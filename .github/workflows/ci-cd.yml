@@ -53,6 +53,9 @@ jobs:
 
       - name: Build frontend
         working-directory: ./punarmilan-frontend
+        env:
+          VITE_API_URL: https://punarmilan.com/api
+          VITE_WS_URL: https://punarmilan.com/ws
         run: npm run build
 
       - name: Build Frontend Docker Image
