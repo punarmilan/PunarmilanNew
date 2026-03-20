@@ -73,17 +73,17 @@ const MyOrder = () => {
                                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         <li>
                                             <a href="#" className="text-cyan-600 hover:text-cyan-800 font-medium hover:underline transition-colors">
-                                                Shaadi.com Profile Blaster
+                                                PunarMilan.com Profile Blaster
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" className="text-cyan-600 hover:text-cyan-800 font-medium hover:underline transition-colors">
-                                                Shaadi.com Spotlight
+                                                PunarMilan.com Spotlight
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" className="text-cyan-600 hover:text-cyan-800 font-medium hover:underline transition-colors">
-                                                Shaadi.com Bold Listing
+                                                PunarMilan.com Bold Listing
                                             </a>
                                         </li>
                                         <li>

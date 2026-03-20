@@ -12,7 +12,7 @@ const reportCategories = [
         reasons: [
             'Incorrect Profile information',
             'Phone number is incorrect/unreachable',
-            'More than one Profile on Shaadi.com',
+            'More than one Profile on PunarMilan.com',
             'Photo belongs to someone else',
             'Not responding'
         ]

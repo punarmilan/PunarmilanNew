@@ -14,11 +14,11 @@ import { ShieldCheck, CreditCard, Phone, Mail, ChevronDown } from 'lucide-react'
 const Header = () => {
     const [helpOpen, setHelpOpen] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
-    const [showMyShaadiMenu, setShowMyShaadiMenu] = useState(false);
+    const [showMyPunarMilanMenu, setShowMyPunarMilanMenu] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [activeTab, setActiveTab] = useState("Home");
-    const [activeDesktopMenu, setActiveDesktopMenu] = useState("My Shaadi");
+    const [activeDesktopMenu, setActiveDesktopMenu] = useState("My PunarMilan");
 
 
     // const [isMobile, setIsMobile] = useState(false);
@@ -124,11 +124,11 @@ const Header = () => {
 
     const desktopMenuItems = [
         {
-            label: "My Shaadi",
+            label: "My PunarMilan",
             path: "/my-shadi",
             onClick: () => {
                 navigate("/my-shadi");
-                setActiveDesktopMenu("My Shaadi");
+                setActiveDesktopMenu("My PunarMilan");
             }
         },
         {
@@ -176,7 +176,7 @@ const Header = () => {
             item.path === currentPath ||
             currentPath.startsWith(item.path) ||
             (item.label === "Inbox" && currentPath.startsWith("/inbox")) ||
-            (item.label === "My Shaadi" && currentPath.startsWith("/my-shadi")) ||
+            (item.label === "My PunarMilan" && currentPath.startsWith("/my-shadi")) ||
             (item.label === "Matches" && currentPath.startsWith("/matches")) ||
             (item.label === "Search" && currentPath.startsWith("/search"))
         );

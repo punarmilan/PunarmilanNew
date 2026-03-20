@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { X, Check, HelpCircle, ChevronDown } from 'lucide-react';
 import FaqSection from './FaqSection';
 import TestimalCarousel from './TestimalCarousel';
-import ShaadiSupport from './ShadiSupport';
+import PunarMilanSupport from './ShadiSupport';
 import HelpDropdown from '../../components/HelpDropdown';
 
 function Payment() {
@@ -14,7 +14,7 @@ function Payment() {
     const [orderDetails, setOrderDetails] = useState({
         addContacts: false,
         promoteProfile: false,
-        contributeShaadi: true
+        contributePunarMilan: true
     });
 
     const navigate = useNavigate()
@@ -66,7 +66,7 @@ function Payment() {
         setOrderDetails({
             addContacts: false,
             promoteProfile: false,
-            contributeShaadi: true
+            contributePunarMilan: true
         });
         setShowModal(true);
     };
@@ -76,7 +76,7 @@ function Payment() {
         let total = selectedPlan.discountedPrice;
         if (orderDetails.addContacts) total += selectedPlan.extraContactPrice;
         if (orderDetails.promoteProfile) total += selectedPlan.promotePrice;
-        if (orderDetails.contributeShaadi) total += selectedPlan.contribution;
+        if (orderDetails.contributePunarMilan) total += selectedPlan.contribution;
         return total;
     };
 
@@ -344,22 +344,22 @@ function Payment() {
                                     </span>
                                 </label>
 
-                                {/* Contribute to Shaadi.org */}
+                                {/* Contribute to PunarMilan.org */}
                                 <label className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
                                     <div className="flex items-center gap-3">
                                         <input
                                             type="checkbox"
-                                            checked={orderDetails.contributeShaadi}
+                                            checked={orderDetails.contributePunarMilan}
                                             onChange={(e) =>
                                                 setOrderDetails({
                                                     ...orderDetails,
-                                                    contributeShaadi: e.target.checked
+                                                    contributePunarMilan: e.target.checked
                                                 })
                                             }
                                             className="w-5 h-5 text-teal-500 rounded focus:ring-2 focus:ring-teal-500"
                                         />
                                         <div className="flex items-center gap-2">
-                                            <span className="text-gray-700">Contribute to Shaadi.org</span>
+                                            <span className="text-gray-700">Contribute to PunarMilan.org</span>
                                             <HelpCircle className="w-4 h-4 text-gray-400" />
                                         </div>
                                     </div>
@@ -428,7 +428,7 @@ function Payment() {
             <FaqSection />
             <TestimalCarousel />
             <div className='flex justify-center items-center'>
-                <ShaadiSupport />
+                <PunarMilanSupport />
 
             </div>
         </div>

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Bell, Mail, MessageSquare, Phone, Smartphone, CheckCircle2, RotateCcw } from 'lucide-react';
 
 /**
- * ShaadiLive Component
- * Manages communication preferences for Shaadi Live sessions.
+ * PunarMilanLive Component
+ * Manages communication preferences for PunarMilan Live sessions.
  * Features a premium design with instant-save functionality.
  */
-function ShaadiLive({ profile, onUpdate }) {
-    const defaultShaadiLive = {
+function PunarMilanLive({ profile, onUpdate }) {
+    const defaultPunarMilanLive = {
         pushNotification: true,
         email: true,
         sms: true,
@@ -15,7 +15,7 @@ function ShaadiLive({ profile, onUpdate }) {
         call: true
     };
 
-    const [preferences, setPreferences] = useState(defaultShaadiLive);
+    const [preferences, setPreferences] = useState(defaultPunarMilanLive);
     const [isSaving, setIsSaving] = useState(false);
     const [lastSaved, setLastSaved] = useState(null);
 
@@ -26,11 +26,11 @@ function ShaadiLive({ profile, onUpdate }) {
                 const parsed = typeof profile.notificationSettings === 'string'
                     ? JSON.parse(profile.notificationSettings)
                     : profile.notificationSettings;
-                if (parsed.shaadiLive) {
-                    setPreferences({ ...defaultShaadiLive, ...parsed.shaadiLive });
+                if (parsed.PunarMilanLive) {
+                    setPreferences({ ...defaultPunarMilanLive, ...parsed.PunarMilanLive });
                 }
             } catch (e) {
-                console.error("Error parsing settings for ShaadiLive:", e);
+                console.error("Error parsing settings for PunarMilanLive:", e);
             }
         }
     }, [profile]);
@@ -64,7 +64,7 @@ function ShaadiLive({ profile, onUpdate }) {
             await onUpdate({
                 notificationSettings: JSON.stringify({
                     ...currentSettings,
-                    shaadiLive: newPreferences
+                    PunarMilanLive: newPreferences
                 })
             });
 
@@ -83,7 +83,7 @@ function ShaadiLive({ profile, onUpdate }) {
      */
     const handleReset = async () => {
         setIsSaving(true);
-        setPreferences(defaultShaadiLive);
+        setPreferences(defaultPunarMilanLive);
 
         try {
             let currentSettings = {};
@@ -100,7 +100,7 @@ function ShaadiLive({ profile, onUpdate }) {
             await onUpdate({
                 notificationSettings: JSON.stringify({
                     ...currentSettings,
-                    shaadiLive: defaultShaadiLive
+                    PunarMilanLive: defaultPunarMilanLive
                 })
             });
             setLastSaved(new Date().toLocaleTimeString());
@@ -248,4 +248,4 @@ function ShaadiLive({ profile, onUpdate }) {
     );
 }
 
-export default ShaadiLive;
+export default PunarMilanLive;

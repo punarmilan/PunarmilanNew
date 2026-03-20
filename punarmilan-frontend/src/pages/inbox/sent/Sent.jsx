@@ -340,7 +340,7 @@ const SentInvitations = () => {
                             className="flex items-center justify-center gap-1.5 md:gap-2 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-lg md:rounded-xl text-sm md:text-base font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 w-full"
                           >
                             <MessageSquare className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                            <span>Shaadi Chat</span>
+                            <span>PunarMilan Chat</span>
                           </button>
                         </div>
                       </div>
@@ -373,7 +373,7 @@ const SentInvitations = () => {
                             className="flex items-center justify-center gap-1.5 md:gap-2 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white px-4 py-2.5 md:px-6 md:py-3.5 rounded-lg md:rounded-xl text-sm md:text-base font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 xs:col-span-2 sm:col-span-3"
                           >
                             <MessageSquare className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                            <span>Shaadi Chat</span>
+                            <span>PunarMilan Chat</span>
                           </button>
                         </div>
                       </div>

@@ -42,7 +42,7 @@ const Navbar = () => {
 
                     {/* Center Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
-                        <NavItem icon={<User className="w-4 h-4" />} label="My Shaadi" />
+                        <NavItem icon={<User className="w-4 h-4" />} label="My PunarMilan" />
                         <NavItem icon={<Bell className="w-4 h-4" />} label="Matches" />
                         <NavItem icon={<Search className="w-4 h-4" />} label="Search" />
                         <NavItem icon={<MessageSquare className="w-4 h-4" />} label="Inbox" />

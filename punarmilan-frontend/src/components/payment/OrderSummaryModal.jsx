@@ -6,7 +6,7 @@ const OrderSummaryModal = ({ plan, isOpen, onClose, onProceed }) => {
   const [addons, setAddons] = useState([
     { id: 'contacts', label: 'Add 20 extra Contact nos.', price: 255, checked: false },
     { id: 'promote', label: 'Promote my Profile', price: 339, checked: false, info: true },
-    { id: 'contribute', label: 'Contribute to Shaadi.org', price: 17, checked: true, info: true },
+    { id: 'contribute', label: 'Contribute to PunarMilan.org', price: 17, checked: true, info: true },
   ]);
 
   if (!isOpen) return null;

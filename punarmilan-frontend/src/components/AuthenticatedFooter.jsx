@@ -9,7 +9,7 @@ const AuthenticatedFooter = () => {
             <div className="bg-white border-t border-gray-200 py-4 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-600 font-medium">
                     <Link to="/about-us" className="hover:text-pink-600 transition-colors">About us</Link>
-                    <Link to="/vip-shaadi" className="hover:text-pink-600 transition-colors">VIP PunarMilan</Link>
+                    <Link to="/vip-PunarMilan" className="hover:text-pink-600 transition-colors">VIP PunarMilan</Link>
                     <Link to="/blog" className="hover:text-pink-600 transition-colors">PunarMilan Blog</Link>
                     <Link to="/success-stories" className="hover:text-pink-600 transition-colors">Success Stories</Link>
                     <Link to="/centres" className="hover:text-pink-600 transition-colors">PunarMilan Centres</Link>

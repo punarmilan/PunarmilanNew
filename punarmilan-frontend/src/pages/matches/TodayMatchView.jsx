@@ -296,7 +296,7 @@ const TodayMatchView = ({
                                                 onClick={() => onChat()}
                                                 className="w-full py-1.5 px-3 border border-gray-200 rounded-full text-[12px] font-bold text-blue-400 hover:bg-blue-50 flex items-center justify-center gap-2 transition-colors"
                                             >
-                                                <MessageCircle className="w-3.5 h-3.5" /> Shaadi Chat
+                                                <MessageCircle className="w-3.5 h-3.5" /> PunarMilan Chat
                                             </button>
                                         )}
                                     </div>

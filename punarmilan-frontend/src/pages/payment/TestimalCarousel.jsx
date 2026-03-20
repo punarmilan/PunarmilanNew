@@ -13,19 +13,19 @@ function TestimonialCarousel() {
         {
             id: 1,
             name: "Prithviraj & Poulomi",
-            story: "We were complete strangers until Shaadi.com brought us together. What started as an arranged match turned out to be the most beautiful love story of our lives. Today, we're not just partners but best friends who support each other through everything.",
+            story: "We were complete strangers until PunarMilan.com brought us together. What started as an arranged match turned out to be the most beautiful love story of our lives. Today, we're not just partners but best friends who support each other through everything.",
             image: img
         },
         {
             id: 2,
             name: "Rahul & Priya",
-            story: "Finding the right match seemed impossible until we found each other on Shaadi.com. Our families are now connected and we couldn't be happier with our journey together. Every moment spent together feels like a blessing.",
+            story: "Finding the right match seemed impossible until we found each other on PunarMilan.com. Our families are now connected and we couldn't be happier with our journey together. Every moment spent together feels like a blessing.",
             image: img1
         },
         {
             id: 3,
             name: "Arjun & Meera",
-            story: "Thanks to Shaadi Premium, we discovered compatibility beyond our expectations. What began as profiles on a screen has blossomed into a lifetime partnership filled with love, laughter, and endless memories.",
+            story: "Thanks to PunarMilan Premium, we discovered compatibility beyond our expectations. What began as profiles on a screen has blossomed into a lifetime partnership filled with love, laughter, and endless memories.",
             image: img2
         }
     ];
@@ -75,7 +75,7 @@ function TestimonialCarousel() {
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-700 text-center mb-6 sm:mb-8 md:mb-12 px-2 sm:px-4 leading-tight">
-                    With <span className="text-gray-900">Shaadi Premium</span> they found their perfect match and so can you
+                    With <span className="text-gray-900">PunarMilan Premium</span> they found their perfect match and so can you
                 </h2>
 
                 {/* Carousel Container */}

@@ -70,7 +70,7 @@ const ReferPage = () => {
                                 <div className="text-center mb-6">
                                     <div className="text-6xl mb-4">🎁</div>
                                     <h2 className="text-2xl font-bold text-gray-800 mb-2">Send Invites</h2>
-                                    <p className="text-lg text-gray-700">Help someone find a match. Refer Shaadi.com to friends!</p>
+                                    <p className="text-lg text-gray-700">Help someone find a match. Refer PunarMilan.com to friends!</p>
                                 </div>
 
                                 <div className="max-w-md mx-auto">

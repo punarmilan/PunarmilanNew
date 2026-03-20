@@ -737,7 +737,7 @@ function ProfileId() {
                 {showDeleteModal && (
                     <div className="modal-backdrop" onClick={cancelDelete}>
                         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                            <div className="modal-header">my.marathishaadi.com says</div>
+                            <div className="modal-header">my.PunarMilan.com says</div>
                             <div className="modal-message">
                                 Delete search: "{deleteSearchText}". Are you sure?
                             </div>

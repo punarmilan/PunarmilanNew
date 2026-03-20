@@ -546,7 +546,7 @@ const MatchProfileDetails = () => {
                                     }}
                                     className="w-[150px] flex items-center justify-center gap-2 py-1.5 bg-blue-500 rounded text-white hover:bg-blue-600 text-[14px] font-bold"
                                 >
-                                    <MessageSquare className="w-4 h-4" /> Shaadi Chat
+                                    <MessageSquare className="w-4 h-4" /> PunarMilan Chat
                                 </button>
                             </div>
                         </div>

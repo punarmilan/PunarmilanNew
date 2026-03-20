@@ -935,10 +935,10 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                     </div>
                                                     <div className="flex-1">
                                                         <span className={`text-sm font-bold block mb-1 ${settings.doNotDisturb ? "text-pink-900" : "text-gray-700"}`}>
-                                                            Shaadi.com can call me
+                                                            PunarMilan.com can call me
                                                         </span>
                                                         <span className="text-xs text-gray-500 leading-relaxed">
-                                                            Allow Shaadi.com to contact you for Premium membership related offers and wedding planning services.
+                                                            Allow PunarMilan.com to contact you for Premium membership related offers and wedding planning services.
                                                         </span>
                                                     </div>
                                                 </label>

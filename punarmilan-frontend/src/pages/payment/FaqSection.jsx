@@ -20,7 +20,7 @@ function FaqSection() {
         },
         {
             id: 4,
-            question: "How can I be safe on Shaadi.com?",
+            question: "How can I be safe on PunarMilan.com?",
             answer: "We go to great lengths to make sure you get the best possible experience here. Every single profile is screened & your matches are tailored to your preferences. But if you still have any unpleasant experience please do report the same to us."
         }
     ];

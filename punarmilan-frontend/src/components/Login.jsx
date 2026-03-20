@@ -318,7 +318,7 @@ function Login({ close, openRegister }) {
 
                         {/* Sign Up Link */}
                         <div className="text-center pt-2">
-                            <span className="text-gray-600 text-xs sm:text-sm">New to MarathiShaadi? </span>
+                            <span className="text-gray-600 text-xs sm:text-sm">New to PunarMilan? </span>
                             <button
                                 type="button"
                                 onClick={openRegister}

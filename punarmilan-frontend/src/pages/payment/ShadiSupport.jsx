@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Minimize2, User } from 'lucide-react';
 
-function ShaadiSupport() {
+function PunarMilanSupport() {
     const [isOpen, setIsOpen] = useState(false);
     const [isMinimized, setIsMinimized] = useState(false);
     const [message, setMessage] = useState('');
@@ -12,7 +12,7 @@ function ShaadiSupport() {
             chats: [
                 {
                     sender: 'bot',
-                    text: "Hi Sh27142336 , I'm Dory.\nYour Shaadi Support Assistant.",
+                    text: "Hi Sh27142336 , I'm Dory.\nYour PunarMilan Support Assistant.",
                     time: '10:30 AM'
                 },
                 {
@@ -29,7 +29,7 @@ function ShaadiSupport() {
             chats: [
                 {
                     sender: 'bot',
-                    text: "Hi Sh27142336 , I'm Dory.\nYour Shaadi Support Assistant.",
+                    text: "Hi Sh27142336 , I'm Dory.\nYour PunarMilan Support Assistant.",
                     time: '2:15 PM'
                 },
                 {
@@ -225,7 +225,7 @@ function ShaadiSupport() {
                                 <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
                             </div>
                             <div className="min-w-0 flex-1">
-                                <h3 className="font-bold text-base sm:text-lg truncate">Shaadi Support</h3>
+                                <h3 className="font-bold text-base sm:text-lg truncate">PunarMilan Support</h3>
                                 <p className="text-xs text-pink-100 truncate">Online • Replies instantly</p>
                             </div>
                         </div>
@@ -410,4 +410,4 @@ function ShaadiSupport() {
     );
 }
 
-export default ShaadiSupport;
+export default PunarMilanSupport;

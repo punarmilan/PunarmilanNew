@@ -11,7 +11,7 @@ import MyContactSettings from './MyContactSettings';
 import AstroDetails from './AstroDetails';
 import AlertsSettings from './AlertsSettings';
 import PrivacyOptions from './PrivacyOptions';
-import ShaadiLive from './ShaadiLive';
+import PunarMilanLive from './PunarMilanLive';
 import DeleteHide from './DeleteHide';
 import Messages from './Messages';
 
@@ -172,14 +172,14 @@ const Settings = () => {
               />
             </SettingsSection>
 
-            {/* Shaadi Live */}
+            {/* PunarMilan Live */}
             <SettingsSection
-              title="Shaadi Live"
+              title="PunarMilan Live"
               isActive={activeSection === 'live'}
               onToggle={() => toggleSection('live')}
               isNew={true}
             >
-              <ShaadiLive
+              <PunarMilanLive
                 profile={profile}
                 onUpdate={handleUpdateProfile}
               />
