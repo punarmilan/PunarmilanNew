@@ -43,6 +43,7 @@ function Register({ close, openLogin }) {
         
         // Check for uppercase letters
         if (/[A-Z]/.test(email)) {
+            console.log("Validation error (Register): Uppercase letters found:", email);
             return "Please use smallcase only";
         }
         
