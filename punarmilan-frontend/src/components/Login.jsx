@@ -22,6 +22,12 @@ function Login({ close, openRegister }) {
         const phoneRegex = /^[0-9]{10}$/;
 
         if (!email) return "Email or Mobile number is required";
+        
+        // Check for uppercase letters
+        if (/[A-Z]/.test(email)) {
+            return "Please use smallcase only";
+        }
+
         if (!emailRegex.test(email) && !phoneRegex.test(email)) {
             return "Enter valid email or 10-digit mobile number";
         }

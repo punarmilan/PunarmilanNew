@@ -40,6 +40,12 @@ function Register({ close, openLogin }) {
         if (!email) return "Email is required";
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) return "Enter valid email address";
+        
+        // Check for uppercase letters
+        if (/[A-Z]/.test(email)) {
+            return "Please use smallcase only";
+        }
+        
         return "";
     };
 
