@@ -4,8 +4,6 @@ import {
     Twitter,
     Youtube,
     Linkedin,
-    Apple,
-    Play,
     Mail,
     Phone,
     MapPin,
@@ -60,22 +58,6 @@ const Footer = () => {
                         <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-sm mb-8 sm:mb-10">
                             The World's No.1 Matchmaking Service. We help thousands find their perfect partner and begin a beautiful journey together.
                         </p>
-                        <div className="flex flex-wrap gap-5">
-                            <button className="flex items-center gap-4 bg-[#121826] border border-white/5 px-6 py-3 rounded-2xl hover:bg-[#1a2332] transition-all duration-300">
-                                <Apple className="w-7 h-7" />
-                                <div className="text-left">
-                                    <div className="text-[10px] uppercase text-gray-500 font-black">Download on</div>
-                                    <div className="text-base font-bold">App Store</div>
-                                </div>
-                            </button>
-                            <button className="flex items-center gap-4 bg-[#121826] border border-white/5 px-6 py-3 rounded-2xl hover:bg-[#1a2332] transition-all duration-300">
-                                <Play className="w-7 h-7" />
-                                <div className="text-left">
-                                    <div className="text-[10px] uppercase text-gray-500 font-black">Get it on</div>
-                                    <div className="text-base font-bold">Google Play</div>
-                                </div>
-                            </button>
-                        </div>
                     </div>
 
                     <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -156,7 +138,7 @@ const Footer = () => {
                             Copyright © 2026-2027 <span className="text-white">PunarMilan.com</span>
                         </div>
                         <div className="text-[10px] text-gray-600 font-black uppercase tracking-widest mt-1">
-                            Developed by Sagar & Pruthviraj
+                            Created by WorknAi Technologies India Pvt Ltd
                         </div>
                     </div>
                 </div>

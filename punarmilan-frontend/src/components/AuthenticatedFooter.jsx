@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Apple, Play, Bell, MessageSquare, Users } from 'lucide-react';
+import { Bell, MessageSquare, Users } from 'lucide-react';
 
 const AuthenticatedFooter = () => {
     return (
@@ -16,11 +16,6 @@ const AuthenticatedFooter = () => {
                     <Link to="/contact-us" className="hover:text-pink-600 transition-colors">Contact Us</Link>
                     <Link to="/live" className="hover:text-pink-600 transition-colors">PunarMilan Live</Link>
                     <Link to="/work-with-us" className="hover:text-pink-600 transition-colors">Work with us</Link>
-                    <div className="flex items-center gap-3 ml-4">
-                        <span className="text-gray-500">Download the App</span>
-                        <Apple className="w-5 h-5 cursor-pointer hover:text-black transition-colors" />
-                        <Play className="w-5 h-5 cursor-pointer hover:text-black transition-colors fill-current" />
-                    </div>
                 </div>
             </div>
 
@@ -41,7 +36,7 @@ const AuthenticatedFooter = () => {
                         <div className="text-right text-[12px] text-gray-500 leading-relaxed">
                             <p>© 1996-2026 PunarMilan.com - The World's No.1 Matchmaking Service™</p>
                             <p className="mt-1">
-                                Passionately created by <span className="text-cyan-600 font-semibold cursor-pointer hover:underline">People Group</span>
+                                Created by <span className="text-cyan-600 font-semibold cursor-pointer hover:underline">WorknAi Technologies India Pvt Ltd</span>
                             </p>
                         </div>
                     </div>
