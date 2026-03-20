@@ -25,6 +25,9 @@ public class MinioServiceImpl implements MinioService {
     @Value("${minio.bucket-name:punarmilan-photos}")
     private String bucketName;
 
+    @Value("${minio.public-url:}")
+    private String publicUrl;
+
     @jakarta.annotation.PostConstruct
     public void init() {
         try {
@@ -86,13 +89,21 @@ public class MinioServiceImpl implements MinioService {
         }
 
         try {
-            return minioClient.getPresignedObjectUrl(
+            String url = minioClient.getPresignedObjectUrl(
                     GetPresignedObjectUrlArgs.builder()
                             .method(Method.GET)
                             .bucket(bucketName)
                             .object(actualObject)
                             .expiry(7, TimeUnit.DAYS)
                             .build());
+            
+            // Re-write URL if a public URL is configured
+            if (publicUrl != null && !publicUrl.isEmpty() && url.contains("minio:9000")) {
+                url = url.replace("http://minio:9000/" + bucketName, publicUrl);
+                log.debug("Rewritten presigned URL: {}", url);
+            }
+            
+            return url;
         } catch (Exception e) {
             log.error("Error generating presigned URL for {}: {}", objectName, e.getMessage());
             return null;

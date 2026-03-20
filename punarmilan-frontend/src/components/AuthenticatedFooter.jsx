@@ -34,7 +34,7 @@ const AuthenticatedFooter = () => {
 
                         {/* Copyright / Attribution */}
                         <div className="text-right text-[12px] text-gray-500 leading-relaxed">
-                            <p>© 1996-2026 PunarMilan.com - The World's No.1 Matchmaking Service™</p>
+                            <p>©2026-2027 PunarMilan.com - The World's No.1 Matchmaking Service™</p>
                             <p className="mt-1">
                                 Created by <span className="text-cyan-600 font-semibold cursor-pointer hover:underline">WorknAi Technologies India Pvt Ltd</span>
                             </p>

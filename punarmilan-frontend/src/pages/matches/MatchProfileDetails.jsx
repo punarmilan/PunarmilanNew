@@ -99,8 +99,8 @@ const MatchProfileDetails = () => {
                 backendProfile.displayNameVisibility,
                 backendProfile.profileId
             ),
-            img: backendProfile.profilePhotoUrl || (photos.length > 0 ? photos[0] : `https://ui-avatars.com/api/?name=${encodeURIComponent(backendProfile.fullName || 'User')}&background=random&color=fff&size=600&bold=true`),
-            image: backendProfile.profilePhotoUrl || (photos.length > 0 ? photos[0] : `https://ui-avatars.com/api/?name=${encodeURIComponent(backendProfile.fullName || 'User')}&background=random&color=fff&size=600&bold=true`),
+            img: backendProfile.profilePhotoUrl || null,
+            image: backendProfile.profilePhotoUrl || null,
             allPhotos: photos.length > 0 ? photos : [],
             age: backendProfile.age || "N/A",
             height: backendProfile.height || "N/A",
@@ -302,7 +302,13 @@ const MatchProfileDetails = () => {
                         </button>
 
                         <div className="flex gap-2 items-center">
-                            <img src={profile.img} className="w-6 h-6 rounded-full grayscale opacity-50" />
+                            <div className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden">
+                                {profile.img ? (
+                                    <img src={profile.img} className="w-full h-full object-cover grayscale opacity-50" />
+                                ) : (
+                                    <User className="w-3 h-3 text-gray-400" />
+                                )}
+                            </div>
                             <div className="text-sm font-medium">{currentIndex + 1} / {profiles.length}</div>
                         </div>
 
@@ -327,11 +333,17 @@ const MatchProfileDetails = () => {
                         {/* Profile Image Column */}
                         <div className="w-full md:w-[300px] flex-shrink-0">
                             <div className="relative group">
-                                <img
-                                    src={profile.img}
-                                    alt={profile.name}
-                                    className={`w-full h-auto rounded shadow-sm object-cover aspect-[3/4] border-2 ${profile.isPremium ? 'border-amber-400' : 'border-transparent'} ${profile.premiumVisible === false ? 'blur-lg scale-110' : ''}`}
-                                />
+                                <div className={`w-full h-auto rounded shadow-sm aspect-[3/4] border-2 bg-gray-50 flex items-center justify-center overflow-hidden ${profile.isPremium ? 'border-amber-400' : 'border-transparent'} ${profile.premiumVisible === false ? 'blur-lg scale-110' : ''}`}>
+                                    {profile.img ? (
+                                        <img
+                                            src={profile.img}
+                                            alt={profile.name}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <User className="w-20 h-20 text-gray-200" />
+                                    )}
+                                </div>
                                 {profile.premiumVisible === false && (
                                     <PremiumLock onViewPlans={() => navigate('/payment')} />
                                 )}
@@ -748,13 +760,25 @@ const MatchProfileDetails = () => {
                                         <>
                                             <div className="flex flex-col items-center mb-8">
                                                 <div className="flex items-center gap-10 md:gap-20">
-                                                    <img src={profile.image} className="w-16 h-16 rounded-full border-2 border-white shadow-sm object-cover" />
+                                                    <div className="w-16 h-16 rounded-full border-2 border-white shadow-sm ring-1 ring-gray-100 bg-gray-50 flex items-center justify-center overflow-hidden">
+                                                        {profile.image ? (
+                                                            <img src={profile.image} className="w-full h-full object-cover" />
+                                                        ) : (
+                                                            <User className="w-8 h-8 text-gray-300" />
+                                                        )}
+                                                    </div>
                                                     <div className="relative border-b border-dashed border-gray-300 px-4 md:px-8 pb-1">
                                                         <span className="text-[11px] md:text-[12px] bg-gray-100 px-3 py-1 rounded-full text-gray-600">
                                                             {`You match ${preferenceMatch.matchedCount}/${preferenceMatch.totalPreferences} of ${profile.gender === 'male' ? 'his' : 'her'} Preferences`}
                                                         </span>
                                                     </div>
-                                                    <img src={myProfile?.profilePhotoUrl || "https://randomuser.me/api/portraits/men/32.jpg"} className="w-16 h-16 rounded-full border-2 border-white shadow-sm object-cover" />
+                                                    <div className="w-16 h-16 rounded-full border-2 border-white shadow-sm ring-1 ring-gray-100 bg-gray-50 flex items-center justify-center overflow-hidden">
+                                                        {myProfile?.profilePhotoUrl ? (
+                                                            <img src={myProfile.profilePhotoUrl} className="w-full h-full object-cover" />
+                                                        ) : (
+                                                            <User className="w-8 h-8 text-gray-300" />
+                                                        )}
+                                                    </div>
                                                 </div>
                                                 <div className="flex justify-between w-full mt-2 text-[12px] font-bold text-gray-500 px-8">
                                                     <span>{profile.gender === 'male' ? 'His' : 'Her'} Preferences</span>

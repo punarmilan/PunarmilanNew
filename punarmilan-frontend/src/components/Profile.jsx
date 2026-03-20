@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../Slice/UserSlice';
-import img from '../assets/image/profile.png'
+// Removed default placeholder import
 
 const Profile = ({ onLogout }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -116,12 +116,16 @@ const Profile = ({ onLogout }) => {
                 aria-label="Profile"
             >
                 <div className="relative">
-                    <div className="w-7 h-7 xs:w-8 xs:h-8 rounded-full overflow-hidden border-2 border-white/70 group-hover:border-white">
-                        <img
-                            src={displayUser?.profilePhotoUrl || img}
-                            alt={displayUser?.fullName || "Profile"}
-                            className="w-full h-full object-cover"
-                        />
+                    <div className="w-7 h-7 xs:w-8 xs:h-8 rounded-full overflow-hidden border-2 border-white/70 group-hover:border-white bg-white/10 flex items-center justify-center">
+                        {displayUser?.profilePhotoUrl ? (
+                            <img
+                                src={displayUser.profilePhotoUrl}
+                                alt={displayUser?.fullName || "Profile"}
+                                className="w-full h-full object-cover"
+                            />
+                        ) : (
+                            <i className="fa-solid fa-user text-white text-xs"></i>
+                        )}
                     </div>
                     {/* Premium Badge */}
                     {isPremium && (
@@ -172,12 +176,16 @@ const Profile = ({ onLogout }) => {
                             </button>
 
                             <div className="flex items-center gap-2 xs:gap-3 mb-2 xs:mb-3">
-                                <div className="w-10 h-10 xs:w-12 xs:h-12 rounded-full border-2 xs:border-3 border-white/40 overflow-hidden flex-shrink-0">
-                                    <img
-                                        src={displayUser?.profilePhotoUrl || img}
-                                        alt={displayUser?.fullName || "Profile"}
-                                        className="w-full h-full object-cover"
-                                    />
+                                <div className="w-10 h-10 xs:w-12 xs:h-12 rounded-full border-2 xs:border-3 border-white/40 overflow-hidden flex-shrink-0 bg-white/20 flex items-center justify-center">
+                                    {displayUser?.profilePhotoUrl ? (
+                                        <img
+                                            src={displayUser.profilePhotoUrl}
+                                            alt={displayUser?.fullName || "Profile"}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    ) : (
+                                        <i className="fa-solid fa-user text-white text-lg"></i>
+                                    )}
                                 </div>
                                 <div className="flex-1 min-w-0">
                                     <h3 className="font-bold text-base xs:text-lg truncate">{displayUser?.fullName || displayUser?.profileId || 'User'}</h3>

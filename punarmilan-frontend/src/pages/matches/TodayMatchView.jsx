@@ -113,7 +113,13 @@ const TodayMatchView = ({
                             <ChevronLeft className="w-4 h-4" /> Prev
                         </button>
                         <div className="flex items-center gap-2">
-                            <img src={profile.img} className="w-8 h-8 rounded-full border-2 border-white shadow-sm ring-1 ring-gray-100" alt="" />
+                            <div className="w-8 h-8 rounded-full bg-gray-100 border-2 border-white shadow-sm ring-1 ring-gray-100 flex items-center justify-center overflow-hidden">
+                                {profile.img ? (
+                                    <img src={profile.img} className="w-full h-full object-cover grayscale opacity-50" alt="" />
+                                ) : (
+                                    <Users className="w-4 h-4 text-gray-400" />
+                                )}
+                            </div>
                             <span className="text-gray-300">|</span>
                             <div className="w-8 h-8 rounded-full bg-gray-100 border-2 border-white shadow-sm ring-1 ring-gray-100 flex items-center justify-center overflow-hidden">
                                 {profile.img ? (
@@ -139,11 +145,17 @@ const TodayMatchView = ({
                     {/* Left: Image */}
                     <div className="w-full md:w-[220px] flex-shrink-0">
                         <div className="relative group">
-                            <img
-                                src={profile.img}
-                                alt={displayName}
-                                className={`w-full h-[280px] object-cover rounded shadow-sm border ${isPremium ? 'border-amber-400 border-2' : 'border-gray-100'} ${isLocked ? 'blur-lg scale-110' : ''}`}
-                            />
+                            <div className={`w-full h-[280px] rounded shadow-sm border bg-gray-50 flex items-center justify-center overflow-hidden ${isPremium ? 'border-amber-400 border-2' : 'border-gray-100'} ${isLocked ? 'blur-lg scale-110' : ''}`}>
+                                {profile.img ? (
+                                    <img
+                                        src={profile.img}
+                                        alt={displayName}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <Users className="w-16 h-16 text-gray-200" />
+                                )}
+                            </div>
                             {isLocked && <PremiumLock onViewPlans={handleViewPlans} />}
                             
                             {isPremium && (
@@ -494,7 +506,13 @@ const TodayMatchView = ({
                                 <div className="flex flex-col items-center mb-10 w-full">
                                     <div className="flex items-center gap-8 md:gap-16 justify-center w-full px-4">
                                         <div className="text-center">
-                                            <img src={profile.img} className="w-16 h-16 rounded-full border-2 border-white shadow-sm ring-1 ring-gray-100" />
+                                            <div className="w-16 h-16 rounded-full border-2 border-white shadow-sm ring-1 ring-gray-100 bg-gray-50 flex items-center justify-center overflow-hidden mx-auto">
+                                                {profile.img ? (
+                                                    <img src={profile.img} className="w-full h-full object-cover" />
+                                                ) : (
+                                                    <Users className="w-8 h-8 text-gray-300" />
+                                                )}
+                                            </div>
                                             <p className="text-[10px] mt-1 font-bold text-gray-400 uppercase">Her Preferences</p>
                                         </div>
                                         <div className="relative flex-1 max-w-[200px] border-b border-dashed border-gray-300 pb-1 text-center">
@@ -503,7 +521,13 @@ const TodayMatchView = ({
                                             </span>
                                         </div>
                                         <div className="text-center">
-                                            <img src={myProfile?.profilePhotoUrl || "https://randomuser.me/api/portraits/men/32.jpg"} className="w-16 h-16 rounded-full border-2 border-white shadow-sm ring-1 ring-gray-100" />
+                                            <div className="w-16 h-16 rounded-full border-2 border-white shadow-sm ring-1 ring-gray-100 bg-gray-50 flex items-center justify-center overflow-hidden mx-auto">
+                                                {myProfile?.profilePhotoUrl ? (
+                                                    <img src={myProfile.profilePhotoUrl} className="w-full h-full object-cover" />
+                                                ) : (
+                                                    <Users className="w-8 h-8 text-gray-300" />
+                                                )}
+                                            </div>
                                             <p className="text-[10px] mt-1 font-bold text-gray-400 uppercase">You match</p>
                                         </div>
                                     </div>

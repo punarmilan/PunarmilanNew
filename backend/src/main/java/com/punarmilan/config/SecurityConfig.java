@@ -48,6 +48,7 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for development/stateless API
+                .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin())) // Fix for SockJS iframe fallback
                 .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
