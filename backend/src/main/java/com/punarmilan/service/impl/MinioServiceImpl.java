@@ -88,6 +88,16 @@ public class MinioServiceImpl implements MinioService {
             }
         }
 
+        // If a public URL is configured, return the direct URL since the bucket is public anyway.
+        // This avoids Host/Path mismatch errors in AWS signatures behind a proxy.
+        if (publicUrl != null && !publicUrl.isEmpty()) {
+            String baseUrl = publicUrl.endsWith("/") ? publicUrl.substring(0, publicUrl.length() - 1) : publicUrl;
+            String path = actualObject.startsWith("/") ? actualObject.substring(1) : actualObject;
+            String url = baseUrl + "/" + path;
+            log.debug("Returning direct public URL: {}", url);
+            return url;
+        }
+
         try {
             String url = minioClient.getPresignedObjectUrl(
                     GetPresignedObjectUrlArgs.builder()
@@ -96,12 +106,6 @@ public class MinioServiceImpl implements MinioService {
                             .object(actualObject)
                             .expiry(7, TimeUnit.DAYS)
                             .build());
-            
-            // Re-write URL if a public URL is configured
-            if (publicUrl != null && !publicUrl.isEmpty() && url.contains("minio:9000")) {
-                url = url.replace("http://minio:9000/" + bucketName, publicUrl);
-                log.debug("Rewritten presigned URL: {}", url);
-            }
             
             return url;
         } catch (Exception e) {
