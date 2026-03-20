@@ -29,10 +29,16 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private final JwtUtils jwtUtils;
     private final CustomUserDetailsService userDetailsService;
 
+    @org.springframework.beans.factory.annotation.Value("${spring.rabbitmq.host:localhost}")
+    private String relayHost;
+
+    @org.springframework.beans.factory.annotation.Value("${cors.allowed-origins:http://localhost:5173}")
+    private String allowedOrigins;
+
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableStompBrokerRelay("/topic", "/queue")
-                .setRelayHost("localhost")
+                .setRelayHost(relayHost)
                 .setRelayPort(61613)
                 .setClientLogin("guest")
                 .setClientPasscode("guest")
@@ -54,8 +60,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+        String[] origins = allowedOrigins.split(",");
         registry.addEndpoint("/ws")
-                .setAllowedOrigins("http://localhost:5173")
+                .setAllowedOrigins(origins)
                 .withSockJS();
     }
 
