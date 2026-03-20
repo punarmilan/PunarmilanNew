@@ -33,14 +33,14 @@ public class AuthController {
     private void setTokenCookies(HttpServletResponse response, String accessToken, String refreshToken) {
         Cookie accessCookie = new Cookie("accessToken", accessToken);
         accessCookie.setHttpOnly(true);
-        accessCookie.setSecure(false); // Set to true in production with HTTPS
+        accessCookie.setSecure(true); // Always true in production
         accessCookie.setPath("/");
-        accessCookie.setMaxAge(15 * 60); // 15 mins (match JWT expiry)
+        accessCookie.setMaxAge(15 * 60); // 15 mins
         response.addCookie(accessCookie);
 
         Cookie refreshCookie = new Cookie("refreshToken", refreshToken);
         refreshCookie.setHttpOnly(true);
-        refreshCookie.setSecure(false); // Set to true in production
+        refreshCookie.setSecure(true); // Always true in production
         refreshCookie.setPath("/");
         refreshCookie.setMaxAge(7 * 24 * 60 * 60); // 7 days
         response.addCookie(refreshCookie);
@@ -75,6 +75,7 @@ public class AuthController {
         
         Cookie accessCookie = new Cookie("accessToken", authResponse.getAccessToken());
         accessCookie.setHttpOnly(true);
+        accessCookie.setSecure(true);
         accessCookie.setPath("/");
         accessCookie.setMaxAge(15 * 60);
         response.addCookie(accessCookie);
@@ -118,12 +119,14 @@ public class AuthController {
         // Clear cookies
         Cookie accessCookie = new Cookie("accessToken", null);
         accessCookie.setHttpOnly(true);
+        accessCookie.setSecure(true);
         accessCookie.setPath("/");
         accessCookie.setMaxAge(0);
         response.addCookie(accessCookie);
 
         Cookie refreshCookie = new Cookie("refreshToken", null);
         refreshCookie.setHttpOnly(true);
+        refreshCookie.setSecure(true);
         refreshCookie.setPath("/");
         refreshCookie.setMaxAge(0);
         response.addCookie(refreshCookie);

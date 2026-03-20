@@ -156,7 +156,7 @@ const Footer = () => {
                             Copyright © 2026-2027 <span className="text-white">PunarMilan.com</span>
                         </div>
                         <div className="text-[10px] text-gray-600 font-black uppercase tracking-widest mt-1">
-                            Developed by Sagar Akolkar
+                            Developed by Sagar & Pruthviraj
                         </div>
                     </div>
                 </div>
