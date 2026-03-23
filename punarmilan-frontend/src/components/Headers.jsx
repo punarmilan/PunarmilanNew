@@ -69,7 +69,7 @@ const Header = () => {
             id: "Home",
             icon: "fa-solid fa-house",
             label: "Home",
-            path: "/"
+            path: "/my-shadi"
         },
         {
             id: "Matches",
@@ -164,7 +164,8 @@ const Header = () => {
         // Sync Mobile Tabs
         const matchedTab = mobileTabs.find(tab =>
             tab.path === currentPath ||
-            (tab.path !== "/" && currentPath.startsWith(tab.path)) ||
+            (tab.path && tab.path !== "/" && currentPath.startsWith(tab.path)) ||
+            (tab.id === "Home" && (currentPath === "/my-shadi" || currentPath.startsWith("/my-shadi/"))) ||
             (tab.id === "Inbox" && currentPath.startsWith("/inbox"))
         );
         if (matchedTab) {
