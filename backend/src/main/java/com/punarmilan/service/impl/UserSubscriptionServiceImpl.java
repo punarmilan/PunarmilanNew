@@ -36,10 +36,10 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
     public UserSubscription subscribe(Long planId) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
 
         SubscriptionPlan plan = planRepository.findById(planId)
-                .orElseThrow(() -> new RuntimeException("Plan not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Plan not found"));
 
         // Deactivate old subscription
         subscriptionRepository.findByUserIdAndActiveTrue(user.getId())
@@ -74,7 +74,7 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
     public UserSubscription getCurrentSubscription() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
         return subscriptionRepository.findByUserIdAndActiveTrue(user.getId()).orElse(null);
     }
 
@@ -83,17 +83,47 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
     public SubscriptionDetailsDTO getSubscriptionDetails() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
 
         UserSubscription sub = subscriptionRepository.findByUserIdAndActiveTrue(user.getId())
                 .orElse(null);
 
-        // Logic check: If user has an active, non-expired subscription, they are PREMIUM
-        boolean isNowPremium = sub != null && 
-                             (sub.getExpiryDate() == null || sub.getExpiryDate().isAfter(LocalDateTime.now()));
+        if (sub == null) {
+            // No active subscription record found
+            if (Boolean.TRUE.equals(user.getIsPremium())) {
+                user.setIsPremium(false);
+                userRepository.save(user);
+                profileRepository.findByUser(user).ifPresent(p -> {
+                    p.setIsPremium(false);
+                    profileRepository.save(p);
+                });
+            }
+            return SubscriptionDetailsDTO.builder()
+                    .active(false)
+                    .build();
+        }
 
+        // Logic check: If user has an active record but it's expired, they are FREE
+        boolean isNowPremium = (sub.getExpiryDate() == null || sub.getExpiryDate().isAfter(LocalDateTime.now()));
+
+        // Handle expired record case
+        if (!isNowPremium) {
+            if (Boolean.TRUE.equals(user.getIsPremium())) {
+                user.setIsPremium(false);
+                userRepository.save(user);
+                profileRepository.findByUser(user).ifPresent(p -> {
+                    p.setIsPremium(false);
+                    profileRepository.save(p);
+                });
+            }
+            return SubscriptionDetailsDTO.builder()
+                    .active(false)
+                    .build();
+        }
+
+        // Now we know sub is non-null AND isNowPremium is true
         // Data Healing: If flags are out of sync, update them
-        if (isNowPremium && !Boolean.TRUE.equals(user.getIsPremium())) {
+        if (!Boolean.TRUE.equals(user.getIsPremium())) {
             user.setIsPremium(true);
             user.setPremiumExpiry(sub.getExpiryDate());
             userRepository.save(user);
@@ -104,32 +134,17 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
             });
         }
 
-        if (!isNowPremium) {
-            // Also handle expiry case where flags are still true but sub is expired or missing
-            if (Boolean.TRUE.equals(user.getIsPremium())) {
-                 user.setIsPremium(false);
-                 userRepository.save(user);
-                 profileRepository.findByUser(user).ifPresent(p -> {
-                     p.setIsPremium(false);
-                     profileRepository.save(p);
-                 });
-            }
-            return SubscriptionDetailsDTO.builder()
-                    .active(false)
-                    .build();
-        }
-
         long used = contactViewRepository.countByViewerId(user.getId());
         int totalAllowed = sub.getPlan().getConnects() != null ? sub.getPlan().getConnects() : 0;
         int balance = Math.max(0, totalAllowed - (int) used);
 
         return SubscriptionDetailsDTO.builder()
+                .active(true)
                 .planName(sub.getPlan().getName())
                 .expiryDate(sub.getExpiryDate())
                 .totalConnects(totalAllowed)
                 .usedConnects((int) used)
                 .balance(balance)
-                .active(true)
                 .build();
     }
 
@@ -138,7 +153,7 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
     public SubscriptionDetailsDTO trackContactView(Long profileId) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
 
         // 1. Check if Premium Active
         if (!Boolean.TRUE.equals(user.getIsPremium()) ||
@@ -147,7 +162,7 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
         }
 
         Profile targetProfile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
 
         // Don't count self-views
         if (targetProfile.getUser() != null && targetProfile.getUser().getId().equals(user.getId())) {
@@ -160,9 +175,14 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
             return getSubscriptionDetails();
         }
 
-        // 3. Check Balance
-        SubscriptionDetailsDTO currentDetails = getSubscriptionDetails();
-        if (currentDetails.getBalance() <= 0) {
+        // 3. Check Balance (Optimized)
+        UserSubscription sub = subscriptionRepository.findByUserIdAndActiveTrue(user.getId()).orElse(null);
+        if (sub == null) {
+            throw new UnauthorizedException("No active subscription found.");
+        }
+        long used = contactViewRepository.countByViewerId(user.getId());
+        int totalAllowed = sub.getPlan().getConnects() != null ? sub.getPlan().getConnects() : 0;
+        if (used >= totalAllowed) {
             throw new BadRequestException("You have exhausted your contact views balance. Please upgrade your plan.");
         }
 
@@ -185,8 +205,9 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
 
     @Override
     public boolean isPremiumUser(User user) {
-        if (user == null) return false;
-        
+        if (user == null)
+            return false;
+
         return Boolean.TRUE.equals(user.getIsPremium()) &&
                 (user.getPremiumExpiry() == null || user.getPremiumExpiry().isAfter(LocalDateTime.now()));
     }

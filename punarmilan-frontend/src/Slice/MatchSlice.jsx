@@ -288,9 +288,10 @@ export const fetchPreferenceMatch = createAsyncThunk(
 
 export const sendConnectionRequest = createAsyncThunk(
     'match/sendConnectionRequest',
-    async (receiverProfileId, { rejectWithValue }) => {
+    async (receiverProfileId, { rejectWithValue, dispatch }) => {
         try {
             await api.post(`/connections/send/${receiverProfileId}`);
+            dispatch(fetchSentRequests());
             return receiverProfileId;
         } catch (error) {
             return rejectWithValue(error.response?.data || error.message);
@@ -318,7 +319,7 @@ export const declineConnectionRequest = createAsyncThunk(
         try {
             await api.put(`/connections/decline/${requestId}`);
             dispatch(fetchReceivedRequests());
-            dispatch(fetchDeclinedRequests());
+            dispatch(fetchDeclinedByMe());
             return requestId;
         } catch (error) {
             return rejectWithValue(error.response?.data || error.message);

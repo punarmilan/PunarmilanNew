@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
+import { useDispatch } from 'react-redux';
+import { sendReferralInvite } from '../../Slice/UserSlice';
+import { toast } from 'react-hot-toast';
 
 const ReferPage = () => {
     const [email, setEmail] = useState('');
     const [referralsSent, setReferralsSent] = useState([]);
 
-    const handleSubmit = (e) => {
+    const [isSending, setIsSending] = useState(false);
+    const dispatch = useDispatch();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (email.trim()) {
-            alert(`Invitation sent to ${email}`);
-            setReferralsSent([...referralsSent, { email, date: new Date().toLocaleDateString() }]);
-            setEmail('');
+            setIsSending(true);
+            try {
+                await dispatch(sendReferralInvite({ email })).unwrap();
+                toast.success(`Invitation sent successfully to ${email}`);
+                setReferralsSent([...referralsSent, { email, date: new Date().toLocaleDateString() }]);
+                setEmail('');
+            } catch (err) {
+                toast.error(err || 'Failed to send invitation');
+            } finally {
+                setIsSending(false);
+            }
         }
     };
 
@@ -89,9 +103,10 @@ const ReferPage = () => {
                                         />
                                         <button
                                             type="submit"
-                                            className="w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white py-3 px-6 rounded-lg font-bold hover:from-rose-600 hover:to-pink-600 transition-all duration-200 shadow-lg hover:shadow-xl"
+                                            disabled={isSending}
+                                            className={`w-full bg-gradient-to-r from-rose-500 to-pink-500 text-white py-3 px-6 rounded-lg font-bold transition-all duration-200 shadow-lg hover:shadow-xl ${isSending ? 'opacity-50 cursor-not-allowed' : 'hover:from-rose-600 hover:to-pink-600'}`}
                                         >
-                                            📧 Send Invitation
+                                            {isSending ? '⏳ Sending...' : '📧 Send Invitation'}
                                         </button>
                                     </form>
                                 </div>

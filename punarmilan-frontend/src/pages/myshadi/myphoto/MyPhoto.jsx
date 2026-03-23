@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Upload, Heart, Users, MapPin, Save, HelpCircle, X, Check, Camera } from 'lucide-react';
+import { Upload, Heart, UserPlus, MapPin, Save, HelpCircle, X, Check, Shield, Users } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMyProfile, updateProfile, uploadProfilePhoto, deleteProfilePhoto } from '../../../Slice/ProfileSlice';
@@ -155,11 +155,10 @@ export default function MyShadiPhotoSection() {
   };
 
   const quickLinks = [
-    { name: 'Shortlists & more', icon: Heart, route: '/' },
+    { name: 'Shortlists & more', icon: Heart, route: '/matches?tab=more' },
     { name: 'New Matches', icon: Users, route: '/matches?tab=new' },
     { name: 'My Matches', icon: Check, route: '/matches?tab=my' },
     { name: 'Near Me', icon: MapPin, route: '/matches?tab=near' },
-    { name: 'My Saved Searches', icon: Save, route: '/profile/saved-searches' },
     { name: 'My Help', icon: HelpCircle, route: '/my-tickets' }
   ];
 
@@ -407,16 +406,22 @@ export default function MyShadiPhotoSection() {
               Useful Links
             </h3>
             <div className="space-y-3">
-              <Link to="/my-shadi/refer/friends" className="flex items-center gap-3 text-cyan-500 hover:text-cyan-600 font-medium transition-all">
-                <Users className="w-5 h-5" />
+              <Link to="/my-shadi/refer" className="flex items-center gap-3 text-cyan-500 hover:text-cyan-600 font-medium transition-all group">
+                <div className="w-8 h-8 rounded-lg bg-cyan-50 flex items-center justify-center group-hover:bg-cyan-100 transition-colors">
+                  <UserPlus className="w-4 h-4" />
+                </div>
                 Refer A Friend
               </Link>
-              <Link to="/my-tickets" className="flex items-center gap-3 text-cyan-500 hover:text-cyan-600 font-medium transition-all">
-                <HelpCircle className="w-5 h-5" />
+              <Link to="/my-tickets" className="flex items-center gap-3 text-cyan-500 hover:text-cyan-600 font-medium transition-all group">
+                <div className="w-8 h-8 rounded-lg bg-cyan-50 flex items-center justify-center group-hover:bg-cyan-100 transition-colors">
+                  <HelpCircle className="w-4 h-4" />
+                </div>
                 Need Help?
               </Link>
-              <Link to="/customer-relation/faq/privar" className="flex items-center gap-3 text-cyan-500 hover:text-cyan-600 font-medium transition-all">
-                <Camera className="w-5 h-5" />
+              <Link to="/my-shadi/security" className="flex items-center gap-3 text-cyan-500 hover:text-cyan-600 font-medium transition-all group">
+                <div className="w-8 h-8 rounded-lg bg-cyan-50 flex items-center justify-center group-hover:bg-cyan-100 transition-colors">
+                  <Shield className="w-4 h-4" />
+                </div>
                 Security Tips
               </Link>
             </div>

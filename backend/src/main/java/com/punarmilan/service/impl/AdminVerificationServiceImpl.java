@@ -25,6 +25,13 @@ public class AdminVerificationServiceImpl implements AdminVerificationService {
         private final NotificationService notificationService;
         private final AdminLogService adminLogService;
         private final ProfileService profileService;
+        private final org.springframework.cache.CacheManager cacheManager;
+
+        private void evictProfileCache(String email) {
+                if (cacheManager != null && cacheManager.getCache("profiles") != null) {
+                        cacheManager.getCache("profiles").evict(email);
+                }
+        }
 
         @Override
         @Transactional(readOnly = true)
@@ -55,10 +62,16 @@ public class AdminVerificationServiceImpl implements AdminVerificationService {
         @Transactional
         public void approveProfile(Long profileId) {
                 Profile profile = profileRepository.findById(profileId)
-                                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
                 profile.setVerificationStatus("VERIFIED");
                 profile.setVerifiedAt(LocalDateTime.now());
                 profileRepository.save(profile);
+
+                // Evict cache to reflect changes immediately
+                if (profile.getUser() != null) {
+                        evictProfileCache(profile.getUser().getEmail());
+                }
+
                 adminLogService.logAction("APPROVE_PROFILE",
                                 "Approved profile ID: " + profileId + " (" + profile.getProfileId() + ")");
 
@@ -76,9 +89,15 @@ public class AdminVerificationServiceImpl implements AdminVerificationService {
         @Transactional
         public void rejectProfile(Long profileId, String reason) {
                 Profile profile = profileRepository.findById(profileId)
-                                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
                 profile.setVerificationStatus("REJECTED");
                 profileRepository.save(profile);
+
+                // Evict cache to reflect changes immediately
+                if (profile.getUser() != null) {
+                        evictProfileCache(profile.getUser().getEmail());
+                }
+
                 adminLogService.logAction("REJECT_PROFILE", "Rejected profile ID: " + profileId + " ("
                                 + profile.getProfileId() + "). Reason: " + reason);
 
@@ -105,9 +124,15 @@ public class AdminVerificationServiceImpl implements AdminVerificationService {
         @Transactional
         public void approvePhotos(Long profileId) {
                 Profile profile = profileRepository.findById(profileId)
-                                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
                 profile.setPhotoVerificationStatus("VERIFIED");
                 profileRepository.save(profile);
+
+                // Evict cache to reflect changes immediately
+                if (profile.getUser() != null) {
+                        evictProfileCache(profile.getUser().getEmail());
+                }
+
                 adminLogService.logAction("APPROVE_PHOTOS", "Approved photos for profile ID: " + profileId);
 
                 notificationService.createNotification(
@@ -124,9 +149,15 @@ public class AdminVerificationServiceImpl implements AdminVerificationService {
         @Transactional
         public void rejectPhotos(Long profileId, String reason) {
                 Profile profile = profileRepository.findById(profileId)
-                                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
                 profile.setPhotoVerificationStatus("REJECTED");
                 profileRepository.save(profile);
+
+                // Evict cache to reflect changes immediately
+                if (profile.getUser() != null) {
+                        evictProfileCache(profile.getUser().getEmail());
+                }
+
                 adminLogService.logAction("REJECT_PHOTOS",
                                 "Rejected photos for profile ID: " + profileId + ". Reason: " + reason);
 

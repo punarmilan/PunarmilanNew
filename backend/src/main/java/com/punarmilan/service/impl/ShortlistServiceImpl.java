@@ -30,7 +30,7 @@ public class ShortlistServiceImpl implements ShortlistService {
     public void addToShortlist(User user, Long profileId) {
         log.info("Adding profile {} to shortlist for user {}", profileId, user.getId());
         Profile profile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
 
         if (!shortlistRepository.existsByUserAndShortlistedProfile(user, profile)) {
             Shortlist shortlist = Shortlist.builder()
@@ -46,7 +46,7 @@ public class ShortlistServiceImpl implements ShortlistService {
     public void removeFromShortlist(User user, Long profileId) {
         log.info("Removing profile {} from shortlist for user {}", profileId, user.getId());
         Profile profile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
 
         shortlistRepository.deleteByUserAndShortlistedProfile(user, profile);
     }

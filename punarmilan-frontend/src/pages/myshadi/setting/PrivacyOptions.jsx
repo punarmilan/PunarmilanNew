@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDown, Info } from "lucide-react";
+import toast from "react-hot-toast";
 
 function PrivacyOptions({ profile, onUpdate }) {
     const [openSection, setOpenSection] = useState(null);
@@ -214,12 +215,14 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                             placeholder="First Name"
                                                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none"
                                                             value={settings.firstName}
-                                                            onChange={(e) =>
+                                                            onChange={(e) => {
+                                                                const val = e.target.value;
+                                                                if (val && !/^[a-zA-Z\s]*$/.test(val)) return;
                                                                 setSettings({
                                                                     ...settings,
-                                                                    firstName: e.target.value,
-                                                                })
-                                                            }
+                                                                    firstName: val,
+                                                                });
+                                                            }}
                                                         />
                                                     </div>
                                                     <div>
@@ -228,12 +231,14 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                             placeholder="Last Name"
                                                             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none"
                                                             value={settings.lastName}
-                                                            onChange={(e) =>
+                                                            onChange={(e) => {
+                                                                const val = e.target.value;
+                                                                if (val && !/^[a-zA-Z\s]*$/.test(val)) return;
                                                                 setSettings({
                                                                     ...settings,
-                                                                    lastName: e.target.value,
-                                                                })
-                                                            }
+                                                                    lastName: val,
+                                                                });
+                                                            }}
                                                         />
                                                     </div>
                                                 </div>
@@ -334,6 +339,14 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                 </button>
                                                 <button
                                                     onClick={() => {
+                                                        if (!settings.firstName || !settings.lastName) {
+                                                            toast.error("Both first name and last name are required");
+                                                            return;
+                                                        }
+                                                        if (!/^[a-zA-Z\s]+$/.test(settings.firstName) || !/^[a-zA-Z\s]+$/.test(settings.lastName)) {
+                                                            toast.error("Names should only contain alphabets");
+                                                            return;
+                                                        }
                                                         const fullName = `${settings.firstName} ${settings.lastName}`.trim();
                                                         onUpdate({
                                                             fullName,

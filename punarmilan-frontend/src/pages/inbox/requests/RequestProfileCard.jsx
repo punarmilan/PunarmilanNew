@@ -14,7 +14,7 @@ const RequestProfileCard = ({ profile, index }) => {
                 {/* Avatar */}
                 <div 
                     className="relative flex-shrink-0 mx-auto md:mx-0 cursor-pointer"
-                    onClick={() => navigate(`/matches/${profile.userId || profile.id}`)}
+                    onClick={() => navigate(`/matches/${profile.id}`)}
                 >
                     {/* Avatar Circle with Image or Fallback */}
                     <div className={`w-32 h-32 rounded-full border-4 ${profile.isPremium ? 'border-amber-400' : 'border-red-500'} shadow-lg overflow-hidden bg-gradient-to-br from-pink-50 to-pink-100 relative`}>
@@ -76,7 +76,7 @@ const RequestProfileCard = ({ profile, index }) => {
                     <div className="flex items-center gap-3 mb-2 justify-center md:justify-start flex-wrap">
                         <h3 
                             className="text-2xl font-bold text-gray-800 hover:text-red-500 cursor-pointer transition-colors"
-                            onClick={() => navigate(`/matches/${profile.userId || profile.id}`)}
+                            onClick={() => navigate(`/matches/${profile.id}`)}
                         >
                             {profile.name}
                         </h3>

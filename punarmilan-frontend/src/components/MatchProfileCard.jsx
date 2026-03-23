@@ -67,7 +67,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                 {/* Image Section */}
                 <div
                     className="relative aspect-[4/5] overflow-hidden cursor-pointer"
-                    onClick={() => navigate(`/matches/${profile.userId || profile.id}`)}
+                    onClick={() => navigate(`/matches/${profile.id}`)}
                 >
                     <img
                         src={photoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&color=fff&size=400&bold=true`}
@@ -172,7 +172,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                 <div className="p-3 flex flex-col flex-grow">
                     <h3
                         className="text-[#00bcd4] font-bold text-[15px] truncate hover:underline cursor-pointer mb-1"
-                        onClick={() => navigate(`/matches/${profile.userId || profile.id}`)}
+                        onClick={() => navigate(`/matches/${profile.id}`)}
                     >
                         {displayName}
                     </h3>
@@ -238,7 +238,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                 {/* Left: Image Section */}
                 <div
                     className="relative w-full md:w-64 h-72 md:h-auto overflow-hidden cursor-pointer flex-shrink-0"
-                    onClick={() => navigate(`/matches/${profile.userId || profile.id}`)}
+                    onClick={() => navigate(`/matches/${profile.id}`)}
                 >
                     <img
                         src={photoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&color=fff&size=600&bold=true`}
@@ -276,7 +276,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                         <div className="flex items-center gap-3">
                             <h3
                                 className="text-xl font-extrabold text-gray-900 truncate hover:text-rose-500 cursor-pointer transition-colors"
-                                onClick={() => navigate(`/matches/${profile.userId || profile.id}`)}
+                                onClick={() => navigate(`/matches/${profile.id}`)}
                             >
                                 {displayName}
                             </h3>
@@ -564,7 +564,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                 <div className="flex items-center justify-between mb-3">
                     <h3
                         className="text-lg font-bold text-gray-800 truncate hover:text-rose-500 cursor-pointer transition-colors"
-                        onClick={() => navigate(`/matches/${profile.userId || profile.id}`)}
+                        onClick={() => navigate(`/matches/${profile.id}`)}
                     >
                         {displayName}
                     </h3>
@@ -649,7 +649,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                             whileTap={{ scale: 0.95 }}
                             onClick={(e) => {
                                 e.stopPropagation();
-                                onChat?.();
+                                onChat?.(profile.userId || profile.id);
                             }}
                             className="w-10 h-10 bg-rose-50 rounded-xl flex items-center justify-center text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm"
                             title="Start Chat"

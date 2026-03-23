@@ -103,6 +103,18 @@ export const trackContactView = createAsyncThunk(
     }
 );
 
+export const sendReferralInvite = createAsyncThunk(
+    'user/sendReferralInvite',
+    async (emailData, { rejectWithValue }) => {
+        try {
+            const response = await api.post('/referral/invite', emailData);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'Failed to send invitation');
+        }
+    }
+);
+
 const getStoredUser = () => {
     const user = localStorage.getItem('user');
     if (user && user !== "undefined") {
@@ -208,12 +220,20 @@ const userSlice = createSlice({
             state.loading = false;
             localStorage.setItem('user', JSON.stringify(action.payload));
         });
-        builder.addCase(getCurrentUser.rejected, (state) => {
-            state.user = null;
-            state.isAuthenticated = false;
+        builder.addCase(getCurrentUser.rejected, (state, action) => {
             state.loading = false;
-            // Clear localStorage
-            localStorage.removeItem('user');
+            // Only clear auth if it's a definitive auth failure (401/403)
+            // Don't clear on transient network errors, timeouts, or server restarts
+            const status = action.payload?.status || action.meta?.requestStatus;
+            const isAuthError = typeof action.payload === 'string' && 
+                (action.payload.includes('401') || action.payload.includes('403') || action.payload.includes('Unauthorized'));
+            
+            if (isAuthError) {
+                state.user = null;
+                state.isAuthenticated = false;
+                localStorage.removeItem('user');
+            }
+            // For other errors (network, 500, etc), keep the cached user
         });
 
         // Forgot Password

@@ -58,63 +58,75 @@ public class ProfileServiceImpl implements ProfileService {
         Specification<Profile> spec = (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
             // Exclude the viewer's own profile from search results
-            if (viewer != null) {
-                predicates.add(cb.notEqual(root.get("user").get("id"), viewer.getId()));
-            }
+            boolean isIdSearch = criteria.getProfileId() != null && !criteria.getProfileId().trim().isEmpty();
 
-            if (criteria.getProfileId() != null && !criteria.getProfileId().isEmpty()) {
-                predicates.add(cb.equal(root.get("profileId"), criteria.getProfileId()));
-                // If searching by ID, we usually don't need other filters,
-                // but let's keep them as additive for now.
-            }
-            if (criteria.getAgeFrom() != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("age"), criteria.getAgeFrom()));
-            }
-            if (criteria.getAgeTo() != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("age"), criteria.getAgeTo()));
-            }
+            if (isIdSearch) {
+                // For ID search, we do exact (ignoring case) match on profileId or database ID
+                String idToSearch = criteria.getProfileId().trim();
+                Predicate idMatch = cb.equal(cb.lower(root.get("profileId")), idToSearch.toLowerCase());
+                
+                // Also allow searching by the numeric database ID if it looks like a number
+                if (idToSearch.matches("\\d+")) {
+                    idMatch = cb.or(idMatch, cb.equal(root.get("id"), Long.parseLong(idToSearch)));
+                }
+                
+                predicates.add(idMatch);
+            } else {
+                // Exclude the viewer's own profile from standard search results
+                if (viewer != null) {
+                    predicates.add(cb.notEqual(root.get("user").get("id"), viewer.getId()));
+                }
 
-            // Handle Gender Filtering
-            String targetGender = criteria.getGender();
-            if (targetGender == null && viewer != null) {
-                // If no gender specified, default to opposite of viewer
-                String viewerGender = profileRepository.findByUser(viewer)
-                        .map(Profile::getGender)
-                        .orElse(null);
-                if (viewerGender != null) {
-                    targetGender = viewerGender.equalsIgnoreCase("Male") ? "Female" : "Male";
+                // Standard search filters
+                if (criteria.getAgeFrom() != null) {
+                    predicates.add(cb.greaterThanOrEqualTo(root.get("age"), criteria.getAgeFrom()));
+                }
+                if (criteria.getAgeTo() != null) {
+                    predicates.add(cb.lessThanOrEqualTo(root.get("age"), criteria.getAgeTo()));
+                }
+
+                // Handle Gender Filtering
+                String targetGender = criteria.getGender();
+                if (targetGender == null && viewer != null) {
+                    String viewerGender = profileRepository.findByUser(viewer)
+                            .map(Profile::getGender)
+                            .orElse(null);
+                    if (viewerGender != null) {
+                        targetGender = viewerGender.equalsIgnoreCase("Male") ? "Female" : "Male";
+                    }
+                }
+
+                if (targetGender != null) {
+                    predicates.add(cb.equal(root.get("gender"), targetGender));
+                }
+
+                if (criteria.getReligion() != null && !criteria.getReligion().isEmpty()) {
+                    predicates.add(root.get("religion").in(criteria.getReligion()));
+                }
+                if (criteria.getCaste() != null && !criteria.getCaste().isEmpty()) {
+                    predicates.add(root.get("caste").in(criteria.getCaste()));
+                }
+                if (criteria.getMaritalStatus() != null && !criteria.getMaritalStatus().isEmpty()) {
+                    predicates.add(root.get("maritalStatus").in(criteria.getMaritalStatus()));
+                }
+                if (criteria.getMotherTongue() != null && !criteria.getMotherTongue().isEmpty()) {
+                    predicates.add(root.get("motherTongue").in(criteria.getMotherTongue()));
+                }
+                if (criteria.getState() != null && !criteria.getState().isEmpty()) {
+                    predicates.add(root.get("state").in(criteria.getState()));
+                }
+                if (criteria.getOccupation() != null && !criteria.getOccupation().isEmpty()) {
+                    predicates.add(root.get("occupation").in(criteria.getOccupation()));
+                }
+                if (criteria.getIsPremium() != null) {
+                    predicates.add(cb.equal(root.get("isPremium"), criteria.getIsPremium()));
+                }
+                if (criteria.getShowWithPhoto() != null && criteria.getShowWithPhoto()) {
+                    predicates.add(cb.isNotNull(root.get("profilePhotoUrl")));
                 }
             }
 
-            if (targetGender != null) {
-                predicates.add(cb.equal(root.get("gender"), targetGender));
-            }
-
-            if (criteria.getReligion() != null && !criteria.getReligion().isEmpty()) {
-                predicates.add(root.get("religion").in(criteria.getReligion()));
-            }
-            if (criteria.getCaste() != null && !criteria.getCaste().isEmpty()) {
-                predicates.add(root.get("caste").in(criteria.getCaste()));
-            }
-            if (criteria.getMaritalStatus() != null && !criteria.getMaritalStatus().isEmpty()) {
-                predicates.add(root.get("maritalStatus").in(criteria.getMaritalStatus()));
-            }
-            if (criteria.getMotherTongue() != null && !criteria.getMotherTongue().isEmpty()) {
-                predicates.add(root.get("motherTongue").in(criteria.getMotherTongue()));
-            }
-            if (criteria.getState() != null && !criteria.getState().isEmpty()) {
-                predicates.add(root.get("state").in(criteria.getState()));
-            }
-            if (criteria.getOccupation() != null && !criteria.getOccupation().isEmpty()) {
-                predicates.add(root.get("occupation").in(criteria.getOccupation()));
-            }
-            if (criteria.getIsPremium() != null) {
-                predicates.add(cb.equal(root.get("isPremium"), criteria.getIsPremium()));
-            }
-            if (criteria.getShowWithPhoto() != null && criteria.getShowWithPhoto()) {
-                predicates.add(cb.isNotNull(root.get("profilePhotoUrl")));
-            }
-
+            // Always enforce visibility unless admin (viewer can be null for admin search)
             predicates.add(cb.or(
                     cb.notEqual(root.get("profileVisibility"), "HIDDEN"),
                     cb.isNull(root.get("profileVisibility"))));
@@ -131,7 +143,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Cacheable(value = "profiles", key = "#user.email")
     public ProfileDTO getMyProfile(User user) {
         Profile profile = profileRepository.findByUser(user)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
 
         // Backfill profileId if missing or fallback value
         if (profile.getProfileId() == null || profile.getProfileId().isEmpty()
@@ -152,7 +164,7 @@ public class ProfileServiceImpl implements ProfileService {
     })
     public ProfileDTO updateProfile(User user, Map<String, Object> updates) {
         Profile profile = profileRepository.findByUser(user)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
 
         updates.forEach((key, value) -> {
             if ("email".equals(key)) {
@@ -163,12 +175,64 @@ public class ProfileServiceImpl implements ProfileService {
                 user.setEmail(newEmail);
             } else if ("mobileNumber".equals(key)) {
                 String newMobile = (String) value;
+                if (newMobile == null || !newMobile.matches("^[6-9][0-9]{9}$")) {
+                    throw new IllegalArgumentException("Mobile number must be 10 digits and start with 6, 7, 8, or 9");
+                }
                 if (!newMobile.equals(user.getMobileNumber()) && userRepository.existsByMobileNumber(newMobile)) {
                     throw new DuplicateResourceException("Mobile number already in use: " + newMobile);
                 }
                 user.setMobileNumber(newMobile);
+            } else if ("fullName".equals(key)) {
+                String name = (String) value;
+                if (name != null && !name.matches("^[a-zA-Z\\s]*$")) {
+                    throw new IllegalArgumentException("Full name should only contain alphabets");
+                }
+                profile.setFullName(name);
             } else if ("enabled".equals(key)) {
                 user.setEnabled((Boolean) value);
+            } else if ("idProofType".equals(key)) {
+                String type = (String) value;
+                List<String> validTypes = List.of("PAN Card", "Aadhar Card", "Driving License", "Voter ID", "Passport");
+                if (type != null && !validTypes.contains(type)) {
+                    throw new IllegalArgumentException("Invalid ID proof type. Must be one of: " + validTypes);
+                }
+                profile.setIdProofType(type);
+            } else if ("idProofNumber".equals(key)) {
+                String idNum = (String) value;
+                String idProofType = (String) updates.getOrDefault("idProofType", profile.getIdProofType());
+                if (idNum != null && idProofType != null) {
+                    idNum = idNum.trim().toUpperCase();
+                    switch (idProofType) {
+                        case "PAN Card" -> {
+                            if (!idNum.matches("^[A-Z]{5}[0-9]{4}[A-Z]{1}$")) {
+                                throw new IllegalArgumentException("Invalid PAN format. Example: ABCDE1234F");
+                            }
+                        }
+                        case "Aadhar Card" -> {
+                            if (!idNum.matches("^[2-9]{1}[0-9]{11}$")) {
+                                throw new IllegalArgumentException("Invalid Aadhaar format. Must be 12 digits and cannot start with 0 or 1");
+                            }
+                        }
+                        case "Driving License" -> {
+                            if (!idNum.matches("^[A-Z]{2}[0-9]{13}$") && !idNum.matches("^[A-Z]{2}[0-9]{2}[0-9]{11}$")) {
+                                throw new IllegalArgumentException("Invalid Driving License format. Must be 15 characters");
+                            }
+                        }
+                        case "Voter ID" -> {
+                            if (!idNum.matches("^[A-Z]{3}[0-9]{7}$")) {
+                                throw new IllegalArgumentException("Invalid Voter ID format. Example: ABC1234567");
+                            }
+                        }
+                        case "Passport" -> {
+                            if (!idNum.matches("^[A-Z]{1}[0-9]{7}$")) {
+                                throw new IllegalArgumentException("Invalid Passport format. Example: A1234567");
+                            }
+                        }
+                    }
+                    profile.setIdProofNumber(idNum);
+                } else {
+                   profile.setIdProofNumber(idNum);
+                }
             } else {
                 try {
                     Field field = Profile.class.getDeclaredField(key);
@@ -196,7 +260,7 @@ public class ProfileServiceImpl implements ProfileService {
     })
     public ProfileDTO uploadPhoto(User user, MultipartFile file, Integer photoIndex) {
         Profile profile = profileRepository.findByUser(user)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
 
         String photoPath = minioService.uploadFile(file, "profile-" + user.getId());
 
@@ -222,7 +286,7 @@ public class ProfileServiceImpl implements ProfileService {
     })
     public ProfileDTO deletePhoto(User user, Integer photoIndex) {
         Profile profile = profileRepository.findByUser(user)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
         return deletePhotoInternal(profile, photoIndex, user);
     }
 
@@ -230,7 +294,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Transactional
     public ProfileDTO deletePhotoByProfileId(Long profileId, Integer photoIndex) {
         Profile profile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
         return deletePhotoInternal(profile, photoIndex, null);
     }
 
@@ -279,7 +343,47 @@ public class ProfileServiceImpl implements ProfileService {
     })
     public ProfileDTO uploadIdProof(User user, MultipartFile file, String idProofType, String idProofNumber) {
         Profile profile = profileRepository.findByUser(user)
-                .orElseThrow(() -> new RuntimeException("Profile not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found"));
+
+        // Validation for ID Proof Type
+        List<String> validTypes = List.of("PAN Card", "Aadhar Card", "Driving License", "Voter ID", "Passport");
+        if (idProofType != null && !validTypes.contains(idProofType)) {
+            throw new IllegalArgumentException("Invalid ID proof type. Must be one of: " + validTypes);
+        }
+
+        // Validation for ID Proof Number
+        if (idProofNumber != null && idProofType != null) {
+            String idNum = idProofNumber.trim().toUpperCase();
+            switch (idProofType) {
+                case "PAN Card" -> {
+                    if (!idNum.matches("^[A-Z]{5}[0-9]{4}[A-Z]{1}$")) {
+                        throw new IllegalArgumentException("Invalid PAN format. Example: ABCDE1234F");
+                    }
+                }
+                case "Aadhar Card" -> {
+                    if (!idNum.matches("^[2-9]{1}[0-9]{11}$")) {
+                        throw new IllegalArgumentException("Invalid Aadhaar format. Must be 12 digits and cannot start with 0 or 1");
+                    }
+                }
+                case "Driving License" -> {
+                    if (!idNum.matches("^[A-Z]{2}[0-9]{13}$") && !idNum.matches("^[A-Z]{2}[0-9]{2}[0-9]{11}$")) {
+                        throw new IllegalArgumentException("Invalid Driving License format. Must be 15 characters");
+                    }
+                }
+                case "Voter ID" -> {
+                    if (!idNum.matches("^[A-Z]{3}[0-9]{7}$")) {
+                        throw new IllegalArgumentException("Invalid Voter ID format. Example: ABC1234567");
+                    }
+                }
+                case "Passport" -> {
+                    if (!idNum.matches("^[A-Z]{1}[0-9]{7}$")) {
+                        throw new IllegalArgumentException("Invalid Passport format. Example: A1234567");
+                    }
+                }
+            }
+            // Update the number with formatted one
+            idProofNumber = idNum;
+        }
 
         // Upload to MinIO
         String proofPath = minioService.uploadFile(file, "id-proof-" + user.getId());
@@ -349,7 +453,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Cacheable(value = "profiles", key = "#userId")
     public ProfileDTO getProfileByUserId(Long userId, User viewer) {
         Profile profile = profileRepository.findByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("Profile not found for user: " + userId));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found for user: " + userId));
         return mapToDTO(profile, viewer);
     }
 

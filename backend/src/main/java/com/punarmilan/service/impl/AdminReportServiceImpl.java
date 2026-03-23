@@ -58,7 +58,7 @@ public class AdminReportServiceImpl implements AdminReportService {
         @Transactional
         public void resolveReport(Long reportId, String adminNote) {
                 Report report = reportRepository.findById(reportId)
-                                .orElseThrow(() -> new RuntimeException("Report not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Report not found"));
                 report.setStatus("RESOLVED");
                 report.setAdminNote(adminNote);
                 report.setResolvedAt(LocalDateTime.now());
@@ -70,7 +70,7 @@ public class AdminReportServiceImpl implements AdminReportService {
         @Transactional
         public void dismissReport(Long reportId) {
                 Report report = reportRepository.findById(reportId)
-                                .orElseThrow(() -> new RuntimeException("Report not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Report not found"));
                 report.setStatus("DISMISSED");
                 report.setResolvedAt(LocalDateTime.now());
                 reportRepository.save(report);
@@ -81,9 +81,9 @@ public class AdminReportServiceImpl implements AdminReportService {
         @Transactional
         public void createReport(ReportDTO reportDTO, Long reporterId) {
                 User reporter = userRepository.findById(reporterId)
-                                .orElseThrow(() -> new RuntimeException("Reporter not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Reporter not found"));
                 User reportedUser = userRepository.findById(reportDTO.getReportedUserId())
-                                .orElseThrow(() -> new RuntimeException("Reported user not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Reported user not found"));
 
                 Report report = Report.builder()
                                 .reporter(reporter)

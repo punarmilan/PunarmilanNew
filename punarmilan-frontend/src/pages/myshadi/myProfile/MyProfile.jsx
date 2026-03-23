@@ -647,7 +647,41 @@ const MyProfile = () => {
 
     if (modalSection === 'verification') {
       if (!modalData.idProofType) newErrors.idProofType = 'ID Proof Type is required';
-      if (!modalData.idProofNumber) newErrors.idProofNumber = 'ID Proof Number is required';
+      if (!modalData.idProofNumber) {
+        newErrors.idProofNumber = 'ID Proof Number is required';
+      } else {
+        const idNum = modalData.idProofNumber.trim().toUpperCase();
+        switch (modalData.idProofType) {
+          case 'PAN Card':
+            if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(idNum)) {
+              newErrors.idProofNumber = 'Invalid PAN format (e.g., ABCDE1234F)';
+            }
+            break;
+          case 'Aadhar Card':
+            if (!/^[2-9]{1}[0-9]{11}$/.test(idNum)) {
+              newErrors.idProofNumber = 'Invalid Aadhaar format (12 digits, cannot start with 0 or 1)';
+            }
+            break;
+          case 'Driving License':
+            // Standard format is 15 characters: State Code(2), RTO Code(2), Year(4), Rest(7)
+            if (!/^[A-Z]{2}[0-9]{2}[0-9]{11}$/.test(idNum) && !/^[A-Z]{2}[0-9]{13}$/.test(idNum)) {
+              newErrors.idProofNumber = 'Invalid Driving License format (15 characters)';
+            }
+            break;
+          case 'Voter ID':
+            if (!/^[A-Z]{3}[0-9]{7}$/.test(idNum)) {
+              newErrors.idProofNumber = 'Invalid Voter ID format (e.g., ABC1234567)';
+            }
+            break;
+          case 'Passport':
+            if (!/^[A-Z]{1}[0-9]{7}$/.test(idNum)) {
+              newErrors.idProofNumber = 'Invalid Passport format (e.g., A1234567)';
+            }
+            break;
+          default:
+            break;
+        }
+      }
       if (!idProofFile && !profileData.idProofUrl) newErrors.idProofFile = 'ID Proof Photo is required';
     }
 
@@ -1748,7 +1782,7 @@ Generated on: ${new Date().toLocaleString()}
       </div>
       {/* Edit All Modal */}
       {isEditModalOpen && (
-        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-md p-0 sm:p-4">
+        <div className="fixed inset-0 z-[999] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-md p-0 sm:p-4">
           <div className="bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in slide-in-from-bottom sm:zoom-in duration-300">
             <div className="bg-gradient-to-r from-rose-600 to-pink-600 p-5 sm:p-6 flex justify-between items-center text-white">
               <div>

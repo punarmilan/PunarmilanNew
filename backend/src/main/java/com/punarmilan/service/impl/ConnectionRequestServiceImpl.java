@@ -118,7 +118,7 @@ public class ConnectionRequestServiceImpl implements ConnectionRequestService {
         }
 
         if (request.getStatus() != RequestStatus.PENDING) {
-            throw new RuntimeException("Request is already " + request.getStatus());
+            throw new BadRequestException("Request is already " + request.getStatus());
         }
 
         if (request.getRequestType() == null) {
@@ -161,7 +161,7 @@ public class ConnectionRequestServiceImpl implements ConnectionRequestService {
         }
 
         if (request.getStatus() != RequestStatus.PENDING) {
-            throw new RuntimeException("Request is already " + request.getStatus());
+            throw new BadRequestException("Request is already " + request.getStatus());
         }
 
         if (request.getRequestType() == null) {
@@ -233,6 +233,10 @@ public class ConnectionRequestServiceImpl implements ConnectionRequestService {
                 .id(request.getId())
                 .senderProfile(senderProfile)
                 .receiverProfile(receiverProfile)
+                .senderId(request.getSender().getId())
+                .receiverId(request.getReceiver().getId())
+                .senderProfileId(senderProfile != null ? senderProfile.getId() : null)
+                .receiverProfileId(receiverProfile != null ? receiverProfile.getId() : null)
                 .status(request.getStatus())
                 .requestType(request.getRequestType() != null ? request.getRequestType() : RequestType.CONNECTION)
                 .createdAt(request.getCreatedAt())

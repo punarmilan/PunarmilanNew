@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Check, Phone } from 'lucide-react';
+import { toast } from 'react-hot-toast';
 
 
 function MyContactSettings({ profile, onUpdate }) {
@@ -17,6 +18,10 @@ function MyContactSettings({ profile, onUpdate }) {
     };
 
     const handlePhoneSubmit = () => {
+        if (!/^[6-9][0-9]{9}$/.test(localPhone)) {
+            toast.error("Please enter a valid 10-digit mobile number starting with 6-9");
+            return;
+        }
         onUpdate({ mobileNumber: localPhone });
         setIsEditingPhone(false);
     };
@@ -59,7 +64,11 @@ function MyContactSettings({ profile, onUpdate }) {
                         <input
                             type="text"
                             value={localPhone}
-                            onChange={(e) => setLocalPhone(e.target.value)}
+                            onChange={(e) => {
+                                const val = e.target.value;
+                                if (val && !/^\d*$/.test(val)) return;
+                                setLocalPhone(val);
+                            }}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-1.5 px-3 max-w-[200px]"
                             placeholder="Mobile Number"
                         />

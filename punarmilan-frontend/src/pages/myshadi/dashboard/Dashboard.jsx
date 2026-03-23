@@ -36,14 +36,14 @@ function Dashboard() {
             <div className="flex flex-col lg:flex-row max-w-[1920px] mx-auto">
 
                 {/* Left Sidebar - Hidden on mobile and tablet, shown on lg+ with better width handling */}
-                <div className="hidden lg:block lg:w-1/4 xl:w-[22%] flex-shrink-0">
+                <div className="hidden lg:block lg:w-1/4 xl:w-[22%] flex-shrink-0 relative z-20">
                     <div className="sticky top-20 p-2 xl:p-4">
                         <DesktopProfileSidebar />
                     </div>
                 </div>
 
                 {/* Main Content - Improved padding for all screens */}
-                <div className="flex-1 w-full px-4 sm:px-6 lg:px-4 xl:px-6 py-4 md:py-6">
+                <div className="flex-1 w-full px-4 sm:px-6 lg:px-4 xl:px-6 py-4 md:py-6 relative z-10">
 
                     {/* Responsive Grid Layout - Better transitions */}
                     <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">

@@ -3,6 +3,7 @@ package com.punarmilan.controller;
 import com.punarmilan.dto.ChatMessageDTO;
 import com.punarmilan.entity.User;
 import com.punarmilan.repository.UserRepository;
+import com.punarmilan.security.AuthUtil;
 import com.punarmilan.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,12 +23,7 @@ public class ChatController {
     private final ChatService chatService;
     private final SimpMessagingTemplate messagingTemplate;
     private final UserRepository userRepository;
-
-    private User getCurrentUser() {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found: " + email));
-    }
+    private final AuthUtil authUtil;
 
     // ── WebSocket Endpoint ──────────────────────────────────────────────
 
@@ -41,7 +36,7 @@ public class ChatController {
         
         String senderEmail = principal.getName();
         User sender = userRepository.findByEmail(senderEmail)
-                .orElseThrow(() -> new RuntimeException("Sender not found: " + senderEmail));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Sender not found: " + senderEmail));
 
         log.info("Received real-time message via WebSocket from {} to recipient ID {}",
                 senderEmail, messageDTO.getRecipientId());
@@ -92,32 +87,32 @@ public class ChatController {
             @PathVariable Long targetUserId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size) {
-        User currentUser = getCurrentUser();
+        User currentUser = authUtil.getCurrentUser();
         return ResponseEntity.ok(chatService.getConversationHistory(currentUser, targetUserId, page, size));
     }
 
     @GetMapping("/unread-count")
     public ResponseEntity<Long> getUnreadCount() {
-        User currentUser = getCurrentUser();
+        User currentUser = authUtil.getCurrentUser();
         return ResponseEntity.ok(chatService.getUnreadCount(currentUser));
     }
 
     @GetMapping("/conversations")
     public ResponseEntity<java.util.List<com.punarmilan.dto.ConversationDTO>> getRecentConversations() {
-        User currentUser = getCurrentUser();
+        User currentUser = authUtil.getCurrentUser();
         return ResponseEntity.ok(chatService.getRecentConversations(currentUser));
     }
 
     @PatchMapping("/read/{messageId}")
     public ResponseEntity<Void> markAsRead(@PathVariable Long messageId) {
-        User currentUser = getCurrentUser();
+        User currentUser = authUtil.getCurrentUser();
         chatService.markAsRead(messageId, currentUser);
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/read/all/{partnerId}")
     public ResponseEntity<Void> markConversationAsRead(@PathVariable Long partnerId) {
-        User currentUser = getCurrentUser();
+        User currentUser = authUtil.getCurrentUser();
         User partner = userRepository.findById(partnerId)
                 .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Partner not found"));
         chatService.markConversationAsRead(partner, currentUser);

@@ -37,6 +37,12 @@ function Home() {
     /* ---------------- HANDLERS ---------------- */
     const handleChange = (e) => {
         const { name, value } = e.target
+
+        // For names, only allow alphabets and spaces
+        if ((name === "firstName" || name === "lastName") && value && !/^[a-zA-Z\s]*$/.test(value)) {
+            return;
+        }
+
         setFormData(prev => ({ ...prev, [name]: value }))
     }
 

@@ -72,7 +72,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Transactional(readOnly = true)
     public AdminUserDetailDTO getUserById(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
 
         UserSubscription subscription = subscriptionRepository.findByUserIdAndActiveTrue(userId).orElse(null);
 
@@ -86,7 +86,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Transactional
     public void blockUser(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
         user.setEnabled(false);
         userRepository.save(user);
         adminLogService.logAction("BLOCK_USER", "Blocked user ID: " + userId + ", Email: " + user.getEmail());
@@ -96,7 +96,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Transactional
     public void unblockUser(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
         user.setEnabled(true);
         userRepository.save(user);
         adminLogService.logAction("UNBLOCK_USER", "Unblocked user ID: " + userId + ", Email: " + user.getEmail());
@@ -106,7 +106,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Transactional
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
         userRepository.deleteById(userId);
         adminLogService.logAction("DELETE_USER", "Deleted user ID: " + userId + ", Email: " + user.getEmail());
     }

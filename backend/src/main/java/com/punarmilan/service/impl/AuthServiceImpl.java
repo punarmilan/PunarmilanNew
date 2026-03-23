@@ -33,6 +33,9 @@ public class AuthServiceImpl implements AuthService {
     private final com.punarmilan.service.MailService mailService;
     private final UserActivityService userActivityService;
 
+    @org.springframework.beans.factory.annotation.Value("${app.frontend-url}")
+    private String frontendUrl;
+
     @Override
     @Transactional
     public UserResponse register(RegisterRequest request) {
@@ -60,8 +63,16 @@ public class AuthServiceImpl implements AuthService {
         user.setEnabled(true);
 
         // Save user to database
+        String verificationToken = UUID.randomUUID().toString();
+        user.setVerificationToken(verificationToken);
+        user.setVerificationTokenExpiry(java.time.LocalDateTime.now().plusHours(24));
+
         User savedUser = userRepository.save(user);
         log.info("User registered successfully with ID: {}", savedUser.getId());
+
+        // Send verification email
+        String verificationLink = frontendUrl + "/verify-email?token=" + verificationToken;
+        mailService.sendVerificationEmail(savedUser.getEmail(), verificationLink);
 
         // Create default profile for the user immediately
         profileService.createDefaultProfile(savedUser, request.getFirstName(), request.getLastName(),
@@ -176,7 +187,7 @@ public class AuthServiceImpl implements AuthService {
         user.setResetTokenExpiry(java.time.LocalDateTime.now().plusHours(1));
         userRepository.save(user);
 
-        String resetLink = "http://localhost:5173/reset-password?token=" + token;
+        String resetLink = frontendUrl + "/reset-password?token=" + token;
         mailService.sendPasswordResetEmail(user.getEmail(), resetLink);
 
         log.info("Reset token generated and email sent for user: {}", user.getEmail());
@@ -201,6 +212,30 @@ public class AuthServiceImpl implements AuthService {
         userRepository.save(user);
 
         log.info("Password successfully reset for user: {}", user.getEmail());
+    }
+
+    @Override
+    @Transactional
+    public void verifyEmail(String token) {
+        log.info("Verifying email with token: {}", token);
+
+        User user = userRepository.findByVerificationToken(token)
+                .orElseThrow(() -> new com.punarmilan.exception.UnauthorizedException("Invalid verification token"));
+
+        if (user.getVerificationTokenExpiry().isBefore(java.time.LocalDateTime.now())) {
+            log.warn("Verification token expired for user: {}", user.getEmail());
+            throw new com.punarmilan.exception.UnauthorizedException("Verification token has expired");
+        }
+
+        user.setEmailVerified(true);
+        user.setVerificationToken(null);
+        user.setVerificationTokenExpiry(null);
+        userRepository.save(user);
+
+        log.info("Email successfully verified for user: {}", user.getEmail());
+
+        // Send success email
+        mailService.sendVerificationSuccessEmail(user.getEmail());
     }
 
     private RefreshToken createRefreshToken(User user) {

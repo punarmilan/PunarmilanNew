@@ -38,8 +38,13 @@ public class MinioAutoStarter {
     }
 
     private boolean isMinioRunning() {
-        try (Socket socket = new Socket("localhost", 9000)) {
-            return true;
+        try {
+            java.net.URL url = java.net.URI.create(minioUrl).toURL();
+            String host = url.getHost();
+            int port = url.getPort() != -1 ? url.getPort() : 9000;
+            try (Socket socket = new Socket(host, port)) {
+                return true;
+            }
         } catch (IOException e) {
             return false;
         }

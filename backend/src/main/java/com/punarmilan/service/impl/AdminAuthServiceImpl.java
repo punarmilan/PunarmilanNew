@@ -7,8 +7,6 @@ import com.punarmilan.repository.AdminRepository;
 import com.punarmilan.security.JwtUtils;
 import com.punarmilan.service.AdminAuthService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.stereotype.Service;
@@ -20,15 +18,18 @@ import java.time.LocalDateTime;
 @Service
 public class AdminAuthServiceImpl implements AdminAuthService {
 
-    @Autowired
-    private AdminRepository adminRepository;
-    
-    @Autowired
-    private JwtUtils jwtUtils;
-    
-    @Autowired
-    @Qualifier("adminAuthenticationProvider")
-    private DaoAuthenticationProvider authenticationProvider;
+    private final AdminRepository adminRepository;
+    private final JwtUtils jwtUtils;
+    private final DaoAuthenticationProvider authenticationProvider;
+
+    public AdminAuthServiceImpl(
+            AdminRepository adminRepository,
+            JwtUtils jwtUtils,
+            @org.springframework.beans.factory.annotation.Qualifier("adminAuthenticationProvider") DaoAuthenticationProvider authenticationProvider) {
+        this.adminRepository = adminRepository;
+        this.jwtUtils = jwtUtils;
+        this.authenticationProvider = authenticationProvider;
+    }
 
     @Override
     @Transactional
@@ -47,12 +48,12 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         Admin admin = adminRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> {
                     log.error("Admin user not found in database after authentication: {}", request.getEmail());
-                    return new RuntimeException("Admin not found after authentication");
+                    return new com.punarmilan.exception.ResourceNotFoundException("Admin not found after authentication");
                 });
 
         if (!admin.getStatus()) {
             log.warn("Admin account is disabled: {}", request.getEmail());
-            throw new RuntimeException("Admin account is inactive");
+            throw new com.punarmilan.exception.UnauthorizedException("Admin account is inactive");
         }
 
         // Update last login

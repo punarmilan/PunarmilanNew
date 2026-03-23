@@ -141,11 +141,7 @@ function Payment() {
                     <h1 className="text-2xl md:text-[32px] font-bold text-white tracking-tight font-serif italic">
                         punarmilan
                     </h1>
-                    <div className="flex items-center space-x-10">
-                        <button className="hidden md:block px-8 py-2 border border-white/60 text-white rounded-full text-[14px] font-bold hover:bg-white/10 transition-all">
-                            Personalised Plan <i className="fa-solid fa-chevron-right text-[10px] ml-1"></i>
-                        </button>
-                    </div>
+                    
                 </div>
 
                 {/* Banner Text */}

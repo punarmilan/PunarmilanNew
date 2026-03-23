@@ -785,8 +785,8 @@ const Matches = () => {
                                                     })}
                                                     isShortlisted={shortlistedProfiles.some(p => p.id === dailyMatches[currentProfileIndex].id)}
                                                     onRemoveShortlist={() => handleRemoveShortlist(dailyMatches[currentProfileIndex].id)}
-                                                    onConnect={() => handleSendRequest(dailyMatches[currentProfileIndex].userId || dailyMatches[currentProfileIndex].id)}
-                                                    requestSent={sentRequests.some(r => r.receiverId === (dailyMatches[currentProfileIndex].userId || dailyMatches[currentProfileIndex].id))}
+                                                    onConnect={() => handleSendRequest(dailyMatches[currentProfileIndex].id)}
+                                                    requestSent={sentRequests.some(r => r.receiverProfileId === dailyMatches[currentProfileIndex].id || r.receiverId === dailyMatches[currentProfileIndex].userId)}
                                                     onChat={() => {
                                                         const target = dailyMatches[currentProfileIndex];
                                                         dispatch(openChatWith({
@@ -833,8 +833,8 @@ const Matches = () => {
                                                         <MatchProfileCard
                                                             key={profile.id}
                                                             profile={normalizedProfile}
-                                                            onSendRequest={() => handleSendRequest(profile.userId || profile.id)}
-                                                            requestSent={sentRequests.some(r => r.receiverId === (profile.userId || profile.id))}
+                                                            onSendRequest={() => handleSendRequest(profile.id)}
+                                                            requestSent={sentRequests.some(r => r.receiverProfileId === profile.id || r.receiverId === profile.userId)}
                                                             onShortlist={() => handleShortlist(normalizedProfile)}
                                                             isShortlisted={shortlistedProfiles.some(p => p.id === profile.id)}
                                                             onRemoveShortlist={() => handleRemoveShortlist(profile.id)}
@@ -876,8 +876,8 @@ const Matches = () => {
                                                         <MatchProfileCard
                                                             key={profile.id}
                                                             profile={normalizedProfile}
-                                                            onSendRequest={() => handleSendRequest(profile.userId || profile.id)}
-                                                            requestSent={sentRequests.some(r => r.receiverId === (profile.userId || profile.id))}
+                                                            onSendRequest={() => handleSendRequest(profile.id)}
+                                                            requestSent={sentRequests.some(r => r.receiverProfileId === profile.id || r.receiverId === profile.userId)}
                                                             onShortlist={() => handleShortlist(normalizedProfile)}
                                                             isShortlisted={shortlistedProfiles.some(p => p.id === profile.id)}
                                                             onRemoveShortlist={() => handleRemoveShortlist(profile.id)}
@@ -919,8 +919,8 @@ const Matches = () => {
                                                         <MatchProfileCard
                                                             key={profile.id}
                                                             profile={normalizedProfile}
-                                                            onSendRequest={() => handleSendRequest(profile.userId || profile.id)}
-                                                            requestSent={sentRequests.some(r => r.receiverId === (profile.userId || profile.id))}
+                                                            onSendRequest={() => handleSendRequest(profile.id)}
+                                                            requestSent={sentRequests.some(r => r.receiverProfileId === profile.id || r.receiverId === profile.userId)}
                                                             onShortlist={() => handleShortlist(normalizedProfile)}
                                                             isShortlisted={shortlistedProfiles.some(p => p.id === profile.id)}
                                                             onRemoveShortlist={() => handleRemoveShortlist(profile.id)}
@@ -980,8 +980,8 @@ const Matches = () => {
                                                                 key={profile.id}
                                                                 profile={normalizeProfile(profile)}
                                                                 layout="compact-grid"
-                                                                onSendRequest={() => handleSendRequest(profile.userId || profile.id)}
-                                                                isRequestSent={sentRequests.some(r => r.receiverId === (profile.userId || profile.id))}
+                                                                onSendRequest={() => handleSendRequest(profile.id)}
+                                                                isRequestSent={sentRequests.some(r => r.receiverProfileId === profile.id || r.receiverId === profile.userId)}
                                                                 onShortlist={() => handleShortlist(profile)}
                                                                 isShortlisted={true}
                                                                 onRemoveShortlist={() => handleRemoveShortlist(profile.id)}
@@ -1018,8 +1018,8 @@ const Matches = () => {
                                                                     <MatchProfileCard
                                                                         profile={normalizeProfile(profile)}
                                                                         layout="compact-grid"
-                                                                        onSendRequest={() => handleSendRequest(profile.userId || profile.id)}
-                                                                        isRequestSent={sentRequests.some(r => r.receiverId === (profile.userId || profile.id))}
+                                                                        onSendRequest={() => handleSendRequest(profile.id)}
+                                                                        isRequestSent={sentRequests.some(r => r.receiverProfileId === profile.id || r.receiverId === profile.userId)}
                                                                         onShortlist={() => handleShortlist(profile)}
                                                                         isShortlisted={shortlistedProfiles.some(p => p.id === profile.id)}
                                                                         onRemoveShortlist={() => handleRemoveShortlist(profile.id)}
@@ -1062,8 +1062,8 @@ const Matches = () => {
                                                                 key={profile.id}
                                                                 profile={normalizeProfile(profile)}
                                                                 layout="compact-grid"
-                                                                onSendRequest={() => handleSendRequest(profile.userId || profile.id)}
-                                                                isRequestSent={sentRequests.some(r => r.receiverId === (profile.userId || profile.id))}
+                                                                onSendRequest={() => handleSendRequest(profile.id)}
+                                                                isRequestSent={sentRequests.some(r => r.receiverProfileId === profile.id || r.receiverId === profile.userId)}
                                                                 onShortlist={() => handleShortlist(profile)}
                                                                 isShortlisted={shortlistedProfiles.some(p => p.id === profile.id)}
                                                                 onRemoveShortlist={() => handleRemoveShortlist(profile.id)}
@@ -1092,8 +1092,8 @@ const Matches = () => {
                                                                 key={profile.id}
                                                                 profile={normalizeProfile(profile)}
                                                                 layout="compact-grid"
-                                                                onSendRequest={() => handleSendRequest(profile.userId || profile.id)}
-                                                                isRequestSent={sentRequests.some(r => r.receiverId === (profile.userId || profile.id))}
+                                                                onSendRequest={() => handleSendRequest(profile.id)}
+                                                                isRequestSent={sentRequests.some(r => r.receiverProfileId === profile.id || r.receiverId === profile.userId)}
                                                                 onShortlist={() => handleShortlist(profile)}
                                                                 isShortlisted={shortlistedProfiles.some(p => p.id === profile.id)}
                                                                 onRemoveShortlist={() => handleRemoveShortlist(profile.id)}
@@ -1110,13 +1110,12 @@ const Matches = () => {
                                     ) : activeTab === 'my' || activeTab === 'new' ? (
                                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                             {paginatedProfiles.map((profile) => {
-                                                const receiverId = profile.userId || profile.id;
                                                 return (
                                                     <MatchProfileCard
                                                         key={profile.id}
                                                         profile={profile}
-                                                        onSendRequest={() => handleSendRequest(receiverId)}
-                                                        isRequestSent={sentRequests.some(r => r.receiverId === receiverId)}
+                                                        onSendRequest={() => handleSendRequest(profile.id)}
+                                                        isRequestSent={sentRequests.some(r => r.receiverProfileId === (profile.id) || r.receiverId === (profile.userId))}
                                                         onShortlist={() => handleShortlist(profile)}
                                                         isShortlisted={shortlistedProfiles.some(p => p.id === profile.id)}
                                                         onRemoveShortlist={() => handleRemoveShortlist(profile.id)}

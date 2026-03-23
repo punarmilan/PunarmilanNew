@@ -39,7 +39,7 @@ public class EventServiceImpl implements EventService {
     public EventDTO updateEvent(Long id, EventDTO eventDTO) {
         log.info("Updating event with ID: {}", id);
         Event existingEvent = eventRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Event not found with id: " + id));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Event not found with id: " + id));
 
         existingEvent.setTitle(eventDTO.getTitle());
         existingEvent.setDescription(eventDTO.getDescription());
@@ -70,7 +70,7 @@ public class EventServiceImpl implements EventService {
     public void deleteEvent(Long id) {
         log.info("Deleting event with ID: {}", id);
         if (!eventRepository.existsById(id)) {
-            throw new RuntimeException("Event not found with id: " + id);
+            throw new com.punarmilan.exception.ResourceNotFoundException("Event not found with id: " + id);
         }
         eventRepository.deleteById(id);
     }
@@ -79,7 +79,7 @@ public class EventServiceImpl implements EventService {
     public EventDTO getEventById(Long id) {
         log.info("Fetching event with ID: {}", id);
         Event event = eventRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Event not found with id: " + id));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Event not found with id: " + id));
         return mapToDTO(event);
     }
 

@@ -55,7 +55,7 @@ const ProfileUpdate = () => {
 // Badge Illustration Component
 const BadgeIllustration = () => {
     return (
-        <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48">
+        <div className="relative w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 z-0 [isolation:isolate]">
             {/* Floating decorative elements */}
             <div className="absolute -top-6 -left-6 w-8 h-2 bg-orange-300 rounded-full transform rotate-45 animate-pulse"></div>
             <div className="absolute -top-4 -right-4 w-6 h-6 border-4 border-yellow-400 rounded-full animate-bounce"></div>

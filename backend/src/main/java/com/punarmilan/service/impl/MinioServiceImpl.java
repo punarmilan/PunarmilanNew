@@ -61,7 +61,7 @@ public class MinioServiceImpl implements MinioService {
 
         } catch (Exception e) {
             log.error("Error uploading file to MinIO: {}", e.getMessage());
-            throw new RuntimeException("Could not upload file", e);
+            throw new com.punarmilan.exception.BadRequestException("Could not upload file: " + e.getMessage());
         }
     }
 

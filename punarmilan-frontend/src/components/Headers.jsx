@@ -160,7 +160,7 @@ const Header = () => {
     // Update active tab based on current route
     useEffect(() => {
         const currentPath = location.pathname;
-        
+
         // Sync Mobile Tabs
         const matchedTab = mobileTabs.find(tab =>
             tab.path === currentPath ||
@@ -298,7 +298,7 @@ const Header = () => {
                 <div className="max-w-7xl mx-auto w-full">
                     <div className="flex justify-between items-center h-12 xs:h-14 sm:h-16 px-2 xs:px-3 sm:px-4 md:px-6">
                         {/* LOGO */}
-                        <Link to="/" className="text-base xs:text-lg sm:text-xl md:text-2xl font-bold italic font-serif tracking-tight hover:opacity-90 transition-opacity">
+                        <Link to="/my-shadi" className="text-base xs:text-lg sm:text-xl md:text-2xl font-bold italic font-serif tracking-tight hover:opacity-90 transition-opacity">
                             PunarMilan
                         </Link>
 
@@ -376,7 +376,7 @@ const Header = () => {
                                     </button>
 
                                     {showPremiumDropdown && (
-                                        <div 
+                                        <div
                                             onMouseEnter={() => setShowPremiumDropdown(true)}
                                             onMouseLeave={() => setShowPremiumDropdown(false)}
                                             className="absolute right-0 mt-0 w-72 xs:w-80 bg-white rounded-xl shadow-2xl border border-gray-100 z-[1000] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 text-gray-800"
@@ -410,8 +410,8 @@ const Header = () => {
                                                         </span>
                                                     </div>
                                                     <div className="w-full bg-gray-100 rounded-full h-1.5 sm:h-2">
-                                                        <div 
-                                                            className="bg-green-500 h-1.5 sm:h-2 rounded-full transition-all duration-500" 
+                                                        <div
+                                                            className="bg-green-500 h-1.5 sm:h-2 rounded-full transition-all duration-500"
                                                             style={{ width: `${(subscriptionDetails?.balance / (subscriptionDetails?.totalConnects || 1)) * 100}%` }}
                                                         ></div>
                                                     </div>
@@ -434,7 +434,7 @@ const Header = () => {
                                                 </div>
 
                                                 {/* Action */}
-                                                <button 
+                                                <button
                                                     onClick={() => navigate('/payment')}
                                                     className="w-full bg-rose-600 hover:bg-rose-700 text-white py-2 rounded-lg text-xs sm:text-sm font-bold transition-colors mt-1"
                                                 >

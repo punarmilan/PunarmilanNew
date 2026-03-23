@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class RegisterRequest {
 
     @NotBlank(message = "Mobile number is required")
-    @Pattern(regexp = "^[0-9]{10}$", message = "Mobile number must be exactly 10 digits")
+    @Pattern(regexp = "^[6-9][0-9]{9}$", message = "Mobile number must be 10 digits and start with 6-9")
     private String mobileNumber;
 
     @NotBlank(message = "Email is required")
@@ -26,9 +26,11 @@ public class RegisterRequest {
     private String password;
 
     @NotBlank(message = "First name is required")
+    @Pattern(regexp = "^[a-zA-Z\\s]*$", message = "First name should only contain alphabets")
     private String firstName;
 
     @NotBlank(message = "Last name is required")
+    @Pattern(regexp = "^[a-zA-Z\\s]*$", message = "Last name should only contain alphabets")
     private String lastName;
 
     @NotBlank(message = "Profile created by is required")

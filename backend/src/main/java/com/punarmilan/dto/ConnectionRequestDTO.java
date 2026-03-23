@@ -18,6 +18,10 @@ public class ConnectionRequestDTO {
     private Long id;
     private ProfileDTO senderProfile;
     private ProfileDTO receiverProfile;
+    private Long senderId;
+    private Long receiverId;
+    private Long senderProfileId;
+    private Long receiverProfileId;
     private RequestStatus status;
     private com.punarmilan.entity.enums.RequestType requestType;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")

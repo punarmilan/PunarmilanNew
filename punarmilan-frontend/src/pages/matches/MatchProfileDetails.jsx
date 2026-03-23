@@ -366,7 +366,7 @@ const MatchProfileDetails = () => {
                                         ))}
                                     </div>
                                 )}
-                                {profile && sentRequests.some(r => r.receiverId === (profile.userId || profile.id)) ? (
+                                {profile && sentRequests.some(r => r.receiverProfileId === profile.id || r.receiverId === profile.userId) ? (
                                     <div className="mt-4 text-[12px] text-pink-600 text-center font-medium bg-pink-50 py-1 rounded">
                                         Invitation sent. {profile.gender === 'male' ? 'He' : 'She'} hasn't viewed it yet.
                                     </div>
@@ -524,15 +524,15 @@ const MatchProfileDetails = () => {
                                 </button>
                                 <button
                                     onClick={() => {
-                                        const receiverId = profile.userId || profile.id;
-                                        if (!sentRequests.some(r => r.receiverId === receiverId)) {
+                                        const receiverId = profile.id;
+                                        if (!sentRequests.some(r => r.receiverProfileId === profile.id || r.receiverId === profile.userId)) {
                                             dispatch(sendConnectionRequest(receiverId));
                                         }
                                     }}
-                                    disabled={sentRequests.some(r => r.receiverId === (profile?.userId || profile?.id))}
-                                    className={`w-[150px] flex items-center justify-center gap-2 py-1.5 rounded text-white text-[14px] font-bold transition-all ${sentRequests.some(r => r.receiverId === (profile?.userId || profile?.id)) ? 'bg-pink-400 cursor-not-allowed' : 'bg-pink-600 hover:bg-pink-700 shadow-md shadow-pink-100'}`}
+                                    disabled={sentRequests.some(r => r.receiverProfileId === profile?.id || r.receiverId === profile?.userId)}
+                                    className={`w-[150px] flex items-center justify-center gap-2 py-1.5 rounded text-white text-[14px] font-bold transition-all ${sentRequests.some(r => r.receiverProfileId === profile?.id || r.receiverId === profile?.userId) ? 'bg-pink-400 cursor-not-allowed' : 'bg-pink-600 hover:bg-pink-700 shadow-md shadow-pink-100'}`}
                                 >
-                                    {sentRequests.some(r => r.receiverId === (profile?.userId || profile?.id)) ? 'Request Sent' : 'Connect Now'}
+                                    {sentRequests.some(r => r.receiverProfileId === profile?.id || r.receiverId === profile?.userId) ? 'Request Sent' : 'Connect Now'}
                                 </button>
                                 <button
                                     onClick={() => {

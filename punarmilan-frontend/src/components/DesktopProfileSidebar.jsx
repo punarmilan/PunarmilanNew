@@ -92,17 +92,42 @@ const DesktopProfileSidebar = () => {
     };
 
     const handleVerify = async () => {
-        const allowedDocs = ['pan', 'driving', 'voter'];
-        if (!selectedDoc || !allowedDocs.includes(selectedDoc)) {
-            toast.error('Please select a valid document type (PAN card, Driving license, or Voter ID)');
+        const validTypes = ['PAN Card', 'Aadhar Card', 'Driving License', 'Voter ID', 'Passport'];
+        if (!selectedDoc || !validTypes.includes(selectedDoc)) {
+            toast.error('Please select a valid document type');
             return;
         }
-        if (selectedDoc === 'pan' && !panNumber) {
-            toast.error('Please enter PAN number');
+        if (!panNumber) {
+            toast.error(`Please enter ${selectedDoc} number`);
             return;
         }
+
+        const idNum = panNumber.trim().toUpperCase();
+        
+        // Validation logic
+        if (selectedDoc === 'PAN Card' && !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(idNum)) {
+            toast.error('Invalid PAN format (e.g., ABCDE1234F)');
+            return;
+        }
+        if (selectedDoc === 'Aadhar Card' && !/^[2-9]{1}[0-9]{11}$/.test(idNum)) {
+            toast.error('Invalid Aadhaar format (12 digits, cannot start with 0 or 1)');
+            return;
+        }
+        if (selectedDoc === 'Driving License' && !/^[A-Z]{2}[0-9]{2}[0-9]{11}$/.test(idNum) && !/^[A-Z]{2}[0-9]{13}$/.test(idNum)) {
+            toast.error('Invalid Driving License format (15 characters)');
+            return;
+        }
+        if (selectedDoc === 'Voter ID' && !/^[A-Z]{3}[0-9]{7}$/.test(idNum)) {
+            toast.error('Invalid Voter ID format (e.g., ABC1234567)');
+            return;
+        }
+        if (selectedDoc === 'Passport' && !/^[A-Z]{1}[0-9]{7}$/.test(idNum)) {
+            toast.error('Invalid Passport format (e.g., A1234567)');
+            return;
+        }
+
         if (!idProofFile) {
-            toast.error('Please upload properly Voter ID, PAN card, or Driving license image');
+            toast.error('Please upload your ID document image');
             return;
         }
 
@@ -110,14 +135,13 @@ const DesktopProfileSidebar = () => {
             await dispatch(uploadIdProof({
                 file: idProofFile,
                 idProofType: selectedDoc,
-                idProofNumber: selectedDoc === 'pan' ? panNumber : selectedDoc
+                idProofNumber: idNum
             })).unwrap();
 
             toast.success('Verification submitted successfully!');
             setIsVerificationOpen(false);
             setPanNumber('');
             setIdProofFile(null);
-            // Refresh summary to show pending status if applicable
             dispatch(fetchDashboardSummary());
         } catch (error) {
             toast.error(error || 'Failed to submit verification');
@@ -186,7 +210,7 @@ const DesktopProfileSidebar = () => {
                             </button>
                         )}
                         <p className="text-sm text-gray-700 flex items-center">
-                            {user?.verificationStatus === 'VERIFIED' || user?.isVerified ? (
+                            {user?.verificationStatus === 'VERIFIED' ? (
                                 <>
                                     <CheckCircle className="w-4 h-4 mr-2 text-emerald-500" />
                                     <span className="font-medium text-emerald-600">Profile Verified</span>
@@ -207,7 +231,7 @@ const DesktopProfileSidebar = () => {
                     </div>
 
                     {/* Blue Tick Verification */}
-                    {user?.verificationStatus === 'VERIFIED' || user?.isVerified ? (
+                    {user?.verificationStatus === 'VERIFIED' ? (
                         <div className="bg-white p-5 rounded-2xl border border-gray-100 mb-6 shadow-sm relative">
                             <div className="flex items-center justify-between">
                                 <div>
@@ -240,10 +264,10 @@ const DesktopProfileSidebar = () => {
                                                 </div>
 
                                                 <div className="flex items-start gap-3">
-                                                    <div className="mt-1 w-4 h-4 rounded-full border border-green-500 flex items-center justify-center flex-shrink-0">
-                                                        <CheckCircle size={12} className="text-green-500" />
+                                                    <div className={`mt-1 w-4 h-4 rounded-full border ${user?.mobileVerified ? 'border-green-500' : 'border-gray-500'} flex items-center justify-center flex-shrink-0`}>
+                                                        <CheckCircle size={12} className={user?.mobileVerified ? "text-green-500" : "text-gray-400"} />
                                                     </div>
-                                                    <p className="text-sm font-medium leading-tight">Mobile no. is verified</p>
+                                                    <p className={`text-sm font-medium leading-tight ${user?.mobileVerified ? 'text-white' : 'text-gray-400'}`}>Mobile no. is {user?.mobileVerified ? 'verified' : 'not verified'}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -309,7 +333,7 @@ const DesktopProfileSidebar = () => {
 
             {/* Desktop File Upload Modal */}
             {showFileUpload && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[999]">
                     <div className="bg-white rounded-2xl p-8 w-full max-w-lg">
                         <div className="flex justify-between items-center mb-6">
                             <h3 className="font-bold text-2xl">Add Photos</h3>
@@ -362,7 +386,7 @@ const DesktopProfileSidebar = () => {
 
             {/* Desktop Verification Modal */}
             {isVerificationOpen && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[999]">
                     <div className="bg-white rounded-2xl p-8 w-full max-w-lg">
                         <div className="flex justify-between items-center mb-6">
                             <h3 className="font-bold text-2xl">Verify your Profile</h3>
@@ -381,9 +405,11 @@ const DesktopProfileSidebar = () => {
                         {/* Document Selection */}
                         <div className="space-y-4 mb-6">
                             {[
-                                { id: 'pan', label: 'PAN card' },
-                                { id: 'driving', label: 'Driving license' },
-                                { id: 'voter', label: 'Voter ID' }
+                                { id: 'PAN Card', label: 'PAN Card' },
+                                { id: 'Aadhar Card', label: 'Aadhar Card' },
+                                { id: 'Driving License', label: 'Driving License' },
+                                { id: 'Voter ID', label: 'Voter ID' },
+                                { id: 'Passport', label: 'Passport' }
                             ].map((doc) => (
                                 <div
                                     key={doc.id}
@@ -400,17 +426,17 @@ const DesktopProfileSidebar = () => {
                             ))}
                         </div>
 
-                        {selectedDoc === 'pan' && (
+                        {selectedDoc && (
                             <div className="mb-6">
-                                <label className="block text-sm font-medium text-gray-700 mb-2  cursor-pointer">
-                                    Your PAN Card number
+                                <label className="block text-sm font-medium text-gray-700 mb-2 cursor-pointer">
+                                    Your {selectedDoc} number
                                 </label>
                                 <input
                                     type="text"
                                     value={panNumber}
                                     onChange={(e) => setPanNumber(e.target.value)}
-                                    placeholder="Enter PAN number"
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    placeholder={`Enter ${selectedDoc} number`}
+                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                                 />
                             </div>
                         )}

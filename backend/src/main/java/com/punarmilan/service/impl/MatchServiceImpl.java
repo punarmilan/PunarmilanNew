@@ -70,16 +70,26 @@ public class MatchServiceImpl implements MatchService {
 
         // ────────────────── Internal scored-profile holder ──────────────────
 
-        private static class ScoredProfile {
-                final Profile profile;
+        private static class ScoredProfile implements java.io.Serializable {
+                private static final long serialVersionUID = 1L;
+                Profile profile;
                 double score;
                 List<String> reasons;
+
+                ScoredProfile() {} // Default constructor for Jackson
 
                 ScoredProfile(Profile profile, double score, List<String> reasons) {
                         this.profile = profile;
                         this.score = score;
                         this.reasons = reasons;
                 }
+
+                public Profile getProfile() { return profile; }
+                public void setProfile(Profile profile) { this.profile = profile; }
+                public double getScore() { return score; }
+                public void setScore(double score) { this.score = score; }
+                public List<String> getReasons() { return reasons; }
+                public void setReasons(List<String> reasons) { this.reasons = reasons; }
         }
 
         // ====================================================================
@@ -369,7 +379,7 @@ public class MatchServiceImpl implements MatchService {
         @Transactional(readOnly = true)
         public Page<ProfileDTO> getNearMeMatches(User user, Pageable pageable) {
                 Profile userProfile = profileRepository.findByUserId(user.getId())
-                                .orElseThrow(() -> new RuntimeException("User profile not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User profile not found"));
 
                 String targetGender = "Male".equalsIgnoreCase(userProfile.getGender()) ? "Female" : "Male";
 
@@ -497,7 +507,7 @@ public class MatchServiceImpl implements MatchService {
                 log.info("Fetching recent visitors for user: {}", user.getId());
 
                 Profile profile = profileRepository.findByUserId(user.getId())
-                                .orElseThrow(() -> new RuntimeException("Profile not found for user: " + user.getId()));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Profile not found for user: " + user.getId()));
 
                 List<ProfileView> views = profileViewRepository.findRecentVisitors(profile, PageRequest.of(0, 50));
 
@@ -598,10 +608,10 @@ public class MatchServiceImpl implements MatchService {
         @Cacheable(value = "partnerPreferences", key = "#currentUser.email + ':' + #targetProfileId")
         public com.punarmilan.dto.PreferenceMatchDTO getPreferenceMatch(User currentUser, Long targetProfileId) {
                 Profile myProfile = profileRepository.findByUserId(currentUser.getId())
-                                .orElseThrow(() -> new RuntimeException("Current user profile not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Current user profile not found"));
 
                 Profile targetProfile = profileRepository.findById(targetProfileId)
-                                .orElseThrow(() -> new RuntimeException("Target profile not found"));
+                                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Target profile not found"));
 
                 PartnerPreference myPref = partnerPreferenceRepository.findByUser(currentUser).orElse(null);
                 PartnerPreference targetPref = targetProfile.getUser() != null

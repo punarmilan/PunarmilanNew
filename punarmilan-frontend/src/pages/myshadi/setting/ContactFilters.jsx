@@ -19,7 +19,7 @@ const ContactFilters = () => {
             icon: '📅',
             color: 'text-rose-600',
             value: preferences ? `${preferences.minAge || 20} - ${preferences.maxAge || 28}` : '20 - 28',
-            path: '/partner-preferences/age-range',
+            path: '/my-shadi/partner-preferences/age-range',
             isActive: true // Special highlight from the image
         },
         {
@@ -28,7 +28,7 @@ const ContactFilters = () => {
             icon: '↕️',
             color: 'text-gray-900',
             value: preferences ? `${preferences.minHeight || "4' 5\""} - ${preferences.maxHeight || "7' 0\""}` : "4' 5\" - 7' 0\"",
-            path: '/partner-preferences/height-range'
+            path: '/my-shadi/partner-preferences/height-range'
         },
         {
             id: 'country',
@@ -36,7 +36,7 @@ const ContactFilters = () => {
             icon: '🌐',
             color: 'text-gray-900',
             value: preferences?.preferredCountry || 'Open to All',
-            path: '/partner-preferences/country'
+            path: '/my-shadi/partner-preferences/country'
         },
         {
             id: 'religion',
@@ -44,7 +44,7 @@ const ContactFilters = () => {
             icon: '📒',
             color: 'text-gray-900',
             value: preferences?.preferredReligion || 'Open to All',
-            path: '/partner-preferences/religion'
+            path: '/my-shadi/partner-preferences/religion'
         },
         {
             id: 'community',
@@ -52,7 +52,7 @@ const ContactFilters = () => {
             icon: '👥',
             color: 'text-gray-900',
             value: preferences?.preferredCaste || 'Open to All',
-            path: '/partner-preferences/community'
+            path: '/my-shadi/partner-preferences/community'
         },
         {
             id: 'motherTongue',
@@ -60,7 +60,7 @@ const ContactFilters = () => {
             icon: '🌐',
             color: 'text-gray-900',
             value: 'Open to All',
-            path: '/partner-preferences/mothertongue'
+            path: '/my-shadi/partner-preferences/mothertongue'
         },
         {
             id: 'maritalStatus',
@@ -68,7 +68,7 @@ const ContactFilters = () => {
             icon: '💑',
             color: 'text-gray-900',
             value: preferences?.maritalStatus || 'Open to All',
-            path: '/partner-preferences/maritalstatus'
+            path: '/my-shadi/partner-preferences/maritalstatus'
         }
     ];
 

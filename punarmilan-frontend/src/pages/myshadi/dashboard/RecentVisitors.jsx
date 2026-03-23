@@ -16,9 +16,9 @@ const RecentVisitors = () => {
         dispatch(fetchSentRequests());
     }, [dispatch]);
 
-    // Normalize profile data from backend ProfileDTO
     const visitors = (recentVisitors || []).map(v => ({
         id: v.id,
+        userId: v.userId,
         name: formatDisplayName(v.fullName, v.displayNameVisibility, v.id),
         age: v.age || 'N/A',
         height: v.height || '',
@@ -29,9 +29,9 @@ const RecentVisitors = () => {
         premiumVisible: v.premiumVisible !== false,
     }));
 
-    const handleConnect = (visitorId) => {
+    const handleConnect = (visitorId, userId) => {
         const receiverId = visitorId;
-        if (!sentRequests.some(r => r.receiverId === receiverId)) {
+        if (!sentRequests.some(r => r.receiverProfileId === receiverId || r.receiverId === userId)) {
             dispatch(sendConnectionRequest(receiverId))
                 .unwrap()
                 .then(() => {
@@ -138,15 +138,15 @@ const RecentVisitors = () => {
                                             View Profile
                                         </button>
                                         <button
-                                            onClick={() => handleConnect(v.id)}
-                                            disabled={sentRequests.some(r => r.receiverId === v.id)}
+                                            onClick={() => handleConnect(v.id, v.userId)}
+                                            disabled={sentRequests.some(r => r.receiverProfileId === v.id || r.receiverId === v.userId)}
                                             className={`w-full border-2 font-semibold py-2 rounded-full transition-all transform active:scale-95 cursor-pointer text-sm ${
-                                                sentRequests.some(r => r.receiverId === v.id)
+                                                sentRequests.some(r => r.receiverProfileId === v.id || r.receiverId === v.userId)
                                                     ? 'border-gray-300 text-gray-400 cursor-not-allowed bg-gray-50'
                                                     : 'border-cyan-500 text-cyan-500 hover:bg-cyan-50'
                                             }`}
                                         >
-                                            {sentRequests.some(r => r.receiverId === v.id) ? 'Request Sent' : 'Connect Now'}
+                                            {sentRequests.some(r => r.receiverProfileId === v.id || r.receiverId === v.userId) ? 'Request Sent' : 'Connect Now'}
                                         </button>
                                     </div>
                                 </div>

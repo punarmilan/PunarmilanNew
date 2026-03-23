@@ -13,7 +13,7 @@ const ProfileCard = ({ profile, onUpgrade, onChat, onWhatsApp, onCall }) => {
                 <div className="flex justify-center md:justify-start">
                     <div 
                         className="relative cursor-pointer"
-                        onClick={() => navigate(`/matches/${profile.userId || profile.id}`)}
+                        onClick={() => navigate(`/matches/${profile.id}`)}
                     >
                         <img
                             src={profile.image}
@@ -53,7 +53,7 @@ const ProfileCard = ({ profile, onUpgrade, onChat, onWhatsApp, onCall }) => {
                         <div className="flex items-center justify-center md:justify-start gap-2">
                             <h2 
                                 className="text-2xl sm:text-3xl font-semibold text-gray-800 hover:text-yellow-600 cursor-pointer transition-colors"
-                                onClick={() => navigate(`/matches/${profile.userId || profile.id}`)}
+                                onClick={() => navigate(`/matches/${profile.id}`)}
                             >
                                 {profile.name}
                                 {profile.isPremium && (

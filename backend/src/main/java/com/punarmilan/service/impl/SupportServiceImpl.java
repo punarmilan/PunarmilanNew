@@ -29,7 +29,7 @@ public class SupportServiceImpl implements SupportService {
     public SupportTicketDTO createTicket(SupportTicketDTO ticketDTO) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
 
         SupportTicket ticket = SupportTicket.builder()
                 .user(user)
@@ -48,7 +48,7 @@ public class SupportServiceImpl implements SupportService {
     public Page<SupportTicketDTO> getUserTickets(Pageable pageable) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
 
         // We need a method in repository for this
         return ticketRepository.findByUser(user, pageable).map(this::mapToDTO);
@@ -64,7 +64,7 @@ public class SupportServiceImpl implements SupportService {
     @Transactional
     public void respondToTicket(Long id, String response) {
         SupportTicket ticket = ticketRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Ticket not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Ticket not found"));
 
         ticket.setAdminResponse(response);
         ticket.setStatus("RESOLVED");

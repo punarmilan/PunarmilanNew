@@ -70,7 +70,6 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    @Transactional
     @org.springframework.scheduling.annotation.Async("taskExecutor")
     public void createNotification(User recipient, NotificationType type, String title, String message,
             String senderName, String senderPhotoUrl, Long referenceId) {
@@ -182,7 +181,8 @@ public class NotificationServiceImpl implements NotificationService {
         Boolean premiumVisible = true;
         com.punarmilan.entity.Profile senderProfile = null;
 
-        // Dynamically fetch the current profile photo and calculate visibility if referenceId (Profile ID) is available
+        // Dynamically fetch the current profile photo and calculate visibility if
+        // referenceId (Profile ID) is available
         if (n.getReferenceId() != null) {
             try {
                 senderProfile = profileRepository.findById(n.getReferenceId()).orElse(null);
@@ -190,21 +190,22 @@ public class NotificationServiceImpl implements NotificationService {
                     if (senderProfile.getProfilePhotoUrl() != null && !senderProfile.getProfilePhotoUrl().isEmpty()) {
                         photoPath = senderProfile.getProfilePhotoUrl();
                     }
-                    
-                    // Calculate visibility: 
+
+                    // Calculate visibility:
                     // False if (Sender is Premium) AND (Recipient is NOT Premium)
                     User recipient = n.getRecipient();
                     User senderUser = senderProfile.getUser();
-                    
+
                     boolean recipientIsPremium = isUserPremium(recipient);
                     boolean senderIsPremium = isUserPremium(senderUser);
-                    
+
                     if (senderIsPremium && !recipientIsPremium) {
                         premiumVisible = false;
                     }
                 }
             } catch (Exception e) {
-                log.warn("Failed to dynamically process notification details for referenceId {}: {}", n.getReferenceId(), e.getMessage());
+                log.warn("Failed to dynamically process notification details for referenceId {}: {}",
+                        n.getReferenceId(), e.getMessage());
             }
         }
 
@@ -223,7 +224,8 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     private boolean isUserPremium(User user) {
-        if (user == null) return false;
+        if (user == null)
+            return false;
         return Boolean.TRUE.equals(user.getIsPremium()) &&
                 user.getPremiumExpiry() != null &&
                 user.getPremiumExpiry().isAfter(java.time.LocalDateTime.now());

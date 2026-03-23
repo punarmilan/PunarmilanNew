@@ -60,6 +60,7 @@ import ResetPassword from "./components/ResetPassword";
 import MyTickets from "./pages/MyOrder/MyTickets";
 import Pricing from "./pages/payment/Pricing";
 import AboutUs from "./pages/AboutUs";
+import VerifyEmail from "./pages/VerifyEmail";
 import api from "./services/api";
 
 // Admin Imports
@@ -173,6 +174,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/about-us" element={<AboutUs />} />
 
         {/* Admin Routes */}

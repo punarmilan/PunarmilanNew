@@ -37,13 +37,13 @@ public class EventRegistrationServiceImpl implements EventRegistrationService {
         log.info("Registering user {} for event {}", userId, eventId);
 
         if (registrationRepository.existsByEventIdAndUserId(eventId, userId)) {
-            throw new RuntimeException("User already registered for this event");
+            throw new com.punarmilan.exception.BadRequestException("User already registered for this event");
         }
 
         Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new RuntimeException("Event not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("Event not found"));
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
 
         EventRegistration registration = EventRegistration.builder()
                 .event(event)

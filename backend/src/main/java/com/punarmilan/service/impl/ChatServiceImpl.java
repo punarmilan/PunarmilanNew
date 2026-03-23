@@ -89,28 +89,30 @@ public class ChatServiceImpl implements ChatService {
     @Transactional(readOnly = true)
     public java.util.List<com.punarmilan.dto.ConversationDTO> getRecentConversations(User user) {
         log.info("Fetching recent conversations for user: {}", user.getEmail());
-        
+
         // Fetch last 100 messages involving this user
-        List<ChatMessage> recentMessages = chatMessageRepository.findRecentMessagesForUser(user, PageRequest.of(0, 100));
-        
+        List<ChatMessage> recentMessages = chatMessageRepository.findRecentMessagesForUser(user,
+                PageRequest.of(0, 100));
+
         // Group by partner ID and keep latest
         java.util.Map<Long, ChatMessage> latestMessagesByPartner = new java.util.LinkedHashMap<>();
-        
+
         for (ChatMessage m : recentMessages) {
             User partner = m.getSender().getId().equals(user.getId()) ? m.getRecipient() : m.getSender();
             if (!latestMessagesByPartner.containsKey(partner.getId())) {
                 latestMessagesByPartner.put(partner.getId(), m);
             }
         }
-        
+
         // Map to DTOs and enrich with profile data
         return latestMessagesByPartner.entrySet().stream().map(entry -> {
             Long partnerId = entry.getKey();
             ChatMessage lastMsg = entry.getValue();
-            User partner = lastMsg.getSender().getId().equals(user.getId()) ? lastMsg.getRecipient() : lastMsg.getSender();
-            
+            User partner = lastMsg.getSender().getId().equals(user.getId()) ? lastMsg.getRecipient()
+                    : lastMsg.getSender();
+
             com.punarmilan.entity.Profile profile = profileRepository.findByUserId(partnerId).orElse(null);
-            
+
             return com.punarmilan.dto.ConversationDTO.builder()
                     .otherUserId(partnerId)
                     .otherUserName(profile != null ? profile.getFullName() : partner.getEmail())

@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.punarmilan.security.AuthUtil;
 import com.punarmilan.entity.User;
@@ -30,17 +31,26 @@ public class AuthController {
     private final AuthService authService;
     private final AuthUtil authUtil;
 
+    @org.springframework.beans.factory.annotation.Value("${server.ssl.enabled:false}")
+    private boolean sslEnabled;
+
+    private boolean isSecureCookie() {
+        // Only set Secure flag when SSL is actually enabled (production)
+        // On localhost HTTP, Secure cookies are silently dropped by browsers
+        return sslEnabled;
+    }
+
     private void setTokenCookies(HttpServletResponse response, String accessToken, String refreshToken) {
         Cookie accessCookie = new Cookie("accessToken", accessToken);
         accessCookie.setHttpOnly(true);
-        accessCookie.setSecure(true); // Always true in production
+        accessCookie.setSecure(isSecureCookie());
         accessCookie.setPath("/");
         accessCookie.setMaxAge(15 * 60); // 15 mins
         response.addCookie(accessCookie);
 
         Cookie refreshCookie = new Cookie("refreshToken", refreshToken);
         refreshCookie.setHttpOnly(true);
-        refreshCookie.setSecure(true); // Always true in production
+        refreshCookie.setSecure(isSecureCookie());
         refreshCookie.setPath("/");
         refreshCookie.setMaxAge(7 * 24 * 60 * 60); // 7 days
         response.addCookie(refreshCookie);
@@ -69,17 +79,45 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<TokenRefreshResponse> refreshToken(@Valid @RequestBody TokenRefreshRequest request, HttpServletResponse response) {
+    public ResponseEntity<?> refreshToken(
+            @RequestBody(required = false) TokenRefreshRequest bodyRequest,
+            HttpServletRequest request,
+            HttpServletResponse response) {
         log.info("Token refresh request received");
-        TokenRefreshResponse authResponse = authService.refreshToken(request);
-        
+
+        // 1. Try to get refresh token from request body first
+        String refreshTokenValue = null;
+        if (bodyRequest != null && bodyRequest.getRefreshToken() != null && !bodyRequest.getRefreshToken().isBlank()) {
+            refreshTokenValue = bodyRequest.getRefreshToken();
+        }
+
+        // 2. If not in body, read from cookie (HTTP-only cookies can't be read by JS)
+        if (refreshTokenValue == null && request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("refreshToken".equals(cookie.getName())) {
+                    refreshTokenValue = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        if (refreshTokenValue == null || refreshTokenValue.isBlank()) {
+            log.warn("No refresh token found in body or cookies");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new MessageResponse("No refresh token provided"));
+        }
+
+        TokenRefreshRequest refreshRequest = new TokenRefreshRequest(refreshTokenValue);
+        TokenRefreshResponse authResponse = authService.refreshToken(refreshRequest);
+
+        // Set the new access token as a cookie
         Cookie accessCookie = new Cookie("accessToken", authResponse.getAccessToken());
         accessCookie.setHttpOnly(true);
-        accessCookie.setSecure(true);
+        accessCookie.setSecure(isSecureCookie());
         accessCookie.setPath("/");
         accessCookie.setMaxAge(15 * 60);
         response.addCookie(accessCookie);
-        
+
         return ResponseEntity.ok(authResponse);
     }
 
@@ -110,23 +148,29 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("Password has been reset successfully"));
     }
 
+    @GetMapping("/verify-email")
+    public ResponseEntity<MessageResponse> verifyEmail(@RequestParam String token) {
+        authService.verifyEmail(token);
+        return ResponseEntity.ok(new MessageResponse("Email has been verified successfully"));
+    }
+
     @PostMapping("/logout")
     public ResponseEntity<MessageResponse> logout(HttpServletResponse response) {
         String email = authUtil.getCurrentUserEmail();
         log.info("Logout request received for email: {}", email);
         authService.logout(email);
 
-        // Clear cookies
+        // Clear cookies — must match the same flags used when setting them
         Cookie accessCookie = new Cookie("accessToken", null);
         accessCookie.setHttpOnly(true);
-        accessCookie.setSecure(true);
+        accessCookie.setSecure(isSecureCookie());
         accessCookie.setPath("/");
         accessCookie.setMaxAge(0);
         response.addCookie(accessCookie);
 
         Cookie refreshCookie = new Cookie("refreshToken", null);
         refreshCookie.setHttpOnly(true);
-        refreshCookie.setSecure(true);
+        refreshCookie.setSecure(isSecureCookie());
         refreshCookie.setPath("/");
         refreshCookie.setMaxAge(0);
         response.addCookie(refreshCookie);
