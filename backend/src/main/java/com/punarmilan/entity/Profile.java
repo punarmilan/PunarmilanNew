@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "profiles", indexes = {
@@ -180,4 +182,12 @@ public class Profile {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "viewedProfile", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ProfileView> views = new ArrayList<>();
+
+    @OneToMany(mappedBy = "shortlistedProfile", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Shortlist> shortlistedBy = new ArrayList<>();
 }
