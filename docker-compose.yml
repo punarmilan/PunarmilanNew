@@ -1,3 +1,7 @@
+# Deployment is now AUTOMATED with Watchtower.
+# Just push your images to Docker Hub, and Watchtower will pull and update them.
+# Alternatively, use ./deploy.sh
+
 version: '3.8'
 
 services:
@@ -158,6 +162,18 @@ services:
     depends_on:
       - frontend
       - backend
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: punarmilan-watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=300
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+    command: --interval 300 --cleanup
 
 volumes:
   mysql_data:
