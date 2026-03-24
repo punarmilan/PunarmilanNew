@@ -185,9 +185,13 @@ public class Profile {
 
     @OneToMany(mappedBy = "viewedProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
     private List<ProfileView> views = new ArrayList<>();
 
     @OneToMany(mappedBy = "shortlistedProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
     private List<Shortlist> shortlistedBy = new ArrayList<>();
 }
