@@ -149,24 +149,24 @@ const EventManagement = () => {
     };
 
     return (
-        <div className="p-8 bg-[#f8fafc] min-h-screen font-sans">
+        <div className="p-4 sm:p-8 bg-[#f8fafc] min-h-screen font-sans">
             {/* Header Section */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4">
                 <div>
-                    <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Event Management</h1>
-                    <p className="text-slate-500 mt-1 font-medium">Control center for all platform gatherings and meetups</p>
+                    <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Events</h1>
+                    <p className="text-slate-500 mt-1 font-medium text-sm">Control center for gatherings</p>
                 </div>
                 <button
                     onClick={handleCreateNew}
-                    className="group bg-rose-500 hover:bg-rose-600 px-6 py-3 rounded-xl text-white font-bold flex items-center transition-all shadow-lg shadow-rose-500/25 active:scale-95"
+                    className="w-full sm:w-auto group bg-rose-500 hover:bg-rose-600 px-6 py-3 rounded-xl text-white font-bold flex items-center justify-center transition-all shadow-lg shadow-rose-500/25 active:scale-95"
                 >
                     <Plus size={20} className="mr-2 group-hover:rotate-90 transition-transform duration-300" /> 
-                    Create New Event
+                    New Event
                 </button>
             </div>
 
             {/* Stats Overview */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
                 {[
                     { label: 'Total Events', value: stats.total, icon: Calendar, color: 'blue' },
                     { label: 'Active Events', value: stats.active, icon: Clock, color: 'emerald' },
@@ -189,8 +189,8 @@ const EventManagement = () => {
             {/* Main Content Card */}
             <div className="bg-white rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden">
                 {/* Search and Filters */}
-                <div className="p-6 border-b border-slate-50 flex flex-col md:flex-row gap-4 items-center justify-between bg-slate-50/30">
-                    <div className="relative w-full md:w-96">
+                <div className="p-4 sm:p-6 border-b border-slate-50 flex flex-col lg:flex-row gap-4 lg:items-center justify-between bg-slate-50/30">
+                    <div className="relative w-full lg:w-96">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                         <input
                             type="text"
@@ -200,12 +200,12 @@ const EventManagement = () => {
                             className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all bg-white"
                         />
                     </div>
-                    <div className="flex items-center gap-3 w-full md:w-auto">
-                        <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-600 font-bold hover:bg-slate-50 transition-colors">
-                            <Filter size={18} /> Filters
+                    <div className="flex items-center gap-2 sm:gap-3 w-full lg:w-auto">
+                        <button className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-slate-200 rounded-xl text-slate-600 text-xs sm:text-sm font-bold hover:bg-slate-50 transition-colors">
+                            <Filter size={16} /> Filters
                         </button>
-                        <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-600 font-bold hover:bg-slate-50 transition-colors text-rose-500 border-rose-100 bg-rose-50/30">
-                            <Download size={18} /> Export
+                        <button className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-slate-200 rounded-xl text-slate-600 text-xs sm:text-sm font-bold hover:bg-slate-50 transition-colors text-rose-500 border-rose-100 bg-rose-50/30">
+                            <Download size={16} /> Export
                         </button>
                     </div>
                 </div>
@@ -221,61 +221,65 @@ const EventManagement = () => {
                         <table className="w-full text-left">
                             <thead>
                                 <tr className="bg-slate-50/50">
-                                    <th className="py-5 px-6 text-slate-400 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-100">Event Info</th>
-                                    <th className="py-5 px-6 text-slate-400 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-100">Date & Time</th>
-                                    <th className="py-5 px-6 text-slate-400 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-100">Location</th>
-                                    <th className="py-5 px-6 text-slate-400 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-100">Status</th>
-                                    <th className="py-5 px-6 text-slate-400 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-100 text-right">Actions</th>
+                                    <th className="py-4 sm:py-5 px-4 sm:px-6 text-slate-400 font-black text-[9px] sm:text-[10px] uppercase tracking-[0.2em] border-b border-slate-100">Info</th>
+                                    <th className="hidden sm:table-cell py-5 px-6 text-slate-400 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-100">Date & Time</th>
+                                    <th className="hidden lg:table-cell py-5 px-6 text-slate-400 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-100">Location</th>
+                                    <th className="hidden md:table-cell py-5 px-6 text-slate-400 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-100">Status</th>
+                                    <th className="py-4 sm:py-5 px-4 sm:px-6 text-slate-400 font-black text-[9px] sm:text-[10px] uppercase tracking-[0.2em] border-b border-slate-100 text-right">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-50">
                                 {filteredEvents.map((event) => (
                                     <tr key={event.id} className="group hover:bg-slate-50/50 transition-colors">
-                                        <td className="py-5 px-6">
-                                            <div className="flex items-center gap-4">
-                                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black ${
+                                        <td className="py-4 sm:py-5 px-4 sm:px-6">
+                                            <div className="flex items-center gap-3 sm:gap-4">
+                                                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center text-[10px] sm:text-xs font-black ${
                                                     event.eventType === 'ONLINE' ? 'bg-indigo-50 text-indigo-500' : 'bg-orange-50 text-orange-500'
                                                 }`}>
                                                     {event.eventType === 'ONLINE' ? 'ON' : 'OFF'}
                                                 </div>
-                                                <div>
-                                                    <h4 className="font-extrabold text-slate-900 group-hover:text-rose-500 transition-colors">{event.title}</h4>
-                                                    <p className="text-slate-400 text-xs font-bold mt-0.5">{event.registeredCount || 0} Registrations</p>
+                                                <div className="min-w-0">
+                                                    <h4 className="font-extrabold text-slate-900 group-hover:text-rose-500 transition-colors text-sm sm:text-base truncate">{event.title}</h4>
+                                                    <div className="flex items-center gap-2 mt-0.5">
+                                                        <p className="text-slate-400 text-[10px] sm:text-xs font-bold">{event.registeredCount || 0} Reg</p>
+                                                        <span className={`sm:hidden px-1.5 py-0.5 rounded-md text-[8px] font-black border uppercase tracking-widest ${getStatusColor(event.status)}`}>
+                                                            {event.status}
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="py-5 px-6">
-                                            <div className="flex flex-col">
-                                                <span className="text-slate-700 font-bold text-sm">
-                                                    {new Date(event.startTime).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                                        <td className="hidden sm:table-cell py-5 px-6">
+                                            <div className="flex flex-col min-w-[120px]">
+                                                <span className="text-slate-700 font-bold text-xs sm:text-sm">
+                                                    {new Date(event.startTime).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
                                                 </span>
-                                                <span className="text-slate-400 text-xs font-medium mt-1">
-                                                    {new Date(event.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - 
-                                                    {new Date(event.endTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                                <span className="text-slate-400 text-[10px] sm:text-xs font-medium mt-1">
+                                                    {new Date(event.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                 </span>
                                             </div>
                                         </td>
-                                        <td className="py-5 px-6">
-                                            <div className="flex items-center gap-2 text-slate-600 font-medium">
-                                                <MapPin size={14} className="text-slate-300" />
-                                                <span className="text-sm">{event.eventType === 'ONLINE' ? 'Virtual/Zoom' : event.location}</span>
+                                        <td className="hidden lg:table-cell py-5 px-6">
+                                            <div className="flex items-center gap-2 text-slate-600 font-medium max-w-[150px]">
+                                                <MapPin size={14} className="text-slate-300 shrink-0" />
+                                                <span className="text-sm truncate">{event.eventType === 'ONLINE' ? 'Virtual' : event.location}</span>
                                             </div>
                                         </td>
-                                        <td className="py-5 px-6">
-                                            <span className={`px-3 py-1.5 rounded-xl text-[10px] font-black tracking-widest border border-dashed ${getStatusColor(event.status)}`}>
+                                        <td className="hidden md:table-cell py-5 px-6">
+                                            <span className={`px-2.5 py-1 rounded-lg text-[9px] font-black border border-dashed uppercase tracking-widest ${getStatusColor(event.status)}`}>
                                                 {event.status}
                                             </span>
                                         </td>
-                                        <td className="py-5 px-6">
-                                            <div className="flex items-center justify-end gap-2">
-                                                <button onClick={() => handleViewRegistrants(event)} className="p-2 hover:bg-purple-50 text-purple-400 hover:text-purple-600 rounded-lg transition-all" title="View Registrants">
-                                                    <Users size={18} />
+                                        <td className="py-4 sm:py-5 px-4 sm:px-6">
+                                            <div className="flex items-center justify-end gap-1 sm:gap-2">
+                                                <button onClick={() => handleViewRegistrants(event)} className="p-1.5 sm:p-2 hover:bg-purple-50 text-purple-400 hover:text-purple-600 rounded-lg transition-all" title="View Registrants">
+                                                    <Users size={16} className="sm:size-[18px]" />
                                                 </button>
-                                                <button onClick={() => handleEdit(event)} className="p-2 hover:bg-blue-50 text-blue-400 hover:text-blue-600 rounded-lg transition-all" title="Edit">
-                                                    <Edit2 size={18} />
+                                                <button onClick={() => handleEdit(event)} className="p-1.5 sm:p-2 hover:bg-blue-50 text-blue-400 hover:text-blue-600 rounded-lg transition-all" title="Edit">
+                                                    <Edit2 size={16} className="sm:size-[18px]" />
                                                 </button>
-                                                <button onClick={() => handleDelete(event.id)} className="p-2 hover:bg-rose-50 text-rose-300 hover:text-rose-500 rounded-lg transition-all" title="Delete">
-                                                    <Trash2 size={18} />
+                                                <button onClick={() => handleDelete(event.id)} className="p-1.5 sm:p-2 hover:bg-rose-50 text-rose-300 hover:text-rose-500 rounded-lg transition-all" title="Delete">
+                                                    <Trash2 size={16} className="sm:size-[18px]" />
                                                 </button>
                                             </div>
                                         </td>
@@ -287,96 +291,97 @@ const EventManagement = () => {
                 </div>
             </div>
 
-            {/* Event Form Modal */}
             {showForm && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xl bg-slate-900/40 animate-in fade-in transition-all">
-                    <div className="bg-white rounded-[2.5rem] w-full max-w-2xl shadow-2xl shadow-black/20 overflow-hidden border border-white/20 animate-in zoom-in-95 duration-300">
-                        <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-md bg-slate-900/40 animate-in fade-in transition-all">
+                    <div className="bg-white rounded-[2rem] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+                        <div className="p-6 sm:p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                             <div>
-                                <h2 className="text-2xl font-black text-slate-900">{editingEvent ? 'Edit Event' : 'Create Event'}</h2>
-                                <p className="text-slate-500 text-sm font-medium mt-1">Fill in the details for your upcoming gathering</p>
+                                <h2 className="text-xl sm:text-2xl font-black text-slate-900">{editingEvent ? 'Edit' : 'Create'} Event</h2>
+                                <p className="text-slate-500 text-[10px] sm:text-xs font-bold uppercase tracking-widest mt-1">Platform Gatherings</p>
                             </div>
-                            <button onClick={() => setShowForm(false)} className="p-3 hover:bg-white text-slate-400 hover:text-slate-900 rounded-2xl transition-all shadow-sm hover:shadow-md">
+                            <button onClick={() => setShowForm(false)} className="p-2 sm:p-3 bg-white text-slate-400 hover:text-slate-900 rounded-xl transition-all shadow-sm">
                                 <X size={20} />
                             </button>
                         </div>
 
-                        <form onSubmit={handleSubmit} className="p-8">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="md:col-span-2 space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Event Title</label>
+                        <form onSubmit={handleSubmit} className="p-6 sm:p-8 overflow-y-auto max-h-[80vh]">
+                            <div className="space-y-5 sm:space-y-6">
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Title</label>
                                     <input
                                         type="text"
                                         name="title"
                                         required
                                         value={formData.title}
                                         onChange={handleInputChange}
-                                        className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30"
-                                        placeholder="Enter event name..."
+                                        className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30 text-sm"
+                                        placeholder="Event name..."
                                     />
                                 </div>
-                                <div className="md:col-span-2 space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Description</label>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Description</label>
                                     <textarea
                                         name="description"
-                                        rows="3"
+                                        rows="2"
                                         value={formData.description}
                                         onChange={handleInputChange}
-                                        className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30"
-                                        placeholder="Tell people what this event is about..."
+                                        className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30 text-sm"
+                                        placeholder="Event details..."
                                     />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Start Time</label>
-                                    <input
-                                        type="datetime-local"
-                                        name="startTime"
-                                        required
-                                        value={formData.startTime}
-                                        onChange={handleInputChange}
-                                        className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30"
-                                    />
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Start Time</label>
+                                        <input
+                                            type="datetime-local"
+                                            name="startTime"
+                                            required
+                                            value={formData.startTime}
+                                            onChange={handleInputChange}
+                                            className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30 text-sm"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">End Time</label>
+                                        <input
+                                            type="datetime-local"
+                                            name="endTime"
+                                            required
+                                            value={formData.endTime}
+                                            onChange={handleInputChange}
+                                            className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30 text-sm"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Type</label>
+                                        <select
+                                            name="eventType"
+                                            value={formData.eventType}
+                                            onChange={handleInputChange}
+                                            className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30 text-sm"
+                                        >
+                                            <option value="OFFLINE">Offline</option>
+                                            <option value="ONLINE">Online</option>
+                                        </select>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Status</label>
+                                        <select
+                                            name="status"
+                                            value={formData.status}
+                                            onChange={handleInputChange}
+                                            className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30 text-sm"
+                                        >
+                                            <option value="UPCOMING">Upcoming</option>
+                                            <option value="ONGOING">Ongoing</option>
+                                            <option value="COMPLETED">Completed</option>
+                                            <option value="CANCELLED">Cancelled</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">End Time</label>
-                                    <input
-                                        type="datetime-local"
-                                        name="endTime"
-                                        required
-                                        value={formData.endTime}
-                                        onChange={handleInputChange}
-                                        className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Event Type</label>
-                                    <select
-                                        name="eventType"
-                                        value={formData.eventType}
-                                        onChange={handleInputChange}
-                                        className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30"
-                                    >
-                                        <option value="OFFLINE">Offline</option>
-                                        <option value="ONLINE">Online</option>
-                                    </select>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Status</label>
-                                    <select
-                                        name="status"
-                                        value={formData.status}
-                                        onChange={handleInputChange}
-                                        className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30"
-                                    >
-                                        <option value="UPCOMING">Upcoming</option>
-                                        <option value="ONGOING">Ongoing</option>
-                                        <option value="COMPLETED">Completed</option>
-                                        <option value="CANCELLED">Cancelled</option>
-                                    </select>
-                                </div>
-                                <div className="md:col-span-2 space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">
-                                        {formData.eventType === 'ONLINE' ? 'Meeting Link' : 'Venue/Location'}
+                                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+                                        {formData.eventType === 'ONLINE' ? 'Link' : 'Location'}
                                     </label>
                                     <input
                                         type="text"
@@ -384,25 +389,25 @@ const EventManagement = () => {
                                         required
                                         value={formData.eventType === 'ONLINE' ? formData.meetingLink : formData.location}
                                         onChange={handleInputChange}
-                                        className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30"
-                                        placeholder={formData.eventType === 'ONLINE' ? 'Zoom/Meet link...' : 'Venue name, city...'}
+                                        className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-xl sm:rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all font-bold text-slate-700 bg-slate-50/30 text-sm"
+                                        placeholder={formData.eventType === 'ONLINE' ? 'Meeting link...' : 'Venue name...'}
                                     />
                                 </div>
                             </div>
-
-                            <div className="flex justify-end gap-3 mt-10 pt-6 border-t border-slate-100">
+ 
+                            <div className="flex flex-col sm:flex-row justify-end gap-3 mt-8 pt-6 border-t border-slate-100">
                                 <button
                                     type="button"
                                     onClick={() => setShowForm(false)}
-                                    className="px-8 py-4 rounded-2xl text-slate-500 font-extrabold hover:bg-slate-50 transition-all active:scale-95"
+                                    className="order-2 sm:order-1 px-8 py-3.5 rounded-xl sm:rounded-2xl text-slate-500 font-extrabold hover:bg-slate-50 transition-all text-xs sm:text-sm uppercase tracking-widest"
                                 >
                                     Discard
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-10 py-4 bg-slate-900 hover:bg-black text-white rounded-2xl font-extrabold shadow-xl shadow-slate-900/20 transition-all active:scale-95 flex items-center justify-center min-w-[160px]"
+                                    className="order-1 sm:order-2 px-8 py-3.5 bg-slate-900 hover:bg-black text-white rounded-xl sm:rounded-2xl font-extrabold shadow-xl shadow-slate-900/10 transition-all text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center min-w-[140px]"
                                 >
-                                    {editingEvent ? 'Save Changes' : 'Launch Event'}
+                                    {editingEvent ? 'Save' : 'Launch'}
                                 </button>
                             </div>
                         </form>
@@ -412,14 +417,14 @@ const EventManagement = () => {
 
             {/* Registrants Modal */}
             {showRegistrants && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xl bg-slate-900/60 animate-in fade-in transition-all">
-                    <div className="bg-white rounded-[2.5rem] w-full max-w-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
-                        <div className="p-8 bg-slate-900 text-white flex justify-between items-center">
-                            <div>
-                                <h2 className="text-2xl font-black">{selectedEventForRegistrants?.title}</h2>
-                                <p className="text-slate-400 text-sm font-bold mt-1 uppercase tracking-widest">Attendance Sheet</p>
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-md bg-slate-900/60 animate-in fade-in transition-all">
+                    <div className="bg-white rounded-[2rem] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+                        <div className="p-6 sm:p-8 bg-slate-900 text-white flex justify-between items-center">
+                            <div className="min-w-0">
+                                <h2 className="text-xl sm:text-2xl font-black truncate">{selectedEventForRegistrants?.title}</h2>
+                                <p className="text-slate-400 text-[10px] sm:text-xs font-bold mt-1 uppercase tracking-widest">Attendance</p>
                             </div>
-                            <button onClick={() => setShowRegistrants(false)} className="p-3 hover:bg-white/10 rounded-2xl transition-all">
+                            <button onClick={() => setShowRegistrants(false)} className="p-2.5 sm:p-3 hover:bg-white/10 rounded-xl transition-all">
                                 <X size={20} />
                             </button>
                         </div>
@@ -459,8 +464,8 @@ const EventManagement = () => {
                         </div>
                         
                         <div className="p-8 border-t border-slate-100 flex justify-center bg-slate-50/50">
-                            <button onClick={() => setShowRegistrants(false)} className="px-10 py-4 bg-slate-900 text-white rounded-2xl font-black shadow-lg shadow-slate-900/20 active:scale-95 transition-all">
-                                Close Register
+                            <button onClick={() => setShowRegistrants(false)} className="w-full sm:w-auto px-10 py-4 bg-slate-900 text-white rounded-xl sm:rounded-2xl font-black shadow-lg shadow-slate-900/10 active:scale-95 transition-all text-sm uppercase tracking-widest">
+                                Close
                             </button>
                         </div>
                     </div>

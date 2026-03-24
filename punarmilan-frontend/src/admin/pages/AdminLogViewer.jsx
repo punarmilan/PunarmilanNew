@@ -35,17 +35,17 @@ const AdminLogViewer = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
                 <div>
-                    <h2 className="text-xl font-bold text-gray-800">System Activity Logs</h2>
-                    <p className="text-sm text-gray-500 font-medium">Chronological record of all administrative actions</p>
+                    <h2 className="text-xl font-bold text-gray-800">System Logs</h2>
+                    <p className="text-sm text-gray-500 font-medium">Record of all administrative actions</p>
                 </div>
-                <div className="flex items-center gap-2 bg-gray-50 p-2 rounded-xl border border-gray-100">
-                    <Search size={18} className="text-gray-400 ml-2" />
+                <div className="flex items-center gap-2 bg-gray-50 p-2 rounded-xl border border-gray-100 w-full sm:w-auto">
+                    <Search size={18} className="text-gray-400 ml-2 shrink-0" />
                     <input
                         type="text"
                         placeholder="Filter logs..."
-                        className="bg-transparent border-none outline-none text-sm font-medium w-48"
+                        className="bg-transparent border-none outline-none text-sm font-medium w-full sm:w-48"
                     />
                 </div>
             </div>
@@ -55,10 +55,10 @@ const AdminLogViewer = () => {
                     <table className="w-full">
                         <thead>
                             <tr className="bg-gray-50 border-b border-gray-100">
-                                <th className="px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Admin Email</th>
-                                <th className="px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Action</th>
-                                <th className="px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Details</th>
-                                <th className="px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Date & Time</th>
+                                <th className="px-4 sm:px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Admin</th>
+                                <th className="px-4 sm:px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Action</th>
+                                <th className="hidden lg:table-cell px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Details</th>
+                                <th className="px-4 sm:px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Time</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-50 text-sm">
@@ -74,22 +74,24 @@ const AdminLogViewer = () => {
                             ) : (
                                 logs.map((log) => (
                                     <tr key={log.id} className="hover:bg-gray-50/50 transition-colors">
-                                        <td className="px-6 py-4 font-bold text-gray-700">{log.adminEmail}</td>
-                                        <td className="px-6 py-4">
-                                            <span className={`px-3 py-1 rounded-lg text-[10px] font-black border uppercase tracking-wider ${getActionColor(log.action)}`}>
+                                        <td className="px-4 sm:px-6 py-4">
+                                            <p className="text-xs sm:text-sm font-bold text-gray-700 truncate max-w-[120px] sm:max-w-none">{log.adminEmail}</p>
+                                        </td>
+                                        <td className="px-4 sm:px-6 py-4">
+                                            <span className={`px-2 py-0.5 sm:px-3 sm:py-1 rounded-lg text-[9px] sm:text-[10px] font-black border uppercase tracking-wider ${getActionColor(log.action)}`}>
                                                 {log.action}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-gray-500 font-medium">
+                                        <td className="hidden lg:table-cell px-6 py-4 text-gray-500 font-medium">
                                             <div className="flex items-center gap-2">
-                                                <Info size={14} className="text-gray-300" />
-                                                {log.details}
+                                                <Info size={14} className="text-gray-300 shrink-0" />
+                                                <p className="text-sm">{log.details}</p>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
+                                        <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
                                             <div className="flex flex-col">
-                                                <span className="text-gray-700 font-bold">{new Date(log.createdAt).toLocaleDateString()}</span>
-                                                <span className="text-[10px] text-gray-400 font-black">{new Date(log.createdAt).toLocaleTimeString()}</span>
+                                                <span className="text-gray-700 font-bold text-xs sm:text-sm">{new Date(log.createdAt).toLocaleDateString()}</span>
+                                                <span className="text-[9px] sm:text-[10px] text-gray-400 font-black">{new Date(log.createdAt).toLocaleTimeString()}</span>
                                             </div>
                                         </td>
                                     </tr>

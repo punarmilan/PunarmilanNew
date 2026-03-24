@@ -16,6 +16,7 @@ import Footer from "./components/Footer";
 import AuthenticatedFooter from "./components/AuthenticatedFooter";
 import OnlineMembers from "./components/OnlineMembers";
 import SecondNav from "./components/SecondNav";
+import { getCurrentUser } from "./Slice/UserSlice";
 import MyProfile from "./pages/myshadi/myProfile/MyProfile";
 import MyPhoto from "./pages/myshadi/myphoto/MyPhoto";
 import PartnerPreference from "./pages/myshadi/partner/PartnerPreference";
@@ -89,6 +90,15 @@ function App() {
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const user = useSelector((state) => state.user.user);
+
+  // Verify session on mount if user is supposedly authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(getCurrentUser()).unwrap().catch((err) => {
+        console.warn('Session verification failed on mount:', err);
+      });
+    }
+  }, [dispatch]); // Only on actual mount
 
   // Hide OnlineMembers on Home page ONLY
   useEffect(() => {

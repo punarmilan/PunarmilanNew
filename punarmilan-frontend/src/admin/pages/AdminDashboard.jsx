@@ -58,16 +58,16 @@ const AdminDashboard = () => {
     return (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             {/* Top Bar / Welcome */}
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h1 className="text-3xl font-black text-gray-900 tracking-tight">Dashboard Overview</h1>
-                    <p className="text-gray-500 font-medium">Welcome back, Admin! Here's what's happening today.</p>
+                    <h1 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Dashboard Overview</h1>
+                    <p className="text-gray-500 font-medium text-sm sm:text-base">Welcome back, Admin! Here's what's happening today.</p>
                 </div>
-                <div className="flex gap-3">
-                    <button className="p-3 bg-white rounded-2xl border border-gray-100 shadow-sm text-gray-400 hover:text-pink-500 transition-colors">
+                <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
+                    <button className="p-2 sm:p-3 bg-white rounded-2xl border border-gray-100 shadow-sm text-gray-400 hover:text-pink-500 transition-colors">
                         <Bell size={20} />
                     </button>
-                    <div className="bg-pink-600 text-white px-6 py-3 rounded-2xl font-bold text-sm shadow-lg shadow-pink-100 flex items-center gap-2">
+                    <div className="flex-1 sm:flex-none justify-center bg-pink-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-2xl font-bold text-xs sm:text-sm shadow-lg shadow-pink-100 flex items-center gap-2">
                         <Activity size={18} />
                         Live Status
                     </div>
@@ -75,7 +75,7 @@ const AdminDashboard = () => {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 <StatCard
                     title="Total Registered"
                     value={stats?.totalUsers || 0}
@@ -105,22 +105,22 @@ const AdminDashboard = () => {
             </div>
 
             {/* Charts Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* Growth Chart */}
-                <div className="lg:col-span-2 bg-white p-8 rounded-[32px] shadow-sm border border-gray-100">
-                    <div className="flex justify-between items-center mb-8">
+                <div className="lg:col-span-2 bg-white p-4 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-sm border border-gray-100">
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4">
                         <div>
-                            <h2 className="text-xl font-black text-gray-900 tracking-tight">User Growth</h2>
-                            <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">Growth over time</p>
+                            <h2 className="text-lg sm:text-xl font-black text-gray-900 tracking-tight">User Growth</h2>
+                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Growth over time</p>
                         </div>
-                        <select className="bg-gray-50 border-none rounded-xl text-xs font-black p-2 outline-none">
+                        <select className="w-full sm:w-auto bg-gray-50 border-none rounded-xl text-[10px] sm:text-xs font-black p-2 outline-none">
                             <option>Last 30 Days</option>
                             <option>Last 6 Months</option>
                         </select>
                     </div>
-                    <div className="h-80 w-full">
+                    <div className="h-60 sm:h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={stats?.userGrowth || []}>
+                            <AreaChart data={stats?.userGrowth || []} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                                 <defs>
                                     <linearGradient id="colorCount" x1="0" y1="0" x2="0" y2="1">
                                         <stop offset="5%" stopColor="#EC4899" stopOpacity={0.1} />
@@ -128,31 +128,31 @@ const AdminDashboard = () => {
                                     </linearGradient>
                                 </defs>
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
-                                <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 700, fill: '#9ca3af' }} />
-                                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fontWeight: 700, fill: '#9ca3af' }} />
+                                <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 9, fontWeight: 700, fill: '#9ca3af' }} />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 9, fontWeight: 700, fill: '#9ca3af' }} />
                                 <Tooltip
                                     contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
                                     itemStyle={{ fontSize: '12px', fontWeight: 'bold' }}
                                 />
-                                <Area type="monotone" dataKey="count" stroke="#EC4899" strokeWidth={4} fillOpacity={1} fill="url(#colorCount)" />
+                                <Area type="monotone" dataKey="count" stroke="#EC4899" strokeWidth={3} fillOpacity={1} fill="url(#colorCount)" />
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
 
                 {/* Distribution Chart */}
-                <div className="bg-white p-8 rounded-[32px] shadow-sm border border-gray-100 flex flex-col">
-                    <h2 className="text-xl font-black text-gray-900 tracking-tight mb-1">Gender Dist.</h2>
-                    <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-8">Demographic Split</p>
-                    <div className="flex-1 h-64">
+                <div className="bg-white p-4 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-sm border border-gray-100 flex flex-col">
+                    <h2 className="text-lg sm:text-xl font-black text-gray-900 tracking-tight mb-1">Gender Dist.</h2>
+                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-6 sm:mb-8">Demographic Split</p>
+                    <div className="flex-1 h-56 sm:h-64">
                         <ResponsiveContainer width="100%" height="100%">
                             <RePieChart>
                                 <Pie
                                     data={pieData}
                                     cx="50%"
                                     cy="50%"
-                                    innerRadius={60}
-                                    outerRadius={80}
+                                    innerRadius={50}
+                                    outerRadius={70}
                                     paddingAngle={5}
                                     dataKey="value"
                                 >
@@ -164,11 +164,11 @@ const AdminDashboard = () => {
                             </RePieChart>
                         </ResponsiveContainer>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 mt-4">
                         {pieData.map((item, i) => (
-                            <div key={i} className="flex justify-between items-center text-xs font-bold">
+                            <div key={i} className="flex justify-between items-center text-[10px] sm:text-xs font-bold">
                                 <div className="flex items-center gap-2">
-                                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }}></div>
+                                    <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }}></div>
                                     <span className="text-gray-500 uppercase">{item.name}</span>
                                 </div>
                                 <span className="text-gray-900">{item.value}</span>
@@ -179,12 +179,12 @@ const AdminDashboard = () => {
             </div>
 
             {/* Bottom Section */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 {/* Pending Actions */}
-                <div className="bg-white p-8 rounded-[32px] shadow-sm border border-gray-100">
-                    <div className="flex justify-between items-center mb-6">
-                        <h2 className="text-xl font-black text-gray-900">Priority Actions</h2>
-                        <button className="text-xs font-black text-pink-600 uppercase">View All Queue</button>
+                <div className="bg-white p-4 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-sm border border-gray-100">
+                    <div className="flex justify-between items-center mb-5 sm:mb-6">
+                        <h2 className="text-lg sm:text-xl font-black text-gray-900">Priority Actions</h2>
+                        <button className="text-[10px] font-black text-pink-600 uppercase">View All</button>
                     </div>
                     <div className="space-y-4">
                         {[

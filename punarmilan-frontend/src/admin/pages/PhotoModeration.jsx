@@ -238,22 +238,22 @@ const PhotoModeration = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
                 <div>
-                    <h2 className="text-xl font-bold text-gray-800">Photo Moderation</h2>
-                    <p className="text-sm text-gray-500 font-medium">Review and swap user photos for batch approval</p>
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-800">Photo Moderation</h2>
+                    <p className="text-xs sm:text-sm text-gray-500 font-medium italic sm:not-italic">Review and swap user photos for batch approval</p>
                 </div>
-                <div className="px-4 py-2 bg-pink-50 text-pink-700 rounded-xl text-sm font-black">
+                <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-pink-50 text-pink-700 rounded-xl text-xs sm:text-sm font-black whitespace-nowrap">
                     {totalElements} Users
                 </div>
             </div>
 
             {loading ? (
-                <div className="p-10 text-center text-gray-400 font-medium">Loading photos...</div>
+                <div className="p-6 sm:p-10 text-center text-gray-400 font-medium">Loading photos...</div>
             ) : profiles.length === 0 ? (
-                <div className="bg-white p-12 rounded-3xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400">
-                    <Image size={48} className="mb-4 opacity-20" />
-                    <p className="font-bold">No photos pending review!</p>
+                <div className="bg-white p-8 sm:p-12 rounded-2xl sm:rounded-3xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400">
+                    <Image size={40} className="mb-4 opacity-20 sm:size-48" />
+                    <p className="font-bold text-sm sm:text-base">No photos pending review!</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

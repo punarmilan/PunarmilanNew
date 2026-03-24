@@ -110,35 +110,35 @@ const SubscriptionManagement = () => {
 
     return (
         <div className="space-y-8 animate-in fade-in duration-700">
-            <div className="flex justify-between items-center bg-white p-8 rounded-[32px] shadow-sm border border-gray-100">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 sm:p-8 rounded-2xl sm:rounded-[32px] shadow-sm border border-gray-100 gap-4">
                 <div>
-                    <h2 className="text-2xl font-black text-gray-900 tracking-tight">Membership Plans</h2>
-                    <p className="text-sm text-gray-400 font-bold uppercase tracking-widest mt-1">Manage monetization and features</p>
+                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">Membership Plans</h2>
+                    <p className="text-xs sm:text-sm text-gray-400 font-bold uppercase tracking-widest mt-1">Manage monetization and features</p>
                 </div>
                 <button
                     onClick={() => handleOpenModal()}
-                    className="bg-gray-900 text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-gray-800 transition-all active:scale-95 shadow-xl shadow-gray-200"
+                    className="w-full sm:w-auto bg-gray-900 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-gray-800 transition-all active:scale-95 shadow-xl shadow-gray-200 shrink-0"
                 >
                     <Plus size={18} /> Add New Plan
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
                 {plans.map((plan) => (
-                    <div key={plan.id} className="bg-white rounded-[40px] shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-500 group">
-                        <div className={`h-3 ${plan.active ? 'bg-emerald-500' : 'bg-gray-200'}`} />
-                        <div className="p-10 flex-1">
-                            <div className="flex justify-between items-start mb-6">
-                                <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${plan.active ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-gray-50 text-gray-400 border border-gray-100'}`}>
+                    <div key={plan.id} className="bg-white rounded-[24px] sm:rounded-[40px] shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-500 group">
+                        <div className={`h-2 sm:h-3 ${plan.active ? 'bg-emerald-500' : 'bg-gray-200'}`} />
+                        <div className="p-6 sm:p-10 flex-1">
+                            <div className="flex justify-between items-start mb-4 sm:mb-6">
+                                <span className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-widest ${plan.active ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-gray-50 text-gray-400 border border-gray-100'}`}>
                                     {plan.active ? 'ACTIVE' : 'INACTIVE'}
                                 </span>
                                 <div className="flex gap-2">
-                                    <button onClick={() => handleOpenModal(plan)} className="p-2 border border-blue-50 text-blue-500 rounded-xl hover:bg-blue-50 transition-colors"><Edit2 size={16} /></button>
-                                    <button onClick={() => handleDelete(plan.id)} className="p-2 border border-rose-50 text-rose-500 rounded-xl hover:bg-rose-50 transition-colors"><Trash2 size={16} /></button>
+                                    <button onClick={() => handleOpenModal(plan)} className="p-1.5 sm:p-2 border border-blue-50 text-blue-500 rounded-lg sm:rounded-xl hover:bg-blue-50 transition-colors"><Edit2 size={14} className="sm:size-4" /></button>
+                                    <button onClick={() => handleDelete(plan.id)} className="p-1.5 sm:p-2 border border-rose-50 text-rose-500 rounded-lg sm:rounded-xl hover:bg-rose-50 transition-colors"><Trash2 size={14} className="sm:size-4" /></button>
                                 </div>
                             </div>
-                            <h3 className="text-2xl font-black text-gray-900 mb-2">{plan.name}</h3>
-                            <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mb-6">{plan.durationInDays} Days Plan</p>
+                            <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-1 sm:mb-2">{plan.name}</h3>
+                            <p className="text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-widest mb-4 sm:mb-6">{plan.durationInDays} Days Plan</p>
 
                             <div className="flex items-baseline gap-1 mb-8">
                                 <span className="text-3xl font-black text-gray-900">₹{plan.price}</span>
@@ -164,18 +164,18 @@ const SubscriptionManagement = () => {
 
             {/* Plan Modal */}
             {isModalOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-gray-900/40 backdrop-blur-md p-4 animate-in fade-in duration-300">
-                    <div className="bg-white rounded-[48px] shadow-2xl w-full max-w-xl overflow-hidden animate-in zoom-in duration-500">
-                        <div className="bg-pink-600 p-10 text-white flex justify-between items-center">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-gray-900/40 backdrop-blur-md p-3 sm:p-4 animate-in fade-in duration-300">
+                    <div className="bg-white rounded-3xl sm:rounded-[48px] shadow-2xl w-full max-w-xl overflow-hidden animate-in zoom-in duration-500">
+                        <div className="bg-pink-600 p-6 sm:p-10 text-white flex justify-between items-center">
                             <div>
-                                <h3 className="text-2xl font-black leading-none">{editingPlan ? 'Refine Plan' : 'New Membership'}</h3>
-                                <p className="text-pink-100 text-xs font-bold uppercase tracking-widest mt-2">{editingPlan ? 'ID: PLAN-0' + editingPlan.id : 'Setup monetization structure'}</p>
+                                <h3 className="text-xl sm:text-2xl font-black leading-none">{editingPlan ? 'Refine Plan' : 'New Membership'}</h3>
+                                <p className="text-pink-100 text-[10px] sm:text-xs font-bold uppercase tracking-widest mt-2">{editingPlan ? 'ID: PLAN-0' + editingPlan.id : 'Setup monetization structure'}</p>
                             </div>
-                            <button onClick={() => setIsModalOpen(false)} className="bg-white/10 hover:bg-white/20 p-3 rounded-2xl transition-colors">
-                                <X size={24} />
+                            <button onClick={() => setIsModalOpen(false)} className="bg-white/10 hover:bg-white/20 p-2 sm:p-3 rounded-xl sm:rounded-2xl transition-colors">
+                                <X size={20} className="sm:size-6" />
                             </button>
                         </div>
-                        <form onSubmit={handleSubmit} className="p-10 space-y-6 max-h-[70vh] overflow-y-auto custom-scrollbar">
+                        <form onSubmit={handleSubmit} className="p-6 sm:p-10 space-y-4 sm:space-y-6 max-h-[80vh] sm:max-h-[70vh] overflow-y-auto custom-scrollbar">
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Plan Name</label>

@@ -62,14 +62,14 @@ const SupportTickets = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
                 <div>
-                    <h2 className="text-xl font-bold text-gray-800">Support Center</h2>
-                    <p className="text-sm text-gray-500 font-medium">Manage user queries and technical issues</p>
+                    <h2 className="text-xl font-bold text-gray-800 leading-tight">Support Center</h2>
+                    <p className="text-sm text-gray-500 font-medium">Manage user queries and issues</p>
                 </div>
-                <div className="flex gap-2">
-                    <div className="px-4 py-2 bg-rose-50 text-rose-700 rounded-xl text-xs font-black uppercase">
-                        {tickets.filter(t => t.status === 'OPEN').length} Open Tickets
+                <div className="flex gap-2 w-full sm:w-auto">
+                    <div className="flex-1 sm:flex-none px-4 py-2 bg-rose-50 text-rose-700 rounded-xl text-[10px] font-black uppercase text-center">
+                        {tickets.filter(t => t.status === 'OPEN').length} Open
                     </div>
                 </div>
             </div>
@@ -79,10 +79,10 @@ const SupportTickets = () => {
                     <table className="w-full">
                         <thead>
                             <tr className="bg-gray-50 border-b border-gray-100">
-                                <th className="px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Ticket Info</th>
-                                <th className="px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Status</th>
-                                <th className="px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Priority</th>
-                                <th className="px-6 py-4 text-right text-[10px] font-black text-gray-400 uppercase tracking-widest">Actions</th>
+                                <th className="px-4 sm:px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Details</th>
+                                <th className="hidden sm:table-cell px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Status</th>
+                                <th className="hidden md:table-cell px-6 py-4 text-left text-[10px] font-black text-gray-400 uppercase tracking-widest">Priority</th>
+                                <th className="px-4 sm:px-6 py-4 text-right text-[10px] font-black text-gray-400 uppercase tracking-widest">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-50">
@@ -98,29 +98,34 @@ const SupportTickets = () => {
                             ) : (
                                 tickets.map((ticket) => (
                                     <tr key={ticket.id} className="hover:bg-gray-50/50 transition-colors">
-                                        <td className="px-6 py-4">
+                                        <td className="px-4 sm:px-6 py-4">
                                             <div className="space-y-1">
-                                                <p className="text-sm font-bold text-gray-800">{ticket.subject}</p>
+                                                <div className="flex flex-wrap items-center gap-2">
+                                                    <p className="text-sm font-bold text-gray-800 truncate">{ticket.subject}</p>
+                                                    <span className={`sm:hidden px-1.5 py-0.5 rounded-md text-[8px] font-black border uppercase tracking-widest ${getStatusStyle(ticket.status)}`}>
+                                                        {ticket.status}
+                                                    </span>
+                                                </div>
                                                 <p className="text-xs text-gray-500 line-clamp-1">{ticket.message}</p>
                                                 <div className="flex items-center gap-2 text-[10px] text-gray-400 font-bold uppercase tracking-tight">
                                                     <Calendar size={10} /> {new Date(ticket.createdAt).toLocaleDateString()}
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <span className={`px-3 py-1 rounded-lg text-[10px] font-black border uppercase tracking-widest ${getStatusStyle(ticket.status)}`}>
+                                        <td className="hidden sm:table-cell px-6 py-4">
+                                            <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black border uppercase tracking-widest ${getStatusStyle(ticket.status)}`}>
                                                 {ticket.status}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="hidden md:table-cell px-6 py-4">
                                             <span className={`text-[10px] uppercase tracking-widest ${getPriorityStyle(ticket.priority)}`}>
                                                 {ticket.priority}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-right">
+                                        <td className="px-4 sm:px-6 py-4 text-right">
                                             <button
                                                 onClick={() => setSelectedTicket(ticket)}
-                                                className="px-4 py-2 bg-gray-900 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-gray-800 transition-all active:scale-95"
+                                                className="px-3 sm:px-4 py-2 bg-gray-900 text-white rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-widest hover:bg-gray-800 transition-all active:scale-95"
                                             >
                                                 Resolve
                                             </button>
@@ -144,45 +149,45 @@ const SupportTickets = () => {
             {/* Resolve Drawer/Modal */}
             {selectedTicket && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-end bg-black/40 backdrop-blur-sm animate-in fade-in duration-300">
-                    <div className="h-full w-full max-w-xl bg-white shadow-2xl animate-in slide-in-from-right duration-500 flex flex-col">
-                        <div className="p-8 border-b border-gray-100 flex justify-between items-center">
-                            <div>
-                                <h3 className="text-2xl font-black text-gray-900 leading-none">Handle Ticket</h3>
-                                <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-2">ID: TK-{selectedTicket.id}</p>
+                    <div className="h-full w-full sm:max-w-xl bg-white shadow-2xl animate-in slide-in-from-right duration-500 flex flex-col">
+                        <div className="p-6 sm:p-8 border-b border-gray-100 flex justify-between items-center">
+                            <div className="min-w-0">
+                                <h3 className="text-xl sm:text-2xl font-black text-gray-900 leading-none truncate">Handle Ticket</h3>
+                                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-2">ID: TK-{selectedTicket.id}</p>
                             </div>
-                            <button onClick={() => setSelectedTicket(null)} className="p-3 bg-gray-50 text-gray-400 rounded-2xl hover:text-gray-900 transition-colors">
-                                <X size={24} />
+                            <button onClick={() => setSelectedTicket(null)} className="p-2.5 sm:p-3 bg-gray-50 text-gray-400 rounded-2xl hover:text-gray-900 transition-colors">
+                                <X size={20} className="sm:size-6" />
                             </button>
                         </div>
 
-                        <div className="flex-1 p-8 space-y-8 overflow-y-auto">
-                            <div className="space-y-4">
-                                <span className={`px-4 py-1.5 rounded-full text-[10px] font-black border uppercase tracking-widest ${getStatusStyle(selectedTicket.status)}`}>
+                        <div className="flex-1 p-6 sm:p-8 space-y-6 sm:space-y-8 overflow-y-auto">
+                            <div className="space-y-3 sm:space-y-4">
+                                <span className={`inline-block px-3 py-1 rounded-full text-[9px] sm:text-[10px] font-black border uppercase tracking-widest ${getStatusStyle(selectedTicket.status)}`}>
                                     {selectedTicket.status}
                                 </span>
-                                <h4 className="text-xl font-black text-gray-800">{selectedTicket.subject}</h4>
-                                <div className="bg-gray-50 p-6 rounded-[32px] border border-gray-100 italic text-gray-600 text-sm leading-relaxed">
+                                <h4 className="text-lg sm:text-xl font-black text-gray-800 leading-tight">{selectedTicket.subject}</h4>
+                                <div className="bg-gray-50 p-5 sm:p-6 rounded-[24px] sm:rounded-[32px] border border-gray-100 italic text-gray-600 text-xs sm:text-sm leading-relaxed">
                                     "{selectedTicket.message}"
                                 </div>
                             </div>
-
-                            <div className="space-y-4">
+ 
+                            <div className="space-y-3 sm:space-y-4">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Admin Response</label>
                                 <textarea
                                     value={response}
                                     onChange={(e) => setResponse(e.target.value)}
-                                    className="w-full h-48 px-6 py-5 bg-gray-50 border-none rounded-[32px] text-sm font-bold focus:ring-2 focus:ring-pink-500 outline-none resize-none"
-                                    placeholder="Draft your response to the user here..."
+                                    className="w-full h-40 sm:h-48 px-5 sm:px-6 py-4 sm:py-5 bg-gray-50 border-none rounded-[24px] sm:rounded-[32px] text-xs sm:text-sm font-bold focus:ring-2 focus:ring-pink-500 outline-none resize-none"
+                                    placeholder="Draft your response..."
                                 />
                             </div>
                         </div>
-
-                        <div className="p-8 border-t border-gray-100">
+ 
+                        <div className="p-6 sm:p-8 border-t border-gray-100">
                             <button
                                 onClick={handleRespond}
-                                className="w-full bg-pink-600 text-white py-5 rounded-[24px] font-black text-sm uppercase tracking-widest shadow-2xl shadow-pink-100 hover:bg-pink-700 active:scale-95 transition-all flex items-center justify-center gap-2"
+                                className="w-full bg-pink-600 text-white py-4 sm:py-5 rounded-[20px] sm:rounded-[24px] font-black text-xs sm:text-sm uppercase tracking-widest shadow-xl shadow-pink-50 hover:bg-pink-700 active:scale-95 transition-all flex items-center justify-center gap-2"
                             >
-                                <Send size={18} /> Solve and Notify User
+                                <Send size={16} className="sm:size-[18px]" /> Solve & Notify User
                             </button>
                         </div>
                     </div>

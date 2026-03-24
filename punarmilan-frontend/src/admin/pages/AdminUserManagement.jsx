@@ -110,16 +110,16 @@ const AdminUserManagement = () => {
     return (
         <div className="space-y-6">
             {/* Filters Bar */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+            <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
                         <input
                             name="email"
                             value={filters.email}
                             onChange={handleFilterChange}
-                            placeholder="Search by Email"
-                            className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all"
+                            placeholder="Email"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all text-sm"
                         />
                     </div>
                     <div className="relative">
@@ -128,8 +128,8 @@ const AdminUserManagement = () => {
                             name="mobileNumber"
                             value={filters.mobileNumber}
                             onChange={handleFilterChange}
-                            placeholder="Mobile Number"
-                            className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all"
+                            placeholder="Mobile"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all text-sm"
                         />
                     </div>
                     <div className="relative">
@@ -138,17 +138,17 @@ const AdminUserManagement = () => {
                             name="city"
                             value={filters.city}
                             onChange={handleFilterChange}
-                            placeholder="Search by City"
-                            className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all"
+                            placeholder="City"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all text-sm"
                         />
                     </div>
                     <select
                         name="gender"
                         value={filters.gender}
                         onChange={handleFilterChange}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-white cursor-pointer"
+                        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-white cursor-pointer text-sm"
                     >
-                        <option value="">All Genders</option>
+                        <option value="">Genders</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
@@ -156,9 +156,9 @@ const AdminUserManagement = () => {
                         name="religion"
                         value={filters.religion}
                         onChange={handleFilterChange}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-white cursor-pointer"
+                        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-white cursor-pointer text-sm"
                     >
-                        <option value="">All Religions</option>
+                        <option value="">Religions</option>
                         {['Hindu', 'Muslim', 'Sikh', 'Christian', 'Buddhist', 'Jain', 'Other'].map(r => (
                             <option key={r} value={r}>{r}</option>
                         ))}
@@ -167,23 +167,23 @@ const AdminUserManagement = () => {
                         name="enabled"
                         value={filters.enabled}
                         onChange={handleFilterChange}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-white cursor-pointer"
+                        className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-white cursor-pointer text-sm"
                     >
-                        <option value="">All Status</option>
+                        <option value="">Status</option>
                         <option value="true">Active</option>
                         <option value="false">Blocked</option>
                     </select>
 
-                    <div className="flex gap-2 xl:col-span-6 mt-2">
+                    <div className="flex flex-col sm:flex-row gap-2 xl:col-span-6 mt-2">
                         <button
                             onClick={applyFilters}
-                            className="flex-1 bg-pink-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200 active:scale-95 flex items-center justify-center gap-2"
+                            className="flex-1 bg-pink-600 text-white px-6 py-2.5 sm:py-3 rounded-xl font-bold hover:bg-pink-700 transition-all shadow-lg shadow-pink-200 active:scale-95 flex items-center justify-center gap-2 text-sm"
                         >
-                            <Filter size={18} /> Apply Advanced Filters
+                            <Filter size={16} /> Apply Filters
                         </button>
                         <button
                             onClick={() => { resetFilters(); fetchUsers(); }}
-                            className="px-6 py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-all font-bold text-gray-600 active:scale-95"
+                            className="px-6 py-2.5 sm:py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-all font-bold text-gray-600 active:scale-95 text-sm"
                         >
                             Reset
                         </button>
@@ -197,12 +197,12 @@ const AdminUserManagement = () => {
                     <table className="w-full text-left">
                         <thead className="bg-gray-50/50 border-b border-gray-100">
                             <tr>
-                                <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">User</th>
-                                <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Profile ID</th>
-                                <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Contact</th>
-                                <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Verification</th>
-                                <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                                <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
+                                <th className="px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">User</th>
+                                <th className="hidden sm:table-cell px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Profile ID</th>
+                                <th className="hidden lg:table-cell px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Contact</th>
+                                <th className="hidden md:table-cell px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Verification</th>
+                                <th className="px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                                <th className="px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
@@ -217,46 +217,43 @@ const AdminUserManagement = () => {
                             ) : (
                                 users.map((user) => (
                                     <tr key={user.id} className="hover:bg-gray-50/80 transition-colors group">
-                                        <td className="px-6 py-4">
+                                        <td className="px-4 sm:px-6 py-4">
                                             <div className="flex items-center">
                                                 {user.profile?.profilePictureUrl ? (
                                                     <img
                                                         src={user.profile.profilePictureUrl}
                                                         alt=""
-                                                        className="h-10 w-10 rounded-xl object-cover border-2 border-pink-50 mr-3 shrink-0"
+                                                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl object-cover border-2 border-pink-50 mr-2 sm:mr-3 shrink-0"
                                                     />
                                                 ) : (
-                                                    <div className="h-10 w-10 rounded-xl bg-pink-100 flex items-center justify-center text-pink-600 font-bold border-2 border-pink-50 mr-3 shrink-0">
+                                                    <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-pink-100 flex items-center justify-center text-pink-600 font-bold border-2 border-pink-50 mr-2 sm:mr-3 shrink-0 text-xs sm:text-base">
                                                         {user.profile?.fullName?.charAt(0) || 'U'}
                                                     </div>
                                                 )}
                                                 <div className="min-w-0">
-                                                    <p className="text-sm font-bold text-gray-800 truncate">{user.profile?.fullName || 'No Name'}</p>
-                                                    <p className="text-[10px] text-gray-500 truncate">{user.email}</p>
+                                                    <p className="text-xs sm:text-sm font-bold text-gray-800 truncate">{user.profile?.fullName || 'No Name'}</p>
+                                                    <p className="text-[9px] sm:text-[10px] text-gray-500 truncate">{user.email}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <span className="text-xs font-mono font-bold bg-pink-50 px-3 py-1 rounded-lg text-pink-700">
+                                        <td className="hidden sm:table-cell px-4 sm:px-6 py-4">
+                                            <span className="text-[10px] font-mono font-bold bg-pink-50 px-2 sm:px-3 py-1 rounded-lg text-pink-700">
                                                 {user.profile?.profileId || 'N/A'}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="hidden lg:table-cell px-4 sm:px-6 py-4">
                                             <p className="text-xs font-medium text-gray-700">{user.mobileNumber}</p>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <span className={`inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider ${
+                                        <td className="hidden md:table-cell px-4 sm:px-6 py-4">
+                                            <span className={`inline-flex items-center px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider ${
                                                 (user.profile?.verificationStatus === 'APPROVED' || user.profile?.verificationStatus === 'VERIFIED')
-                                                ? 'bg-emerald-100 text-emerald-700'
-                                                : user.profile?.verificationStatus === 'REJECTED'
-                                                    ? 'bg-rose-100 text-rose-700'
-                                                    : 'bg-amber-100 text-amber-700'
+                                                ? 'bg-emerald-100 text-emerald-700' : user.profile?.verificationStatus === 'REJECTED' ? 'bg-rose-100 text-rose-700' : 'bg-amber-100 text-amber-700'
                                                 }`}>
                                                 {user.profile?.verificationStatus || 'PENDING'}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4">
-                                            <span className={`inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider ${user.enabled ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-200 text-slate-600'
+                                        <td className="px-4 sm:px-6 py-4">
+                                            <span className={`inline-flex items-center px-2 sm:px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider ${user.enabled ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-200 text-slate-600'
                                                 }`}>
                                                 {user.enabled ? 'Active' : 'Blocked'}
                                             </span>
@@ -352,12 +349,12 @@ const AdminUserManagement = () => {
                         </div>
 
                         {/* Modal Body */}
-                        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="flex-1 overflow-y-auto p-4 sm:p-8 custom-scrollbar">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                                 {/* Basic Info */}
                                 <div className="space-y-6">
-                                    <h4 className="text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Basic Information</h4>
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <h4 className="text-xs sm:text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Basic Information</h4>
+                                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                                         {[
                                             { label: 'Full Name', value: selectedUser.user?.profile?.fullName },
                                             { label: 'Email', value: selectedUser.user?.email },
@@ -368,15 +365,15 @@ const AdminUserManagement = () => {
                                             { label: 'Marital Status', value: selectedUser.user?.profile?.maritalStatus },
                                             { label: 'Mother Tongue', value: selectedUser.user?.profile?.motherTongue },
                                         ].map((item, i) => (
-                                            <div key={i} className="bg-gray-50 p-3 rounded-xl border border-gray-100">
-                                                <p className="text-[10px] font-bold text-gray-400 uppercase">{item.label}</p>
-                                                <p className="text-sm font-bold text-gray-800">{item.value || 'N/A'}</p>
+                                            <div key={i} className="bg-gray-50 p-2 sm:p-3 rounded-xl border border-gray-100">
+                                                <p className="text-[8px] sm:text-[10px] font-bold text-gray-400 uppercase">{item.label}</p>
+                                                <p className="text-xs sm:text-sm font-bold text-gray-800 break-words">{item.value || 'N/A'}</p>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <h4 className="text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Religious & Astro</h4>
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <h4 className="text-xs sm:text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Religious & Astro</h4>
+                                    <div className="grid grid-cols-2 gap-3 sm:gap-4">
                                         {[
                                             { label: 'Religion', value: selectedUser.user?.profile?.religion },
                                             { label: 'Caste', value: selectedUser.user?.profile?.caste },
@@ -385,9 +382,9 @@ const AdminUserManagement = () => {
                                             { label: 'Birth Place', value: selectedUser.user?.profile?.placeOfBirth },
                                             { label: 'Birth Time', value: selectedUser.user?.profile?.timeOfBirth },
                                         ].map((item, i) => (
-                                            <div key={i} className="bg-gray-50 p-3 rounded-xl border border-gray-100">
-                                                <p className="text-[10px] font-bold text-gray-400 uppercase">{item.label}</p>
-                                                <p className="text-sm font-bold text-gray-800">{item.value || 'N/A'}</p>
+                                            <div key={i} className="bg-gray-50 p-2 sm:p-3 rounded-xl border border-gray-100">
+                                                <p className="text-[8px] sm:text-[10px] font-bold text-gray-400 uppercase">{item.label}</p>
+                                                <p className="text-xs sm:text-sm font-bold text-gray-800 break-words">{item.value || 'N/A'}</p>
                                             </div>
                                         ))}
                                     </div>
@@ -395,38 +392,38 @@ const AdminUserManagement = () => {
 
                                 {/* Education & Family */}
                                 <div className="space-y-6">
-                                    <h4 className="text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Education & Career</h4>
-                                    <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100 space-y-4">
+                                    <h4 className="text-xs sm:text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Education & Career</h4>
+                                    <div className="bg-gray-50 p-3 sm:p-4 rounded-2xl border border-gray-100 space-y-4">
                                         <div className="flex items-center gap-3">
                                             <div className="p-2 bg-pink-100 rounded-lg text-pink-600"><FaGraduationCap /></div>
                                             <div>
-                                                <p className="text-[10px] font-bold text-gray-400 uppercase">Education</p>
-                                                <p className="text-sm font-bold text-gray-800">{selectedUser.user?.profile?.educationLevel || 'N/A'}</p>
+                                                <p className="text-[8px] sm:text-[10px] font-bold text-gray-400 uppercase">Education</p>
+                                                <p className="text-xs sm:text-sm font-bold text-gray-800">{selectedUser.user?.profile?.educationLevel || 'N/A'}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-3">
                                             <div className="p-2 bg-pink-100 rounded-lg text-pink-600"><FaBriefcase /></div>
                                             <div>
-                                                <p className="text-[10px] font-bold text-gray-400 uppercase">Occupation & Income</p>
-                                                <p className="text-sm font-bold text-gray-800">{selectedUser.user?.profile?.occupation || 'N/A'} • {selectedUser.user?.profile?.annualIncome || 'N/A'}</p>
+                                                <p className="text-[8px] sm:text-[10px] font-bold text-gray-400 uppercase">Occupation & Income</p>
+                                                <p className="text-xs sm:text-sm font-bold text-gray-800">{selectedUser.user?.profile?.occupation || 'N/A'} • {selectedUser.user?.profile?.annualIncome || 'N/A'}</p>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <h4 className="text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Location</h4>
-                                    <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100 space-y-2">
+                                    <h4 className="text-xs sm:text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Location</h4>
+                                    <div className="bg-gray-50 p-3 sm:p-4 rounded-2xl border border-gray-100 space-y-2">
                                         <div className="flex items-center gap-2 text-gray-700">
-                                            <FaMapMarkerAlt className="text-pink-500" />
-                                            <span className="text-sm font-bold">{selectedUser.user?.profile?.city}, {selectedUser.user?.profile?.state}, {selectedUser.user?.profile?.country}</span>
+                                            <FaMapMarkerAlt className="text-pink-500 flex-shrink-0" />
+                                            <span className="text-xs sm:text-sm font-bold">{selectedUser.user?.profile?.city}, {selectedUser.user?.profile?.state}, {selectedUser.user?.profile?.country}</span>
                                         </div>
-                                        <p className="text-xs text-gray-500 pl-6">{selectedUser.user?.profile?.address}</p>
+                                        <p className="text-[10px] sm:text-xs text-gray-500 pl-6">{selectedUser.user?.profile?.address}</p>
                                     </div>
 
-                                    <h4 className="text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Verification Details</h4>
-                                    <div className="bg-gray-900 p-4 rounded-2xl text-white space-y-4">
+                                    <h4 className="text-xs sm:text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Verification Details</h4>
+                                    <div className="bg-gray-900 p-3 sm:p-4 rounded-2xl text-white space-y-4">
                                         <div className="flex justify-between items-center">
-                                            <span className="text-xs text-gray-400 font-bold uppercase">Status</span>
-                                            <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${
+                                            <span className="text-[10px] text-gray-400 font-bold uppercase">Status</span>
+                                            <span className={`px-2 sm:px-3 py-1 rounded-lg text-[9px] font-black uppercase ${
                                                 (selectedUser.user?.profile?.verificationStatus === 'APPROVED' || selectedUser.user?.profile?.verificationStatus === 'VERIFIED') 
                                                 ? 'bg-emerald-500/20 text-emerald-400' 
                                                 : selectedUser.user?.profile?.verificationStatus === 'REJECTED' 
@@ -436,36 +433,36 @@ const AdminUserManagement = () => {
                                                 {selectedUser.user?.profile?.verificationStatus || 'PENDING'}
                                             </span>
                                         </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-xs text-gray-400 font-bold uppercase">ID Type</span>
-                                            <span className="text-sm font-bold">{selectedUser.user?.profile?.idProofType || 'N/A'}</span>
+                                        <div className="flex justify-between items-center gap-2">
+                                            <span className="text-[10px] text-gray-400 font-bold uppercase shrink-0">ID Type</span>
+                                            <span className="text-xs sm:text-sm font-bold truncate">{selectedUser.user?.profile?.idProofType || 'N/A'}</span>
                                         </div>
-                                        <div className="flex justify-between items-center">
-                                            <span className="text-xs text-gray-400 font-bold uppercase">ID Number</span>
-                                            <span className="text-sm font-bold">{selectedUser.user?.profile?.idProofNumber || 'N/A'}</span>
+                                        <div className="flex justify-between items-center gap-2">
+                                            <span className="text-[10px] text-gray-400 font-bold uppercase shrink-0">ID Number</span>
+                                            <span className="text-xs sm:text-sm font-bold truncate">{selectedUser.user?.profile?.idProofNumber || 'N/A'}</span>
                                         </div>
                                     </div>
 
-                                    <h4 className="text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3 mt-4">Membership Info</h4>
-                                    <div className="bg-pink-600 p-4 rounded-2xl text-white space-y-3">
+                                    <h4 className="text-xs sm:text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3 mt-4">Membership Info</h4>
+                                    <div className="bg-pink-600 p-3 sm:p-4 rounded-2xl text-white space-y-3">
                                         {selectedUser.activeSubscription ? (
                                             <>
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-[10px] text-pink-200 font-bold uppercase">Plan</span>
-                                                    <span className="text-sm font-black">{selectedUser.activeSubscription.plan.name}</span>
+                                                    <span className="text-[9px] sm:text-[10px] text-pink-200 font-bold uppercase">Plan</span>
+                                                    <span className="text-xs sm:text-sm font-black">{selectedUser.activeSubscription.plan.name}</span>
                                                 </div>
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-[10px] text-pink-200 font-bold uppercase">Expiry</span>
-                                                    <span className="text-sm font-bold">{new Date(selectedUser.activeSubscription.expiryDate).toLocaleDateString()}</span>
+                                                    <span className="text-[9px] sm:text-[10px] text-pink-200 font-bold uppercase">Expiry</span>
+                                                    <span className="text-xs sm:text-sm font-bold">{new Date(selectedUser.activeSubscription.expiryDate).toLocaleDateString()}</span>
                                                 </div>
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-[10px] text-pink-200 font-bold uppercase">Status</span>
-                                                    <span className="px-2 py-0.5 bg-white/20 rounded-md text-[10px] font-black uppercase tracking-widest">Active</span>
+                                                    <span className="text-[9px] sm:text-[10px] text-pink-200 font-bold uppercase">Status</span>
+                                                    <span className="px-2 py-0.5 bg-white/20 rounded-md text-[9px] font-black uppercase tracking-widest">Active</span>
                                                 </div>
                                             </>
                                         ) : (
-                                            <div className="text-center py-2">
-                                                <p className="text-sm font-bold italic text-pink-100">No Active Membership</p>
+                                            <div className="text-center py-1">
+                                                <p className="text-xs font-bold italic text-pink-100">No Active Membership</p>
                                             </div>
                                         )}
                                     </div>

@@ -347,7 +347,7 @@ const MyProfile = () => {
   // Commit profile updates directly to backend
   const commitProfileUpdate = async (updates) => {
     const allowedFields = [
-      'fullName', 'gender', 'age', 'idProofType', 'idProofNumber', 'dateOfBirth', 'height', 'weight', 'maritalStatus', 'motherTongue',
+      'fullName', 'age', 'idProofType', 'idProofNumber', 'dateOfBirth', 'height', 'weight', 'maritalStatus', 'motherTongue',
       'religion', 'caste', 'subCaste', 'gotra',
       'educationLevel', 'educationField', 'college', 'occupation', 'company', 'workingWith', 'annualIncome', 'workingCity', 'grewUpIn', 'zipCode', 'residencyStatus',
       'diet', 'bloodGroup', 'healthInformation', 'disability', 'drinkingHabit', 'smokingHabit',
@@ -489,7 +489,6 @@ const MyProfile = () => {
     setModalSection(section);
     if (section === 'religious') {
       fields = {
-        gender: profileData.religiousBackground.gender,
         religion: profileData.religiousBackground.religion,
         manglikStatus: profileData.religiousBackground.manglikChevvai,
         caste: profileData.religiousBackground.community,
@@ -605,7 +604,6 @@ const MyProfile = () => {
       fields = {
         profileCreatedBy: profileData.postedBy,
         fullName: profileData.fullName,
-        gender: profileData.religiousBackground.gender,
         maritalStatus: profileData.maritalStatus,
         height: profileData.height,
         weight: profileData.weight,
@@ -624,7 +622,6 @@ const MyProfile = () => {
   const validateModalData = () => {
     let newErrors = {};
     if (modalSection === 'religious') {
-      if (!modalData.gender) newErrors.gender = 'Gender is required';
       if (!modalData.religion) newErrors.religion = 'Religion is required';
       if (!modalData.caste) newErrors.caste = 'Caste/Community is required';
     }
@@ -1825,15 +1822,6 @@ Generated on: ${new Date().toLocaleString()}
                     </div>
                   </div>
 
-                  {/* Gender (Read only) */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-gray-600 font-medium">Gender:</label>
-                    <div className="sm:col-span-2 font-bold text-gray-800">
-                      {modalData.gender || 'Not Specified'}
-                    </div>
-                  </div>
-
-
                   {/* Marital Status */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
                     <label className="text-gray-600 font-medium">Marital Status *</label>
@@ -2020,17 +2008,6 @@ Generated on: ${new Date().toLocaleString()}
                           >
                             <option value="true">Yes</option>
                             <option value="false">No</option>
-                          </select>
-                        ) : key === 'gender' ? (
-                          <select
-                            value={value}
-                            onChange={(e) => handleModalDataChange(key, e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
-                          >
-                            <option value="">Select Gender</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
                           </select>
                         ) : (key === 'diet' || key === 'preferredDiet') ? (
                           <div className="grid grid-cols-2 xs:grid-cols-3 gap-2 py-2">
