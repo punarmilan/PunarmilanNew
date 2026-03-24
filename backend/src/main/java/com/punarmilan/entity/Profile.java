@@ -187,11 +187,13 @@ public class Profile {
     @Builder.Default
     @lombok.ToString.Exclude
     @lombok.EqualsAndHashCode.Exclude
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<ProfileView> views = new ArrayList<>();
 
     @OneToMany(mappedBy = "shortlistedProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     @lombok.ToString.Exclude
     @lombok.EqualsAndHashCode.Exclude
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Shortlist> shortlistedBy = new ArrayList<>();
 }
