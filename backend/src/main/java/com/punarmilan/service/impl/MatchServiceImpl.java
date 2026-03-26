@@ -22,6 +22,9 @@ import com.punarmilan.entity.enums.RequestStatus;
 import com.punarmilan.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -70,26 +73,14 @@ public class MatchServiceImpl implements MatchService {
 
         // ────────────────── Internal scored-profile holder ──────────────────
 
+        @Data
+        @NoArgsConstructor
+        @AllArgsConstructor
         private static class ScoredProfile implements java.io.Serializable {
                 private static final long serialVersionUID = 1L;
                 Profile profile;
                 double score;
                 List<String> reasons;
-
-                ScoredProfile() {} // Default constructor for Jackson
-
-                ScoredProfile(Profile profile, double score, List<String> reasons) {
-                        this.profile = profile;
-                        this.score = score;
-                        this.reasons = reasons;
-                }
-
-                public Profile getProfile() { return profile; }
-                public void setProfile(Profile profile) { this.profile = profile; }
-                public double getScore() { return score; }
-                public void setScore(double score) { this.score = score; }
-                public List<String> getReasons() { return reasons; }
-                public void setReasons(List<String> reasons) { this.reasons = reasons; }
         }
 
         // ====================================================================

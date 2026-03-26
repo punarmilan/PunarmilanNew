@@ -40,11 +40,15 @@ function AstroDetails({ profile, onUpdate }) {
                 nakshatra: profile.nakshatra || 'Shravana'
             });
             setPrivacyOption(privacyMap[profile.astroVisibility] || 'Visible to all Members');
+            setShowOtherRashi(profile.rashi && !rashiOptions.includes(profile.rashi));
+            setShowOtherNakshatra(profile.nakshatra && !nakshatraOptions.includes(profile.nakshatra));
         }
     }, [profile]);
 
     // Temporary state for form inputs
     const [formData, setFormData] = useState({ ...astroData });
+    const [showOtherRashi, setShowOtherRashi] = useState(false);
+    const [showOtherNakshatra, setShowOtherNakshatra] = useState(false);
 
     // Manglik options
     const manglikOptions = ["Don't Know", "Yes", "No"];
@@ -99,10 +103,25 @@ function AstroDetails({ profile, onUpdate }) {
     };
 
     const handleInputChange = (field, value) => {
-        setFormData(prev => ({
-            ...prev,
-            [field]: value
-        }));
+        if (field === 'rashi') {
+            if (value === 'Other') {
+                setShowOtherRashi(true);
+                setFormData(prev => ({ ...prev, rashi: '' }));
+            } else {
+                setShowOtherRashi(false);
+                setFormData(prev => ({ ...prev, [field]: value }));
+            }
+        } else if (field === 'nakshatra') {
+            if (value === 'Other') {
+                setShowOtherNakshatra(true);
+                setFormData(prev => ({ ...prev, nakshatra: '' }));
+            } else {
+                setShowOtherNakshatra(false);
+                setFormData(prev => ({ ...prev, [field]: value }));
+            }
+        } else {
+            setFormData(prev => ({ ...prev, [field]: value }));
+        }
     };
 
     const handleSave = () => {
@@ -362,16 +381,26 @@ function AstroDetails({ profile, onUpdate }) {
                                     This is based on lunar star sign.
                                 </p>
                                 <select
-                                    value={formData.rashi}
+                                    value={showOtherRashi ? 'Other' : formData.rashi}
                                     onChange={(e) => handleInputChange('rashi', e.target.value)}
                                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base appearance-none bg-white cursor-pointer transition-colors"
                                 >
-                                    {rashiOptions.map((rashi) => (
+                                    <option value="">Select Raashi</option>
+                                    {[...rashiOptions, 'Other'].map((rashi) => (
                                         <option key={rashi} value={rashi}>
                                             {rashi}
                                         </option>
                                     ))}
                                 </select>
+                                {showOtherRashi && (
+                                    <input
+                                        type="text"
+                                        value={formData.rashi}
+                                        onChange={(e) => setFormData(prev => ({ ...prev, rashi: e.target.value }))}
+                                        placeholder="Enter custom Raashi"
+                                        className="mt-2 w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base transition-colors"
+                                    />
+                                )}
                             </div>
 
                             {/* Nakshatra */}
@@ -383,16 +412,26 @@ function AstroDetails({ profile, onUpdate }) {
                                     Selected based on your Raashi
                                 </p>
                                 <select
-                                    value={formData.nakshatra}
+                                    value={showOtherNakshatra ? 'Other' : formData.nakshatra}
                                     onChange={(e) => handleInputChange('nakshatra', e.target.value)}
                                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base appearance-none bg-white cursor-pointer transition-colors"
                                 >
-                                    {nakshatraOptions.map((nakshatra) => (
+                                    <option value="">Select Nakshatra</option>
+                                    {[...nakshatraOptions, 'Other'].map((nakshatra) => (
                                         <option key={nakshatra} value={nakshatra}>
                                             {nakshatra}
                                         </option>
                                     ))}
                                 </select>
+                                {showOtherNakshatra && (
+                                    <input
+                                        type="text"
+                                        value={formData.nakshatra}
+                                        onChange={(e) => setFormData(prev => ({ ...prev, nakshatra: e.target.value }))}
+                                        placeholder="Enter custom Nakshatra"
+                                        className="mt-2 w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base transition-colors"
+                                    />
+                                )}
                             </div>
                         </div>
 

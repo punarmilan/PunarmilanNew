@@ -101,28 +101,72 @@ public class ProfileServiceImpl implements ProfileService {
                 }
 
                 if (criteria.getReligion() != null && !criteria.getReligion().isEmpty()) {
-                    predicates.add(root.get("religion").in(criteria.getReligion()));
+                    List<String> values = filterOpenToAll(criteria.getReligion());
+                    if (!values.isEmpty()) predicates.add(root.get("religion").in(values));
                 }
                 if (criteria.getCaste() != null && !criteria.getCaste().isEmpty()) {
-                    predicates.add(root.get("caste").in(criteria.getCaste()));
+                    List<String> values = filterOpenToAll(criteria.getCaste());
+                    if (!values.isEmpty()) predicates.add(root.get("caste").in(values));
                 }
                 if (criteria.getMaritalStatus() != null && !criteria.getMaritalStatus().isEmpty()) {
-                    predicates.add(root.get("maritalStatus").in(criteria.getMaritalStatus()));
+                    List<String> values = filterOpenToAll(criteria.getMaritalStatus());
+                    if (!values.isEmpty()) predicates.add(root.get("maritalStatus").in(values));
                 }
                 if (criteria.getMotherTongue() != null && !criteria.getMotherTongue().isEmpty()) {
-                    predicates.add(root.get("motherTongue").in(criteria.getMotherTongue()));
+                    List<String> values = filterOpenToAll(criteria.getMotherTongue());
+                    if (!values.isEmpty()) predicates.add(root.get("motherTongue").in(values));
+                }
+                if (criteria.getCountry() != null && !criteria.getCountry().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getCountry());
+                    if (!values.isEmpty()) predicates.add(root.get("country").in(values));
                 }
                 if (criteria.getState() != null && !criteria.getState().isEmpty()) {
-                    predicates.add(root.get("state").in(criteria.getState()));
+                    List<String> values = filterOpenToAll(criteria.getState());
+                    if (!values.isEmpty()) predicates.add(root.get("state").in(values));
                 }
                 if (criteria.getOccupation() != null && !criteria.getOccupation().isEmpty()) {
-                    predicates.add(root.get("occupation").in(criteria.getOccupation()));
+                    List<String> values = filterOpenToAll(criteria.getOccupation());
+                    if (!values.isEmpty()) predicates.add(root.get("occupation").in(values));
+                }
+                if (criteria.getResidencyStatus() != null && !criteria.getResidencyStatus().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getResidencyStatus());
+                    if (!values.isEmpty()) predicates.add(root.get("residencyStatus").in(values));
+                }
+                if (criteria.getGrewUpIn() != null && !criteria.getGrewUpIn().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getGrewUpIn());
+                    if (!values.isEmpty()) predicates.add(root.get("grewUpIn").in(values));
+                }
+                if (criteria.getEducationLevel() != null && !criteria.getEducationLevel().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getEducationLevel());
+                    if (!values.isEmpty()) predicates.add(root.get("educationLevel").in(values));
+                }
+                if (criteria.getEducationField() != null && !criteria.getEducationField().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getEducationField());
+                    if (!values.isEmpty()) predicates.add(root.get("educationField").in(values));
+                }
+                if (criteria.getWorkingWith() != null && !criteria.getWorkingWith().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getWorkingWith());
+                    if (!values.isEmpty()) predicates.add(root.get("workingWith").in(values));
+                }
+                if (criteria.getDiet() != null && !criteria.getDiet().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getDiet());
+                    if (!values.isEmpty()) predicates.add(root.get("diet").in(values));
+                }
+                if (criteria.getProfileCreatedBy() != null && !criteria.getProfileCreatedBy().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getProfileCreatedBy());
+                    if (!values.isEmpty()) predicates.add(root.get("profileCreatedBy").in(values));
+                }
+                if (criteria.getMinIncome() != null && !criteria.getMinIncome().isEmpty()) {
+                    predicates.add(cb.like(cb.lower(root.get("annualIncome")), "%" + criteria.getMinIncome().toLowerCase() + "%"));
                 }
                 if (criteria.getIsPremium() != null) {
                     predicates.add(cb.equal(root.get("isPremium"), criteria.getIsPremium()));
                 }
                 if (criteria.getShowWithPhoto() != null && criteria.getShowWithPhoto()) {
                     predicates.add(cb.isNotNull(root.get("profilePhotoUrl")));
+                }
+                if (criteria.getShowProtectedPhoto() != null && criteria.getShowProtectedPhoto()) {
+                    predicates.add(cb.equal(root.get("profilePhotoVisibility"), "PROTECTED"));
                 }
             }
 
@@ -188,6 +232,25 @@ public class ProfileServiceImpl implements ProfileService {
                     throw new IllegalArgumentException("Full name should only contain alphabets");
                 }
                 profile.setFullName(name);
+            } else if ("religion".equals(key)) {
+                String rel = (String) value;
+                if (rel != null && !rel.matches("^[a-zA-Z\\s]*$")) {
+                    throw new IllegalArgumentException("Religion should only contain alphabets");
+                }
+                profile.setReligion(rel);
+            } else if ("caste".equals(key)) {
+                String c = (String) value;
+                if (c != null && !c.matches("^[a-zA-Z\\s]*$")) {
+                    throw new IllegalArgumentException("Community should only contain alphabets");
+                }
+                profile.setCaste(c);
+            } else if ("height".equals(key)) {
+                String h = String.valueOf(value);
+                // Allow numeric values or standard height strings for compatibility
+                if (h != null && !h.matches("^[0-9]*$") && !h.matches(".*\\d+.*")) {
+                    throw new IllegalArgumentException("Height should be numeric or contain numbers");
+                }
+                profile.setHeight(h);
             } else if ("enabled".equals(key)) {
                 user.setEnabled((Boolean) value);
             } else if ("idProofType".equals(key)) {
@@ -349,6 +412,11 @@ public class ProfileServiceImpl implements ProfileService {
         List<String> validTypes = List.of("PAN Card", "Aadhar Card", "Driving License", "Voter ID", "Passport");
         if (idProofType != null && !validTypes.contains(idProofType)) {
             throw new IllegalArgumentException("Invalid ID proof type. Must be one of: " + validTypes);
+        }
+
+        // Validation for Religion if provided (sometimes updated with ID proof)
+        if (profile.getReligion() != null && !profile.getReligion().matches("^[a-zA-Z\\s]*$")) {
+            throw new IllegalArgumentException("Religion should only contain alphabets");
         }
 
         // Validation for ID Proof Number
@@ -698,5 +766,10 @@ public class ProfileServiceImpl implements ProfileService {
                 .preferredCaste(pref.getPreferredCaste())
                 .build();
     }
-
+    private List<String> filterOpenToAll(List<String> list) {
+        if (list == null) return new java.util.ArrayList<>();
+        return list.stream()
+                .filter(s -> s != null && !"Open to All".equalsIgnoreCase(s.trim()))
+                .collect(Collectors.toList());
+    }
 }

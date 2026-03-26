@@ -3,7 +3,6 @@ package com.punarmilan.config;
 import com.punarmilan.security.CustomUserDetailsService;
 import com.punarmilan.security.JwtUtils;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
@@ -23,7 +22,6 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocketMessageBroker
 @RequiredArgsConstructor
-@Slf4j
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     private final JwtUtils jwtUtils;

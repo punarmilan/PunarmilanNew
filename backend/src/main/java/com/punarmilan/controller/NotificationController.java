@@ -1,7 +1,6 @@
 package com.punarmilan.controller;
 
 import com.punarmilan.dto.NotificationDTO;
-import com.punarmilan.entity.User;
 import com.punarmilan.security.AuthUtil;
 import com.punarmilan.service.NotificationService;
 import lombok.RequiredArgsConstructor;

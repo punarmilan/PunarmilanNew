@@ -118,27 +118,32 @@ const AdvancedSearchApp = () => {
             if (filters.managedBy.siblingFriendOthers) managedByList.push('Sibling / Friend / Others');
         }
 
+        const cleanList = (val) => {
+            if (val === 'Open to All' || !val) return [];
+            return Array.isArray(val) ? val.filter(v => v !== 'Open to All') : [val];
+        };
+
         const criteria = {
             gender: targetGender,
-            country: filters.country !== 'Open to All' ? [filters.country] : [],
-            state: filters.state !== 'Open to All' ? [filters.state] : [],
-            residencyStatus: filters.residency !== 'Open to All' ? [filters.residency] : [],
-            grewUpIn: filters.grewUp !== 'Open to All' ? [filters.grewUp] : [],
-            educationLevel: filters.qualification !== 'Open to All' ? [filters.qualification] : [],
-            educationField: filters.educationArea !== 'Open to All' ? [filters.educationArea] : [],
-            workingWith: filters.workingWith !== 'Open to All' ? [filters.workingWith] : [],
-            occupation: filters.professionArea !== 'Open to All' ? [filters.professionArea] : [],
+            country: cleanList(filters.country),
+            state: cleanList(filters.state),
+            residencyStatus: cleanList(filters.residency),
+            grewUpIn: cleanList(filters.grewUp),
+            educationLevel: cleanList(filters.qualification),
+            educationField: cleanList(filters.educationArea),
+            workingWith: cleanList(filters.workingWith),
+            occupation: cleanList(filters.professionArea),
             minIncome: filters.incomeType === 'range' ? filters.minIncome : null,
             maxIncome: filters.incomeType === 'range' ? filters.maxIncome : null,
             diet: dietList,
             profileCreatedBy: managedByList,
-            isPremium: filters.isPremium || null,
-            chatStatus: filters.chatStatus || null,
-            showWithPhoto: filters.visibleToAll || null,
-            showProtectedPhoto: filters.protectedPhoto || null
+            isPremium: filters.isPremium ? true : null,
+            chatStatus: filters.chatStatus ? true : null,
+            showWithPhoto: filters.visibleToAll ? true : null,
+            showProtectedPhoto: filters.protectedPhoto ? true : null
         };
 
-        dispatch(searchProfiles(criteria));
+        dispatch(searchProfiles({ criteria }));
         navigate('/search-results', { state: { filters: criteria } });
         setIsSearching(false);
     };

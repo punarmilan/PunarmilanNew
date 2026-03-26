@@ -1,7 +1,6 @@
 package com.punarmilan.controller;
 
 import com.punarmilan.dto.ConnectionRequestDTO;
-import com.punarmilan.entity.User;
 import com.punarmilan.entity.enums.RequestStatus;
 import com.punarmilan.entity.enums.RequestType;
 import com.punarmilan.security.AuthUtil;

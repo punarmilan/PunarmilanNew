@@ -61,21 +61,26 @@ function AgeBasic() {
   const handleSearch = () => {
     const targetGender = myProfile ? (myProfile.gender === 'Male' ? 'Female' : 'Male') : null;
 
+    const cleanCriteria = (list) => {
+      if (!list || !Array.isArray(list)) return [];
+      return list.filter(item => item !== 'Open to All');
+    };
+
     const criteria = {
       ageFrom: parseInt(formData.ageFrom),
       ageTo: parseInt(formData.ageTo),
       heightFrom: formData.heightFrom,
       heightTo: formData.heightTo,
-      maritalStatus: formData.maritalStatus,
-      religion: formData.religion,
-      motherTongue: formData.motherTongue,
-      caste: formData.community,
-      country: formData.countryLivingIn,
-      state: formData.stateLivingIn,
+      maritalStatus: cleanCriteria(formData.maritalStatus),
+      religion: cleanCriteria(formData.religion),
+      motherTongue: cleanCriteria(formData.motherTongue),
+      caste: cleanCriteria(formData.community),
+      country: cleanCriteria(formData.countryLivingIn),
+      state: cleanCriteria(formData.stateLivingIn),
       gender: targetGender
     };
 
-    dispatch(searchProfiles(criteria));
+    dispatch(searchProfiles({ criteria }));
     navigate('/search-results', { state: { filters: criteria } });
   };
 

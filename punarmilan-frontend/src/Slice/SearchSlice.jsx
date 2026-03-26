@@ -5,7 +5,11 @@ export const searchProfiles = createAsyncThunk(
     'search/searchProfiles',
     async (params, { rejectWithValue }) => {
         try {
-            const { criteria, page = 0, size = 20 } = params;
+            // Handle both { criteria, page, size } and criteria object directly
+            const criteria = params.criteria || params;
+            const page = params.page || 0;
+            const size = params.size || 20;
+
             const response = await api.post(`/profiles/search?page=${page}&size=${size}`, criteria);
             return response.data;
         } catch (error) {

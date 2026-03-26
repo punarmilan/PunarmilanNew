@@ -11,7 +11,129 @@ import { fetchMyProfile, updateProfile, fetchPartnerPreferences, updatePartnerPr
 import { fetchDashboardSummary } from '../../../Slice/DashboardSlice';
 
 
-// Inside your component function:
+const rashiOptions = [
+  "Mesh (Aries)", "Vrishabh (Taurus)", "Mithun (Gemini)", "Kark (Cancer)",
+  "Sinh (Leo)", "Kanya (Virgo)", "Tula (Libra)", "Vrishchik (Scorpio)",
+  "Dhanu (Sagittarius)", "Makar (Capricorn)", "Kumbh (Aquarius)", "Meen (Pisces)"
+];
+
+const nakshatraOptions = [
+  "Ashwini", "Bharani", "Krittika", "Rohini", "Mrigashira", "Ardra", "Punarvasu", "Pushya", "Ashlesha",
+  "Magha", "Purva Phalguni", "Uttara Phalguni", "Hasta", "Chitra", "Swati", "Vishakha", "Anuradha", "Jyeshtha",
+  "Moola", "Purva Ashadha", "Uttara Ashadha", "Shravana", "Dhanishta", "Shatabhisha", "Purva Bhadrapada", "Uttara Bhadrapada", "Revati"
+];
+
+const religionOptions = ["Hindu", "Sikh", "Christian", "Muslim", "Parsi", "Jain", "Buddhist", "Jewish", "No Religion", "Spiritual - not religious"];
+
+const communityOptions = ["Maratha", "Brahmin", "Kunbi", "Agri", "Banjara", "Chambhar", "Dhangar", "Gond", "Koli", "Mahar", "Mali", "Matang", "Nomadic Tribes", "Paradhi", "Vanjari"];
+
+const motherTongueOptions = ["Punjabi", "Hindi", "Marathi", "Gujarati", "Tamil", "Telugu", "Kannada", "Malayalam", "Bengali", "Oriya", "Urdu", "English", "Other"];
+
+const subCasteOptions = ["Jat Sikh", "Arora Sikh", "Khatri Sikh", "Ramgarhia Sikh", "Majabi Sikh", "Ravidasia Sikh", "Maratha-Patil", "96 Kuli Maratha", "96 Kuli Maratha (Deshmukh)", "Other"];
+
+const gotraOptions = ["Bhardwaj", "Kashyap", "Vasishta", "Vishvamitra", "Gautam", "Jamadagni", "Atri", "Agastya", "Not Specified", "Other"];
+
+const timeOfBirthOptions = Array.from({ length: 48 }, (_, i) => {
+  const h = Math.floor(i / 2);
+  const hour = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  const minute = (i % 2) * 30;
+  const period = h < 12 ? 'AM' : 'PM';
+  return `${hour}:${minute.toString().padStart(2, '0')} ${period}`;
+});
+
+const FIELD_TYPES = {
+  // Screen 1: Religious / Astro Info
+  religion: 'dropdown_req',
+  manglikStatus: 'dropdown_req',
+  caste: 'dropdown_req',
+  subCaste: 'dropdown_req',
+  gotra: 'dropdown_req',
+  motherTongue: 'dropdown_req',
+  timeOfBirth: 'dropdown_req',
+  placeOfBirth: 'text_only',
+  nakshatra: 'dropdown_req',
+  rashi: 'dropdown_req',
+  astroVisibility: 'dropdown_req',
+
+  // Screen 2: Family Info
+  fatherStatus: 'text_only',
+  motherStatus: 'text_only',
+  familyFinancialStatus: 'text_only',
+  sistersCount: 'number_range_0_20',
+  brothersCount: 'number_range_0_20',
+  familyLocation: 'text_only', // Updated to only characters as per user request
+  familyAnnualIncome: 'dropdown_req', // Added as per user request
+
+  // Screen 3: Education / Career Info
+  educationLevel: 'text_only',
+  educationField: 'text_only',
+  college: 'text_space',
+  workingWith: 'dropdown_req',
+  occupation: 'text_only',
+  company: 'text_space',
+  workingCity: 'text_only',
+  annualIncome: 'dropdown_req',
+
+  // Screen 4: Location Info
+  address: 'text_addr',
+  city: 'text_only',
+  state: 'text_only',
+  country: 'text_only',
+  residencyStatus: 'dropdown_req',
+  zipCode: 'number_zip_6',
+
+  // Screen 5: Personal / Lifestyle Info
+  age: 'number_range_18_70',
+  dateOfBirth: 'date_18plus',
+  maritalStatus: 'dropdown_req',
+  height: 'dropdown_req',
+  weight: 'number_range_30_200',
+  grewUpIn: 'text_only',
+  diet: 'radio_req',
+  drinkingHabit: 'dropdown_req',
+  smokingHabit: 'dropdown_req',
+  bloodGroup: 'dropdown_req',
+  healthInformation: 'dropdown_req',
+  disability: 'radio_req',
+
+  // Screen 6: About Me
+  aboutMe: 'textarea_50_8000',
+
+  // Screen 7: Hobbies
+  hobbies: 'text_hobbies',
+
+  // Screen 8: Privacy / Visibility Settings
+  profileVisibility: 'dropdown_req',
+  profilePhotoVisibility: 'dropdown_req',
+  albumPhotoVisibility: 'dropdown_req',
+  contactDisplayStatus: 'dropdown_req',
+  // astroVisibility: 'dropdown_req', // Duplicate in screen 1
+
+  // Screen 9: Partner Preferences
+  preferredMotherTongue: 'text_commas',
+  professionArea: 'dropdown',
+  profileManagedBy: 'dropdown',
+  minAge: 'number_range_18_70',
+  maxAge: 'number_age_max',
+  minHeight: 'height_format',
+  maxHeight: 'height_format_max',
+  preferredReligion: 'text_only',
+  preferredCaste: 'text_only',
+  preferredSubCaste: 'text_only',
+  minEducationLevel: 'text_only',
+  preferredCity: 'text_only',
+  preferredState: 'text_only',
+  preferredDiet: 'radio',
+  minAnnualIncome: 'number_only',
+  preferWorkingProfessional: 'dropdown_req',
+  preferNri: 'dropdown_req',
+  showVerifiedOnly: 'dropdown_req',
+  enableAutoMatch: 'dropdown_req',
+  matchScoreThreshold: 'dropdown',
+  preferredEducationField: 'text_only',
+  preferredCountry: 'text_only'
+};
+
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -29,6 +151,7 @@ const MyProfile = () => {
   const [modalSection, setModalSection] = useState('');
   const [idProofFile, setIdProofFile] = useState(null);
   const [errors, setErrors] = useState({});
+  const [showOtherInput, setShowOtherInput] = useState({});
 
   useEffect(() => {
     dispatch(fetchMyProfile());
@@ -206,7 +329,8 @@ const MyProfile = () => {
           familyLocation: profile.familyLocation || '',
           financialStatus: profile.familyFinancialStatus || 'Middle',
           sisters: profile.sistersCount !== undefined ? profile.sistersCount : 0,
-          brothers: profile.brothersCount !== undefined ? profile.brothersCount : 0
+          brothers: profile.brothersCount !== undefined ? profile.brothersCount : 0,
+          familyAnnualIncome: profile.familyAnnualIncome || "Don't want to specify"
         },
 
         educationCareer: {
@@ -464,6 +588,7 @@ const MyProfile = () => {
       'familyDetails.father': 'fatherStatus',
       'familyDetails.sisters': 'sistersCount',
       'familyDetails.brothers': 'brothersCount',
+      'familyDetails.familyAnnualIncome': 'familyAnnualIncome',
       'educationCareer.highestQualification': 'educationLevel',
       'educationCareer.workingAs': 'occupation',
       'educationCareer.employerName': 'company',
@@ -509,6 +634,7 @@ const MyProfile = () => {
         sistersCount: profileData.familyDetails.sisters,
         brothersCount: profileData.familyDetails.brothers,
         familyLocation: profileData.familyDetails.familyLocation,
+        familyAnnualIncome: profileData.familyDetails.familyAnnualIncome,
       };
     } else if (section === 'education') {
       fields = {
@@ -617,31 +743,96 @@ const MyProfile = () => {
     setModalData(fields);
     setErrors({});
     setIsEditModalOpen(true);
+    setShowOtherInput({});
   };
 
   const validateModalData = () => {
     let newErrors = {};
-    if (modalSection === 'religious') {
-      if (!modalData.religion) newErrors.religion = 'Religion is required';
-      if (!modalData.caste) newErrors.caste = 'Caste/Community is required';
-    }
 
-    if (modalSection === 'personal') {
-      if (!modalData.fullName) newErrors.fullName = 'Full Name is required';
-    }
+    Object.entries(modalData).forEach(([key, value]) => {
+      const type = FIELD_TYPES[key];
+      if (!type) return;
 
-    if (modalSection === 'about') {
-      // Validations if needed for about text
-    }
+      const valStr = value?.toString() || '';
 
-    if (modalSection === 'person') {
-      if (!modalData.profileCreatedBy) newErrors.profileCreatedBy = 'This field is required';
-      if (!modalData.maritalStatus) newErrors.maritalStatus = 'Marital Status is required';
-      if (!modalData.height) newErrors.height = 'Height is required';
-      if (!modalData.diet) newErrors.diet = 'Diet is required';
-      if (!modalData.disability) newErrors.disability = 'Disability status is required';
-    }
+      // Required Dropdown/Radio checks
+      if (type.includes('_req') && (!value || value === '')) {
+        if (type.includes('dropdown')) newErrors[key] = "⚠️ Please select a valid option";
+        else newErrors[key] = "⚠️ This field is required";
+      }
 
+      // Type-specific validation
+      if (type.includes('number')) {
+        if (valStr && !/^\d*$/.test(valStr)) {
+          newErrors[key] = "⚠️ Only numbers allowed";
+        }
+      }
+
+      if (type.includes('text_only')) {
+        if (valStr && !/^[a-zA-Z\s]*$/.test(valStr)) {
+          newErrors[key] = "⚠️ Only text characters allowed";
+        }
+      }
+
+      // Specific Ranges
+      if (type === 'number_range_0_20') {
+        const n = parseInt(valStr);
+        if (isNaN(n) || n < 0 || n > 20) newErrors[key] = "⚠️ Must be a number between 0-20";
+      }
+      if (type === 'number_range_18_70' || type === 'number_age_max') {
+        const n = parseInt(valStr);
+        if (isNaN(n) || n < 18 || n > 70) newErrors[key] = "⚠️ Age must be a number between 18-70";
+        if (key === 'maxAge' && modalData.minAge && n <= parseInt(modalData.minAge)) {
+          newErrors[key] = "⚠️ Max age must be greater than min age";
+        }
+      }
+      if (type === 'number_range_30_200') {
+        const n = parseInt(valStr);
+        if (isNaN(n) || n < 30 || n > 200) newErrors[key] = "⚠️ Weight must be a number in KG (30-200)";
+      }
+
+      // Formats
+      if (type === 'number_zip_6') {
+        if (valStr && (!/^\d{6}$/.test(valStr))) newErrors[key] = "⚠️ Zip code must be 6 digits numbers only";
+      }
+      if (type === 'date_18plus') {
+        if (!valStr || !/^\d{4}-\d{2}-\d{2}$/.test(valStr)) {
+          newErrors[key] = "⚠️ Invalid date format (YYYY-MM-DD)";
+        } else {
+          const [y, m, d] = valStr.split('-').map(n => parseInt(n));
+          const birthDate = new Date(y, m - 1, d);
+          const today = new Date();
+          let age = today.getFullYear() - birthDate.getFullYear();
+          const monthDiff = today.getMonth() - birthDate.getMonth();
+          if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) age--;
+          if (age < 18) newErrors[key] = "⚠️ Must be 18 or older";
+        }
+      }
+      if (type === 'time_req') {
+        if (!valStr || !/^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i.test(valStr)) {
+          newErrors[key] = "⚠️ Must be valid time format (HH:MM AM/PM)";
+        }
+      }
+
+      // Textarea
+      if (type === 'textarea_50_8000') {
+        if (!valStr || valStr.length < 50) newErrors[key] = "⚠️ Minimum 50 characters required";
+        else if (valStr.length > 8000) newErrors[key] = "⚠️ Maximum 8000 characters allowed";
+      }
+
+      // Height format validation (e.g., 5ft or 5ft 6in)
+      if (type === 'height_format' || type === 'height_format_max') {
+        if (valStr && !/^\d+ft(\s*\d+in)?$/.test(valStr)) {
+          newErrors[key] = "⚠️ Invalid height format (e.g., 5ft or 5ft 6in)";
+        }
+        if (type === 'height_format_max' && modalData.minHeight && valStr) {
+          // Basic string comparison might not work for height, but let's assume simple check for now
+          // or just ensure max >= min if both are valid numbers (hard-coded for now)
+        }
+      }
+    });
+
+    // Keep existing verification specific logic if not covered
     if (modalSection === 'verification') {
       if (!modalData.idProofType) newErrors.idProofType = 'ID Proof Type is required';
       if (!modalData.idProofNumber) {
@@ -660,7 +851,6 @@ const MyProfile = () => {
             }
             break;
           case 'Driving License':
-            // Standard format is 15 characters: State Code(2), RTO Code(2), Year(4), Rest(7)
             if (!/^[A-Z]{2}[0-9]{2}[0-9]{11}$/.test(idNum) && !/^[A-Z]{2}[0-9]{13}$/.test(idNum)) {
               newErrors.idProofNumber = 'Invalid Driving License format (15 characters)';
             }
@@ -675,16 +865,9 @@ const MyProfile = () => {
               newErrors.idProofNumber = 'Invalid Passport format (e.g., A1234567)';
             }
             break;
-          default:
-            break;
         }
       }
       if (!idProofFile && !profileData.idProofUrl) newErrors.idProofFile = 'ID Proof Photo is required';
-    }
-
-    if (modalSection === 'education') {
-      // Annual income can be a string like "5-10 LPA" or a number
-      // If you want to enforce numbers, you can, but allow common string values
     }
 
     setErrors(newErrors);
@@ -724,19 +907,66 @@ const MyProfile = () => {
     setIsEditModalOpen(false);
   };
 
-
   const handleModalDataChange = (field, value) => {
-    setModalData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-    // Clear error for this field
-    if (errors[field]) {
-      setErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[field];
-        return newErrors;
-      });
+    const type = FIELD_TYPES[field];
+    const valStr = value?.toString() || '';
+
+    // Real-time validation for specific types
+    if (type) {
+      if (type.includes('number') && valStr && !/^\d*$/.test(valStr)) {
+        setErrors(prev => ({ ...prev, [field]: "⚠️ Only numbers allowed" }));
+      } else if (type.includes('text_only') && valStr && !/^[a-zA-Z\s]*$/.test(valStr)) {
+        setErrors(prev => ({ ...prev, [field]: "⚠️ Only text characters allowed" }));
+      } else if (type === 'text_hobbies' && valStr && !/^[a-zA-Z\s,]*$/.test(valStr)) {
+        setErrors(prev => ({ ...prev, [field]: "⚠️ Only text characters allowed" }));
+      } else if (type === 'text_commas' && valStr && !/^[a-zA-Z\s,]*$/.test(valStr)) {
+        setErrors(prev => ({ ...prev, [field]: "⚠️ Only letters and commas allowed" }));
+      } else if (type === 'text_addr' && valStr && !/^[a-zA-Z0-9\s,,]*$/.test(valStr)) {
+        // Basic address validation, allowing numbers
+      } else {
+        // Clear error if now valid (real-time feedback)
+        if (errors[field]) {
+          setErrors(prev => {
+            const newErrors = { ...prev };
+            delete newErrors[field];
+            return newErrors;
+          });
+        }
+      }
+    }
+
+    // Auto-calculate age from dateOfBirth
+    if (field === 'dateOfBirth' && valStr && /^\d{4}-\d{2}-\d{2}$/.test(valStr)) {
+        const [y, m, d] = valStr.split('-').map(n => parseInt(n));
+        const birthDate = new Date(y, m - 1, d);
+        const today = new Date();
+        let calculatedAge = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) calculatedAge--;
+        
+        if (calculatedAge >= 0) {
+            setModalData(prev => ({
+                ...prev,
+                [field]: value,
+                age: calculatedAge.toString()
+            }));
+            return;
+        }
+    }
+
+    if (field === 'religion' || field === 'rashi' || field === 'nakshatra' || field === 'caste' || field === 'community' || field === 'subCaste' || field === 'gotra' || field === 'motherTongue') {
+      if (value === 'Other') {
+        setShowOtherInput(prev => ({ ...prev, [field]: true }));
+        setModalData(prev => ({ ...prev, [field]: '' }));
+      } else {
+        setShowOtherInput(prev => ({ ...prev, [field]: false }));
+        setModalData(prev => ({ ...prev, [field]: value }));
+      }
+    } else {
+      setModalData(prev => ({
+        ...prev,
+        [field]: value
+      }));
     }
   };
 
@@ -2041,7 +2271,7 @@ Generated on: ${new Date().toLocaleString()}
                               </label>
                             ))}
                           </div>
-                        ) : (key === 'profileCreatedBy' || key === 'maritalStatus' || key === 'height' || key === 'bloodGroup' || key === 'healthInformation' || key === 'manglikStatus' || key === 'astroVisibility' || key === 'profilePhotoVisibility' || key === 'albumPhotoVisibility' || key === 'profileVisibility' || key === 'drinkingHabit' || key === 'smokingHabit' || key === 'profileManagedBy' || key === 'professionArea' || key === 'workingWith' || key === 'matchScoreThreshold') ? (
+                        ) : (key === 'profileCreatedBy' || key === 'maritalStatus' || key === 'height' || key === 'bloodGroup' || key === 'healthInformation' || key === 'manglikStatus' || key === 'astroVisibility' || key === 'profilePhotoVisibility' || key === 'albumPhotoVisibility' || key === 'profileVisibility' || key === 'drinkingHabit' || key === 'smokingHabit' || key === 'profileManagedBy' || key === 'professionArea' || key === 'workingWith' || key === 'matchScoreThreshold' || key === 'annualIncome' || key === 'minAnnualIncome' || key === 'familyAnnualIncome' || key === 'motherTongue' || key === 'subCaste' || key === 'gotra' || key === 'timeOfBirth') ? (
                           <select
                             value={value || ''}
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
@@ -2084,6 +2314,74 @@ Generated on: ${new Date().toLocaleString()}
                               { label: 'Registered Members', value: 'Members' },
                               { label: 'Premium Members', value: 'Premium' }
                             ].map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+                            {key === 'rashi' && [...rashiOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'nakshatra' && [...nakshatraOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'religion' && [...religionOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'caste' && [...communityOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'motherTongue' && motherTongueOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'subCaste' && subCasteOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'gotra' && gotraOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'timeOfBirth' && timeOfBirthOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {(key === 'annualIncome' || key === 'minAnnualIncome' || key === 'familyAnnualIncome') && [
+                               "Don't want to specify", "1L - 2L", "2L - 5L", "5L - 10L", "10L - 15L", 
+                               "15L - 20L", "20L - 30L", "30L - 50L", "50L - 1Cr", "1Cr+"
+                            ].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                          </select>
+                        ) : (key === 'rashi' || key === 'nakshatra' || key === 'religion' || key === 'caste' || key === 'subCaste' || key === 'gotra' || key === 'motherTongue') && !showOtherInput[key] && ![...rashiOptions, ...nakshatraOptions, ...religionOptions, ...communityOptions, ...motherTongueOptions, ...subCasteOptions, ...gotraOptions].includes(value) && value !== '' ? (
+                          // For cases where value exists but not in list, show select with 'Other' selected or handle it
+                          <select
+                            value="Other"
+                            onChange={(e) => handleModalDataChange(key, e.target.value)}
+                            className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
+                          >
+                            <option value="">Select Option</option>
+                            {key === 'rashi' && [...rashiOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'nakshatra' && [...nakshatraOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'religion' && [...religionOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'caste' && [...communityOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'motherTongue' && motherTongueOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'subCaste' && subCasteOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'gotra' && gotraOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'timeOfBirth' && timeOfBirthOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {(key === 'annualIncome' || key === 'minAnnualIncome' || key === 'familyAnnualIncome') && [
+                              "Don't want to specify", "1L - 2L", "2L - 5L", "5L - 10L", "10L - 15L",
+                              "15L - 20L", "20L - 30L", "30L - 50L", "50L - 1Cr", "1Cr+"
+                            ].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                          </select>
+                        ) : (key === 'rashi' || key === 'nakshatra' || key === 'religion' || key === 'caste') && showOtherInput[key] ? (
+                          <div className="space-y-2">
+                            <select
+                              value="Other"
+                              onChange={(e) => handleModalDataChange(key, e.target.value)}
+                              className="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 outline-none"
+                            >
+                              {key === 'rashi' && [...rashiOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                              {key === 'nakshatra' && [...nakshatraOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                              {key === 'religion' && [...religionOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                              {key === 'caste' && [...communityOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                              {key === 'motherTongue' && [...motherTongueOptions].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                              {key === 'subCaste' && [...subCasteOptions].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                              {key === 'gotra' && [...gotraOptions].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            </select>
+                            <input
+                              type="text"
+                              value={value || ''}
+                              onChange={(e) => setModalData(prev => ({ ...prev, [key]: e.target.value }))}
+                              placeholder={`Enter custom ${key}`}
+                              className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 outline-none ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
+                            />
+                          </div>
+                        ) : (key === 'rashi' || key === 'nakshatra' || key === 'religion' || key === 'caste' || key === 'subCaste' || key === 'gotra' || key === 'motherTongue') ? (
+                          <select
+                            value={[...rashiOptions, ...nakshatraOptions, ...religionOptions, ...communityOptions].includes(value) ? value : 'Other'}
+                            onChange={(e) => handleModalDataChange(key, e.target.value)}
+                            className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
+                          >
+                            <option value="">Select {key}</option>
+                            {key === 'rashi' && [...rashiOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'nakshatra' && [...nakshatraOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'religion' && [...religionOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                            {key === 'caste' && [...communityOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
                           </select>
                         ) : key === 'aboutMe' ? (
                           <div className="space-y-3">
@@ -2105,16 +2403,21 @@ Generated on: ${new Date().toLocaleString()}
                           </div>
                         ) : (
                           <input
-                            type={key === 'dateOfBirth' ? 'date' : key === 'timeOfBirth' ? 'time' : 'text'}
+                            type={key === 'dateOfBirth' ? 'date' : 'text'}
                             value={value || ''}
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
+                            readOnly={key === 'age'}
+                            placeholder={key === 'dateOfBirth' ? 'YYYY-MM-DD' : key === 'timeOfBirth' ? 'HH:MM AM/PM' : ''}
+                            className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'} ${key === 'age' ? 'bg-gray-50' : ''}`}
                           />
                         )}
 
                         {/* Add support for new preference fields rendering */}
                         {modalSection === 'preferences' && key === 'preferredMotherTongue' && (
                           <p className="text-xs text-gray-500">Separate multiple languages with commas</p>
+                        )}
+                        {key === 'hobbies' && (
+                          <p className="text-xs text-gray-500">Tip: Separate multiple hobbies with comma</p>
                         )}
                         {errors[key] && (
                           <p className="text-xs text-red-500 mt-1">{errors[key]}</p>

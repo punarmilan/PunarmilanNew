@@ -45,7 +45,7 @@ public class AuthController {
         accessCookie.setHttpOnly(true);
         accessCookie.setSecure(isSecureCookie());
         accessCookie.setPath("/");
-        accessCookie.setMaxAge(15 * 60); // 15 mins
+        accessCookie.setMaxAge(24 * 60 * 60); // 24 hours (was: 15 mins)
         response.addCookie(accessCookie);
 
         Cookie refreshCookie = new Cookie("refreshToken", refreshToken);
@@ -115,7 +115,7 @@ public class AuthController {
         accessCookie.setHttpOnly(true);
         accessCookie.setSecure(isSecureCookie());
         accessCookie.setPath("/");
-        accessCookie.setMaxAge(15 * 60);
+        accessCookie.setMaxAge(24 * 60 * 60); // 24 hours (was: 15 mins)
         response.addCookie(accessCookie);
 
         return ResponseEntity.ok(authResponse);

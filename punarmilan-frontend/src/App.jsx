@@ -63,6 +63,7 @@ import Pricing from "./pages/payment/Pricing";
 import AboutUs from "./pages/AboutUs";
 import VerifyEmail from "./pages/VerifyEmail";
 import api from "./services/api";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Admin Imports
 import AdminLogin from "./admin/pages/AdminLogin";
@@ -207,11 +208,11 @@ function App() {
         <Route
           path="/my-shadi"
           element={
-            <>
+            <ProtectedRoute>
               <Header />
               <SecondNav />
               <Dashboard />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* payment */}
@@ -220,11 +221,11 @@ function App() {
         <Route
           path="/my-shadi/my-profile"
           element={
-            <>
+            <ProtectedRoute>
               <Header />
               <SecondNav />
               <MyProfile />
-            </>
+            </ProtectedRoute>
           }
         />
 
@@ -232,11 +233,11 @@ function App() {
         <Route
           path="/my-shadi/my-photos"
           element={
-            <>
+            <ProtectedRoute>
               <Header />
               <SecondNav />
               <MyPhoto />
-            </>
+            </ProtectedRoute>
           }
         />
 
@@ -244,11 +245,11 @@ function App() {
         <Route
           path="/my-shadi/partner-preferences"
           element={
-            <>
+            <ProtectedRoute>
               <Header />
               <SecondNav />
               <PartnerPreference />
-            </>
+            </ProtectedRoute>
           }
         />
         {/* <Route path="/preferences/age-range" element={< />} /> */}
@@ -477,11 +478,11 @@ function App() {
         <Route
           path="/my-shadi/settings"
           element={
-            <>
+            <ProtectedRoute>
               <Header />
               <SecondNav />
               <Settings />
-            </>
+            </ProtectedRoute>
           }
         />
 

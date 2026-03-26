@@ -4,7 +4,6 @@ import com.punarmilan.dto.ProfileDTO;
 import com.punarmilan.security.AuthUtil;
 import com.punarmilan.service.MatchService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 @RestController
 @RequestMapping("/api/social")
 @RequiredArgsConstructor
-@Slf4j
 public class SocialController {
 
     private final MatchService matchService;
