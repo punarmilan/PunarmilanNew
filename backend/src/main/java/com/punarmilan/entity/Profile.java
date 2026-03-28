@@ -196,4 +196,18 @@ public class Profile {
     @lombok.EqualsAndHashCode.Exclude
     @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Shortlist> shortlistedBy = new ArrayList<>();
+
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private List<DailyMatch> dailyMatches = new ArrayList<>();
+
+    @OneToMany(mappedBy = "viewedProfile", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    @lombok.ToString.Exclude
+    @lombok.EqualsAndHashCode.Exclude
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private List<ContactView> contactViewedBy = new ArrayList<>();
 }
