@@ -22,7 +22,7 @@ function Login({ close, openRegister }) {
         const phoneRegex = /^[0-9]{10}$/;
 
         if (!email) return "Email or Mobile number is required";
-        
+
         // Check for uppercase letters
         if (/[A-Z]/.test(email)) {
             console.log("Validation error: Uppercase letters found in email:", email);
@@ -168,7 +168,7 @@ function Login({ close, openRegister }) {
                     {/* Logo Section */}
                     <div className="flex justify-center pt-6 sm:pt-8 pb-4 sm:pb-6">
                         <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-xl flex items-center justify-center shadow-lg">
-                            <span className="text-white text-2xl sm:text-3xl font-bold">S</span>
+                            <span className="text-white text-2xl sm:text-3xl font-bold">P</span>
                         </div>
                     </div>
 

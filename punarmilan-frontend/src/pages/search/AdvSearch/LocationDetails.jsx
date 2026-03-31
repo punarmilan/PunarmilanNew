@@ -24,7 +24,7 @@ const LocationDetails = ({ filters, onChange }) => {
                     <div className="p-2 bg-rose-100 rounded-lg">
                         <MapPin className="w-5 h-5 text-rose-600" />
                     </div>
-                    <h2 className="text-lg font-semibold text-gray-800">Location & Grew up in Details</h2>
+                    <h2 className="text-lg font-semibold text-gray-800">Location & Grew Up In Details</h2>
                 </div>
                 <ChevronDown
                     className={`w-5 h-5 text-gray-600 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}

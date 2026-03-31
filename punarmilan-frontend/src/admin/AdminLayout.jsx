@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { adminLogout } from './store/adminAuthSlice';
-import { LayoutDashboard, Users, CheckCircle, Image, Flag, LogOut, CreditCard, HelpCircle, History, CalendarDays, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Users, CheckCircle, Image, Flag, LogOut, CreditCard, HelpCircle, History, CalendarDays, Menu, X, MessageCircle } from 'lucide-react';
 
 const AdminLayout = () => {
     const { admin } = useSelector((state) => state.adminAuth);
@@ -42,27 +42,34 @@ const AdminLayout = () => {
     };
 
     const menuItems = [
-        { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard },
-        { name: 'User Management', path: '/admin/users', icon: Users },
-        { name: 'Events', path: '/admin/events', icon: CalendarDays },
-        { name: 'Profile Approvals', path: '/admin/approvals', icon: CheckCircle },
-        { name: 'Photo Moderation', path: '/admin/photos', icon: Image },
-        { name: 'Reports', path: '/admin/reports', icon: Flag },
-        { name: 'Subscriptions', path: '/admin/subscriptions', icon: CreditCard },
-        { name: 'Support', path: '/admin/support', icon: HelpCircle },
-        { name: 'Activity Logs', path: '/admin/logs', icon: History },
+        { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SUB_ADMIN', 'ROLE_KYC_VERIFIER', 'ROLE_EVENT_MANAGER'] },
+        { name: 'User Management', path: '/admin/users', icon: Users, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SUB_ADMIN'] },
+        { name: 'Events', path: '/admin/events', icon: CalendarDays, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_EVENT_MANAGER', 'ROLE_SUB_ADMIN'] },
+        { name: 'Profile Approvals', path: '/admin/approvals', icon: CheckCircle, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_KYC_VERIFIER', 'ROLE_SUB_ADMIN'] },
+        { name: 'Photo Moderation', path: '/admin/photos', icon: Image, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_KYC_VERIFIER', 'ROLE_SUB_ADMIN'] },
+        { name: 'Reports', path: '/admin/reports', icon: Flag, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SUB_ADMIN'] },
+        { name: 'Subscriptions', path: '/admin/subscriptions', icon: CreditCard, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_SUB_ADMIN'] },
+        { name: 'Support', path: '/admin/support', icon: HelpCircle, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SUB_ADMIN'] },
+        { name: 'Contact Messages', path: '/admin/contacts', icon: MessageCircle, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SUB_ADMIN'] },
+        { name: 'Activity Logs', path: '/admin/logs', icon: History, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_SUB_ADMIN'] },
     ];
+
+    const filteredMenuItems = menuItems.filter(item => item.roles.includes(admin.role));
 
     /** Reusable sidebar content — shared between desktop & mobile drawer */
     const SidebarContent = () => (
         <>
             <div className="p-5 sm:p-6 border-b border-gray-800">
                 <h2 className="text-xl sm:text-2xl font-bold text-white tracking-wider">PUNARMILAN</h2>
-                <p className="text-pink-500 text-xs font-semibold mt-1 uppercase tracking-widest">Admin Panel</p>
+                <div className="flex items-center gap-2 mt-1">
+                    <p className="text-pink-500 text-[10px] font-black uppercase tracking-widest">Admin Panel</p>
+                    <span className="h-1 w-1 bg-gray-600 rounded-full" />
+                    <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest">{admin.role.replace('ROLE_', '').replace('_', ' ')}</p>
+                </div>
             </div>
 
             <nav className="flex-1 mt-4 sm:mt-6 px-3 sm:px-4 space-y-1 overflow-y-auto">
-                {menuItems.map((item) => {
+                {filteredMenuItems.map((item) => {
                     const Icon = item.icon;
                     const isActive = location.pathname === item.path;
                     return (

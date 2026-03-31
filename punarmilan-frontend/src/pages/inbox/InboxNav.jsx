@@ -10,6 +10,7 @@ export default function InboxNav() {
         { id: "Accepted", path: "/inbox/accepted/intrest" },
         { id: "Requests", path: "/inbox/pending/requests" },
         { id: "Sent", path: "/inbox/sent/request" },
+        { id: "Contacts", path: "/inbox/contacts" },
         { id: "Deleted", path: "/inbox/archieved/intrest" },
     ];
 

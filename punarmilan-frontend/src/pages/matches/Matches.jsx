@@ -605,7 +605,7 @@ const Matches = () => {
                                         ))}
                                     </FilterSection>
 
-                                    <FilterSection title="Country Living in">
+                                    <FilterSection title="Country Living In">
                                         {dynamicOptions.countryLiving.map(({ label, count }) => (
                                             <FilterCheckbox
                                                 key={label}
@@ -616,7 +616,7 @@ const Matches = () => {
                                         ))}
                                     </FilterSection>
 
-                                    <FilterSection title="State Living in">
+                                    <FilterSection title="State Living In">
                                         {dynamicOptions.stateLiving.map(({ label, count }) => (
                                             <FilterCheckbox
                                                 key={label}
@@ -627,7 +627,7 @@ const Matches = () => {
                                         ))}
                                     </FilterSection>
 
-                                    <FilterSection title="Country Grew up in">
+                                    <FilterSection title="Country Grew Up In">
                                         <FilterCheckbox label="India" checked={selectedFilters.countryGrewUp.includes('India')} onChange={() => handleFilterChange('countryGrewUp', 'India')} />
                                         <FilterCheckbox label="USA" checked={selectedFilters.countryGrewUp.includes('USA')} onChange={() => handleFilterChange('countryGrewUp', 'USA')} />
                                     </FilterSection>
@@ -654,7 +654,7 @@ const Matches = () => {
                                         ))}
                                     </FilterSection>
 
-                                    <FilterSection title="Profile Managed by">
+                                    <FilterSection title="Profile Managed By">
                                         {dynamicOptions.profileManagedBy.map(({ label, count }) => (
                                             <FilterCheckbox
                                                 key={label}
@@ -665,7 +665,7 @@ const Matches = () => {
                                         ))}
                                     </FilterSection>
 
-                                    <FilterSection title="Eating habits">
+                                    <FilterSection title="Eating Habits">
                                         {dynamicOptions.eatingHabits.map(({ label, count }) => (
                                             <FilterCheckbox
                                                 key={label}

@@ -268,7 +268,7 @@ const PartnerPreferencesMain = () => {
                         <Globe className="w-6 h-6 text-purple-600" />
                       </div>
                       <div className="text-left flex-1">
-                        <p className="text-sm text-gray-500 mb-0.5">Country living in</p>
+                        <p className="text-sm text-gray-500 mb-0.5">Country Living In</p>
                         <p className="text-base font-semibold text-gray-800">{preferences.country}</p>
                       </div>
                     </div>
@@ -285,7 +285,7 @@ const PartnerPreferencesMain = () => {
                         <MapPin className="w-6 h-6 text-pink-600" />
                       </div>
                       <div className="text-left flex-1">
-                        <p className="text-sm text-gray-500 mb-0.5">State living in</p>
+                        <p className="text-sm text-gray-500 mb-0.5">State Living In</p>
                         <p className="text-base font-semibold text-gray-800">{preferences.state}</p>
                       </div>
                     </div>
@@ -366,7 +366,7 @@ const PartnerPreferencesMain = () => {
                         <Building className="w-6 h-6 text-cyan-600" />
                       </div>
                       <div className="text-left flex-1">
-                        <p className="text-sm text-gray-500 mb-0.5">Working with</p>
+                        <p className="text-sm text-gray-500 mb-0.5">Working With</p>
                         <p className="text-base font-semibold text-gray-800">{preferences.workingWith}</p>
                       </div>
                     </div>
@@ -416,7 +416,7 @@ const PartnerPreferencesMain = () => {
                       <User className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
                     </div>
                     <div className="flex-1 text-left">
-                      <div className="text-sm text-gray-500">Profile Managed by</div>
+                      <div className="text-sm text-gray-500">Profile Managed By</div>
                       <div className="text-base text-gray-900 font-medium">{preferences.managedBy}</div>
                     </div>
                     <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0" />

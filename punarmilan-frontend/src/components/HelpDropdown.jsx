@@ -136,16 +136,7 @@ const HelpDropdown = () => {
 
     // Help options data
     const helpOptions = [
-        {
-            id: 'chat',
-            icon: 'fa-solid fa-comment-dots',
-            iconColor: 'text-green-600',
-            iconBg: 'bg-green-100',
-            title: 'Chat with us (24x7)',
-            badge: 'No wait time!',
-            description: 'Get instant responses from our support team',
-            onClick: handleChatClick
-        },
+
         {
             id: 'tickets-view',
             icon: 'fa-solid fa-list-check',
@@ -171,7 +162,7 @@ const HelpDropdown = () => {
             icon: 'fa-solid fa-phone',
             iconColor: 'text-red-600',
             iconBg: 'bg-red-100',
-            title: 'Call on +91-8095031111',
+            title: 'Call on +91-9923400442',
             badge: null,
             description: 'Click for regional offices • Call 10am - 7pm (IST)',
             waitTime: 'Wait time: 5-8 mins',
@@ -180,11 +171,8 @@ const HelpDropdown = () => {
     ];
 
     const regionalNumbers = [
-        { region: 'North India', number: '+91-11-43567890' },
-        { region: 'South India', number: '+91-44-56789012' },
-        { region: 'West India', number: '+91-22-67890123' },
-        { region: 'East India', number: '+91-33-78901234' },
-        { region: 'International', number: '+1-800-123-4567' }
+        { region: 'Pune Maharashtra', number: '+91-9923400442' }
+
     ];
 
     return (
@@ -349,7 +337,7 @@ const HelpDropdown = () => {
                             <div className="space-y-6">
                                 <div className="bg-red-50 p-4 rounded-xl text-center">
                                     <h4 className="font-bold text-gray-800 mb-2">Main Helpline</h4>
-                                    <a href="tel:+918095031111" className="text-red-600 text-xl font-bold">+91-8095031111</a>
+                                    <a href="tel:+919923400442" className="text-red-600 text-xl font-bold">+91-9923400442</a>
                                 </div>
                                 <div className="space-y-3">
                                     <h4 className="font-bold text-gray-800">Regional Offices</h4>

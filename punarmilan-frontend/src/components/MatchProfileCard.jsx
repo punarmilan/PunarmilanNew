@@ -202,7 +202,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
 
                     {/* Action Section */}
                     <div className="mt-auto border-t border-gray-100 pt-3 flex flex-col items-center">
-                        <p className="text-[13px] text-gray-500 font-medium mb-3">Connect with her?</p>
+                        <p className="text-[13px] text-gray-500 font-medium mb-3">Connect with {profile.gender?.toLowerCase() === 'male' ? 'him' : 'her'}?</p>
                         <button
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -352,7 +352,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                         <div className="flex items-center gap-4 text-xs font-bold text-gray-500">
                             <div className="flex items-center gap-1.5 hover:text-rose-500 cursor-pointer transition-colors">
                                 <Heart size={14} className="text-rose-400" />
-                                You & {profile.gender === 'male' ? 'Him' : 'Her'}
+                                You & {profile.gender?.toLowerCase() === 'male' ? 'Him' : 'Her'}
                             </div>
                             <div className="flex items-center gap-1.5 hover:text-amber-500 cursor-pointer transition-colors">
                                 <Star size={14} className="text-amber-400" />

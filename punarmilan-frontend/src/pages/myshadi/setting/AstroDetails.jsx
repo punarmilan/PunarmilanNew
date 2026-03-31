@@ -231,7 +231,7 @@ function AstroDetails({ profile, onUpdate }) {
                                         <Clock className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
                                     </div>
                                     <div className="flex-1">
-                                        <div className="text-xs md:text-sm text-gray-500 mb-1">Time of Birth</div>
+                                        <div className="text-xs md:text-sm text-gray-500 mb-1">Time Of Birth</div>
                                         <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800">
                                             {astroData.timeOfBirth}
                                         </div>
@@ -244,7 +244,7 @@ function AstroDetails({ profile, onUpdate }) {
                                         <MapPin className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
                                     </div>
                                     <div className="flex-1">
-                                        <div className="text-xs md:text-sm text-gray-500 mb-1">Place of Birth</div>
+                                        <div className="text-xs md:text-sm text-gray-500 mb-1">City Of Birth</div>
                                         <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800">
                                             {astroData.placeOfBirth}
                                         </div>
@@ -257,7 +257,7 @@ function AstroDetails({ profile, onUpdate }) {
                                         <Star className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
                                     </div>
                                     <div className="flex-1">
-                                        <div className="text-xs md:text-sm text-gray-500 mb-1">Manglik</div>
+                                        <div className="text-xs md:text-sm text-gray-500 mb-1">Manglik/Chevvai Dosham</div>
                                         <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800">
                                             {astroData.manglikStatus}
                                         </div>
@@ -319,7 +319,7 @@ function AstroDetails({ profile, onUpdate }) {
                                 {/* Time of Birth */}
                                 <div>
                                     <label className="block text-sm md:text-base font-semibold text-gray-800 mb-2">
-                                        Time of Birth
+                                        Time Of Birth
                                     </label>
                                     <div className="relative">
                                         <input
@@ -335,7 +335,7 @@ function AstroDetails({ profile, onUpdate }) {
                                 {/* Place of Birth */}
                                 <div>
                                     <label className="block text-sm md:text-base font-semibold text-gray-800 mb-2">
-                                        Place of Birth
+                                        City Of Birth
                                     </label>
                                     <select
                                         value={formData.placeOfBirth}
@@ -354,7 +354,7 @@ function AstroDetails({ profile, onUpdate }) {
                             {/* Manglik Dosha */}
                             <div>
                                 <label className="block text-sm md:text-base font-semibold text-gray-800 mb-3">
-                                    Manglik Dosha
+                                    Manglik/Chevvai Dosham
                                 </label>
                                 <div className="flex flex-wrap gap-3">
                                     {manglikOptions.map((option) => (
@@ -375,7 +375,7 @@ function AstroDetails({ profile, onUpdate }) {
                             {/* Raashi */}
                             <div>
                                 <label className="block text-sm md:text-base font-semibold text-gray-800 mb-2">
-                                    Raashi
+                                    Rashi
                                 </label>
                                 <p className="text-xs md:text-sm text-gray-500 mb-3">
                                     This is based on lunar star sign.
@@ -385,7 +385,7 @@ function AstroDetails({ profile, onUpdate }) {
                                     onChange={(e) => handleInputChange('rashi', e.target.value)}
                                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base appearance-none bg-white cursor-pointer transition-colors"
                                 >
-                                    <option value="">Select Raashi</option>
+                                    <option value="">Select Rashi</option>
                                     {[...rashiOptions, 'Other'].map((rashi) => (
                                         <option key={rashi} value={rashi}>
                                             {rashi}
@@ -397,7 +397,7 @@ function AstroDetails({ profile, onUpdate }) {
                                         type="text"
                                         value={formData.rashi}
                                         onChange={(e) => setFormData(prev => ({ ...prev, rashi: e.target.value }))}
-                                        placeholder="Enter custom Raashi"
+                                        placeholder="Enter custom Rashi"
                                         className="mt-2 w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base transition-colors"
                                     />
                                 )}

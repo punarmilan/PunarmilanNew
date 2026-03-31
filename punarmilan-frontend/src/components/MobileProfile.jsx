@@ -239,9 +239,9 @@ const MobileProfile = () => {
             {/* Verification Modal */}
             {isVerificationOpen && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-3 xs:p-4">
-                    <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 w-full max-w-md max-h-[90vh] overflow-y-auto">
-                        <div className="flex justify-between items-center mb-4 xs:mb-6">
-                            <h3 className="font-bold text-xl xs:text-2xl">Verify your Profile</h3>
+                    <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-5 w-full max-w-md max-h-[95vh] overflow-y-auto relative shadow-2xl">
+                        <div className="flex justify-between items-center mb-3 xs:mb-4">
+                            <h3 className="font-bold text-lg xs:text-xl">Verify your Profile</h3>
                             <button
                                 onClick={() => setIsVerificationOpen(false)}
                                 className="text-gray-500 hover:text-gray-700 p-1"
@@ -250,12 +250,12 @@ const MobileProfile = () => {
                             </button>
                         </div>
 
-                        <p className="text-sm xs:text-base text-gray-600 mb-4 xs:mb-6">
+                        <p className="text-xs xs:text-sm text-gray-600 mb-3 xs:mb-4">
                             Verification is important to ensure safety and establish authenticity of your Profile.
                         </p>
 
                         {/* Document Selection */}
-                        <div className="space-y-3 xs:space-y-4 mb-4 xs:mb-6">
+                        <div className="space-y-2 xs:space-y-3 mb-4">
                             {[
                                 { id: 'pan', label: 'PAN card', checked: selectedDoc === 'pan' },
                                 { id: 'driving', label: 'Driving license', checked: selectedDoc === 'driving' },
@@ -287,24 +287,24 @@ const MobileProfile = () => {
                                     value={panNumber}
                                     onChange={(e) => setPanNumber(e.target.value)}
                                     placeholder="Enter PAN number"
-                                    className="w-full px-3 xs:px-4 py-2 xs:py-3 border border-gray-300 rounded-lg text-sm xs:text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    className="w-full px-3 xs:px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 />
                             </div>
                         )}
 
                         {/* Divider */}
-                        <div className="border-t border-gray-200 my-4 xs:my-6"></div>
+                        <div className="border-t border-gray-100 my-4"></div>
 
                         {/* Verify Button */}
                         <button
                             onClick={handleVerify}
-                            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 xs:py-4 rounded-xl font-bold text-base xs:text-lg hover:from-blue-600 hover:to-blue-700 active:scale-95 transition-all shadow-md"
+                            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl font-bold text-base hover:from-blue-600 hover:to-blue-700 active:scale-95 transition-all shadow-md"
                         >
                             Verify
                         </button>
 
                         {/* Safety Note */}
-                        <div className="mt-4 xs:mt-6 p-3 xs:p-4 bg-blue-50 rounded-lg border border-blue-100">
+                        <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
                             <div className="flex items-start xs:items-center gap-2">
                                 <Shield className="w-4 h-4 xs:w-5 xs:h-5 text-blue-500 flex-shrink-0" />
                                 <p className="text-xs xs:text-sm text-blue-700">

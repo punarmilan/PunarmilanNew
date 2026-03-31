@@ -103,6 +103,18 @@ export const trackContactView = createAsyncThunk(
     }
 );
 
+export const fetchViewedContacts = createAsyncThunk(
+    'user/fetchViewedContacts',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await api.get('/subscriptions/viewed-contacts');
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'Failed to fetch viewed contacts');
+        }
+    }
+);
+
 export const sendReferralInvite = createAsyncThunk(
     'user/sendReferralInvite',
     async (emailData, { rejectWithValue }) => {
@@ -135,6 +147,8 @@ const userSlice = createSlice({
         error: null,
         isAuthenticated: !!getStoredUser(), // Initial guess based on cached user
         subscriptionDetails: null,
+        viewedContacts: [],
+        viewedContactsLoading: false,
     },
     reducers: {
         clearError: (state) => {
@@ -276,6 +290,19 @@ const userSlice = createSlice({
                 state.user.isPremium = action.payload.active;
                 localStorage.setItem('user', JSON.stringify(state.user));
             }
+        });
+
+        // Viewed Contacts History
+        builder.addCase(fetchViewedContacts.pending, (state) => {
+            state.viewedContactsLoading = true;
+        });
+        builder.addCase(fetchViewedContacts.fulfilled, (state, action) => {
+            state.viewedContactsLoading = false;
+            state.viewedContacts = action.payload || [];
+        });
+        builder.addCase(fetchViewedContacts.rejected, (state, action) => {
+            state.viewedContactsLoading = false;
+            state.error = action.payload;
         });
     }
 });

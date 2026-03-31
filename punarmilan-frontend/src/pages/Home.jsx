@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { HiHeart, HiStar, HiUserGroup, HiCheckCircle, HiShieldCheck, HiSparkles, HiCash, HiBadgeCheck, HiLightningBolt, HiShieldExclamation, HiSearch, HiChat, HiPencilAlt } from 'react-icons/hi'
+import { HiHeart, HiStar, HiShieldCheck, HiSparkles, HiCash, HiBadgeCheck, HiLightningBolt, HiShieldExclamation, HiSearch, HiChat, HiPencilAlt } from 'react-icons/hi'
 import Login from "../components/Login"
 import Register from "../components/Register"
 import { HiX, HiArrowLeft } from "react-icons/hi"
@@ -75,11 +75,7 @@ function Home() {
 
 
 
-    const stats = [
-        { icon: <HiUserGroup className="w-6 h-6" />, value: '50 Lakh+', label: 'Active Profiles' },
-        { icon: <HiStar className="w-6 h-6" />, value: '4.8', label: 'User Ratings' },
-        { icon: <HiCheckCircle className="w-6 h-6" />, value: '7 Lakh+', label: 'Success Stories' }
-    ]
+
 
     return (
         <div className="min-h-screen">
@@ -338,34 +334,7 @@ function Home() {
                     </div>
                 </div>
 
-                {/* Bottom Statistics Bar - Matching Image 2 */}
-                <div className="absolute bottom-0 left-0 right-0 z-10 bg-black/50 backdrop-blur-sm border-t border-white/10 py-3 sm:py-4">
-                    <div className="max-w-7xl mx-auto px-4">
-                        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-14 md:gap-20 text-white">
-                            <div className="flex items-center gap-3">
-                                <HiUserGroup className="w-5 h-5 sm:w-6 sm:h-6 text-pink-500" />
-                                <div className="flex items-baseline gap-1.5">
-                                    <span className="text-lg sm:text-xl font-bold">50 Lakh+</span>
-                                    <span className="text-xs sm:text-sm text-white/70 font-medium">Members</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <HiCheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-pink-500" />
-                                <div className="flex items-baseline gap-1.5">
-                                    <span className="text-lg sm:text-xl font-bold">7 Lakh+</span>
-                                    <span className="text-xs sm:text-sm text-white/70 font-medium">Success Stories</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <HiStar className="w-5 h-5 sm:w-6 sm:h-6 text-pink-500" />
-                                <div className="flex items-baseline gap-1.5">
-                                    <span className="text-lg sm:text-xl font-bold">4.8</span>
-                                    <span className="text-xs sm:text-sm text-white/70 font-medium tracking-tight">Avg Rating</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
 
                 {/* Sub-tagline from Image 1 can be optionally added below the bar or as a thin line inside */}
                 {/* For now, keeping it clean as per Image 2's structure which looks more "proper" */}

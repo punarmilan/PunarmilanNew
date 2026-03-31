@@ -642,13 +642,13 @@ const MatchProfileDetails = () => {
                                         </div>
                                         {profile.smokingHabit && (
                                             <div className="border border-gray-100 rounded p-4 w-[100px] flex flex-col items-center">
-                                                <span className="text-[12px] text-gray-400 mb-1">Smoking</span>
+                                                <span className="text-[12px] text-gray-400 mb-1">Smoking Habit</span>
                                                 <span className="text-[14px] font-medium">{profile.smokingHabit}</span>
                                             </div>
                                         )}
                                         {profile.drinkingHabit && (
                                             <div className="border border-gray-100 rounded p-4 w-[100px] flex flex-col items-center">
-                                                <span className="text-[12px] text-gray-400 mb-1">Drinking</span>
+                                                <span className="text-[12px] text-gray-400 mb-1">Drinking Habit</span>
                                                 <span className="text-[14px] font-medium">{profile.drinkingHabit}</span>
                                             </div>
                                         )}
@@ -659,14 +659,14 @@ const MatchProfileDetails = () => {
                                 <SectionLayout icon={<Home className="w-6 h-6 text-gray-300" />} title="Background">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[14px]">
                                         <div className="space-y-2">
-                                            <p className="flex items-center gap-2 text-gray-500">Religion/Mother Tongue</p>
+                                            <p className="flex items-center gap-2 text-gray-500">Religion / Mother Tongue</p>
                                             <p className="font-medium">{profile.religion}, {profile.motherTongue}</p>
 
-                                            <p className="flex items-center gap-2 text-gray-500 mt-4">Community/Caste</p>
+                                            <p className="flex items-center gap-2 text-gray-500 mt-4">Community / Caste</p>
                                             <p className="font-medium">{profile.caste}{profile.subCaste ? `, ${profile.subCaste}` : ''}</p>
                                         </div>
                                         <div className="space-y-2">
-                                            <p className="flex items-center gap-2 text-gray-500">Gotra/Manglik Status</p>
+                                            <p className="flex items-center gap-2 text-gray-500">Gothra / Manglik/Chevvai Dosham</p>
                                             <p className="font-medium">{profile.gotra || 'Not Specified'}, {profile.manglikStatus}</p>
 
                                             <p className="flex items-center gap-2 text-gray-500 mt-4">Location</p>
@@ -680,15 +680,15 @@ const MatchProfileDetails = () => {
                                     {profile.horoscope && (profile.horoscope.rashi || profile.horoscope.nakshatra) ? (
                                         <div className="grid grid-cols-2 gap-4 text-[14px]">
                                             <div>
-                                                <p className="text-gray-500">Rashi/Nakshatra</p>
+                                                <p className="text-gray-500">Rashi / Nakshatra</p>
                                                 <p className="font-medium">{profile.horoscope.rashi || 'Not Specified'}, {profile.horoscope.nakshatra || 'Not Specified'}</p>
-                                                <p className="text-gray-500 mt-4">Time of Birth</p>
+                                                <p className="text-gray-500 mt-4">Time Of Birth</p>
                                                 <p className="font-medium">{profile.horoscope.timeOfBirth || 'Not Specified'}</p>
                                             </div>
                                             <div>
-                                                <p className="text-gray-500">Place of Birth</p>
+                                                <p className="text-gray-500">City Of Birth</p>
                                                 <p className="font-medium">{profile.horoscope.placeOfBirth || 'Not Specified'}</p>
-                                                <p className="text-gray-500 mt-4">Date of Birth</p>
+                                                <p className="text-gray-500 mt-4">Date Of Birth</p>
                                                 <p className="font-medium">{profile.horoscope.dateOfBirth?.split('T')[0] || 'Not Specified'}</p>
                                             </div>
                                         </div>

@@ -31,9 +31,24 @@ const TodayMatchView = ({
 }) => {
     const [subTab, setSubTab] = useState('detailed');
     const [timeLeft, setTimeLeft] = useState('');
+    const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = React.useRef(null);
     const navigate = useNavigate();
+
+    // Reset photo index when profile changes
+    useEffect(() => {
+        setCurrentPhotoIndex(0);
+    }, [profile?.id]);
+
+    const allPhotos = [
+        profile.profilePhotoUrl || profile.img,
+        profile.photoUrl2,
+        profile.photoUrl3,
+        profile.photoUrl4,
+        profile.photoUrl5,
+        profile.photoUrl6
+    ].filter(Boolean);
 
     const isLocked = profile.premiumVisible === false;
     const isPremium = profile.isPremium;
@@ -89,7 +104,7 @@ const TodayMatchView = ({
     if (!profile) return null;
 
     return (
-        <div className="max-w-4xl mx-auto py-2">
+        <div className="max-w-4xl mx-auto py-2 px-4 md:px-0">
             {/* Title */}
             <h2 className="text-center text-gray-600 text-[15px] mb-4">
                 Here are Today's top Matches for you. Connect with them now!
@@ -140,15 +155,15 @@ const TodayMatchView = ({
             </div>
 
             {/* Main Profile Card */}
-            <div className="bg-white border-x border-b border-gray-200 shadow-sm overflow-hidden mb-6">
+            <div className="bg-white border-x border-y md:border-t-0 border-gray-200 shadow-sm overflow-hidden mb-6 rounded-lg md:rounded-none md:rounded-b-lg">
                 <div className="p-4 flex flex-col md:flex-row gap-6">
                     {/* Left: Image */}
                     <div className="w-full md:w-[220px] flex-shrink-0">
                         <div className="relative group">
                             <div className={`w-full h-[280px] rounded shadow-sm border bg-gray-50 flex items-center justify-center overflow-hidden ${isPremium ? 'border-amber-400 border-2' : 'border-gray-100'} ${isLocked ? 'blur-lg scale-110' : ''}`}>
-                                {profile.img ? (
+                                {allPhotos.length > 0 ? (
                                     <img
-                                        src={profile.img}
+                                        src={allPhotos[currentPhotoIndex]}
                                         alt={displayName}
                                         className="w-full h-full object-cover"
                                     />
@@ -165,11 +180,25 @@ const TodayMatchView = ({
                                 </div>
                             )}
 
-                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/40 text-white text-[11px] px-2 py-0.5 rounded-full flex items-center gap-2 z-20">
-                                <ChevronLeft className="w-3.5 h-3.5 cursor-pointer" onClick={onPrev} />
-                                <span>{currentIndex + 1} of {total}</span>
-                                <ChevronRight className="w-3.5 h-3.5 cursor-pointer" onClick={onNext} />
-                            </div>
+                             {allPhotos.length > 1 && (
+                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/40 text-white text-[11px] px-2 py-0.5 rounded-full flex items-center gap-2 z-20">
+                                    <ChevronLeft
+                                        className="w-3.5 h-3.5 cursor-pointer hover:text-rose-400 transition-colors"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setCurrentPhotoIndex(prev => (prev === 0 ? allPhotos.length - 1 : prev - 1));
+                                        }}
+                                    />
+                                    <span>{currentPhotoIndex + 1} of {allPhotos.length}</span>
+                                    <ChevronRight
+                                        className="w-3.5 h-3.5 cursor-pointer hover:text-rose-400 transition-colors"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setCurrentPhotoIndex(prev => (prev === allPhotos.length - 1 ? 0 : prev + 1));
+                                        }}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -243,14 +272,14 @@ const TodayMatchView = ({
                                         </AnimatePresence>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-6 text-[13px] mt-1.5 text-gray-500">
-                                    <span className="flex items-center gap-2 cursor-pointer hover:text-rose-500 transition-colors">
+                                <div className="flex flex-wrap items-center gap-3 md:gap-6 text-[13px] mt-1.5 text-gray-500">
+                                    <span className="flex items-center gap-2 cursor-pointer hover:text-rose-500 transition-colors whitespace-nowrap">
                                         <MessageCircle className="w-4 h-4 text-green-500" /> Online {profile.updatedAt ? 'recently' : '20h ago'}
                                     </span>
-                                    <span className="flex items-center gap-2 cursor-pointer hover:text-rose-500 transition-colors">
-                                        <Users className="w-4 h-4 text-rose-400" /> You & Her
+                                    <span className="flex items-center gap-2 cursor-pointer hover:text-rose-500 transition-colors whitespace-nowrap">
+                                        <Users className="w-4 h-4 text-rose-400" /> You & {profile.gender?.toLowerCase() === 'male' ? 'Him' : 'Her'}
                                     </span>
-                                    <span className="flex items-center gap-2 cursor-pointer hover:text-rose-500 transition-colors">
+                                    <span className="flex items-center gap-2 cursor-pointer hover:text-rose-500 transition-colors whitespace-nowrap">
                                         <Star className="w-4 h-4 text-amber-500" /> Astro
                                     </span>
                                 </div>
@@ -306,7 +335,7 @@ const TodayMatchView = ({
 
                         <hr className="my-4 border-gray-100" />
 
-                        <div className="grid grid-cols-2 gap-x-12 gap-y-2.5 text-[14px]">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2.5 text-[14px]">
                             <div className="space-y-2">
                                 <p className="text-gray-600">{profile.age} yrs, {profile.height}, {profile.rashi || 'Libra'}</p>
                                 <p className="text-gray-600">{profile.motherTongue}</p>
@@ -361,7 +390,7 @@ const TodayMatchView = ({
             </div>
 
             {/* Sub-Contents Area */}
-            <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-8 md:p-10 mb-10">
+            <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 sm:p-8 md:p-10 mb-10">
                 <AnimatePresence mode="wait">
                     {subTab === 'detailed' ? (
                         <motion.div
@@ -376,7 +405,7 @@ const TodayMatchView = ({
                                         ID: {String(profile.profileId || profile.id).toUpperCase().replace('-', '')} <Copy className="w-3 h-3 hover:text-rose-500 cursor-pointer" />
                                     </div>
                                     <div className="text-[11px] text-gray-500 border border-gray-200 rounded px-2 py-0.5">
-                                        Profile Managed by {profile.profileCreatedBy || 'Self'}
+                                        Profile Managed By {profile.profileCreatedBy || 'Self'}
                                     </div>
                                 </div>
                                 <p className="text-[14px] leading-relaxed text-gray-600">
@@ -515,9 +544,9 @@ const TodayMatchView = ({
                                             </div>
                                             <p className="text-[10px] mt-1 font-bold text-gray-400 uppercase">Her Preferences</p>
                                         </div>
-                                        <div className="relative flex-1 max-w-[200px] border-b border-dashed border-gray-300 pb-1 text-center">
+                                        <div className="relative flex-1 max-w-[200px] border-b border-dashed border-gray-300 pb-1 text-center hidden sm:block">
                                             <span className="text-[11px] bg-gray-100 px-3 py-1 rounded-full text-gray-600 font-medium">
-                                                You match {matchCount}/{totalCount} ({matchPercentage}%) of her Preferences
+                                                You match {matchCount}/{totalCount} ({matchPercentage}%)
                                             </span>
                                         </div>
                                         <div className="text-center">
@@ -597,7 +626,7 @@ const TodayMatchView = ({
 };
 
 const SectionLayout = ({ icon, title, children }) => (
-    <div className="relative pl-12">
+    <div className="relative pl-10 md:pl-12">
         <div className="absolute left-0 top-0 w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center bg-white z-10 shadow-sm">
             {icon}
         </div>

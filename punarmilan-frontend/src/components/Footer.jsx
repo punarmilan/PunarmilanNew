@@ -19,7 +19,7 @@ const Footer = () => {
             title: 'Company',
             links: [
                 { name: 'About Us', href: '/about-us' },
-                { name: 'Contact Us', href: '#contact' },
+                { name: 'Contact Us', href: '/contact' },
             ]
         },
         privacy: {
@@ -87,7 +87,7 @@ const Footer = () => {
                         </div>
                         <div>
                             <div className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-1">Call Us</div>
-                            <div className="text-white font-black text-lg tracking-wide">+91 1800 200 1234</div>
+                            <div className="text-white font-black text-lg tracking-wide">+91 9923400442</div>
                         </div>
                     </div>
                     <div className="flex items-center gap-5">
@@ -105,7 +105,7 @@ const Footer = () => {
                         </div>
                         <div>
                             <div className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-1">Visit Us</div>
-                            <div className="text-white font-black text-lg tracking-wide">Mumbai, India</div>
+                            <div className="text-white font-black text-lg tracking-wide">Pune, Maharashtra, India</div>
                         </div>
                     </div>
                 </div>

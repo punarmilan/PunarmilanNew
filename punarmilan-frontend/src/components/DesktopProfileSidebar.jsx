@@ -386,10 +386,10 @@ const DesktopProfileSidebar = () => {
 
             {/* Desktop Verification Modal */}
             {isVerificationOpen && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[999]">
-                    <div className="bg-white rounded-2xl p-8 w-full max-w-lg">
-                        <div className="flex justify-between items-center mb-6">
-                            <h3 className="font-bold text-2xl">Verify your Profile</h3>
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[999] p-4">
+                    <div className="bg-white rounded-2xl p-5 sm:p-6 w-full max-w-lg shadow-2xl relative overflow-y-auto max-h-[95vh]">
+                        <div className="flex justify-between items-center mb-4">
+                            <h3 className="font-bold text-xl sm:text-2xl">Verify your Profile</h3>
                             <button
                                 onClick={() => setIsVerificationOpen(false)}
                                 className="text-gray-500 hover:text-gray-700"
@@ -398,12 +398,12 @@ const DesktopProfileSidebar = () => {
                             </button>
                         </div>
 
-                        <p className="text-gray-600 mb-6">
+                        <p className="text-gray-600 mb-4 text-sm sm:text-base">
                             Verification is important to ensure safety and establish authenticity of your Profile.
                         </p>
 
                         {/* Document Selection */}
-                        <div className="space-y-4 mb-6">
+                        <div className="space-y-2 mb-4">
                             {[
                                 { id: 'PAN Card', label: 'PAN Card' },
                                 { id: 'Aadhar Card', label: 'Aadhar Card' },
@@ -413,7 +413,7 @@ const DesktopProfileSidebar = () => {
                             ].map((doc) => (
                                 <div
                                     key={doc.id}
-                                    className="flex items-center gap-3 cursor-pointer p-2 hover:bg-gray-50 rounded-lg transition-colors"
+                                    className="flex items-center gap-3 cursor-pointer p-1.5 hover:bg-gray-50 rounded-lg transition-colors border border-transparent hover:border-gray-100"
                                     onClick={() => setSelectedDoc(doc.id)}
                                 >
                                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${selectedDoc === doc.id ? 'border-blue-500 bg-blue-500' : 'border-gray-300'}`}>
@@ -427,7 +427,7 @@ const DesktopProfileSidebar = () => {
                         </div>
 
                         {selectedDoc && (
-                            <div className="mb-6">
+                            <div className="mb-4">
                                 <label className="block text-sm font-medium text-gray-700 mb-2 cursor-pointer">
                                     Your {selectedDoc} number
                                 </label>
@@ -436,14 +436,14 @@ const DesktopProfileSidebar = () => {
                                     value={panNumber}
                                     onChange={(e) => setPanNumber(e.target.value)}
                                     placeholder={`Enter ${selectedDoc} number`}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none text-sm"
                                 />
                             </div>
                         )}
 
                         {/* File Upload for ID Proof */}
-                        <div className="mb-6">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 mb-1.5">
                                 Upload Document (Image or PDF)
                             </label>
                             <input
@@ -453,9 +453,9 @@ const DesktopProfileSidebar = () => {
                                 accept="image/*,application/pdf"
                                 className="hidden"
                             />
-                            <div
+                             <div
                                 onClick={() => idProofInputRef.current.click()}
-                                className={`border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-colors ${idProofFile ? 'border-green-300 bg-green-50' : 'border-gray-300 hover:border-blue-400'}`}
+                                className={`border-2 border-dashed rounded-xl p-2.5 text-center cursor-pointer transition-colors ${idProofFile ? 'border-green-300 bg-green-50' : 'border-gray-300 hover:border-blue-400'}`}
                             >
                                 {idProofFile ? (
                                     <div className="text-green-600 font-medium truncate">
@@ -470,17 +470,17 @@ const DesktopProfileSidebar = () => {
                             </div>
                         </div>
 
-                        <div className="border-t border-gray-200 my-6"></div>
+                        <div className="border-t border-gray-100 my-4"></div>
 
                         <button
                             onClick={handleVerify}
                             disabled={profileLoading}
-                            className="w-full bg-gradient-to-r  cursor-pointer from-blue-500 to-blue-600 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-600 hover:to-blue-700 transition-all shadow-md disabled:opacity-50"
+                            className="w-full bg-gradient-to-r cursor-pointer from-blue-500 to-blue-600 text-white py-3 rounded-xl font-bold text-base hover:from-blue-600 hover:to-blue-700 transition-all shadow-md disabled:opacity-50"
                         >
                             {profileLoading ? 'Submitting...' : 'Verify'}
                         </button>
 
-                        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                        <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
                             <div className="flex items-center gap-2">
                                 <Shield className="w-5 h-5 text-blue-500" />
                                 <p className="text-sm text-blue-700">

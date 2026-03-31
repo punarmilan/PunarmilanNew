@@ -58,7 +58,7 @@ function ProfileId() {
                 Keyword: 'More',
                 'Country Living In': 'United Kingdom',
                 'Mother Tongue': 'English, Hindi, Marathi',
-                'Posted By': 'Self',
+                'Profile Managed By': 'Self',
                 'Do Not Show': 'Profiles that have Filtered me out, Profiles that I have Ignored',
                 'Account Type': 'Open to All'
             }

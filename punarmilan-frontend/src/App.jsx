@@ -49,6 +49,7 @@ import Accepted from "./pages/inbox/accepted/Accepted";
 import Deleted from "./pages/inbox/deleted/Deleted";
 import Requests from "./pages/inbox/requests/Requests";
 import Sent from "./pages/inbox/sent/Sent";
+import Contacts from "./pages/inbox/contacts/Contacts";
 import Payment from "./pages/payment/Payment";
 import ContactFilters from "./pages/myshadi/setting/ContactFilters";
 import MyOrdersPage from "./pages/MyOrder/MyOrder";
@@ -77,6 +78,8 @@ import AdminLogViewer from "./admin/pages/AdminLogViewer";
 import SubscriptionManagement from "./admin/pages/SubscriptionManagement";
 import SupportTickets from "./admin/pages/SupportTickets";
 import EventManagement from "./pages/admin/EventManagement";
+import Contact from "./pages/Contact";
+import ContactMessages from "./admin/pages/ContactMessages";
 
 
 function App() {
@@ -88,6 +91,7 @@ function App() {
   const notificationsUnreadCount = useSelector((state) => state.notifications.unreadCount);
   const isHomePage = location.pathname === "/" || location.pathname === "/home" || location.pathname === '/payment';
   const isAdminPage = location.pathname.startsWith("/admin");
+  const isContactPage = location.pathname === "/contact";
 
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const user = useSelector((state) => state.user.user);
@@ -153,7 +157,7 @@ function App() {
     <div className="min-h-screen pb-safe-bottom">
       {/* Online Members Chat Button */}
       {/* ✅ DO NOT SHOW ON HOME PAGE */}
-      {!isHomePage && !isAdminPage && (
+      {!isHomePage && !isAdminPage && !isContactPage && (
         <>
           {/* Online Members Chat Button */}
           <button
@@ -187,6 +191,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/contact" element={<Contact />} />
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -199,6 +204,7 @@ function App() {
           <Route path="logs" element={<AdminLogViewer />} />
           <Route path="subscriptions" element={<SubscriptionManagement />} />
           <Route path="support" element={<SupportTickets />} />
+          <Route path="contacts" element={<ContactMessages />} />
           <Route path="events" element={<EventManagement />} />
         </Route>
 
@@ -567,6 +573,17 @@ function App() {
               <Header />
               <InboxNav />
               <Sent />
+            </>
+          }
+        />
+
+        <Route
+          path="/inbox/contacts"
+          element={
+            <>
+              <Header />
+              <InboxNav />
+              <Contacts />
             </>
           }
         />

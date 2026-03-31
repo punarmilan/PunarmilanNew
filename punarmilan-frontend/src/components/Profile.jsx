@@ -139,7 +139,7 @@ const Profile = ({ onLogout }) => {
 
                 {/* Text shown on md+ screens */}
                 <div className="text-left hidden md:block">
-                    <p className="text-[10px] sm:text-xs font-medium text-white leading-tight truncate max-w-[80px]">{displayUser?.profileId || 'User'}</p>
+                    <p className="text-[10px] sm:text-xs font-medium text-white leading-tight truncate max-w-[80px]">{displayUser?.fullName || displayUser?.profileId || 'User'}</p>
                     <p className="text-[9px] sm:text-[10px] text-white/80 font-bold uppercase tracking-tighter">{isPremium ? 'Premium member' : 'Free Account'}</p>
                 </div>
 

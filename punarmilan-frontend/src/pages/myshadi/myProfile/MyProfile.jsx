@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 // import img from '../../../assets/image/profile.png' // Removed static image
 import 'react-toastify/dist/ReactToastify.css';
-import { FaEdit, FaChartBar, FaFilter, FaHeart, FaCamera, FaEye, FaPhone, FaStar, FaShareAlt, FaDownload, FaUserEdit, FaUserFriends, FaHome, FaGraduationCap, FaBriefcase, FaMapMarkerAlt, FaBirthdayCake, FaClock, FaCity, FaVenusMars, FaUsers, FaWallet, FaCheck, FaTimes, FaInfoCircle, FaUserCircle } from 'react-icons/fa';
+import { FaEdit, FaChartBar, FaFilter, FaHeart, FaCamera, FaEye, FaPhone, FaStar, FaShareAlt, FaDownload, FaUserEdit, FaUserFriends, FaHome, FaGraduationCap, FaBriefcase, FaMapMarkerAlt, FaBirthdayCake, FaClock, FaCity, FaVenusMars, FaUsers, FaWallet, FaCheck, FaTimes, FaInfoCircle, FaUserCircle, FaLanguage } from 'react-icons/fa';
 import { MdVerified } from 'react-icons/md';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
@@ -263,6 +263,7 @@ const MyProfile = () => {
         profession: profile.occupation || '',
         company: profile.company || '',
         income: profile.annualIncome ? profile.annualIncome.toString() : 'Don\'t want to specify',
+        aboutText: profile.aboutMe || '',
         workingCity: profile.workingCity || '',
         workingWith: profile.workingWith || '',
         grewUpIn: profile.grewUpIn || '',
@@ -412,13 +413,6 @@ const MyProfile = () => {
   // Profile management options with navigation paths
   const profileOptions = [
     {
-      id: 'edit-personal-profile',
-      label: 'Edit Personal Profile',
-      icon: <FaUserEdit />,
-      color: 'text-blue-600',
-      onClick: () => handleOpenEditModal('person')
-    },
-    {
       id: 'view-profile-stats',
       label: 'View Profile Stats',
       icon: <FaChartBar />,
@@ -431,20 +425,6 @@ const MyProfile = () => {
       icon: <FaFilter />,
       color: 'text-purple-600',
       onClick: () => navigate('/my-shadi/my-contact/contact-filters')
-    },
-    {
-      id: 'edit-partner-profile',
-      label: 'Edit Partner Profile',
-      icon: <FaUserFriends />,
-      color: 'text-red-600',
-      onClick: () => navigate('/my-shadi/partner-preferences')
-    },
-    {
-      id: 'add-photos',
-      label: 'Add Photos',
-      icon: <FaCamera />,
-      color: 'text-yellow-600',
-      onClick: () => navigate('/my-shadi/my-photos')
     },
     {
       id: 'hide-delete-profile',
@@ -669,7 +649,8 @@ const MyProfile = () => {
         smokingHabit: profileData.lifestyle.smoking,
         bloodGroup: profileData.lifestyle.bloodGroup,
         healthInformation: profileData.lifestyle.healthInfo,
-        disability: profileData.lifestyle.disability
+        disability: profileData.lifestyle.disability,
+        aboutMe: profileData.aboutText
       };
     } else if (section === 'hobbies') {
       fields = {
@@ -937,21 +918,21 @@ const MyProfile = () => {
 
     // Auto-calculate age from dateOfBirth
     if (field === 'dateOfBirth' && valStr && /^\d{4}-\d{2}-\d{2}$/.test(valStr)) {
-        const [y, m, d] = valStr.split('-').map(n => parseInt(n));
-        const birthDate = new Date(y, m - 1, d);
-        const today = new Date();
-        let calculatedAge = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) calculatedAge--;
-        
-        if (calculatedAge >= 0) {
-            setModalData(prev => ({
-                ...prev,
-                [field]: value,
-                age: calculatedAge.toString()
-            }));
-            return;
-        }
+      const [y, m, d] = valStr.split('-').map(n => parseInt(n));
+      const birthDate = new Date(y, m - 1, d);
+      const today = new Date();
+      let calculatedAge = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) calculatedAge--;
+
+      if (calculatedAge >= 0) {
+        setModalData(prev => ({
+          ...prev,
+          [field]: value,
+          age: calculatedAge.toString()
+        }));
+        return;
+      }
     }
 
     if (field === 'religion' || field === 'rashi' || field === 'nakshatra' || field === 'caste' || field === 'community' || field === 'subCaste' || field === 'gotra' || field === 'motherTongue') {
@@ -1068,42 +1049,9 @@ Generated on: ${new Date().toLocaleString()}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center overflow-hidden">
             <span className="hidden sm:inline text-sm font-medium text-gray-600 mr-2">{label}</span>
             <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
-              {isEditing ? (
-                <div className="flex items-center gap-2 w-full">
-                  <input
-                    type="text"
-                    value={editValue}
-                    onChange={(e) => setEditValue(e.target.value)}
-                    className="flex-1 px-2 py-1 border border-rose-300 rounded text-sm focus:ring-1 focus:ring-rose-500 outline-none"
-                    autoFocus
-                  />
-                  <button
-                    onClick={saveEdit}
-                    className="text-green-600 hover:text-green-700 p-1"
-                  >
-                    <FaCheck size={14} />
-                  </button>
-                  <button
-                    onClick={cancelEdit}
-                    className="text-red-600 hover:text-red-700 p-1"
-                  >
-                    <FaTimes size={14} />
-                  </button>
-                </div>
-              ) : (
-                <>
-                  <span className="text-gray-800 font-semibold text-sm sm:text-base truncate max-w-[200px] sm:max-w-none">
-                    <span className="hidden sm:inline">: </span>{value}
-                  </span>
-                  <button
-                    onClick={() => startEditing(section, field, value)}
-                    className="ml-auto sm:ml-2 text-gray-400 hover:text-rose-600 transition-colors p-1"
-                    title="Edit"
-                  >
-                    <FaEdit size={14} />
-                  </button>
-                </>
-              )}
+              <span className="text-gray-800 font-semibold text-sm sm:text-base truncate max-w-[200px] sm:max-w-none">
+                <span className="hidden sm:inline">: </span>{value}
+              </span>
             </div>
           </div>
         </div>
@@ -1136,13 +1084,13 @@ Generated on: ${new Date().toLocaleString()}
               {[
                 { field: 'gender', label: 'Gender', value: profileData.religiousBackground.gender, icon: <FaVenusMars /> },
                 { field: 'religion', label: 'Religion', value: profileData.religiousBackground.religion, icon: <FaStar /> },
-                { field: 'manglikStatus', label: 'Manglik/Chevvai dosham', value: profileData.religiousBackground.manglikChevvai, icon: <FaVenusMars /> },
+                { field: 'manglikStatus', label: 'Manglik/Chevvai Dosham', value: profileData.religiousBackground.manglikChevvai, icon: <FaVenusMars /> },
                 { field: 'caste', label: 'Community', value: profileData.religiousBackground.community, icon: <FaUsers /> },
-                { field: 'subCaste', label: 'Sub community', value: profileData.religiousBackground.subCommunity, icon: <FaUsers /> },
+                { field: 'subCaste', label: 'Sub Community', value: profileData.religiousBackground.subCommunity, icon: <FaUsers /> },
                 { field: 'gotra', label: 'Gothra / Gothram', value: profileData.religiousBackground.gothra, icon: <FaStar /> },
-                { field: 'motherTongue', label: 'Mother Tongue', value: profileData.religiousBackground.motherTongue, icon: <FaEdit /> },
-                { field: 'timeOfBirth', label: 'Time of Birth', value: profileData.religiousBackground.timeOfBirth, icon: <FaClock /> },
-                { field: 'placeOfBirth', label: 'City of Birth', value: profileData.religiousBackground.cityOfBirth, icon: <FaCity /> },
+                { field: 'motherTongue', label: 'Mother Tongue', value: profileData.religiousBackground.motherTongue, icon: <FaLanguage /> },
+                { field: 'timeOfBirth', label: 'Time Of Birth', value: profileData.religiousBackground.timeOfBirth, icon: <FaClock /> },
+                { field: 'placeOfBirth', label: 'City Of Birth', value: profileData.religiousBackground.cityOfBirth, icon: <FaCity /> },
                 { field: 'nakshatra', label: 'Nakshatra', value: profileData.religiousBackground.nakshatra, icon: <FaStar /> },
                 { field: 'rashi', label: 'Rashi', value: profileData.religiousBackground.rashi, icon: <FaStar /> },
                 { field: 'astroVisibility', label: 'Astro Visibility', value: profileData.religiousBackground.astroVisibility, icon: <FaEye /> }
@@ -1180,12 +1128,12 @@ Generated on: ${new Date().toLocaleString()}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               {[
-                { field: 'motherStatus', label: 'Mother\'s Details', value: profileData.familyDetails.mother, icon: <FaUsers /> },
-                { field: 'fatherStatus', label: 'Father\'s Details', value: profileData.familyDetails.father, icon: <FaUsers /> },
+                { field: 'motherStatus', label: 'Mother\'s Status', value: profileData.familyDetails.mother,icon: <FaUsers /> },
+                { field: 'fatherStatus', label: 'Father\'s Status', value: profileData.familyDetails.father, icon: <FaUsers /> },
                 { field: 'familyLocation', label: 'Family Location', value: profileData.familyDetails.familyLocation, icon: <FaHome /> },
                 { field: 'familyFinancialStatus', label: 'Family Financial Status', value: profileData.familyDetails.financialStatus, icon: <FaWallet /> },
-                { field: 'sistersCount', label: 'No. of Sisters', value: profileData.familyDetails.sisters, icon: <FaUsers /> },
-                { field: 'brothersCount', label: 'No. of Brothers', value: profileData.familyDetails.brothers, icon: <FaUsers /> }
+                { field: 'sistersCount', label: 'No. Of Sisters', value: profileData.familyDetails.sisters, icon: <FaUsers /> },
+                { field: 'brothersCount', label: 'No. Of Brothers', value: profileData.familyDetails.brothers, icon: <FaUsers /> }
               ].map((item, index) => (
                 <div key={index}>
                   {renderEditableField('familyDetails', item.field, item.label, item.value, item.icon)}
@@ -1249,7 +1197,7 @@ Generated on: ${new Date().toLocaleString()}
                 { field: 'state', label: 'State Of Residence', value: profileData.locationInfo.state, icon: <FaMapMarkerAlt /> },
                 { field: 'country', label: 'Country', value: profileData.locationInfo.country, icon: <FaMapMarkerAlt /> },
                 { field: 'residencyStatus', label: 'Residency Status', value: profileData.locationInfo.residencyStatus, icon: <FaMapMarkerAlt /> },
-                { field: 'zipCode', label: 'Zip / Pin code', value: profileData.locationInfo.zipCode, icon: <FaMapMarkerAlt /> }
+                { field: 'zipCode', label: 'Zip / Pin Code', value: profileData.locationInfo.zipCode, icon: <FaMapMarkerAlt /> }
               ].map((item, index) => (
                 <div key={index}>
                   {renderEditableField('locationInfo', item.field, item.label, item.value, item.icon)}
@@ -1262,18 +1210,23 @@ Generated on: ${new Date().toLocaleString()}
       case 'lifestyle':
         return (
           <div className="space-y-6">
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-semibold text-gray-800">Lifestyle & Personality</h3>
+              <button
+                onClick={() => handleOpenEditModal('lifestyle')}
+                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
+              >
+                <FaEdit /> Edit All
+                {hasPendingInSection('lifestyle') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
+              </button>
+            </div>
+
             {/* Personality & About Section */}
             <div className="space-y-1">
               <div className="flex justify-between items-center border-b border-gray-100 pb-1 mb-1">
                 <h3 className="text-base sm:text-lg font-bold text-rose-500">
                   Personality.
                 </h3>
-                <button
-                  onClick={() => handleOpenEditModal('about')}
-                  className="flex items-center gap-1 text-xs font-medium text-blue-500 hover:text-blue-700 transition-colors"
-                >
-                  <FaEdit className="text-xs" /> Edit
-                </button>
               </div>
               <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                 {profileData.aboutText || 'Let me introduce myself...'}
@@ -1284,23 +1237,16 @@ Generated on: ${new Date().toLocaleString()}
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <h3 className="text-base sm:text-lg font-semibold text-gray-800">Basics & Lifestyle</h3>
-                <button
-                  onClick={() => handleOpenEditModal('lifestyle')}
-                  className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
-                >
-                  <FaEdit /> Edit
-                  {hasPendingInSection('lifestyle') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
-                </button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 {[
                   { label: 'Age', value: profileData.age },
-                  { label: 'Date of Birth', value: profileData.religiousBackground.dob },
+                  { label: 'Date Of Birth', value: profileData.religiousBackground.dob },
                   { label: 'Marital Status', value: profileData.maritalStatus },
                   { label: 'Height', value: profileData.height },
                   { label: 'Weight', value: profileData.weight },
-                  { label: 'Grew up in', value: profileData.lifestyle.grewUpIn },
+                  { label: 'Grew Up In', value: profileData.lifestyle.grewUpIn },
                   { label: 'Diet', value: profileData.lifestyle.diet },
                   { label: 'Drinking Habit', value: profileData.lifestyle.smoking }, // Note: smoking/drinking habits
                   { label: 'Smoking Habit', value: profileData.lifestyle.drinking }, // labels might be swapped in previous state mapping, checking...
@@ -1322,10 +1268,9 @@ Generated on: ${new Date().toLocaleString()}
                 <h3 className="text-base sm:text-lg font-semibold text-rose-600">Hobbies and Interests</h3>
                 <button
                   onClick={() => handleOpenEditModal('hobbies')}
-                  className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
+                  className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium"
                 >
-                  <FaEdit /> Edit
-                  {hasPendingInSection('hobbies') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
+                  <FaEdit /> Edit All
                 </button>
               </div>
 
@@ -1365,9 +1310,9 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Privacy & Settings</h3>
               <button
                 onClick={() => handleOpenEditModal('privacy')}
-                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium"
+                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
               >
-                <FaEdit /> Edit Settings
+                <FaEdit /> Edit All
               </button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1399,9 +1344,9 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Verification Details</h3>
               <button
                 onClick={() => handleOpenEditModal('verification')}
-                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium"
+                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
               >
-                <FaEdit /> Update Proof
+                <FaEdit /> Edit All
               </button>
             </div>
             <div className="bg-rose-50 p-4 rounded-xl border border-rose-100 mb-4">
@@ -1449,11 +1394,14 @@ Generated on: ${new Date().toLocaleString()}
       case 'preferences':
         return (
           <>
+            {/* Partner Preferences Section Header */}
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-800">Partner Preferences</h3>
+              <h3 className="text-lg font-semibold text-gray-800">Partner Preference Criteria</h3>
               <button
                 onClick={() => handleOpenEditModal('preferences')}
+                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
               >
+                <FaEdit /> Edit All
               </button>
             </div>
 
@@ -1482,12 +1430,6 @@ Generated on: ${new Date().toLocaleString()}
                     </span>
                     Basic Information
                   </h3>
-                  <button
-                    onClick={() => handleOpenEditModal('preferences')}
-                    className="text-sm bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-all duration-200"
-                  >
-                    <FaEdit className="text-sm" /> Edit All
-                  </button>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1510,12 +1452,6 @@ Generated on: ${new Date().toLocaleString()}
                             </p>
                           </div>
                         </div>
-                        <button
-                          onClick={() => handleOpenEditModal('preferences')}
-                          className="opacity-0 group-hover:opacity-100 bg-rose-50 p-2 rounded-lg transition-all duration-200"
-                        >
-                          <FaEdit className="text-rose-500 text-sm" />
-                        </button>
                       </div>
                     </div>
                   ))}
@@ -1545,12 +1481,6 @@ Generated on: ${new Date().toLocaleString()}
                         </div>
                       </div>
                     </div>
-                    <button
-                      onClick={() => handleOpenEditModal('preferences')}
-                      className="opacity-0 group-hover:opacity-100 bg-purple-50 p-2 rounded-lg transition-all duration-200"
-                    >
-                      <FaEdit className="text-purple-500 text-sm" />
-                    </button>
                   </div>
                 </div>
               </div>
@@ -1588,12 +1518,6 @@ Generated on: ${new Date().toLocaleString()}
                             </p>
                           </div>
                         </div>
-                        <button
-                          onClick={() => handleOpenEditModal('preferences')}
-                          className="opacity-0 group-hover:opacity-100 bg-emerald-50 p-2 rounded-lg transition-all duration-200"
-                        >
-                          <FaEdit className="text-emerald-500 text-sm" />
-                        </button>
                       </div>
                     </div>
                   ))}
@@ -1635,12 +1559,6 @@ Generated on: ${new Date().toLocaleString()}
                             </p>
                           </div>
                         </div>
-                        <button
-                          onClick={() => handleOpenEditModal('preferences')}
-                          className="opacity-0 group-hover:opacity-100 bg-purple-50 p-2 rounded-lg transition-all duration-200"
-                        >
-                          <FaEdit className="text-purple-500 text-sm" />
-                        </button>
                       </div>
                     </div>
                   ))}
@@ -1677,12 +1595,6 @@ Generated on: ${new Date().toLocaleString()}
                             </p>
                           </div>
                         </div>
-                        <button
-                          onClick={() => handleOpenEditModal('preferences')}
-                          className="opacity-0 group-hover:opacity-100 bg-pink-50 p-2 rounded-lg transition-all duration-200"
-                        >
-                          <FaEdit className="text-pink-500 text-sm" />
-                        </button>
                       </div>
                     </div>
                   ))}
@@ -1775,19 +1687,14 @@ Generated on: ${new Date().toLocaleString()}
                       <FaUserCircle className="w-full h-full text-rose-200" />
                     )}
                   </div>
-                  <button
-                    onClick={() => profileOptions[4].onClick()}
-                    className="absolute bottom-1 right-1 sm:bottom-2 sm:right-2 bg-rose-500 text-white p-2 rounded-full shadow-lg hover:bg-rose-600 transition-colors text-xs sm:text-sm border-2 border-white"
-                  >
-                    <FaCamera size={14} />
-                  </button>
+
                 </div>
 
                 {/* Basic Info */}
                 <div className="text-white text-center sm:text-left flex-1">
                   <div className="flex flex-wrap justify-center sm:justify-start items-center gap-2 mb-2">
                     <span className="bg-white/20 backdrop-blur-sm text-white px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider">
-                      {profileData.id}
+                      {profileData.profileId}
                     </span>
                     <div className="flex items-center gap-1">
                       <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
@@ -1825,13 +1732,6 @@ Generated on: ${new Date().toLocaleString()}
                         </div>
                       )}
                     </h1>
-                    <button
-                      onClick={() => handleOpenEditModal('personal')}
-                      className="text-white/80 hover:text-white transition-colors p-1"
-                      title="Edit Name"
-                    >
-                      <FaEdit size={16} />
-                    </button>
                   </div>
 
                   <h2 className="text-base sm:text-lg md:text-xl font-semibold text-white/90 mb-2">
@@ -1997,7 +1897,7 @@ Generated on: ${new Date().toLocaleString()}
             </div>
 
             <button
-              onClick={() => profileOptions[1].onClick()}
+              onClick={() => profileOptions[0].onClick()}
               className="w-full mt-6 bg-white text-rose-600 hover:bg-rose-50 py-3 rounded-xl font-bold transition-all duration-300 text-sm shadow-lg flex items-center justify-center gap-2"
             >
               <FaChartBar size={14} /> View Detailed Stats
@@ -2214,16 +2114,43 @@ Generated on: ${new Date().toLocaleString()}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {Object.entries(modalData).map(([key, value]) => {
                     const fieldLabels = {
-                      manglikStatus: 'Manglik/Chevvai dosham',
+                      manglikStatus: 'Manglik/Chevvai Dosham',
                       caste: 'Community',
-                      subCaste: 'Sub community',
+                      subCaste: 'Sub Community',
                       gotra: 'Gothra / Gothram',
-                      placeOfBirth: 'City of Birth',
+                      placeOfBirth: 'City Of Birth',
                       astroVisibility: 'Astro Visibility',
                       motherTongue: 'Mother Tongue',
-                      dateOfBirth: 'Date of Birth',
-                      timeOfBirth: 'Time of Birth',
-                      grewUpIn: 'Grew up in'
+                      dateOfBirth: 'Date Of Birth',
+                      timeOfBirth: 'Time Of Birth',
+                      grewUpIn: 'Grew Up In',
+                      fatherStatus: 'Father\'s Status',
+                      motherStatus: 'Mother\'s Status',
+                      familyFinancialStatus: 'Family Financial Status',
+                      sistersCount: 'No. Of Sisters',
+                      brothersCount: 'No. Of Brothers',
+                      familyLocation: 'Family Location',
+                      familyAnnualIncome: 'Family Annual Income',
+                      educationLevel: 'Highest Qualification',
+                      educationField: 'Education Field',
+                      college: 'College(s) Attended',
+                      workingWith: 'Working With',
+                      occupation: 'Working As',
+                      company: 'Employer Name',
+                      workingCity: 'Working City',
+                      annualIncome: 'Annual Income',
+                      address: 'Residential Address',
+                      city: 'Current City',
+                      state: 'State Of Residence',
+                      country: 'Country',
+                      residencyStatus: 'Residency Status',
+                      zipCode: 'Zip / Pin Code',
+                      maritalStatus: 'Marital Status',
+                      bloodGroup: 'Blood Group',
+                      healthInformation: 'Health Information',
+                      disability: 'Disability',
+                      drinkingHabit: 'Drinking Habit',
+                      smokingHabit: 'Smoking Habit',
                     };
                     return (
                       <div key={key} className="space-y-1">
@@ -2277,7 +2204,7 @@ Generated on: ${new Date().toLocaleString()}
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
                             className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
                           >
-                            <option value="">Select {key.replace(/([A-Z])/g, ' $1').trim()}</option>
+                            <option value="">Select {fieldLabels[key] || key.replace(/([A-Z])/g, ' $1').trim().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</option>
                             {key === 'profileCreatedBy' && ['Self', 'Parent', 'Sibling', 'Friend', 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
                             {key === 'profileManagedBy' && ['Self', 'Parent', 'Sibling', 'Friend', 'Relative'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
                             {key === 'maritalStatus' && ['Never Married', 'Divorced', 'Widowed', 'Awaiting Divorce', 'Annulled'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2323,8 +2250,8 @@ Generated on: ${new Date().toLocaleString()}
                             {key === 'gotra' && gotraOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                             {key === 'timeOfBirth' && timeOfBirthOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                             {(key === 'annualIncome' || key === 'minAnnualIncome' || key === 'familyAnnualIncome') && [
-                               "Don't want to specify", "1L - 2L", "2L - 5L", "5L - 10L", "10L - 15L", 
-                               "15L - 20L", "20L - 30L", "30L - 50L", "50L - 1Cr", "1Cr+"
+                              "Don't want to specify", "1L - 2L", "2L - 5L", "5L - 10L", "10L - 15L",
+                              "15L - 20L", "20L - 30L", "30L - 50L", "50L - 1Cr", "1Cr+"
                             ].map(opt => <option key={opt} value={opt}>{opt}</option>)}
                           </select>
                         ) : (key === 'rashi' || key === 'nakshatra' || key === 'religion' || key === 'caste' || key === 'subCaste' || key === 'gotra' || key === 'motherTongue') && !showOtherInput[key] && ![...rashiOptions, ...nakshatraOptions, ...religionOptions, ...communityOptions, ...motherTongueOptions, ...subCasteOptions, ...gotraOptions].includes(value) && value !== '' ? (
