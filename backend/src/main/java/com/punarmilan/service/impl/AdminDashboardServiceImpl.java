@@ -5,8 +5,10 @@ import com.punarmilan.repository.ProfileRepository;
 import com.punarmilan.repository.ReportRepository;
 import com.punarmilan.repository.UserRepository;
 import com.punarmilan.repository.UserSubscriptionRepository;
+import com.punarmilan.repository.AdminRepository;
 import com.punarmilan.service.AdminDashboardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,8 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
     private final ProfileRepository profileRepository;
     private final ReportRepository reportRepository;
     private final UserSubscriptionRepository subscriptionRepository;
+    private final AdminRepository adminRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional(readOnly = true)
@@ -54,5 +58,27 @@ public class AdminDashboardServiceImpl implements AdminDashboardService {
                 .genderDistribution(genderDist)
                 .userGrowth(growth)
                 .build();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<com.punarmilan.entity.Admin> getAllStaff() {
+        return adminRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public com.punarmilan.entity.Admin createStaff(com.punarmilan.entity.Admin staff) {
+        if (adminRepository.existsByEmail(staff.getEmail())) {
+            throw new RuntimeException("Admin with this email already exists");
+        }
+        staff.setPassword(passwordEncoder.encode(staff.getPassword()));
+        return adminRepository.save(staff);
+    }
+
+    @Override
+    @Transactional
+    public void deleteStaff(Long id) {
+        adminRepository.deleteById(id);
     }
 }

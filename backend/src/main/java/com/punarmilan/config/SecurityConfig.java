@@ -52,9 +52,9 @@ public class SecurityConfig {
                 .exceptionHandling(ex -> ex.accessDeniedHandler(accessDeniedHandler))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/api/auth/**", "/api/admin/auth/**", "/ws/**", "/api/events/upcoming", "/api/subscriptions/plans", "/api/activity/ping", "/api/actuator/**")
+                        .requestMatchers("/api/auth/**", "/api/admin/auth/**", "/ws/**", "/api/events/upcoming", "/api/subscriptions/plans", "/api/activity/ping", "/api/actuator/**", "/api/contact/**")
                         .permitAll()
-                        .requestMatchers("/api/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_SUPER_ADMIN", "ROLE_MODERATOR", "ADMIN", "SUPER_ADMIN", "MODERATOR")
+                        .requestMatchers("/api/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_SUPER_ADMIN", "ROLE_MODERATOR", "ROLE_SUB_ADMIN", "ROLE_KYC_VERIFIER", "ROLE_EVENT_MANAGER", "ADMIN", "SUPER_ADMIN", "MODERATOR", "SUB_ADMIN", "KYC_VERIFIER", "EVENT_MANAGER")
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

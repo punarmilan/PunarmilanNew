@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Edit, Camera, CheckCircle, X, User as UserIcon, Phone, Clock } from 'lucide-react';
 import toast from 'react-hot-toast';
+import heic2any from 'heic2any';
 import Notifications from './Notification';
 import { useSelector, useDispatch } from 'react-redux';
 import { uploadProfilePhoto, uploadIdProof } from '../Slice/ProfileSlice';
@@ -45,8 +46,36 @@ const DesktopProfileSidebar = () => {
     };
 
     const handleFileChange = async (e) => {
-        const file = e.target.files[0];
+        let file = e.target.files[0];
         if (!file) return;
+
+        // Handle HEIC/HEIF conversion
+        const isHeic = file.name.toLowerCase().endsWith('.heic') || 
+                       file.name.toLowerCase().endsWith('.heif') || 
+                       file.type === 'image/heic' || 
+                       file.type === 'image/heif';
+
+        if (isHeic) {
+            const loadingToast = toast.loading(`Converting HEIC image...`);
+            try {
+                const blob = await heic2any({
+                    blob: file,
+                    toType: 'image/jpeg',
+                    quality: 0.8
+                });
+                
+                const newFileName = file.name.replace(/\.[^/.]+$/, ".jpg");
+                file = new File([Array.isArray(blob) ? blob[0] : blob], newFileName, {
+                    type: 'image/jpeg',
+                    lastModified: new Date().getTime()
+                });
+                toast.success('Conversion successful!', { id: loadingToast });
+            } catch (err) {
+                console.error("HEIC conversion error:", err);
+                toast.error('Failed to convert HEIC image. Please use JPG/PNG.', { id: loadingToast });
+                return;
+            }
+        }
 
         // 1. Show immediate preview
         const reader = new FileReader();
@@ -67,11 +96,39 @@ const DesktopProfileSidebar = () => {
         setShowFileUpload(false);
     };
 
-    const handleIdProofFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setIdProofFile(file);
+    const handleIdProofFileChange = async (e) => {
+        let file = e.target.files[0];
+        if (!file) return;
+
+        // Handle HEIC/HEIF conversion (ID Proofs can be images)
+        const isHeic = file.name.toLowerCase().endsWith('.heic') || 
+                       file.name.toLowerCase().endsWith('.heif') || 
+                       file.type === 'image/heic' || 
+                       file.type === 'image/heif';
+
+        if (isHeic) {
+            const loadingToast = toast.loading(`Converting HEIC document...`);
+            try {
+                const blob = await heic2any({
+                    blob: file,
+                    toType: 'image/jpeg',
+                    quality: 0.8
+                });
+                
+                const newFileName = file.name.replace(/\.[^/.]+$/, ".jpg");
+                file = new File([Array.isArray(blob) ? blob[0] : blob], newFileName, {
+                    type: 'image/jpeg',
+                    lastModified: new Date().getTime()
+                });
+                toast.success('Document converted!', { id: loadingToast });
+            } catch (err) {
+                console.error("HEIC conversion error:", err);
+                toast.error('Failed to convert HEIC document.', { id: loadingToast });
+                return;
+            }
         }
+
+        setIdProofFile(file);
     };
 
     const removeFile = (index) => {
@@ -351,7 +408,7 @@ const DesktopProfileSidebar = () => {
                                 type="file"
                                 ref={fileInputRef}
                                 onChange={handleFileChange}
-                                accept="image/*"
+                                accept="image/*,.heic,.heif"
                                 className="hidden"
                             />
                             <button
@@ -450,7 +507,7 @@ const DesktopProfileSidebar = () => {
                                 type="file"
                                 ref={idProofInputRef}
                                 onChange={handleIdProofFileChange}
-                                accept="image/*,application/pdf"
+                                accept="image/*,application/pdf,.heic,.heif"
                                 className="hidden"
                             />
                              <div

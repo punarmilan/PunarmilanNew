@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchMyProfile, updateProfile, uploadProfilePhoto, deleteProfilePhoto } from '../../../Slice/ProfileSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import heic2any from 'heic2any';
 
 // Import fallback images in case no photo is present (optional, or just use placeholders)
 import img from '../../../assets/image/profile.png'
@@ -86,7 +87,47 @@ export default function MyShadiPhotoSection() {
     }
 
     for (let i = 0; i < files.length; i++) {
-      const file = files[i];
+      let file = files[i];
+
+      // Handle HEIC/HEIF conversion
+      const isHeic = file.name.toLowerCase().endsWith('.heic') || 
+                     file.name.toLowerCase().endsWith('.heif') || 
+                     file.type === 'image/heic' || 
+                     file.type === 'image/heif';
+
+      if (isHeic) {
+        const convertingToast = toast.loading(`Converting HEIC image: ${file.name}...`);
+        try {
+          const blob = await heic2any({
+            blob: file,
+            toType: 'image/jpeg',
+            quality: 0.8
+          });
+          
+          const newFileName = file.name.replace(/\.[^/.]+$/, ".jpg");
+          file = new File([Array.isArray(blob) ? blob[0] : blob], newFileName, {
+            type: 'image/jpeg',
+            lastModified: new Date().getTime()
+          });
+          
+          toast.update(convertingToast, { 
+            render: 'Conversion successful!', 
+            type: 'success', 
+            isLoading: false, 
+            autoClose: 2000 
+          });
+        } catch (err) {
+          console.error("HEIC conversion error:", err);
+          toast.update(convertingToast, { 
+            render: `Failed to convert HEIC: ${file.name}. Please upload a JPG/PNG instead.`, 
+            type: 'error', 
+            isLoading: false, 
+            autoClose: 4000 
+          });
+          continue;
+        }
+      }
+
       if (file.size > 15 * 1024 * 1024) {
         toast.error(`File ${file.name} is too large (>15MB)`);
         continue;
@@ -297,7 +338,7 @@ export default function MyShadiPhotoSection() {
           <input
             ref={fileInputRef}
             type="file"
-            accept=".jpg,.jpeg,.png,.webp"
+            accept=".jpg,.jpeg,.png,.webp,.heic,.heif"
             multiple
             onChange={handleFileUpload}
             className="hidden"

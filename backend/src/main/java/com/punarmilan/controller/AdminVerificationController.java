@@ -14,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/admin/verifications")
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN', 'MODERATOR')")
+@PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN', 'MODERATOR', 'SUB_ADMIN', 'KYC_VERIFIER')")
 public class AdminVerificationController {
 
     private final AdminVerificationService adminVerificationService;

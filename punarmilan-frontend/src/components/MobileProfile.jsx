@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Camera, CheckCircle, X, Upload, User as UserIcon, Phone } from 'lucide-react';
+import heic2any from 'heic2any';
 import { useSelector, useDispatch } from 'react-redux';
 import { uploadProfilePhoto } from '../Slice/ProfileSlice';
 import { fetchDashboardSummary } from '../Slice/DashboardSlice';
@@ -26,8 +27,36 @@ const MobileProfile = () => {
     };
 
     const handleFileChange = async (e) => {
-        const file = e.target.files[0];
+        let file = e.target.files[0];
         if (!file) return;
+
+        // Handle HEIC/HEIF conversion
+        const isHeic = file.name.toLowerCase().endsWith('.heic') || 
+                       file.name.toLowerCase().endsWith('.heif') || 
+                       file.type === 'image/heic' || 
+                       file.type === 'image/heif';
+
+        if (isHeic) {
+            const loadingToast = toast.loading(`Converting HEIC image...`);
+            try {
+                const blob = await heic2any({
+                    blob: file,
+                    toType: 'image/jpeg',
+                    quality: 0.8
+                });
+                
+                const newFileName = file.name.replace(/\.[^/.]+$/, ".jpg");
+                file = new File([Array.isArray(blob) ? blob[0] : blob], newFileName, {
+                    type: 'image/jpeg',
+                    lastModified: new Date().getTime()
+                });
+                toast.success('Conversion successful!', { id: loadingToast });
+            } catch (err) {
+                console.error("HEIC conversion error:", err);
+                toast.error('Failed to convert HEIC image. Please use JPG/PNG.', { id: loadingToast });
+                return;
+            }
+        }
 
         // 1. Show immediate preview
         const reader = new FileReader();
@@ -203,7 +232,7 @@ const MobileProfile = () => {
                                 type="file"
                                 ref={fileInputRef}
                                 onChange={handleFileChange}
-                                accept="image/*"
+                                accept="image/*,.heic,.heif"
                                 className="hidden"
                             />
                             <button

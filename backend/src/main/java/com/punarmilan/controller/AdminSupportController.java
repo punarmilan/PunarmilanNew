@@ -14,7 +14,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/admin/support")
 @RequiredArgsConstructor
-@PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN', 'MODERATOR')")
+@PreAuthorize("hasAnyRole('ADMIN', 'SUPER_ADMIN', 'MODERATOR', 'SUB_ADMIN')")
 public class AdminSupportController {
 
     private final SupportService supportService;
