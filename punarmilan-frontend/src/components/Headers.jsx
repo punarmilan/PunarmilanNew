@@ -96,6 +96,12 @@ const Header = () => {
             badge: "85% OFF",
             label: "Premium",
             path: "/payment"
+        },
+        {
+            id: "TruthLife",
+            icon: "fa-solid fa-sparkles",
+            label: "Truth Life",
+            path: "/truth-life"
         }
     ];
 
@@ -153,6 +159,14 @@ const Header = () => {
             onClick: () => {
                 navigate("/inbox/pending/intrest");
                 setActiveDesktopMenu("Inbox");
+            }
+        },
+        {
+            label: "Truth Life",
+            path: "/truth-life",
+            onClick: () => {
+                navigate("/truth-life");
+                setActiveDesktopMenu("Truth Life");
             }
         }
     ];

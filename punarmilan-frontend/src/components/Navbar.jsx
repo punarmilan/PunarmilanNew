@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ChevronDown, MessageSquare, Bell, Search, User, HelpCircle, ShieldCheck, CreditCard, Phone, Mail } from 'lucide-react';
+import { ChevronDown, MessageSquare, Bell, Search, User, HelpCircle, ShieldCheck, CreditCard, Phone, Mail, Heart } from 'lucide-react';
 import { fetchSubscriptionDetails } from '../Slice/UserSlice';
 
 const Navbar = () => {
@@ -46,6 +46,7 @@ const Navbar = () => {
                         <NavItem icon={<Bell className="w-4 h-4" />} label="Matches" />
                         <NavItem icon={<Search className="w-4 h-4" />} label="Search" />
                         <NavItem icon={<MessageSquare className="w-4 h-4" />} label="Inbox" />
+                        <NavItem icon={<Heart className="w-4 h-4" />} label="Truth Life" />
                     </div>
 
                     {/* Right Actions */}

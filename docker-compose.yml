@@ -151,6 +151,35 @@ services:
     depends_on:
       - backend
 
+  truth-life:
+    image: worknai009/punarmilan-truth-life:latest
+    container_name: truth-life-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+  login-server:
+    image: worknai009/punarmilan-login-server:latest
+    container_name: punarmilan-login-server
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/punarmilan_db
+      SPRING_DATASOURCE_USERNAME: root
+      DB_PASSWORD: ${DB_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
   nginx-gateway:
     image: nginx:alpine
     container_name: punarmilan-gateway
