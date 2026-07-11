@@ -5,7 +5,7 @@ import com.punarmilan.dto.RegisterRequest;
 import com.punarmilan.dto.UserResponse;
 import com.punarmilan.dto.VerifyOtpRequest;
 import com.punarmilan.dto.ResetPasswordOtpRequest;
-import com.punarmilan.dto.VerifyOtpResponse;
+
 import com.punarmilan.dto.LoginOtpRequest;
 import com.punarmilan.dto.LoginOtpVerifyRequest;
 import com.punarmilan.dto.TokenRefreshRequest;

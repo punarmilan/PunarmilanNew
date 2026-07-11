@@ -260,6 +260,7 @@ public class ProfileServiceImpl implements ProfileService {
                     java.time.LocalDateTime tenMinsAgo = java.time.LocalDateTime.now().minusMinutes(10);
                     predicates.add(cb.greaterThan(root.get("user").get("lastActive"), tenMinsAgo));
                 }
+            }
 
             // Always enforce visibility unless admin (viewer can be null for admin search)
             predicates.add(cb.or(
