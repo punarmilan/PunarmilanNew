@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import adminVerificationService from '../services/adminVerificationService';
 import { Check, X, Image, Info, Eye, Trash2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -35,7 +36,7 @@ const PhotoModerationCard = ({ profile, onApprove, onReject }) => {
 
     const handleDeletePhoto = async (e) => {
         e.stopPropagation();
-        if (window.confirm('Are you sure you want to delete this specific photo?')) {
+        if ((await Swal.fire({ title: 'Are you sure?', text: 'Are you sure you want to delete this specific photo?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#8C6D39', cancelButtonColor: '#d33', confirmButtonText: 'Yes' }).then(r => r.isConfirmed))) {
             try {
                 // Determine the correct index in the original profile object
                 const originalPhotoFields = [

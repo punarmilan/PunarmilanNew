@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { HiHeart } from "react-icons/hi";
 import HelpDropdown from "./HelpDropdown";
 import Profile from "./Profile";
 import profileImg from '../assets/image/profile.png'
@@ -9,7 +10,20 @@ import MobileProfile from "./MobileProfile";
 import OnlineMembers from "./OnlineMembers";
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchSubscriptionDetails } from '../Slice/UserSlice';
-import { ShieldCheck, CreditCard, Phone, Mail, ChevronDown } from 'lucide-react';
+import { fetchMyProfile } from '../Slice/ProfileSlice';
+import {
+  ShieldCheck,
+  CreditCard,
+  Phone,
+  Mail,
+  ChevronDown,
+  Menu,
+  X,
+  Bell,
+  ChevronRight,
+  Crown,
+  Heart
+} from "lucide-react";
 
 const Header = () => {
     const [helpOpen, setHelpOpen] = useState(false);
@@ -18,7 +32,7 @@ const Header = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [activeTab, setActiveTab] = useState("Home");
-    const [activeDesktopMenu, setActiveDesktopMenu] = useState("My PunarMilan");
+    const [activeDesktopMenu, setActiveDesktopMenu] = useState("Dashboard");
 
 
     // const [isMobile, setIsMobile] = useState(false);
@@ -31,13 +45,17 @@ const Header = () => {
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const { isAuthenticated, subscriptionDetails } = useSelector((state) => state.user);
+    const { isAuthenticated, subscriptionDetails, user } = useSelector((state) => state.user);
+    const { profile } = useSelector((state) => state.profile);
 
     useEffect(() => {
         if (isAuthenticated) {
             dispatch(fetchSubscriptionDetails());
+            if (!profile) {
+                dispatch(fetchMyProfile());
+            }
         }
-    }, [isAuthenticated, dispatch]);
+    }, [isAuthenticated, dispatch, profile]);
 
     const isPremiumActive = subscriptionDetails?.active;
 
@@ -77,13 +95,7 @@ const Header = () => {
             label: "Matches",
             path: "/matches"
         },
-        {
-            id: "Inbox",
-            icon: "fa-solid fa-envelope",
-            label: "Inbox",
-            badge: "99+",
-            path: "/inbox/pending/intrest"
-        },
+
         {
             id: "Chat",
             icon: "fa-solid fa-message",
@@ -98,10 +110,16 @@ const Header = () => {
             path: "/payment"
         },
         {
-            id: "TruthLife",
-            icon: "fa-solid fa-sparkles",
-            label: "Truth Life",
-            path: "/truth-life"
+            id: "Wedding",
+            icon: "fa-solid fa-ring",
+            label: "Wedding",
+            path: "/wedding"
+        },
+        {
+            id: "SpecialServices",
+            icon: "fa-solid fa-gem",
+            label: "Special Services",
+            path: "/special-services"
         }
     ];
 
@@ -130,43 +148,48 @@ const Header = () => {
 
     const desktopMenuItems = [
         {
-            label: "My PunarMilan",
+            label: "Dashboard",
+            icon: "fa-solid fa-house",
             path: "/my-shadi",
             onClick: () => {
                 navigate("/my-shadi");
-                setActiveDesktopMenu("My PunarMilan");
+                setActiveDesktopMenu("Dashboard");
             }
         },
         {
             label: "Matches",
+            icon: "fa-solid fa-heart",
             path: "/matches",
             onClick: () => {
-                navigate("/matches");
+                navigate("/matches?tab=new");
                 setActiveDesktopMenu("Matches");
             }
         },
+
+        // {
+        //     label: "Log Out",
+        //     path: "/",
+        //     onClick: () => {
+        //         navigate("/");
+        //         setActiveDesktopMenu("Home");
+        //     }
+        // },
         {
-            label: "Search",
-            path: "/search",
+            label: "Wedding",
+            icon: "fa-solid fa-ring",
+            path: "/wedding",
             onClick: () => {
-                navigate("/search");
-                setActiveDesktopMenu("Search");
+                navigate("/wedding");
+                setActiveDesktopMenu("Wedding");
             }
         },
         {
-            label: "Inbox",
-            path: "/inbox/pending/intrest",
+            label: "Special Services",
+            icon: "fa-solid fa-gem",
+            path: "/special-services",
             onClick: () => {
-                navigate("/inbox/pending/intrest");
-                setActiveDesktopMenu("Inbox");
-            }
-        },
-        {
-            label: "Truth Life",
-            path: "/truth-life",
-            onClick: () => {
-                navigate("/truth-life");
-                setActiveDesktopMenu("Truth Life");
+                navigate("/special-services");
+                setActiveDesktopMenu("Special Services");
             }
         }
     ];
@@ -179,8 +202,7 @@ const Header = () => {
         const matchedTab = mobileTabs.find(tab =>
             tab.path === currentPath ||
             (tab.path && tab.path !== "/" && currentPath.startsWith(tab.path)) ||
-            (tab.id === "Home" && (currentPath === "/my-shadi" || currentPath.startsWith("/my-shadi/"))) ||
-            (tab.id === "Inbox" && currentPath.startsWith("/inbox"))
+            (tab.id === "Home" && (currentPath === "/my-shadi" || currentPath.startsWith("/my-shadi/")))
         );
         if (matchedTab) {
             setActiveTab(matchedTab.id);
@@ -190,10 +212,10 @@ const Header = () => {
         const matchedDesktopMenu = desktopMenuItems.find(item =>
             item.path === currentPath ||
             currentPath.startsWith(item.path) ||
-            (item.label === "Inbox" && currentPath.startsWith("/inbox")) ||
-            (item.label === "My PunarMilan" && currentPath.startsWith("/my-shadi")) ||
+            (item.label === "Dashboard" && currentPath.startsWith("/my-shadi")) ||
             (item.label === "Matches" && currentPath.startsWith("/matches")) ||
-            (item.label === "Search" && currentPath.startsWith("/search"))
+            (item.label === "Wedding" && currentPath.startsWith("/wedding")) ||
+            (item.label === "Special Services" && currentPath.startsWith("/special-services"))
         );
         if (matchedDesktopMenu) {
             setActiveDesktopMenu(matchedDesktopMenu.label);
@@ -234,35 +256,11 @@ const Header = () => {
     const [activeMenuItem, setActiveMenuItem] = useState("My Profile");
     const menuItems = [
         {
-            id: "Accepted",
-            icon: "fa-solid fa-user-check",
-            label: "Accepted",
-            color: "text-green-600",
-            count: "12",
-            path: "/accepted"
-        },
-        {
-            id: "Requested",
-            icon: "fa-solid fa-user-clock",
-            label: "Requested",
-            color: "text-blue-600",
-            count: "5",
-            path: "/requested"
-        },
-        {
-            id: "Recent Visitors",
-            icon: "fa-solid fa-eye",
-            label: "Recent Visitors",
-            color: "text-purple-600",
-            count: "23",
-            path: "/visitors"
-        },
-        {
             id: "Account & Settings",
             icon: "fa-solid fa-cog",
             label: "Account & Settings",
             color: "text-gray-600",
-            path: "/settings"
+            path: "/my-shadi/settings"
         },
         {
             id: "Notifications",
@@ -285,6 +283,13 @@ const Header = () => {
             label: "Help & Support",
             color: "text-indigo-600",
             path: "/help"
+        },
+        {
+            id: "Log Out",
+            icon: "fa-solid fa-sign-out-alt",
+            label: "Log Out",
+            color: "text-rose-600",
+            path: "/"
         }
     ];
 
@@ -309,197 +314,58 @@ const Header = () => {
     return (
         <>
             {/* MAIN HEADER - Now fully visible on all devices */}
-            <header className="w-full bg-gradient-to-r from-rose-500 to-rose-600 text-white shadow-md fixed top-0 left-0 right-0 z-50">
+            <header className="w-full bg-gradient-to-r from-slate-100 via-gray-50 to-slate-100 text-slate-800 shadow-sm border-b border-slate-200/80 fixed top-0 left-0 right-0 z-50">
                 <div className="max-w-7xl mx-auto w-full">
-                    <div className="flex justify-between items-center h-12 xs:h-14 sm:h-16 px-2 xs:px-3 sm:px-4 md:px-6">
+                    <div className="flex justify-between items-center h-12 xs:h-14 sm:h-16 px-2 xs:px-1 sm:px-4 md:px-2">
                         {/* LOGO */}
-                        <Link to="/my-shadi" className="text-base xs:text-lg sm:text-xl md:text-2xl font-bold italic font-serif tracking-tight hover:opacity-90 transition-opacity">
-                            PunarMilan
+                        <Link to="/my-shadi" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
+                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#d94f73] to-orange-400 flex items-center justify-center text-white shadow-md shadow-[#d94f73]/25">
+                                <HiHeart className="w-5 h-5 sm:w-5.5 sm:h-5.5 fill-current" />
+                            </div>
+                            <span className="text-xl sm:text-2xl font-black tracking-tighter flex items-center">
+                                <span className="text-slate-900 drop-shadow-sm">Punar</span>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d94f73] to-rose-400">Milan</span>
+                            </span>
                         </Link>
 
-                        {/* DESKTOP NAV - Hidden on mobile/tablet, shown on md+ */}
-                        <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 xl:space-x-4 2xl:space-x-6 text-white font-medium h-full">
-                            {desktopMenuItems.map((item) => (
-                                <div
-                                    key={item.label}
-                                    className="relative h-full flex items-center"
-                                    onMouseEnter={() => item.menuItems && handleMouseEnter(item.label)}
-                                    onMouseLeave={handleMouseLeave}
-                                >
-                                    <button
-                                        onClick={item.onClick}
-                                        className={`cursor-pointer px-2 sm:px-3 py-2 text-xs lg:text-sm xl:text-base font-medium whitespace-nowrap flex items-center gap-1 ${activeDesktopMenu === item.label
-                                            ? "text-white border-b-2 border-white"
-                                            : "text-white/80 hover:text-white"
-                                            } transition-colors`}
-                                    >
-                                        {item.label}
-                                        {item.menuItems && (
-                                            <i className={`fa-solid fa-chevron-down text-[10px] transition-transform ${dropdownOpen === item.label ? 'rotate-180' : ''}`}></i>
-                                        )}
-                                    </button>
-
-                                    {/* Dropdown Menu */}
-                                    {item.menuItems && dropdownOpen === item.label && (
-                                        <div className="absolute top-full left-0 w-56 bg-white rounded-b-lg shadow-xl text-gray-800 py-2 z-50 border-t border-gray-100 animate-fadeIn">
-                                            {item.menuItems.map((subItem, idx) => (
-                                                <Link
-                                                    key={idx}
-                                                    to={subItem.path}
-                                                    className="block px-4 py-2 hover:bg-rose-50 hover:text-rose-600 transition-colors text-sm font-medium flex justify-between items-center"
-                                                    onClick={() => {
-                                                        setDropdownOpen(null);
-                                                        setActiveDesktopMenu(item.label);
-                                                    }}
-                                                >
-                                                    <span>{subItem.label}</span>
-                                                    {subItem.count && <span className="bg-gray-100 text-gray-600 text-xs px-1.5 py-0.5 rounded-full">{subItem.count}</span>}
-                                                </Link>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
-                        </nav>
-
                         {/* RIGHT SIDE - All items visible on all screens */}
-                        <div className="flex items-center gap-1 xs:gap-1.5 sm:gap-2 md:gap-3">
-                            {/* Upgrade Button - Responsive text */}
-                            <Link to="/search">
-                                <button className="md:hidden block ">
-                                    {/* <span className="hidden xs:inline">Upgrade Now</span> */}
-                                    <span className="xs:hidden">Search</span>
-                                </button>
-                            </Link>
+                        <div className="flex items-center gap-3">
 
-                            {/* HELP BUTTON - Always visible on all devices */}
-                            <div className="flex items-center" ref={helpRef}>
-                                <HelpDropdown />
-                            </div>
+                    {/* Saved Profiles */}
+                    <button
+                        onClick={() => navigate("/my-shadi/saved-profiles")}
+                        className="relative p-2 rounded-full text-slate-600 hover:text-rose-500 hover:bg-slate-100 transition"
+                        title="Likes & Shortlisted"
+                    >
+                        <Heart size={20} />
+                    </button>
 
-                            {/* PREMIUM DROPDOWN */}
-                            {isPremiumActive && (
-                                <div className="relative">
-                                    <button
-                                        onMouseEnter={() => setShowPremiumDropdown(true)}
-                                        onMouseLeave={() => setShowPremiumDropdown(false)}
-                                        className="flex items-center space-x-1 sm:space-x-2 bg-white/20 hover:bg-white/30 text-white px-1.5 xs:px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-white/30 transition-all cursor-pointer"
-                                    >
-                                        <ShieldCheck className="w-3 h-3 sm:w-4 sm:h-4 text-amber-300" />
-                                        <span className="text-[8px] xs:text-[10px] sm:text-xs font-bold uppercase tracking-wider">Premium</span>
-                                        <ChevronDown className="w-2.5 h-2.5 sm:w-4 sm:h-4" />
-                                    </button>
+                    {/* Notification */}
+                    <button
+                        onClick={() => navigate("/notifications")}
+                        className="relative p-2 rounded-full text-slate-600 hover:text-rose-500 hover:bg-slate-100 transition"
+                    >
+                        <Bell size={20} />
+                        <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full border border-white"></span>
+                    </button>
 
-                                    {showPremiumDropdown && (
-                                        <div
-                                            onMouseEnter={() => setShowPremiumDropdown(true)}
-                                            onMouseLeave={() => setShowPremiumDropdown(false)}
-                                            className="absolute right-0 mt-0 w-72 xs:w-80 bg-white rounded-xl shadow-2xl border border-gray-100 z-[1000] overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 text-gray-800"
-                                        >
-                                            {/* Header */}
-                                            <div className="bg-gradient-to-r from-rose-600 to-pink-600 p-3 sm:p-4 text-white">
-                                                <div className="flex justify-between items-center mb-1">
-                                                    <h3 className="font-bold text-sm sm:text-lg">Premium Membership</h3>
-                                                    <span className="bg-white/20 px-2 py-0.5 rounded text-[8px] sm:text-[10px] font-bold uppercase">Active</span>
-                                                </div>
-                                                <p className="text-rose-50 text-[10px] sm:text-xs opacity-90">Plan: {subscriptionDetails?.planName || 'N/A'}</p>
-                                            </div>
+                    {/* Profile */}
+                    <div className="flex items-center" ref={profileRef}>
+                        <Profile />
+                    </div>
 
-                                            {/* Content */}
-                                            <div className="p-3 sm:p-4 space-y-3 sm:space-y-4">
-                                                {/* Validity */}
-                                                <div className="flex items-center justify-between text-xs sm:text-sm">
-                                                    <div className="flex items-center space-x-2 text-gray-600">
-                                                        <CreditCard className="w-3 h-3 sm:w-4 sm:h-4" />
-                                                        <span>Valid Till:</span>
-                                                    </div>
-                                                    <span className="font-bold text-gray-900">{formatDate(subscriptionDetails?.expiryDate)}</span>
-                                                </div>
+                    {/* Hamburger */}
+                    <button
+                        onClick={() => setMobileOpen(true)}
+                        className="p-2 rounded-full text-slate-600 hover:text-rose-500 hover:bg-slate-100 transition"
+                    >
+                        <Menu size={22} />
+                    </button>
 
-                                                {/* Connects Balance */}
-                                                <div className="space-y-1 sm:space-y-2">
-                                                    <div className="flex items-center justify-between">
-                                                        <span className="text-[10px] sm:text-sm font-medium text-gray-700">Contact Views Balance</span>
-                                                        <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                                                            {subscriptionDetails?.balance} Left
-                                                        </span>
-                                                    </div>
-                                                    <div className="w-full bg-gray-100 rounded-full h-1.5 sm:h-2">
-                                                        <div
-                                                            className="bg-green-500 h-1.5 sm:h-2 rounded-full transition-all duration-500"
-                                                            style={{ width: `${(subscriptionDetails?.balance / (subscriptionDetails?.totalConnects || 1)) * 100}%` }}
-                                                        ></div>
-                                                    </div>
-                                                    <div className="flex justify-between text-[8px] sm:text-[10px] text-gray-500">
-                                                        <span>Used: {subscriptionDetails?.usedConnects}</span>
-                                                        <span>Total: {subscriptionDetails?.totalConnects}</span>
-                                                    </div>
-                                                </div>
-
-                                                {/* Extra Benefits */}
-                                                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-gray-50 text-gray-700">
-                                                    <div className="flex items-center space-x-1.5 sm:space-x-2 p-1.5 sm:p-2 bg-blue-50 rounded-lg">
-                                                        <Phone className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-blue-600" />
-                                                        <span className="text-[9px] sm:text-[10px] font-bold text-blue-700">Phone Balance</span>
-                                                    </div>
-                                                    <div className="flex items-center space-x-1.5 sm:space-x-2 p-1.5 sm:p-2 bg-purple-50 rounded-lg">
-                                                        <Mail className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-purple-600" />
-                                                        <span className="text-[9px] sm:text-[10px] font-bold text-purple-700">SMS Balance</span>
-                                                    </div>
-                                                </div>
-
-                                                {/* Action */}
-                                                <button
-                                                    onClick={() => navigate('/payment')}
-                                                    className="w-full bg-rose-600 hover:bg-rose-700 text-white py-2 rounded-lg text-xs sm:text-sm font-bold transition-colors mt-1"
-                                                >
-                                                    Upgrade / Renew
-                                                </button>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-
-                            {/* PROFILE COMPONENT */}
-                            <div className="flex items-center" ref={profileRef}>
-                                <Profile />
-                            </div>
-                        </div>
+                </div>
                     </div>
                 </div>
             </header>
-
-            {/* MOBILE BOTTOM NAVIGATION - Shows on mobile only */}
-            {isMobile && (
-                <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 safe-area-pb">
-                    <div className="flex justify-around items-center h-16 px-2">
-                        {mobileTabs.map((tab) => (
-                            <button
-                                key={tab.id}
-                                onClick={() => handleTabClick(tab.id, tab.path, tab.action)}
-                                className={`flex flex-col items-center justify-center flex-1 h-full relative transition-colors ${activeTab === tab.id
-                                    ? 'text-rose-500'
-                                    : 'text-gray-500 hover:text-gray-700'
-                                    }`}
-                            >
-                                <div className="relative">
-                                    <i className={`${tab.icon} text-lg`}></i>
-                                    {tab.badge && (
-                                        <span className="absolute -top-2 -right-3 bg-red-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-full min-w-[16px] text-center">
-                                            {tab.badge}
-                                        </span>
-                                    )}
-                                </div>
-                                <span className="text-[10px] mt-1 font-medium">{tab.label}</span>
-                                {activeTab === tab.id && (
-                                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-rose-500 rounded-b-full"></div>
-                                )}
-                            </button>
-                        ))}
-                    </div>
-                </nav>
-            )}
 
             {/* Add safe area padding for devices with notches */}
             <style>{`
@@ -516,6 +382,160 @@ const Header = () => {
                     onClose={handleCloseOnlineMembers}
                 />
             )}
+
+            {/* Overlay */}
+{mobileOpen && (
+    <div
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[998]"
+        onClick={() => setMobileOpen(false)}
+    />
+)}
+
+{/* Right Drawer */}
+<div
+    ref={mobileMenuRef}
+    className={`fixed top-4 right-0 h-[calc(100vh-16px)] w-[85%] max-w-[280px] sm:max-w-[320px] lg:max-w-[400px]
+        bg-white/95 backdrop-blur-md border-l border-white/80
+        rounded-tl-[32px]
+        shadow-[0_20px_60px_rgba(0,0,0,0.18)]
+        z-[999]
+        transition-all duration-300
+        overflow-hidden
+        ${
+            mobileOpen
+                ? "translate-x-0"
+                : "translate-x-full"
+        }`}
+        >
+
+    {/* Header */}
+    <div className="bg-gradient-to-br from-pink-50 to-rose-100/50 p-4 sm:p-6 text-gray-900 border-b border-rose-100 rounded-tl-[32px]">
+
+        <div className="flex justify-between items-start">
+            <div className="flex gap-3">
+
+                <img
+                    src={profile?.profilePhotoUrl || user?.profilePhotoUrl || profileImg}
+                    alt=""
+                    className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-4 border-white shadow-sm"
+                />
+                <div className="mt-1 sm:mt-2">
+                    <h2 className="text-lg sm:text-xl font-bold font-serif text-rose-600 leading-tight">
+                        {profile?.fullName || user?.fullName || (user?.firstName ? `${user.firstName} ${user.lastName || ''}` : 'User')}
+                    </h2>
+                    <p className="text-xs sm:text-sm text-gray-500 opacity-90">
+                        {profile?.profileId || user?.profileId || ''}
+                    </p>
+                </div>
+            </div>
+            <button
+                onClick={() => setMobileOpen(false)}
+                className="p-2 rounded-full hover:bg-gray-100/50 text-gray-400 hover:text-gray-600 transition"
+            >
+                <X size={24} />
+            </button>
+        </div>
+
+        <button
+            onClick={() => navigate("/payment")}
+            className="w-full mt-4 sm:mt-5 bg-gradient-to-r from-[#C5A059] to-[#8C6D39] hover:from-[#B59049] hover:to-[#7C5D29] text-white font-bold py-2.5 sm:py-3 text-sm sm:text-base rounded-xl shadow-md shadow-[#C5A059]/30 hover:shadow-lg transition-all flex items-center justify-center gap-2"
+        >
+            <Crown size={18} className="text-white fill-white sm:w-[20px] sm:h-[20px]" />
+            Upgrade Membership
+        </button>
+    </div>
+
+    {/* Menu */}
+    <div className="p-4 overflow-y-auto h-[calc(100%-180px)]">
+
+        {/* Main Menus */}
+        <div className="space-y-2 mb-6">
+
+            {desktopMenuItems.map((item) => (
+                <button
+                    key={item.label}
+                    onClick={() => {
+                        item.onClick();
+                        setMobileOpen(false);
+                    }}
+                    className={`w-full flex justify-between items-center px-3 py-2 sm:px-4 sm:py-3 rounded-xl transition ${
+                        activeDesktopMenu === item.label
+                            ? "bg-gradient-to-r from-rose-100 to-pink-50 border border-pink-200 text-rose-700 font-bold shadow-sm"
+                            : "text-gray-600 font-medium hover:bg-gray-100 hover:text-rose-600"
+                    }`}
+                >
+                    <div className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
+                        <i className={`${item.icon} ${activeDesktopMenu === item.label ? 'text-rose-600' : 'text-gray-400'}`}></i>
+                        <span>{item.label}</span>
+                    </div>
+                    <ChevronRight size={14} className="sm:w-4 sm:h-4" />
+                </button>
+            ))}
+        </div>
+
+        {/* Premium Card */}
+        {isPremiumActive && (
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-4 mb-5">
+
+                <div className="flex items-center gap-2 mb-2">
+                    <ShieldCheck className="text-amber-600" size={18} />
+                    <span className="font-semibold">
+                        Premium Active
+                    </span>
+                </div>
+
+                <p className="text-sm text-gray-600">
+                    Plan: {subscriptionDetails?.planName}
+                </p>
+
+                <p className="text-sm text-gray-600">
+                    Valid Till: {formatDate(subscriptionDetails?.expiryDate)}
+                </p>
+
+                <div className="mt-3 bg-white rounded-full h-2">
+                    <div
+                        className="bg-green-500 h-2 rounded-full"
+                        style={{
+                            width: `${
+                                (subscriptionDetails?.balance /
+                                    (subscriptionDetails?.totalConnects || 1)) *
+                                100
+                            }%`
+                        }}
+                    />
+                </div>
+
+            </div>
+        )}
+
+        {/* Other Menu Items */}
+        <div className="space-y-2">
+
+            {menuItems.map((item) => (
+                <button
+                    key={item.id}
+                    onClick={() => {
+                        handleMenuItemClick(item.id, item.path);
+                        setMobileOpen(false);
+                    }}
+                    className={`w-full flex justify-between items-center px-4 py-3 rounded-xl transition ${
+                        activeMenuItem === item.id
+                            ? "bg-rose-50 text-rose-600"
+                            : "hover:bg-gray-50"
+                    }`}
+                >
+                    <div className="flex items-center gap-3">
+                        <i className={item.icon}></i>
+                        <span>{item.label}</span>
+                    </div>
+
+                    <ChevronRight size={16} />
+                </button>
+            ))}
+
+        </div>
+    </div>
+</div>
         </>
     );
 };

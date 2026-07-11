@@ -11,6 +11,8 @@ public interface ConnectionRequestService {
 
     void sendPhotoRequest(User sender, Long receiverProfileId);
 
+    void withdrawRequest(User sender, Long receiverProfileId);
+
     void acceptRequest(User receiver, Long requestId);
 
     void declineRequest(User receiver, Long requestId);

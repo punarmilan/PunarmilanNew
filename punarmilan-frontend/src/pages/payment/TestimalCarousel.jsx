@@ -71,8 +71,8 @@ function TestimonialCarousel() {
     };
 
     return (
-        <div className="bg-gray-100 py-8 sm:py-12 md:py-16 px-3 sm:px-4 md:px-6">
-            <div className="max-w-7xl mx-auto">
+        <div className="bg-transparent py-8 sm:py-12 md:py-16 px-3 sm:px-4 md:px-6">
+            <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-700 text-center mb-6 sm:mb-8 md:mb-12 px-2 sm:px-4 leading-tight">
                     With <span className="text-gray-900">PunarMilan Premium</span> they found their perfect match and so can you
@@ -85,7 +85,7 @@ function TestimonialCarousel() {
                     onMouseLeave={handleMouseLeave}
                 >
                     {/* Main Card */}
-                    <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden transition-all duration-500">
+                    <div className="dashboard-card-bg border border-white/50 rounded-xl sm:rounded-2xl shadow-lg overflow-hidden transition-all duration-500">
                         <div className="grid grid-cols-1 md:grid-cols-2">
                             {/* Image Section */}
                             <div className="relative h-48 sm:h-56 md:h-80 lg:h-96 bg-gray-200 overflow-hidden">
@@ -198,7 +198,7 @@ function TestimonialCarousel() {
             </div>
 
             {/* CSS for line-clamp (add to your global CSS if needed) */}
-            <style jsx>{`
+            <style>{`
                 .line-clamp-4 {
                     display: -webkit-box;
                     -webkit-line-clamp: 4;

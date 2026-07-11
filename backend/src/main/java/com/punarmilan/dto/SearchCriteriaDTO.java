@@ -40,4 +40,35 @@ public class SearchCriteriaDTO {
     private Boolean chatStatus;
     private Boolean showWithPhoto;
     private Boolean showProtectedPhoto;
+
+    // Premium Filtering Fields
+    private String keyword; // For Name, Profile ID, City, Occupation search
+    private List<String> subCaste;
+    private List<String> city;
+    private List<String> workingCity;
+    private List<String> company;
+    private String weight;
+    private List<String> bloodGroup;
+    private String disability;
+    private List<String> smokingHabit;
+    private List<String> drinkingHabit;
+    private List<String> familyFinancialStatus;
+    private String fatherStatus;
+    private String motherStatus;
+    private Integer brothersCount;
+    private Integer sistersCount;
+    private String manglikStatus;
+    private List<String> rashi;
+    private List<String> nakshatra;
+    private List<String> gotra;
+    
+    // Status Toggles
+    private Boolean verified;
+    private Boolean premium;
+    private Boolean profileComplete;
+    private Boolean photoAvailable;
+    private Boolean onlineNow;
+    
+    // Sorting
+    private String sort;
 }

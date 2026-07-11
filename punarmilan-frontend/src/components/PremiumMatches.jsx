@@ -36,7 +36,7 @@ const PremiumMatches = () => {
             <ToastContainer />
 
             {/* Responsive Container */}
-            <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg border border-gray-100 p-2 sm:p-3 md:p-4 lg:p-5 w-full mx-auto">
+            <div className="dashboard-card-bg rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg border border-white/50 p-2 sm:p-3 md:p-4 lg:p-5 w-full mx-auto">
 
                 {/* Header with Badge */}
                 <div className="flex items-center justify-between mb-3 sm:mb-4 pb-3 sm:pb-4 border-b border-gray-200">
@@ -142,7 +142,7 @@ const PremiumMatches = () => {
 
                 {/* Footer Stats */}
                 <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-200">
-                    <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
                         <div className="text-center">
                             <div className="text-xs sm:text-sm font-bold text-rose-600">{Number(summary?.recentVisitorsCount) || 0}</div>
                             <div className="text-[10px] xs:text-xs text-gray-500">Views</div>

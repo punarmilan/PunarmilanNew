@@ -97,7 +97,7 @@ export default function Messages({ profile, onUpdate }) {
             <div className="group relative bg-white border-2 border-gray-50 rounded-[2.5rem] p-6 md:p-8 hover:border-pink-100 transition-all duration-500">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-6">
                     <div className="flex gap-5 flex-1 max-w-2xl">
-                        <div className="w-14 h-14 rounded-2xl bg-pink-50 text-pink-500 flex items-center justify-center shrink-0">
+                        <div className="w-14 h-14 rounded-2xl bg-green-50 text-pink-500 flex items-center justify-center shrink-0">
                             <MessageSquare size={28} />
                         </div>
                         <div className="space-y-1">

@@ -13,7 +13,7 @@ import java.net.Socket;
 @Slf4j
 public class MinioAutoStarter {
 
-    @Value("${minio.exe-path:C:\\Users\\Dell\\Downloads\\minio.exe}")
+    @Value("${minio.exe-path:C:\\Users\\Admin\\Downloads\\minio.exe}")
     private String minioExePath;
 
     @Value("${minio.data-path:C:\\minio_data}")
@@ -28,8 +28,15 @@ public class MinioAutoStarter {
     @Value("${minio.secret-key}")
     private String minioSecretKey;
 
+    @Value("${minio.enabled:true}")
+    private boolean minioEnabled;
+
     @PostConstruct
     public void init() {
+        if (!minioEnabled) {
+            log.info("MinIO is disabled in configuration. Skipping auto-start.");
+            return;
+        }
         if (isMinioRunning()) {
             log.info("MinIO server is already running. Skipping auto-start.");
             return;

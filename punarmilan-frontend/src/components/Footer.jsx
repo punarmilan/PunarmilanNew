@@ -1,145 +1,193 @@
+import React from 'react';
 import {
     Facebook,
     Instagram,
     Twitter,
     Youtube,
     Linkedin,
-    Mail,
-    Phone,
-    MapPin,
     ShieldCheck,
-    Heart
+    Heart,
+    ShieldAlert,
+    FileText,
+    Lock,
+    Tag,
+    MessageCircle
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
-
-    const sections = {
-        company: {
-            title: 'Company',
-            links: [
-                { name: 'About Us', href: '/about-us' },
-                { name: 'Contact Us', href: '/contact' },
-            ]
-        },
-        privacy: {
-            title: 'Privacy & Legal',
-            links: [
-                { name: 'Be Safe Online', href: '#safety' },
-                { name: 'Privacy Policy', href: '#privacy' },
-                { name: 'Terms of Use', href: '#terms' },
-                { name: 'Grievance Officer', href: '#grievance' }
-            ]
-        }
-    };
-
-    const socialLinks = [
-        { name: 'Facebook', href: '#', icon: <Facebook className="w-5 h-5 text-gray-400 group-hover:text-white" /> },
-        { name: 'Instagram', href: '#', icon: <Instagram className="w-5 h-5 text-gray-400 group-hover:text-white" /> },
-        { name: 'Twitter', href: '#', icon: <Twitter className="w-5 h-5 text-gray-400 group-hover:text-white" /> },
-        { name: 'YouTube', href: '#', icon: <Youtube className="w-5 h-5 text-gray-400 group-hover:text-white" /> },
-        { name: 'LinkedIn', href: '#', icon: <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-white" /> }
+    const navItems = [
+        { name: 'About Us', href: '/about-us' },
+        { name: 'VIP PunarMilan', href: '/vip-PunarMilan' },
+        { name: 'PunarMilan Blog', href: '/blog' },
+        { name: 'Success Stories', href: '/success-stories' },
+        { name: 'PunarMilan Centres', href: '/centres' },
+        { name: 'Contact Us', href: '/contact-us' },
+        { name: 'PunarMilan Live', href: '/live' },
+        { name: 'Work With Us', href: '/work-with-us' }
     ];
 
+    const socialLinks = [
+        { name: 'Facebook', href: '#', icon: <Facebook className="w-5 h-5" /> },
+        { name: 'Instagram', href: '#', icon: <Instagram className="w-5 h-5" /> },
+        { name: 'YouTube', href: '#', icon: <Youtube className="w-5 h-5" /> },
+        { name: 'LinkedIn', href: '#', icon: <Linkedin className="w-5 h-5" /> },
+        { name: 'Twitter', href: '#', icon: <Twitter className="w-5 h-5" /> }
+    ];
+
+    const featureCards = [
+        {
+            icon: <ShieldAlert className="w-6 h-6 text-[#ff2d7a] group-hover:scale-110 transition-transform duration-300" />,
+            title: 'Be Safe Online',
+            desc: 'Tips & resources for your safety',
+            href: '/safety'
+        },
+        {
+            icon: <FileText className="w-6 h-6 text-[#3bb8ff] group-hover:scale-110 transition-transform duration-300" />,
+            title: 'Grievance Officer Details',
+            desc: 'Raise a concern or contact officer',
+            href: '/grievance'
+        },
+        {
+            icon: <Lock className="w-6 h-6 text-[#ff2d7a] group-hover:scale-110 transition-transform duration-300" />,
+            title: 'Privacy Policy',
+            desc: 'Your privacy matters to us',
+            href: '/privacy'
+        },
+        {
+            icon: <FileText className="w-6 h-6 text-[#3bb8ff] group-hover:scale-110 transition-transform duration-300" />,
+            title: 'Terms of Use',
+            desc: 'Read terms and conditions',
+            href: '/terms'
+        },
+        {
+            icon: <Tag className="w-6 h-6 text-[#ff2d7a] group-hover:scale-110 transition-transform duration-300" />,
+            title: 'Offer Terms',
+            desc: 'Latest offers & conditions',
+            href: '/offer-terms'
+        }
+    ];
+
+    const handleChatClick = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     return (
-        <footer className="bg-[#0a0e1b] text-white pt-12 sm:pt-20 pb-8 sm:pb-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Top Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-16 mb-12 sm:mb-20">
-                    <div className="lg:col-span-5">
-                        <div className="flex items-center gap-3 mb-8">
-                            <div className="bg-[#e91e63] p-2 rounded-lg shadow-[0_0_20px_rgba(233,30,99,0.3)]">
-                                <Heart className="w-6 h-6 sm:w-8 sm:h-8 text-white fill-white" />
+        <footer className="relative bg-[#050816] text-white overflow-hidden font-sans border-t border-white/10">
+            {/* Glowing background highlights */}
+            <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[60%] rounded-full bg-purple-900/10 blur-[120px] pointer-events-none"></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[60%] rounded-full bg-pink-900/10 blur-[120px] pointer-events-none"></div>
+
+            {/* Subtle glowing particles/dots background styling */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,45,122,0.03)_1px,transparent_1px),radial-gradient(circle_at_70%_60%,rgba(59,184,255,0.03)_1px,transparent_1px)] bg-[length:32px_32px] pointer-events-none"></div>
+
+            <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-16 relative z-10">
+                {/* 1. Top Navigation */}
+                <div className="flex flex-col items-center mb-10">
+                    <nav className="flex flex-wrap justify-center gap-3 mb-8">
+                        {navItems.map((item) => (
+                            <Link
+                                key={item.name}
+                                to={item.href}
+                                className="px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md hover:bg-white/20 hover:border-[#ff2d7a]/50 text-white hover:text-white text-xs font-bold transition-all duration-300 hover:scale-105 shadow-sm hover:shadow-[0_0_15px_rgba(255,45,122,0.3)]"
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
+                    </nav>
+                    {/* Thin glowing divider */}
+                    <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#ff2d7a]/45 to-transparent"></div>
+                </div>
+
+                {/* 2. Brand Section */}
+                <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
+                    {/* Left: Logo and Tagline */}
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                        <div className="flex items-center gap-3 mb-3">
+                            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#ff2d7a] to-pink-600 flex items-center justify-center shadow-lg shadow-[#ff2d7a]/20">
+                                <Heart className="w-5 h-5 text-white fill-white animate-[pulse_3s_infinite]" />
                             </div>
-                            <h2 className="text-2xl sm:text-3xl font-black tracking-tighter">
-                                PUNAR<span className="text-[#e91e63]">MILAN</span>
+                            <h2 className="text-3xl font-black tracking-wider">
+                                PUNAR
+                                <span className="bg-gradient-to-r from-[#ff2d7a] to-rose-500 bg-clip-text text-transparent">MILAN</span>
                             </h2>
                         </div>
-                        <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-sm mb-8 sm:mb-10">
-                            The World's No.1 Matchmaking Service. We help thousands find their perfect partner and begin a beautiful journey together.
+                        <p className="text-gray-400 text-sm font-medium tracking-wide">
+                            The World's No.1 Matchmaking Service
                         </p>
                     </div>
 
-                    <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-                        {Object.entries(sections).map(([key, section]) => (
-                            <div key={key}>
-                                <h3 className="text-white font-black text-lg sm:text-xl mb-5 sm:mb-8 uppercase tracking-wider">{section.title}</h3>
-                                <ul className="space-y-3 sm:space-y-5">
-                                    {section.links.map((link) => (
-                                        <li key={link.name}>
-                                            <Link to={link.href} className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-3 font-medium text-base sm:text-lg">
-                                                <span className="w-1.5 h-1.5 bg-gray-700 rounded-full"></span>
-                                                {link.name}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                    {/* Right: Circular Social Buttons */}
+                    <div className="flex items-center gap-3">
+                        {socialLinks.map((social) => (
+                            <a
+                                key={social.name}
+                                href={social.href}
+                                aria-label={social.name}
+                                className="w-11 h-11 rounded-full bg-white/5 border border-white/10 hover:border-[#ff2d7a]/50 hover:bg-white/10 flex items-center justify-center text-gray-300 hover:text-white transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-[0_0_15px_rgba(255,45,122,0.3)]"
+                            >
+                                {social.icon}
+                            </a>
                         ))}
                     </div>
                 </div>
 
-                {/* Contact Icons Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-10 py-8 sm:py-12 border-y border-white/5 mb-8 sm:mb-12">
-                    <div className="flex items-center gap-5">
-                        <div className="w-14 h-14 bg-[#e91e63]/10 rounded-2xl flex items-center justify-center">
-                            <Phone className="w-7 h-7 text-[#e91e63]" />
-                        </div>
-                        <div>
-                            <div className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-1">Call Us</div>
-                            <div className="text-white font-black text-lg tracking-wide">+91 9923400442</div>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-5">
-                        <div className="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center">
-                            <Mail className="w-7 h-7 text-blue-500" />
-                        </div>
-                        <div>
-                            <div className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-1">Email Us</div>
-                            <div className="text-white font-black text-lg tracking-wide">punarmilan2@gmail.com</div>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-5">
-                        <div className="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center">
-                            <MapPin className="w-7 h-7 text-amber-500" />
-                        </div>
-                        <div>
-                            <div className="text-[11px] text-gray-500 font-black uppercase tracking-widest mb-1">Visit Us</div>
-                            <div className="text-white font-black text-lg tracking-wide">Pune, Maharashtra, India</div>
-                        </div>
+                {/* 3. Feature Cards (5 premium glassmorphic cards in one container - horizontal layout to reduce height) */}
+                <div className="bg-white/[0.01] backdrop-blur-md border border-white/5 rounded-2xl p-4 sm:p-5 mb-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                        {featureCards.map((card, idx) => (
+                            <Link
+                                key={idx}
+                                to={card.href}
+                                className="group relative flex flex-row items-center gap-3.5 p-3 rounded-xl bg-white/10 border border-white/20 hover:border-[#ff2d7a]/50 hover:bg-white/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
+                            >
+                                <div className="p-2 bg-white/10 rounded-lg group-hover:bg-white/20 transition-colors shrink-0">
+                                    {card.icon}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <h4 className="text-white font-bold text-xs group-hover:text-[#ff2d7a] transition-colors truncate">
+                                        {card.title}
+                                    </h4>
+                                    <p className="text-gray-300 text-[10px] leading-tight mt-0.5 line-clamp-1">
+                                        {card.desc}
+                                    </p>
+                                </div>
+                            </Link>
+                        ))}
                     </div>
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-10">
-                    <div className="flex items-center gap-8 text-gray-400 font-black uppercase tracking-widest text-[12px]">
-                        <div className="flex items-center gap-3">
-                            <ShieldCheck className="w-5 h-5 text-[#00a65a]" />
-                            100% Verified Profiles
+                {/* 4. Bottom Information Bar (Floating glass card) */}
+                <div className="bg-white/[0.02] backdrop-blur-lg border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
+                    
+                    {/* Left: Verified Badge */}
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/30 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+                            <ShieldCheck className="w-5 h-5 text-green-400 shadow-[0_0_8px_rgba(74,222,128,0.8)]" />
                         </div>
-                        <span className="w-1.5 h-1.5 bg-gray-700 rounded-full"></span>
-                        <div>Since 2026</div>
+                        <div>
+                            <p className="text-xs font-black tracking-[3px] text-green-400">100% VERIFIED PROFILES</p>
+                            <p className="text-[10px] text-gray-500 font-bold mt-0.5">Since 2026</p>
+                        </div>
                     </div>
 
-                    <div className="flex flex-col md:flex-end items-center md:items-end gap-1">
-                        <div className="flex gap-4 mb-4">
-                            {socialLinks.map((social) => (
-                                <a
-                                    key={social.name}
-                                    href={social.href}
-                                    className="w-11 h-11 rounded-full bg-white/5 hover:bg-[#e91e63] flex items-center justify-center transition-all duration-300 group"
-                                    aria-label={social.name}
-                                >
-                                    {social.icon}
-                                </a>
-                            ))}
-                        </div>
-                        <div className="text-gray-400 font-black text-sm tracking-wide">
-                            Copyright © 2026-2027 <span className="text-white">PunarMilan.com</span>
-                        </div>
-                        <div className="text-[10px] text-gray-600 font-black uppercase tracking-widest mt-1">
-                            Created by WorknAi Technologies India Pvt Ltd
-                        </div>
+                    {/* Center: Copyright */}
+                    <div className="text-center">
+                        <p className="text-xs font-semibold text-gray-400">
+                            © 2026–2027 <span className="text-[#ff2d7a] font-black hover:underline cursor-pointer">PunarMilan.com</span>
+                        </p>
+                        <p className="text-[10px] text-gray-500 font-medium mt-0.5">
+                            The World's No.1 Matchmaking Service
+                        </p>
+                    </div>
+
+                    {/* Right: Creator Badge */}
+                    <div className="text-center lg:text-right">
+                        <p className="text-[9px] font-black tracking-[2px] text-gray-500">CREATED BY</p>
+                        <p className="text-xs font-bold text-[#ff2d7a] tracking-wide mt-0.5 drop-shadow-[0_0_6px_rgba(255,45,122,0.3)]">
+                            PUNARMILAN PVT LTD
+                        </p>
                     </div>
                 </div>
             </div>

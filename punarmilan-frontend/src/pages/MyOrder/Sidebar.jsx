@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -8,7 +9,7 @@ const Sidebar = () => {
     const handleProfileSearch = (e) => {
         e.preventDefault();
         if (profileId.trim()) {
-            alert(`Searching for Profile ID: ${profileId}`);
+            Swal.fire({ text: `Searching for Profile ID: ${profileId}`, confirmButtonColor: '#8C6D39' });
             // You can implement actual search logic here
         }
     };

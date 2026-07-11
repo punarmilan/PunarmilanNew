@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from 'sweetalert2';
 import { Eye, EyeOff, Trash2, AlertTriangle, CheckCircle2, ShieldAlert } from "lucide-react";
 
 /**
@@ -49,12 +50,12 @@ export default function DeleteHide({ profile, onUpdate }) {
         try {
             // Deactivating account by setting enabled: false
             await onUpdate({ enabled: false });
-            alert("Your profile has been deactivated. You will now be logged out.");
+            Swal.fire({ text: "Your profile has been deactivated. You will now be logged out.", confirmButtonColor: '#8C6D39' });
             // In a real app, clear tokens and redirect to login
             window.location.href = "/login";
         } catch (error) {
             console.error("Failed to delete profile:", error);
-            alert("An error occurred while trying to deactivate your profile. Please try again.");
+            Swal.fire({ text: "An error occurred while trying to deactivate your profile. Please try again.", confirmButtonColor: '#8C6D39' });
             setIsSaving(false);
             setShowDeleteConfirm(false);
         }

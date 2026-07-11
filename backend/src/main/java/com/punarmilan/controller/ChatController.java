@@ -25,7 +25,7 @@ public class ChatController {
     private final UserRepository userRepository;
     private final AuthUtil authUtil;
 
-    // ── WebSocket Endpoint ──────────────────────────────────────────────
+    // â”€â”€ WebSocket Endpoint â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     @MessageMapping("/chat.send")
     public void sendMessage(@Payload ChatMessageDTO messageDTO, java.security.Principal principal) {
@@ -80,7 +80,7 @@ public class ChatController {
         }
     }
 
-    // ── REST Endpoints ──────────────────────────────────────────────────
+    // â”€â”€ REST Endpoints â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     @GetMapping("/history/{targetUserId}")
     public ResponseEntity<Page<ChatMessageDTO>> getHistory(

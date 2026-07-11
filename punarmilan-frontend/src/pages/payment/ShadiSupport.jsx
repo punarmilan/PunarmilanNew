@@ -204,7 +204,7 @@ function PunarMilanSupport() {
 
             {/* Chat Window - MOBILE FULL SCREEN */}
             <div
-                className={`fixed inset-0 sm:inset-auto sm:bottom-4 sm:right-4 w-full sm:w-[400px] md:w-[440px] bg-white sm:rounded-2xl transition-all duration-300 z-50 shadow-2xl overflow-hidden ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full pointer-events-none'
+                className={`fixed inset-0 sm:inset-auto sm:bottom-4 sm:right-4 w-full sm:w-full max-w-[400px] md:w-full max-w-[440px] bg-white sm:rounded-2xl transition-all duration-300 z-50 shadow-2xl overflow-hidden ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full pointer-events-none'
                     } ${isMinimized ? 'sm:h-[70px]' : 'h-full sm:h-[600px] md:h-[650px]'}`}
             >
                 <div className="flex flex-col h-full">
@@ -362,7 +362,7 @@ function PunarMilanSupport() {
                 </div>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes bounce-slow {
                     0%, 100% {
                         transform: translateY(0);

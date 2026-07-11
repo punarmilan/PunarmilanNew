@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import adminSubscriptionService from '../services/adminSubscriptionService';
 import { Plus, Edit2, Trash2, Check, X, Shield, Zap, Sparkles } from 'lucide-react';
 import { toast } from 'react-hot-toast';
@@ -18,7 +19,8 @@ const SubscriptionManagement = () => {
         highlightTag: '',
         connects: '',
         features: '',
-        active: true
+        active: true,
+        planType: 'MEMBERSHIP'
     });
 
     useEffect(() => {
@@ -50,7 +52,8 @@ const SubscriptionManagement = () => {
                 highlightTag: plan.highlightTag || '',
                 connects: plan.connects || '',
                 features: plan.features || '',
-                active: plan.active !== undefined ? plan.active : true
+                active: plan.active !== undefined ? plan.active : true,
+                planType: plan.planType || 'MEMBERSHIP'
             });
         } else {
             setEditingPlan(null);
@@ -64,7 +67,8 @@ const SubscriptionManagement = () => {
                 highlightTag: '',
                 connects: '',
                 features: '',
-                active: true
+                active: true,
+                planType: 'MEMBERSHIP'
             });
         }
         setIsModalOpen(true);
@@ -96,7 +100,7 @@ const SubscriptionManagement = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this plan?')) return;
+        if (!(await Swal.fire({ title: 'Are you sure?', text: 'Are you sure you want to delete this plan?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#8C6D39', cancelButtonColor: '#d33', confirmButtonText: 'Yes' }).then(r => r.isConfirmed))) return;
         try {
             await adminSubscriptionService.deletePlan(id);
             toast.success('Plan deleted');
@@ -108,11 +112,52 @@ const SubscriptionManagement = () => {
 
     if (loading) return <div className="p-8 text-center text-gray-500 font-bold uppercase tracking-widest animate-pulse">Initializing Systems...</div>;
 
+    const renderPlanCard = (plan) => (
+        <div key={plan.id} className="bg-white rounded-[24px] sm:rounded-[40px] shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-500 group">
+            <div className={`h-2 sm:h-3 ${plan.active ? 'bg-emerald-500' : 'bg-gray-200'}`} />
+            <div className="p-6 sm:p-10 flex-1">
+                <div className="flex justify-between items-start mb-4 sm:mb-6">
+                    <span className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-widest ${plan.active ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-gray-50 text-gray-400 border border-gray-100'}`}>
+                        {plan.active ? 'ACTIVE' : 'INACTIVE'}
+                    </span>
+                    <div className="flex gap-2">
+                        <button onClick={() => handleOpenModal(plan)} className="p-1.5 sm:p-2 border border-blue-50 text-blue-500 rounded-lg sm:rounded-xl hover:bg-blue-50 transition-colors"><Edit2 size={14} className="sm:size-4" /></button>
+                        <button onClick={() => handleDelete(plan.id)} className="p-1.5 sm:p-2 border border-rose-50 text-rose-500 rounded-lg sm:rounded-xl hover:bg-rose-50 transition-colors"><Trash2 size={14} className="sm:size-4" /></button>
+                    </div>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-1 sm:mb-2">{plan.name}</h3>
+                <p className="text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-widest mb-4 sm:mb-6">{plan.durationInDays > 0 ? `${plan.durationInDays} Days Plan` : 'Custom Duration'}</p>
+
+                <div className="flex items-baseline gap-1 mb-8">
+                    <span className="text-3xl font-black text-gray-900">₹{plan.price}</span>
+                    <span className="text-sm text-gray-400 font-bold">/ membership</span>
+                </div>
+
+                <div className="space-y-4">
+                    <div className="flex items-center gap-3 text-sm font-bold text-gray-600">
+                        <Zap size={16} className="text-amber-500" />
+                        <span>{plan.connects} Connects included</span>
+                    </div>
+                    {plan.features && plan.features.split(',').map((f, i) => (
+                        <div key={i} className="flex items-center gap-3 text-sm font-bold text-gray-600">
+                            <Sparkles size={16} className="text-pink-500" />
+                            <span>{f.trim()}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+
+    const membershipPlans = plans.filter(p => !p.planType || p.planType === 'MEMBERSHIP');
+    const specialServicePlans = plans.filter(p => p.planType === 'SPECIAL_SERVICE');
+    const upgradePlans = plans.filter(p => p.planType === 'UPGRADE');
+
     return (
-        <div className="space-y-8 animate-in fade-in duration-700">
+        <div className="space-y-12 animate-in fade-in duration-700 pb-12">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 sm:p-8 rounded-2xl sm:rounded-[32px] shadow-sm border border-gray-100 gap-4">
                 <div>
-                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">Membership Plans</h2>
+                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">Plan Management</h2>
                     <p className="text-xs sm:text-sm text-gray-400 font-bold uppercase tracking-widest mt-1">Manage monetization and features</p>
                 </div>
                 <button
@@ -123,43 +168,40 @@ const SubscriptionManagement = () => {
                 </button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
-                {plans.map((plan) => (
-                    <div key={plan.id} className="bg-white rounded-[24px] sm:rounded-[40px] shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-500 group">
-                        <div className={`h-2 sm:h-3 ${plan.active ? 'bg-emerald-500' : 'bg-gray-200'}`} />
-                        <div className="p-6 sm:p-10 flex-1">
-                            <div className="flex justify-between items-start mb-4 sm:mb-6">
-                                <span className={`px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-widest ${plan.active ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-gray-50 text-gray-400 border border-gray-100'}`}>
-                                    {plan.active ? 'ACTIVE' : 'INACTIVE'}
-                                </span>
-                                <div className="flex gap-2">
-                                    <button onClick={() => handleOpenModal(plan)} className="p-1.5 sm:p-2 border border-blue-50 text-blue-500 rounded-lg sm:rounded-xl hover:bg-blue-50 transition-colors"><Edit2 size={14} className="sm:size-4" /></button>
-                                    <button onClick={() => handleDelete(plan.id)} className="p-1.5 sm:p-2 border border-rose-50 text-rose-500 rounded-lg sm:rounded-xl hover:bg-rose-50 transition-colors"><Trash2 size={14} className="sm:size-4" /></button>
-                                </div>
-                            </div>
-                            <h3 className="text-xl sm:text-2xl font-black text-gray-900 mb-1 sm:mb-2">{plan.name}</h3>
-                            <p className="text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-widest mb-4 sm:mb-6">{plan.durationInDays} Days Plan</p>
-
-                            <div className="flex items-baseline gap-1 mb-8">
-                                <span className="text-3xl font-black text-gray-900">₹{plan.price}</span>
-                                <span className="text-sm text-gray-400 font-bold">/ membership</span>
-                            </div>
-
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-3 text-sm font-bold text-gray-600">
-                                    <Zap size={16} className="text-amber-500" />
-                                    <span>{plan.connects} Connects included</span>
-                                </div>
-                                {plan.features && plan.features.split(',').map((f, i) => (
-                                    <div key={i} className="flex items-center gap-3 text-sm font-bold text-gray-600">
-                                        <Sparkles size={16} className="text-pink-500" />
-                                        <span>{f.trim()}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+            {/* Membership Plans Section */}
+            <div className="space-y-6">
+                <h3 className="text-lg font-black text-gray-800 uppercase tracking-widest border-b pb-2 border-gray-200">Membership Plans</h3>
+                {membershipPlans.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+                        {membershipPlans.map(renderPlanCard)}
                     </div>
-                ))}
+                ) : (
+                    <p className="text-sm font-bold text-gray-400 p-8 border border-dashed border-gray-200 rounded-2xl text-center">No membership plans available. Create one to get started.</p>
+                )}
+            </div>
+
+            {/* Special Service Plans Section */}
+            <div className="space-y-6">
+                <h3 className="text-lg font-black text-gray-800 uppercase tracking-widest border-b pb-2 border-gray-200">Special Service Plans</h3>
+                {specialServicePlans.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+                        {specialServicePlans.map(renderPlanCard)}
+                    </div>
+                ) : (
+                    <p className="text-sm font-bold text-gray-400 p-8 border border-dashed border-gray-200 rounded-2xl text-center">No special service plans available. Select "Special Service Plan" when adding a new plan.</p>
+                )}
+            </div>
+
+            {/* Upgrade Plans Section */}
+            <div className="space-y-6">
+                <h3 className="text-lg font-black text-gray-800 uppercase tracking-widest border-b pb-2 border-gray-200">Upgrade Plans</h3>
+                {upgradePlans.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+                        {upgradePlans.map(renderPlanCard)}
+                    </div>
+                ) : (
+                    <p className="text-sm font-bold text-gray-400 p-8 border border-dashed border-gray-200 rounded-2xl text-center">No upgrade plans available. Select "Upgrade Plan" when adding a new plan.</p>
+                )}
             </div>
 
             {/* Plan Modal */}
@@ -177,6 +219,18 @@ const SubscriptionManagement = () => {
                         </div>
                         <form onSubmit={handleSubmit} className="p-6 sm:p-10 space-y-4 sm:space-y-6 max-h-[80vh] sm:max-h-[70vh] overflow-y-auto custom-scrollbar">
                             <div className="grid grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Plan Category</label>
+                                    <select
+                                        value={formData.planType}
+                                        onChange={(e) => setFormData({ ...formData, planType: e.target.value })}
+                                        className="w-full px-6 py-4 bg-gray-50 border-none rounded-2xl text-sm font-bold focus:ring-2 focus:ring-pink-500 outline-none"
+                                    >
+                                        <option value="MEMBERSHIP">Membership Plan</option>
+                                        <option value="SPECIAL_SERVICE">Special Service Plan</option>
+                                        <option value="UPGRADE">Upgrade Plan</option>
+                                    </select>
+                                </div>
                                 <div className="space-y-2">
                                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Plan Name</label>
                                     <input

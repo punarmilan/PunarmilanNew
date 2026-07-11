@@ -1,166 +1,165 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
+import ProfileAside from "./ProfileAside";
 import More from "../pages/myshadi/more/More";
+import { logout } from "../Slice/UserSlice";
 
 export default function SecondNav() {
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
 
-    const tabs = [
-        { id: "Dashboard", path: "/my-shadi" },
-        { id: "My Profile", path: "/my-shadi/my-profile" },
-        { id: "My Photos", path: "/my-shadi/my-photos" },
-        { id: "Partner Preferences", path: "/my-shadi/partner-preferences" },
-        { id: "Settings", path: "/my-shadi/settings" },
-        // { id: "More", path: "/my-shadi/more", subPaths: ["/my-shadi/my-order", "/my-tickets"], component: (isActive) => <More isActive={isActive} /> },
+    const fileInputRef = useRef(null);
+    const [photoPreview, setPhotoPreview] = useState(null);
+
+    const { summary } = useSelector((state) => state.dashboard);
+    const user = summary?.user;
+
+    const myShadiTabs = [
+        { id: "Dashboard", path: "/my-shadi", icon: "fa-solid fa-border-all", color: "text-amber-500" },
+        { id: "Profile", path: "/my-shadi/my-profile", subPaths: ["/my-shadi/edit-profile", "/my-shadi/my-photos", "/my-shadi/partner-preferences"], icon: "fa-regular fa-user", color: "text-cyan-500" },
+        { id: "Interests", path: "/inbox", icon: "fa-regular fa-handshake", color: "text-rose-500" },
+        { id: "Chat list", path: "/my-shadi/chats", icon: "fa-regular fa-comment-dots", color: "text-indigo-500" },
+        { id: "Plan", path: "/payment", icon: "fa-regular fa-credit-card", color: "text-emerald-500" },
+        { id: "Setting", path: "/my-shadi/settings", icon: "fa-solid fa-gear", color: "text-slate-500" },
+        { id: "Log out", path: "/logout", icon: "fa-solid fa-right-from-bracket", color: "text-red-500" },
     ];
 
-    // Get active tab from current URL path
+    const matchesTabs = [
+        { id: "New Matches", path: "/matches?tab=new", icon: "fa-solid fa-bolt" },
+        { id: "Near Me", path: "/matches?tab=nearme", icon: "fa-solid fa-location-dot" },
+        { id: "Viewed My Profile", path: "/matches?tab=viewedme", icon: "fa-solid fa-eye" },
+    ];
+
+    const searchTabs = [
+        { id: "Basic Search", path: "/search", icon: "fa-solid fa-magnifying-glass" },
+        { id: "Advance Search", path: "/search/advance", icon: "fa-solid fa-sliders" }
+    ];
+
+    const isMatchesPage = location.pathname.startsWith("/matches");
+    const isSearchPage = location.pathname.startsWith("/search");
+    const tabs =
+        isMatchesPage ? matchesTabs :
+        isSearchPage ? searchTabs :
+        myShadiTabs;
+
     const getActiveTabFromPath = () => {
         const currentPath = location.pathname;
-
-        // Try exact matches first
-        const exactMatch = tabs.find(tab => tab.path === currentPath);
+        const exactMatch = tabs.find((tab) => tab.path === currentPath);
         if (exactMatch) return exactMatch.id;
-
-        // Check subPaths (especially for "More")
-        const subPathMatch = tabs.find(tab =>
-            tab.subPaths?.some(sp => currentPath === sp || currentPath.startsWith(sp + "/"))
+        const subPathMatch = tabs.find((tab) =>
+            tab.subPaths?.some((sp) => currentPath === sp || currentPath.startsWith(sp + "/"))
         );
         if (subPathMatch) return subPathMatch.id;
-
-        // Check prefixes (longest first to avoid partial matches)
         const prefixMatch = [...tabs]
-            .filter(tab => tab.path && tab.path !== "/my-shadi") // Exclude base path for prefix check
+            .filter((tab) => tab.path && tab.path !== "/my-shadi")
             .sort((a, b) => b.path.length - a.path.length)
-            .find(tab => currentPath.startsWith(tab.path + "/"));
-
+            .find((tab) => currentPath.startsWith(tab.path + "/"));
         if (prefixMatch) return prefixMatch.id;
-
-        // Fallback to Dashboard if path starts with it
-        if (currentPath === "/my-shadi" || currentPath.startsWith("/my-shadi/")) return "Dashboard";
-
-        return "Dashboard";
+        if (currentPath.startsWith("/inbox")) return "Interests";
+        if (currentPath === "/my-shadi") return "Dashboard";
+        return "";
     };
 
     const [active, setActive] = useState(getActiveTabFromPath());
     const [isMobile, setIsMobile] = useState(false);
 
-    // Update active tab when URL changes
     useEffect(() => {
         setActive(getActiveTabFromPath());
     }, [location.pathname]);
 
-    // Check if mobile on mount and resize
     useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
-        window.addEventListener('resize', checkMobile);
-
-        return () => window.removeEventListener('resize', checkMobile);
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
+    useEffect(() => {
+        if (isMatchesPage) {
+            const params = new URLSearchParams(location.search);
+            const tab = params.get("tab");
+            if (tab === "new") setActive("New Matches");
+            else if (tab === "today") setActive("Today's Match");
+            else if (tab === "my") setActive("My Matches");
+            else if (tab === "near") setActive("Near Me");
+            else if (tab === "more") setActive("More Matches");
+        } else if (isSearchPage) {
+            const params = new URLSearchParams(location.search);
+            const tab = params.get("tab");
+            if (tab === "advance") setActive("Advance Search");
+            else setActive("Basic Search");
+        }
+    }, [location.search, isMatchesPage, isSearchPage]);
+
     const handleTabClick = (tab) => {
+        if (tab.id === "Log out") {
+            dispatch(logout());
+            navigate("/");
+            toast.success("Logged out successfully");
+            return;
+        }
+
         if (tab.component) {
-            // If it's a component (like More), just set active
             setActive(tab.id);
         } else {
-            // Regular navigation
             setActive(tab.id);
             navigate(tab.path);
         }
     };
 
+    const handleAddPicture = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleFileChange = async (e) => {
+        let file = e.target.files[0];
+        if (!file) return;
+        setPhotoPreview(URL.createObjectURL(file));
+        toast.success("Photo selected");
+        // Add upload logic here if needed
+    };
+
     return (
         <>
-            {/* Mobile/Tablet View (below 768px) */}
-            <div className="md:hidden">
-                <div className="pt-12 xs:pt-14">
-                    <div className="w-full bg-white shadow-sm border-b">
-                        <div className="w-full overflow-x-auto scrollbar-hide">
-                            <div className="flex justify-center w-full min-w-max px-1 xs:px-2 sm:px-3 h-10 xs:h-11 sm:h-12 items-center gap-0.5 xs:gap-0.5">
-                                {tabs.map((tab) => {
-                                    // Check if it's a component tab
-                                    if (tab.component) {
-                                        const isActive = active === tab.id;
-                                        return (
-                                            <div
-                                                key={tab.id}
-                                                onClick={() => handleTabClick(tab)}
-                                                className={`cursor-pointer px-1.5 xs:px-2 sm:px-3 py-1 xs:py-1 sm:py-1.5 transition-all ${isActive ? "bg-rose-50 border border-rose-100 rounded-lg" : ""}`}
-                                            >
-                                                {tab.component(isActive)}
-                                            </div>
-                                        );
-                                    }
-
-                                    // Regular tab button
-                                    return (
-                                        <button
-                                            key={tab.id}
-                                            onClick={() => handleTabClick(tab)}
-                                            className={`cursor-pointer px-1.5 xs:px-2 sm:px-3 py-1 xs:py-1 sm:py-1.5 text-[10px] xs:text-xs font-medium rounded-lg transition-all whitespace-nowrap ${active === tab.id
-                                                ? "text-rose-500 bg-rose-50 border border-rose-100"
-                                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-                                                }`}
-                                        >
-                                            {tab.id}
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             {/* Desktop View (768px+) */}
             <div className="hidden md:block">
-                <div className="pt-14 lg:pt-16">
-                    <div className="w-full bg-white shadow-sm border-b">
-                        <div className="max-w-7xl mx-auto w-full">
-                            <div className="overflow-x-auto scrollbar-hide">
-                                <ul className="flex justify-center w-full gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 px-3 sm:px-4 lg:px-6 h-11 sm:h-12 items-center min-w-max">
-                                    {tabs.map((tab) => {
-                                        // Check if it's a component tab
-                                        if (tab.component) {
-                                            const isActive = active === tab.id;
-                                            return (
-                                                <li
-                                                    key={tab.id}
-                                                    onClick={() => handleTabClick(tab)}
-                                                    className={`cursor-pointer pb-1.5 sm:pb-2 px-0.5 sm:px-1 transition-all ${isActive ? "border-b-2 border-rose-500" : ""}`}
-                                                >
-                                                    {tab.component(isActive)}
-                                                </li>
-                                            );
-                                        }
-
-                                        // Regular tab item
-                                        return (
-                                            <li
-                                                key={tab.id}
-                                                onClick={() => handleTabClick(tab)}
-                                                className={`cursor-pointer pb-1.5 sm:pb-2 px-0.5 sm:px-1 text-xs sm:text-sm lg:text-base font-medium whitespace-nowrap ${active === tab.id
-                                                    ? "text-rose-500 border-b-2 border-rose-500"
-                                                    : "text-gray-600 hover:text-gray-900"
-                                                    } transition-colors`}
-                                            >
-                                                {tab.id}
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <ProfileAside 
+                    user={user}
+                    tabs={tabs}
+                    active={active}
+                    handleTabClick={handleTabClick}
+                    handleEditProfile={() => navigate('/my-shadi/edit-profile')}
+                    photoPreview={photoPreview}
+                    handleAddPicture={handleAddPicture}
+                    fileInputRef={fileInputRef}
+                    handleFileChange={handleFileChange}
+                />
             </div>
 
-            {/* Add CSS for hiding scrollbar */}
+            {/* Mobile View (< 768px) - Bottom Navigation Bar */}
+            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-[9999] shadow-[0_-10px_20px_rgba(0,0,0,0.05)] pb-safe">
+                 <div className="flex overflow-x-auto scrollbar-hide items-center justify-start sm:justify-center h-16 px-1 xs:px-2">
+                     {tabs.map(tab => (
+                         <button 
+                             key={tab.id}
+                             onClick={() => handleTabClick(tab)}
+                             className={`flex flex-col items-center justify-center flex-shrink-0 min-w-[72px] sm:min-w-[80px] h-full relative transition-all duration-300 ${active === tab.id ? `${tab.color || 'text-[#C5A059]'} scale-105 font-bold` : `${tab.color || 'text-gray-400'} opacity-70 hover:opacity-100 font-medium`}`}
+                         >
+                             <div className="relative mb-1">
+                                 <i className={`${tab.icon} text-lg xs:text-xl drop-shadow-sm`}></i>
+                             </div>
+                             <span className="text-[10px] xs:text-[11px] tracking-tight truncate w-[90%] text-center">{tab.id}</span>
+                             {active === tab.id && (
+                                <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 w-8 xs:w-12 h-1 bg-current rounded-b-full opacity-80`}></div>
+                             )}
+                         </button>
+                     ))}
+                 </div>
+            </div>
+
             <style>{`
                 .scrollbar-hide::-webkit-scrollbar {
                     display: none;
@@ -168,6 +167,9 @@ export default function SecondNav() {
                 .scrollbar-hide {
                     -ms-overflow-style: none;
                     scrollbar-width: none;
+                }
+                .pb-safe {
+                    padding-bottom: env(safe-area-inset-bottom, 0px);
                 }
             `}</style>
         </>

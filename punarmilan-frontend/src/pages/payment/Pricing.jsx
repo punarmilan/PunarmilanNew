@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import api from '../../services/api';
 import PricingCard from '../../components/PricingCard';
 import OrderSummaryModal from '../../components/payment/OrderSummaryModal';
@@ -57,10 +58,10 @@ const Pricing = () => {
               planId: selectedPlan.id
             };
             const { data: subscription } = await api.post('/payments/verify', verificationData);
-            alert('Subscription successful!');
-            window.location.href = '/dashboard';
+            Swal.fire({ text: 'Subscription successful!', confirmButtonColor: '#8C6D39' });
+            window.location.href = '/my-shadi';
           } catch (err) {
-            alert('Payment verification failed');
+            Swal.fire({ text: 'Payment verification failed', confirmButtonColor: '#8C6D39' });
           }
         },
         prefill: {
@@ -76,7 +77,7 @@ const Pricing = () => {
       rzp.open();
     } catch (error) {
       console.error('Error creating order:', error);
-      alert('Failed to initiate payment');
+      Swal.fire({ text: 'Failed to initiate payment', confirmButtonColor: '#8C6D39' });
     }
   };
 

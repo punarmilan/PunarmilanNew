@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAcceptedByMe, fetchAcceptedByHer } from '../../../Slice/MatchSlice';
 import Sidebar from './Sidebar';
@@ -119,11 +120,11 @@ export default function App() {
                                     }}
                                     onWhatsApp={() => {
                                         if (profile.phone) window.open(`https://wa.me/${profile.phone}`, '_blank');
-                                        else alert("Phone number not available.");
+                                        else Swal.fire({ text: "Phone number not available.", confirmButtonColor: '#8C6D39' });
                                     }}
                                     onCall={() => {
                                         if (profile.phone) window.open(`tel:${profile.phone}`, '_self');
-                                        else alert("Phone number not available.");
+                                        else Swal.fire({ text: "Phone number not available.", confirmButtonColor: '#8C6D39' });
                                     }}
                                 />
                             ))

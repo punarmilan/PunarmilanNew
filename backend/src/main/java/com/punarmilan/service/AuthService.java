@@ -15,9 +15,21 @@ public interface AuthService {
 
     void processForgotPassword(ForgotPasswordRequest request);
 
+    void verifyForgotPasswordOtp(VerifyOtpRequest request);
+
+    void resetPasswordWithOtp(ResetPasswordOtpRequest request);
+
     void resetPassword(ResetPasswordRequest request);
 
     void verifyEmail(String token);
+
+    void verifyOtp(VerifyOtpRequest request);
+
+    void resendOtp(String identifier, String type);
+    
+    void requestLoginOtp(LoginOtpRequest request);
+    
+    UserResponse verifyLoginOtp(LoginOtpVerifyRequest request);
 
     void logout(String email);
 }

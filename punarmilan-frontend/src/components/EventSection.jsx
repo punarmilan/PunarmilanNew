@@ -112,7 +112,7 @@ const EventsSection = () => {
 
     return (
         <div className='w-full px-2 sm:px-4 md:px-0 space-y-6 font-sans mb-12'>
-            <div className="bg-white/70 backdrop-blur-md rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/20 p-6 md:p-10">
+            <div className="dashboard-card-bg rounded-[2.5rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/20 p-6 md:p-10">
                 {/* Header with improved aesthetics */}
                 <div className="flex items-end justify-between mb-12">
                     <div className="space-y-1">

@@ -34,7 +34,7 @@ const MatchesSection = () => {
 
     return (
         <div className="w-full px-2 sm:px-4 md:px-0">
-            <div className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg p-3 sm:p-4 md:p-6">
+            <div className="dashboard-card-bg rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg p-3 sm:p-4 md:p-6">
                 {/* Header */}
                 <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between mb-4 sm:mb-5 md:mb-6 gap-2 xs:gap-0">
                     <div>
@@ -50,7 +50,7 @@ const MatchesSection = () => {
                 </div>
 
                 {/* Match Categories */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-5 md:mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-5 md:mb-6">
                     <CategoryCard title="Accepted Members" count={0} icon={<Users className="w-4 h-4 sm:w-5 sm:h-5" />} color="purple" />
                     <CategoryCard title="Shortlists & More" count={0} icon={<Star className="w-4 h-4 sm:w-5 sm:h-5" />} color="blue" />
                     <CategoryCard title="My Matches" count={20} icon={<Heart className="w-4 h-4 sm:w-5 sm:h-5" />} color="pink" />

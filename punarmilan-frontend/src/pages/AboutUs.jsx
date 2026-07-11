@@ -10,7 +10,7 @@ const AboutUs = () => {
             <Header />
 
             {/* Hero Section with Glassmorphism Overlay */}
-            <section className="relative h-[80vh] flex items-center justify-center overflow-hidden pt-16">
+            <section className="relative min-h-[80vh] py-32 flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0">
                     <img
                         src={bannerImg}
@@ -31,14 +31,7 @@ const AboutUs = () => {
                     <p className="text-xl md:text-2xl text-slate-100 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow-lg mb-12">
                         PunarMilan is more than a platform; it's a sanctuary for those who believe in the enduring power of love and shared traditions.
                     </p>
-                    <div className="flex flex-wrap justify-center gap-6">
-                        <button className="bg-[#e91e63] text-white px-10 py-5 rounded-2xl text-xl font-bold hover:bg-rose-600 transition-all duration-300 shadow-[0_15px_30px_rgba(233,30,99,0.3)] transform hover:-translate-y-1">
-                            Begin Your Story
-                        </button>
-                        <button className="bg-white/10 backdrop-blur-md border border-white/30 text-white px-10 py-5 rounded-2xl text-xl font-bold hover:bg-white/20 transition-all duration-300">
-                            Our Method
-                        </button>
-                    </div>
+
                 </div>
             </section>
 
@@ -149,11 +142,6 @@ const AboutUs = () => {
                             Create Your Free Profile Today
                         </button>
                     </Link>
-                    <div className="mt-12 flex items-center justify-center gap-8 opacity-40 greyscale">
-                        <img src="https://images.unsplash.com/photo-1549417229-aa67d3263c09?auto=format&fit=crop&q=80&w=200" className="h-10 w-auto" alt="Partner Logo" />
-                        <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=200" className="h-10 w-auto" alt="Partner Logo" />
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=200" className="h-10 w-auto" alt="Partner Logo" />
-                    </div>
                 </div>
             </section>
 

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.punarmilan.dto.SearchCriteriaDTO;
 import java.util.Map;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -69,6 +70,11 @@ public class ProfileController {
             log.debug("No authenticated user for profile view ID: {}", userId);
         }
         return ResponseEntity.ok(profileService.getProfileByUserId(userId, currentUser));
+    }
+
+    @GetMapping("/filters")
+    public ResponseEntity<Map<String, List<String>>> getFilterOptions() {
+        return ResponseEntity.ok(profileService.getFilterOptions());
     }
 
     @PostMapping("/search")

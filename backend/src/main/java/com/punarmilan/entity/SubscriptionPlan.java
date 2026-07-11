@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "subscription_plans")
+@com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,4 +45,8 @@ public class SubscriptionPlan {
 
     @Column(name = "features", columnDefinition = "TEXT")
     private String features; // Comma separated or JSON string
+
+    @Column(name = "plan_type")
+    @Builder.Default
+    private String planType = "MEMBERSHIP"; // e.g., "MEMBERSHIP", "SPECIAL_SERVICE", "UPGRADE"
 }

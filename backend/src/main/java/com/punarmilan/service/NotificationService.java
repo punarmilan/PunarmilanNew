@@ -20,7 +20,7 @@ public interface NotificationService {
     void markAllAsRead(User user);
 
     /**
-     * Internal method — used by other services to create notifications.
+     * Internal method â€” used by other services to create notifications.
      */
     void createNotification(User recipient, NotificationType type, String title, String message,
             String senderName, String senderPhotoUrl, Long referenceId);

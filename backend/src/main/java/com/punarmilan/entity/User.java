@@ -64,6 +64,18 @@ public class User {
     @Column(name = "verification_token_expiry")
     private LocalDateTime verificationTokenExpiry;
 
+    @Column(name = "email_otp", length = 6)
+    private String emailOtp;
+
+    @Column(name = "email_otp_expiry")
+    private LocalDateTime emailOtpExpiry;
+
+    @Column(name = "mobile_otp", length = 6)
+    private String mobileOtp;
+
+    @Column(name = "mobile_otp_expiry")
+    private LocalDateTime mobileOtpExpiry;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

@@ -26,8 +26,8 @@ function FaqSection() {
     ];
 
     return (
-        <div className="bg-gray-50 py-16 px-4">
-            <div className="max-w-6xl mx-auto">
+        <div className="bg-transparent py-16 px-4">
+            <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
@@ -40,7 +40,7 @@ function FaqSection() {
                     {faqs.map((faq) => (
                         <div
                             key={faq.id}
-                            className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
+                            className="dashboard-card-bg border border-white/50 rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300"
                         >
                             <h3 className="text-lg font-semibold text-gray-800 mb-4">
                                 {faq.question}
@@ -54,11 +54,11 @@ function FaqSection() {
 
                 {/* Help Link */}
                 <div className="text-center mt-12">
-                    <p className="text-gray-600">
+                    <p className="text-[#8C6D39] text-lg font-medium italic tracking-wide">
                         Didn't find what you are looking for? Find it on our{' '}
                         <a
                             href="#"
-                            className="text-blue-600 hover:text-blue-700 font-medium hover:underline"
+                            className="text-rose-600 hover:text-rose-700 font-bold hover:underline transition-colors"
                         >
                             Help page
                         </a>
@@ -72,8 +72,8 @@ function FaqSection() {
                         The safest, smartest and the most secure<br />matchmaking service in India
                     </h2>
 
-                    {/* Trust Card */}
-                    <div className="bg-white rounded-2xl shadow-sm p-12">
+                    <div className="mt-20">
+                    <div className="dashboard-card-bg border border-white/50 rounded-2xl shadow-sm p-12">
                         {/* Money Back Guarantee Badge */}
                         <div className="flex flex-col items-center mb-8">
 
@@ -117,6 +117,7 @@ function FaqSection() {
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     );

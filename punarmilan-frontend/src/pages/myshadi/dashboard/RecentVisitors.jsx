@@ -63,7 +63,7 @@ const RecentVisitors = () => {
     }
 
     return (
-        <div className="bg-gray-50">
+        <div className="bg-transparent">
             <main className="max-w-7xl mx-auto px-4 py-6">
                 <div className="flex items-center gap-3 mb-6">
                     <h2 className="text-2xl sm:text-3xl font-bold">Recent Visitors</h2>
@@ -88,7 +88,7 @@ const RecentVisitors = () => {
                             {visitors.map((v) => (
                                 <div
                                     key={v.id}
-                                    className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all w-56 flex-shrink-0 group relative"
+                                    className="dashboard-card-bg rounded-3xl shadow-md hover:shadow-xl transition-all w-56 flex-shrink-0 group relative"
                                 >
                                     {v.isPremium && (
                                         <div className="absolute top-3 left-3 z-10 bg-gradient-to-r from-pink-500 to-red-500 rounded-full p-2">

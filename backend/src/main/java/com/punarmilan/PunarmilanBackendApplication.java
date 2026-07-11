@@ -14,7 +14,7 @@ public class PunarmilanBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PunarmilanBackendApplication.class, args);
 
-		System.err.println("punarmilan backend appliction started successfully");
+		System.err.println("punarmilan backend application started successfully");
 
 	}
 

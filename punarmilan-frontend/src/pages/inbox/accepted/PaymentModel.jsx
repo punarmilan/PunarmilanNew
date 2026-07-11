@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const PaymentModal = ({ onClose }) => {
     const [selectedPlan, setSelectedPlan] = useState(null);
@@ -80,7 +81,7 @@ const PaymentModal = ({ onClose }) => {
 
     const handleSelectPlan = (planId, planName) => {
         setSelectedPlan(planId);
-        alert(`Processing payment for ${planName} plan...`);
+        Swal.fire({ text: `Processing payment for ${planName} plan...`, confirmButtonColor: '#8C6D39' });
     };
 
     return (

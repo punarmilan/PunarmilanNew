@@ -1,4 +1,5 @@
 import { ArrowLeft } from 'lucide-react';
+import Swal from 'sweetalert2';
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +29,7 @@ function DietPage() {
             navigate('/my-shadi/partner-preferences');
         } catch (error) {
             console.error('Failed to update diet:', error);
-            alert('Failed to update diet. Please try again.');
+            Swal.fire({ text: 'Failed to update diet. Please try again.', confirmButtonColor: '#8C6D39' });
         }
     };
 

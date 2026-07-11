@@ -34,6 +34,12 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
         }
     }, [open, user?.id, dispatch]);
 
+    useEffect(() => {
+        const handleOpenChats = () => setActiveTab("chats");
+        window.addEventListener('open-chats-sidebar', handleOpenChats);
+        return () => window.removeEventListener('open-chats-sidebar', handleOpenChats);
+    }, []);
+
     // Toggle audio mute
     const toggleAudioMute = () => {
         setIsAudioMuted(!isAudioMuted);
@@ -86,14 +92,14 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                     
                     /* Tablet and Desktop: Side panel from right */
                     md:right-0 md:left-auto md:bottom-4 
-                    md:h-[580px] md:w-[320px]
+                    md:h-[580px] md:w-full max-w-[320px]
                     md:rounded-2xl md:rounded-r-none
                     md:border-l md:border-gray-200
                     md:z-[1000]
                     ${open ? "md:translate-x-0 md:translate-y-0" : "md:translate-x-full md:translate-y-0"}
                     
                     /* Large Desktop */
-                    lg:w-[360px] lg:h-[620px]
+                    lg:w-full max-w-[360px] lg:h-[620px]
                 `}
             >
                 {/* HEADER with gradient background */}
@@ -344,7 +350,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
 
 
                 {/* BOTTOM TABS */}
-                <div className="absolute bottom-0 left-0 right-0 grid grid-cols-3 border-t border-gray-200 text-sm bg-white rounded-b-3xl md:rounded-bl-none shadow-lg">
+                <div className="absolute bottom-0 left-0 right-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 border-t border-gray-200 text-sm bg-white rounded-b-3xl md:rounded-bl-none shadow-lg">
                     <button
                         onClick={() => setActiveTab("chats")}
                         className={`py-3.5 flex flex-col items-center justify-center gap-1 transition-all duration-200 relative border-x border-gray-200 ${activeTab === "chats"

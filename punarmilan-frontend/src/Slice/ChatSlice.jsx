@@ -99,6 +99,9 @@ const chatSlice = createSlice({
             state.activeChatUser = null;
             state.activeChatUserId = null;
         },
+        clearChatError: (state) => {
+            state.error = null;
+        },
         receiveMessage: (state, action) => {
             const { currentUserId: receivedCurrentUserId, ...message } = action.payload;
             // Use ID from payload if provided, otherwise fallback to state
@@ -194,5 +197,5 @@ const chatSlice = createSlice({
     }
 });
 
-export const { setActiveChatUser, receiveMessage, setCurrentUserId, openChatWith, closeChatWindow } = chatSlice.actions;
+export const { setActiveChatUser, receiveMessage, setCurrentUserId, openChatWith, closeChatWindow, clearChatError } = chatSlice.actions;
 export default chatSlice.reducer;

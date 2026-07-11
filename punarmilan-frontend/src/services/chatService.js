@@ -13,14 +13,17 @@ const ChatService = {
         if (isConnecting || (stompClient && stompClient.connected)) return;
         isConnecting = true;
 
-        const wsUrl = import.meta.env.VITE_WS_URL || 'http://localhost:8080/ws';
+        const wsUrl = import.meta.env.VITE_WS_URL || '/ws';
         socket = new SockJS(wsUrl);
         stompClient = Stomp.over(socket);
 
         // Disable logging in production
         stompClient.debug = null;
 
-        stompClient.connect({}, (frame) => {
+        const token = localStorage.getItem('token');
+        const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+
+        stompClient.connect(headers, (frame) => {
             isConnecting = false;
             retryCount = 0; // Reset on successful connection
             

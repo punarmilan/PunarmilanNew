@@ -14,6 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @Service
 @RequiredArgsConstructor
@@ -28,8 +32,15 @@ public class MinioServiceImpl implements MinioService {
     @Value("${minio.public-url:}")
     private String publicUrl;
 
+    @Value("${minio.enabled:true}")
+    private boolean minioEnabled;
+
     @jakarta.annotation.PostConstruct
     public void init() {
+        if (!minioEnabled) {
+            log.info("MinIO is disabled in configuration. Skipping bucket initialization.");
+            return;
+        }
         try {
             boolean found = minioClient.bucketExists(io.minio.BucketExistsArgs.builder().bucket(bucketName).build());
             if (!found) {
@@ -47,6 +58,13 @@ public class MinioServiceImpl implements MinioService {
     public String uploadFile(MultipartFile file, String folder) {
         try {
             String fileName = folder + "/" + UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+
+            if (!minioEnabled) {
+                Path uploadPath = Paths.get("uploads", fileName);
+                Files.createDirectories(uploadPath.getParent());
+                Files.copy(file.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
+                return fileName;
+            }
 
             minioClient.putObject(
                     PutObjectArgs.builder()
@@ -86,6 +104,10 @@ public class MinioServiceImpl implements MinioService {
             } catch (Exception e) {
                 log.warn("Failed to parse legacy URL for presigned generation: {}", objectName);
             }
+        }
+
+        if (!minioEnabled) {
+            return "http://localhost:8080/uploads/" + actualObject;
         }
 
         // If a public URL is configured, return the direct URL since the bucket is public anyway.

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchViewedContacts } from '../../../Slice/UserSlice';
 import Sidebar from './Sidebar';
@@ -114,14 +115,14 @@ export default function Contacts() {
                                             const cleanPhone = profile.phone.replace(/\D/g, '');
                                             window.open(`https://wa.me/${cleanPhone}`, '_blank');
                                         } else {
-                                            alert("Phone number not available.");
+                                            Swal.fire({ text: "Phone number not available.", confirmButtonColor: '#8C6D39' });
                                         }
                                     }}
                                     onCall={() => {
                                         if (profile.phone && profile.phone !== "Not Shared") {
                                             window.open(`tel:${profile.phone}`, '_self');
                                         } else {
-                                            alert("Phone number not available.");
+                                            Swal.fire({ text: "Phone number not available.", confirmButtonColor: '#8C6D39' });
                                         }
                                     }}
                                 />

@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProfileService {
     Page<ProfileDTO> searchProfiles(SearchCriteriaDTO criteria, User viewer, Pageable pageable);
+    
+    Map<String, List<String>> getFilterOptions();
 
     ProfileDTO getMyProfile(User user);
 

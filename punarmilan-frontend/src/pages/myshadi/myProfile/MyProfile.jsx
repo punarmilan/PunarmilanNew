@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import editProfileBanner from '../../../assets/image/edit-profile-banner.png';
 // import img from '../../../assets/image/profile.png' // Removed static image
 import 'react-toastify/dist/ReactToastify.css';
-import { FaEdit, FaChartBar, FaFilter, FaHeart, FaCamera, FaEye, FaPhone, FaStar, FaShareAlt, FaDownload, FaUserEdit, FaUserFriends, FaHome, FaGraduationCap, FaBriefcase, FaMapMarkerAlt, FaBirthdayCake, FaClock, FaCity, FaVenusMars, FaUsers, FaWallet, FaCheck, FaTimes, FaInfoCircle, FaUserCircle, FaLanguage } from 'react-icons/fa';
+import { FaEdit, FaChartBar, FaFilter, FaHeart, FaCamera, FaEye, FaPhone, FaStar, FaShareAlt, FaDownload, FaUserEdit, FaUserFriends, FaHome, FaGraduationCap, FaBriefcase, FaMapMarkerAlt, FaBirthdayCake, FaClock, FaCity, FaVenusMars, FaUsers, FaWallet, FaCheck, FaTimes, FaInfoCircle, FaUserCircle, FaLanguage, FaShieldAlt, FaTrash } from 'react-icons/fa';
 import { MdVerified } from 'react-icons/md';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMyProfile, updateProfile, fetchPartnerPreferences, updatePartnerPreferences, uploadIdProof } from '../../../Slice/ProfileSlice';
+import { fetchMyProfile, updateProfile, fetchPartnerPreferences, updatePartnerPreferences, uploadIdProof, uploadProfilePhoto } from '../../../Slice/ProfileSlice';
 import { fetchDashboardSummary } from '../../../Slice/DashboardSlice';
+import ProfileStatusCards from './ProfileStatusCards';
+import ProfileDetailsView from './ProfileDetailsView';
 
 
 const rashiOptions = [
@@ -135,7 +139,7 @@ const FIELD_TYPES = {
 };
 
 
-const MyProfile = () => {
+const MyProfile = ({ editModePage = false }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { profile, preferences, loading, error } = useSelector((state) => state.profile);
@@ -152,6 +156,12 @@ const MyProfile = () => {
   const [idProofFile, setIdProofFile] = useState(null);
   const [errors, setErrors] = useState({});
   const [showOtherInput, setShowOtherInput] = useState({});
+  const [isEditing, setIsEditing] = useState(editModePage);
+  const [photoPreview, setPhotoPreview] = useState(null);
+
+  useEffect(() => {
+    setIsEditing(editModePage);
+  }, [editModePage]);
 
   useEffect(() => {
     dispatch(fetchMyProfile());
@@ -365,13 +375,55 @@ const MyProfile = () => {
           grewUpIn: profile.grewUpIn || 'India',
           weight: profile.weight || '',
           height: profile.height || ''
-        }
+        },
+        albumPhotos: [
+          profile.profilePhotoUrl || null,
+          profile.photoUrl2 || null,
+          profile.photoUrl3 || null,
+          profile.photoUrl4 || null,
+          profile.photoUrl5 || null,
+          profile.photoUrl6 || null
+        ]
       }));
 
       setProfileImage(profile.profilePhotoUrl || null);
       setIsPremium(profile.isPremium || false);
     }
   }, [profile]);
+
+  const handlePhotoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Show immediate local preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPhotoPreview(reader.result);
+    };
+    reader.readAsDataURL(file);
+
+    // Upload to database
+    try {
+      await dispatch(uploadProfilePhoto({ file, photoIndex: 0 })).unwrap();
+      toast.success("Profile photo updated successfully!");
+    } catch (error) {
+      toast.error(error || "Failed to upload photo");
+      setPhotoPreview(null); // Revert preview on failure
+    }
+  };
+
+  const handleAlbumPhotoUpload = async (e, index) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const toastId = toast.loading("Uploading photo...");
+    try {
+      await dispatch(uploadProfilePhoto({ file, photoIndex: index })).unwrap();
+      toast.update(toastId, { render: "Photo uploaded successfully!", type: "success", isLoading: false, autoClose: 3000 });
+    } catch (error) {
+      toast.update(toastId, { render: error || "Failed to upload photo", type: "error", isLoading: false, autoClose: 3000 });
+    }
+  };
 
   useEffect(() => {
     if (preferences) {
@@ -1041,7 +1093,7 @@ Generated on: ${new Date().toLocaleString()}
     return (
       <div className="flex flex-col sm:flex-row items-start sm:items-center p-2.5 sm:p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl hover:shadow-md transition-shadow gap-2 sm:gap-0">
         <div className="flex items-center w-full sm:w-auto">
-          <div className="mr-3 text-rose-500/70 sm:text-gray-500">{icon}</div>
+          <div className="mr-3 text-[#C5A059]/70 sm:text-gray-500">{icon}</div>
           <span className="text-xs sm:text-sm font-medium text-gray-600 sm:hidden">{label}</span>
         </div>
 
@@ -1072,7 +1124,7 @@ Generated on: ${new Date().toLocaleString()}
               </h3>
               <button
                 onClick={() => handleOpenEditModal('religious')}
-                className="flex items-center justify-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium px-4 py-2 sm:py-0 bg-rose-50 sm:bg-transparent rounded-lg sm:rounded-none w-full sm:w-auto relative"
+                className="flex items-center justify-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium px-4 py-2 sm:py-0 bg-[#FAF6F0] sm:bg-transparent rounded-lg sm:rounded-none w-full sm:w-auto relative"
               >
                 <FaEdit /> Edit All
                 {hasPendingInSection('religious') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
@@ -1097,7 +1149,7 @@ Generated on: ${new Date().toLocaleString()}
               ].map((item, index) => (
                 <div key={index} className="flex flex-col sm:flex-row items-start sm:items-center p-2.5 sm:p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl hover:shadow-md transition-shadow gap-2 sm:gap-0">
                   <div className="flex items-center w-full sm:w-auto">
-                    <div className="mr-3 text-rose-500/70 sm:text-gray-500">{item.icon}</div>
+                    <div className="mr-3 text-[#C5A059]/70 sm:text-gray-500">{item.icon}</div>
                     <span className="text-xs sm:text-sm font-medium text-gray-600 sm:hidden">{item.label}</span>
                   </div>
                   <div className="flex-1 w-full flex items-center">
@@ -1119,7 +1171,7 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Family Details</h3>
               <button
                 onClick={() => handleOpenEditModal('family')}
-                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
                 {hasPendingInSection('family') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
@@ -1150,7 +1202,7 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Education & Career</h3>
               <button
                 onClick={() => handleOpenEditModal('education')}
-                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
                 {hasPendingInSection('education') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
@@ -1183,7 +1235,7 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Location of Groom</h3>
               <button
                 onClick={() => handleOpenEditModal('location')}
-                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
                 {hasPendingInSection('location') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
@@ -1214,7 +1266,7 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Lifestyle & Personality</h3>
               <button
                 onClick={() => handleOpenEditModal('lifestyle')}
-                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
                 {hasPendingInSection('lifestyle') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
@@ -1223,8 +1275,8 @@ Generated on: ${new Date().toLocaleString()}
 
             {/* Personality & About Section */}
             <div className="space-y-1">
-              <div className="flex justify-between items-center border-b border-gray-100 pb-1 mb-1">
-                <h3 className="text-base sm:text-lg font-bold text-rose-500">
+              <div className="flex justify-between items-center border-b border-white/50 pb-1 mb-1">
+                <h3 className="text-base sm:text-lg font-bold text-[#C5A059]">
                   Personality.
                 </h3>
               </div>
@@ -1254,7 +1306,7 @@ Generated on: ${new Date().toLocaleString()}
                   { label: 'Health Information', value: profileData.lifestyle.healthInfo },
                   { label: 'Disability', value: profileData.lifestyle.disability }
                 ].map((item, index) => (
-                  <div key={index} className="flex border-b border-gray-100 pb-1.5">
+                  <div key={index} className="flex border-b border-white/50 pb-1.5">
                     <span className="w-1/3 text-gray-500 text-xs sm:text-sm">{item.label}</span>
                     <span className="w-2/3 text-gray-800 font-medium text-xs sm:text-sm">: {item.value}</span>
                   </div>
@@ -1263,12 +1315,12 @@ Generated on: ${new Date().toLocaleString()}
             </div>
 
             {/* Hobbies & Interests Section */}
-            <div className="space-y-4 pt-4 border-t border-gray-100">
+            <div className="space-y-4 pt-4 border-t border-white/50">
               <div className="flex justify-between items-center">
-                <h3 className="text-base sm:text-lg font-semibold text-rose-600">Hobbies and Interests</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-[#C5A059]">Hobbies and Interests</h3>
                 <button
                   onClick={() => handleOpenEditModal('hobbies')}
-                  className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium"
+                  className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium"
                 >
                   <FaEdit /> Edit All
                 </button>
@@ -1281,7 +1333,7 @@ Generated on: ${new Date().toLocaleString()}
                       key={index}
                       className="px-4 py-2 bg-white border border-gray-200 rounded-full shadow-sm flex items-center gap-2 text-gray-700 hover:border-rose-300 transition-colors"
                     >
-                      <span className="text-rose-500">
+                      <span className="text-[#C5A059]">
                         {/* Dynamic icons could be added here based on hobby name */}
                         {hobby.toLowerCase().includes('photo') && <FaCamera />}
                         {hobby.toLowerCase().includes('music') && <FaStar />}
@@ -1310,7 +1362,7 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Privacy & Settings</h3>
               <button
                 onClick={() => handleOpenEditModal('privacy')}
-                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
               </button>
@@ -1328,7 +1380,7 @@ Generated on: ${new Date().toLocaleString()}
                 { label: 'Last Updated', value: profileData.updatedAt ? new Date(profileData.updatedAt).toLocaleString() : 'N/A' },
                 { label: 'Profile ID (System)', value: profileData.id }
               ].map((item, idx) => (
-                <div key={idx} className="flex border-b border-gray-100 pb-2">
+                <div key={idx} className="flex border-b border-white/50 pb-2">
                   <span className="w-1/2 text-gray-500 text-sm font-medium">{item.label}</span>
                   <span className="w-1/2 text-gray-800 text-sm font-semibold truncate">: {item.value}</span>
                 </div>
@@ -1344,12 +1396,12 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Verification Details</h3>
               <button
                 onClick={() => handleOpenEditModal('verification')}
-                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
               </button>
             </div>
-            <div className="bg-rose-50 p-4 rounded-xl border border-rose-100 mb-4">
+            <div className="bg-[#FAF6F0] p-4 rounded-xl border border-rose-100 mb-4">
               <div className="flex items-center gap-3 mb-2">
                 <div className={`p-2 rounded-lg ${profileData.verificationStatus === 'VERIFIED' ? 'bg-green-100 text-green-600' : 'bg-orange-100 text-orange-600'}`}>
                   <FaCheck />
@@ -1375,7 +1427,7 @@ Generated on: ${new Date().toLocaleString()}
                 { label: 'Verified At', value: profileData.verifiedAt ? new Date(profileData.verifiedAt).toLocaleString() : 'N/A' },
                 { label: 'Profile Completion Score', value: profileData.profileComplete ? 'Complete' : 'Pending' }
               ].map((item, idx) => (
-                <div key={idx} className="flex border-b border-gray-100 pb-2">
+                <div key={idx} className="flex border-b border-white/50 pb-2">
                   <span className="w-1/2 text-gray-500 text-sm">{item.label}</span>
                   <span className="w-1/2 text-gray-800 font-medium text-sm">: {item.value}</span>
                 </div>
@@ -1399,18 +1451,18 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Partner Preference Criteria</h3>
               <button
                 onClick={() => handleOpenEditModal('preferences')}
-                className="flex items-center gap-2 text-rose-600 hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
               </button>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-lg p-5 sm:p-6 border border-gray-100">
+            <div className="dashboard-card-bg rounded-2xl shadow-lg p-5 sm:p-6 border border-white/50">
               {/* Header */}
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
                 <div className="flex items-center gap-3">
                   <div className="bg-gradient-to-br from-rose-100 to-rose-50 p-2.5 rounded-xl">
-                    <FaUserFriends className="text-rose-600 text-2xl" />
+                    <FaUserFriends className="text-[#C5A059] text-2xl" />
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-gray-800">Partner Preferences</h2>
@@ -1437,9 +1489,9 @@ Generated on: ${new Date().toLocaleString()}
                     { label: 'Age', field: 'ageRange', defaultValue: '22 to 26', icon: '📅', color: 'bg-blue-50' },
                     { label: 'Mother Tongue', field: 'motherTongue', defaultValue: 'Marathi, Hindi, English', icon: '🗣️', color: 'bg-green-50' },
                     { label: 'Height', field: 'heightRange', defaultValue: "5' 0\"(152cm) to 5' 8\"(172cm)", icon: '📏', color: 'bg-orange-50' },
-                    { label: 'Marital Status', field: 'maritalStatus', defaultValue: 'Never Married', icon: '💍', color: 'bg-pink-50' },
+                    { label: 'Marital Status', field: 'maritalStatus', defaultValue: 'Never Married', icon: '💍', color: 'bg-[#FCFAF7]' },
                   ].map((item) => (
-                    <div key={item.field} className="group bg-white rounded-2xl p-3 border border-gray-100 hover:border-rose-200 hover:shadow-md transition-all duration-300">
+                    <div key={item.field} className="group dashboard-card-bg rounded-2xl p-3 border border-white/50 hover:border-rose-200 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                           <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center text-xl`}>
@@ -1458,7 +1510,7 @@ Generated on: ${new Date().toLocaleString()}
                 </div>
 
                 {/* Religion / Community */}
-                <div className="group bg-white rounded-2xl p-4 border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all duration-300 mt-4">
+                <div className="group dashboard-card-bg rounded-2xl p-4 border border-white/50 hover:border-purple-200 hover:shadow-md transition-all duration-300 mt-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-xl">
@@ -1505,7 +1557,7 @@ Generated on: ${new Date().toLocaleString()}
                     { label: 'State living in', field: 'state', defaultValue: 'Maharashtra', icon: '🗺️', color: 'bg-cyan-50' },
                     { label: 'City / District', field: 'city', defaultValue: 'Open to All', icon: '🏙️', color: 'bg-sky-50' },
                   ].map((item) => (
-                    <div key={item.field} className="group bg-white rounded-2xl p-4 border border-gray-100 hover:border-emerald-200 hover:shadow-md transition-all duration-300">
+                    <div key={item.field} className="group dashboard-card-bg rounded-2xl p-4 border border-white/50 hover:border-emerald-200 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                           <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center text-xl`}>
@@ -1546,7 +1598,7 @@ Generated on: ${new Date().toLocaleString()}
                     { label: 'Annual Income', field: 'annualIncome', defaultValue: 'Any', icon: '💰' },
                     { label: 'Field of Study', field: 'preferredEducationField', defaultValue: 'Any', icon: '📚' },
                   ].map((item) => (
-                    <div key={item.field} className="group bg-white rounded-2xl p-4 border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all duration-300">
+                    <div key={item.field} className="group dashboard-card-bg rounded-2xl p-4 border border-white/50 hover:border-purple-200 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                           <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-xl">
@@ -1569,7 +1621,7 @@ Generated on: ${new Date().toLocaleString()}
               <div className="mb-10">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                    <span className="bg-pink-50 p-2 rounded-lg">
+                    <span className="bg-[#FCFAF7] p-2 rounded-lg">
                       <FaHeart className="text-pink-600" />
                     </span>
                     Lifestyle & Others
@@ -1582,7 +1634,7 @@ Generated on: ${new Date().toLocaleString()}
                     { label: 'Smoking', field: 'smokingHabit', defaultValue: 'Non-Smoker', icon: '🚬', color: 'bg-gray-50' },
                     { label: 'Profile Managed By', field: 'profileManagedBy', defaultValue: 'Any', icon: '👤', color: 'bg-blue-50' },
                   ].map((item) => (
-                    <div key={item.field} className="group bg-white rounded-2xl p-4 border border-gray-100 hover:border-pink-200 hover:shadow-md transition-all duration-300">
+                    <div key={item.field} className="group dashboard-card-bg rounded-2xl p-4 border border-white/50 hover:border-pink-200 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                           <div className={`w-12 h-12 ${item.color} rounded-xl flex items-center justify-center text-xl`}>
@@ -1612,37 +1664,37 @@ Generated on: ${new Date().toLocaleString()}
                   </h3>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="bg-white p-4 rounded-xl border border-gray-100 flex items-center justify-between">
+                  <div className="dashboard-card-bg p-4 rounded-xl border border-white/50 flex items-center justify-between">
                     <span className="text-gray-600 font-medium">Verify Profiles Only</span>
                     <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.showVerifiedOnly ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
                       {profileData.partnerPreferences.showVerifiedOnly ? 'Yes' : 'No'}
                     </span>
                   </div>
-                  <div className="bg-white p-4 rounded-xl border border-gray-100 flex items-center justify-between">
+                  <div className="dashboard-card-bg p-4 rounded-xl border border-white/50 flex items-center justify-between">
                     <span className="text-gray-600 font-medium">Auto Match</span>
                     <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.enableAutoMatch ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
                       {profileData.partnerPreferences.enableAutoMatch ? 'Enabled' : 'Disabled'}
                     </span>
                   </div>
-                  <div className="bg-white p-4 rounded-xl border border-gray-100 flex items-center justify-between">
+                  <div className="dashboard-card-bg p-4 rounded-xl border border-white/50 flex items-center justify-between">
                     <span className="text-gray-600 font-medium">Prefer NRI</span>
                     <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.preferNri ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500'}`}>
                       {profileData.partnerPreferences.preferNri ? 'Yes' : 'No'}
                     </span>
                   </div>
-                  <div className="bg-white p-4 rounded-xl border border-gray-100 flex items-center justify-between">
+                  <div className="dashboard-card-bg p-4 rounded-xl border border-white/50 flex items-center justify-between">
                     <span className="text-gray-600 font-medium">Working Professionals</span>
                     <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.preferWorkingProfessional ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-500'}`}>
                       {profileData.partnerPreferences.preferWorkingProfessional ? 'Preferred' : 'Any'}
                     </span>
                   </div>
-                  <div className="bg-white p-4 rounded-xl border border-gray-100 flex flex-col gap-2 sm:col-span-2">
+                  <div className="dashboard-card-bg p-4 rounded-xl border border-white/50 flex flex-col gap-2 sm:col-span-2">
                     <div className="flex justify-between">
                       <span className="text-gray-600 font-medium">Match Score Threshold</span>
                       <span className="font-bold text-gray-800">{profileData.partnerPreferences.matchScoreThreshold || 0}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2.5">
-                      <div className="bg-rose-600 h-2.5 rounded-full" style={{ width: `${profileData.partnerPreferences.matchScoreThreshold || 0}%` }}></div>
+                      <div className="bg-[#8C6D39] h-2.5 rounded-full" style={{ width: `${profileData.partnerPreferences.matchScoreThreshold || 0}%` }}></div>
                     </div>
                   </div>
                 </div>
@@ -1657,264 +1709,422 @@ Generated on: ${new Date().toLocaleString()}
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-3 sm:p-4 md:p-6">
+    <div className="bg-transparent p-3 sm:p-4 md:p-6 pb-20">
       <ToastContainer />
 
       {/* Main Profile Container */}
-      <div className="max-w-7xl mx-auto pb-10 sm:pb-0">
-        {/* Profile Header Card */}
-        <div className="bg-gradient-to-r from-rose-600 to-pink-600 rounded-xl sm:rounded-2xl shadow-xl mb-4 sm:mb-6 overflow-hidden relative">
-          {isPremium && (
-            <div className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-2 py-0.5 sm:px-4 sm:py-1 rounded-full text-[10px] sm:text-sm font-semibold shadow-lg flex items-center gap-1 sm:gap-2 z-10">
-              <FaStar className="text-white text-[10px] sm:text-xs" /> PREMIUM
+      <div className="max-w-7xl mx-auto font-sans">
+        
+        {/* HERO BANNER & BASIC INFO */}
+        <div className="dashboard-card-bg rounded-3xl shadow-sm mb-6 overflow-hidden relative border border-white/50">
+          {/* Banner Image */}
+          <div className="h-48 md:h-64 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${editProfileBanner})` }}>
+            <div className="absolute inset-0 bg-black/10"></div>
+            <div className="absolute top-4 right-4 z-10">
+              <button onClick={() => navigate(editModePage ? '/my-shadi/my-profile' : '/my-shadi/edit-profile')} className="bg-black/60 hover:bg-black/80 text-white backdrop-blur-md px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition-all shadow-sm">
+                <FaEdit /> {editModePage ? 'Done Editing' : 'Edit Profile'}
+              </button>
             </div>
-          )}
+          </div>
+          
+          <div className="p-6 md:px-10 relative">
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* Profile Avatar overlapping banner */}
+              <div className="relative -mt-20 md:-mt-24 shrink-0 mx-auto md:mx-0 group cursor-pointer">
+                <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-white shadow-xl bg-[#FAF6F0] flex items-center justify-center relative">
+                  <img src={photoPreview || profileImage || "https://images.unsplash.com/photo-1621886126620-3b95ceebf686?auto=format&fit=crop&w=400&q=80"} alt="Profile" className="w-full h-full object-cover" />
+                  
+                  {isEditing && (
+                    <label className="absolute inset-0 bg-black/40 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                      <FaCamera size={24} />
+                      <input type="file" accept="image/*" className="hidden" onChange={handlePhotoUpload} />
+                    </label>
+                  )}
 
-          <div className="p-4 sm:p-5 md:p-6">
-            <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-6">
-              {/* Profile Image and Basic Info */}
-              <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6 w-full md:w-auto">
-                {/* Profile Image */}
-                <div className="relative shrink-0">
-                  <div className="w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full sm:rounded-2xl overflow-hidden border-4 border-white shadow-xl bg-gray-100 flex items-center justify-center">
-                    {profileImage ? (
-                      <img
-                        src={profileImage}
-                        alt="Profile"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <FaUserCircle className="w-full h-full text-rose-200" />
-                    )}
-                  </div>
-
-                </div>
-
-                {/* Basic Info */}
-                <div className="text-white text-center sm:text-left flex-1">
-                  <div className="flex flex-wrap justify-center sm:justify-start items-center gap-2 mb-2">
-                    <span className="bg-white/20 backdrop-blur-sm text-white px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-wider">
-                      {profileData.profileId}
-                    </span>
-                    <div className="flex items-center gap-1">
-                      <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                      <span className="text-white/90 text-[10px] sm:text-xs font-medium">Online Now</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-center sm:justify-start gap-2 mb-1 sm:mb-2">
-                    <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-2">
-                      {profileData.fullName || 'No Name'}
-                      {profile?.verificationStatus === 'VERIFIED' && (
-                        <div className="relative group/verify">
-                          <div className="cursor-pointer">
-                            <MdVerified className="text-cyan-400 w-5 h-5 sm:w-6 sm:h-6" />
-                          </div>
-                          {/* Verification Tooltip */}
-                          <div className="invisible group-hover/verify:visible absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-[#1a1a1a] text-white p-4 rounded-2xl shadow-2xl z-[60] animate-in fade-in zoom-in duration-200 font-normal">
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 w-3 h-3 bg-[#1a1a1a] rotate-45"></div>
-                            <h4 className="text-sm font-bold mb-3 border-b border-white/10 pb-2">Verified Profile</h4>
-                            <div className="space-y-3">
-                              <div className="flex items-start gap-2">
-                                <div className={`mt-0.5 w-4 h-4 rounded-full border-2 flex items-center justify-center ${profile?.photoVerificationStatus === 'VERIFIED' ? 'border-green-500' : 'border-gray-600'}`}>
-                                  {profile?.photoVerificationStatus === 'VERIFIED' && <FaCheck className="w-2 h-2 text-green-500" />}
-                                </div>
-                                <span className="text-[11px] font-medium leading-tight">Selfie verified with Profile Photo</span>
-                              </div>
-                              <div className="flex items-start gap-2">
-                                <div className={`mt-0.5 w-4 h-4 rounded-full border-2 flex items-center justify-center ${profile?.mobileVerified ? 'border-green-500' : 'border-gray-600'}`}>
-                                  {profile?.mobileVerified && <FaCheck className="w-2 h-2 text-green-500" />}
-                                </div>
-                                <span className="text-[11px] font-medium leading-tight">Mobile no. is verified</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </h1>
-                  </div>
-
-                  <h2 className="text-base sm:text-lg md:text-xl font-semibold text-white/90 mb-2">
-                    {profileData.age} Years • {profileData.height}
-                  </h2>
-
-                  <div className="space-y-1 text-xs sm:text-sm md:text-base opacity-95">
-                    <div className="flex flex-wrap justify-center sm:justify-start items-center gap-x-2">
-                      <span>{profileData.religion}</span>
-                      <span className="text-white/40">•</span>
-                      <span>{profileData.community}</span>
-                    </div>
-                    <div className="flex flex-wrap justify-center sm:justify-start items-center gap-x-2">
-                      <span>{profileData.education}</span>
-                      <span className="text-white/40">•</span>
-                      <span>{profileData.profession}</span>
-                    </div>
-                    <div className="flex justify-center sm:justify-start items-center gap-1 text-rose-100">
-                      <FaMapMarkerAlt size={12} className="opacity-70" />
-                      <span>{profileData.location}</span>
-                    </div>
-                  </div>
+                  {/* Online Indicator */}
+                  <div className="absolute bottom-3 right-3 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
                 </div>
               </div>
 
+              {/* Basic Info */}
+              <div className="flex-1 text-center md:text-left mt-2 md:mt-0">
+                <h1 className="text-2xl md:text-3xl font-bold text-[#3a2618] font-serif flex items-center justify-center md:justify-start gap-2 mb-1">
+                  {profileData.fullName || 'Priya Sharma'}
+                  <MdVerified className="text-[#8C6D39] w-5 h-5 md:w-6 md:h-6" />
+                </h1>
+                <p className="text-gray-600 font-medium text-sm md:text-base mb-1">
+                  {profileData.age || '27'} Yrs, {profileData.height || "5'4\""} • {profileData.location || 'Pune, Maharashtra'}
+                </p>
+                <p className="text-gray-500 text-sm mb-4">
+                  {profileData.religion || 'Hindu'} • {profileData.community || 'Brahmin'} • {profileData.maritalStatus || 'Never Married'}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
+                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FAF6F0] text-[#C5A059] rounded-full text-xs font-bold border border-rose-100 shadow-sm">
+                    <FaMapMarkerAlt /> {profileData.city || 'Pune'}, {profileData.state || 'Maharashtra'}
+                  </span>
+                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FAF6F0] text-[#C5A059] rounded-full text-xs font-bold border border-rose-100 shadow-sm">
+                    <FaUserFriends /> {profileData.maritalStatus || 'Never Married'}
+                  </span>
+                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FAF6F0] text-[#C5A059] rounded-full text-xs font-bold border border-rose-100 shadow-sm">
+                    🕉️ {profileData.religion || 'Hindu'}
+                  </span>
+                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FAF6F0] text-[#C5A059] rounded-full text-xs font-bold border border-rose-100 shadow-sm">
+                    <FaStar /> {profileData.community || 'Brahmin'}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-          {/* Left Column - Profile Details */}
-          <div className="lg:col-span-8 space-y-6">
-            {/* Profile Info Card */}
-            <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-              {/* Tabs Navigation - Responsive Scrollable Underline Style */}
-              <div className="bg-gray-50/50 border-b border-gray-100">
-                <div className="flex overflow-x-auto no-scrollbar scroll-smooth px-2 sm:px-4">
-                  <div className="flex min-w-max">
-                    {tabs.map((tab) => (
-                      <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`flex flex-col items-center gap-1.5 px-4 sm:px-6 py-4 transition-all relative ${activeTab === tab.id
-                          ? 'text-rose-600'
-                          : 'text-gray-500 hover:text-gray-700'
-                          }`}
-                      >
-                        <div className={`p-2 rounded-lg transition-colors ${activeTab === tab.id ? 'bg-rose-100 text-rose-600' : 'bg-transparent'
-                          }`}>
-                          {React.cloneElement(tab.icon, { size: 18 })}
-                        </div>
-                        <span className="text-xs sm:text-sm font-bold whitespace-nowrap">{tab.label}</span>
-                        {activeTab === tab.id && (
-                          <div className="absolute bottom-0 left-0 right-0 h-1 bg-rose-600 rounded-t-full shadow-[0_-2px_8px_rgba(225,29,72,0.3)]"></div>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+        {/* STATS ROW */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          {[
+            { label: 'Profile Views', value: summary?.recentVisitorsCount || '236', icon: <FaEye className="text-rose-400" /> },
+            { label: 'Interests Received', value: summary?.pendingInvitations || '42', icon: <FaHeart className="text-rose-400" /> },
+            { label: 'Interest Sent', value: summary?.interestsSentCount || '18', icon: <FaShareAlt className="text-rose-400" /> },
+            { label: 'Shortlisted', value: '9', icon: <FaStar className="text-orange-400" /> }
+          ].map((stat, i) => (
+            <div key={i} className="dashboard-card-bg p-5 rounded-2xl shadow-sm border border-white/50 flex items-center gap-4 hover:shadow-md transition-shadow">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#FAF6F0] flex items-center justify-center text-lg md:text-xl shrink-0">
+                {stat.icon}
               </div>
-
-              {/* Tab Content */}
-              <div className="p-4 sm:p-5 md:p-6">
-                {renderTabContent()}
+              <div>
+                <h3 className="text-lg md:text-xl font-black text-gray-800">{stat.value}</h3>
+                <p className="text-[10px] md:text-xs font-semibold text-gray-500 uppercase tracking-wider">{stat.label}</p>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Right Column - Sidebar */}
-          <div className="lg:col-span-4 space-y-6">
-            {/* Profile Management Card */}
-            <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 p-4 sm:p-5">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-bold text-gray-800">Account</h3>
-                <div className="p-2 bg-gray-50 rounded-lg">
-                  <HiOutlineDotsVertical className="text-gray-400" />
+        {/* MAIN TWO-COLUMN LAYOUT */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          {/* LEFT COLUMN - SCROLLABLE CONTENT */}
+          <div className="lg:col-span-8 space-y-6">
+            
+            {/* About Me */}
+            <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6 relative group">
+              <div className="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
+                  <FaUserEdit className="text-[#a67c52]" /> About Me
+                </h3>
+                {isEditing && <button onClick={() => handleOpenEditModal('person')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit About Me"><FaEdit size={16}/></button>}
+              </div>
+              <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-wrap">
+                {profileData.aboutText || "I am a simple, ambitious and family-oriented person. I love traveling, reading books and exploring new places. I believe in honesty, respect and understanding in a relationship."}
+              </p>
+              <button className="text-[#C5A059] text-sm font-bold mt-3 hover:underline">Read More</button>
+            </div>
+
+            {/* Photos (6) */}
+            <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6 relative group">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
+                  <FaCamera className="text-[#a67c52]" /> Photos <span className="text-gray-400 text-sm">(6 max)</span>
+                </h3>
+                <button onClick={() => navigate('/my-shadi/my-photos')} className="bg-[#FAF6F0] text-[#C5A059] px-4 py-1.5 rounded-full text-xs font-bold hover:bg-rose-100 transition-colors">View All</button>
+              </div>
+              <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+                {(profileData.albumPhotos || Array(6).fill(null)).map((src, idx) => (
+                  <div key={idx} className="relative w-24 h-32 shrink-0 rounded-xl overflow-hidden shadow-sm border border-gray-200 bg-gray-50 flex items-center justify-center group/photo">
+                    {src ? (
+                      <>
+                        <img src={src} alt={`Album ${idx + 1}`} className="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" />
+                        <label className="absolute inset-0 bg-black/40 opacity-0 group-hover/photo:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
+                          <FaEdit className="text-white text-xl" />
+                          <input type="file" accept="image/*" className="hidden" onChange={(e) => handleAlbumPhotoUpload(e, idx)} />
+                        </label>
+                      </>
+                    ) : (
+                      <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors">
+                        <div className="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center mb-1 border border-gray-200">
+                          <span className="text-[#a67c52] font-bold text-lg leading-none">+</span>
+                        </div>
+                        <span className="text-[10px] font-bold text-gray-400">Add Photo</span>
+                        <input type="file" accept="image/*" className="hidden" onChange={(e) => handleAlbumPhotoUpload(e, idx)} />
+                      </label>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Split Grid for Personal and Education */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              {/* Personal Details */}
+              <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6 relative group">
+                <div className="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                  <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
+                    <FaUserCircle className="text-rose-400" /> Personal Details
+                  </h3>
+                  {isEditing && <button onClick={() => handleOpenEditModal('person')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Personal Details"><FaEdit size={16}/></button>}
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Date of Birth', value: profileData.religiousBackground?.dob || '15 Mar 1997' },
+                    { label: 'Time of Birth', value: profileData.timeOfBirth || '10:45 AM' },
+                    { label: 'Height', value: profileData.height || "5'4\"" },
+                    { label: 'Complexion', value: 'Fair' },
+                    { label: 'Body Type', value: 'Slim' },
+                    { label: 'Manglik', value: profileData.manglikStatus === 'YES' ? 'Yes' : 'No' }
+                  ].map((item, i) => (
+                    <div key={i} className="flex text-sm">
+                      <span className="w-5/12 text-gray-500">{item.label}</span>
+                      <span className="w-7/12 font-semibold text-gray-800 truncate" title={item.value}>{item.value}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <div className="space-y-3">
-                {profileOptions.map((option) => (
-                  <button
-                    key={option.id}
-                    onClick={option.onClick}
-                    className="w-full flex items-center p-3 rounded-xl hover:bg-rose-50 transition-all duration-300 group border border-transparent hover:border-rose-100"
-                  >
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${option.color.replace('text-', 'bg-').replace('-600', '-50')
-                      } group-hover:bg-rose-100`}>
-                      <span className={`${option.color} text-lg`}>
-                        {option.icon}
-                      </span>
+              {/* Education & Career */}
+              <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6 relative group">
+                <div className="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                  <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
+                    <FaGraduationCap className="text-rose-400" /> Education & Career
+                  </h3>
+                  {isEditing && <button onClick={() => handleOpenEditModal('education')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Education & Career"><FaEdit size={16}/></button>}
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Education', value: profileData.education || 'MBA' },
+                    { label: 'Profession', value: profileData.profession || 'Marketing Manager' },
+                    { label: 'Company', value: profileData.company || 'Infosys' },
+                    { label: 'Annual Income', value: profileData.income || '₹ 12 - 15 Lacs' },
+                    { label: 'Working With', value: profileData.workingWith || 'Private Company' },
+                    { label: 'Employment Type', value: 'Full Time' }
+                  ].map((item, i) => (
+                    <div key={i} className="flex text-sm">
+                      <span className="w-5/12 text-gray-500">{item.label}</span>
+                      <span className="w-7/12 font-semibold text-gray-800 truncate" title={item.value}>{item.value}</span>
                     </div>
-                    <span className="text-left flex-1 font-bold text-gray-700 group-hover:text-rose-600 ml-4 text-sm sm:text-base">
-                      {option.label}
+                  ))}
+                </div>
+              </div>
+
+              {/* Lifestyle */}
+              <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6 relative group">
+                <div className="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                  <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
+                    <FaHeart className="text-rose-400" /> Lifestyle
+                  </h3>
+                  {isEditing && <button onClick={() => handleOpenEditModal('lifestyle')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Lifestyle"><FaEdit size={16}/></button>}
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Diet', value: profileData.diet || 'Vegetarian' },
+                    { label: 'Smoking', value: profileData.smokingHabit || 'No' },
+                    { label: 'Drinking', value: profileData.drinkingHabit || 'No' },
+                    { label: 'Physical Status', value: profileData.disability === 'None' ? 'Normal' : 'Normal' },
+                    { label: 'Blood Group', value: profileData.bloodGroup || 'B+' }
+                  ].map((item, i) => (
+                    <div key={i} className="flex text-sm">
+                      <span className="w-5/12 text-gray-500">{item.label}</span>
+                      <span className="w-7/12 font-semibold text-gray-800 truncate" title={item.value}>{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Partner Preference */}
+              <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6 relative group">
+                <div className="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                  <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
+                    <FaStar className="text-rose-400" /> Partner Preference
+                  </h3>
+                  {isEditing && <button onClick={() => handleOpenEditModal('preferences')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Partner Preference"><FaEdit size={16}/></button>}
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Age', value: profileData.partnerPreferences?.ageRange || '26 - 32 Years' },
+                    { label: 'Height', value: profileData.partnerPreferences?.heightRange || "5'6\" - 6'0\"" },
+                    { label: 'Education', value: profileData.partnerPreferences?.education || 'Graduate & Above' },
+                    { label: 'Profession', value: profileData.partnerPreferences?.profession || 'Any' },
+                    { label: 'Location', value: profileData.partnerPreferences?.country || 'India' },
+                    { label: 'Manglik', value: 'No Preference' }
+                  ].map((item, i) => (
+                    <div key={i} className="flex text-sm">
+                      <span className="w-5/12 text-gray-500">{item.label}</span>
+                      <span className="w-7/12 font-semibold text-gray-800 truncate" title={item.value}>{item.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            {/* Contact Information */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6 relative group">
+                <div className="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                  <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
+                    <FaPhone className="text-rose-400" /> Contact Information
+                  </h3>
+                  {isEditing && <button onClick={() => handleOpenEditModal('location')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Contact Information"><FaEdit size={16}/></button>}
+                </div>
+                <div className="grid grid-cols-1 gap-3">
+                  {[
+                    { label: 'Mobile Number', value: profileData.mobileNumber || '98XXXXXX23', verified: true },
+                    { label: 'Email ID', value: profileData.email || 'priya.sharma@example.com', verified: true },
+                    { label: 'Address', value: `${profileData.city || 'Pune'}, ${profileData.state || 'Maharashtra'}, ${profileData.country || 'India'}`, verified: false }
+                  ].map((item, i) => (
+                    <div key={i} className="flex flex-col sm:flex-row sm:items-center text-sm py-1">
+                      <span className="w-full sm:w-5/12 text-gray-500 mb-0.5 sm:mb-0">{item.label}</span>
+                      <div className="w-full sm:w-7/12 flex items-center gap-2 overflow-hidden">
+                        <span className="font-semibold text-gray-800 truncate text-[13px]" title={item.value}>
+                          {item.value}
+                        </span>
+                        {item.verified && <span className="text-green-500 text-[10px] font-bold uppercase tracking-wider shrink-0">Verified</span>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Interests (Mock) */}
+              <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6 relative group">
+                <div className="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                  <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
+                    <FaHeart className="text-rose-400" /> Interests
+                  </h3>
+                  {isEditing && <button onClick={() => handleOpenEditModal('hobbies')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Interests"><FaEdit size={16}/></button>}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['🎵 Music', '✈️ Traveling', '📚 Reading', '🍳 Cooking', '📸 Photography', '🧘‍♀️ Yoga'].map((tag, i) => (
+                    <span key={i} className="bg-gray-50 border border-white/50 text-gray-700 px-3 py-1.5 rounded-xl text-xs font-bold shadow-sm">
+                      {tag}
                     </span>
-                    <i className="fa-solid fa-chevron-right text-gray-300 group-hover:text-rose-500 text-xs transition-transform group-hover:translate-x-1"></i>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Verification */}
+            <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6 relative group">
+              <div className="flex items-center justify-between mb-4 border-b border-gray-50 pb-2">
+                <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
+                  <MdVerified className="text-rose-400 w-5 h-5" /> Verification
+                </h3>
+                {isEditing && <button onClick={() => handleOpenEditModal('verification')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Verification"><FaEdit size={16}/></button>}
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-xl bg-green-50 text-green-500"><FaPhone /></div>
+                  <span className="text-sm font-semibold text-gray-700">Mobile Verified</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-xl bg-green-50 text-green-500"><FaCheck /></div>
+                  <span className="text-sm font-semibold text-gray-700">Email Verified</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-xl bg-green-50 text-green-500"><MdVerified /></div>
+                  <span className="text-sm font-semibold text-gray-700">Profile Verified</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* RIGHT COLUMN - SIDEBAR */}
+          <div className="lg:col-span-4 space-y-6">
+            
+            {/* Profile Completion Circular Chart */}
+            <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6 text-center">
+              <h3 className="font-bold text-gray-800 mb-6 font-serif text-lg">Profile Completion</h3>
+              <div className="relative w-36 h-36 mx-auto mb-6">
+                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="#f3f4f6" strokeWidth="8" fill="none" />
+                  <circle cx="50" cy="50" r="40" stroke="#e11d48" strokeWidth="8" fill="none" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * (summary?.profileCompletionPercentage || 85)) / 100} className="transition-all duration-1000 ease-out drop-shadow-md" strokeLinecap="round" />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-4xl font-black text-gray-800">{summary?.profileCompletionPercentage || 85}%</span>
+                </div>
+              </div>
+              <h4 className="font-bold text-gray-800 mb-1 text-lg">Almost There!</h4>
+              <p className="text-sm text-gray-500 mb-6 px-2">Add more details to get better matches.</p>
+              <button onClick={() => navigate('/my-shadi/edit-profile')} className="w-full bg-[#8C6D39] hover:bg-rose-700 text-white font-bold py-3.5 rounded-xl transition-colors shadow-sm">
+                Complete Now
+              </button>
+            </div>
+
+            {/* Profile Strength Checklist */}
+            <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6">
+              <h3 className="font-bold text-gray-800 flex items-center gap-2 mb-5 font-serif text-lg">
+                <FaStar className="text-[#a67c52]" /> Profile Strength
+              </h3>
+              <div className="space-y-4 mb-6">
+                {[
+                  { label: 'Photos', complete: true },
+                  { label: 'About Me', complete: true },
+                  { label: 'Education', complete: true },
+                  { label: 'Lifestyle', complete: true },
+                  { label: 'Partner Pref.', complete: true },
+                  { label: 'Contact Info', complete: true }
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center justify-between text-sm">
+                    <span className="text-gray-700 font-medium">{item.label}</span>
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center ${item.complete ? 'bg-green-500 text-white shadow-sm' : 'bg-gray-200 text-transparent'}`}>
+                      <FaCheck size={10} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="text-center bg-yellow-50/50 p-4 rounded-xl border border-yellow-100/50">
+                <p className="text-xs font-bold text-gray-800 mb-2">Great! Your profile looks complete.</p>
+                <FaStar className="text-yellow-400 text-2xl mx-auto drop-shadow-sm" />
+              </div>
+            </div>
+
+            {/* My Actions */}
+            <div className="dashboard-card-bg rounded-2xl shadow-sm border border-white/50 p-6">
+              <h3 className="font-bold text-gray-800 flex items-center gap-2 mb-4 font-serif text-lg">
+                <FaStar className="text-rose-400" /> My Actions
+              </h3>
+              <div className="space-y-2">
+                {(!editModePage ? [
+                  { label: 'Edit Profile', icon: <FaEdit />, onClick: () => navigate('/my-shadi/edit-profile') },
+                  { label: 'Preview Profile', icon: <FaEye />, onClick: () => navigate('/my-shadi/my-profile') },
+                  { label: 'Privacy Settings', icon: <FaShieldAlt />, onClick: () => handleOpenEditModal('privacy') },
+                ] : [
+                  { label: 'View Profile', icon: <FaEye />, onClick: () => navigate('/my-shadi/my-profile') },
+                  { label: 'Privacy Settings', icon: <FaShieldAlt />, onClick: () => handleOpenEditModal('privacy') },
+                ]).map((action, i) => (
+                  <button key={i} onClick={action.onClick} className="w-full flex items-center gap-3 p-3 text-sm font-bold text-gray-700 hover:bg-[#FAF6F0] hover:text-[#C5A059] rounded-xl transition-colors text-left group">
+                    <div className="w-9 h-9 rounded-xl bg-gray-50 border border-white/50 flex items-center justify-center text-gray-400 group-hover:bg-rose-100 group-hover:text-[#C5A059] group-hover:border-rose-200 transition-colors">
+                      {action.icon}
+                    </div>
+                    {action.label}
                   </button>
                 ))}
               </div>
-
-              {/* Quick Actions */}
-              <div className="mt-6 pt-6 border-t border-gray-100">
-                <h4 className="font-bold text-gray-800 mb-4 text-lg">Quick Actions</h4>
-                <div className="grid grid-cols-2 gap-4">
-                  <button
-                    onClick={handleDownloadProfile}
-                    className="flex flex-col items-center justify-center py-4 px-4 bg-blue-50/50 rounded-2xl hover:bg-blue-50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group border border-blue-100/50"
-                  >
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm mb-3 group-hover:scale-110 transition-transform text-blue-600">
-                      <FaDownload size={20} />
-                    </div>
-                    <span className="text-xs sm:text-sm font-bold text-gray-600 group-hover:text-blue-700">Download</span>
-                  </button>
-                  <button
-                    onClick={handleShareProfile}
-                    className="flex flex-col items-center justify-center py-4 px-4 bg-purple-50/50 rounded-2xl hover:bg-purple-50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group border border-purple-100/50"
-                  >
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm mb-3 group-hover:scale-110 transition-transform text-purple-600">
-                      <FaShareAlt size={20} />
-                    </div>
-                    <span className="text-xs sm:text-sm font-bold text-gray-600 group-hover:text-purple-700">Share</span>
-                  </button>
-                </div>
-              </div>
             </div>
 
-            {/* Profile Stats Card */}
-
-
-            {/* Photo Gallery */}
+            {/* Promo Banner */}
+            <div className="bg-gradient-to-br from-rose-50 to-[#FCFAF7] rounded-2xl shadow-sm border border-rose-100 p-8 text-center relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full opacity-40 -mr-10 -mt-10 blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+              <div className="text-5xl mb-4 relative z-10 drop-shadow-md">💎</div>
+              <h3 className="text-xl font-black text-[#3a2618] mb-2 font-serif relative z-10">Get 10x More Matches</h3>
+              <p className="text-sm text-[#6b584a] mb-6 relative z-10 leading-relaxed">Increase your visibility and connect with more people.</p>
+              <button className="w-full bg-[#8C6D39] hover:bg-rose-700 text-white font-bold py-3.5 rounded-xl transition-colors shadow-md hover:shadow-lg relative z-10">
+                Upgrade Now
+              </button>
+            </div>
 
           </div>
         </div>
-
-        <div className="bg-gradient-to-br from-rose-600 to-pink-700 rounded-xl sm:rounded-2xl shadow-xl p-6 text-white overflow-hidden relative group">
-          {/* Decorative Circle */}
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all duration-700"></div>
-
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-white/20 rounded-lg">
-                <FaChartBar className="text-white text-xl" />
-              </div>
-              <h3 className="text-xl font-bold">Profile Statistics</h3>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { label: 'Profile Views', value: summary?.recentVisitorsCount || '0', icon: <FaEye /> },
-                { label: 'Interests Recv', value: summary?.pendingInvitations || '0', icon: <FaHeart /> },
-                { label: 'Interests Sent', value: summary?.interestsSentCount || '0', icon: <FaShareAlt /> },
-                { label: 'Completion', value: `${summary?.profileCompletionPercentage || 0}%`, icon: <FaCheck /> }
-              ].map((stat, i) => (
-                <div key={i} className="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10 hover:bg-white/20 transition-colors">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-white/60 text-xs">{stat.icon}</span>
-                    <span className="text-2xl font-black">{stat.value}</span>
-                  </div>
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-rose-100">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-
-            <button
-              onClick={() => profileOptions[0].onClick()}
-              className="w-full mt-6 bg-white text-rose-600 hover:bg-rose-50 py-3 rounded-xl font-bold transition-all duration-300 text-sm shadow-lg flex items-center justify-center gap-2"
-            >
-              <FaChartBar size={14} /> View Detailed Stats
-            </button>
-          </div>
-        </div>
-        {/* Bottom Action Bar (Mobile Only) */}
 
       </div>
       {/* Edit All Modal */}
-      {isEditModalOpen && (
-        <div className="fixed inset-0 z-[999] flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-md p-0 sm:p-4">
-          <div className="bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in slide-in-from-bottom sm:zoom-in duration-300">
-            <div className="bg-gradient-to-r from-rose-600 to-pink-600 p-5 sm:p-6 flex justify-between items-center text-white">
+      {isEditModalOpen && createPortal(
+        <div className="fixed inset-0 z-[99999] flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm p-0 sm:p-4 transition-all duration-300">
+          <div className="bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in slide-in-from-bottom sm:zoom-in duration-300 border border-white/50">
+            <div className="bg-gradient-to-r from-[#C5A059] to-[#8C6D39] p-5 sm:p-6 flex justify-between items-center text-white">
               <div>
-                <h3 className="text-xl font-bold">Update Information</h3>
-                <p className="text-rose-100 text-xs mt-1">Please provide accurate details</p>
+                <h3 className="text-xl font-black tracking-wide">Update Information</h3>
+                <p className="text-rose-100 text-xs mt-1 font-medium">Please provide accurate details</p>
               </div>
               <button
                 onClick={() => setIsEditModalOpen(false)}
@@ -1940,7 +2150,7 @@ Generated on: ${new Date().toLocaleString()}
                       <select
                         value={modalData.profileCreatedBy || ''}
                         onChange={(e) => handleModalDataChange('profileCreatedBy', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-rose-500 outline-none"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-[#C5A059] outline-none"
                       >
                         <option value="">Select Options</option>
                         <option value="Self">Self</option>
@@ -1959,7 +2169,7 @@ Generated on: ${new Date().toLocaleString()}
                       <select
                         value={modalData.maritalStatus || ''}
                         onChange={(e) => handleModalDataChange('maritalStatus', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-rose-500 outline-none"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-[#C5A059] outline-none"
                       >
                         <option value="">Select Options</option>
                         {['Never Married', 'Divorced', 'Widowed', 'Awaiting Divorce', 'Annulled'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -1974,7 +2184,7 @@ Generated on: ${new Date().toLocaleString()}
                       <select
                         value={modalData.height || ''}
                         onChange={(e) => handleModalDataChange('height', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-rose-500 outline-none"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-[#C5A059] outline-none"
                       >
                         <option value="">Select Options</option>
                         {Array.from({ length: 41 }, (_, i) => {
@@ -2008,7 +2218,7 @@ Generated on: ${new Date().toLocaleString()}
                       <select
                         value={modalData.healthInformation || ''}
                         onChange={(e) => handleModalDataChange('healthInformation', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-rose-500 outline-none"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-[#C5A059] outline-none"
                       >
                         <option value="">Select Options</option>
                         {['No Health Problems', 'Minor Health Issues', 'Major Health Issues'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2036,7 +2246,7 @@ Generated on: ${new Date().toLocaleString()}
                       <select
                         value={modalData.bloodGroup || ''}
                         onChange={(e) => handleModalDataChange('bloodGroup', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-rose-500 outline-none"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-[#C5A059] outline-none"
                       >
                         <option value="">Select Options</option>
                         {['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2046,11 +2256,11 @@ Generated on: ${new Date().toLocaleString()}
                 </div>
               ) : modalSection === 'verification' ? (
                 <div className="space-y-6">
-                  <div className="bg-rose-50 text-rose-800 p-4 rounded-xl flex items-start gap-3 border border-rose-100">
-                    <FaInfoCircle className="mt-1 shrink-0 text-rose-500" />
+                  <div className="bg-[#FAF6F0] text-rose-800 p-4 rounded-xl flex items-start gap-3 border border-rose-100">
+                    <FaInfoCircle className="mt-1 shrink-0 text-[#C5A059]" />
                     <div>
                       <p className="font-bold text-sm">Verify your ID</p>
-                      <p className="text-xs text-rose-600 mt-0.5">Please upload a clear photo of your Govt. ID (PAN card, Voter ID, or Driving License).</p>
+                      <p className="text-xs text-[#C5A059] mt-0.5">Please upload a clear photo of your Govt. ID (PAN card, Voter ID, or Driving License).</p>
                     </div>
                   </div>
 
@@ -2060,7 +2270,7 @@ Generated on: ${new Date().toLocaleString()}
                       <select
                         value={modalData.idProofType || ''}
                         onChange={(e) => handleModalDataChange('idProofType', e.target.value)}
-                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors.idProofType ? 'border-red-500' : 'border-gray-200'}`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all ${errors.idProofType ? 'border-red-500' : 'border-gray-200'}`}
                       >
                         <option value="">Select ID Type</option>
                         <option value="PAN Card">PAN Card</option>
@@ -2078,7 +2288,7 @@ Generated on: ${new Date().toLocaleString()}
                         value={modalData.idProofNumber || ''}
                         onChange={(e) => handleModalDataChange('idProofNumber', e.target.value)}
                         placeholder="Enter your ID number"
-                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors.idProofNumber ? 'border-red-500' : 'border-gray-200'}`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all ${errors.idProofNumber ? 'border-red-500' : 'border-gray-200'}`}
                       />
                     </div>
 
@@ -2094,9 +2304,9 @@ Generated on: ${new Date().toLocaleString()}
                         />
                         <label
                           htmlFor="id-photo-upload"
-                          className={`flex flex-col items-center justify-center border-4 border-dashed rounded-2xl p-8 cursor-pointer transition-all duration-300 ${idProofFile ? 'border-green-400 bg-green-50' : 'border-gray-200 hover:border-rose-400 hover:bg-rose-50'}`}
+                          className={`flex flex-col items-center justify-center border-4 border-dashed rounded-2xl p-8 cursor-pointer transition-all duration-300 ${idProofFile ? 'border-green-400 bg-green-50' : 'border-gray-200 hover:border-rose-400 hover:bg-[#FAF6F0]'}`}
                         >
-                          <div className={`p-4 rounded-full mb-3 ${idProofFile ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400 group-hover:bg-rose-100 group-hover:text-rose-500'}`}>
+                          <div className={`p-4 rounded-full mb-3 ${idProofFile ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400 group-hover:bg-rose-100 group-hover:text-[#C5A059]'}`}>
                             {idProofFile ? <FaCheck size={28} /> : <FaCamera size={28} />}
                           </div>
                           <p className="font-bold text-sm text-gray-700">
@@ -2153,30 +2363,30 @@ Generated on: ${new Date().toLocaleString()}
                       smokingHabit: 'Smoking Habit',
                     };
                     return (
-                      <div key={key} className="space-y-1">
-                        <label className="text-sm font-medium text-gray-600 capitalize">
+                      <div key={key} className={key === 'aboutMe' ? 'col-span-1 sm:col-span-2 space-y-1' : 'space-y-1'}>
+                        <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1 block ml-1">
                           {fieldLabels[key] || key.replace(/([A-Z])/g, ' $1').trim()}
                         </label>
                         {typeof value === 'boolean' ? (
                           <select
                             value={value}
                             onChange={(e) => handleModalDataChange(key, e.target.value === 'true')}
-                            className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
+                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
                           >
                             <option value="true">Yes</option>
                             <option value="false">No</option>
                           </select>
                         ) : (key === 'diet' || key === 'preferredDiet') ? (
-                          <div className="grid grid-cols-2 xs:grid-cols-3 gap-2 py-2">
+                          <div className="grid grid-cols-2 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 py-2">
                             {['Veg', 'Non-Veg', 'Occasionally Non-Veg', 'Eggetarian', 'Jain', 'Vegan'].map(option => (
-                              <label key={option} className="flex items-center gap-2 text-xs sm:text-sm cursor-pointer hover:text-rose-600 transition-colors">
+                              <label key={option} className="flex items-center gap-2 text-xs sm:text-sm cursor-pointer hover:text-[#C5A059] transition-colors">
                                 <input
                                   type="radio"
                                   name={`diet-${key}`}
                                   value={option}
                                   checked={value === option}
                                   onChange={(e) => handleModalDataChange(key, e.target.value)}
-                                  className="w-4 h-4 text-rose-500 focus:ring-rose-500 border-gray-300"
+                                  className="w-4 h-4 text-[#C5A059] focus:ring-[#C5A059] border-gray-300"
                                 />
                                 {option}
                               </label>
@@ -2185,14 +2395,14 @@ Generated on: ${new Date().toLocaleString()}
                         ) : key === 'disability' ? (
                           <div className="flex gap-4 py-2">
                             {['None', 'Physical Disability'].map(option => (
-                              <label key={option} className="flex items-center gap-2 text-xs sm:text-sm cursor-pointer hover:text-rose-600 transition-colors">
+                              <label key={option} className="flex items-center gap-2 text-xs sm:text-sm cursor-pointer hover:text-[#C5A059] transition-colors">
                                 <input
                                   type="radio"
                                   name={`disability-${key}`}
                                   value={option}
                                   checked={value === option}
                                   onChange={(e) => handleModalDataChange(key, e.target.value)}
-                                  className="w-4 h-4 text-rose-500 focus:ring-rose-500 border-gray-300"
+                                  className="w-4 h-4 text-[#C5A059] focus:ring-[#C5A059] border-gray-300"
                                 />
                                 {option}
                               </label>
@@ -2202,7 +2412,7 @@ Generated on: ${new Date().toLocaleString()}
                           <select
                             value={value || ''}
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
+                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
                           >
                             <option value="">Select {fieldLabels[key] || key.replace(/([A-Z])/g, ' $1').trim().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</option>
                             {key === 'profileCreatedBy' && ['Self', 'Parent', 'Sibling', 'Friend', 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2259,7 +2469,7 @@ Generated on: ${new Date().toLocaleString()}
                           <select
                             value="Other"
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
+                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
                           >
                             <option value="">Select Option</option>
                             {key === 'rashi' && [...rashiOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2280,7 +2490,7 @@ Generated on: ${new Date().toLocaleString()}
                             <select
                               value="Other"
                               onChange={(e) => handleModalDataChange(key, e.target.value)}
-                              className="w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 outline-none"
+                              className="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium text-gray-800"
                             >
                               {key === 'rashi' && [...rashiOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
                               {key === 'nakshatra' && [...nakshatraOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2295,14 +2505,14 @@ Generated on: ${new Date().toLocaleString()}
                               value={value || ''}
                               onChange={(e) => setModalData(prev => ({ ...prev, [key]: e.target.value }))}
                               placeholder={`Enter custom ${key}`}
-                              className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 outline-none ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
+                              className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
                             />
                           </div>
                         ) : (key === 'rashi' || key === 'nakshatra' || key === 'religion' || key === 'caste' || key === 'subCaste' || key === 'gotra' || key === 'motherTongue') ? (
                           <select
                             value={[...rashiOptions, ...nakshatraOptions, ...religionOptions, ...communityOptions].includes(value) ? value : 'Other'}
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
+                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
                           >
                             <option value="">Select {key}</option>
                             {key === 'rashi' && [...rashiOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2319,10 +2529,10 @@ Generated on: ${new Date().toLocaleString()}
                             <textarea
                               value={value || ''}
                               onChange={(e) => handleModalDataChange(key, e.target.value)}
-                              className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all min-h-[200px] text-gray-700 ${errors[key] ? 'border-red-500' : 'border-gray-200'}`}
+                              className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all min-h-[160px] text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
                               placeholder="Let me introduce myself..."
                             />
-                            <div className="flex justify-between text-gray-500 text-sm border-t border-gray-100 pt-2">
+                            <div className="flex justify-between text-gray-500 text-sm border-t border-white/50 pt-2">
                               <span>Characters count</span>
                               <span className="font-medium">{value?.length || 0}</span>
                               <span>min. 50, max. 8000</span>
@@ -2335,7 +2545,7 @@ Generated on: ${new Date().toLocaleString()}
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
                             readOnly={key === 'age'}
                             placeholder={key === 'dateOfBirth' ? 'YYYY-MM-DD' : key === 'timeOfBirth' ? 'HH:MM AM/PM' : ''}
-                            className={`w-full px-4 py-2 border rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none transition-all ${errors[key] ? 'border-red-500' : 'border-gray-200'} ${key === 'age' ? 'bg-gray-50' : ''}`}
+                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} ${key === 'age' ? 'bg-gray-100 text-gray-500' : 'text-gray-800'}`}
                           />
                         )}
 
@@ -2355,28 +2565,28 @@ Generated on: ${new Date().toLocaleString()}
                 </div>
               )}
 
-              <div className="flex justify-end gap-3 pt-6 border-t border-gray-100">
+              <div className="flex justify-end gap-3 pt-6 border-t border-white/50 bg-gray-50 -mx-4 sm:-mx-8 px-4 sm:px-8 pb-4 sm:pb-8 -mb-4 sm:-mb-8 mt-4 rounded-b-3xl">
                 <button
                   type="button"
                   onClick={() => setIsEditModalOpen(false)}
-                  className="px-6 py-2 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 transition-all font-medium"
+                  className="px-6 py-2.5 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-all font-bold text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-8 py-2 rounded-xl bg-gradient-to-r from-rose-600 to-pink-600 text-white shadow-lg hover:shadow-rose-500/30 transition-all font-semibold disabled:opacity-50"
+                  className="px-8 py-2.5 rounded-xl bg-gradient-to-r from-[#C5A059] to-[#8C6D39] text-white shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50 hover:-translate-y-0.5 transition-all font-bold text-sm disabled:opacity-50 disabled:hover:translate-y-0"
                 >
-                  {loading ? 'Saving...' : 'Save'}
+                  {loading ? 'Saving...' : 'Save Changes'}
                 </button>
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
-};
-
+}
 export default MyProfile;

@@ -31,6 +31,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtUtils jwtUtils;
     private final com.punarmilan.service.ProfileService profileService;
     private final com.punarmilan.service.MailService mailService;
+    private final com.punarmilan.service.SmsService smsService;
     private final UserActivityService userActivityService;
 
     @org.springframework.beans.factory.annotation.Value("${app.frontend-url}")
@@ -41,19 +42,13 @@ public class AuthServiceImpl implements AuthService {
     public UserResponse register(RegisterRequest request) {
         log.info("Attempting to register user with email: {}", request.getEmail());
 
-        // Check if email already exists
         if (userRepository.existsByEmail(request.getEmail())) {
-            log.warn("Registration failed: Email already exists - {}", request.getEmail());
             throw new DuplicateResourceException("Email already registered");
         }
-
-        // Check if mobile number already exists
         if (userRepository.existsByMobileNumber(request.getMobileNumber())) {
-            log.warn("Registration failed: Mobile number already exists - {}", request.getMobileNumber());
             throw new DuplicateResourceException("Mobile number already registered");
         }
 
-        // Create new user
         User user = new User();
         user.setMobileNumber(request.getMobileNumber());
         user.setEmail(request.getEmail());
@@ -62,26 +57,14 @@ public class AuthServiceImpl implements AuthService {
         user.setMobileVerified(false);
         user.setEnabled(true);
 
-        // Save user to database
-        String verificationToken = UUID.randomUUID().toString();
-        user.setVerificationToken(verificationToken);
-        user.setVerificationTokenExpiry(java.time.LocalDateTime.now().plusHours(24));
-
         User savedUser = userRepository.save(user);
-        log.info("User registered successfully with ID: {}", savedUser.getId());
 
-        // Send verification email
-        String verificationLink = frontendUrl + "/verify-email?token=" + verificationToken;
-        mailService.sendVerificationEmail(savedUser.getEmail(), verificationLink);
-
-        // Create default profile for the user immediately
         profileService.createDefaultProfile(savedUser, request.getFirstName(), request.getLastName(),
                 request.getProfileCreatedBy(), request.getGender());
 
         String accessToken = jwtUtils.generateAccessToken(savedUser.getEmail());
         RefreshToken refreshToken = createRefreshToken(savedUser);
 
-        // Convert to response DTO
         return UserResponse.builder()
                 .id(savedUser.getId())
                 .mobileNumber(savedUser.getMobileNumber())
@@ -99,38 +82,23 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public UserResponse login(LoginRequest request) {
-        log.info("Login attempt for: {}", request.getEmail());
-
-        // Find user by email or mobile number using existing methods (more robust)
         User user = userRepository.findByEmail(request.getEmail())
                 .or(() -> userRepository.findByMobileNumber(request.getEmail()))
-                .orElseThrow(() -> {
-                    log.warn("Login failed: User not found - {}", request.getEmail());
-                    return new BadCredentialsException("Invalid email/mobile or password");
-                });
+                .orElseThrow(() -> new BadCredentialsException("Invalid email/mobile or password"));
 
-        // Verify password
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            log.warn("Login failed: Invalid password for user - {}", request.getEmail());
             throw new BadCredentialsException("Invalid email/mobile or password");
         }
-
-        // Check if user is enabled
         if (!user.getEnabled()) {
-            log.warn("Login failed: Account disabled - {}", request.getEmail());
             throw new BadCredentialsException("Account is disabled");
         }
 
-        log.info("Login successful for user ID: {}", user.getId());
-
-        // Update last active status
         user.setLastActive(java.time.LocalDateTime.now());
         userRepository.save(user);
 
         String accessToken = jwtUtils.generateAccessToken(user.getEmail());
         RefreshToken refreshToken = createRefreshToken(user);
 
-        // Convert to response DTO
         String profilePhotoUrl = null;
         try {
             profilePhotoUrl = profileService.getMyProfile(user).getProfilePhotoUrl();
@@ -156,7 +124,6 @@ public class AuthServiceImpl implements AuthService {
     @Transactional
     public TokenRefreshResponse refreshToken(TokenRefreshRequest request) {
         String requestRefreshToken = request.getRefreshToken();
-
         return refreshTokenRepository.findByToken(requestRefreshToken)
                 .map(this::verifyExpiration)
                 .map(RefreshToken::getUser)
@@ -173,86 +140,94 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public void processForgotPassword(ForgotPasswordRequest request) {
-        log.info("Processing forgot password for email: {}", request.getEmail());
-
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> {
-                    log.warn("Forgot password failed: User not found - {}", request.getEmail());
-                    return new com.punarmilan.exception.ResourceNotFoundException(
-                            "User not found with email: " + request.getEmail());
-                });
-
-        String token = UUID.randomUUID().toString();
-        user.setResetToken(token);
-        user.setResetTokenExpiry(java.time.LocalDateTime.now().plusHours(1));
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
+        
+        String otp = String.format("%06d", new java.util.Random().nextInt(999999));
+        user.setEmailOtp(otp);
+        user.setEmailOtpExpiry(java.time.LocalDateTime.now().plusMinutes(15));
         userRepository.save(user);
+        
+        mailService.sendOtpEmail(user.getEmail(), otp);
+    }
 
-        String resetLink = frontendUrl + "/reset-password?token=" + token;
-        mailService.sendPasswordResetEmail(user.getEmail(), resetLink);
+    @Override
+    @Transactional
+    public void verifyForgotPasswordOtp(VerifyOtpRequest request) {
+        User user = userRepository.findByEmail(request.getIdentifier())
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
 
-        log.info("Reset token generated and email sent for user: {}", user.getEmail());
+        if (user.getEmailOtp() == null || !user.getEmailOtp().equals(request.getOtp())) {
+            throw new com.punarmilan.exception.UnauthorizedException("Invalid OTP");
+        }
+
+        if (user.getEmailOtpExpiry() == null || user.getEmailOtpExpiry().isBefore(java.time.LocalDateTime.now())) {
+            throw new com.punarmilan.exception.UnauthorizedException("OTP has expired");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void resetPasswordWithOtp(ResetPasswordOtpRequest request) {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new com.punarmilan.exception.ResourceNotFoundException("User not found"));
+
+        if (user.getEmailOtp() == null || !user.getEmailOtp().equals(request.getOtp())) {
+            throw new com.punarmilan.exception.UnauthorizedException("Invalid OTP");
+        }
+
+        if (user.getEmailOtpExpiry() == null || user.getEmailOtpExpiry().isBefore(java.time.LocalDateTime.now())) {
+            throw new com.punarmilan.exception.UnauthorizedException("OTP has expired");
+        }
+
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        user.setEmailOtp(null);
+        user.setEmailOtpExpiry(null);
+        userRepository.save(user);
     }
 
     @Override
     @Transactional
     public void resetPassword(ResetPasswordRequest request) {
-        log.info("Resetting password with token: {}", request.getToken());
-
         User user = userRepository.findByResetToken(request.getToken())
                 .orElseThrow(() -> new com.punarmilan.exception.UnauthorizedException("Invalid reset token"));
-
         if (user.getResetTokenExpiry().isBefore(java.time.LocalDateTime.now())) {
-            log.warn("Reset token expired for user: {}", user.getEmail());
             throw new com.punarmilan.exception.UnauthorizedException("Reset token has expired");
         }
-
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         user.setResetToken(null);
         user.setResetTokenExpiry(null);
         userRepository.save(user);
-
-        log.info("Password successfully reset for user: {}", user.getEmail());
     }
 
     @Override
     @Transactional
     public void verifyEmail(String token) {
-        log.info("Verifying email with token: {}", token);
-
         User user = userRepository.findByVerificationToken(token)
                 .orElseThrow(() -> new com.punarmilan.exception.UnauthorizedException("Invalid verification token"));
-
         if (user.getVerificationTokenExpiry().isBefore(java.time.LocalDateTime.now())) {
-            log.warn("Verification token expired for user: {}", user.getEmail());
             throw new com.punarmilan.exception.UnauthorizedException("Verification token has expired");
         }
-
         user.setEmailVerified(true);
         user.setVerificationToken(null);
         user.setVerificationTokenExpiry(null);
         userRepository.save(user);
-
-        log.info("Email successfully verified for user: {}", user.getEmail());
-
-        // Send success email
         mailService.sendVerificationSuccessEmail(user.getEmail());
     }
 
     private RefreshToken createRefreshToken(User user) {
         RefreshToken refreshToken = refreshTokenRepository.findByUser(user)
                 .orElse(new RefreshToken());
-
         refreshToken.setUser(user);
         refreshToken.setToken(UUID.randomUUID().toString());
         refreshToken.setExpiryDate(Instant.now().plusMillis(jwtUtils.getRefreshExpiration()));
-
         return refreshTokenRepository.save(refreshToken);
     }
 
     private RefreshToken verifyExpiration(RefreshToken token) {
         if (token.getExpiryDate().isBefore(Instant.now())) {
             refreshTokenRepository.delete(token);
-            throw new UnauthorizedException("Refresh token was expired. Please make a new signin request");
+            throw new UnauthorizedException("Refresh token was expired");
         }
         return token;
     }
@@ -260,12 +235,164 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public void logout(String email) {
-        log.info("Logging out user: {}", email);
-        userRepository.findByEmail(email).ifPresent(user -> {
-            user.setLastActive(java.time.LocalDateTime.now().minusYears(10));
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UnauthorizedException("User not found"));
+        refreshTokenRepository.deleteByUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void verifyOtp(VerifyOtpRequest request) {
+        if ("EMAIL".equalsIgnoreCase(request.getType())) {
+            User user = userRepository.findByEmail(request.getIdentifier())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid email address"));
+            if (user.getEmailOtp() == null || !user.getEmailOtp().equals(request.getOtp())) {
+                throw new IllegalArgumentException("Invalid email OTP");
+            }
+            if (user.getEmailOtpExpiry() == null || user.getEmailOtpExpiry().isBefore(java.time.LocalDateTime.now())) {
+                throw new IllegalArgumentException("Email OTP has expired");
+            }
+            user.setEmailVerified(true);
+            user.setEmailOtp(null);
+            user.setEmailOtpExpiry(null);
             userRepository.save(user);
-            // Clear Redis cache so isOnline returns false immediately
-            userActivityService.clearActivity(email);
-        });
+            mailService.sendVerificationSuccessEmail(user.getEmail());
+        } else if ("MOBILE".equalsIgnoreCase(request.getType())) {
+            User user = userRepository.findByMobileNumber(request.getIdentifier())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid mobile number"));
+            if (user.getMobileOtp() == null || !user.getMobileOtp().equals(request.getOtp())) {
+                throw new IllegalArgumentException("Invalid mobile OTP");
+            }
+            if (user.getMobileOtpExpiry() == null || user.getMobileOtpExpiry().isBefore(java.time.LocalDateTime.now())) {
+                throw new IllegalArgumentException("Mobile OTP has expired");
+            }
+            user.setMobileVerified(true);
+            user.setMobileOtp(null);
+            user.setMobileOtpExpiry(null);
+            userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException("Invalid verification type");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void resendOtp(String identifier, String type) {
+        if ("EMAIL".equalsIgnoreCase(type)) {
+            User user = userRepository.findByEmail(identifier)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid email address"));
+            if (user.getEmailVerified()) {
+                throw new IllegalArgumentException("Email is already verified");
+            }
+            String emailOtp = String.format("%06d", new java.util.Random().nextInt(999999));
+            user.setEmailOtp(emailOtp);
+            user.setEmailOtpExpiry(java.time.LocalDateTime.now().plusMinutes(10));
+            userRepository.save(user);
+            mailService.sendOtpEmail(user.getEmail(), emailOtp);
+        } else if ("MOBILE".equalsIgnoreCase(type)) {
+            User user = userRepository.findByMobileNumber(identifier)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid mobile number"));
+            if (user.getMobileVerified()) {
+                throw new IllegalArgumentException("Mobile number is already verified");
+            }
+            String mobileOtp = String.format("%06d", new java.util.Random().nextInt(999999));
+            user.setMobileOtp(mobileOtp);
+            user.setMobileOtpExpiry(java.time.LocalDateTime.now().plusMinutes(10));
+            userRepository.save(user);
+            smsService.sendOtpSms(user.getMobileNumber(), mobileOtp);
+        } else {
+            throw new IllegalArgumentException("Invalid verification type");
+        }
+    }
+    
+    @Override
+    @Transactional
+    public void requestLoginOtp(LoginOtpRequest request) {
+        if ("EMAIL".equalsIgnoreCase(request.getType())) {
+            User user = userRepository.findByEmail(request.getIdentifier())
+                    .orElseThrow(() -> new IllegalArgumentException("User with this email not found"));
+            if (!user.getEnabled()) {
+                throw new IllegalArgumentException("Account is disabled");
+            }
+            String emailOtp = String.format("%06d", new java.util.Random().nextInt(999999));
+            user.setEmailOtp(emailOtp);
+            user.setEmailOtpExpiry(java.time.LocalDateTime.now().plusMinutes(10));
+            userRepository.save(user);
+            mailService.sendOtpEmail(user.getEmail(), emailOtp);
+        } else if ("MOBILE".equalsIgnoreCase(request.getType())) {
+            User user = userRepository.findByMobileNumber(request.getIdentifier())
+                    .orElseThrow(() -> new IllegalArgumentException("User with this mobile number not found"));
+            if (!user.getEnabled()) {
+                throw new IllegalArgumentException("Account is disabled");
+            }
+            String mobileOtp = String.format("%06d", new java.util.Random().nextInt(999999));
+            user.setMobileOtp(mobileOtp);
+            user.setMobileOtpExpiry(java.time.LocalDateTime.now().plusMinutes(10));
+            userRepository.save(user);
+            smsService.sendOtpSms(user.getMobileNumber(), mobileOtp);
+        } else {
+            throw new IllegalArgumentException("Invalid login type");
+        }
+    }
+
+    @Override
+    @Transactional
+    public UserResponse verifyLoginOtp(LoginOtpVerifyRequest request) {
+        User user;
+        if ("EMAIL".equalsIgnoreCase(request.getType())) {
+            user = userRepository.findByEmail(request.getIdentifier())
+                    .orElseThrow(() -> new IllegalArgumentException("User not found"));
+            if (user.getEmailOtp() == null || !user.getEmailOtp().equals(request.getOtp())) {
+                throw new IllegalArgumentException("Invalid email OTP");
+            }
+            if (user.getEmailOtpExpiry() == null || user.getEmailOtpExpiry().isBefore(java.time.LocalDateTime.now())) {
+                throw new IllegalArgumentException("Email OTP has expired");
+            }
+            user.setEmailOtp(null);
+            user.setEmailOtpExpiry(null);
+        } else if ("MOBILE".equalsIgnoreCase(request.getType())) {
+            user = userRepository.findByMobileNumber(request.getIdentifier())
+                    .orElseThrow(() -> new IllegalArgumentException("User not found"));
+            if (user.getMobileOtp() == null || !user.getMobileOtp().equals(request.getOtp())) {
+                throw new IllegalArgumentException("Invalid mobile OTP");
+            }
+            if (user.getMobileOtpExpiry() == null || user.getMobileOtpExpiry().isBefore(java.time.LocalDateTime.now())) {
+                throw new IllegalArgumentException("Mobile OTP has expired");
+            }
+            user.setMobileOtp(null);
+            user.setMobileOtpExpiry(null);
+        } else {
+            throw new IllegalArgumentException("Invalid login type");
+        }
+
+        if (!user.getEnabled()) {
+            throw new BadCredentialsException("Account is disabled");
+        }
+
+        user.setLastActive(java.time.LocalDateTime.now());
+        userRepository.save(user);
+
+        String accessToken = jwtUtils.generateAccessToken(user.getEmail());
+        RefreshToken refreshToken = createRefreshToken(user);
+
+        String profilePhotoUrl = null;
+        try {
+            profilePhotoUrl = profileService.getMyProfile(user).getProfilePhotoUrl();
+        } catch (Exception e) {
+            log.warn("Could not fetch profile photo for user: {}", user.getId());
+        }
+
+        return UserResponse.builder()
+                .id(user.getId())
+                .mobileNumber(user.getMobileNumber())
+                .email(user.getEmail())
+                .emailVerified(user.getEmailVerified())
+                .mobileVerified(user.getMobileVerified())
+                .accessToken(accessToken)
+                .refreshToken(refreshToken.getToken())
+                .profilePhotoUrl(profilePhotoUrl)
+                .createdAt(user.getCreatedAt())
+                .isPremium(user.getIsPremium())
+                .build();
     }
 }

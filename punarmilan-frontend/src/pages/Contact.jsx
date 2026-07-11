@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from '../components/Headers';
 import Footer from '../components/Footer';
 import { Mail, Phone, MapPin, Send, MessageSquare, User, Smartphone, Tag } from 'lucide-react';
 import contactService from '../services/contactService';
@@ -42,6 +43,7 @@ const Contact = () => {
 
     return (
         <div className="min-h-screen bg-slate-50 font-sans selection:bg-[#e91e63] selection:text-white">
+            <Header />
 
             {/* Hero Section */}
             <section className="relative pt-32 pb-20 bg-[#0a0e1b] overflow-hidden">

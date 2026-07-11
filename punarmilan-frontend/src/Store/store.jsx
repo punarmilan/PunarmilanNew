@@ -5,7 +5,7 @@ import profileSlice from '../Slice/ProfileSlice';
 import notificationSlice from '../Slice/NotificationSlice';
 import eventSlice from '../Slice/EventSlice';
 import matchSlice from '../Slice/MatchSlice';
-import searchSlice from '../Slice/SearchSlice';
+
 import chatSlice from '../Slice/ChatSlice';
 import reportSlice from '../Slice/ReportSlice';
 import adminAuthReducer from '../admin/store/adminAuthSlice';
@@ -18,7 +18,7 @@ const store = configureStore({
         notifications: notificationSlice,
         events: eventSlice,
         match: matchSlice,
-        search: searchSlice,
+
         chat: chatSlice,
         report: reportSlice,
         adminAuth: adminAuthReducer

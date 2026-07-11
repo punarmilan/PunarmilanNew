@@ -21,7 +21,7 @@ public class NotificationController {
     private final NotificationService notificationService;
     private final AuthUtil authUtil;
 
-    /** GET /api/notifications?page=0&size=20 — paginated list */
+    /** GET /api/notifications?page=0&size=20 â€” paginated list */
     @GetMapping
     public ResponseEntity<Page<NotificationDTO>> getNotifications(
             @RequestParam(defaultValue = "0") int page,
@@ -30,7 +30,7 @@ public class NotificationController {
         return ResponseEntity.ok(notificationService.getNotifications(authUtil.getCurrentUser(), page, size));
     }
 
-    /** GET /api/notifications/unread — unread notifications list */
+    /** GET /api/notifications/unread â€” unread notifications list */
     @GetMapping("/unread")
     public ResponseEntity<List<NotificationDTO>> getUnreadNotifications() {
         log.info("Fetching unread notifications for current user");
@@ -44,7 +44,7 @@ public class NotificationController {
         return ResponseEntity.ok(Map.of("count", count));
     }
 
-    /** PATCH /api/notifications/{id}/read — mark single notification as read */
+    /** PATCH /api/notifications/{id}/read â€” mark single notification as read */
     @PatchMapping("/{id}/read")
     public ResponseEntity<Void> markAsRead(@PathVariable Long id) {
         log.info("Marking notification {} as read", id);
@@ -52,7 +52,7 @@ public class NotificationController {
         return ResponseEntity.ok().build();
     }
 
-    /** PATCH /api/notifications/mark-all-read — mark all as read */
+    /** PATCH /api/notifications/mark-all-read â€” mark all as read */
     @PatchMapping("/mark-all-read")
     public ResponseEntity<Void> markAllAsRead() {
         log.info("Marking all notifications as read");

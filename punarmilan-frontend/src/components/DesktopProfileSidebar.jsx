@@ -209,7 +209,7 @@ const DesktopProfileSidebar = () => {
         <div className='hidden lg:block'>
             <aside className="w-full bg-white min-h-screen p-6 border-r">
                 {/* Profile Section */}
-                <div className="mb-8">
+                <div className="mb-8 bg-amber-300">
                     <div className="bg-white p-4 rounded">
                         <div className="flex items-center space-x-4 mb-4">
                             <div className="relative">
@@ -366,7 +366,7 @@ const DesktopProfileSidebar = () => {
                     {uploadedFiles.length > 0 && (
                         <div className="mt-6">
                             <h4 className="font-medium text-gray-700 mb-3">Uploaded Photos</h4>
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                                 {uploadedFiles.map((file, index) => (
                                     <div key={index} className="relative">
                                         <img

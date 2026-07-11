@@ -73,4 +73,85 @@ public interface ProfileRepository extends JpaRepository<Profile, Long>,
                         @org.springframework.data.repository.query.Param("gender") String gender,
                         @org.springframework.data.repository.query.Param("excludedIds") java.util.Collection<Long> excludedIds,
                         org.springframework.data.domain.Pageable pageable);
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.religion FROM Profile p WHERE p.religion IS NOT NULL AND p.religion != ''")
+        List<String> findDistinctReligion();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.caste FROM Profile p WHERE p.caste IS NOT NULL AND p.caste != ''")
+        List<String> findDistinctCaste();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.subCaste FROM Profile p WHERE p.subCaste IS NOT NULL AND p.subCaste != ''")
+        List<String> findDistinctSubCaste();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.state FROM Profile p WHERE p.state IS NOT NULL AND p.state != ''")
+        List<String> findDistinctState();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.city FROM Profile p WHERE p.city IS NOT NULL AND p.city != ''")
+        List<String> findDistinctCity();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.country FROM Profile p WHERE p.country IS NOT NULL AND p.country != ''")
+        List<String> findDistinctCountry();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.educationLevel FROM Profile p WHERE p.educationLevel IS NOT NULL AND p.educationLevel != ''")
+        List<String> findDistinctEducationLevel();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.educationField FROM Profile p WHERE p.educationField IS NOT NULL AND p.educationField != ''")
+        List<String> findDistinctEducationField();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.occupation FROM Profile p WHERE p.occupation IS NOT NULL AND p.occupation != ''")
+        List<String> findDistinctOccupation();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.company FROM Profile p WHERE p.company IS NOT NULL AND p.company != ''")
+        List<String> findDistinctCompany();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.motherTongue FROM Profile p WHERE p.motherTongue IS NOT NULL AND p.motherTongue != ''")
+        List<String> findDistinctMotherTongue();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.maritalStatus FROM Profile p WHERE p.maritalStatus IS NOT NULL AND p.maritalStatus != ''")
+        List<String> findDistinctMaritalStatus();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.workingWith FROM Profile p WHERE p.workingWith IS NOT NULL AND p.workingWith != ''")
+        List<String> findDistinctWorkingWith();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.annualIncome FROM Profile p WHERE p.annualIncome IS NOT NULL AND p.annualIncome != ''")
+        List<String> findDistinctAnnualIncome();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.diet FROM Profile p WHERE p.diet IS NOT NULL AND p.diet != ''")
+        List<String> findDistinctDiet();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.bloodGroup FROM Profile p WHERE p.bloodGroup IS NOT NULL AND p.bloodGroup != ''")
+        List<String> findDistinctBloodGroup();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.rashi FROM Profile p WHERE p.rashi IS NOT NULL AND p.rashi != ''")
+        List<String> findDistinctRashi();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.gotra FROM Profile p WHERE p.gotra IS NOT NULL AND p.gotra != ''")
+        List<String> findDistinctGotra();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.nakshatra FROM Profile p WHERE p.nakshatra IS NOT NULL AND p.nakshatra != ''")
+        List<String> findDistinctNakshatra();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.manglikStatus FROM Profile p WHERE p.manglikStatus IS NOT NULL AND p.manglikStatus != ''")
+        List<String> findDistinctManglikStatus();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.familyFinancialStatus FROM Profile p WHERE p.familyFinancialStatus IS NOT NULL AND p.familyFinancialStatus != ''")
+        List<String> findDistinctFamilyFinancialStatus();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.fatherStatus FROM Profile p WHERE p.fatherStatus IS NOT NULL AND p.fatherStatus != ''")
+        List<String> findDistinctFatherStatus();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.motherStatus FROM Profile p WHERE p.motherStatus IS NOT NULL AND p.motherStatus != ''")
+        List<String> findDistinctMotherStatus();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.drinkingHabit FROM Profile p WHERE p.drinkingHabit IS NOT NULL AND p.drinkingHabit != ''")
+        List<String> findDistinctDrinkingHabit();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.smokingHabit FROM Profile p WHERE p.smokingHabit IS NOT NULL AND p.smokingHabit != ''")
+        List<String> findDistinctSmokingHabit();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.disability FROM Profile p WHERE p.disability IS NOT NULL AND p.disability != ''")
+        List<String> findDistinctDisability();
+
+        @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.verificationStatus FROM Profile p WHERE p.verificationStatus IS NOT NULL AND p.verificationStatus != ''")
+        List<String> findDistinctVerificationStatus();
 }

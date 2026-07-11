@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import { toast } from 'react-hot-toast';
 import { X, Send, Minus, Maximize2 } from 'lucide-react';
-import { fetchChatHistory, setActiveChatUser, markAllChatAsRead } from '../Slice/ChatSlice';
+import Swal from 'sweetalert2';
+import { fetchChatHistory, setActiveChatUser, markAllChatAsRead, clearChatError } from '../Slice/ChatSlice';
 import ChatService from '../services/chatService';
 import { formatDisplayName } from '../utils/mockData';
 
@@ -19,10 +20,28 @@ export default function ChatWindow({ targetUser, onClose }) {
 
     useEffect(() => {
         if (error) {
-            toast.error(error);
-            // We could dispatch an action to clear the error here if needed
+            if (error.toLowerCase().includes("premium") || error.toLowerCase().includes("upgrade")) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '<span style="color:#8C6D39">Premium Feature</span>',
+                    html: `<b>${error}</b>`,
+                    confirmButtonText: 'Upgrade Now',
+                    confirmButtonColor: '#8C6D39',
+                    showCancelButton: true,
+                    cancelButtonText: 'Later',
+                    cancelButtonColor: '#6c757d',
+                    background: '#fcfaf8'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/payment';
+                    }
+                });
+            } else {
+                toast.error(error);
+            }
+            dispatch(clearChatError());
         }
-    }, [error]);
+    }, [error, dispatch]);
 
     useEffect(() => {
         dispatch(setActiveChatUser(targetUser.id));

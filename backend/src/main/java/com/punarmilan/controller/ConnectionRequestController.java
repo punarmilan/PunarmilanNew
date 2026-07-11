@@ -35,6 +35,13 @@ public class ConnectionRequestController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/withdraw/{receiverProfileId}")
+    public ResponseEntity<Void> withdrawRequest(@PathVariable Long receiverProfileId) {
+        log.info("Request to withdraw connection request from profile {}", receiverProfileId);
+        connectionRequestService.withdrawRequest(authUtil.getCurrentUser(), receiverProfileId);
+        return ResponseEntity.ok().build();
+    }
+
     @PutMapping("/accept/{requestId}")
     public ResponseEntity<Void> acceptRequest(@PathVariable Long requestId) {
         log.info("Request to accept connection {}", requestId);

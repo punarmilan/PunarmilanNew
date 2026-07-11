@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from 'sweetalert2';
 import { ShieldAlert, Trash2, EyeOff, CheckCircle2, AlertCircle } from "lucide-react";
 
 /**
@@ -25,7 +26,7 @@ function DeleteProfile({ profile, onUpdate }) {
         setIsSaving(true);
         try {
             await onUpdate({ enabled: false });
-            alert("Account deactivated successfully.");
+            Swal.fire({ text: "Account deactivated successfully.", confirmButtonColor: '#8C6D39' });
             window.location.href = "/login";
         } catch (e) {
             setIsSaving(false);

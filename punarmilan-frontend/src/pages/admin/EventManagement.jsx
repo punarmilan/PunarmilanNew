@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { Calendar, Clock, MapPin, Users, Plus, Edit2, Trash2, X, Check, Search, Filter, ChevronRight, MoreHorizontal, Download } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import adminApi from '../../admin/services/adminApi';
@@ -81,7 +82,7 @@ const EventManagement = () => {
     };
 
     const handleDelete = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this event?')) return;
+        if (!(await Swal.fire({ title: 'Are you sure?', text: 'Are you sure you want to delete this event?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#8C6D39', cancelButtonColor: '#d33', confirmButtonText: 'Yes' }).then(r => r.isConfirmed))) return;
 
         try {
             await adminApi.delete(`/events/${id}`);

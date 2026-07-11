@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -199,10 +200,13 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
 
     @Override
     @org.springframework.cache.annotation.Cacheable(value = "subscription_plans")
-    public java.util.List<SubscriptionPlan> getAllPlans() {
-        return planRepository.findByActive(true);
-    }
+    public List<SubscriptionPlan> getAllPlans() {
+        List<SubscriptionPlan> plans = planRepository.findAll();
 
+        System.out.println("Plans count = " + plans.size());
+
+        return plans;
+    }
     @Override
     public boolean isPremiumUser(User user) {
         if (user == null)

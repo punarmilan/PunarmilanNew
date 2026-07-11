@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaArrowLeft, FaCheck, FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
@@ -66,7 +67,7 @@ const MaritalStatusPage = () => {
             navigate('/my-shadi/partner-preferences');
         } catch (error) {
             console.error('Failed to update marital status:', error);
-            alert('Failed to update marital status. Please try again.');
+            Swal.fire({ text: 'Failed to update marital status. Please try again.', confirmButtonColor: '#8C6D39' });
         }
     };
 

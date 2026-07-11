@@ -3,6 +3,11 @@ package com.punarmilan.controller;
 import com.punarmilan.dto.LoginRequest;
 import com.punarmilan.dto.RegisterRequest;
 import com.punarmilan.dto.UserResponse;
+import com.punarmilan.dto.VerifyOtpRequest;
+import com.punarmilan.dto.ResetPasswordOtpRequest;
+import com.punarmilan.dto.VerifyOtpResponse;
+import com.punarmilan.dto.LoginOtpRequest;
+import com.punarmilan.dto.LoginOtpVerifyRequest;
 import com.punarmilan.dto.TokenRefreshRequest;
 import com.punarmilan.dto.TokenRefreshResponse;
 import com.punarmilan.dto.ForgotPasswordRequest;
@@ -12,8 +17,11 @@ import com.punarmilan.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.Cookie;
@@ -139,7 +147,19 @@ public class AuthController {
     @PostMapping("/forgot-password")
     public ResponseEntity<MessageResponse> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
         authService.processForgotPassword(request);
-        return ResponseEntity.ok(new MessageResponse("Password reset link has been sent to your email"));
+        return ResponseEntity.ok(new MessageResponse("OTP has been sent to your email"));
+    }
+
+    @PostMapping("/forgot-password/verify-otp")
+    public ResponseEntity<MessageResponse> verifyForgotPasswordOtp(@Valid @RequestBody VerifyOtpRequest request) {
+        authService.verifyForgotPasswordOtp(request);
+        return ResponseEntity.ok(new MessageResponse("OTP verified successfully"));
+    }
+
+    @PostMapping("/reset-password-otp")
+    public ResponseEntity<MessageResponse> resetPasswordWithOtp(@Valid @RequestBody ResetPasswordOtpRequest request) {
+        authService.resetPasswordWithOtp(request);
+        return ResponseEntity.ok(new MessageResponse("Password has been reset successfully"));
     }
 
     @PostMapping("/reset-password")
@@ -154,23 +174,86 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("Email has been verified successfully"));
     }
 
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOtp(@Valid @RequestBody VerifyOtpRequest request) {
+        try {
+            authService.verifyOtp(request);
+            return ResponseEntity.ok(new MessageResponse(request.getType() + " verified successfully!"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+        }
+    }
+
+    @PostMapping("/resend-otp")
+    public ResponseEntity<?> resendOtp(@RequestParam String identifier, @RequestParam String type) {
+        try {
+            authService.resendOtp(identifier, type);
+            return ResponseEntity.ok(new MessageResponse("OTP resent successfully"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+        }
+    }
+
+    @PostMapping("/login-otp/request")
+    public ResponseEntity<?> requestLoginOtp(@Valid @RequestBody LoginOtpRequest request) {
+        try {
+            authService.requestLoginOtp(request);
+            return ResponseEntity.ok(new MessageResponse("Login OTP sent successfully"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+        }
+    }
+
+    @PostMapping("/login-otp/verify")
+    public ResponseEntity<?> verifyLoginOtp(@Valid @RequestBody LoginOtpVerifyRequest request, HttpServletResponse response) {
+        try {
+            UserResponse userResponse = authService.verifyLoginOtp(request);
+            
+            // Set access token cookie
+            ResponseCookie jwtCookie = ResponseCookie.from("accessToken", userResponse.getAccessToken())
+                    .path("/")
+                    .httpOnly(true)
+                    .secure(true)
+                    .sameSite("Strict")
+                    .maxAge(24 * 60 * 60) // 24 hours
+                    .build();
+            response.addHeader(HttpHeaders.SET_COOKIE, jwtCookie.toString());
+
+            // Set refresh token cookie
+            ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", userResponse.getRefreshToken())
+                    .path("/")
+                    .httpOnly(true)
+                    .secure(true)
+                    .sameSite("Strict")
+                    .maxAge(7 * 24 * 60 * 60) // 7 days
+                    .build();
+            response.addHeader(HttpHeaders.SET_COOKIE, refreshCookie.toString());
+
+            return ResponseEntity.ok(userResponse);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(new MessageResponse(e.getMessage()));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse(e.getMessage()));
+        }
+    }
+
     @PostMapping("/logout")
     public ResponseEntity<MessageResponse> logout(HttpServletResponse response) {
         String email = authUtil.getCurrentUserEmail();
         log.info("Logout request received for email: {}", email);
         authService.logout(email);
 
-        // Clear cookies — must match the same flags used when setting them
+        // Clear cookies â€” must match the same flags used when setting them
         Cookie accessCookie = new Cookie("accessToken", null);
         accessCookie.setHttpOnly(true);
-        accessCookie.setSecure(isSecureCookie());
+        accessCookie.setSecure(true);
         accessCookie.setPath("/");
         accessCookie.setMaxAge(0);
         response.addCookie(accessCookie);
 
         Cookie refreshCookie = new Cookie("refreshToken", null);
         refreshCookie.setHttpOnly(true);
-        refreshCookie.setSecure(isSecureCookie());
+        refreshCookie.setSecure(true);
         refreshCookie.setPath("/");
         refreshCookie.setMaxAge(0);
         response.addCookie(refreshCookie);

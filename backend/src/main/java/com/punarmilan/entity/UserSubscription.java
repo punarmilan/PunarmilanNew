@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_subscriptions")
+@com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

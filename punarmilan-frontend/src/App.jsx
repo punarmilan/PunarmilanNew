@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-// Forced reload
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import ChatWindow from "./components/ChatWindow";
 import { closeChatWindow, setCurrentUserId } from "./Slice/ChatSlice";
 import ChatService from "./services/chatService";
-import Matches from "./pages/matches/Matches";
+import PremiumMatchDashboard from "./pages/myshadi/matches/PremiumMatchDashboard";
 import MatchProfileDetails from "./pages/matches/MatchProfileDetails";
 import { Toaster } from "react-hot-toast";
 import "./pages/myshadi/partner/partner.css";
@@ -33,16 +32,13 @@ import QualificationPage from "./pages/myshadi/partner/QualificationPage";
 import StateLivingPage from "./pages/myshadi/partner/StateLivingPage";
 import CityDistrictPage from "./pages/myshadi/partner/CityDistrictPage";
 import AnnualIncomePage from "./pages/myshadi/partner/AnnualIncomePage";
-import WorkingWithPage from "./pages/myshadi/partner/WorkingWithPage";
+// import WorkingWithPage from "./pages/myshadi/partner/WorkingWithPage";
 import DietPage from "./pages/myshadi/partner/DietPage";
 import ProfileManagedByPage from "./pages/myshadi/partner/ProfileManagedByPage";
 import Settings from "./pages/myshadi/setting/Setting";
 import Country from "./pages/myshadi/partner/Country";
 import MoreDropdown from "./pages/myshadi/more/More";
-import SearchNav from "./pages/search/SearchNav";
-import AdvancedSearch from "./pages/search/AdvSearch/AdvancedSearch";
-import Search from "./pages/search/Search";
-import SearchResults from "./pages/search/SearchResults";
+
 import InboxNav from "./pages/inbox/InboxNav";
 import Received from "./pages/inbox/received/Received";
 import Accepted from "./pages/inbox/accepted/Accepted";
@@ -63,8 +59,34 @@ import MyTickets from "./pages/MyOrder/MyTickets";
 import Pricing from "./pages/payment/Pricing";
 import AboutUs from "./pages/AboutUs";
 import VerifyEmail from "./pages/VerifyEmail";
+import OtpVerification from "./pages/OtpVerification";
 import api from "./services/api";
 import ProtectedRoute from "./components/ProtectedRoute";
+
+//Complete Profile Routes
+import CompleteProfile from "./pages/CompleteProfile";
+import ReligiousBackgroundForm from "./components/profile/ReligiousBackgroundForm";
+import FamilyDetailsForm from "./components/profile/FamilyDetailsForm";
+import EducationCareerForm from "./components/profile/EducationCareerForm";
+import LocationForm from "./components/profile/LocationForm";
+import LifestyleForm from "./components/profile/LifestyleForm";
+import PartnerPreferenceForm from "./components/profile/PartnerPreferenceForm";
+
+//Auth Footer Routes import
+import BlogPage from "./pages/./authFooter/BlogPage";
+import VipPunarMilanPage from "./pages/authFooter/VipPunarMilanPage";
+import SuccessStoriesPage from "./pages/authFooter/SuccessStoriesPage";
+import CentresPage from "./pages/authFooter/CentresPage";
+import ContactPage from "./pages/authFooter/ContactPage";
+import LivePage from "./pages/authFooter/LivePage";
+import WorkWithUsPage from "./pages/authFooter/WorkWithUsPage";
+
+// New Pages
+import Wedding from "./pages/myshadi/wedding/Wedding";
+import SpecialServices from "./pages/myshadi/services/SpecialServices";
+import Notifications from "./pages/Notifications";
+import BeSafeOnline from "./pages/BeSafeOnline";
+import WeddingInvite from "./pages/wedding/WeddingInvite";
 
 // Admin Imports
 import AdminLogin from "./admin/pages/AdminLogin";
@@ -80,6 +102,15 @@ import SupportTickets from "./admin/pages/SupportTickets";
 import EventManagement from "./pages/admin/EventManagement";
 import Contact from "./pages/Contact";
 import ContactMessages from "./admin/pages/ContactMessages";
+import MobileUsersManagement from "./admin/pages/MobileUsersManagement";
+import MobileUserDetails from "./admin/pages/MobileUserDetails";
+import { Ban } from 'lucide-react';
+import MyShadiLayout from "./layouts/MyShadiLayout";
+import PageContainer from "./layouts/PageContainer";
+import ChatsPage from "./pages/myshadi/chats/ChatsPage";
+import InterestsPage from "./pages/myshadi/interests/InterestsPage";
+import ChatListPage from "./pages/myshadi/chats/ChatListPage";
+import SavedProfilesPage from "./pages/myshadi/matches/SavedProfilesPage";
 
 
 function App() {
@@ -90,6 +121,7 @@ function App() {
   const unreadCount = useSelector((state) => state.chat.unreadCount);
   const notificationsUnreadCount = useSelector((state) => state.notifications.unreadCount);
   const isHomePage = location.pathname === "/" || location.pathname === "/home" || location.pathname === '/payment';
+  const isWeddingPage = location.pathname.startsWith('/wedding');
   const isAdminPage = location.pathname.startsWith("/admin");
   const isContactPage = location.pathname === "/contact";
 
@@ -111,6 +143,13 @@ function App() {
       setOpen(false);
     }
   }, [isHomePage]);
+
+  // Global listener for chats sidebar
+  useEffect(() => {
+    const handleOpenChats = () => setOpen(true);
+    window.addEventListener('open-chats-sidebar', handleOpenChats);
+    return () => window.removeEventListener('open-chats-sidebar', handleOpenChats);
+  }, []);
 
   // Activity Heartbeat & CSRF Initialization
   useEffect(() => {
@@ -154,26 +193,38 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen pb-safe-bottom">
+    <div className="min-h-screen pb-safe-bottom w-full max-w-[100%] overflow-x-hidden">
       {/* Online Members Chat Button */}
       {/* ✅ DO NOT SHOW ON HOME PAGE */}
       {!isHomePage && !isAdminPage && !isContactPage && (
         <>
           {/* Online Members Chat Button */}
           <button
-            onClick={() => setOpen(!open)}
-            className="fixed right-0 top-1/2 -translate-y-1/2 md:block hidden
-                       z-[10000] bg-gradient-to-br from-rose-500 to-pink-600 text-white
-                       px-3 py-4 rounded-l-xl shadow-2xl hover:translate-x-[-4px] transition-transform duration-300">
-            <div className="relative">
-              <span className="text-xl">💬</span>
-              {(unreadCount + notificationsUnreadCount) > 0 && (
-                <span className="absolute -top-3 -right-3 min-w-[20px] h-5 bg-yellow-400 text-rose-900 text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white animate-bounce shadow-sm px-1">
-                  {unreadCount + notificationsUnreadCount}
-                </span>
-              )}
-            </div>
-          </button>
+          onClick={() => setOpen(!open)}
+          className="
+            fixed
+            right-4 bottom-4
+            md:block hidden
+            z-[10000]
+            bg-gradient-to-br from-rose-500 to-pink-600
+            text-white
+            p-4
+            rounded-full
+            shadow-2xl
+            hover:scale-105
+            transition-all duration-300
+          "
+        >
+          <div className="relative">
+            <span className="text-xl">💬</span>
+
+            {(unreadCount + notificationsUnreadCount) > 0 && (
+              <span className="absolute -top-2 -right-2 min-w-[20px] h-5 bg-yellow-400 text-rose-900 text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white animate-bounce shadow-sm px-1">
+                {unreadCount + notificationsUnreadCount}
+              </span>
+            )}
+          </div>
+        </button>
 
           <OnlineMembers open={open} setOpen={setOpen} />
 
@@ -183,21 +234,34 @@ function App() {
       <Routes>
         {/* HOME */}
         <Route path="/" element={<Home />} />
-        <Route path="/matches" element={<Matches />} />
-        <Route path="/matches/:id" element={<MatchProfileDetails />} />
+        <Route path="/matches" element={
+          <>
+            <MyShadiLayout>
+                <PremiumMatchDashboard />
+            </MyShadiLayout>
+          </>
+          } />
+        <Route path="/matches/:id" element={<><MyShadiLayout><MatchProfileDetails /></MyShadiLayout></>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/safety" element={<BeSafeOnline />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/verify-email" element={<VerifyEmail />} />
+        <Route path="/verify-otp" element={<OtpVerification />} />
         <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/wedding" element={<WeddingInvite />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/be-safe-online" element={<BeSafeOnline />} />
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="users" element={<AdminUserManagement />} />
+          <Route path="mobile-users" element={<MobileUsersManagement />} />
+          <Route path="mobile-users/:id" element={<MobileUserDetails />} />
           <Route path="approvals" element={<VerificationQueue />} />
           <Route path="photos" element={<PhotoModeration />} />
           <Route path="reports" element={<ReportManagement />} />
@@ -208,29 +272,102 @@ function App() {
           <Route path="events" element={<EventManagement />} />
         </Route>
 
-        <Route path="/my-tickets" element={<><Header /><SecondNav /><MyTickets /></>} />
+        // Complete Profile Routes
+        <Route path="/complete-profile" element={<CompleteProfile />} />
+        <Route path="/religious-background-form" element={<ReligiousBackgroundForm />} />
+        <Route path="/family-details-form" element={<FamilyDetailsForm />} />
+        <Route path="/education-career-form" element={<EducationCareerForm />} />
+        <Route path="/location-form" element={<LocationForm />} />
+        <Route path="/lifestyle-form" element={<LifestyleForm />} />
+        <Route path="/partner-preference-form" element={<PartnerPreferenceForm />} />  
+
+        // Auth Footer Routes
+        <Route path="/blog" element={<><Header /><div className="pt-16"><BlogPage /></div></>} /> 
+        <Route path="/VIP-punarmilan" element={<><Header /><div className="pt-16"><VipPunarMilanPage /></div></>} /> 
+        <Route path="/success-stories" element={<><Header /><div className="pt-16"><SuccessStoriesPage /></div></>} />
+        <Route path="/centres" element={<><Header /><div className="pt-16"><CentresPage /></div></>} />
+        <Route path="/contact-us" element={<><Header /><div className="pt-16"><ContactPage /></div></>} />
+        <Route path="/live" element={<><Header /><div className="pt-16"><LivePage /></div></>} />
+        <Route path="/work-with-us" element={<><Header /><div className="pt-16"><WorkWithUsPage /></div></>} />
+
+        <Route path="/my-tickets" element={<MyShadiLayout><MyTickets /></MyShadiLayout>} />
 
         {/* DASHBOARD */}
         <Route
           path="/my-shadi"
           element={
             <ProtectedRoute>
-              <Header />
-              <SecondNav />
-              <Dashboard />
+              <MyShadiLayout>                
+                <Dashboard />         
+            </MyShadiLayout>
             </ProtectedRoute>
           }
         />
-        {/* payment */}
-        <Route path="/payment" element={<Payment />} />
+        <Route
+          path="/my-shadi/chats"
+          element={
+            <ProtectedRoute>
+              <MyShadiLayout>                
+                <ChatsPage />         
+            </MyShadiLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/inbox"
+          element={
+            <ProtectedRoute>
+              <MyShadiLayout>                
+                <InterestsPage />         
+            </MyShadiLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <ProtectedRoute>
+              <MyShadiLayout>                
+                <ChatListPage />         
+            </MyShadiLayout>
+            </ProtectedRoute>
+          }
+        />
+        {/* Payment */}
+        <Route
+          path="/payment"
+          element={
+            <ProtectedRoute>
+              <MyShadiLayout>
+                <Payment />
+              </MyShadiLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Premium Pages */}
+        <Route path="/wedding" element={<><Header /><Wedding /></>} />
+        <Route path="/special-services" element={<><Header /><SpecialServices /></>} />
         {/* MY PROFILE */}
         <Route
           path="/my-shadi/my-profile"
           element={
             <ProtectedRoute>
-              <Header />
-              <SecondNav />
-              <MyProfile />
+              <MyShadiLayout>
+                <MyProfile />
+              </MyShadiLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* EDIT PROFILE */}
+        <Route
+          path="/my-shadi/edit-profile"
+          element={
+            <ProtectedRoute>
+              <MyShadiLayout>
+                <MyProfile editModePage={true} />
+              </MyShadiLayout>
             </ProtectedRoute>
           }
         />
@@ -240,9 +377,9 @@ function App() {
           path="/my-shadi/my-photos"
           element={
             <ProtectedRoute>
-              <Header />
-              <SecondNav />
-              <MyPhoto />
+              <MyShadiLayout>
+                <MyPhoto />
+              </MyShadiLayout>  
             </ProtectedRoute>
           }
         />
@@ -252,9 +389,9 @@ function App() {
           path="/my-shadi/partner-preferences"
           element={
             <ProtectedRoute>
-              <Header />
-              <SecondNav />
-              <PartnerPreference />
+              <MyShadiLayout>
+                  <PartnerPreference />
+              </MyShadiLayout>
             </ProtectedRoute>
           }
         />
@@ -262,78 +399,72 @@ function App() {
         <Route
           path="/my-shadi/partner-preferences/age-range"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <AgeRangePage />
-            </>
+            </MyShadiLayout>
           }
         />
 
         <Route
           path="/my-shadi/partner-preferences/country"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <Country />
-            </>
+            </MyShadiLayout>
           }
         />
         {/* my order */}
         <Route
           path="/my-shadi/my-order"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <MyOrder />
-            </>
+            </MyShadiLayout>
           }
         />
         <Route
           path="/my-shadi/refer"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <ReferPage />
-            </>
+            </MyShadiLayout>
+          }
+        />
+        <Route
+          path="/my-shadi/saved-profiles"
+          element={
+            <ProtectedRoute>
+              <SavedProfilesPage />
+            </ProtectedRoute>
           }
         />
 
         <Route
           path="/my-shadi/help"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <HelpPage />
-            </>
+            </MyShadiLayout>
           }
         />
-        <Route path="/help" element={<><Header /><SecondNav /><HelpPage /></>} />
-        <Route path="/support" element={<><Header /><SecondNav /><HelpPage /></>} />
+        <Route path="/help" element={<MyShadiLayout><HelpPage /></MyShadiLayout>} />
+        <Route path="/support" element={<MyShadiLayout><HelpPage /></MyShadiLayout>} />
 
         <Route
           path="/my-shadi/security"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <SecurityPage />
-            </>
+            </MyShadiLayout>
           }
         />
 
         <Route
           path="/my-shadi/online"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <OnlineMembers />
-            </>
+            </MyShadiLayout>
           }
         />
 
@@ -341,42 +472,34 @@ function App() {
         <Route
           path="/my-shadi/partner-preferences/height-range"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <HeightRangePage />
-            </>
+            </MyShadiLayout>
           }
         />
 
         <Route
           path="/my-shadi/partner-preferences/maritalstatus"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <MaritalStatusPage />
-            </>
+            </MyShadiLayout>
           }
         />
         <Route
           path="/my-shadi/partner-preferences/religion"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <ReligionPage />
-            </>
+            </MyShadiLayout>
           }
         />
         <Route
           path="/my-shadi/partner-preferences/community"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <Community />
-            </>
+            </MyShadiLayout>
           }
         />
 
@@ -386,70 +509,58 @@ function App() {
         <Route
           path="/my-shadi/partner-preferences/mothertongue"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <MotherTonguePage />
-            </>
+            </MyShadiLayout>
           }
         />
 
         <Route
           path="/my-shadi/partner-preferences/profession"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <ProfessionPage />
-            </>
+            </MyShadiLayout>
           }
         />
 
         <Route
           path="/my-shadi/partner-preferences/qualification"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <QualificationPage />
-            </>
+            </MyShadiLayout>
           }
         />
 
         <Route
           path="/my-shadi/partner-preferences/state"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <StateLivingPage />
-            </>
+            </MyShadiLayout>
           }
         />
 
         <Route
           path="/my-shadi/partner-preferences/city"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <CityDistrictPage />
-            </>
+            </MyShadiLayout>
           }
         />
 
         <Route
           path="/my-shadi/partner-preferences/annulincome"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <AnnualIncomePage />
-            </>
+            </MyShadiLayout>
           }
         />
-        <Route
-          path="/my-shadi/partner-preferences/working"
+        {/* <Route
+          path="/working-with-us"
           element={
             <>
               <Header />
@@ -457,27 +568,23 @@ function App() {
               <WorkingWithPage />
             </>
           }
-        />
+        /> */}
 
         <Route
           path="/my-shadi/partner-preferences/diet"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <DietPage />
-            </>
+            </MyShadiLayout>
           }
         />
 
         <Route
           path="/my-shadi/partner-preferences/profile"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <ProfileManagedByPage />
-            </>
+            </MyShadiLayout>
           }
         />
 
@@ -485,9 +592,9 @@ function App() {
           path="/my-shadi/settings"
           element={
             <ProtectedRoute>
-              <Header />
-              <SecondNav />
-              <Settings />
+              <MyShadiLayout>
+                <Settings />
+              </MyShadiLayout>
             </ProtectedRoute>
           }
         />
@@ -495,41 +602,13 @@ function App() {
         <Route
           path="/my-shadi/more"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <MoreDropdown />
-            </>
-          }
-
-        />
-
-        {/* <Route path="/search"
-          element={<Search />
-
-          } /> */}
-
-
-
-        <Route
-          path="/search"
-          element={
-            <>
-              <Header />
-              <SearchNav />
-              <Search />
-            </>
+            </MyShadiLayout>
           }
         />
-        <Route
-          path="/search-results"
-          element={
-            <>
-              <Header />
-              <SearchResults />
-            </>
-          }
-        />
+
+
 
 
 
@@ -537,9 +616,9 @@ function App() {
           path="/inbox/pending/intrest"
           element={
             <>
-              <Header />
-              <InboxNav />
+              <MyShadiLayout>
               <Received />
+              </MyShadiLayout>
             </>
           }
         />
@@ -548,9 +627,9 @@ function App() {
           path="/inbox/accepted/intrest"
           element={
             <>
-              <Header />
-              <InboxNav />
-              <Accepted />
+              <MyShadiLayout>
+               <Accepted />
+              </MyShadiLayout>
             </>
           }
         />
@@ -559,9 +638,10 @@ function App() {
           path="/inbox/pending/requests"
           element={
             <>
-              <Header />
-              <InboxNav />
+              <MyShadiLayout>
               <Requests />
+              </MyShadiLayout>
+              
             </>
           }
         />
@@ -570,9 +650,10 @@ function App() {
           path="/inbox/sent/request"
           element={
             <>
-              <Header />
-              <InboxNav />
+              <MyShadiLayout>
               <Sent />
+              </MyShadiLayout>
+              
             </>
           }
         />
@@ -581,36 +662,13 @@ function App() {
           path="/inbox/contacts"
           element={
             <>
-              <Header />
-              <InboxNav />
+              <MyShadiLayout>
               <Contacts />
+              </MyShadiLayout>
+              
             </>
           }
         />
-
-
-        <Route
-          path="/search"
-          element={
-            <>
-              <Header />
-              <SearchNav />
-              <Search />
-            </>
-          }
-        />
-
-        <Route
-          path="/search/advance"
-          element={
-            <>
-              <Header />
-              <SearchNav />
-              <AdvancedSearch />
-            </>
-          }
-        />
-
 
 
 
@@ -619,9 +677,10 @@ function App() {
           path="/inbox/archieved/intrest"
           element={
             <>
-              <Header />
-              <InboxNav />
+              <MyShadiLayout>
               <Deleted />
+              </MyShadiLayout>
+              
             </>
           }
         />
@@ -629,36 +688,20 @@ function App() {
         <Route
           path="/my-shadi/my-contact/contact-filters"
           element={
-            <>
-              <Header />
-              <SecondNav />
+            <MyShadiLayout>
               <ContactFilters />
-            </>
+            </MyShadiLayout>
           }
         />
 
-        <Route
-          path="/my-shadi/setting/contact"
-          element={
-            <>
-              <Header />
-              <SecondNav />
-              {/* <MyContactSettings /> */}
-            </>
-          }
+        {/* Catch-all route for unknown URLs */}
+        <Route 
+          path="*" 
+          element={<Navigate to={isAuthenticated ? "/my-shadi" : "/"} replace />} 
         />
 
-        {/* <Route
-          path="/my-shadi/more"
-          element={
-            <>
-              <Header />
-              <SecondNav />
-              <MyContactSettings />
-            </>
-          } */}
-        {/* /> */}
-      </Routes>
+             </Routes>
+
       {!isAdminPage && (isAuthenticated ? <AuthenticatedFooter /> : <Footer />)}
       <Toaster position="top-center" />
 

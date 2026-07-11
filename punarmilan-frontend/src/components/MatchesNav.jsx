@@ -35,7 +35,7 @@ const MatchesNav = () => {
 
     const tabs = [
         { id: 'new', label: 'New Matches', count: newMatches.length },
-        { id: 'today', label: "Today's Match", count: dailyMatches.length },
+        // { id: 'today', label: "Today's Match", count: dailyMatches.length },
         { id: 'my', label: 'My Matches', count: allMatches.length },
         { id: 'near', label: 'Near Me', count: nearMeMatches.length },
         { id: 'more', label: 'More Matches', count: allMatches.length },

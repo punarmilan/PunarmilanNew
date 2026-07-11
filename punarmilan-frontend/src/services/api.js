@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || '/api',
+    // baseURL: import.meta.env.VITE_API_URL || '/api',
+    baseURL: '/api',
     withCredentials: true,
     xsrfCookieName: 'XSRF-TOKEN',
     xsrfHeaderName: 'X-XSRF-TOKEN',
@@ -9,6 +10,7 @@ const api = axios.create({
         'Content-Type': 'application/json',
     },
 });
+console.log(import.meta.env.VITE_API_URL);
 
 let isRefreshing = false;
 let failedQueue = [];
@@ -25,7 +27,7 @@ const processQueue = (error, token = null) => {
 };
 
 // URLs that should NOT trigger a token refresh on 401
-const AUTH_URLS = ['/auth/login', '/auth/register', '/auth/refresh', '/auth/forgot-password', '/auth/reset-password'];
+const AUTH_URLS = ['/auth/login', '/auth/register', '/auth/refresh', '/auth/forgot-password', '/auth/reset-password', '/auth/verify-otp', '/auth/resend-otp', '/auth/login-otp/request', '/auth/login-otp/verify'];
 
 const isAuthUrl = (url) => {
     return AUTH_URLS.some(authUrl => url?.includes(authUrl));
@@ -34,6 +36,10 @@ const isAuthUrl = (url) => {
 // Token handling is now handled by HTTP-only cookies automatically
 api.interceptors.request.use(
     (config) => {
+        // Let the browser set the Content-Type and boundary automatically for FormData
+        if (config.data instanceof FormData) {
+            delete config.headers['Content-Type'];
+        }
         return config;
     },
     (error) => {
@@ -94,7 +100,7 @@ const handleLogout = () => {
     console.error('Session expired. Redirecting to login...');
     localStorage.removeItem('user');
     // Only redirect if not already on a public page
-    const publicPaths = ['/', '/login', '/register', '/forgot-password', '/reset-password', '/verify-email', '/about-us'];
+    const publicPaths = ['/', '/login', '/register', '/forgot-password', '/reset-password', '/verify-email', '/verify-otp', '/about-us'];
     if (!publicPaths.includes(window.location.pathname)) {
         window.location.href = '/';
     }

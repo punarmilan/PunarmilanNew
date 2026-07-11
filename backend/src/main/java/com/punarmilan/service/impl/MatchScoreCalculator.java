@@ -27,7 +27,7 @@ public class MatchScoreCalculator {
 
     private final MatchWeightConfig config;
 
-    // ────────────────── Public API ──────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Public API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     /**
      * Holds the result of a compatibility computation.
@@ -48,7 +48,7 @@ public class MatchScoreCalculator {
     /**
      * Compute the two-way match score between two users.
      *
-     * @return MatchResult with score (0–100) and human-readable reasons
+     * @return MatchResult with score (0â€“100) and human-readable reasons
      */
     public MatchResult computeTwoWayScore(Profile myProfile, PartnerPreference myPref,
                                            Profile targetProfile, PartnerPreference targetPref) {
@@ -95,7 +95,7 @@ public class MatchScoreCalculator {
      */
     public double scoreOneWay(Profile candidateProfile, PartnerPreference pref, List<String> reasons) {
         if (pref == null) {
-            return 50.0; // No preference → neutral score
+            return 50.0; // No preference â†’ neutral score
         }
 
         MatchWeightConfig.Weight w = config.getWeight();
@@ -150,10 +150,10 @@ public class MatchScoreCalculator {
         return totalScore;
     }
 
-    // ────────────────── Cold Start ──────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Cold Start â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     /**
-     * Checks if user has no/incomplete partner preferences (≤2 meaningful fields filled).
+     * Checks if user has no/incomplete partner preferences (â‰¤2 meaningful fields filled).
      */
     public boolean isColdStartUser(PartnerPreference pref) {
         if (pref == null) return true;
@@ -178,7 +178,7 @@ public class MatchScoreCalculator {
     private double scoreColdStart(Profile candidateProfile, Profile referenceProfile, List<String> reasons) {
         double score = 0;
 
-        // Age proximity (30% weight) — score based on how close ages are
+        // Age proximity (30% weight) â€” score based on how close ages are
         if (candidateProfile.getAge() != null && referenceProfile.getAge() != null) {
             int ageDiff = Math.abs(candidateProfile.getAge() - referenceProfile.getAge());
             if (ageDiff <= 3) {
@@ -210,7 +210,7 @@ public class MatchScoreCalculator {
             score += 10;
         }
 
-        // Profile completeness (30% weight) — reward profiles with photos & details
+        // Profile completeness (30% weight) â€” reward profiles with photos & details
         double completeness = 0;
         if (candidateProfile.getProfilePhotoUrl() != null) completeness += 10;
         if (candidateProfile.getAboutMe() != null && !candidateProfile.getAboutMe().isEmpty()) completeness += 5;
@@ -223,11 +223,11 @@ public class MatchScoreCalculator {
         return score;
     }
 
-    // ────────────────── Per-Field Soft Scoring ──────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Per-Field Soft Scoring â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private double scoreAge(Integer candidateAge, Integer minAge, Integer maxAge) {
-        if (candidateAge == null) return 50; // unknown → neutral
-        if (minAge == null && maxAge == null) return 100; // no pref → full score
+        if (candidateAge == null) return 50; // unknown â†’ neutral
+        if (minAge == null && maxAge == null) return 100; // no pref â†’ full score
 
         int effectiveMin = minAge != null ? minAge : 18;
         int effectiveMax = maxAge != null ? maxAge : 70;
@@ -244,8 +244,8 @@ public class MatchScoreCalculator {
             distanceFromRange = candidateAge - effectiveMax;
         }
 
-        if (distanceFromRange <= 2) return 50; // within 2 years → 50%
-        if (distanceFromRange <= 5) return 20; // within 5 years → 20%
+        if (distanceFromRange <= 2) return 50; // within 2 years â†’ 50%
+        if (distanceFromRange <= 5) return 20; // within 5 years â†’ 20%
         return 0;
     }
 
@@ -256,7 +256,7 @@ public class MatchScoreCalculator {
         if (effectiveMin == null && effectiveMax == null) return 100; // no pref
 
         int candidateInches = parseHeightToInches(candidateHeight);
-        if (candidateInches <= 0) return 50; // unknown → neutral
+        if (candidateInches <= 0) return 50; // unknown â†’ neutral
 
         int minInches = parseHeightToInches(effectiveMin);
         int maxInches = parseHeightToInches(effectiveMax);
@@ -274,7 +274,7 @@ public class MatchScoreCalculator {
         }
 
         if (inRange) return 100;
-        if (distance <= 2) return 50; // within 2 inches → 50%
+        if (distance <= 2) return 50; // within 2 inches â†’ 50%
         return 0;
     }
 
@@ -284,7 +284,7 @@ public class MatchScoreCalculator {
         boolean casteMatch = matchesPreference(candidateCaste, prefCaste);
 
         if (relMatch && casteMatch) return 100;
-        if (relMatch && !casteMatch) return 50; // Same religion, different caste → partial
+        if (relMatch && !casteMatch) return 50; // Same religion, different caste â†’ partial
         return 0;
     }
 
@@ -297,7 +297,7 @@ public class MatchScoreCalculator {
         String normPrefState = normalize(prefState);
         String normPrefCountry = normalize(prefCountry);
 
-        // No preference → full score
+        // No preference â†’ full score
         if (normPrefCity.isEmpty() && normPrefState.isEmpty() && normPrefCountry.isEmpty()) {
             return 100;
         }
@@ -323,11 +323,11 @@ public class MatchScoreCalculator {
     private double scoreStringMatch(String candidateValue, String prefValue) {
         String effective = sanitize(prefValue);
         if (effective == null || "Any".equalsIgnoreCase(effective) || "Open to All".equalsIgnoreCase(effective)) {
-            return 100; // no pref → full score
+            return 100; // no pref â†’ full score
         }
 
         String candidateNorm = normalize(candidateValue);
-        if (candidateNorm.isEmpty()) return 30; // unknown → low score
+        if (candidateNorm.isEmpty()) return 30; // unknown â†’ low score
 
         // Multi-value support (comma-separated)
         String[] prefs = effective.split(",");
@@ -361,7 +361,7 @@ public class MatchScoreCalculator {
         if (candidateVal > 0 && minVal > 0) {
             if (candidateVal >= minVal) return 100;
             double ratio = candidateVal / minVal;
-            if (ratio >= 0.8) return 50; // within 20% of minimum → partial credit
+            if (ratio >= 0.8) return 50; // within 20% of minimum â†’ partial credit
             return 0;
         }
 
@@ -396,7 +396,7 @@ public class MatchScoreCalculator {
         return (double) total / count;
     }
 
-    // ────────────────── Helper Methods ──────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Helper Methods â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private boolean matchesPreference(String actual, String pref) {
         String p = sanitize(pref);

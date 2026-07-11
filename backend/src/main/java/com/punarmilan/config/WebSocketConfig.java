@@ -30,24 +30,51 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @org.springframework.beans.factory.annotation.Value("${spring.rabbitmq.host:localhost}")
     private String relayHost;
 
-    @org.springframework.beans.factory.annotation.Value("${cors.allowed-origins:http://localhost:5173}")
+    @org.springframework.beans.factory.annotation.Value("${cors.allowed-origins:http://localhost:5173,http://localhost:5174,http://localhost:5175}")
     private String allowedOrigins;
+
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableStompBrokerRelay("/topic", "/queue")
-                .setRelayHost(relayHost)
-                .setRelayPort(61613)
-                .setClientLogin("guest")
-                .setClientPasscode("guest")
-                .setSystemLogin("guest")
-                .setSystemPasscode("guest")
-                .setSystemHeartbeatSendInterval(10000)
-                .setSystemHeartbeatReceiveInterval(10000);
-                
+
+        // Local development â†’ use in-memory broker
+        if ("localhost".equals(relayHost)) {
+
+            config.enableSimpleBroker("/topic", "/queue");
+
+        } else {
+
+            // Production / CI-CD
+            config.enableStompBrokerRelay("/topic", "/queue")
+                    .setRelayHost(relayHost)
+                    .setRelayPort(61613)
+                    .setClientLogin("guest")
+                    .setClientPasscode("guest")
+                    .setSystemLogin("guest")
+                    .setSystemPasscode("guest")
+                    .setSystemHeartbeatSendInterval(10000)
+                    .setSystemHeartbeatReceiveInterval(10000);
+        }
+
         config.setApplicationDestinationPrefixes("/app");
         config.setUserDestinationPrefix("/user");
     }
+
+//    @Override
+//    public void configureMessageBroker(MessageBrokerRegistry config) {
+//        config.enableStompBrokerRelay("/topic", "/queue")
+//                .setRelayHost(relayHost)
+//                .setRelayPort(61613)
+//                .setClientLogin("guest")
+//                .setClientPasscode("guest")
+//                .setSystemLogin("guest")
+//                .setSystemPasscode("guest")
+//                .setSystemHeartbeatSendInterval(10000)
+//                .setSystemHeartbeatReceiveInterval(10000);
+//
+//        config.setApplicationDestinationPrefixes("/app");
+//        config.setUserDestinationPrefix("/user");
+//    }
 
     @Override
     public void configureWebSocketTransport(org.springframework.web.socket.config.annotation.WebSocketTransportRegistration registration) {

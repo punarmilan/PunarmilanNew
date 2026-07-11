@@ -47,6 +47,26 @@ public class ConnectionRequestServiceImpl implements ConnectionRequestService {
         sendInternal(sender, receiverProfileId, RequestType.PHOTO);
     }
 
+    @Override
+    @Transactional
+    public void withdrawRequest(User sender, Long receiverProfileId) {
+        log.info("User {} withdrawing CONNECTION request from profile {}", sender.getId(), receiverProfileId);
+        
+        Profile receiverProfile = profileRepository.findById(receiverProfileId)
+                .orElseThrow(() -> new ResourceNotFoundException("Receiver profile not found"));
+                
+        User receiver = receiverProfile.getUser();
+        if (receiver == null) {
+            throw new ResourceNotFoundException("Receiver user not found for profile");
+        }
+        
+        ConnectionRequest request = connectionRequestRepository
+                .findBySenderAndReceiverAndRequestType(sender, receiver, RequestType.CONNECTION)
+                .orElseThrow(() -> new ResourceNotFoundException("Connection request not found"));
+                
+        connectionRequestRepository.delete(request);
+    }
+
     private void sendInternal(User sender, Long receiverProfileId, RequestType type) {
         log.info("User {} sending {} request to profile {}", sender.getId(), type, receiverProfileId);
 

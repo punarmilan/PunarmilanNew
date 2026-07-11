@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { adminLogout } from './store/adminAuthSlice';
-import { LayoutDashboard, Users, CheckCircle, Image, Flag, LogOut, CreditCard, HelpCircle, History, CalendarDays, Menu, X, MessageCircle } from 'lucide-react';
+import { LayoutDashboard, Users, CheckCircle, Image, Flag, LogOut, CreditCard, HelpCircle, History, CalendarDays, Menu, X, MessageCircle, Smartphone } from 'lucide-react';
 
 const AdminLayout = () => {
     const { admin } = useSelector((state) => state.adminAuth);
@@ -44,6 +44,7 @@ const AdminLayout = () => {
     const menuItems = [
         { name: 'Dashboard', path: '/admin/dashboard', icon: LayoutDashboard, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SUB_ADMIN', 'ROLE_KYC_VERIFIER', 'ROLE_EVENT_MANAGER'] },
         { name: 'User Management', path: '/admin/users', icon: Users, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SUB_ADMIN'] },
+        { name: 'Mobile Users', path: '/admin/mobile-users', icon: Smartphone, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SUB_ADMIN'] },
         { name: 'Events', path: '/admin/events', icon: CalendarDays, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_EVENT_MANAGER', 'ROLE_SUB_ADMIN'] },
         { name: 'Profile Approvals', path: '/admin/approvals', icon: CheckCircle, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_KYC_VERIFIER', 'ROLE_SUB_ADMIN'] },
         { name: 'Photo Moderation', path: '/admin/photos', icon: Image, roles: ['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_KYC_VERIFIER', 'ROLE_SUB_ADMIN'] },

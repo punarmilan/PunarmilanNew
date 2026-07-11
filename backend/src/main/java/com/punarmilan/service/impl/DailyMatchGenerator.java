@@ -89,7 +89,7 @@ public class DailyMatchGenerator {
         if (existing.size() >= DAILY_MATCH_COUNT) return;
         int needed = DAILY_MATCH_COUNT - existing.size();
 
-        // ── Step 1: Build exclusion set ──
+        // â”€â”€ Step 1: Build exclusion set â”€â”€
         Set<Long> exclusions = new HashSet<>();
 
         // Already matched today
@@ -109,14 +109,14 @@ public class DailyMatchGenerator {
         exclusions.add(user.getId());
         if (exclusions.isEmpty()) exclusions.add(-1L);
 
-        // ── Step 2: Fetch my profile + preferences ──
+        // â”€â”€ Step 2: Fetch my profile + preferences â”€â”€
         Profile myProfile = profileRepository.findByUserId(user.getId()).orElse(null);
         if (myProfile == null) return;
 
         String targetGender = "Male".equalsIgnoreCase(myProfile.getGender()) ? "Female" : "Male";
         PartnerPreference myPref = partnerPreferenceRepository.findByUser(user).orElse(null);
 
-        // ── Step 3: Fetch candidate pool ──
+        // â”€â”€ Step 3: Fetch candidate pool â”€â”€
         int poolSize = matchWeightConfig.getCandidate().getPoolSize();
         List<Profile> candidates = profileRepository.findCandidateProfiles(
                 targetGender, exclusions, PageRequest.of(0, poolSize));
@@ -126,7 +126,7 @@ public class DailyMatchGenerator {
             return;
         }
 
-        // ── Step 4: Batch-fetch candidate preferences ──
+        // â”€â”€ Step 4: Batch-fetch candidate preferences â”€â”€
         List<Long> candidateUserIds = candidates.stream()
                 .filter(p -> p.getUser() != null)
                 .map(p -> p.getUser().getId())
@@ -142,7 +142,7 @@ public class DailyMatchGenerator {
             }
         }
 
-        // ── Step 5: Score all candidates in-memory ──
+        // â”€â”€ Step 5: Score all candidates in-memory â”€â”€
         List<ScoredCandidate> scored = new ArrayList<>(candidates.size());
 
         for (Profile candidate : candidates) {
@@ -158,14 +158,14 @@ public class DailyMatchGenerator {
         // Sort by score descending
         scored.sort(Comparator.comparingDouble((ScoredCandidate sc) -> sc.score).reversed());
 
-        // ── Step 6: Pick randomly from top-50 for variety ──
+        // â”€â”€ Step 6: Pick randomly from top-50 for variety â”€â”€
         int topPoolEnd = Math.min(TOP_POOL_SIZE, scored.size());
         List<ScoredCandidate> topPool = new ArrayList<>(scored.subList(0, topPoolEnd));
         Collections.shuffle(topPool);
 
         List<ScoredCandidate> selected = topPool.subList(0, Math.min(needed, topPool.size()));
 
-        // ── Step 7: Persist DailyMatch with scores ──
+        // â”€â”€ Step 7: Persist DailyMatch with scores â”€â”€
         List<DailyMatch> newMatches = selected.stream()
                 .map(sc -> DailyMatch.builder()
                         .user(user)
@@ -182,7 +182,7 @@ public class DailyMatchGenerator {
                 selected.stream().mapToDouble(sc -> sc.score).average().orElse(0));
     }
 
-    // ────────────────── Internal ──────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Internal â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     private static class ScoredCandidate {
         final Profile profile;

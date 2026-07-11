@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { X, Eye, EyeOff, Phone, Mail, Lock, AlertCircle, CheckCircle, Heart, Send, User, ChevronDown } from "lucide-react";
+import { X, Eye, EyeOff, AlertCircle, CheckCircle, Heart, ChevronDown } from "lucide-react";
+import { FcBusinessman, FcPhone, FcFeedback, FcLock, FcExport, FcOk, FcPrivacy, FcUnlock, FcCancel } from "react-icons/fc";
+import { FaMale, FaFemale } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { register } from "../Slice/UserSlice";
-
+import maleAvatar from "../assets/image/male_avatar.png";
+import femaleAvatar from "../assets/image/female_avatar.png";
 
 function Register({ close, openLogin }) {
     const [user, setUser] = useState({
@@ -198,8 +201,12 @@ function Register({ close, openLogin }) {
         try {
             const resultAction = await dispatch(register(user));
             if (register.fulfilled.match(resultAction)) {
-                toast.success("Registration successful! 🎉");
-                setShowSuccessMessage(true);
+                toast.success("Registration successful! 🎉 Please login.");
+                // Close the modal if it's open, then navigate
+                if (close) {
+                    close();
+                }
+                navigate("/login");
             } else {
                 toast.error(resultAction.payload || "Registration failed");
             }
@@ -230,37 +237,37 @@ function Register({ close, openLogin }) {
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm animate-fadeIn overflow-y-auto"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md animate-fadeIn overflow-y-auto"
             onClick={handleBackdropClick}
         >
             {/* Modal Container */}
             <div className="relative w-full max-w-[95%] sm:max-w-md md:max-w-lg my-4 sm:my-8 animate-slideUp">
-                {/* Glow Effect - Hidden on mobile for performance */}
-                <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-emerald-600 to-cyan-600 rounded-3xl blur-xl opacity-30 animate-pulse" />
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-rose-400 rounded-3xl blur-2xl opacity-20 animate-pulse" />
 
                 {/* Main Card */}
-                <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+                <div className="relative bg-white/95 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
                     {/* Header */}
                     {!showSuccessMessage && (
-                        <div className="sticky top-0 z-20 bg-gradient-to-br from-emerald-600 via-cyan-600 to-teal-600 px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8">
-                            {/* Close Button */}
+                        <>
                             <button
                                 onClick={onInternalClose}
-                                className="absolute right-3 top-3 sm:right-4 sm:top-4 text-white/80 hover:text-white hover:rotate-90 transition-all duration-300 p-1 hover:bg-white/10 rounded-full"
+                                className="absolute right-4 top-4 text-gray-400 hover:text-gray-700 transition-colors z-20 p-2 hover:bg-gray-100 rounded-full bg-white/50"
                                 aria-label="Close"
                             >
                                 <X className="w-5 h-5 sm:w-6 sm:h-6" />
                             </button>
 
-                            {/* Header Content */}
-                            <div className="relative">
-                                <div className="flex items-center space-x-2 mb-1 sm:mb-2">
-                                    <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-pink-300 animate-pulse" />
-                                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">Create Account</h2>
+                            <div className="px-8 pt-8 pb-4 text-center relative z-10">
+                                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-rose-500 shadow-xl mb-4 transform hover:scale-105 transition-transform">
+                                    <span className="text-white text-3xl font-black tracking-tighter">P</span>
                                 </div>
-                                <p className="text-white/90 text-xs sm:text-sm">Join thousands finding their perfect match</p>
+                                <h2 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 mb-2">
+                                    Create Account
+                                </h2>
+                                <p className="text-sm text-gray-500 font-medium">Join thousands finding their perfect match</p>
                             </div>
-                        </div>
+                        </>
                     )}
 
                     {showSuccessMessage ? (
@@ -323,10 +330,10 @@ function Register({ close, openLogin }) {
                                             : user.profileCreatedBy
                                                 ? "border-green-500"
                                                 : "border-gray-200"
-                                            } rounded-lg sm:rounded-xl cursor-pointer flex items-center bg-white transition-all`}
+                                            } rounded-full cursor-pointer flex items-center bg-white transition-all`}
                                         onClick={() => setIsCreatedByOpen(!isCreatedByOpen)}
                                     >
-                                        <Send className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5 rotate-[-45deg]" />
+                                        <FcExport className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" />
                                         <span className={user.profileCreatedBy ? "text-gray-900" : "text-gray-400"}>
                                             {user.profileCreatedBy || "Select Option"}
                                         </span>
@@ -367,7 +374,7 @@ function Register({ close, openLogin }) {
                                         <span className="text-red-500">*</span>
                                     </label>
                                     <div className="relative">
-                                        <User className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                                        <FcBusinessman className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" />
                                         <input
                                             type="text"
                                             name="firstName"
@@ -380,7 +387,7 @@ function Register({ close, openLogin }) {
                                                 : user.firstName
                                                     ? "border-green-500"
                                                     : "border-gray-200"
-                                                } rounded-lg sm:rounded-xl focus:outline-none focus:ring-4 transition-all bg-white`}
+                                                } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
                                         />
                                     </div>
                                     {errors.firstName && touched.firstName && (
@@ -397,7 +404,7 @@ function Register({ close, openLogin }) {
                                         <span className="text-red-500">*</span>
                                     </label>
                                     <div className="relative">
-                                        <User className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                                        <FcBusinessman className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" />
                                         <input
                                             type="text"
                                             name="lastName"
@@ -410,7 +417,7 @@ function Register({ close, openLogin }) {
                                                 : user.lastName
                                                     ? "border-green-500"
                                                     : "border-gray-200"
-                                                } rounded-lg sm:rounded-xl focus:outline-none focus:ring-4 transition-all bg-white`}
+                                                } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
                                         />
                                     </div>
                                     {errors.lastName && touched.lastName && (
@@ -435,15 +442,13 @@ function Register({ close, openLogin }) {
                                             setUser({ ...user, gender: "Male" });
                                             setErrors({ ...errors, gender: "" });
                                         }}
-                                        className={`flex items-center justify-center gap-2 py-3 rounded-xl border-2 transition-all ${user.gender === "Male"
-                                                ? "border-emerald-500 bg-emerald-50 text-emerald-700 font-bold shadow-md"
-                                                : "border-gray-200 text-gray-500 hover:border-gray-300 hover:bg-gray-50"
+                                        className={`flex flex-col items-center justify-center gap-2 py-4 rounded-xl border-2 transition-all ${user.gender === "Male"
+                                                ? "border-cyan-500 bg-cyan-50 text-cyan-700 font-bold shadow-md ring-2 ring-cyan-200"
+                                                : "border-gray-200 text-gray-500 hover:border-cyan-300 hover:bg-gray-50"
                                             }`}
                                     >
-                                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${user.gender === "Male" ? "border-emerald-500 bg-emerald-500" : "border-gray-300"}`}>
-                                            {user.gender === "Male" && <div className="w-1.5 h-1.5 rounded-full bg-white"></div>}
-                                        </div>
-                                        Male
+                                        <img src={maleAvatar} alt="Male" className="w-8 h-8 rounded-full object-cover shadow-sm bg-white" />
+                                        <span>Male</span>
                                     </button>
                                     <button
                                         type="button"
@@ -451,19 +456,17 @@ function Register({ close, openLogin }) {
                                             setUser({ ...user, gender: "Female" });
                                             setErrors({ ...errors, gender: "" });
                                         }}
-                                        className={`flex items-center justify-center gap-2 py-3 rounded-xl border-2 transition-all ${user.gender === "Female"
-                                                ? "border-pink-500 bg-pink-50 text-pink-700 font-bold shadow-md"
-                                                : "border-gray-200 text-gray-500 hover:border-gray-300 hover:bg-gray-50"
+                                        className={`flex flex-col items-center justify-center gap-2 py-4 rounded-xl border-2 transition-all ${user.gender === "Female"
+                                                ? "border-rose-500 bg-rose-50 text-rose-700 font-bold shadow-md ring-2 ring-rose-200"
+                                                : "border-gray-200 text-gray-500 hover:border-rose-300 hover:bg-gray-50"
                                             }`}
                                     >
-                                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${user.gender === "Female" ? "border-pink-500 bg-pink-500" : "border-gray-300"}`}>
-                                            {user.gender === "Female" && <div className="w-1.5 h-1.5 rounded-full bg-white"></div>}
-                                        </div>
-                                        Female
+                                        <img src={femaleAvatar} alt="Female" className="w-8 h-8 rounded-full object-cover shadow-sm bg-white" />
+                                        <span>Female</span>
                                     </button>
                                 </div>
                                 {errors.gender && touched.gender && (
-                                    <div className="flex items-center gap-1 text-red-500 text-xs sm:text-sm">
+                                    <div className="flex items-center gap-1 text-red-500 text-xs sm:text-sm mt-1">
                                         <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
                                         <span>{errors.gender}</span>
                                     </div>
@@ -476,8 +479,11 @@ function Register({ close, openLogin }) {
                                     <span>Mobile Number</span>
                                     <span className="text-red-500">*</span>
                                 </label>
-                                <div className="relative">
-                                    <Phone className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                                <div className="relative flex items-center">
+                                    <FcPhone className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 z-20" />
+                                    <div className="absolute left-9 sm:left-11 top-0 bottom-0 flex items-center justify-center px-1 bg-transparent text-gray-600 font-bold z-10">
+                                        +91
+                                    </div>
                                     <input
                                         type="tel"
                                         name="mobileNumber"
@@ -486,12 +492,12 @@ function Register({ close, openLogin }) {
                                         onChange={handleChange}
                                         onBlur={() => handleBlur("mobileNumber")}
                                         maxLength="10"
-                                        className={`w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 ${errors.mobileNumber && touched.mobileNumber
+                                        className={`w-full pl-[5rem] sm:pl-[5.5rem] pr-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 ${errors.mobileNumber && touched.mobileNumber
                                             ? "border-red-500 focus:ring-red-400"
                                             : user.mobileNumber.length === 10
                                                 ? "border-green-500 focus:ring-green-400"
                                                 : "border-gray-200 focus:ring-emerald-400"
-                                            } rounded-lg sm:rounded-xl focus:outline-none focus:ring-4 transition-all bg-white`}
+                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
                                     />
                                 </div>
                                 {errors.mobileNumber && touched.mobileNumber ? (
@@ -514,7 +520,7 @@ function Register({ close, openLogin }) {
                                     <span className="text-red-500">*</span>
                                 </label>
                                 <div className="relative">
-                                    <Mail className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                                    <FcFeedback className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" />
                                     <input
                                         type="email"
                                         name="email"
@@ -525,7 +531,7 @@ function Register({ close, openLogin }) {
                                         className={`w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 ${errors.email && touched.email
                                             ? "border-red-500 focus:ring-red-400"
                                             : "border-gray-200 focus:ring-emerald-400"
-                                            } rounded-lg sm:rounded-xl focus:outline-none focus:ring-4 transition-all bg-white`}
+                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
                                     />
                                 </div>
                                 {errors.email && touched.email && (
@@ -543,7 +549,7 @@ function Register({ close, openLogin }) {
                                     <span className="text-red-500">*</span>
                                 </label>
                                 <div className="relative">
-                                    <Lock className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                                    <FcLock className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" />
                                     <input
                                         type={showPassword ? "text" : "password"}
                                         name="password"
@@ -554,7 +560,7 @@ function Register({ close, openLogin }) {
                                         className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 text-sm sm:text-base border-2 ${errors.password && touched.password
                                             ? "border-red-500 focus:ring-red-400"
                                             : "border-gray-200 focus:ring-emerald-400"
-                                            } rounded-lg sm:rounded-xl focus:outline-none focus:ring-4 transition-all bg-white`}
+                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
                                     />
                                     <button
                                         type="button"
@@ -604,7 +610,7 @@ function Register({ close, openLogin }) {
                                     <span className="text-red-500">*</span>
                                 </label>
                                 <div className="relative">
-                                    <Lock className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                                    <FcLock className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
                                     <input
                                         type={showConfirmPassword ? "text" : "password"}
                                         name="confirmPassword"
@@ -622,7 +628,7 @@ function Register({ close, openLogin }) {
                                             : confirmPassword && user.password === confirmPassword
                                                 ? "border-green-500 focus:ring-green-400"
                                                 : "border-gray-200 focus:ring-emerald-400"
-                                            } rounded-lg sm:rounded-xl focus:outline-none focus:ring-4 transition-all bg-white`}
+                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
                                     />
                                     <button
                                         type="button"
@@ -631,27 +637,27 @@ function Register({ close, openLogin }) {
                                         aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                                     >
                                         {showConfirmPassword ? (
-                                            <EyeOff className="w-4 h-4 sm:w-5 sm:h-5" />
+                                            <FcPrivacy className="w-4 h-4 sm:w-5 sm:h-5" />
                                         ) : (
-                                            <Eye className="w-4 h-4 sm:w-5 sm:h-5" />
+                                            <FcUnlock className="w-4 h-4 sm:w-5 sm:h-5" />
                                         )}
                                     </button>
                                 </div>
                                 {errors.confirmPassword && touched.confirmPassword ? (
                                     <div className="flex items-center gap-1 text-red-500 text-xs sm:text-sm">
-                                        <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
+                                        <FcCancel className="w-3 h-3 sm:w-4 sm:h-4" />
                                         <span>{errors.confirmPassword}</span>
                                     </div>
                                 ) : confirmPassword && user.password === confirmPassword ? (
                                     <div className="flex items-center gap-1 text-green-600 text-xs sm:text-sm">
-                                        <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />
+                                        <FcOk className="w-3 h-3 sm:w-4 sm:h-4" />
                                         <span>Passwords match</span>
                                     </div>
                                 ) : null}
                             </div>
 
                             {/* Terms and Conditions */}
-                            <div className="flex items-start space-x-2 sm:space-x-3 bg-gradient-to-r from-emerald-50 to-cyan-50 p-3 sm:p-4 rounded-lg sm:rounded-xl border border-emerald-100">
+                            <div className="flex items-start space-x-2 sm:space-x-3 bg-gradient-to-r from-emerald-50 to-cyan-50 p-3 sm:p-4 rounded-full border border-emerald-100">
                                 <input
                                     type="checkbox"
                                     id="terms"
@@ -676,7 +682,7 @@ function Register({ close, openLogin }) {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full bg-gradient-to-r from-emerald-600 via-cyan-600 to-teal-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-teal-700 text-white py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm sm:text-base"
+                                    className="w-full bg-gradient-to-r from-emerald-600 via-cyan-600 to-teal-600 hover:from-emerald-700 hover:via-cyan-700 hover:to-teal-700 text-white py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm sm:text-base"
                                 >
                                     {loading ? (
                                         <span className="flex items-center justify-center">

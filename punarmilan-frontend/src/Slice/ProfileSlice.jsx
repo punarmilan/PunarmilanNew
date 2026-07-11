@@ -65,11 +65,7 @@ export const uploadProfilePhoto = createAsyncThunk(
             formData.append('file', file);
             formData.append('photoIndex', photoIndex);
 
-            const response = await api.post('/profiles/photo', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const response = await api.post('/profiles/photo', formData);
 
             // Synchronize with other slices
             const updatedProfile = response.data;
@@ -92,11 +88,7 @@ export const uploadIdProof = createAsyncThunk(
             formData.append('idProofType', idProofType);
             formData.append('idProofNumber', idProofNumber);
 
-            const response = await api.post('/profiles/id-proof', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const response = await api.post('/profiles/id-proof', formData);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || 'Failed to upload verification document');

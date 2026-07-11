@@ -13,7 +13,36 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
 
     // Map ProfileDTO fields to internal names for consistency
     const displayName = profile.fullName || profile.name || "User " + profile.id;
-    const photoUrl = profile.profilePhotoUrl || profile.img;
+    
+    const MALE_AVATARS = [
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1489980508314-941910ded1f4?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150&auto=format&fit=crop&q=60"
+    ];
+
+    const FEMALE_AVATARS = [
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=150&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=150&auto=format&fit=crop&q=60"
+    ];
+
+    const idVal = profile.id || profile.userId || 0;
+    const isMale = (profile.gender || 'female').toLowerCase() === 'male';
+    const fallbackAvatar = isMale 
+        ? MALE_AVATARS[idVal % MALE_AVATARS.length] 
+        : FEMALE_AVATARS[idVal % FEMALE_AVATARS.length];
+
+    const photoUrl = profile.profilePhotoUrl || profile.img || fallbackAvatar;
     const age = profile.age;
     const height = profile.height;
     const location = profile.city ? `${profile.city}${profile.state ? ', ' + profile.state : ''}` : (profile.location || 'Location N/A');
@@ -67,7 +96,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                 {/* Image Section */}
                 <div
                     className="relative aspect-[4/5] overflow-hidden cursor-pointer"
-                    onClick={() => navigate(`/matches/${profile.id}`)}
+                    onClick={() => navigate(`/matches/${idVal}`)}
                 >
                     <img
                         src={photoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&color=fff&size=400&bold=true`}
@@ -172,7 +201,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                 <div className="p-3 flex flex-col flex-grow">
                     <h3
                         className="text-[#00bcd4] font-bold text-[15px] truncate hover:underline cursor-pointer mb-1"
-                        onClick={() => navigate(`/matches/${profile.id}`)}
+                        onClick={() => navigate(`/matches/${idVal}`)}
                     >
                         {displayName}
                     </h3>
@@ -233,12 +262,13 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -2, shadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
-                className="group bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row relative"
+                onClick={() => navigate(`/matches/${idVal}`)}
+                className="group bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row relative cursor-pointer"
             >
                 {/* Left: Image Section */}
                 <div
                     className="relative w-full md:w-64 h-72 md:h-auto overflow-hidden cursor-pointer flex-shrink-0"
-                    onClick={() => navigate(`/matches/${profile.id}`)}
+                    onClick={() => navigate(`/matches/${idVal}`)}
                 >
                     <img
                         src={photoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&color=fff&size=600&bold=true`}
@@ -276,7 +306,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                         <div className="flex items-center gap-3">
                             <h3
                                 className="text-xl font-extrabold text-gray-900 truncate hover:text-rose-500 cursor-pointer transition-colors"
-                                onClick={() => navigate(`/matches/${profile.id}`)}
+                                onClick={() => navigate(`/matches/${idVal}`)}
                             >
                                 {displayName}
                             </h3>
@@ -453,12 +483,12 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             whileHover={{ y: -4 }}
-            className="group bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col relative"
+            onClick={() => navigate(`/matches/${idVal}`)}
+            className="group bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col relative cursor-pointer"
         >
             {/* Image Section */}
             <div
                 className="relative h-72 overflow-hidden cursor-pointer"
-                onClick={() => navigate(`/matches/${profile.userId || profile.id}`)}
             >
                 <img
                     src={photoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&color=fff&size=600&bold=true`}

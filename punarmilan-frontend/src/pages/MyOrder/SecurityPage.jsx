@@ -1,4 +1,5 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 import Sidebar from './Sidebar';
 
 const SecurityPage = () => {
@@ -170,13 +171,13 @@ const SecurityPage = () => {
                                 <p className="mb-4">If you encounter any suspicious activity, feel unsafe, or need to report a profile or behavior, please contact us immediately. We take all reports seriously and will investigate promptly.</p>
                                 <div className="flex flex-col sm:flex-row gap-4">
                                     <button
-                                        onClick={() => alert('Opening report form...')}
+                                        onClick={() => Swal.fire({ text: 'Opening report form...', confirmButtonColor: '#8C6D39' })}
                                         className="flex-1 bg-white text-rose-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-200"
                                     >
                                         🚨 Report an Issue
                                     </button>
                                     <button
-                                        onClick={() => alert('Opening live chat for urgent help...')}
+                                        onClick={() => Swal.fire({ text: 'Opening live chat for urgent help...', confirmButtonColor: '#8C6D39' })}
                                         className="flex-1 bg-yellow-400 text-gray-900 px-6 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors duration-200"
                                     >
                                         💬 Emergency Chat

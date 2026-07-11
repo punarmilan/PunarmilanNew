@@ -1,6 +1,31 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../services/api';
 
+export const fetchFilterOptions = createAsyncThunk(
+    'match/fetchFilterOptions',
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await api.get('/profiles/filters');
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
+
+export const searchPremiumProfiles = createAsyncThunk(
+    'match/searchPremiumProfiles',
+    async (searchData, { rejectWithValue }) => {
+        try {
+            // Using a default large size or pagination if needed
+            const response = await api.post('/profiles/search?page=0&size=50', searchData);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
+
 export const fetchNewMatches = createAsyncThunk(
     'match/fetchNewMatches',
     async (params = { page: 0, size: 20 }, { rejectWithValue }) => {
@@ -299,6 +324,19 @@ export const sendConnectionRequest = createAsyncThunk(
     }
 );
 
+export const withdrawConnectionRequest = createAsyncThunk(
+    'match/withdrawConnectionRequest',
+    async (receiverProfileId, { rejectWithValue, dispatch }) => {
+        try {
+            await api.delete(`/connections/withdraw/${receiverProfileId}`);
+            dispatch(fetchSentRequests());
+            return receiverProfileId;
+        } catch (error) {
+            return rejectWithValue(error.response?.data || error.message);
+        }
+    }
+);
+
 export const acceptConnectionRequest = createAsyncThunk(
     'match/acceptConnectionRequest',
     async (requestId, { rejectWithValue, dispatch }) => {
@@ -349,7 +387,10 @@ const matchSlice = createSlice({
         onlineAccepted: [],
         currentProfile: null,
         preferenceMatch: null,
-        loading: false,
+        loadingAction: false,
+        filterOptions: null,
+        searchResults: null,
+        searchLoading: false,
         error: null,
         pagination: {
             newMatches: { totalPages: 0, totalElements: 0, page: 0 },
@@ -648,6 +689,18 @@ const matchSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
+            // Withdraw connection request
+            .addCase(withdrawConnectionRequest.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(withdrawConnectionRequest.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(withdrawConnectionRequest.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
             .addCase(acceptConnectionRequest.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -709,6 +762,22 @@ const matchSlice = createSlice({
                     totalElements: action.payload.totalElements,
                     page: action.payload.number
                 };
+            })
+            // New reducers for premium filtering
+            .addCase(fetchFilterOptions.fulfilled, (state, action) => {
+                state.filterOptions = action.payload;
+            })
+            .addCase(searchPremiumProfiles.pending, (state) => {
+                state.searchLoading = true;
+                state.error = null;
+            })
+            .addCase(searchPremiumProfiles.fulfilled, (state, action) => {
+                state.searchLoading = false;
+                state.searchResults = action.payload;
+            })
+            .addCase(searchPremiumProfiles.rejected, (state, action) => {
+                state.searchLoading = false;
+                state.error = action.payload;
             });
     },
 });

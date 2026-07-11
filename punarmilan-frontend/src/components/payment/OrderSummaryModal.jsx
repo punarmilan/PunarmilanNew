@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Check, Info } from 'lucide-react';
 import './OrderSummaryModal.css';
 
@@ -29,9 +30,9 @@ const OrderSummaryModal = ({ plan, isOpen, onClose, onProceed }) => {
 
   const totalAmount = plan.price + addonsTotal;
 
-  return (
-    <div className="order-summary-overlay">
-      <div className="order-summary-content animate-modal">
+  return createPortal(
+    <div className="order-summary-overlay" onClick={onClose}>
+      <div className="order-summary-content animate-modal dashboard-card-bg" onClick={e => e.stopPropagation()}>
         <div className="summary-header">
           <h2 className="summary-title">Order Summary</h2>
           <button className="close-summary" onClick={onClose}><X size={20} /></button>
@@ -82,7 +83,8 @@ const OrderSummaryModal = ({ plan, isOpen, onClose, onProceed }) => {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

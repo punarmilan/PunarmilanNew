@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { Shield, Camera, CheckCircle, X, Upload, User as UserIcon, Phone } from 'lucide-react';
 import heic2any from 'heic2any';
@@ -98,7 +99,7 @@ const MobileProfile = () => {
 
     const handleVerify = () => {
         // Handle verification logic
-        alert('Verification submitted!');
+        Swal.fire({ text: 'Verification submitted!', confirmButtonColor: '#8C6D39' });
         setIsVerificationOpen(false);
         setPanNumber('');
     };

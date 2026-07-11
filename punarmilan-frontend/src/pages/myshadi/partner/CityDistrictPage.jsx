@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { ArrowLeft, Check, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,7 +48,7 @@ const CityDistrictPage = () => {
             navigate('/my-shadi/partner-preferences');
         } catch (error) {
             console.error('Failed to update city:', error);
-            alert('Failed to update city. Please try again.');
+            Swal.fire({ text: 'Failed to update city. Please try again.', confirmButtonColor: '#8C6D39' });
         }
     };
 

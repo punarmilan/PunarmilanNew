@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { ArrowLeft, Search, X, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -80,7 +81,7 @@ const StateLivingPage = () => {
             navigate('/my-shadi/partner-preferences');
         } catch (error) {
             console.error('Failed to update state:', error);
-            alert('Failed to update state. Please try again.');
+            Swal.fire({ text: 'Failed to update state. Please try again.', confirmButtonColor: '#8C6D39' });
         }
     };
 

@@ -26,6 +26,18 @@ export const login = createAsyncThunk(
     }
 );
 
+export const loginWithOtp = createAsyncThunk(
+    'user/loginWithOtp',
+    async (credentials, { rejectWithValue }) => {
+        try {
+            const response = await api.post('/auth/login-otp/verify', credentials);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'OTP Login failed');
+        }
+    }
+);
+
 export const forgotPassword = createAsyncThunk(
     'user/forgotPassword',
     async (emailData, { rejectWithValue }) => {
@@ -43,6 +55,30 @@ export const resetPassword = createAsyncThunk(
     async (resetData, { rejectWithValue }) => {
         try {
             const response = await api.post('/auth/reset-password', resetData);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'Failed to reset password');
+        }
+    }
+);
+
+export const verifyForgotPasswordOtp = createAsyncThunk(
+    'user/verifyForgotPasswordOtp',
+    async (otpData, { rejectWithValue }) => {
+        try {
+            const response = await api.post('/auth/forgot-password/verify-otp', otpData);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response?.data?.message || 'Failed to verify OTP');
+        }
+    }
+);
+
+export const resetPasswordWithOtp = createAsyncThunk(
+    'user/resetPasswordWithOtp',
+    async (resetData, { rejectWithValue }) => {
+        try {
+            const response = await api.post('/auth/reset-password-otp', resetData);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response?.data?.message || 'Failed to reset password');
@@ -204,6 +240,22 @@ const userSlice = createSlice({
             state.isAuthenticated = false;
         });
 
+        // OTP Login
+        builder.addCase(loginWithOtp.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        });
+        builder.addCase(loginWithOtp.fulfilled, (state, action) => {
+            state.loading = false;
+            state.isAuthenticated = true;
+            state.user = action.payload;
+            localStorage.setItem('user', JSON.stringify(action.payload));
+        });
+        builder.addCase(loginWithOtp.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        });
+
         // Logout
         builder.addCase(logout.pending, (state) => {
             state.loading = true;
@@ -259,6 +311,34 @@ const userSlice = createSlice({
             state.loading = false;
         });
         builder.addCase(forgotPassword.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        });
+
+        // Verify Forgot Password OTP
+        builder.addCase(verifyForgotPasswordOtp.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        });
+        builder.addCase(verifyForgotPasswordOtp.fulfilled, (state) => {
+            state.loading = false;
+            state.error = null;
+        });
+        builder.addCase(verifyForgotPasswordOtp.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        });
+
+        // Reset Password With OTP
+        builder.addCase(resetPasswordWithOtp.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        });
+        builder.addCase(resetPasswordWithOtp.fulfilled, (state) => {
+            state.loading = false;
+            state.error = null;
+        });
+        builder.addCase(resetPasswordWithOtp.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload;
         });

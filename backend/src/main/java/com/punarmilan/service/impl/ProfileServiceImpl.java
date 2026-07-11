@@ -159,16 +159,107 @@ public class ProfileServiceImpl implements ProfileService {
                 if (criteria.getMinIncome() != null && !criteria.getMinIncome().isEmpty()) {
                     predicates.add(cb.like(cb.lower(root.get("annualIncome")), "%" + criteria.getMinIncome().toLowerCase() + "%"));
                 }
-                if (criteria.getIsPremium() != null) {
-                    predicates.add(cb.equal(root.get("isPremium"), criteria.getIsPremium()));
-                }
-                if (criteria.getShowWithPhoto() != null && criteria.getShowWithPhoto()) {
-                    predicates.add(cb.isNotNull(root.get("profilePhotoUrl")));
-                }
                 if (criteria.getShowProtectedPhoto() != null && criteria.getShowProtectedPhoto()) {
                     predicates.add(cb.equal(root.get("profilePhotoVisibility"), "PROTECTED"));
                 }
-            }
+
+                // New Premium Filtering Fields
+                if (criteria.getKeyword() != null && !criteria.getKeyword().trim().isEmpty()) {
+                    String kw = "%" + criteria.getKeyword().trim().toLowerCase() + "%";
+                    predicates.add(cb.or(
+                        cb.like(cb.lower(root.get("fullName")), kw),
+                        cb.like(cb.lower(root.get("profileId")), kw),
+                        cb.like(cb.lower(root.get("city")), kw),
+                        cb.like(cb.lower(root.get("occupation")), kw)
+                    ));
+                }
+                if (criteria.getSubCaste() != null && !criteria.getSubCaste().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getSubCaste());
+                    if (!values.isEmpty()) predicates.add(root.get("subCaste").in(values));
+                }
+                if (criteria.getCity() != null && !criteria.getCity().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getCity());
+                    if (!values.isEmpty()) predicates.add(root.get("city").in(values));
+                }
+                if (criteria.getWorkingCity() != null && !criteria.getWorkingCity().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getWorkingCity());
+                    if (!values.isEmpty()) predicates.add(root.get("workingCity").in(values));
+                }
+                if (criteria.getCompany() != null && !criteria.getCompany().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getCompany());
+                    if (!values.isEmpty()) predicates.add(root.get("company").in(values));
+                }
+                if (criteria.getBloodGroup() != null && !criteria.getBloodGroup().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getBloodGroup());
+                    if (!values.isEmpty()) predicates.add(root.get("bloodGroup").in(values));
+                }
+                if (criteria.getSmokingHabit() != null && !criteria.getSmokingHabit().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getSmokingHabit());
+                    if (!values.isEmpty()) predicates.add(root.get("smokingHabit").in(values));
+                }
+                if (criteria.getDrinkingHabit() != null && !criteria.getDrinkingHabit().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getDrinkingHabit());
+                    if (!values.isEmpty()) predicates.add(root.get("drinkingHabit").in(values));
+                }
+                if (criteria.getFamilyFinancialStatus() != null && !criteria.getFamilyFinancialStatus().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getFamilyFinancialStatus());
+                    if (!values.isEmpty()) predicates.add(root.get("familyFinancialStatus").in(values));
+                }
+                if (criteria.getRashi() != null && !criteria.getRashi().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getRashi());
+                    if (!values.isEmpty()) predicates.add(root.get("rashi").in(values));
+                }
+                if (criteria.getNakshatra() != null && !criteria.getNakshatra().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getNakshatra());
+                    if (!values.isEmpty()) predicates.add(root.get("nakshatra").in(values));
+                }
+                if (criteria.getGotra() != null && !criteria.getGotra().isEmpty()) {
+                    List<String> values = filterOpenToAll(criteria.getGotra());
+                    if (!values.isEmpty()) predicates.add(root.get("gotra").in(values));
+                }
+                if (criteria.getWeight() != null && !criteria.getWeight().trim().isEmpty()) {
+                    predicates.add(cb.equal(root.get("weight"), criteria.getWeight().trim()));
+                }
+                if (criteria.getDisability() != null && !criteria.getDisability().trim().isEmpty()) {
+                    predicates.add(cb.equal(root.get("disability"), criteria.getDisability().trim()));
+                }
+                if (criteria.getFatherStatus() != null && !criteria.getFatherStatus().trim().isEmpty()) {
+                    predicates.add(cb.equal(root.get("fatherStatus"), criteria.getFatherStatus().trim()));
+                }
+                if (criteria.getMotherStatus() != null && !criteria.getMotherStatus().trim().isEmpty()) {
+                    predicates.add(cb.equal(root.get("motherStatus"), criteria.getMotherStatus().trim()));
+                }
+                if (criteria.getManglikStatus() != null && !criteria.getManglikStatus().trim().isEmpty()) {
+                    predicates.add(cb.equal(root.get("manglikStatus"), criteria.getManglikStatus().trim()));
+                }
+                if (criteria.getBrothersCount() != null) {
+                    predicates.add(cb.equal(root.get("brothersCount"), criteria.getBrothersCount()));
+                }
+                if (criteria.getSistersCount() != null) {
+                    predicates.add(cb.equal(root.get("sistersCount"), criteria.getSistersCount()));
+                }
+
+                // Status Toggles
+                if (criteria.getPremium() != null && criteria.getPremium()) {
+                    predicates.add(cb.equal(root.get("isPremium"), true));
+                } else if (criteria.getIsPremium() != null) {
+                    predicates.add(cb.equal(root.get("isPremium"), criteria.getIsPremium()));
+                }
+                if (criteria.getPhotoAvailable() != null && criteria.getPhotoAvailable()) {
+                    predicates.add(cb.isNotNull(root.get("profilePhotoUrl")));
+                } else if (criteria.getShowWithPhoto() != null && criteria.getShowWithPhoto()) {
+                    predicates.add(cb.isNotNull(root.get("profilePhotoUrl")));
+                }
+                if (criteria.getVerified() != null && criteria.getVerified()) {
+                    predicates.add(cb.equal(root.get("verificationStatus"), "VERIFIED"));
+                }
+                if (criteria.getProfileComplete() != null && criteria.getProfileComplete()) {
+                    predicates.add(cb.equal(root.get("profileComplete"), true));
+                }
+                if (criteria.getOnlineNow() != null && criteria.getOnlineNow()) {
+                    java.time.LocalDateTime tenMinsAgo = java.time.LocalDateTime.now().minusMinutes(10);
+                    predicates.add(cb.greaterThan(root.get("user").get("lastActive"), tenMinsAgo));
+                }
 
             // Always enforce visibility unless admin (viewer can be null for admin search)
             predicates.add(cb.or(
@@ -178,8 +269,63 @@ public class ProfileServiceImpl implements ProfileService {
             return cb.and(predicates.toArray(new Predicate[0]));
         };
 
-        return profileRepository.findAll(spec, pageable)
+        // Handle Sorting dynamically
+        Pageable finalPageable = pageable;
+        if (criteria.getSort() != null && !criteria.getSort().isEmpty()) {
+            org.springframework.data.domain.Sort sortObj = pageable.getSort();
+            switch (criteria.getSort()) {
+                case "Recently Joined":
+                    sortObj = org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "createdAt");
+                    break;
+                case "Youngest First":
+                    sortObj = org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.ASC, "age");
+                    break;
+                case "Oldest First":
+                    sortObj = org.springframework.data.domain.Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "age");
+                    break;
+                // Add more custom sorting here if needed
+            }
+            finalPageable = org.springframework.data.domain.PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sortObj);
+        }
+
+        return profileRepository.findAll(spec, finalPageable)
                 .map(p -> this.mapToDTO(p, viewer));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Map<String, List<String>> getFilterOptions() {
+        Map<String, List<String>> filters = new java.util.HashMap<>();
+        
+        filters.put("religion", profileRepository.findDistinctReligion());
+        filters.put("caste", profileRepository.findDistinctCaste());
+        filters.put("subCaste", profileRepository.findDistinctSubCaste());
+        filters.put("state", profileRepository.findDistinctState());
+        filters.put("city", profileRepository.findDistinctCity());
+        filters.put("country", profileRepository.findDistinctCountry());
+        filters.put("educationLevel", profileRepository.findDistinctEducationLevel());
+        filters.put("educationField", profileRepository.findDistinctEducationField());
+        filters.put("occupation", profileRepository.findDistinctOccupation());
+        filters.put("company", profileRepository.findDistinctCompany());
+        filters.put("motherTongue", profileRepository.findDistinctMotherTongue());
+        filters.put("maritalStatus", profileRepository.findDistinctMaritalStatus());
+        filters.put("workingWith", profileRepository.findDistinctWorkingWith());
+        filters.put("annualIncome", profileRepository.findDistinctAnnualIncome());
+        filters.put("diet", profileRepository.findDistinctDiet());
+        filters.put("bloodGroup", profileRepository.findDistinctBloodGroup());
+        filters.put("rashi", profileRepository.findDistinctRashi());
+        filters.put("gotra", profileRepository.findDistinctGotra());
+        filters.put("nakshatra", profileRepository.findDistinctNakshatra());
+        filters.put("manglikStatus", profileRepository.findDistinctManglikStatus());
+        filters.put("familyFinancialStatus", profileRepository.findDistinctFamilyFinancialStatus());
+        filters.put("fatherStatus", profileRepository.findDistinctFatherStatus());
+        filters.put("motherStatus", profileRepository.findDistinctMotherStatus());
+        filters.put("drinkingHabit", profileRepository.findDistinctDrinkingHabit());
+        filters.put("smokingHabit", profileRepository.findDistinctSmokingHabit());
+        filters.put("disability", profileRepository.findDistinctDisability());
+        filters.put("verificationStatus", profileRepository.findDistinctVerificationStatus());
+
+        return filters;
     }
 
     @Override

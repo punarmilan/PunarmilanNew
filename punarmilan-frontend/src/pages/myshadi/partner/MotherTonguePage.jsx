@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from 'sweetalert2';
 import { FaArrowLeft, FaCheck } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -88,7 +89,7 @@ const MotherTonguePage = () => {
             navigate('/my-shadi/partner-preferences');
         } catch (error) {
             console.error('Failed to update mother tongue:', error);
-            alert('Failed to update mother tongue. Please try again.');
+            Swal.fire({ text: 'Failed to update mother tongue. Please try again.', confirmButtonColor: '#8C6D39' });
         }
     };
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import adminUserService from '../services/adminUserService';
 import { adminAuthService } from '../services/adminAuthService';
 import { useSelector } from 'react-redux';
@@ -119,7 +120,7 @@ const AdminUserManagement = () => {
     };
 
     const handleDeleteUser = async (id) => {
-        if (window.confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
+        if ((await Swal.fire({ title: 'Are you sure?', text: 'Are you sure you want to delete this user? This action cannot be undone.', icon: 'warning', showCancelButton: true, confirmButtonColor: '#8C6D39', cancelButtonColor: '#d33', confirmButtonText: 'Yes' }).then(r => r.isConfirmed))) {
             try {
                 await adminUserService.deleteUser(id);
                 toast.success('User deleted successfully');
@@ -144,7 +145,7 @@ const AdminUserManagement = () => {
     };
 
     const handleDeleteStaff = async (id) => {
-        if (window.confirm('Delete this staff member?')) {
+        if ((await Swal.fire({ title: 'Are you sure?', text: 'Delete this staff member?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#8C6D39', cancelButtonColor: '#d33', confirmButtonText: 'Yes' }).then(r => r.isConfirmed))) {
             try {
                 await adminAuthService.deleteStaff(id);
                 toast.success('Staff deleted successfully');

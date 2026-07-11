@@ -67,10 +67,35 @@ public class MailServiceImpl implements MailService {
 
     @Async("taskExecutor")
     @Override
+    public void sendOtpEmail(String to, String otp) {
+        log.info("=========================================");
+        log.info("LOCAL DEV EMAIL OTP INTERCEPTED");
+        log.info("To: {}", to);
+        log.info("OTP: {}", otp);
+        log.info("=========================================");
+        String subject = "Your OTP for Punarmilan Registration";
+        String htmlContent = "<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 10px; padding: 20px;\">"
+                + "<h2 style=\"color: #e11d48; text-align: center;\">Welcome to Punarmilan!</h2>"
+                + "<p>To complete your registration, please enter the following OTP:</p>"
+                + "<div style=\"text-align: center; margin: 30px 0;\">"
+                + "<span style=\"background-color: #f3f4f6; color: #333; padding: 14px 28px; border-radius: 8px; font-weight: bold; font-size: 24px; letter-spacing: 4px;\">"
+                + otp + "</span>"
+                + "</div>"
+                + "<p style=\"color: #666; font-size: 14px;\">This OTP will expire in 10 minutes.</p>"
+                + "<p style=\"color: #666; font-size: 14px;\">If you didn't create an account, please ignore this email.</p>"
+                + "<hr style=\"border: 0; border-top: 1px solid #eee; margin: 20px 0;\">"
+                + "<p style=\"text-align: center; color: #999; font-size: 12px;\">&copy; 2026 Punarmilan. All rights reserved.</p>"
+                + "</div>";
+
+        sendEmail(to, subject, htmlContent);
+    }
+
+    @Async("taskExecutor")
+    @Override
     public void sendVerificationSuccessEmail(String to) {
         String subject = "Account Verified Successfully - Punarmilan";
         String htmlContent = "<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 10px; padding: 20px; text-align: center;\">"
-                + "<div style=\"color: #22c55e; font-size: 48px; margin-bottom: 20px;\">✓</div>"
+                + "<div style=\"color: #22c55e; font-size: 48px; margin-bottom: 20px;\">âœ“</div>"
                 + "<h2 style=\"color: #e11d48;\">Email Verified!</h2>"
                 + "<p>Congratulations! Your email address has been successfully verified.</p>"
                 + "<p>Your account is now fully active, and you can start looking for matches.</p>"
@@ -134,8 +159,9 @@ public class MailServiceImpl implements MailService {
 
             mailSender.send(message);
             log.info("Email sent successfully to: {}", to);
-        } catch (MessagingException | java.io.UnsupportedEncodingException e) {
-            log.error("Failed to send email to {}: {}", to, e.getMessage());
+        } catch (Exception e) {
+            log.error("Failed to send email to {}: (Mail Auth/Connection Error)", to);
+            log.error("HINT: If you are testing locally, check the console above for the printed OTP!");
         }
     }
 }

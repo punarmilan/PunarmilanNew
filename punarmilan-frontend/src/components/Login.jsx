@@ -1,20 +1,49 @@
-import React, { useState } from "react";
-import { X, Eye, EyeOff, Info, Mail, Lock, AlertCircle } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { X, Eye, EyeOff, Mail, Lock, AlertCircle, ChevronRight, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { login, clearError } from "../Slice/UserSlice";
+import { login, loginWithOtp, clearError } from "../Slice/UserSlice";
+import api from "../services/api";
 
 function Login({ close, openRegister }) {
+    const [loginMethod, setLoginMethod] = useState("PASSWORD"); // "PASSWORD" or "OTP"
+    
+    // Form state
     const [user, setUser] = useState({ email: "", password: "" });
     const [showPassword, setShowPassword] = useState(false);
     const [stayLoggedIn, setStayLoggedIn] = useState(true);
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
+    
+    // OTP specific state
+    const [otpStep, setOtpStep] = useState(1); // 1 = request, 2 = verify
+    const [otp, setOtp] = useState(['', '', '', '', '', '']);
+    const [isRequestingOtp, setIsRequestingOtp] = useState(false);
+    const [loginType, setLoginType] = useState(""); // "EMAIL" or "MOBILE"
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { loading, error: reduxError } = useSelector((state) => state.user);
+
+    // Load saved credentials on mount
+    useEffect(() => {
+        const savedEmail = localStorage.getItem("rememberedEmail");
+        const savedPassword = localStorage.getItem("rememberedPassword");
+        if (savedEmail && savedPassword) {
+            setUser({ email: savedEmail, password: savedPassword });
+            setStayLoggedIn(true);
+        }
+    }, []);
+
+    // Clear errors when switching tabs
+    useEffect(() => {
+        setErrors({});
+        setTouched({});
+        if (reduxError) {
+            dispatch(clearError());
+        }
+    }, [loginMethod, dispatch]);
 
     // Validation functions
     const validateEmail = (email) => {
@@ -22,13 +51,9 @@ function Login({ close, openRegister }) {
         const phoneRegex = /^[0-9]{10}$/;
 
         if (!email) return "Email or Mobile number is required";
-
-        // Check for uppercase letters
-        if (/[A-Z]/.test(email)) {
-            console.log("Validation error: Uppercase letters found in email:", email);
-            return "Please use smallcase only";
+        if (/[A-Z]/.test(email) && emailRegex.test(email.toLowerCase())) {
+            return "Please use smallcase only for email";
         }
-
         if (!emailRegex.test(email) && !phoneRegex.test(email)) {
             return "Enter valid email or 10-digit mobile number";
         }
@@ -36,309 +61,364 @@ function Login({ close, openRegister }) {
     };
 
     const validatePassword = (password) => {
+        if (loginMethod === "OTP") return "";
         if (!password) return "Password is required";
         if (password.length < 6) return "Password must be at least 6 characters";
         return "";
     };
 
-    // Handle input change with validation
     function handleChange(e) {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
 
-        // Clear local error when user starts typing
-        if (touched[name]) {
-            setErrors({ ...errors, [name]: "" });
-        }
-
-        // Clear global redux error on type
-        if (reduxError) {
-            dispatch(clearError());
-        }
+        if (touched[name]) setErrors({ ...errors, [name]: "" });
+        if (reduxError) dispatch(clearError());
     }
 
-    // Handle blur to show validation errors
     function handleBlur(field) {
         setTouched({ ...touched, [field]: true });
-
         let error = "";
-        if (field === "email") {
-            error = validateEmail(user.email);
-        } else if (field === "password") {
-            error = validatePassword(user.password);
-        }
-
+        if (field === "email") error = validateEmail(user.email);
+        else if (field === "password") error = validatePassword(user.password);
         setErrors({ ...errors, [field]: error });
     }
 
-    // Form submission
     async function handleSubmit(e) {
         e.preventDefault();
+        
+        if (loginMethod === "OTP") {
+            if (otpStep === 1) {
+                handleRequestOtp();
+            } else {
+                handleVerifyOtp();
+            }
+            return;
+        }
 
-        // Validate all fields
         const emailError = validateEmail(user.email);
         const passwordError = validatePassword(user.password);
 
         if (emailError || passwordError) {
-            setErrors({
-                email: emailError,
-                password: passwordError
-            });
+            setErrors({ email: emailError, password: passwordError });
             setTouched({ email: true, password: true });
-
-            // Show toast for validation errors
             if (emailError) toast.error(emailError);
             else if (passwordError) toast.error(passwordError);
-
             return;
         }
 
         try {
             const resultAction = await dispatch(login(user));
             if (login.fulfilled.match(resultAction)) {
-                toast.success("Login successful! 🎉");
-                // Navigate first, then reload to ensure state is completely fresh for the new user session
-                navigate('/my-shadi');
-                close();
-                // Short delay to let toast show, then hard reload to ensure all app state is fresh
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
-            } else {
-                // If it fails, the error is in reduxError, but since we await, we can also see payload
-                const errorMessage = resultAction.payload || "Login failed";
-
-                // Specific handling for common auth errors if backend returns them
-                if (errorMessage.toLowerCase().includes("not found")) {
-                    toast.error("User not found. Please register first.");
-                } else if (errorMessage.toLowerCase().includes("password")) {
-                    toast.error("Invalid password. Please try again.");
+                if (stayLoggedIn) {
+                    localStorage.setItem("rememberedEmail", user.email);
+                    localStorage.setItem("rememberedPassword", user.password);
                 } else {
-                    toast.error(errorMessage);
+                    localStorage.removeItem("rememberedEmail");
+                    localStorage.removeItem("rememberedPassword");
                 }
+                toast.success("Login successful! 🎉");
+                navigate('/complete-profile');
+                close && close();
+                setTimeout(() => window.location.reload(), 1000);
+            } else {
+                handleLoginError(resultAction.payload);
             }
         } catch (err) {
-            console.error("Login error:", err);
             toast.error("An unexpected error occurred. Please try again.");
         }
     }
+    
+    // OTP Logic
+    const handleRequestOtp = async () => {
+        const emailError = validateEmail(user.email);
+        if (emailError) {
+            setErrors({ email: emailError });
+            setTouched({ email: true });
+            toast.error(emailError);
+            return;
+        }
 
-    function handleOTPLogin() {
-        alert("OTP Login feature coming soon!");
-    }
+        const type = /^[0-9]{10}$/.test(user.email) ? "MOBILE" : "EMAIL";
+        setLoginType(type);
+        setIsRequestingOtp(true);
 
-    // Click outside to close
+        try {
+            await api.post('/auth/login-otp/request', {
+                identifier: user.email,
+                type: type
+            });
+            toast.success(`OTP sent to your ${type.toLowerCase()}!`);
+            setOtpStep(2);
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Failed to send OTP");
+        } finally {
+            setIsRequestingOtp(false);
+        }
+    };
+
+    const handleVerifyOtp = async () => {
+        const otpString = otp.join('');
+        if (otpString.length < 6) {
+            toast.error("Please enter the complete 6-digit OTP");
+            return;
+        }
+
+        try {
+            const resultAction = await dispatch(loginWithOtp({
+                identifier: user.email,
+                otp: otpString,
+                type: loginType
+            }));
+
+            if (loginWithOtp.fulfilled.match(resultAction)) {
+                toast.success("Login successful! 🎉");
+                navigate('/complete-profile');
+                close && close();
+                setTimeout(() => window.location.reload(), 1000);
+            } else {
+                handleLoginError(resultAction.payload);
+            }
+        } catch (err) {
+            toast.error("An unexpected error occurred. Please try again.");
+        }
+    };
+
+    const handleLoginError = (errorMessage) => {
+        if (!errorMessage) errorMessage = "Login failed";
+        if (errorMessage.toLowerCase().includes("not found")) {
+            toast.error("User not found. Please register first.");
+        } else if (errorMessage.toLowerCase().includes("password")) {
+            toast.error("Invalid password. Please try again.");
+        } else {
+            toast.error(errorMessage);
+        }
+    };
+
+    const handleOtpChange = (index, value) => {
+        if (!/^[0-9]?$/.test(value)) return;
+        const newOtp = [...otp];
+        newOtp[index] = value;
+        setOtp(newOtp);
+
+        if (value && index < 5) {
+            const nextInput = document.getElementById(`login-otp-${index + 1}`);
+            if (nextInput) nextInput.focus();
+        }
+    };
+    
+    const handleOtpKeyDown = (index, e) => {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+            const prevInput = document.getElementById(`login-otp-${index - 1}`);
+            if (prevInput) prevInput.focus();
+        }
+    };
+
     function handleBackdropClick(e) {
         if (e.target === e.currentTarget) {
-            if (close) {
-                close();
-            } else {
-                navigate("/");
-            }
+            close ? close() : navigate("/");
         }
     }
 
     const onInternalClose = (e) => {
         if (e) e.stopPropagation();
-        if (close) {
-            close();
-        } else {
-            navigate("/");
-        }
+        close ? close() : navigate("/");
     };
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm animate-fadeIn"
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md animate-fadeIn"
             onClick={handleBackdropClick}
         >
-            {/* Modal Container */}
-            <div className="relative w-full max-w-[95%] sm:max-w-md md:max-w-lg animate-slideUp">
-                {/* Main Card */}
-                <div className="relative bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
-                    {/* Close Button */}
+            <div className="relative w-full max-w-[95%] sm:max-w-md animate-slideUp">
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-rose-400 rounded-3xl blur-2xl opacity-20 animate-pulse" />
+                
+                <div className="relative bg-white/95 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
                     <button
                         onClick={onInternalClose}
-                        className="absolute right-3 top-3 sm:right-4 sm:top-4 text-gray-400 hover:text-gray-600 transition-colors z-10 p-1 hover:bg-gray-100 rounded-full"
+                        className="absolute right-4 top-4 text-gray-400 hover:text-gray-700 transition-colors z-20 p-2 hover:bg-gray-100 rounded-full bg-white/50"
                         aria-label="Close"
                     >
-                        <X className="w-5 h-5 sm:w-6 sm:h-6" />
+                        <X className="w-5 h-5" />
                     </button>
 
-                    {/* Logo Section */}
-                    <div className="flex justify-center pt-6 sm:pt-8 pb-4 sm:pb-6">
-                        <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-xl flex items-center justify-center shadow-lg">
-                            <span className="text-white text-2xl sm:text-3xl font-bold">P</span>
+                    <div className="px-8 pt-8 pb-4 text-center relative z-10">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-500 to-rose-500 shadow-xl mb-4 transform hover:scale-105 transition-transform">
+                            <span className="text-white text-3xl font-black tracking-tighter">P</span>
                         </div>
-                    </div>
-
-                    {/* Welcome Text */}
-                    <div className="text-center mb-6 sm:mb-8 px-4">
-                        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 mb-1">
-                            Welcome back!
+                        <h2 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 mb-2">
+                            Welcome Back
                         </h2>
-                        <p className="text-sm sm:text-base text-gray-600">Please login to continue</p>
+                        <p className="text-sm text-gray-500 font-medium">Please login to continue</p>
                     </div>
 
-                    {/* Form */}
-                    <form onSubmit={handleSubmit} className="px-4 sm:px-6 md:px-8 pb-6 sm:pb-8 space-y-4 sm:space-y-5">
+                    {/* Tabs */}
+                    <div className="flex border-b border-gray-200/60 relative z-10">
+                        <button
+                            type="button"
+                            onClick={() => { setLoginMethod("PASSWORD"); setOtpStep(1); }}
+                            className={`flex-1 py-4 text-sm font-semibold transition-all duration-300 relative ${loginMethod === "PASSWORD" ? "text-cyan-600 bg-cyan-50/50" : "text-gray-500 hover:bg-gray-50/50 hover:text-gray-700"}`}
+                        >
+                            Password
+                            {loginMethod === "PASSWORD" && (
+                                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-cyan-400 to-cyan-600 shadow-sm" />
+                            )}
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setLoginMethod("OTP")}
+                            className={`flex-1 py-4 text-sm font-semibold transition-all duration-300 relative ${loginMethod === "OTP" ? "text-rose-600 bg-rose-50/50" : "text-gray-500 hover:bg-gray-50/50 hover:text-gray-700"}`}
+                        >
+                            OTP
+                            {loginMethod === "OTP" && (
+                                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-rose-400 to-rose-600 shadow-sm" />
+                            )}
+                        </button>
+                    </div>
 
-                        {/* Redux Error Alert */}
+                    <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-5 relative z-10">
                         {reduxError && (
-                            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg flex items-center gap-2 text-sm animate-fadeIn">
-                                <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                                <span>{reduxError}</span>
+                            <div className="bg-red-50 border border-red-100 text-red-600 px-4 py-3 rounded-xl flex items-start gap-3 text-sm animate-fadeIn shadow-sm">
+                                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                                <span className="font-medium">{reduxError}</span>
                             </div>
                         )}
 
-                        {/* Email/Mobile Input */}
-                        <div className="space-y-2">
-                            <label className="block text-xs sm:text-sm font-medium text-gray-700">
-                                Mobile No. / Email ID <span className="text-red-500">*</span>
+                        <div className="space-y-1.5">
+                            <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                Email or Mobile <span className="text-rose-500">*</span>
                             </label>
-                            <div className="relative">
-                                <Mail className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
+                            <div className="relative group flex items-center">
+                                <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${errors.email ? 'text-red-400' : 'text-gray-400 group-focus-within:text-cyan-500'}`} />
+                                
                                 <input
                                     type="text"
                                     name="email"
-                                    placeholder="Enter mobile no. / email"
+                                    placeholder="Enter registered email or mobile"
                                     value={user.email}
                                     onChange={handleChange}
                                     onBlur={() => handleBlur("email")}
-                                    className={`w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 text-sm sm:text-base border ${errors.email && touched.email
-                                        ? "border-red-500 focus:ring-red-400"
-                                        : "border-gray-300 focus:ring-rose-400"
-                                        } rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-gray-700 placeholder:text-gray-400`}
+                                    disabled={loginMethod === "OTP" && otpStep === 2}
+                                    className={`w-full pl-12 pr-4 py-3.5 bg-gray-50/50 border-2 rounded-xl text-sm font-medium transition-all outline-none ${
+                                        errors.email && touched.email
+                                            ? "border-red-300 focus:border-red-500 focus:bg-white"
+                                            : "border-transparent focus:border-cyan-400 focus:bg-white"
+                                    } text-gray-800 placeholder:text-gray-400`}
                                 />
                             </div>
                             {errors.email && touched.email && (
-                                <div className="flex items-center gap-1 text-red-500 text-xs sm:text-sm">
-                                    <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
-                                    <span>{errors.email}</span>
-                                </div>
+                                <p className="text-red-500 text-xs font-medium flex items-center gap-1 mt-1">
+                                    <AlertCircle className="w-3.5 h-3.5" /> {errors.email}
+                                </p>
                             )}
                         </div>
 
-                        {/* Password Input */}
-                        <div className="space-y-2">
-                            <label className="block text-xs sm:text-sm font-medium text-gray-700">
-                                Password <span className="text-red-500">*</span>
-                            </label>
-                            <div className="relative">
-                                <Lock className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 sm:w-5 sm:h-5" />
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    name="password"
-                                    placeholder="Enter password"
-                                    value={user.password}
-                                    onChange={handleChange}
-                                    onBlur={() => handleBlur("password")}
-                                    className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 text-sm sm:text-base border ${errors.password && touched.password
-                                        ? "border-red-500 focus:ring-red-400"
-                                        : "border-gray-300 focus:ring-rose-400"
-                                        } rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all text-gray-700 placeholder:text-gray-400`}
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                                    aria-label={showPassword ? "Hide password" : "Show password"}
-                                >
-                                    {showPassword ? (
-                                        <EyeOff className="w-4 h-4 sm:w-5 sm:h-5" />
-                                    ) : (
-                                        <Eye className="w-4 h-4 sm:w-5 sm:h-5" />
-                                    )}
-                                </button>
+                        {loginMethod === "PASSWORD" && (
+                            <div className="space-y-1.5 animate-fadeIn">
+                                <div className="flex justify-between items-center">
+                                    <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                        Password <span className="text-rose-500">*</span>
+                                    </label>
+                                    <button
+                                        type="button"
+                                        onClick={() => { close(); navigate("/forgot-password"); }}
+                                        className="text-xs font-semibold text-cyan-600 hover:text-cyan-800 transition-colors"
+                                    >
+                                        Forgot Password?
+                                    </button>
+                                </div>
+                                <div className="relative group">
+                                    <Lock className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors ${errors.password ? 'text-red-400' : 'text-gray-400 group-focus-within:text-cyan-500'}`} />
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        name="password"
+                                        placeholder="Enter password"
+                                        value={user.password}
+                                        onChange={handleChange}
+                                        onBlur={() => handleBlur("password")}
+                                        className={`w-full pl-12 pr-12 py-3.5 bg-gray-50/50 border-2 rounded-xl text-sm font-medium transition-all outline-none ${
+                                            errors.password && touched.password
+                                                ? "border-red-300 focus:border-red-500 focus:bg-white"
+                                                : "border-transparent focus:border-cyan-400 focus:bg-white"
+                                        } text-gray-800 placeholder:text-gray-400`}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-cyan-600 transition-colors p-1"
+                                    >
+                                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                                    </button>
+                                </div>
+                                {errors.password && touched.password && (
+                                    <p className="text-red-500 text-xs font-medium flex items-center gap-1 mt-1">
+                                        <AlertCircle className="w-3.5 h-3.5" /> {errors.password}
+                                    </p>
+                                )}
                             </div>
-                            {errors.password && touched.password && (
-                                <div className="flex items-center gap-1 text-red-500 text-xs sm:text-sm">
-                                    <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
-                                    <span>{errors.password}</span>
+                        )}
+
+                        {loginMethod === "OTP" && otpStep === 2 && (
+                            <div className="space-y-3 animate-slideUp">
+                                <div className="flex justify-between items-center">
+                                    <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                        Enter OTP
+                                    </label>
+                                    <button
+                                        type="button"
+                                        onClick={() => setOtpStep(1)}
+                                        className="text-xs font-semibold text-rose-600 hover:text-rose-800 transition-colors"
+                                    >
+                                        Change ID
+                                    </button>
                                 </div>
-                            )}
-                        </div>
+                                <div className="flex justify-between gap-2">
+                                    {otp.map((digit, i) => (
+                                        <input
+                                            key={i}
+                                            id={`login-otp-${i}`}
+                                            type="text"
+                                            maxLength="1"
+                                            value={digit}
+                                            onChange={(e) => handleOtpChange(i, e.target.value)}
+                                            onKeyDown={(e) => handleOtpKeyDown(i, e)}
+                                            className="w-12 h-14 bg-gray-50/50 border-2 border-transparent focus:border-rose-400 focus:bg-white rounded-xl text-center text-xl font-bold text-gray-800 outline-none transition-all shadow-sm"
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
-                        {/* Stay Logged In & Forgot Password */}
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-2">
-                            <label className="flex items-center cursor-pointer group">
-                                <input
-                                    type="checkbox"
-                                    checked={stayLoggedIn}
-                                    onChange={(e) => setStayLoggedIn(e.target.checked)}
-                                    className="w-4 h-4 text-cyan-500 border-gray-300 rounded focus:ring-2 focus:ring-cyan-400"
-                                />
-                                <span className="ml-2 text-xs sm:text-sm text-gray-700 flex items-center gap-1">
-                                    Stay Logged in
-                                    <Info className="w-3 h-3 sm:w-4 sm:h-4 text-gray-400" />
-                                </span>
-                            </label>
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    close();
-                                    navigate("/forgot-password");
-                                }}
-                                className="text-xs sm:text-sm text-cyan-500 hover:text-cyan-600 font-medium transition-colors text-left sm:text-right"
-                            >
-                                Forgot Password?
-                            </button>
-                        </div>
-
-                        {/* Login Button */}
                         <button
                             type="submit"
-                            disabled={loading}
-                            className="w-full bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-500 hover:to-cyan-600 text-white py-3 sm:py-3.5 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                            disabled={loading || isRequestingOtp}
+                            className={`w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-white transition-all shadow-lg hover:shadow-xl active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed
+                                ${loginMethod === "PASSWORD" ? "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-cyan-500/30" : "bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 shadow-rose-500/30"}
+                            `}
                         >
-                            {loading ? (
-                                <span className="flex items-center justify-center">
-                                    <svg className="animate-spin h-4 w-4 sm:h-5 sm:w-5 mr-2" viewBox="0 0 24 24">
-                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                                    </svg>
-                                    Logging in...
-                                </span>
+                            {(loading || isRequestingOtp) ? (
+                                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                </svg>
                             ) : (
-                                "Login"
+                                loginMethod === "PASSWORD" ? "Login Securely" : (otpStep === 1 ? "Send OTP" : "Verify & Login")
                             )}
                         </button>
 
-                        {/* Divider */}
-                        <div className="relative py-2">
-                            <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-gray-300"></div>
-                            </div>
-                            <div className="relative flex justify-center text-xs sm:text-sm">
-                                <span className="px-3 bg-white text-gray-500 font-medium">OR</span>
-                            </div>
-                        </div>
-
-                        {/* Login with OTP Button */}
-                        <button
-                            type="button"
-                            onClick={handleOTPLogin}
-                            className="w-full bg-white border-2 border-cyan-400 text-cyan-500 py-3 sm:py-3.5 rounded-lg font-semibold hover:bg-cyan-50 transition-all duration-300 shadow-sm hover:shadow-md text-sm sm:text-base"
-                        >
-                            Login with OTP
-                        </button>
-
-                        {/* Sign Up Link */}
-                        <div className="text-center pt-2">
-                            <span className="text-gray-600 text-xs sm:text-sm">New to PunarMilan? </span>
+                        <div className="pt-2 text-center border-t border-gray-100">
+                            <span className="text-gray-500 text-sm">New to PunarMilan? </span>
                             <button
                                 type="button"
                                 onClick={openRegister}
-                                className="text-cyan-500 hover:text-cyan-600 font-semibold text-xs sm:text-sm transition-colors"
+                                className="text-cyan-600 hover:text-cyan-800 font-bold text-sm transition-colors inline-flex items-center gap-0.5"
                             >
-                                Sign Up Free →
+                                Sign Up Free <ChevronRight className="w-4 h-4" />
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
-
-
         </div>
     );
 }

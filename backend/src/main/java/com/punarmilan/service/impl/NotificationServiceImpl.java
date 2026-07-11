@@ -175,7 +175,7 @@ public class NotificationServiceImpl implements NotificationService {
         }
     }
 
-    // ── Mapper ──────────────────────────────────────────────────────────
+    // â”€â”€ Mapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private NotificationDTO toDTO(Notification n) {
         String photoPath = n.getSenderPhotoUrl();
         Boolean premiumVisible = true;

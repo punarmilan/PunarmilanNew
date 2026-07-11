@@ -71,7 +71,7 @@ public class MatchServiceImpl implements MatchService {
 
         private static final String SCORED_CACHE_KEY_PREFIX = "match:scored:";
 
-        // ────────────────── Internal scored-profile holder ──────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Internal scored-profile holder â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         @Data
         @NoArgsConstructor
@@ -84,7 +84,7 @@ public class MatchServiceImpl implements MatchService {
         }
 
         // ====================================================================
-        //  NEW MATCHES — Full scoring pipeline
+        //  NEW MATCHES â€” Full scoring pipeline
         // ====================================================================
 
         @Override
@@ -142,11 +142,11 @@ public class MatchServiceImpl implements MatchService {
         }
 
         // ====================================================================
-        //  SCORING PIPELINE — all DB calls upfront, scoring in-memory
+        //  SCORING PIPELINE â€” all DB calls upfront, scoring in-memory
         // ====================================================================
 
         private List<ScoredProfile> runScoringPipeline(User user) {
-                // ── Step 1: My profile + preferences ──
+                // â”€â”€ Step 1: My profile + preferences â”€â”€
                 Profile myProfile = profileRepository.findByUserId(user.getId()).orElse(null);
                 if (myProfile == null) {
                         log.warn("No profile found for user {}. Returning empty matches.", user.getId());
@@ -156,14 +156,14 @@ public class MatchServiceImpl implements MatchService {
                 String targetGender = "Male".equalsIgnoreCase(myProfile.getGender()) ? "Female" : "Male";
                 PartnerPreference myPref = partnerPreferenceRepository.findByUser(user).orElse(null);
 
-                // ── Step 2: Exclusion sets ──
+                // â”€â”€ Step 2: Exclusion sets â”€â”€
                 Set<Long> exclusions = new HashSet<>();
                 exclusions.addAll(blockedUserRepository.findBlockedUserIdsByBlockerId(user.getId()));
                 exclusions.addAll(blockedUserRepository.findBlockerIdsByBlockedUserId(user.getId()));
                 exclusions.add(user.getId());
                 if (exclusions.isEmpty()) exclusions.add(-1L);
 
-                // ── Step 3: Candidate pool (capped) ──
+                // â”€â”€ Step 3: Candidate pool (capped) â”€â”€
                 int poolSize = matchWeightConfig.getCandidate().getPoolSize();
                 List<Profile> candidates = profileRepository.findCandidateProfiles(
                                 targetGender, exclusions, PageRequest.of(0, poolSize));
@@ -173,7 +173,7 @@ public class MatchServiceImpl implements MatchService {
                         return Collections.emptyList();
                 }
 
-                // ── Step 4: Declined IDs for reject penalty ──
+                // â”€â”€ Step 4: Declined IDs for reject penalty â”€â”€
                 Set<Long> declinedIds = new HashSet<>();
                 try {
                         declinedIds.addAll(connectionRequestRepository.findDeclinedReceiverIdsBySender(user));
@@ -182,7 +182,7 @@ public class MatchServiceImpl implements MatchService {
                         log.warn("Failed to fetch declined IDs: {}", e.getMessage());
                 }
 
-                // ── Step 5: Batch-fetch candidate preferences ──
+                // â”€â”€ Step 5: Batch-fetch candidate preferences â”€â”€
                 List<Long> candidateUserIds = candidates.stream()
                                 .filter(p -> p.getUser() != null)
                                 .map(p -> p.getUser().getId())
@@ -198,7 +198,7 @@ public class MatchServiceImpl implements MatchService {
                         }
                 }
 
-                // ── Step 6: Batch-fetch engagement data ──
+                // â”€â”€ Step 6: Batch-fetch engagement data â”€â”€
                 List<Long> candidateProfileIds = candidates.stream().map(Profile::getId).collect(Collectors.toList());
 
                 Map<Long, Long> viewCounts = new HashMap<>();
@@ -221,9 +221,9 @@ public class MatchServiceImpl implements MatchService {
                 long maxShortlists = shortlistCounts.values().stream().mapToLong(v -> v).max().orElse(1);
                 double popularityMaxBoost = matchWeightConfig.getBoost().getPopularityMax();
 
-                // ══════════════════════════════════════════════
-                //  ALL DB CALLS DONE — Pure in-memory scoring
-                // ══════════════════════════════════════════════
+                // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+                //  ALL DB CALLS DONE â€” Pure in-memory scoring
+                // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
                 List<ScoredProfile> scoredList = new ArrayList<>(candidates.size());
 
@@ -233,13 +233,13 @@ public class MatchServiceImpl implements MatchService {
                         Long candidateUserId = candidate.getUser().getId();
                         PartnerPreference targetPref = prefMap.get(candidateUserId);
 
-                        // ── 7a: Two-way match score ──
+                        // â”€â”€ 7a: Two-way match score â”€â”€
                         MatchScoreCalculator.MatchResult result = matchScoreCalculator.computeTwoWayScore(
                                         myProfile, myPref, candidate, targetPref);
                         double score = result.getScore();
                         List<String> reasons = new ArrayList<>(result.getTopReasons());
 
-                        // ── 7b: Activity boost ──
+                        // â”€â”€ 7b: Activity boost â”€â”€
                         try {
                                 String candidateEmail = candidate.getUser().getEmail();
                                 if (candidateEmail != null) {
@@ -258,7 +258,7 @@ public class MatchServiceImpl implements MatchService {
                                 // Activity service failure should not break scoring
                         }
 
-                        // ── 7c: Popularity boost ──
+                        // â”€â”€ 7c: Popularity boost â”€â”€
                         long views = viewCounts.getOrDefault(candidate.getId(), 0L);
                         long shorts = shortlistCounts.getOrDefault(candidate.getId(), 0L);
                         double normalizedPopularity = ((double) views / maxViews + (double) shorts / maxShortlists) / 2.0;
@@ -266,7 +266,7 @@ public class MatchServiceImpl implements MatchService {
                         score += popularityBoost;
                         if (popularityBoost >= 3) reasons.add("Popular profile");
 
-                        // ── 7d: Reject penalty ──
+                        // â”€â”€ 7d: Reject penalty â”€â”€
                         if (declinedIds.contains(candidateUserId)) {
                                 score -= matchWeightConfig.getPenalty().getRejected();
                                 reasons.removeIf(r -> r.equals("Popular profile")); // don't highlight penalized
@@ -284,7 +284,7 @@ public class MatchServiceImpl implements MatchService {
                         scoredList.add(new ScoredProfile(candidate, score, reasons));
                 }
 
-                // ── Step 8: Sort by score descending ──
+                // â”€â”€ Step 8: Sort by score descending â”€â”€
                 scoredList.sort(Comparator.comparingDouble((ScoredProfile sp) -> sp.score).reversed());
 
                 log.info("Scoring pipeline complete for user {}. {} candidates scored.", user.getId(), scoredList.size());
@@ -292,7 +292,7 @@ public class MatchServiceImpl implements MatchService {
         }
 
         // ====================================================================
-        //  TODAY'S MATCHES — Read pre-computed from DailyMatch
+        //  TODAY'S MATCHES â€” Read pre-computed from DailyMatch
         // ====================================================================
 
         @Override
@@ -352,7 +352,7 @@ public class MatchServiceImpl implements MatchService {
         }
 
         // ====================================================================
-        //  ALL MATCHES — Same scoring pipeline
+        //  ALL MATCHES â€” Same scoring pipeline
         // ====================================================================
 
         @Override
@@ -592,7 +592,7 @@ public class MatchServiceImpl implements MatchService {
         }
 
         // ====================================================================
-        //  PREFERENCE MATCH — Weighted two-way scoring with field breakdown
+        //  PREFERENCE MATCH â€” Weighted two-way scoring with field breakdown
         // ====================================================================
 
         @Override
@@ -638,7 +638,7 @@ public class MatchServiceImpl implements MatchService {
                         matchList.add(checkStringMatch("WORKING AS", myProfile.getOccupation(), targetPref.getOccupation()));
                         matchList.add(checkIncomeMatch(myProfile.getAnnualIncome(), targetPref.getMinAnnualIncome()));
                 } else {
-                        // No target preference — all fields auto-pass
+                        // No target preference â€” all fields auto-pass
                         matchList.add(buildAutoPass("AGE", myProfile.getAge() != null ? myProfile.getAge() + " yrs" : "N/A"));
                         matchList.add(buildAutoPass("HEIGHT", myProfile.getHeight() != null ? myProfile.getHeight() : "N/A"));
                         matchList.add(buildAutoPass("MARITAL STATUS", myProfile.getMaritalStatus() != null ? myProfile.getMaritalStatus() : "N/A"));
@@ -658,7 +658,7 @@ public class MatchServiceImpl implements MatchService {
                                 .build();
         }
 
-        // ────────────────── Field-Level Check Helpers ──────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Field-Level Check Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         private com.punarmilan.dto.PreferenceMatchDTO.FieldMatchStatus buildAutoPass(String label, String actualValue) {
                 return com.punarmilan.dto.PreferenceMatchDTO.FieldMatchStatus.builder()
@@ -812,7 +812,7 @@ public class MatchServiceImpl implements MatchService {
                 return 0;
         }
 
-        // ────────────────── Utility ──────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ Utility â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         private static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
                 Map<Object, Boolean> seen = new ConcurrentHashMap<>();

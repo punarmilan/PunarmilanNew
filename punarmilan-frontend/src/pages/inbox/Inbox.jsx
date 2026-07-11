@@ -4,7 +4,7 @@ import InboxNav from './InboxNav'
 function Inbox() {
   return (
     <div>
-      {/* <InboxNav /> */}
+      <InboxNav />
     </div>
   )
 }

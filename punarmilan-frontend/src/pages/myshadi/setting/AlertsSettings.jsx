@@ -18,12 +18,6 @@ import {
 const AlertSettingsManager = ({ profile, onUpdate }) => {
     // State for expanded sections
     const [expandedSections, setExpandedSections] = useState({
-        matchMail: true,
-        premiumMatchMail: false,
-        recentVisitors: false,
-        shortlisted: false,
-        viewedProfiles: false,
-        similarProfiles: false,
         contactAlert: false,
         messageReceived: false,
         smsAlert: false,
@@ -33,30 +27,6 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
     });
 
     const defaultSettings = {
-        matchMail: {
-            emailFrequency: "daily",
-            sendBroaderMatches: true,
-        },
-        premiumMatchMail: {
-            emailFrequency: "weekly",
-            sendBroaderMatches: false,
-        },
-        recentVisitors: {
-            enabled: true,
-            frequency: "instant",
-        },
-        shortlisted: {
-            enabled: true,
-            frequency: "instant",
-        },
-        viewedProfiles: {
-            enabled: false,
-            frequency: "daily",
-        },
-        similarProfiles: {
-            enabled: true,
-            frequency: "weekly",
-        },
         contactAlert: {
             enabled: true,
             frequency: "instant",
@@ -104,63 +74,6 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
 
     // Alert sections configuration
     const alertSections = [
-        {
-            id: "matchMail",
-            title: "Match Mail & Photo Match Mail",
-            description:
-                "Personalized matches for you delivered via email as often as you like. A very effective match-making tool.",
-            icon: Heart,
-            type: "frequency",
-            frequencies: ["daily", "tri-weekly", "weekly", "unsubscribe"],
-            hasCheckbox: true,
-            checkboxLabel:
-                "Send me Broader Matches if there are no new Preferred Matches",
-        },
-        {
-            id: "premiumMatchMail",
-            title: "Premium Match Mail",
-            description:
-                "An email notification containing your Matches who have upgraded to a Premium Membership",
-            icon: Zap,
-            type: "frequency",
-            frequencies: ["weekly", "unsubscribe"],
-        },
-        {
-            id: "recentVisitors",
-            title: "Recent Visitors Email",
-            description:
-                "An email notification of Members who have recently Viewed your Profile",
-            icon: Eye,
-            type: "toggle",
-            frequencies: ["daily", "unsubscribe"],
-        },
-        {
-            id: "shortlisted",
-            title: "Members who Shortlisted you Email",
-            description:
-                "An email notification of Members who have recently Shortlisted your Profile",
-            icon: Heart,
-            type: "toggle",
-            frequencies: ["daily", "unsubscribe"],
-        },
-        {
-            id: "viewedProfiles",
-            title: "Viewed Profiles Email",
-            description:
-                "An email reminder containing Profiles you have Viewed recently but have not yet invited to Connect.",
-            icon: Eye,
-            type: "toggle",
-            frequencies: ["weekly", "unsubscribe"],
-        },
-        {
-            id: "similarProfiles",
-            title: "Similar Profiles Email",
-            description:
-                "An email containing Profiles that are similar to the ones you have liked recently.",
-            icon: Users,
-            type: "toggle",
-            frequencies: ["bi-weekly", "unsubscribe"],
-        },
         {
             id: "contactAlert",
             title: "Contact Alert",

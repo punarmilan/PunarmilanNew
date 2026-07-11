@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 import { ArrowLeft, Search, X, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -111,7 +112,7 @@ const Country = () => {
             navigate('/my-shadi/partner-preferences');
         } catch (error) {
             console.error('Failed to update country:', error);
-            alert('Failed to update country. Please try again.');
+            Swal.fire({ text: 'Failed to update country. Please try again.', confirmButtonColor: '#8C6D39' });
         }
     };
 
