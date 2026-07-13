@@ -119,7 +119,7 @@ function Login({ close, openRegister }) {
                 toast.success("Login successful! 🎉");
                 try {
                     const profileRes = await api.get('/profiles/me');
-                    if (profileRes.data && profileRes.data.profileComplete) {
+                    if (profileRes.data && (profileRes.data.profileComplete || (profileRes.data.religion && profileRes.data.caste))) {
                         navigate('/my-shadi');
                     } else {
                         navigate('/complete-profile');
@@ -183,7 +183,7 @@ function Login({ close, openRegister }) {
                 toast.success("Login successful! 🎉");
                 try {
                     const profileRes = await api.get('/profiles/me');
-                    if (profileRes.data && profileRes.data.profileComplete) {
+                    if (profileRes.data && (profileRes.data.profileComplete || (profileRes.data.religion && profileRes.data.caste))) {
                         navigate('/my-shadi');
                     } else {
                         navigate('/complete-profile');
