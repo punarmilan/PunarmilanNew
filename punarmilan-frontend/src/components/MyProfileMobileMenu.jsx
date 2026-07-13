@@ -102,14 +102,14 @@ const MyProfileMobileMenu = () => {
 
     return (
         <div className="my-profile-mobile-section">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
+            <div className="bg-theme-surface rounded-xl shadow-sm border border-theme-border p-4 mb-4">
                 {/* Section Header */}
                 <div className="mb-4">
                     <h3 className="text-lg font-bold text-gray-900">My Profile</h3>
                 </div>
 
                 {/* My Profile Main Item with Arrow */}
-                <div className="border-b border-gray-200 pb-3 mb-3">
+                <div className="border-b border-theme-border pb-3 mb-3">
                     <div className="flex items-center justify-between">
                         {/* Left side: Icon and Label */}
                         <button
@@ -126,7 +126,7 @@ const MyProfileMobileMenu = () => {
                         {/* Right side: Arrow Icon for toggle */}
                         <button
                             onClick={handleArrowClick}
-                            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg ml-2"
+                            className="p-2 text-theme-text-secondary hover:text-gray-700 hover:bg-gray-100 rounded-lg ml-2"
                             aria-label={isProfileExpanded ? "Collapse menu" : "Expand menu"}
                         >
                             <i className={`fa-solid fa-chevron-${isProfileExpanded ? 'up' : 'down'} transition-transform duration-300`}></i>

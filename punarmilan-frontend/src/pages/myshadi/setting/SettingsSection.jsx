@@ -8,7 +8,7 @@ import React from 'react'
  */
 function SettingsSection({ title, status, isActive, onToggle, isNew, children }) {
     return (
-        <div className="bg-white overflow-hidden first:rounded-t-2xl last:rounded-b-2xl border-b border-gray-100 last:border-b-0">
+        <div className="bg-theme-surface overflow-hidden first:rounded-t-2xl last:rounded-b-2xl border-b border-gray-100 last:border-b-0">
             <button
                 className="w-full flex items-center justify-between p-5 md:p-6 cursor-pointer hover:bg-gray-50 transition-all duration-300 group"
                 onClick={onToggle}
@@ -39,7 +39,7 @@ function SettingsSection({ title, status, isActive, onToggle, isNew, children })
             <div
                 className={`transition-all duration-500 ease-in-out overflow-hidden ${isActive ? 'max-h-[5000px] opacity-100' : 'max-h-0 opacity-0'}`}
             >
-                <div className="p-5 md:p-8 pt-0 border-t border-gray-50 bg-white/50">
+                <div className="p-5 md:p-8 pt-0 border-t border-gray-50 bg-theme-surface/50">
                     {children}
                 </div>
             </div>

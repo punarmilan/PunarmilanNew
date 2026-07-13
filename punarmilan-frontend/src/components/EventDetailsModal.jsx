@@ -45,12 +45,12 @@ const EventDetailsModal = ({ isOpen, onClose, event, isRegistered, onRegister })
                         initial={{ opacity: 0, scale: 0.9, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="relative w-full max-w-3xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-white/20"
+                        className="relative w-full max-w-3xl bg-theme-surface rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh] border border-white/20"
                     >
                         {/* Header Image/Gradient Block */}
                         <div className="relative h-48 sm:h-64 bg-gradient-to-br from-rose-500 via-rose-600 to-orange-500 overflow-hidden">
                             {/* Decorative Elements */}
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl animate-pulse" />
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-theme-surface/10 rounded-full -mr-20 -mt-20 blur-3xl animate-pulse" />
                             <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange-400/20 rounded-full -ml-16 -mb-16 blur-2xl" />
                             
                             {/* Close Button */}
@@ -85,7 +85,7 @@ const EventDetailsModal = ({ isOpen, onClose, event, isRegistered, onRegister })
                             {/* Event Fast Facts */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <div className="flex items-start gap-4 p-5 bg-slate-50 rounded-3xl border border-slate-100/50">
-                                    <div className="w-12 h-12 rounded-2xl bg-white border border-rose-100 flex items-center justify-center text-rose-500 shrink-0 shadow-sm">
+                                    <div className="w-12 h-12 rounded-2xl bg-theme-surface border border-rose-100 flex items-center justify-center text-rose-500 shrink-0 shadow-sm">
                                         <Calendar size={20} />
                                     </div>
                                     <div className="space-y-1">
@@ -94,7 +94,7 @@ const EventDetailsModal = ({ isOpen, onClose, event, isRegistered, onRegister })
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4 p-5 bg-slate-50 rounded-3xl border border-slate-100/50">
-                                    <div className="w-12 h-12 rounded-2xl bg-white border border-rose-100 flex items-center justify-center text-rose-500 shrink-0 shadow-sm">
+                                    <div className="w-12 h-12 rounded-2xl bg-theme-surface border border-rose-100 flex items-center justify-center text-rose-500 shrink-0 shadow-sm">
                                         <Clock size={20} />
                                     </div>
                                     <div className="space-y-1">
@@ -103,7 +103,7 @@ const EventDetailsModal = ({ isOpen, onClose, event, isRegistered, onRegister })
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4 p-5 bg-slate-50 rounded-3xl border border-slate-100/50">
-                                    <div className="w-12 h-12 rounded-2xl bg-white border border-rose-100 flex items-center justify-center text-rose-500 shrink-0 shadow-sm">
+                                    <div className="w-12 h-12 rounded-2xl bg-theme-surface border border-rose-100 flex items-center justify-center text-rose-500 shrink-0 shadow-sm">
                                         <MapPin size={20} />
                                     </div>
                                     <div className="space-y-1">
@@ -112,7 +112,7 @@ const EventDetailsModal = ({ isOpen, onClose, event, isRegistered, onRegister })
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4 p-5 bg-slate-50 rounded-3xl border border-slate-100/50">
-                                    <div className="w-12 h-12 rounded-2xl bg-white border border-rose-100 flex items-center justify-center text-rose-500 shrink-0 shadow-sm">
+                                    <div className="w-12 h-12 rounded-2xl bg-theme-surface border border-rose-100 flex items-center justify-center text-rose-500 shrink-0 shadow-sm">
                                         <Users size={20} />
                                     </div>
                                     <div className="space-y-1">

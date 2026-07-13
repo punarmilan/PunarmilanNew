@@ -31,7 +31,7 @@ export default function More({ isActive }) {
     <>
       <button
         onClick={() => setShowPopup(!showPopup)}
-        className={`flex items-center gap-1 cursor-pointer font-medium transition-colors ${isActive ? 'text-rose-500' : 'text-gray-600 hover:text-gray-900'}`}
+        className={`flex items-center gap-1 cursor-pointer font-medium transition-colors ${isActive ? 'text-rose-500' : 'text-theme-text-secondary hover:text-gray-900'}`}
         aria-label="More options"
       >
         <span>More</span>
@@ -48,14 +48,14 @@ export default function More({ isActive }) {
           onClick={() => setShowPopup(false)}
         >
           <div
-            className="bg-white rounded-2xl shadow-2xl w-full max-w-sm animate-scale-in"
+            className="bg-theme-surface rounded-2xl shadow-2xl w-full max-w-sm animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between p-5 border-b border-gray-200">
+            <div className="flex items-center justify-between p-5 border-b border-theme-border">
               <h2 className="text-xl font-bold text-gray-800">More Options</h2>
               <button
                 onClick={() => setShowPopup(false)}
-                className="text-gray-500 hover:text-gray-700 transition-colors"
+                className="text-theme-text-secondary hover:text-gray-700 transition-colors"
                 aria-label="Close"
               >
                 <X size={24} />
@@ -170,17 +170,17 @@ function NotificationPopup({ onClose }) {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden animate-scale-in flex flex-col"
+        className="bg-theme-surface rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden animate-scale-in flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-5 md:p-6 border-b border-gray-200">
+        <div className="flex items-center justify-between p-5 md:p-6 border-b border-theme-border">
           <h2 className="text-xl md:text-2xl font-bold text-cyan-500 uppercase tracking-wide">
             Notifications
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 transition-colors"
+            className="text-theme-text-secondary hover:text-gray-700 transition-colors"
             aria-label="Close"
           >
             <X size={24} />
@@ -197,7 +197,7 @@ function NotificationPopup({ onClose }) {
                 onChange={(e) => setIncludeDeclined(e.target.checked)}
                 className="w-4 h-4 text-cyan-500 border-gray-300 rounded focus:ring-cyan-500"
               />
-              <span className="text-sm text-gray-600">Include Declined Notifications</span>
+              <span className="text-sm text-theme-text-secondary">Include Declined Notifications</span>
             </label>
 
             <div className="flex items-center gap-2">
@@ -212,7 +212,7 @@ function NotificationPopup({ onClose }) {
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20 gap-4">
               <div className="w-12 h-12 border-4 border-cyan-100 border-t-cyan-500 rounded-full animate-spin"></div>
-              <p className="text-gray-500 font-medium italic">Finding your latest updates...</p>
+              <p className="text-theme-text-secondary font-medium italic">Finding your latest updates...</p>
             </div>
           ) : items.length > 0 ? (
             <div className="space-y-3">
@@ -229,7 +229,7 @@ function NotificationPopup({ onClose }) {
               <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-4">
                 <Inbox size={32} className="text-gray-300" />
               </div>
-              <p className="text-gray-500 font-medium">No notifications yet.</p>
+              <p className="text-theme-text-secondary font-medium">No notifications yet.</p>
               <p className="text-sm text-gray-400">We'll notify you when something happens!</p>
             </div>
           )}
@@ -237,9 +237,9 @@ function NotificationPopup({ onClose }) {
 
         {/* Pagination Footer */}
         {totalPages > 1 && (
-          <div className="px-5 md:px-6 py-4 border-t border-gray-200 bg-gray-50">
+          <div className="px-5 md:px-6 py-4 border-t border-theme-border bg-gray-50">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-theme-text-secondary">
                 Showing <span className="font-semibold">{startIndex + 1}-{Math.min(startIndex + items.length, totalItems)}</span> of <span className="font-semibold">{totalItems}</span>
               </span>
 
@@ -249,14 +249,14 @@ function NotificationPopup({ onClose }) {
                   disabled={currentPage === 1}
                   className={`p-2 rounded-lg transition-all ${currentPage === 1
                     ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm'
+                    : 'bg-theme-surface text-gray-700 hover:bg-gray-100 shadow-sm'
                     }`}
                   aria-label="Previous page"
                 >
                   <ChevronLeft size={20} />
                 </button>
 
-                <div className="px-3 py-1 bg-white border border-gray-200 rounded-md text-sm font-medium text-gray-700">
+                <div className="px-3 py-1 bg-theme-surface border border-theme-border rounded-md text-sm font-medium text-gray-700">
                   {currentPage} / {totalPages}
                 </div>
 
@@ -265,7 +265,7 @@ function NotificationPopup({ onClose }) {
                   disabled={currentPage === totalPages}
                   className={`p-2 rounded-lg transition-all ${currentPage === totalPages
                     ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm'
+                    : 'bg-theme-surface text-gray-700 hover:bg-gray-100 shadow-sm'
                     }`}
                   aria-label="Next page"
                 >
@@ -296,7 +296,7 @@ function NotificationItem({ notification, onProfileClick }) {
   };
 
   return (
-    <div className={`flex items-center gap-3 md:gap-4 p-3 md:p-4 hover:bg-gray-50 rounded-xl transition-all duration-200 border border-transparent hover:border-gray-200 ${!notification.read ? 'bg-cyan-50/30' : ''}`}>
+    <div className={`flex items-center gap-3 md:gap-4 p-3 md:p-4 hover:bg-gray-50 rounded-xl transition-all duration-200 border border-transparent hover:border-theme-border ${!notification.read ? 'bg-cyan-50/30' : ''}`}>
       <div className="flex-shrink-0 relative">
         <div
           className="w-12 h-12 md:w-14 md:h-14 rounded-full overflow-hidden bg-gray-100 border border-gray-100 cursor-pointer hover:opacity-80 transition-opacity"
@@ -331,7 +331,7 @@ function NotificationItem({ notification, onProfileClick }) {
             >
               {notification.senderName || 'System'}
             </span>
-            <span className="ml-2 text-gray-600 font-medium">
+            <span className="ml-2 text-theme-text-secondary font-medium">
               {notification.message}
             </span>
           </p>
@@ -342,7 +342,7 @@ function NotificationItem({ notification, onProfileClick }) {
       </div>
 
       <div className="flex-shrink-0">
-        <span className={`inline-block text-[10px] md:text-xs px-2 md:px-2.5 py-1 rounded-full font-bold uppercase tracking-wider ${!notification.read ? 'bg-cyan-500 text-white shadow-sm' : 'bg-gray-100 text-gray-500'}`}>
+        <span className={`inline-block text-[10px] md:text-xs px-2 md:px-2.5 py-1 rounded-full font-bold uppercase tracking-wider ${!notification.read ? 'bg-cyan-500 text-white shadow-sm' : 'bg-gray-100 text-theme-text-secondary'}`}>
           {formatDate(notification.createdAt)}
         </span>
       </div>

@@ -72,13 +72,13 @@ export default function CompleteProfile() {
             Complete Your Profile
           </h1>
 
-          <p className="text-gray-500 mt-3 text-lg">
+          <p className="text-theme-text-secondary mt-3 text-lg">
             Find your perfect life partner ❤️
           </p>
         </div>
 
         {/* MAIN CARD */}
-        <div className="bg-white/80 backdrop-blur-xl border border-pink-100 shadow-2xl rounded-[32px] overflow-hidden">
+        <div className="bg-theme-surface/80 backdrop-blur-xl border border-pink-100 shadow-2xl rounded-[32px] overflow-hidden">
 
           {/* TOP GRADIENT */}
           <div className="h-2 bg-gradient-to-r from-pink-500 via-rose-500 to-pink-400"></div>

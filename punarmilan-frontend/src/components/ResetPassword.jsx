@@ -74,14 +74,14 @@ function ResetPassword() {
     if (isSubmitted) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
-                <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl text-center">
+                <div className="max-w-md w-full space-y-8 bg-theme-surface p-8 rounded-2xl shadow-xl text-center">
                     <div className="flex justify-center">
                         <div className="bg-green-100 p-3 rounded-full">
                             <CheckCircle className="h-12 w-12 text-green-600" />
                         </div>
                     </div>
                     <h2 className="text-3xl font-extrabold text-gray-900">Password reset</h2>
-                    <p className="mt-2 text-sm text-gray-600">
+                    <p className="mt-2 text-sm text-theme-text-secondary">
                         Your password has been successfully reset. You can now log in with your new password.
                     </p>
                     <div className="mt-6">
@@ -100,14 +100,14 @@ function ResetPassword() {
     if (!token) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
-                <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl text-center">
+                <div className="max-w-md w-full space-y-8 bg-theme-surface p-8 rounded-2xl shadow-xl text-center">
                     <div className="flex justify-center">
                         <div className="bg-red-100 p-3 rounded-full">
                             <AlertCircle className="h-12 w-12 text-red-600" />
                         </div>
                     </div>
                     <h2 className="text-2xl font-bold text-gray-900">Invalid Link</h2>
-                    <p className="mt-2 text-sm text-gray-600">
+                    <p className="mt-2 text-sm text-theme-text-secondary">
                         This password reset link is invalid or has expired. Please request a new one.
                     </p>
                     <div className="mt-6">
@@ -126,12 +126,12 @@ function ResetPassword() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
-            <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl">
+            <div className="max-w-md w-full space-y-8 bg-theme-surface p-8 rounded-2xl shadow-xl">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                         Set new password
                     </h2>
-                    <p className="mt-2 text-center text-sm text-gray-600">
+                    <p className="mt-2 text-center text-sm text-theme-text-secondary">
                         Please enter your new password below.
                     </p>
                 </div>
@@ -156,7 +156,7 @@ function ResetPassword() {
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-theme-text-secondary"
                                 >
                                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                 </button>

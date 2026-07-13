@@ -94,7 +94,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                     md:right-0 md:left-auto md:bottom-4 
                     md:h-[580px] md:w-full max-w-[320px]
                     md:rounded-2xl md:rounded-r-none
-                    md:border-l md:border-gray-200
+                    md:border-l md:border-theme-border
                     md:z-[1000]
                     ${open ? "md:translate-x-0 md:translate-y-0" : "md:translate-x-full md:translate-y-0"}
                     
@@ -105,7 +105,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                 {/* HEADER with gradient background */}
                 <div className="relative bg-gradient-to-r from-rose-500 to-pink-500 px-4 py-4 md:py-3 rounded-t-3xl md:rounded-tr-none shadow-lg">
                     {/* Mobile drag handle */}
-                    <div className="md:hidden absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-white/30 rounded-full"></div>
+                    <div className="md:hidden absolute top-2 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-theme-surface/30 rounded-full"></div>
 
                     <div className="flex items-center justify-between mt-2 md:mt-0">
                         <div className="flex items-center gap-2.5">
@@ -122,7 +122,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                             {/* Audio Icon */}
                             <button
                                 onClick={toggleAudioMute}
-                                className="p-2 hover:bg-white/20 rounded-lg transition-all duration-200 active:scale-95"
+                                className="p-2 hover:bg-theme-surface/20 rounded-lg transition-all duration-200 active:scale-95"
                                 title={isAudioMuted ? "Unmute all" : "Mute all"}
                             >
                                 {isAudioMuted ? (
@@ -144,7 +144,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                             {/* Close Button */}
                             <button
                                 onClick={handleClose}
-                                className="p-2 hover:bg-white/20 rounded-lg transition-all duration-200 active:scale-95"
+                                className="p-2 hover:bg-theme-surface/20 rounded-lg transition-all duration-200 active:scale-95"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -159,7 +159,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                 <div className="h-[calc(100%-140px)] md:h-[calc(100%-115px)] lg:h-[calc(100%-120px)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent hover:scrollbar-thumb-gray-400">
 
                     {/* ACCEPTED MEMBERS SECTION */}
-                    <div className="border-b border-gray-200">
+                    <div className="border-b border-theme-border">
                         <div className="flex items-center justify-between px-4 py-3.5 bg-blue-50/30">
                             <div className="flex items-center gap-2">
                                 <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center shadow-md">
@@ -167,7 +167,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                                 </div>
                                 <div>
                                     <h3 className="text-sm font-semibold text-gray-800">Accepted & Online</h3>
-                                    <p className="text-xs text-gray-500">{onlineAccepted.length} online</p>
+                                    <p className="text-xs text-theme-text-secondary">{onlineAccepted.length} online</p>
                                 </div>
                             </div>
                         </div>
@@ -187,7 +187,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                                             className="w-10 h-10 rounded-full ring-2 ring-white shadow-sm"
                                             alt={formatDisplayName(m.fullName, m.displayNameVisibility, m.id)}
                                         />
-                                        <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white shadow-md"></span>
+                                        <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-theme-success rounded-full border-2 border-white shadow-md"></span>
                                     </div>
                                     <div className="flex-1">
                                         <p className="text-sm font-medium text-gray-800 truncate">{formatDisplayName(m.fullName, m.displayNameVisibility, m.id)}</p>
@@ -200,7 +200,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                     </div>
 
                     {/* SHORTLISTED SECTION */}
-                    <div className="border-b border-gray-200">
+                    <div className="border-b border-theme-border">
                         <div className="flex items-center justify-between px-4 py-3.5 bg-purple-50/30">
                             <div className="flex items-center gap-2">
                                 <div className="w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
@@ -208,7 +208,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                                 </div>
                                 <div>
                                     <h3 className="text-sm font-semibold text-gray-800">Shortlisted</h3>
-                                    <p className="text-xs text-gray-500">{shortlistedProfiles.length} total</p>
+                                    <p className="text-xs text-theme-text-secondary">{shortlistedProfiles.length} total</p>
                                 </div>
                             </div>
                         </div>
@@ -228,7 +228,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                                     />
                                     <div className="flex-1">
                                         <p className="text-sm font-medium text-gray-800 truncate">{formatDisplayName(m.fullName, m.displayNameVisibility, m.id)}</p>
-                                        <p className="text-[10px] text-gray-500">{m.city}, {m.state}</p>
+                                        <p className="text-[10px] text-theme-text-secondary">{m.city}, {m.state}</p>
                                     </div>
                                     <ChevronRight size={18} className="text-gray-300" />
                                 </div>
@@ -249,7 +249,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                                         <MessageCircle size={32} className="text-gray-400" />
                                     </div>
                                     <h3 className="text-sm font-semibold text-gray-700">No Recent Chats</h3>
-                                    <p className="text-xs text-gray-500 mt-1">Start chatting with your matches!</p>
+                                    <p className="text-xs text-theme-text-secondary mt-1">Start chatting with your matches!</p>
                                 </div>
                             ) : (
                                 recentConversations.map((c) => (
@@ -269,7 +269,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                                                 alt={c.otherUserName}
                                             />
                                             {c.isOnline && (
-                                                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white shadow-sm"></span>
+                                                <span className="absolute bottom-0 right-0 w-3 h-3 bg-theme-success rounded-full border-2 border-white shadow-sm"></span>
                                             )}
                                         </div>
                                         <div className="flex-1 min-w-0">
@@ -279,7 +279,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                                                     {new Date(c.lastActive).toLocaleDateString([], { day: '2-digit', month: 'short' })}
                                                 </p>
                                             </div>
-                                            <p className="text-xs text-gray-500 truncate mt-0.5">{c.lastMessage}</p>
+                                            <p className="text-xs text-theme-text-secondary truncate mt-0.5">{c.lastMessage}</p>
                                         </div>
                                         {c.unreadCount > 0 && (
                                             <span className="w-5 h-5 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-sm">
@@ -295,14 +295,14 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                     {/* ACTIVE MEMBERS */}
                     {activeTab === "active" && (
                         <>
-                            <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-rose-50 to-transparent border-b border-gray-200">
+                            <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-rose-50 to-transparent border-b border-theme-border">
                                 <div className="flex items-center gap-2">
                                     <div className="w-8 h-8 bg-gradient-to-br from-rose-400 to-pink-600 rounded-lg flex items-center justify-center shadow-md">
                                         <Heart size={16} className="text-white" />
                                     </div>
                                     <div>
                                         <h3 className="text-sm font-semibold text-gray-800">My Matches</h3>
-                                        <p className="text-xs text-gray-500">{onlineMatches.length} online</p>
+                                        <p className="text-xs text-theme-text-secondary">{onlineMatches.length} online</p>
                                     </div>
                                 </div>
                             </div>
@@ -324,8 +324,8 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                                                 className="w-11 h-11 rounded-full ring-2 ring-white shadow-md group-hover:ring-rose-200 transition-all"
                                                 alt={formatDisplayName(m.fullName, m.displayNameVisibility, m.id)}
                                             />
-                                            <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-500 rounded-full border-2 border-white shadow-md">
-                                                <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-75"></span>
+                                            <span className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-theme-success rounded-full border-2 border-white shadow-md">
+                                                <span className="absolute inset-0 rounded-full bg-theme-success animate-ping opacity-75"></span>
                                             </span>
                                         </div>
                                         <div className="flex-1">
@@ -350,12 +350,12 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
 
 
                 {/* BOTTOM TABS */}
-                <div className="absolute bottom-0 left-0 right-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 border-t border-gray-200 text-sm bg-white rounded-b-3xl md:rounded-bl-none shadow-lg">
+                <div className="absolute bottom-0 left-0 right-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 border-t border-theme-border text-sm bg-theme-surface rounded-b-3xl md:rounded-bl-none shadow-lg">
                     <button
                         onClick={() => setActiveTab("chats")}
-                        className={`py-3.5 flex flex-col items-center justify-center gap-1 transition-all duration-200 relative border-x border-gray-200 ${activeTab === "chats"
+                        className={`py-3.5 flex flex-col items-center justify-center gap-1 transition-all duration-200 relative border-x border-theme-border ${activeTab === "chats"
                             ? "text-rose-600"
-                            : "text-gray-500 hover:text-gray-700"
+                            : "text-theme-text-secondary hover:text-gray-700"
                             }`}
                     >
                         {activeTab === "chats" && (
@@ -376,7 +376,7 @@ export default function OnlineMembers({ open, setOpen, onClose }) {
                         onClick={() => setActiveTab("active")}
                         className={`py-3.5 flex flex-col items-center justify-center gap-1 transition-all duration-200 relative ${activeTab === "active"
                             ? "text-rose-600"
-                            : "text-gray-500 hover:text-gray-700"
+                            : "text-theme-text-secondary hover:text-gray-700"
                             }`}
                     >
                         {activeTab === "active" && (

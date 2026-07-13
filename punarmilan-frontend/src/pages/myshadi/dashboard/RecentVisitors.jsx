@@ -56,7 +56,7 @@ const RecentVisitors = () => {
             <div className="bg-gray-50 flex items-center justify-center py-16">
                 <div className="flex flex-col items-center gap-3">
                     <Loader2 className="w-10 h-10 text-pink-500 animate-spin" />
-                    <p className="text-gray-500 font-medium">Loading visitors...</p>
+                    <p className="text-theme-text-secondary font-medium">Loading visitors...</p>
                 </div>
             </div>
         );
@@ -78,7 +78,7 @@ const RecentVisitors = () => {
                             <Heart className="w-12 h-12 text-pink-300" />
                         </div>
                         <h3 className="text-xl font-semibold text-gray-700 mb-2">No visitors yet</h3>
-                        <p className="text-gray-500 max-w-sm">
+                        <p className="text-theme-text-secondary max-w-sm">
                             When someone visits your profile, they'll appear here.
                         </p>
                     </div>
@@ -130,7 +130,7 @@ const RecentVisitors = () => {
                                         <p className="text-sm text-gray-700 text-center">
                                             {[v.age && `${v.age} yrs`, v.height, v.language].filter(Boolean).join(', ')}
                                         </p>
-                                        <p className="text-sm text-gray-500 text-center mb-4">{v.location}</p>
+                                        <p className="text-sm text-theme-text-secondary text-center mb-4">{v.location}</p>
                                         <button
                                             onClick={() => handleViewProfile(v.id)}
                                             className="w-full mb-2 border-2 border-pink-500 text-pink-500 hover:bg-pink-50 font-semibold py-2 rounded-full transition-all transform active:scale-95 cursor-pointer text-sm"

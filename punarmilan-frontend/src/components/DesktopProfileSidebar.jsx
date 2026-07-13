@@ -207,10 +207,10 @@ const DesktopProfileSidebar = () => {
 
     return (
         <div className='hidden lg:block'>
-            <aside className="w-full bg-white min-h-screen p-6 border-r">
+            <aside className="w-full bg-theme-surface min-h-screen p-6 border-r">
                 {/* Profile Section */}
                 <div className="mb-8 bg-amber-300">
-                    <div className="bg-white p-4 rounded">
+                    <div className="bg-theme-surface p-4 rounded">
                         <div className="flex items-center space-x-4 mb-4">
                             <div className="relative">
                                 <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-lg bg-gray-100 flex items-center justify-center">
@@ -236,7 +236,7 @@ const DesktopProfileSidebar = () => {
                             <div>
                                 <div className="font-bold  text-gray-800 mb-1">{user?.profileId || 'PM00000000'}</div>
                                 <div className="font-bold  text-gray-800 mb-1">{user?.fullName || 'User'}</div>
-                                <div className="text-sm text-gray-600 mb-2 flex items-center gap-1">
+                                <div className="text-sm text-theme-text-secondary mb-2 flex items-center gap-1">
                                     <Phone size={14} /> {user?.mobileNumber || 'No Number'}
                                 </div>
                                 <button
@@ -289,11 +289,11 @@ const DesktopProfileSidebar = () => {
 
                     {/* Blue Tick Verification */}
                     {user?.verificationStatus === 'VERIFIED' ? (
-                        <div className="bg-white p-5 rounded-2xl border border-gray-100 mb-6 shadow-sm relative">
+                        <div className="bg-theme-surface p-5 rounded-2xl border border-gray-100 mb-6 shadow-sm relative">
                             <div className="flex items-center justify-between">
                                 <div>
                                     <h3 className="font-bold text-lg text-gray-800">Blue Tick Verified</h3>
-                                    <p className="text-gray-500 text-sm">Valid till 11-Jan-27</p>
+                                    <p className="text-theme-text-secondary text-sm">Valid till 11-Jan-27</p>
                                 </div>
                                 <div className="relative" ref={tooltipRef}>
                                     <button
@@ -347,7 +347,7 @@ const DesktopProfileSidebar = () => {
                                 <Shield className="w-6 h-6 text-blue-500 mr-2" />
                                 <h3 className="font-bold text-lg cursor-pointer">Blue Tick Verification</h3>
                             </div>
-                            <p className="text-gray-600 mb-4 cursor-pointer">Verify your profile with Govt. ID</p>
+                            <p className="text-theme-text-secondary mb-4 cursor-pointer">Verify your profile with Govt. ID</p>
                             <button
                                 onClick={handleGetBlueTick}
                                 className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300"
@@ -391,19 +391,19 @@ const DesktopProfileSidebar = () => {
             {/* Desktop File Upload Modal */}
             {showFileUpload && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[999]">
-                    <div className="bg-white rounded-2xl p-8 w-full max-w-lg">
+                    <div className="bg-theme-surface rounded-2xl p-8 w-full max-w-lg">
                         <div className="flex justify-between items-center mb-6">
                             <h3 className="font-bold text-2xl">Add Photos</h3>
                             <button
                                 onClick={() => setShowFileUpload(false)}
-                                className="text-gray-500 hover:text-gray-700"
+                                className="text-theme-text-secondary hover:text-gray-700"
                             >
                                 <X size={24} />
                             </button>
                         </div>
 
                         <div className="border-2 border-dashed border-gray-300 rounded-xl p-12 text-center mb-6">
-                            <p className="text-gray-600 mb-4">Select photos to upload</p>
+                            <p className="text-theme-text-secondary mb-4">Select photos to upload</p>
                             <input
                                 type="file"
                                 ref={fileInputRef}
@@ -444,18 +444,18 @@ const DesktopProfileSidebar = () => {
             {/* Desktop Verification Modal */}
             {isVerificationOpen && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[999] p-4">
-                    <div className="bg-white rounded-2xl p-5 sm:p-6 w-full max-w-lg shadow-2xl relative overflow-y-auto max-h-[95vh]">
+                    <div className="bg-theme-surface rounded-2xl p-5 sm:p-6 w-full max-w-lg shadow-2xl relative overflow-y-auto max-h-[95vh]">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="font-bold text-xl sm:text-2xl">Verify your Profile</h3>
                             <button
                                 onClick={() => setIsVerificationOpen(false)}
-                                className="text-gray-500 hover:text-gray-700"
+                                className="text-theme-text-secondary hover:text-gray-700"
                             >
                                 <X size={24} />
                             </button>
                         </div>
 
-                        <p className="text-gray-600 mb-4 text-sm sm:text-base">
+                        <p className="text-theme-text-secondary mb-4 text-sm sm:text-base">
                             Verification is important to ensure safety and establish authenticity of your Profile.
                         </p>
 
@@ -520,7 +520,7 @@ const DesktopProfileSidebar = () => {
                                         {idProofFile.name}
                                     </div>
                                 ) : (
-                                    <div className="text-gray-500">
+                                    <div className="text-theme-text-secondary">
                                         Click to select file
                                     </div>
                                 )}

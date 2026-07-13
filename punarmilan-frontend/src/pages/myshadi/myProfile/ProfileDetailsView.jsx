@@ -2,7 +2,7 @@ import React from 'react';
 import { User, Heart, MapPin, Briefcase, GraduationCap, Users } from 'lucide-react';
 
 const DetailSection = ({ title, icon, children }) => (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+    <div className="bg-theme-surface rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
         <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
             <div className="w-10 h-10 rounded-xl bg-rose-50 flex items-center justify-center text-rose-500">
                 {icon}
@@ -17,7 +17,7 @@ const DetailSection = ({ title, icon, children }) => (
 
 const DetailRow = ({ label, value }) => (
     <div className="flex flex-col mb-2">
-        <span className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-1">{label}</span>
+        <span className="text-xs text-theme-text-secondary uppercase tracking-wider font-semibold mb-1">{label}</span>
         <span className="text-gray-800 font-medium">{value || 'Not Specified'}</span>
     </div>
 );

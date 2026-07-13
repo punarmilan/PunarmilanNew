@@ -131,14 +131,14 @@ const PremiumMatchDashboard = () => {
                         <h1 className="text-xl sm:text-2xl lg:text-[28px] font-serif font-bold leading-tight mb-1 flex items-center gap-2">
                             Find Someone Worth Meeting <Heart className="inline fill-pink-500 text-pink-500 w-5 h-5 animate-pulse drop-shadow-sm" />
                         </h1>
-                        <p className="text-[12px] text-gray-600 max-w-sm mb-2 font-medium leading-relaxed">
+                        <p className="text-[12px] text-theme-text-secondary max-w-sm mb-2 font-medium leading-relaxed">
                             Explore compatible profiles based on your preferences & relationship goals.
                         </p>
                         <div className="flex gap-3">
                             <button className="px-5 py-1.5 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white text-xs font-bold rounded-full shadow-md transition-colors flex items-center gap-2">
                                 <User size={14} /> Explore Matches
                             </button>
-                            <button className="px-5 py-1.5 bg-white border border-pink-200 hover:bg-pink-50 text-pink-600 text-xs font-bold rounded-full transition-colors flex items-center gap-2 shadow-sm">
+                            <button className="px-5 py-1.5 bg-theme-surface border border-pink-200 hover:bg-pink-50 text-pink-600 text-xs font-bold rounded-full transition-colors flex items-center gap-2 shadow-sm">
                                 <Heart size={14} /> View Likes
                             </button>
                         </div>
@@ -146,21 +146,21 @@ const PremiumMatchDashboard = () => {
 
                     <div className="relative z-10 w-full md:w-1/2 lg:w-2/5 flex justify-end">
                         <div className="flex gap-2">
-                            <div className="bg-white/80 backdrop-blur-md border border-pink-100 rounded-[12px] p-2.5 w-[85px] text-center shadow-sm hover:bg-white transition-colors cursor-pointer">
+                            <div className="bg-theme-surface/80 backdrop-blur-md border border-pink-100 rounded-[12px] p-2.5 w-[85px] text-center shadow-sm hover:bg-theme-surface transition-colors cursor-pointer">
                                 <User className="mx-auto text-pink-500 mb-1" size={16} />
-                                <p className="text-[9px] text-gray-500 font-medium mb-0.5">Matches</p>
+                                <p className="text-[9px] text-theme-text-secondary font-medium mb-0.5">Matches</p>
                                 <p className="text-xl font-black text-gray-800">{displayMatches.length || 24}</p>
                                 <p className="text-[8px] text-pink-500 mt-0.5 font-bold">+3 new</p>
                             </div>
-                            <div className="bg-white/80 backdrop-blur-md border border-pink-100 rounded-[12px] p-2.5 w-[85px] text-center shadow-sm hover:bg-white transition-colors cursor-pointer">
+                            <div className="bg-theme-surface/80 backdrop-blur-md border border-pink-100 rounded-[12px] p-2.5 w-[85px] text-center shadow-sm hover:bg-theme-surface transition-colors cursor-pointer">
                                 <Eye className="mx-auto text-pink-500 mb-1" size={16} />
-                                <p className="text-[9px] text-gray-500 font-medium mb-0.5">Views</p>
+                                <p className="text-[9px] text-theme-text-secondary font-medium mb-0.5">Views</p>
                                 <p className="text-xl font-black text-gray-800">56</p>
                                 <p className="text-[8px] text-pink-500 mt-0.5 font-bold">+8 week</p>
                             </div>
-                            <div className="bg-white/80 backdrop-blur-md border border-pink-100 rounded-[12px] p-2.5 w-[85px] text-center shadow-sm hover:bg-white transition-colors cursor-pointer">
+                            <div className="bg-theme-surface/80 backdrop-blur-md border border-pink-100 rounded-[12px] p-2.5 w-[85px] text-center shadow-sm hover:bg-theme-surface transition-colors cursor-pointer">
                                 <Heart className="mx-auto text-pink-500 mb-1" size={16} />
-                                <p className="text-[9px] text-gray-500 font-medium mb-0.5">Likes</p>
+                                <p className="text-[9px] text-theme-text-secondary font-medium mb-0.5">Likes</p>
                                 <p className="text-xl font-black text-gray-800">10</p>
                                 <p className="text-[8px] text-pink-500 mt-0.5 font-bold">+2 week</p>
                             </div>
@@ -195,12 +195,12 @@ const PremiumMatchDashboard = () => {
                             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-600"></div>
                         </div>
                     ) : displayMatches.length === 0 ? (
-                        <div className="w-full flex flex-col items-center justify-center py-16 text-center bg-white/40 backdrop-blur-sm rounded-[24px] border border-dashed border-gray-300 shadow-sm">
+                        <div className="w-full flex flex-col items-center justify-center py-16 text-center bg-theme-surface/40 backdrop-blur-sm rounded-[24px] border border-dashed border-gray-300 shadow-sm">
                             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-gray-400 shadow-inner">
                                 <Search size={32} />
                             </div>
                             <h3 className="text-lg font-bold text-gray-800 mb-2">No profiles found</h3>
-                            <p className="text-sm text-gray-500 mb-6 max-w-sm">
+                            <p className="text-sm text-theme-text-secondary mb-6 max-w-sm">
                                 We couldn't find any matches matching your exact criteria. Try adjusting your filters to see more results!
                             </p>
                             <button 
@@ -244,9 +244,9 @@ const PremiumMatchDashboard = () => {
 
                                     {/* Pagination Dots */}
                                     <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
-                                        <div className="w-1.5 h-1.5 rounded-full bg-white/50"></div>
-                                        <div className="w-1.5 h-1.5 rounded-full bg-white/50"></div>
+                                        <div className="w-1.5 h-1.5 rounded-full bg-theme-surface"></div>
+                                        <div className="w-1.5 h-1.5 rounded-full bg-theme-surface/50"></div>
+                                        <div className="w-1.5 h-1.5 rounded-full bg-theme-surface/50"></div>
                                     </div>
                                 </div>
 
@@ -261,9 +261,9 @@ const PremiumMatchDashboard = () => {
                                         </div>
 
                                         {/* Sub Tags */}
-                                        <div className="flex flex-wrap items-center gap-3 mb-4 text-[10px] font-bold text-gray-500">
+                                        <div className="flex flex-wrap items-center gap-3 mb-4 text-[10px] font-bold text-theme-text-secondary">
                                             {match.online ? (
-                                                <span className="flex items-center gap-1 text-green-600"><div className="w-1.5 h-1.5 rounded-full bg-green-500"></div> Online</span>
+                                                <span className="flex items-center gap-1 text-green-600"><div className="w-1.5 h-1.5 rounded-full bg-theme-success"></div> Online</span>
                                             ) : (
                                                 <span className="flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div> {match.activeText}</span>
                                             )}
@@ -274,27 +274,27 @@ const PremiumMatchDashboard = () => {
 
                                         {/* Grid */}
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 mb-4">
-                                            <div className="flex items-center gap-2 text-[12px] text-gray-600 font-medium">
+                                            <div className="flex items-center gap-2 text-[12px] text-theme-text-secondary font-medium">
                                                 <User size={14} className="text-gray-400" /> {match.age} Yrs, {match.height}
                                             </div>
-                                            <div className="flex items-center gap-2 text-[12px] text-gray-600 font-medium">
+                                            <div className="flex items-center gap-2 text-[12px] text-theme-text-secondary font-medium">
                                                 <Heart size={14} className="text-gray-400" /> {match.maritalStatus}
                                             </div>
-                                            <div className="flex items-center gap-2 text-[12px] text-gray-600 font-medium">
+                                            <div className="flex items-center gap-2 text-[12px] text-theme-text-secondary font-medium">
                                                 <MapPin size={14} className="text-gray-400" /> {match.city}
                                             </div>
-                                            <div className="flex items-center gap-2 text-[12px] text-gray-600 font-medium">
+                                            <div className="flex items-center gap-2 text-[12px] text-theme-text-secondary font-medium">
                                                 <Globe size={14} className="text-gray-400" /> {match.religion}
                                             </div>
-                                            <div className="flex items-center gap-2 text-[12px] text-gray-600 font-medium">
+                                            <div className="flex items-center gap-2 text-[12px] text-theme-text-secondary font-medium">
                                                 <MessageCircle size={14} className="text-gray-400" /> {match.language}
                                             </div>
-                                            <div className="flex items-center gap-2 text-[12px] text-gray-600 font-medium">
+                                            <div className="flex items-center gap-2 text-[12px] text-theme-text-secondary font-medium">
                                                 <Activity size={14} className="text-gray-400" /> {match.profession}
                                             </div>
                                         </div>
 
-                                        <p className="text-[12px] text-gray-500 leading-relaxed mb-4">
+                                        <p className="text-[12px] text-theme-text-secondary leading-relaxed mb-4">
                                             {match.bio} <span className="text-pink-500 font-semibold cursor-pointer">... More</span>
                                         </p>
                                     </div>
@@ -328,7 +328,7 @@ const PremiumMatchDashboard = () => {
                                             <p className="text-[9px] font-bold text-[#ff336f] mb-1">Why this match?</p>
                                             <ul className="space-y-1">
                                                 {match.whyMatch.map((reason, idx) => (
-                                                    <li key={idx} className="flex items-center gap-1.5 text-[9.5px] font-medium text-gray-500">
+                                                    <li key={idx} className="flex items-center gap-1.5 text-[9.5px] font-medium text-theme-text-secondary">
                                                         <CheckCircle2 size={10} className="text-[#ff336f]" /> {reason}
                                                     </li>
                                                 ))}
@@ -359,7 +359,7 @@ const PremiumMatchDashboard = () => {
                                                                 .then(() => toast.success('Profile Liked!'))
                                                                 .catch(err => toast.error(err.message || 'Failed to like profile'));
                                                         }
-                                                    }} className={`w-full py-1.5 border border-[#D4AF37] text-[11px] font-bold rounded-full transition-colors flex items-center justify-center gap-1.5 ${isLiked ? 'bg-[#D4AF37] text-white hover:bg-[#C89B3C]' : 'bg-white hover:bg-[#FDFBF7] text-[#D4AF37]'}`}>
+                                                    }} className={`w-full py-1.5 border border-[#D4AF37] text-[11px] font-bold rounded-full transition-colors flex items-center justify-center gap-1.5 ${isLiked ? 'bg-[#D4AF37] text-white hover:bg-[#C89B3C]' : 'bg-theme-surface hover:bg-[#FDFBF7] text-[#D4AF37]'}`}>
                                                         <Heart size={12} className={isLiked ? 'text-white fill-white' : 'text-[#D4AF37]'} /> {isLiked ? 'Liked' : 'Like'}
                                                     </button>
                                                     <button onClick={(e) => { 
@@ -388,7 +388,7 @@ const PremiumMatchDashboard = () => {
                                                                 .then(() => toast.success('Profile Shortlisted!'))
                                                                 .catch(err => toast.error(err.message || 'Failed to shortlist profile'));
                                                         }
-                                                    }} className={`w-full py-1.5 border border-[#D4AF37] text-[11px] font-bold rounded-full transition-colors flex items-center justify-center gap-1.5 ${isShortlisted ? 'bg-[#D4AF37] text-white hover:bg-[#C89B3C]' : 'bg-white hover:bg-[#FDFBF7] text-[#D4AF37]'}`}>
+                                                    }} className={`w-full py-1.5 border border-[#D4AF37] text-[11px] font-bold rounded-full transition-colors flex items-center justify-center gap-1.5 ${isShortlisted ? 'bg-[#D4AF37] text-white hover:bg-[#C89B3C]' : 'bg-theme-surface hover:bg-[#FDFBF7] text-[#D4AF37]'}`}>
                                                         <Star size={12} className={isShortlisted ? 'text-white fill-white' : 'text-[#D4AF37]'} /> {isShortlisted ? 'Shortlisted' : 'Shortlist'}
                                                     </button>
                                                 </>
@@ -402,10 +402,10 @@ const PremiumMatchDashboard = () => {
                                                 profilePhotoUrl: match.image,
                                                 displayNameVisibility: 'SHOW_FULL_NAME'
                                             }));
-                                        }} className="w-full py-1.5 bg-white border border-[#D4AF37] hover:bg-[#FDFBF7] text-[#D4AF37] text-[11px] font-bold rounded-full transition-colors flex items-center justify-center gap-1.5">
+                                        }} className="w-full py-1.5 bg-theme-surface border border-[#D4AF37] hover:bg-[#FDFBF7] text-[#D4AF37] text-[11px] font-bold rounded-full transition-colors flex items-center justify-center gap-1.5">
                                             <MessageCircle size={12} className="text-[#D4AF37]" /> Send Message
                                         </button>
-                                        <button onClick={(e) => { e.stopPropagation(); navigate(`/matches/${match.id}`); }} className="w-full py-1.5 bg-white border border-[#D4AF37] hover:bg-[#FDFBF7] text-[#D4AF37] text-[11px] font-bold rounded-full transition-colors flex items-center justify-center gap-1.5">
+                                        <button onClick={(e) => { e.stopPropagation(); navigate(`/matches/${match.id}`); }} className="w-full py-1.5 bg-theme-surface border border-[#D4AF37] hover:bg-[#FDFBF7] text-[#D4AF37] text-[11px] font-bold rounded-full transition-colors flex items-center justify-center gap-1.5">
                                             <ExternalLink size={12} className="text-[#D4AF37]" /> View Profile
                                         </button>
                                     </div>
@@ -426,7 +426,7 @@ const PremiumMatchDashboard = () => {
                         </div>
                         <div>
                             <h3 className="text-sm font-black text-gray-900 mb-0.5">Want better matches?</h3>
-                            <p className="text-[11px] font-medium text-gray-600">Complete your profile, add more photos and get 3x more matches.</p>
+                            <p className="text-[11px] font-medium text-theme-text-secondary">Complete your profile, add more photos and get 3x more matches.</p>
                         </div>
                     </div>
                     <button className="w-full md:w-auto px-6 py-2 bg-[#ff336f] hover:bg-[#ff1a5d] text-white text-[11px] font-bold rounded-md shadow-md transition-colors flex items-center justify-center gap-2">

@@ -99,7 +99,7 @@ const StateLivingPage = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 flex items-center justify-center p-2 sm:p-4 md:p-6">
-            <div className="w-full max-w-4xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
+            <div className="w-full max-w-4xl bg-theme-surface rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
                 {/* Header */}
                 <div className="bg-gradient-to-r from-rose-500 to-rose-600 p-4 sm:p-6 md:p-8">
                     <button
@@ -126,7 +126,7 @@ const StateLivingPage = () => {
                                 placeholder="Search State living in"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:outline-none transition-colors text-sm sm:text-base"
+                                className="w-full pl-10 pr-4 py-3 border-2 border-theme-border rounded-xl focus:border-blue-400 focus:outline-none transition-colors text-sm sm:text-base"
                             />
                         </div>
                     </div>
@@ -152,7 +152,7 @@ const StateLivingPage = () => {
                                         {state}
                                         <button
                                             onClick={() => removeState(state)}
-                                            className="w-5 h-5 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                                            className="w-5 h-5 rounded-full bg-theme-surface/20 hover:bg-theme-surface/30 flex items-center justify-center transition-colors"
                                         >
                                             <X className="w-3 h-3" />
                                         </button>
@@ -181,7 +181,7 @@ const StateLivingPage = () => {
 
                     {/* States List */}
                     <div className="max-h-96 overflow-y-auto">
-                        <h3 className="text-lg font-bold text-gray-800 mb-4 sticky top-0 bg-white py-2">India</h3>
+                        <h3 className="text-lg font-bold text-gray-800 mb-4 sticky top-0 bg-theme-surface py-2">India</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                             {filteredStates.map((state) => (
                                 <label
@@ -204,10 +204,10 @@ const StateLivingPage = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 mt-6 border-t border-gray-200">
+                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 mt-6 border-t border-theme-border">
                         <button
                             onClick={handleCancel}
-                            className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg transition-all duration-300 active:scale-95"
+                            className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-theme-surface hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg transition-all duration-300 active:scale-95"
                         >
                             Cancel
                         </button>

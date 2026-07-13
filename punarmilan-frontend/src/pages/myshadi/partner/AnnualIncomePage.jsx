@@ -90,7 +90,7 @@ const AnnualIncomePage = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 flex items-center justify-center p-2 sm:p-4 md:p-6">
-            <div className="w-full max-w-3xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
+            <div className="w-full max-w-3xl bg-theme-surface rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
                 <div className="bg-gradient-to-r from-rose-500 to-rose-600 p-4 sm:p-6 md:p-8">
                     <button onClick={handleCancel} className="flex items-center gap-2 text-white hover:text-gray-100 transition-all mb-3 sm:mb-4 group">
                         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -104,7 +104,7 @@ const AnnualIncomePage = () => {
                         <input type="radio" checked={option === 'openToAll'} onChange={() => setOption('openToAll')} className="w-6 h-6 mt-1 cursor-pointer" />
                         <div>
                             <span className="text-base sm:text-lg font-bold text-gray-700 group-hover:text-gray-900 block">Open to All</span>
-                            <p className="text-sm text-gray-500 mt-1">No income preference</p>
+                            <p className="text-sm text-theme-text-secondary mt-1">No income preference</p>
                         </div>
                     </label>
                     <label className="flex items-start gap-3 cursor-pointer group p-4 rounded-xl hover:bg-blue-50 transition-colors border-2 border-transparent hover:border-blue-200">
@@ -115,11 +115,11 @@ const AnnualIncomePage = () => {
                                 <div className="space-y-4">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-2">Minimum Annual Income</label>
-                                        <input type="number" placeholder="Enter amount in Lakhs" value={min} onChange={(e) => setMin(e.target.value)} className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:outline-none" />
+                                        <input type="number" placeholder="Enter amount in Lakhs" value={min} onChange={(e) => setMin(e.target.value)} className="w-full px-4 py-3 border-2 border-theme-border rounded-xl focus:border-blue-400 focus:outline-none" />
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-2">Maximum Annual Income</label>
-                                        <input type="number" placeholder="Enter amount in Lakhs" value={max} onChange={(e) => setMax(e.target.value)} className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:outline-none" />
+                                        <input type="number" placeholder="Enter amount in Lakhs" value={max} onChange={(e) => setMax(e.target.value)} className="w-full px-4 py-3 border-2 border-theme-border rounded-xl focus:border-blue-400 focus:outline-none" />
                                     </div>
                                     <div className="flex flex-wrap gap-2">
                                         <button type="button" onClick={() => { setMin('5'); setMax('10'); }} className="px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-lg text-sm font-medium">5-10 Lakhs</button>
@@ -130,8 +130,8 @@ const AnnualIncomePage = () => {
                             )}
                         </div>
                     </label>
-                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-6 border-t border-gray-200">
-                        <button onClick={handleCancel} className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg transition-all duration-300 active:scale-95">Cancel</button>
+                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-6 border-t border-theme-border">
+                        <button onClick={handleCancel} className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-theme-surface hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg transition-all duration-300 active:scale-95">Cancel</button>
                         <button onClick={handleApply} className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-rose-500 to-rose-600 text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2">
                             <Check className="w-4 h-4 sm:w-5 sm:h-5" />
                             <span>Apply</span>

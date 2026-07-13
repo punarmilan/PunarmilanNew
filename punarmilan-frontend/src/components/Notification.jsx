@@ -57,13 +57,13 @@ const getIconBg = (type) => {
     switch (type) {
         case 'PROFILE_VIEW': return 'bg-blue-500';
         case 'CONNECTION_REQUEST': return 'bg-purple-500';
-        case 'CONNECTION_ACCEPTED': return 'bg-green-500';
+        case 'CONNECTION_ACCEPTED': return 'bg-theme-success';
         case 'CONNECTION_DECLINED': return 'bg-gray-400';
         case 'NEW_MATCH': return 'bg-pink-500';
         case 'PHOTO_REQUEST': return 'bg-cyan-500';
         case 'VERIFICATION_APPROVED': return 'bg-emerald-500';
         case 'VERIFICATION_REJECTED': return 'bg-red-500';
-        case 'PROFILE_COMPLETION': return 'bg-orange-500';
+        case 'PROFILE_COMPLETION': return 'bg-theme-warning';
         default: return 'bg-gray-500';
     }
 };
@@ -170,9 +170,9 @@ const Notifications = () => {
     };
 
     return (
-        <div className="bg-white rounded-lg border border-gray-200 w-full max-w-sm mx-auto shadow-sm">
+        <div className="bg-theme-surface rounded-lg border border-theme-border w-full max-w-sm mx-auto shadow-sm">
             {/* Header */}
-            <div className="px-4 py-3 border-b border-gray-200 flex items-center justify-between bg-gray-50/50 rounded-t-lg">
+            <div className="px-4 py-3 border-b border-theme-border flex items-center justify-between bg-gray-50/50 rounded-t-lg">
                 <div className="flex items-center gap-2">
                     <h2 className="text-lg font-bold text-gray-800">Notifications</h2>
                     {unreadCount > 0 && (
@@ -203,12 +203,12 @@ const Notifications = () => {
                             onClick={() => setActiveFilter(tab.key)}
                             className={`flex-shrink-0 px-3 py-1.5 text-xs font-medium rounded-t-md transition-all border-b-2 cursor-pointer ${isActive
                                 ? 'border-rose-500 text-rose-600 bg-rose-50'
-                                : 'border-transparent text-gray-500 hover:text-gray-700'
+                                : 'border-transparent text-theme-text-secondary hover:text-gray-700'
                                 }`}
                         >
                             {tab.label}
                             {count > 0 && (
-                                <span className={`ml-1 text-[10px] px-1 rounded-full ${isActive ? 'bg-rose-100 text-rose-600' : 'bg-gray-100 text-gray-500'}`}>
+                                <span className={`ml-1 text-[10px] px-1 rounded-full ${isActive ? 'bg-rose-100 text-rose-600' : 'bg-gray-100 text-theme-text-secondary'}`}>
                                     {count}
                                 </span>
                             )}
@@ -220,7 +220,7 @@ const Notifications = () => {
             {/* Notifications List */}
             <div className="divide-y divide-gray-100 max-h-[420px] overflow-y-auto">
                 {loading && notifications.length === 0 ? (
-                    <div className="p-8 text-center text-gray-500 flex flex-col items-center gap-2">
+                    <div className="p-8 text-center text-theme-text-secondary flex flex-col items-center gap-2">
                         <Loader2 className="w-8 h-8 text-rose-400 animate-spin" />
                         <p className="text-sm">Loading notifications...</p>
                     </div>
@@ -243,10 +243,10 @@ const Notifications = () => {
                                         <img
                                             src={notification.senderPhotoUrl}
                                             alt={notification.senderName || 'User'}
-                                            className={`w-10 h-10 rounded-full object-cover border border-gray-200 ${notification.premiumVisible === false ? 'blur-[2px]' : ''}`}
+                                            className={`w-10 h-10 rounded-full object-cover border border-theme-border ${notification.premiumVisible === false ? 'blur-[2px]' : ''}`}
                                         />
                                     ) : (
-                                        <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border border-gray-200">
+                                        <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center border border-theme-border">
                                             <UserIcon className="text-gray-400" size={20} />
                                         </div>
                                     )}
@@ -297,7 +297,7 @@ const Notifications = () => {
             {/* Notification Details Modal */}
             {selectedNotification && (
                 <div className="fixed inset-0 z-[10010] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden relative animate-in fade-in zoom-in-95 duration-200 border border-gray-100/50">
+                    <div className="bg-theme-surface rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden relative animate-in fade-in zoom-in-95 duration-200 border border-gray-100/50">
                         {/* Header Image/Pattern Background Option */}
                         <div className="h-24 bg-gradient-to-r from-rose-500 to-pink-500 absolute top-0 left-0 w-full opacity-10"></div>
 
@@ -306,7 +306,7 @@ const Notifications = () => {
                             <h3 className="font-bold text-gray-800 text-lg">Notification</h3>
                             <button
                                 onClick={() => setSelectedNotification(null)}
-                                className="text-gray-400 hover:text-gray-700 bg-white shadow-sm border border-gray-100 hover:bg-gray-50 p-2 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-rose-500/50"
+                                className="text-gray-400 hover:text-gray-700 bg-theme-surface shadow-sm border border-gray-100 hover:bg-gray-50 p-2 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-rose-500/50"
                             >
                                 <X size={16} />
                             </button>
@@ -347,7 +347,7 @@ const Notifications = () => {
                                 <h4 className="font-bold text-gray-900 text-lg">
                                     {selectedNotification.senderName || 'PunarMilan Admin'}
                                 </h4>
-                                <p className="text-xs font-medium text-gray-500 mt-0.5">
+                                <p className="text-xs font-medium text-theme-text-secondary mt-0.5">
                                     {timeAgo(selectedNotification.createdAt)}
                                 </p>
                             </div>

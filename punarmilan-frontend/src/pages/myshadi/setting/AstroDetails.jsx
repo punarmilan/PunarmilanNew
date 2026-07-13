@@ -141,16 +141,16 @@ function AstroDetails({ profile, onUpdate }) {
         <>
             <div className="p-4 md:p-6 lg:p-8 bg-gray-50">
                 {/* Main Container */}
-                <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <div className="bg-theme-surface border border-theme-border rounded-lg overflow-hidden shadow-sm">
                     {/* Header */}
-                    <div className="bg-gray-100 border-b border-gray-200 p-4 md:p-5">
+                    <div className="bg-gray-100 border-b border-theme-border p-4 md:p-5">
                         <h2 className="text-base md:text-lg lg:text-xl font-bold text-gray-800">
                             Astro Details
                         </h2>
                     </div>
 
                     {/* Astro Privacy Settings */}
-                    <div className="border-b border-gray-200">
+                    <div className="border-b border-theme-border">
                         <div
                             className="flex items-center justify-between p-4 md:p-5 hover:bg-gray-50 cursor-pointer transition-colors"
                             onClick={() => setIsPrivacyExpanded(!isPrivacyExpanded)}
@@ -159,7 +159,7 @@ function AstroDetails({ profile, onUpdate }) {
                                 <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800">
                                     Astro Privacy Settings
                                 </div>
-                                <div className="text-xs md:text-sm text-gray-500 mt-1">
+                                <div className="text-xs md:text-sm text-theme-text-secondary mt-1">
                                     {privacyOption}
                                 </div>
                             </div>
@@ -171,15 +171,15 @@ function AstroDetails({ profile, onUpdate }) {
                         </div>
 
                         {isPrivacyExpanded && (
-                            <div className="p-4 md:p-5 bg-gray-50 border-t border-gray-200">
-                                <p className="text-xs md:text-sm text-gray-600 mb-3">
+                            <div className="p-4 md:p-5 bg-gray-50 border-t border-theme-border">
+                                <p className="text-xs md:text-sm text-theme-text-secondary mb-3">
                                     Choose who can see your astro details
                                 </p>
                                 <div className="space-y-2">
                                     {['Visible to all Members', 'Visible to Premium Members only', 'Hidden'].map((option) => (
                                         <label
                                             key={option}
-                                            className="flex items-center gap-3 p-3 rounded-lg hover:bg-white cursor-pointer transition-colors"
+                                            className="flex items-center gap-3 p-3 rounded-lg hover:bg-theme-surface cursor-pointer transition-colors"
                                         >
                                             <input
                                                 type="radio"
@@ -224,14 +224,14 @@ function AstroDetails({ profile, onUpdate }) {
                         </div>
 
                         {isDetailsExpanded && (
-                            <div className="p-4 md:p-5 space-y-4 bg-white border-t border-gray-200">
+                            <div className="p-4 md:p-5 space-y-4 bg-theme-surface border-t border-theme-border">
                                 {/* Time of Birth */}
                                 <div className="flex items-start gap-3 md:gap-4">
                                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
                                         <Clock className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
                                     </div>
                                     <div className="flex-1">
-                                        <div className="text-xs md:text-sm text-gray-500 mb-1">Time Of Birth</div>
+                                        <div className="text-xs md:text-sm text-theme-text-secondary mb-1">Time Of Birth</div>
                                         <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800">
                                             {astroData.timeOfBirth}
                                         </div>
@@ -244,7 +244,7 @@ function AstroDetails({ profile, onUpdate }) {
                                         <MapPin className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
                                     </div>
                                     <div className="flex-1">
-                                        <div className="text-xs md:text-sm text-gray-500 mb-1">City Of Birth</div>
+                                        <div className="text-xs md:text-sm text-theme-text-secondary mb-1">City Of Birth</div>
                                         <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800">
                                             {astroData.placeOfBirth}
                                         </div>
@@ -257,7 +257,7 @@ function AstroDetails({ profile, onUpdate }) {
                                         <Star className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
                                     </div>
                                     <div className="flex-1">
-                                        <div className="text-xs md:text-sm text-gray-500 mb-1">Manglik/Chevvai Dosham</div>
+                                        <div className="text-xs md:text-sm text-theme-text-secondary mb-1">Manglik/Chevvai Dosham</div>
                                         <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800">
                                             {astroData.manglikStatus}
                                         </div>
@@ -270,7 +270,7 @@ function AstroDetails({ profile, onUpdate }) {
                                         <Star className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
                                     </div>
                                     <div className="flex-1">
-                                        <div className="text-xs md:text-sm text-gray-500 mb-1">Nakshatra</div>
+                                        <div className="text-xs md:text-sm text-theme-text-secondary mb-1">Nakshatra</div>
                                         <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800">
                                             {astroData.nakshatra}
                                         </div>
@@ -283,7 +283,7 @@ function AstroDetails({ profile, onUpdate }) {
                                         <Grid className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
                                     </div>
                                     <div className="flex-1">
-                                        <div className="text-xs md:text-sm text-gray-500 mb-1">Rashi</div>
+                                        <div className="text-xs md:text-sm text-theme-text-secondary mb-1">Rashi</div>
                                         <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800">
                                             {astroData.rashi}
                                         </div>
@@ -298,9 +298,9 @@ function AstroDetails({ profile, onUpdate }) {
             {/* Edit Modal */}
             {isEditModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fadeIn">
-                    <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl animate-slideUp">
+                    <div className="bg-theme-surface rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl animate-slideUp">
                         {/* Modal Header */}
-                        <div className="sticky top-0 bg-white border-b border-gray-200 p-4 md:p-6 flex items-center justify-between z-10">
+                        <div className="sticky top-0 bg-theme-surface border-b border-theme-border p-4 md:p-6 flex items-center justify-between z-10">
                             <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-800">
                                 Edit Details
                             </h2>
@@ -308,7 +308,7 @@ function AstroDetails({ profile, onUpdate }) {
                                 onClick={handleCloseModal}
                                 className="w-8 h-8 md:w-10 md:h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
                             >
-                                <X className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
+                                <X className="w-5 h-5 md:w-6 md:h-6 text-theme-text-secondary" />
                             </button>
                         </div>
 
@@ -326,7 +326,7 @@ function AstroDetails({ profile, onUpdate }) {
                                             type="time"
                                             value={formData.timeOfBirth}
                                             onChange={(e) => handleInputChange('timeOfBirth', e.target.value)}
-                                            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base transition-colors"
+                                            className="w-full px-4 py-3 border-2 border-theme-border rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base transition-colors"
                                         />
                                         <Clock className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
                                     </div>
@@ -340,7 +340,7 @@ function AstroDetails({ profile, onUpdate }) {
                                     <select
                                         value={formData.placeOfBirth}
                                         onChange={(e) => handleInputChange('placeOfBirth', e.target.value)}
-                                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base appearance-none bg-white cursor-pointer transition-colors"
+                                        className="w-full px-4 py-3 border-2 border-theme-border rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base appearance-none bg-theme-surface cursor-pointer transition-colors"
                                     >
                                         {placeOptions.map((place) => (
                                             <option key={place} value={place}>
@@ -377,13 +377,13 @@ function AstroDetails({ profile, onUpdate }) {
                                 <label className="block text-sm md:text-base font-semibold text-gray-800 mb-2">
                                     Rashi
                                 </label>
-                                <p className="text-xs md:text-sm text-gray-500 mb-3">
+                                <p className="text-xs md:text-sm text-theme-text-secondary mb-3">
                                     This is based on lunar star sign.
                                 </p>
                                 <select
                                     value={showOtherRashi ? 'Other' : formData.rashi}
                                     onChange={(e) => handleInputChange('rashi', e.target.value)}
-                                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base appearance-none bg-white cursor-pointer transition-colors"
+                                    className="w-full px-4 py-3 border-2 border-theme-border rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base appearance-none bg-theme-surface cursor-pointer transition-colors"
                                 >
                                     <option value="">Select Rashi</option>
                                     {[...rashiOptions, 'Other'].map((rashi) => (
@@ -398,7 +398,7 @@ function AstroDetails({ profile, onUpdate }) {
                                         value={formData.rashi}
                                         onChange={(e) => setFormData(prev => ({ ...prev, rashi: e.target.value }))}
                                         placeholder="Enter custom Rashi"
-                                        className="mt-2 w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base transition-colors"
+                                        className="mt-2 w-full px-4 py-2 border-2 border-theme-border rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base transition-colors"
                                     />
                                 )}
                             </div>
@@ -408,13 +408,13 @@ function AstroDetails({ profile, onUpdate }) {
                                 <label className="block text-sm md:text-base font-semibold text-gray-800 mb-2">
                                     Nakshatra
                                 </label>
-                                <p className="text-xs md:text-sm text-gray-500 mb-3">
+                                <p className="text-xs md:text-sm text-theme-text-secondary mb-3">
                                     Selected based on your Raashi
                                 </p>
                                 <select
                                     value={showOtherNakshatra ? 'Other' : formData.nakshatra}
                                     onChange={(e) => handleInputChange('nakshatra', e.target.value)}
-                                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base appearance-none bg-white cursor-pointer transition-colors"
+                                    className="w-full px-4 py-3 border-2 border-theme-border rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base appearance-none bg-theme-surface cursor-pointer transition-colors"
                                 >
                                     <option value="">Select Nakshatra</option>
                                     {[...nakshatraOptions, 'Other'].map((nakshatra) => (
@@ -429,14 +429,14 @@ function AstroDetails({ profile, onUpdate }) {
                                         value={formData.nakshatra}
                                         onChange={(e) => setFormData(prev => ({ ...prev, nakshatra: e.target.value }))}
                                         placeholder="Enter custom Nakshatra"
-                                        className="mt-2 w-full px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base transition-colors"
+                                        className="mt-2 w-full px-4 py-2 border-2 border-theme-border rounded-xl focus:border-cyan-400 focus:outline-none text-sm md:text-base transition-colors"
                                     />
                                 )}
                             </div>
                         </div>
 
                         {/* Modal Footer */}
-                        <div className="sticky bottom-0 bg-white border-t border-gray-200 p-4 md:p-6">
+                        <div className="sticky bottom-0 bg-theme-surface border-t border-theme-border p-4 md:p-6">
                             <button
                                 onClick={handleSave}
                                 className="w-full px-6 py-3 md:py-4 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white rounded-xl font-bold text-sm md:text-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95"

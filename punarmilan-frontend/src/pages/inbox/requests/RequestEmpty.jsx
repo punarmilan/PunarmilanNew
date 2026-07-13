@@ -6,7 +6,7 @@ const RequestEmpty = ({ message, submessage }) => {
             <div className="w-48 h-48 mx-auto mb-8 relative animate-float">
                 <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 rounded-full relative shadow-lg">
                     {/* Character Head */}
-                    <div className="absolute top-7 left-1/2 -translate-x-1/2 w-20 h-20 bg-white border-4 border-gray-800 rounded-full">
+                    <div className="absolute top-7 left-1/2 -translate-x-1/2 w-20 h-20 bg-theme-surface border-4 border-gray-800 rounded-full">
                         {/* Eyes */}
                         <div className="absolute top-7 left-1/2 -translate-x-1/2 flex gap-4">
                             <div className="w-2 h-2 bg-gray-800 rounded-full"></div>
@@ -32,7 +32,7 @@ const RequestEmpty = ({ message, submessage }) => {
                 </div>
             </div>
             <h2 className="text-3xl font-bold text-gray-800 mb-3 font-playfair">{message}</h2>
-            <p className="text-gray-500 text-base">{submessage}</p>
+            <p className="text-theme-text-secondary text-base">{submessage}</p>
         </div>
     );
 };

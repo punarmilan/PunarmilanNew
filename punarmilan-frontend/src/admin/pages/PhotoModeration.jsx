@@ -80,7 +80,7 @@ const PhotoModerationCard = ({ profile, onApprove, onReject }) => {
     };
 
     return (
-        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-full group">
+        <div className="bg-theme-surface rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-full group">
             {/* Header */}
             <div className="p-4 border-b border-gray-50 flex justify-between items-center shrink-0">
                 <div className="flex items-center gap-3">
@@ -111,14 +111,14 @@ const PhotoModerationCard = ({ profile, onApprove, onReject }) => {
                         {/* Navigation Arrows */}
                         <button
                             onClick={prevPhoto}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40 transition-colors"
+                            className="absolute left-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-theme-surface/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-theme-surface/40 transition-colors"
                         >
                             <span className="sr-only">Previous</span>
                             <div className="border-l-2 border-t-2 border-white h-2.5 w-2.5 -rotate-45 ml-1"></div>
                         </button>
                         <button
                             onClick={nextPhoto}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-white/40 transition-colors"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-theme-surface/20 backdrop-blur-md text-white flex items-center justify-center hover:bg-theme-surface/40 transition-colors"
                         >
                             <span className="sr-only">Next</span>
                             <div className="border-r-2 border-t-2 border-white h-2.5 w-2.5 rotate-45 mr-1"></div>
@@ -129,7 +129,7 @@ const PhotoModerationCard = ({ profile, onApprove, onReject }) => {
                             {photos.map((_, i) => (
                                 <div
                                     key={i}
-                                    className={`h-1 rounded-full transition-all ${i === currentIndex ? 'w-6 bg-pink-500' : 'w-2 bg-white/40'}`}
+                                    className={`h-1 rounded-full transition-all ${i === currentIndex ? 'w-6 bg-pink-500' : 'w-2 bg-theme-surface/40'}`}
                                 />
                             ))}
                         </div>
@@ -151,7 +151,7 @@ const PhotoModerationCard = ({ profile, onApprove, onReject }) => {
             </div>
 
             {/* Actions */}
-            <div className="p-4 bg-white space-y-3 mt-auto shrink-0">
+            <div className="p-4 bg-theme-surface space-y-3 mt-auto shrink-0">
                 {isRejecting ? (
                     <div className="animate-in slide-in-from-bottom duration-300">
                         <textarea
@@ -162,7 +162,7 @@ const PhotoModerationCard = ({ profile, onApprove, onReject }) => {
                         />
                         <div className="flex gap-2">
                             <button onClick={handleRejectSubmit} className="flex-1 bg-rose-600 text-white py-2 rounded-xl text-xs font-bold hover:bg-rose-700 transition-colors">Confirm Reject</button>
-                            <button onClick={() => setIsRejecting(false)} className="px-4 py-2 bg-gray-100 text-gray-600 rounded-xl text-xs font-bold hover:bg-gray-200 transition-colors">Back</button>
+                            <button onClick={() => setIsRejecting(false)} className="px-4 py-2 bg-gray-100 text-theme-text-secondary rounded-xl text-xs font-bold hover:bg-gray-200 transition-colors">Back</button>
                         </div>
                     </div>
                 ) : (
@@ -239,10 +239,10 @@ const PhotoModeration = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-theme-surface p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
                 <div>
                     <h2 className="text-lg sm:text-xl font-bold text-gray-800">Photo Moderation</h2>
-                    <p className="text-xs sm:text-sm text-gray-500 font-medium italic sm:not-italic">Review and swap user photos for batch approval</p>
+                    <p className="text-xs sm:text-sm text-theme-text-secondary font-medium italic sm:not-italic">Review and swap user photos for batch approval</p>
                 </div>
                 <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-pink-50 text-pink-700 rounded-xl text-xs sm:text-sm font-black whitespace-nowrap">
                     {totalElements} Users
@@ -252,7 +252,7 @@ const PhotoModeration = () => {
             {loading ? (
                 <div className="p-6 sm:p-10 text-center text-gray-400 font-medium">Loading photos...</div>
             ) : profiles.length === 0 ? (
-                <div className="bg-white p-8 sm:p-12 rounded-2xl sm:rounded-3xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400">
+                <div className="bg-theme-surface p-8 sm:p-12 rounded-2xl sm:rounded-3xl border-2 border-dashed border-theme-border flex flex-col items-center justify-center text-gray-400">
                     <Image size={40} className="mb-4 opacity-20 sm:size-48" />
                     <p className="font-bold text-sm sm:text-base">No photos pending review!</p>
                 </div>
@@ -275,14 +275,14 @@ const PhotoModeration = () => {
                     <button
                         disabled={page === 0}
                         onClick={() => setPage(page - 1)}
-                        className="px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold disabled:opacity-50"
+                        className="px-4 py-2 bg-theme-surface border border-theme-border rounded-xl text-xs font-bold disabled:opacity-50"
                     >
                         Previous
                     </button>
                     <button
                         disabled={(page + 1) * size >= totalElements}
                         onClick={() => setPage(page + 1)}
-                        className="px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold disabled:opacity-50"
+                        className="px-4 py-2 bg-theme-surface border border-theme-border rounded-xl text-xs font-bold disabled:opacity-50"
                     >
                         Next
                     </button>

@@ -75,7 +75,7 @@ const VipPunarMilanPage = () => {
 
           <div className="text-center max-w-4xl mx-auto">
 
-            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/10 backdrop-blur-xl px-5 py-2 rounded-full mb-8">
+            <div className="inline-flex items-center gap-2 bg-theme-surface/10 border border-white/10 backdrop-blur-xl px-5 py-2 rounded-full mb-8">
 
               <Crown className="w-4 h-4 text-yellow-400" />
 
@@ -107,7 +107,7 @@ const VipPunarMilanPage = () => {
                 <ArrowRight size={18} />
               </button>
 
-              <button className="border border-white/10 bg-white/5 hover:bg-white/10 px-8 py-4 rounded-2xl font-semibold transition-all">
+              <button className="border border-white/10 bg-theme-surface/5 hover:bg-theme-surface/10 px-8 py-4 rounded-2xl font-semibold transition-all">
                 Talk To Match Expert
               </button>
 
@@ -128,7 +128,7 @@ const VipPunarMilanPage = () => {
 
             <div
               key={item.label}
-              className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 text-center backdrop-blur-xl"
+              className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8 text-center backdrop-blur-xl"
             >
 
               <h3 className="text-4xl font-extrabold text-pink-500">
@@ -171,7 +171,7 @@ const VipPunarMilanPage = () => {
             return (
               <div
                 key={benefit.title}
-                className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 hover:border-pink-500/30 transition-all duration-300 group"
+                className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8 hover:border-pink-500/30 transition-all duration-300 group"
               >
 
                 <div className="w-16 h-16 rounded-2xl bg-pink-500/10 flex items-center justify-center mb-6">
@@ -197,7 +197,7 @@ const VipPunarMilanPage = () => {
       </section>
 
       {/* Process Section */}
-      <section className="bg-white/[0.02] border-y border-white/5">
+      <section className="bg-theme-surface/[0.02] border-y border-white/5">
 
         <div className="max-w-6xl mx-auto px-6 py-28">
 
@@ -215,7 +215,7 @@ const VipPunarMilanPage = () => {
 
               <div
                 key={step}
-                className="relative bg-white/[0.03] border border-white/10 rounded-3xl p-8"
+                className="relative bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8"
               >
 
                 <div className="text-5xl font-extrabold text-pink-500/20 absolute right-6 top-4">
@@ -304,7 +304,7 @@ const VipPunarMilanPage = () => {
               relationship journey.
             </p>
 
-            <button className="mt-8 bg-white text-black px-7 py-4 rounded-2xl font-semibold flex items-center gap-2">
+            <button className="mt-8 bg-theme-surface text-black px-7 py-4 rounded-2xl font-semibold flex items-center gap-2">
               Schedule Consultation
               <PhoneCall size={18} />
             </button>
@@ -332,7 +332,7 @@ const VipPunarMilanPage = () => {
 
             <div
               key={item}
-              className="bg-white/[0.03] border border-white/10 rounded-3xl p-8"
+              className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8"
             >
 
               <div className="flex gap-1 text-yellow-400 mb-5">

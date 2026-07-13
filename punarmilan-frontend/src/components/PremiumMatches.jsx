@@ -36,10 +36,10 @@ const PremiumMatches = () => {
             <ToastContainer />
 
             {/* Responsive Container */}
-            <div className="dashboard-card-bg rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg border border-white/50 p-2 sm:p-3 md:p-4 lg:p-5 w-full mx-auto">
+            <div className="bg-theme-surface rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg border border-white/50 p-2 sm:p-3 md:p-4 lg:p-5 w-full mx-auto">
 
                 {/* Header with Badge */}
-                <div className="flex items-center justify-between mb-3 sm:mb-4 pb-3 sm:pb-4 border-b border-gray-200">
+                <div className="flex items-center justify-between mb-3 sm:mb-4 pb-3 sm:pb-4 border-b border-theme-border">
                     <div className="flex items-center gap-2 sm:gap-3">
                         <div className="relative">
                             <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-md">
@@ -74,7 +74,7 @@ const PremiumMatches = () => {
                         <div
                             key={match.id}
                             onClick={() => navigate(`/matches/${match.id}`)}
-                            className="group bg-white border border-gray-200 rounded-lg sm:rounded-xl p-2 sm:p-2.5 md:p-3 hover:border-rose-300 hover:shadow-md transition-all duration-200 cursor-pointer"
+                            className="group bg-theme-surface border border-theme-border rounded-lg sm:rounded-xl p-2 sm:p-2.5 md:p-3 hover:border-rose-300 hover:shadow-md transition-all duration-200 cursor-pointer"
                         >
                             <div className="flex items-start gap-2 sm:gap-2.5 md:gap-3">
                                 {/* Profile Image */}
@@ -87,7 +87,7 @@ const PremiumMatches = () => {
                                         />
                                     </div>
                                     {/* Online Indicator */}
-                                    <div className="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full border-2 border-white"></div>
+                                    <div className="absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-theme-success rounded-full border-2 border-white"></div>
                                 </div>
 
                                 {/* Right Content */}
@@ -107,14 +107,14 @@ const PremiumMatches = () => {
                                                 e.stopPropagation();
                                                 navigate(`/chat/${match.id}`);
                                             }}
-                                            className="p-1 sm:p-1.5 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-lg transition-colors flex-shrink-0"
+                                            className="p-1 sm:p-1.5 bg-gray-100 hover:bg-gray-200 text-theme-text-secondary rounded-lg transition-colors flex-shrink-0"
                                         >
                                             <MessageCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                                         </button>
                                     </div>
 
                                     {/* Details */}
-                                    <p className="text-gray-600 text-[10px] xs:text-xs mb-1.5 sm:mb-2 leading-relaxed">
+                                    <p className="text-theme-text-secondary text-[10px] xs:text-xs mb-1.5 sm:mb-2 leading-relaxed">
                                         {match.age} yrs, {match.height}, {match.ethnicity}, {match.location}
                                     </p>
 
@@ -141,19 +141,19 @@ const PremiumMatches = () => {
                 </div>
 
                 {/* Footer Stats */}
-                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-200">
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-theme-border">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
                         <div className="text-center">
                             <div className="text-xs sm:text-sm font-bold text-rose-600">{Number(summary?.recentVisitorsCount) || 0}</div>
-                            <div className="text-[10px] xs:text-xs text-gray-500">Views</div>
+                            <div className="text-[10px] xs:text-xs text-theme-text-secondary">Views</div>
                         </div>
                         <div className="text-center">
                             <div className="text-xs sm:text-sm font-bold text-rose-600">{Number(summary?.pendingInvitations) || 0}</div>
-                            <div className="text-[10px] xs:text-xs text-gray-500">Interests</div>
+                            <div className="text-[10px] xs:text-xs text-theme-text-secondary">Interests</div>
                         </div>
                         <div className="text-center">
                             <div className="text-xs sm:text-sm font-bold text-rose-600">{Number(summary?.acceptedInvitations) || 0}</div>
-                            <div className="text-[10px] xs:text-xs text-gray-500">Accepted</div>
+                            <div className="text-[10px] xs:text-xs text-theme-text-secondary">Accepted</div>
                         </div>
                     </div>
                 </div>

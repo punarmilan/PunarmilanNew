@@ -102,7 +102,7 @@ export default function ChatWindow({ targetUser, onClose }) {
     }
 
     return (
-        <div className="fixed bottom-0 right-4 w-80 md:w-96 h-[450px] bg-white rounded-t-2xl shadow-2xl z-[1100] flex flex-col border border-gray-200 overflow-hidden animate-slide-up">
+        <div className="fixed bottom-0 right-4 w-80 md:w-96 h-[450px] bg-theme-surface rounded-t-2xl shadow-2xl z-[1100] flex flex-col border border-theme-border overflow-hidden animate-slide-up">
             {/* Header */}
             <div className="bg-gradient-to-r from-rose-500 to-pink-500 p-4 flex items-center justify-between text-white shrink-0">
                 <div className="flex items-center gap-3">
@@ -112,7 +112,7 @@ export default function ChatWindow({ targetUser, onClose }) {
                             className="w-10 h-10 rounded-full border-2 border-white/20"
                             alt={targetUser.fullName}
                         />
-                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+                        <span className="absolute bottom-0 right-0 w-3 h-3 bg-theme-success rounded-full border-2 border-white"></span>
                     </div>
                     <div>
                         <h4 className="font-semibold text-sm">{formatDisplayName(targetUser.fullName, targetUser.displayNameVisibility, targetUser.id)}</h4>
@@ -120,8 +120,8 @@ export default function ChatWindow({ targetUser, onClose }) {
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
-                    <button onClick={() => setIsMinimized(true)} className="p-1 hover:bg-white/10 roundedTransition"><Minus size={18} /></button>
-                    <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-lg transition-all"><X size={18} /></button>
+                    <button onClick={() => setIsMinimized(true)} className="p-1 hover:bg-theme-surface/10 roundedTransition"><Minus size={18} /></button>
+                    <button onClick={onClose} className="p-1 hover:bg-theme-surface/10 rounded-lg transition-all"><X size={18} /></button>
                 </div>
             </div>
 
@@ -143,7 +143,7 @@ export default function ChatWindow({ targetUser, onClose }) {
                             <div key={msg.id || idx} className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}>
                                 <div className={`max-w-[80%] px-4 py-2 rounded-2xl text-sm shadow-sm ${isMe
                                     ? 'bg-rose-500 text-white rounded-tr-none'
-                                    : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
+                                    : 'bg-theme-surface text-gray-800 border border-gray-100 rounded-tl-none'
                                     }`}>
                                     <p className="leading-relaxed break-words">{msg.content}</p>
                                     <p className={`text-[9px] mt-1 text-right ${isMe ? 'text-rose-100' : 'text-gray-400'}`}>
@@ -158,7 +158,7 @@ export default function ChatWindow({ targetUser, onClose }) {
             </div>
 
             {/* Input */}
-            <form onSubmit={handleSend} className="p-3 bg-white border-t border-gray-100 flex items-center gap-2 shrink-0">
+            <form onSubmit={handleSend} className="p-3 bg-theme-surface border-t border-gray-100 flex items-center gap-2 shrink-0">
                 <input
                     type="text"
                     value={message}

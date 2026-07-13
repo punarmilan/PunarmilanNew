@@ -103,7 +103,7 @@ export default function App() {
 
                     <main className="flex flex-col gap-4 sm:gap-6">
                         {loading ? (
-                            <div className="text-center py-20 text-gray-500">Loading requests...</div>
+                            <div className="text-center py-20 text-theme-text-secondary">Loading requests...</div>
                         ) : currentProfiles.length > 0 ? (
                             currentProfiles.map((profile) => (
                                 <ProfileCard
@@ -129,7 +129,7 @@ export default function App() {
                                 />
                             ))
                         ) : (
-                            <div className="bg-white rounded-lg shadow-md p-10 text-center text-gray-500">
+                            <div className="bg-theme-surface rounded-lg shadow-md p-10 text-center text-theme-text-secondary">
                                 No accepted requests found matching your filters.
                             </div>
                         )}

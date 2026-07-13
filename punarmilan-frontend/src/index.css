@@ -7,6 +7,44 @@
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
   --breakpoint-2xl: 1440px;
+
+  --color-theme-primary: var(--theme-primary);
+  --color-theme-primary-dark: var(--theme-primary-dark);
+  --color-theme-violet: var(--theme-violet);
+  --color-theme-magenta: var(--theme-magenta);
+  --color-theme-pink: var(--theme-pink);
+  --color-theme-coral: var(--theme-coral);
+  --color-theme-bg: var(--theme-bg);
+  --color-theme-surface: var(--theme-surface);
+  --color-theme-lavender: var(--theme-lavender);
+  --color-theme-soft-pink: var(--theme-soft-pink);
+  --color-theme-text: var(--theme-text);
+  --color-theme-text-secondary: var(--theme-text-secondary);
+  --color-theme-border: var(--theme-border);
+  --color-theme-success: var(--theme-success);
+  --color-theme-warning: var(--theme-warning);
+  --color-theme-error: var(--theme-error);
+}
+
+:root {
+  --theme-primary: #E86D8A;
+  --theme-primary-dark: #C46A88;
+  --theme-violet: #D89A74;
+  --theme-magenta: #E86D8A;
+  --theme-pink: #F9E6E7;
+  --theme-coral: #C99853;
+  --theme-bg: #FFF8F7;
+  --theme-surface: #FFFFFF;
+  --theme-lavender: #FFF6F2;
+  --theme-soft-pink: #F9E6E7;
+  --theme-text: #3B2F2F;
+  --theme-text-secondary: #7A6666;
+  --theme-border: #F2D7D9;
+  --theme-success: #4CAF7A;
+  --theme-warning: #F5B942;
+  --theme-error: #EF476F;
+  --theme-gradient: linear-gradient(135deg, #E86D8A 0%, #D89A74 100%);
+  --theme-purple-magenta: linear-gradient(135deg, #E86D8A 0%, #D89A74 100%);
 }
 /* ===== Global Responsive Defaults ===== */
 html {
@@ -331,14 +369,16 @@ button:focus-visible, a:focus-visible {
     background-position: center;
     background-attachment: fixed;
     position: relative;
-    border-color: rgba(255, 255, 255, 0.5) !important;
+    border: 1px solid #F2D7D9 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(216, 154, 116, 0.12) !important;
     overflow: hidden;
 }
 .dashboard-card-bg::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 248, 247, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: inherit;

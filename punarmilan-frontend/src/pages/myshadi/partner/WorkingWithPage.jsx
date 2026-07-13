@@ -51,7 +51,7 @@ const WorkingWithPage = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 flex items-center justify-center p-2 sm:p-4 md:p-6">
-            <div className="w-full max-w-3xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
+            <div className="w-full max-w-3xl bg-theme-surface rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
                 <div className="bg-gradient-to-r from-rose-500 to-rose-600 p-4 sm:p-6 md:p-8">
                     <button onClick={handleCancel} className="flex items-center gap-2 text-white hover:text-gray-100 transition-all mb-3 sm:mb-4 group">
                         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -76,8 +76,8 @@ const WorkingWithPage = () => {
                             </label>
                         ))}
                     </div>
-                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 mt-6 border-t border-gray-200">
-                        <button onClick={handleCancel} className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg transition-all duration-300 active:scale-95">Cancel</button>
+                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 mt-6 border-t border-theme-border">
+                        <button onClick={handleCancel} className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-theme-surface hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg transition-all duration-300 active:scale-95">Cancel</button>
                         <button onClick={handleApply} className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-rose-500 to-rose-600 text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2">
                             <Check className="w-4 h-4 sm:w-5 sm:h-5" />
                             <span>Apply</span>

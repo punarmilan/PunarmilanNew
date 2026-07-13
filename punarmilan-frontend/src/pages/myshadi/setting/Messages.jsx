@@ -64,7 +64,7 @@ export default function Messages({ profile, onUpdate }) {
                         onClick={() => onSelect(choice)}
                         className={`text-left p-4 rounded-2xl border-2 transition-all duration-200 text-sm font-medium ${current === choice
                                 ? "border-pink-500 bg-pink-50 text-pink-700"
-                                : "border-gray-50 bg-white hover:border-pink-200"
+                                : "border-gray-50 bg-theme-surface hover:border-pink-200"
                             }`}
                     >
                         {choice}
@@ -83,7 +83,7 @@ export default function Messages({ profile, onUpdate }) {
                         <span className="w-2 h-6 bg-rose-500 rounded-full"></span>
                         Manage Messages
                     </h2>
-                    <p className="text-sm text-gray-500 mt-1 font-medium">Customize your standard response messages</p>
+                    <p className="text-sm text-theme-text-secondary mt-1 font-medium">Customize your standard response messages</p>
                 </div>
                 {lastSaved && (
                     <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-black text-green-500 bg-green-50 px-3 py-1.5 rounded-full uppercase tracking-tighter">
@@ -94,7 +94,7 @@ export default function Messages({ profile, onUpdate }) {
             </div>
 
             {/* Message on Connect Card */}
-            <div className="group relative bg-white border-2 border-gray-50 rounded-[2.5rem] p-6 md:p-8 hover:border-pink-100 transition-all duration-500">
+            <div className="group relative bg-theme-surface border-2 border-gray-50 rounded-[2.5rem] p-6 md:p-8 hover:border-pink-100 transition-all duration-500">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-6">
                     <div className="flex gap-5 flex-1 max-w-2xl">
                         <div className="w-14 h-14 rounded-2xl bg-green-50 text-pink-500 flex items-center justify-center shrink-0">
@@ -118,7 +118,7 @@ export default function Messages({ profile, onUpdate }) {
                         ) : (
                             <button
                                 onClick={() => setIsEditingConnect(false)}
-                                className="px-4 py-3 bg-gray-50 text-gray-500 rounded-2xl font-bold text-sm hover:bg-gray-100 transition-all"
+                                className="px-4 py-3 bg-gray-50 text-theme-text-secondary rounded-2xl font-bold text-sm hover:bg-gray-100 transition-all"
                             >
                                 Cancel
                             </button>
@@ -133,7 +133,7 @@ export default function Messages({ profile, onUpdate }) {
                                 <textarea
                                     value={connectMsg}
                                     onChange={(e) => setConnectMsg(e.target.value)}
-                                    className="w-full bg-white border-2 border-pink-100 rounded-2xl p-4 text-gray-800 text-sm font-medium focus:ring-0 focus:border-pink-500 transition-all min-h-[120px]"
+                                    className="w-full bg-theme-surface border-2 border-pink-100 rounded-2xl p-4 text-gray-800 text-sm font-medium focus:ring-0 focus:border-pink-500 transition-all min-h-[120px]"
                                     placeholder="Write your custom message..."
                                 />
                             ) : (
@@ -175,7 +175,7 @@ export default function Messages({ profile, onUpdate }) {
             </div>
 
             {/* Message on Accept Card */}
-            <div className={`group relative bg-white border-2 rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 ${isPremium ? 'border-gray-50 hover:border-rose-100' : 'border-gray-100 opacity-90 grayscale-[0.5]'}`}>
+            <div className={`group relative bg-theme-surface border-2 rounded-[2.5rem] p-6 md:p-8 transition-all duration-500 ${isPremium ? 'border-gray-50 hover:border-rose-100' : 'border-gray-100 opacity-90 grayscale-[0.5]'}`}>
                 <div className="flex flex-col md:flex-row justify-between items-start gap-6">
                     <div className="flex gap-5 flex-1 max-w-2xl">
                         <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 ${isPremium ? 'bg-orange-50 text-orange-500' : 'bg-gray-100 text-gray-400'}`}>
@@ -205,7 +205,7 @@ export default function Messages({ profile, onUpdate }) {
                             ) : (
                                 <button
                                     onClick={() => setIsEditingAccept(false)}
-                                    className="px-4 py-3 bg-gray-50 text-gray-500 rounded-2xl font-bold text-sm"
+                                    className="px-4 py-3 bg-gray-50 text-theme-text-secondary rounded-2xl font-bold text-sm"
                                 >
                                     Cancel
                                 </button>
@@ -227,7 +227,7 @@ export default function Messages({ profile, onUpdate }) {
                             <textarea
                                 value={acceptMsg}
                                 onChange={(e) => setAcceptMsg(e.target.value)}
-                                className="w-full bg-white border-2 border-pink-100 rounded-2xl p-4 text-gray-800 text-sm font-medium focus:ring-0 focus:border-pink-500 transition-all min-h-[120px]"
+                                className="w-full bg-theme-surface border-2 border-pink-100 rounded-2xl p-4 text-gray-800 text-sm font-medium focus:ring-0 focus:border-pink-500 transition-all min-h-[120px]"
                                 placeholder="Write your custom accept message..."
                             />
                             <button
@@ -256,7 +256,7 @@ export default function Messages({ profile, onUpdate }) {
 
             {/* Footer hint */}
             <div className="bg-rose-50 rounded-3xl p-6 border border-rose-100 flex items-start gap-4">
-                <div className="bg-white p-2.5 rounded-xl text-rose-600 shadow-sm shrink-0">
+                <div className="bg-theme-surface p-2.5 rounded-xl text-rose-600 shadow-sm shrink-0">
                     <Undo2 size={20} />
                 </div>
                 <div className="space-y-1">

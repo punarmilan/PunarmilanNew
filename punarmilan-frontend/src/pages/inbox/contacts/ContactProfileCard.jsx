@@ -7,7 +7,7 @@ const ContactProfileCard = ({ profile, onChat, onWhatsApp, onCall }) => {
     const navigate = useNavigate();
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8 hover:shadow-lg transition-shadow border border-gray-100">
+        <div className="bg-theme-surface rounded-lg shadow-md p-4 sm:p-6 lg:p-8 hover:shadow-lg transition-shadow border border-gray-100">
             <div className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-4 sm:gap-6 lg:gap-8">
 
                 {/* Profile Image Section */}
@@ -36,8 +36,8 @@ const ContactProfileCard = ({ profile, onChat, onWhatsApp, onCall }) => {
                         )}
 
                         {profile.online && (
-                            <div className="absolute bottom-1 left-2 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded-full shadow-sm text-[10px]">
-                                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                            <div className="absolute bottom-1 left-2 flex items-center gap-1.5 bg-theme-surface/90 backdrop-blur-sm px-2 py-0.5 rounded-full shadow-sm text-[10px]">
+                                <div className="w-2 h-2 rounded-full bg-theme-success animate-pulse"></div>
                                 <span className="text-gray-700 font-medium">Online</span>
                             </div>
                         )}
@@ -62,10 +62,10 @@ const ContactProfileCard = ({ profile, onChat, onWhatsApp, onCall }) => {
                                 </span>
                             )}
                         </div>
-                        <span className="text-xs sm:text-sm bg-gray-100 text-gray-500 px-3 py-1 rounded-full whitespace-nowrap">Viewed on {profile.date}</span>
+                        <span className="text-xs sm:text-sm bg-gray-100 text-theme-text-secondary px-3 py-1 rounded-full whitespace-nowrap">Viewed on {profile.date}</span>
                     </div>
 
-                    <div className="space-y-1.5 sm:space-y-2 text-sm sm:text-base text-gray-600">
+                    <div className="space-y-1.5 sm:space-y-2 text-sm sm:text-base text-theme-text-secondary">
                         <p className="flex items-center md:justify-start justify-center gap-2">
                              {profile.age}, {profile.height} • {profile.languages}
                         </p>
@@ -99,7 +99,7 @@ const ContactProfileCard = ({ profile, onChat, onWhatsApp, onCall }) => {
                 <div className="flex flex-col gap-3 w-full md:w-56 justify-center">
                     <button
                         onClick={onCall}
-                        className="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 font-medium py-2.5 px-4 rounded-lg hover:border-rose-400 hover:text-rose-600 transition-all text-sm shadow-sm"
+                        className="w-full flex items-center justify-center gap-2 bg-theme-surface border border-theme-border text-gray-700 font-medium py-2.5 px-4 rounded-lg hover:border-rose-400 hover:text-rose-600 transition-all text-sm shadow-sm"
                     >
                         <Phone className="w-4 h-4" />
                         Call Now
@@ -107,7 +107,7 @@ const ContactProfileCard = ({ profile, onChat, onWhatsApp, onCall }) => {
 
                     <button
                         onClick={onWhatsApp}
-                        className="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 font-medium py-2.5 px-4 rounded-lg hover:border-green-400 hover:text-green-600 transition-all text-sm shadow-sm"
+                        className="w-full flex items-center justify-center gap-2 bg-theme-surface border border-theme-border text-gray-700 font-medium py-2.5 px-4 rounded-lg hover:border-green-400 hover:text-green-600 transition-all text-sm shadow-sm"
                     >
                         <MessageCircle className="w-4 h-4" />
                         WhatsApp

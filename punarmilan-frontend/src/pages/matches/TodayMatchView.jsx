@@ -106,13 +106,13 @@ const TodayMatchView = ({
     return (
         <div className="max-w-4xl mx-auto py-2 px-4 md:px-0">
             {/* Title */}
-            <h2 className="text-center text-gray-600 text-[15px] mb-4">
+            <h2 className="text-center text-theme-text-secondary text-[15px] mb-4">
                 Here are Today's top Matches for you. Connect with them now!
             </h2>
 
             {/* Countdown and Pager Bar */}
-            <div className="bg-white rounded-t-lg border border-gray-200 px-4 py-2 flex justify-between items-center text-[13px] mb-[-1px] relative z-10 shadow-sm">
-                <div className="flex items-center gap-2 text-gray-500">
+            <div className="bg-theme-surface rounded-t-lg border border-theme-border px-4 py-2 flex justify-between items-center text-[13px] mb-[-1px] relative z-10 shadow-sm">
+                <div className="flex items-center gap-2 text-theme-text-secondary">
                     <span>Time left to Connect</span>
                     <div className="flex items-center gap-1.5 text-rose-500 font-bold">
                         <Clock className="w-4 h-4" />
@@ -155,7 +155,7 @@ const TodayMatchView = ({
             </div>
 
             {/* Main Profile Card */}
-            <div className="bg-white border-x border-y md:border-t-0 border-gray-200 shadow-sm overflow-hidden mb-6 rounded-lg md:rounded-none md:rounded-b-lg">
+            <div className="bg-theme-surface border-x border-y md:border-t-0 border-theme-border shadow-sm overflow-hidden mb-6 rounded-lg md:rounded-none md:rounded-b-lg">
                 <div className="p-4 flex flex-col md:flex-row gap-6">
                     {/* Left: Image */}
                     <div className="w-full md:w-[220px] flex-shrink-0">
@@ -230,7 +230,7 @@ const TodayMatchView = ({
                                                     initial={{ opacity: 0, scale: 0.95, y: -10 }}
                                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                                     exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                                                    className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
+                                                    className="absolute right-0 mt-2 w-48 bg-theme-surface rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
                                                 >
                                                     <button
                                                         className="w-full flex items-center gap-3 px-4 py-2.5 text-[14px] text-gray-700 hover:bg-rose-50 hover:text-rose-600 transition-colors text-left font-normal"
@@ -272,7 +272,7 @@ const TodayMatchView = ({
                                         </AnimatePresence>
                                     </div>
                                 </div>
-                                <div className="flex flex-wrap items-center gap-3 md:gap-6 text-[13px] mt-1.5 text-gray-500">
+                                <div className="flex flex-wrap items-center gap-3 md:gap-6 text-[13px] mt-1.5 text-theme-text-secondary">
                                     <span className="flex items-center gap-2 cursor-pointer hover:text-rose-500 transition-colors whitespace-nowrap">
                                         <MessageCircle className="w-4 h-4 text-green-500" /> Online {profile.updatedAt ? 'recently' : '20h ago'}
                                     </span>
@@ -287,7 +287,7 @@ const TodayMatchView = ({
                             <div className="border-l border-gray-100 ml-6 pl-6 min-w-[150px]">
                                 <div className="flex flex-col items-center">
                                     <div className="w-full space-y-2 text-center">
-                                        <p className="text-[11px] text-gray-500 italic mb-2">
+                                        <p className="text-[11px] text-theme-text-secondary italic mb-2">
                                             <span 
                                                 onClick={() => navigate('/payment')}
                                                 className="text-blue-500 font-bold cursor-pointer hover:underline"
@@ -309,13 +309,13 @@ const TodayMatchView = ({
                                         <div className="flex gap-2">
                                             <button
                                                 onClick={() => { if (onCall) onCall(); }}
-                                                className="flex-1 py-1.5 px-3 border border-gray-200 rounded-full text-[12px] font-bold text-blue-500 flex items-center justify-center gap-2 hover:bg-blue-50 transition-colors"
+                                                className="flex-1 py-1.5 px-3 border border-theme-border rounded-full text-[12px] font-bold text-blue-500 flex items-center justify-center gap-2 hover:bg-blue-50 transition-colors"
                                             >
                                                 <Phone className="w-3.5 h-3.5" /> Call
                                             </button>
                                             <button
                                                 onClick={() => { if (onWhatsApp) onWhatsApp(); }}
-                                                className="flex-1 py-1.5 px-3 border border-gray-200 rounded-full text-[12px] font-bold text-green-500 hover:bg-green-50 transition-colors flex items-center justify-center gap-2"
+                                                className="flex-1 py-1.5 px-3 border border-theme-border rounded-full text-[12px] font-bold text-green-500 hover:bg-green-50 transition-colors flex items-center justify-center gap-2"
                                             >
                                                 <MessageSquare className="w-3.5 h-3.5" /> WhatsApp
                                             </button>
@@ -323,7 +323,7 @@ const TodayMatchView = ({
                                         {onChat && (
                                             <button
                                                 onClick={() => onChat()}
-                                                className="w-full py-1.5 px-3 border border-gray-200 rounded-full text-[12px] font-bold text-blue-400 hover:bg-blue-50 flex items-center justify-center gap-2 transition-colors"
+                                                className="w-full py-1.5 px-3 border border-theme-border rounded-full text-[12px] font-bold text-blue-400 hover:bg-blue-50 flex items-center justify-center gap-2 transition-colors"
                                             >
                                                 <MessageCircle className="w-3.5 h-3.5" /> PunarMilan Chat
                                             </button>
@@ -337,16 +337,16 @@ const TodayMatchView = ({
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2.5 text-[14px]">
                             <div className="space-y-2">
-                                <p className="text-gray-600">{profile.age} yrs, {profile.height}, {profile.rashi || 'Libra'}</p>
-                                <p className="text-gray-600">{profile.motherTongue}</p>
-                                <p className="text-gray-600">{profile.religion}, {profile.caste}{profile.subCaste ? `: ${profile.subCaste}` : ''}</p>
-                                <p className="text-gray-600">{profile.education}</p>
+                                <p className="text-theme-text-secondary">{profile.age} yrs, {profile.height}, {profile.rashi || 'Libra'}</p>
+                                <p className="text-theme-text-secondary">{profile.motherTongue}</p>
+                                <p className="text-theme-text-secondary">{profile.religion}, {profile.caste}{profile.subCaste ? `: ${profile.subCaste}` : ''}</p>
+                                <p className="text-theme-text-secondary">{profile.education}</p>
                             </div>
                             <div className="space-y-2">
-                                <p className="text-gray-600">{profile.maritalStatus}</p>
-                                <p className="text-gray-600">{profile.state || 'Maharashtra'}</p>
-                                <p className="text-gray-600">{profile.profession}</p>
-                                <p className="text-gray-600">Earns {profile.income}</p>
+                                <p className="text-theme-text-secondary">{profile.maritalStatus}</p>
+                                <p className="text-theme-text-secondary">{profile.state || 'Maharashtra'}</p>
+                                <p className="text-theme-text-secondary">{profile.profession}</p>
+                                <p className="text-theme-text-secondary">Earns {profile.income}</p>
                             </div>
                         </div>
 
@@ -370,27 +370,27 @@ const TodayMatchView = ({
                         <button
                             onClick={() => setSubTab('detailed')}
                             className={`px-4 py-3 text-[13px] font-bold border-b-2 transition-all
-                                ${subTab === 'detailed' ? 'border-rose-500 text-rose-500' : 'border-transparent text-gray-500'}`}
+                                ${subTab === 'detailed' ? 'border-rose-500 text-rose-500' : 'border-transparent text-theme-text-secondary'}`}
                         >
                             Detailed Profile
                         </button>
                         <button
                             onClick={() => setSubTab('preferences')}
                             className={`px-4 py-3 text-[13px] font-bold border-b-2 transition-all
-                                ${subTab === 'preferences' ? 'border-rose-500 text-rose-500' : 'border-transparent text-gray-500'}`}
+                                ${subTab === 'preferences' ? 'border-rose-500 text-rose-500' : 'border-transparent text-theme-text-secondary'}`}
                         >
                             Partner Preferences
                         </button>
                     </div>
                     <div className="flex gap-4 text-gray-400">
-                        <Share2 className="w-5 h-5 cursor-pointer hover:text-gray-600" />
-                        <Printer className="w-5 h-5 cursor-pointer hover:text-gray-600" />
+                        <Share2 className="w-5 h-5 cursor-pointer hover:text-theme-text-secondary" />
+                        <Printer className="w-5 h-5 cursor-pointer hover:text-theme-text-secondary" />
                     </div>
                 </div>
             </div>
 
             {/* Sub-Contents Area */}
-            <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 sm:p-8 md:p-10 mb-10">
+            <div className="bg-theme-surface border border-theme-border rounded-lg shadow-sm p-4 sm:p-8 md:p-10 mb-10">
                 <AnimatePresence mode="wait">
                     {subTab === 'detailed' ? (
                         <motion.div
@@ -401,14 +401,14 @@ const TodayMatchView = ({
                             {/* About Section */}
                             <SectionLayout icon={<Users className="w-5 h-5 text-gray-400" />} title={`About ${displayName.split(' ')[0]}`}>
                                 <div className="flex gap-3 mb-4">
-                                    <div className="flex items-center gap-2 text-[11px] text-gray-500 border border-gray-200 rounded px-2 py-0.5">
+                                    <div className="flex items-center gap-2 text-[11px] text-theme-text-secondary border border-theme-border rounded px-2 py-0.5">
                                         ID: {String(profile.profileId || profile.id).toUpperCase().replace('-', '')} <Copy className="w-3 h-3 hover:text-rose-500 cursor-pointer" />
                                     </div>
-                                    <div className="text-[11px] text-gray-500 border border-gray-200 rounded px-2 py-0.5">
+                                    <div className="text-[11px] text-theme-text-secondary border border-theme-border rounded px-2 py-0.5">
                                         Profile Managed By {profile.profileCreatedBy || 'Self'}
                                     </div>
                                 </div>
-                                <p className="text-[14px] leading-relaxed text-gray-600">
+                                <p className="text-[14px] leading-relaxed text-theme-text-secondary">
                                     {profile.bio || "Thank you for visiting my profile. I have completed my education and currently working professionally. I am looking for a suitable partner who is understanding and has similar values."}
                                 </p>
                             </SectionLayout>
@@ -417,7 +417,7 @@ const TodayMatchView = ({
                             <SectionLayout icon={<Star className="w-5 h-5 text-gray-400" />} title="Hobbies & Interests">
                                 <div className="flex flex-wrap gap-2">
                                     {(profile.hobbies || "Cooking, Music, Reading, Cycling, Trekking").split(',').map((hobby, idx) => (
-                                        <div key={idx} className="flex items-center gap-2 border border-gray-200 rounded-full px-4 py-1.5 text-[13px] text-gray-700 bg-gray-50/50">
+                                        <div key={idx} className="flex items-center gap-2 border border-theme-border rounded-full px-4 py-1.5 text-[13px] text-gray-700 bg-gray-50/50">
                                             <Circle className="w-1.5 h-1.5 fill-rose-400 text-rose-400" />
                                             {hobby.trim()}
                                         </div>
@@ -437,7 +437,7 @@ const TodayMatchView = ({
                                         </p>
                                     </div>
                                     <div className="absolute inset-0 flex items-center justify-center gap-3">
-                                        <div className="bg-white p-1.5 rounded-full shadow-sm">
+                                        <div className="bg-theme-surface p-1.5 rounded-full shadow-sm">
                                             <Lock className="w-4 h-4 text-rose-500" />
                                         </div>
                                         <p className="text-[13px] text-gray-800">
@@ -460,13 +460,13 @@ const TodayMatchView = ({
                                             <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor" />
                                         </svg>
                                     </div>
-                                    <span className="text-[12px] font-medium text-gray-600">Vegetarian</span>
+                                    <span className="text-[12px] font-medium text-theme-text-secondary">Vegetarian</span>
                                 </div>
                             </SectionLayout>
 
                             {/* Background */}
                             <SectionLayout icon={<Home className="w-5 h-5 text-gray-400" />} title="Background">
-                                <div className="space-y-3.5 text-[14px] text-gray-600">
+                                <div className="space-y-3.5 text-[14px] text-theme-text-secondary">
                                     <p className="flex items-center gap-3 font-medium"><Users className="w-4 h-4 text-blue-300" /> {profile.religion}, {profile.motherTongue}</p>
                                     <p className="flex items-center gap-3 font-medium"><Users className="w-4 h-4 text-blue-300" /> {profile.caste}{profile.subCaste ? `, ${profile.subCaste}` : ''}</p>
                                     <p className="flex items-center gap-3 font-medium"><MapPin className="w-4 h-4 text-rose-400" /> Lives in {profile.location}</p>
@@ -482,14 +482,14 @@ const TodayMatchView = ({
                                     <div className="text-amber-200 mb-3">
                                         <ExternalLink className="w-10 h-10" />
                                     </div>
-                                    <p className="text-[13px] text-gray-600 mb-2">For the common interest of members, quickly enter your horoscope details & unhide her info.</p>
+                                    <p className="text-[13px] text-theme-text-secondary mb-2">For the common interest of members, quickly enter your horoscope details & unhide her info.</p>
                                     <button className="text-blue-500 font-bold text-[13px] hover:underline">Add My Details »</button>
                                 </div>
                             </SectionLayout>
 
                             {/* Family Details */}
                             <SectionLayout icon={<Home className="w-5 h-5 text-gray-400" />} title="Family Details">
-                                <div className="space-y-4 text-[14px] text-gray-600">
+                                <div className="space-y-4 text-[14px] text-theme-text-secondary">
                                     <div className="flex items-start gap-3">
                                         <Users className="w-4 h-4 text-blue-300 mt-0.5" />
                                         <div>
@@ -545,7 +545,7 @@ const TodayMatchView = ({
                                             <p className="text-[10px] mt-1 font-bold text-gray-400 uppercase">Her Preferences</p>
                                         </div>
                                         <div className="relative flex-1 max-w-[200px] border-b border-dashed border-gray-300 pb-1 text-center hidden sm:block">
-                                            <span className="text-[11px] bg-gray-100 px-3 py-1 rounded-full text-gray-600 font-medium">
+                                            <span className="text-[11px] bg-gray-100 px-3 py-1 rounded-full text-theme-text-secondary font-medium">
                                                 You match {matchCount}/{totalCount} ({matchPercentage}%)
                                             </span>
                                         </div>
@@ -571,7 +571,7 @@ const TodayMatchView = ({
                                                             </div>
                                                             <div className="flex-1 flex justify-end pr-10">
                                                                 {item.isMatch ? (
-                                                                    <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                                                                    <div className="w-5 h-5 bg-theme-success rounded-full flex items-center justify-center">
                                                                         <Check className="w-3 h-3 text-white" strokeWidth={4} />
                                                                     </div>
                                                                 ) : (
@@ -598,16 +598,16 @@ const TodayMatchView = ({
                         >
                             <div className="text-center mb-10">
                                 <h2 className="text-[20px] font-bold text-gray-800">Her Partner Preferences</h2>
-                                <p className="text-[14px] text-gray-500">Based on your Profile</p>
+                                <p className="text-[14px] text-theme-text-secondary">Based on your Profile</p>
                             </div>
                             <div className="space-y-1">
                                 {preferences.map((item, i) => (
                                     <div key={i} className="flex items-center justify-between py-4 border-b border-gray-50 px-2">
-                                        <div className="w-1/3 text-[14px] font-medium text-gray-500 uppercase">{item.fieldLabel}</div>
+                                        <div className="w-1/3 text-[14px] font-medium text-theme-text-secondary uppercase">{item.fieldLabel}</div>
                                         <div className="w-1/2 text-[14px] font-bold text-gray-800">{item.prefValue}</div>
                                         <div>
                                             {item.isMatch ? (
-                                                <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                                                <div className="w-5 h-5 bg-theme-success rounded-full flex items-center justify-center">
                                                     <Check className="w-3 h-3 text-white" strokeWidth={4} />
                                                 </div>
                                             ) : (
@@ -627,7 +627,7 @@ const TodayMatchView = ({
 
 const SectionLayout = ({ icon, title, children }) => (
     <div className="relative pl-10 md:pl-12">
-        <div className="absolute left-0 top-0 w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center bg-white z-10 shadow-sm">
+        <div className="absolute left-0 top-0 w-10 h-10 rounded-full border border-gray-100 flex items-center justify-center bg-theme-surface z-10 shadow-sm">
             {icon}
         </div>
         <div className="absolute left-5 top-10 bottom-[-48px] w-px bg-gray-100 z-0"></div>

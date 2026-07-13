@@ -110,7 +110,7 @@ const MobileProfile = () => {
             {user?.verificationStatus === 'VERIFIED' || user?.isVerified ? (
                 <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg sm:rounded-xl p-3 xs:p-4 mb-3 xs:mb-4 shadow-lg">
                     <div className="flex items-center gap-3">
-                        <div className="bg-white/20 p-2 rounded-full">
+                        <div className="bg-theme-surface/20 p-2 rounded-full">
                             <CheckCircle className="w-6 h-6 text-white" />
                         </div>
                         <div>
@@ -128,7 +128,7 @@ const MobileProfile = () => {
                         </div>
                         <button
                             onClick={handleGetBlueTick}
-                            className="bg-white text-blue-600 px-3 xs:px-4 py-1.5 xs:py-2 rounded-lg font-bold text-xs xs:text-sm hover:bg-white/90 active:bg-white/80 transition-colors whitespace-nowrap"
+                            className="bg-theme-surface text-blue-600 px-3 xs:px-4 py-1.5 xs:py-2 rounded-lg font-bold text-xs xs:text-sm hover:bg-theme-surface/90 active:bg-theme-surface/80 transition-colors whitespace-nowrap"
                         >
                             Get Now
                         </button>
@@ -137,7 +137,7 @@ const MobileProfile = () => {
             )}
 
             {/* Profile Card */}
-            <div className="bg-white rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-gray-100 p-3 xs:p-4 sm:p-6 mb-4 xs:mb-6">
+            <div className="bg-theme-surface rounded-lg sm:rounded-xl shadow-md sm:shadow-lg border border-gray-100 p-3 xs:p-4 sm:p-6 mb-4 xs:mb-6">
                 {/* Profile Header */}
                 <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-3 xs:gap-4 mb-4 xs:mb-6">
                     <div className="flex items-center gap-3 xs:gap-4 w-full xs:w-auto">
@@ -166,13 +166,13 @@ const MobileProfile = () => {
                         <div className="flex flex-col flex-1 min-w-0">
                             <div className="mb-1 xs:mb-2">
                                 <h1 className="font-bold text-lg xs:text-xl text-gray-900 truncate">{user?.fullName || 'User'}</h1>
-                                <p className="text-xs xs:text-sm text-gray-600">ID: {user?.profileId || 'PM00000000'}</p>
-                                <p className="text-xs xs:text-sm text-gray-600 flex items-center gap-1">
+                                <p className="text-xs xs:text-sm text-theme-text-secondary">ID: {user?.profileId || 'PM00000000'}</p>
+                                <p className="text-xs xs:text-sm text-theme-text-secondary flex items-center gap-1">
                                     <Phone size={12} /> {user?.mobileNumber || 'No Number'}
                                 </p>
                             </div>
                             <div className="flex flex-wrap items-center gap-1.5 xs:gap-2 text-xs xs:text-sm">
-                                <span className="text-gray-600">Account - {user?.isPremium ? 'Premium' : 'Free'}</span>
+                                <span className="text-theme-text-secondary">Account - {user?.isPremium ? 'Premium' : 'Free'}</span>
                                 <span className="text-gray-400 hidden xs:inline">•</span>
                                 <button
                                     onClick={handleEditProfile}
@@ -198,13 +198,13 @@ const MobileProfile = () => {
                 {/* Account Details Grid */}
                 <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:gap-4">
                     <div className="bg-gray-50 p-3 xs:p-4 rounded-lg">
-                        <p className="text-[10px] xs:text-xs sm:text-sm text-gray-600 mb-0.5 xs:mb-1">Account Type</p>
+                        <p className="text-[10px] xs:text-xs sm:text-sm text-theme-text-secondary mb-0.5 xs:mb-1">Account Type</p>
                         <p className="font-bold text-xs xs:text-sm sm:text-base text-rose-500">Free Membership</p>
                     </div>
                     <div className="bg-gray-50 p-3 xs:p-4 rounded-lg">
-                        <p className="text-[10px] xs:text-xs sm:text-sm text-gray-600 mb-0.5 xs:mb-1">Status</p>
+                        <p className="text-[10px] xs:text-xs sm:text-sm text-theme-text-secondary mb-0.5 xs:mb-1">Status</p>
                         <div className="flex items-center gap-1.5 xs:gap-2">
-                            <div className="w-1.5 h-1.5 xs:w-2 xs:h-2 bg-green-500 rounded-full"></div>
+                            <div className="w-1.5 h-1.5 xs:w-2 xs:h-2 bg-theme-success rounded-full"></div>
                             <p className="font-bold text-xs xs:text-sm sm:text-base text-gray-800">Active</p>
                         </div>
                     </div>
@@ -214,12 +214,12 @@ const MobileProfile = () => {
             {/* File Upload Modal */}
             {showFileUpload && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-3 xs:p-4">
-                    <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-6 w-full max-w-md">
+                    <div className="bg-theme-surface rounded-xl xs:rounded-2xl p-4 xs:p-6 w-full max-w-md">
                         <div className="flex justify-between items-center mb-3 xs:mb-4">
                             <h3 className="font-bold text-lg xs:text-xl">Add Photos</h3>
                             <button
                                 onClick={() => setShowFileUpload(false)}
-                                className="text-gray-500 hover:text-gray-700 p-1"
+                                className="text-theme-text-secondary hover:text-gray-700 p-1"
                             >
                                 <X size={20} className="xs:w-6 xs:h-6" />
                             </button>
@@ -227,8 +227,8 @@ const MobileProfile = () => {
 
                         <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 xs:p-8 text-center mb-3 xs:mb-4">
                             <Upload className="w-10 h-10 xs:w-12 xs:h-12 text-gray-400 mx-auto mb-3 xs:mb-4" />
-                            <p className="text-sm xs:text-base text-gray-600 mb-2">Drag & drop photos here</p>
-                            <p className="text-xs xs:text-sm text-gray-500 mb-3 xs:mb-4">or</p>
+                            <p className="text-sm xs:text-base text-theme-text-secondary mb-2">Drag & drop photos here</p>
+                            <p className="text-xs xs:text-sm text-theme-text-secondary mb-3 xs:mb-4">or</p>
                             <input
                                 type="file"
                                 ref={fileInputRef}
@@ -269,18 +269,18 @@ const MobileProfile = () => {
             {/* Verification Modal */}
             {isVerificationOpen && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-3 xs:p-4">
-                    <div className="bg-white rounded-xl xs:rounded-2xl p-4 xs:p-5 w-full max-w-md max-h-[95vh] overflow-y-auto relative shadow-2xl">
+                    <div className="bg-theme-surface rounded-xl xs:rounded-2xl p-4 xs:p-5 w-full max-w-md max-h-[95vh] overflow-y-auto relative shadow-2xl">
                         <div className="flex justify-between items-center mb-3 xs:mb-4">
                             <h3 className="font-bold text-lg xs:text-xl">Verify your Profile</h3>
                             <button
                                 onClick={() => setIsVerificationOpen(false)}
-                                className="text-gray-500 hover:text-gray-700 p-1"
+                                className="text-theme-text-secondary hover:text-gray-700 p-1"
                             >
                                 <X size={20} className="xs:w-6 xs:h-6" />
                             </button>
                         </div>
 
-                        <p className="text-xs xs:text-sm text-gray-600 mb-3 xs:mb-4">
+                        <p className="text-xs xs:text-sm text-theme-text-secondary mb-3 xs:mb-4">
                             Verification is important to ensure safety and establish authenticity of your Profile.
                         </p>
 

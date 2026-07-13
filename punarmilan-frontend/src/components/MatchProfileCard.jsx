@@ -91,7 +91,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden flex flex-col w-full max-w-[240px] mx-auto min-h-[420px]"
+                className="bg-theme-surface rounded-lg shadow-md border border-theme-border overflow-hidden flex flex-col w-full max-w-[240px] mx-auto min-h-[420px]"
             >
                 {/* Image Section */}
                 <div
@@ -119,7 +119,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                     
                     {/* Match Percentage Badge */}
                     {matchPercentage > 0 && (
-                        <div className="absolute top-2 right-2 bg-green-500/90 backdrop-blur-sm text-white text-[10px] font-black px-2 py-1 rounded-lg flex items-center gap-1 shadow-lg border border-white/20">
+                        <div className="absolute top-2 right-2 bg-theme-success/90 backdrop-blur-sm text-white text-[10px] font-black px-2 py-1 rounded-lg flex items-center gap-1 shadow-lg border border-white/20">
                             <Sparkles size={10} className="fill-white" />
                             {matchPercentage}% Match
                         </div>
@@ -143,10 +143,10 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                                     initial={{ opacity: 0, scale: 0.95, y: -10 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                                    className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
+                                    className="absolute right-0 mt-2 w-48 bg-theme-surface rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
                                 >
                                     <button
-                                        className="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-gray-700 hover:bg-rose-50 hover:text-rose-600 transition-colors text-left"
+                                        className="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-gray-700 hover:bg-theme-lavender hover:text-[#0F766E] transition-colors text-left"
                                         onClick={(e) => {
                                             e.stopPropagation();
                                             setIsDropdownOpen(false);
@@ -154,7 +154,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                                             else onShortlist?.();
                                         }}
                                     >
-                                        <Star size={14} className={isShortlisted ? 'fill-rose-500 text-rose-500' : ''} />
+                                        <Star size={14} className={isShortlisted ? 'fill-theme-primary text-theme-primary' : ''} />
                                         {isShortlisted ? 'Remove Shortlist' : 'Add to Shortlist'}
                                     </button>
                                     <button
@@ -200,20 +200,20 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                 {/* Content Section */}
                 <div className="p-3 flex flex-col flex-grow">
                     <h3
-                        className="text-[#00bcd4] font-bold text-[15px] truncate hover:underline cursor-pointer mb-1"
+                        className="text-[#0F766E] font-bold text-[15px] truncate hover:underline cursor-pointer mb-1"
                         onClick={() => navigate(`/matches/${idVal}`)}
                     >
                         {displayName}
                     </h3>
 
                     <div className="space-y-0.5 mb-3">
-                        <p className="text-[12px] text-gray-500 leading-tight">
+                        <p className="text-[12px] text-theme-text-secondary leading-tight">
                             {age} yrs, {height}, {religionBase}, {profile.motherTongue || 'Marathi'}
                         </p>
-                        <p className="text-[12px] text-gray-500 leading-tight truncate">
+                        <p className="text-[12px] text-theme-text-secondary leading-tight truncate">
                             {casteBase || 'Community'}
                         </p>
-                        <p className="text-[12px] text-gray-500 leading-tight truncate">
+                        <p className="text-[12px] text-theme-text-secondary leading-tight truncate">
                             {location}
                         </p>
                     </div>
@@ -231,7 +231,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
 
                     {/* Action Section */}
                     <div className="mt-auto border-t border-gray-100 pt-3 flex flex-col items-center">
-                        <p className="text-[13px] text-gray-500 font-medium mb-3">Connect with {profile.gender?.toLowerCase() === 'male' ? 'him' : 'her'}?</p>
+                        <p className="text-[13px] text-theme-text-secondary font-medium mb-3">Connect with {profile.gender?.toLowerCase() === 'male' ? 'him' : 'her'}?</p>
                         <button
                             onClick={(e) => {
                                 e.stopPropagation();
@@ -243,7 +243,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                             disabled={requestSent || isRequestSent}
                             className={`w-full py-2 rounded font-bold text-sm transition-all shadow-sm ${requestSent || isRequestSent
                                 ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                : 'bg-[#00bcd4] text-white hover:bg-[#00acc1]'
+                                : 'bg-gradient-to-r from-theme-primary to-theme-pink text-white hover:from-[#115E59] hover:to-[#16A085]'
                                 }`}
                         >
                             {requestSent || isRequestSent ? 'Sent' : 'Yes'}
@@ -263,7 +263,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                 viewport={{ once: true }}
                 whileHover={{ y: -2, shadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }}
                 onClick={() => navigate(`/matches/${idVal}`)}
-                className="group bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row relative cursor-pointer"
+                className="group bg-theme-surface rounded-xl shadow-sm border border-theme-border overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row relative cursor-pointer"
             >
                 {/* Left: Image Section */}
                 <div
@@ -283,7 +283,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
 
                     {/* Corner Badges */}
                     <div className="absolute top-3 left-3 flex flex-col gap-2">
-                        <span className="bg-rose-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1 uppercase tracking-wider animate-pulse">
+                        <span className="bg-theme-primary text-white text-[10px] font-black px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1 uppercase tracking-wider animate-pulse">
                             New
                         </span>
                         {profile.isPremium && (
@@ -295,8 +295,8 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
 
                     {/* Image Navigation Dots (Mock) */}
                     <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 px-3 py-1 bg-black/30 backdrop-blur-md rounded-full">
-                        <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-                        <div className="w-1.5 h-1.5 bg-white/50 rounded-full"></div>
+                        <div className="w-1.5 h-1.5 bg-theme-surface rounded-full"></div>
+                        <div className="w-1.5 h-1.5 bg-theme-surface/50 rounded-full"></div>
                     </div>
                 </div>
 
@@ -305,7 +305,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                     <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
                         <div className="flex items-center gap-3">
                             <h3
-                                className="text-xl font-extrabold text-gray-900 truncate hover:text-rose-500 cursor-pointer transition-colors"
+                                className="text-xl font-extrabold text-gray-900 truncate hover:text-theme-primary cursor-pointer transition-colors"
                                 onClick={() => navigate(`/matches/${idVal}`)}
                             >
                                 {displayName}
@@ -319,7 +319,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                                         e.stopPropagation();
                                         setIsDropdownOpen(!isDropdownOpen);
                                     }}
-                                    className="text-gray-400 hover:text-gray-600 transition-colors"
+                                    className="text-gray-400 hover:text-theme-text-secondary transition-colors"
                                 >
                                     <ChevronDown size={20} className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                                 </button>
@@ -330,10 +330,10 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                                             initial={{ opacity: 0, scale: 0.95, y: -10 }}
                                             animate={{ opacity: 1, scale: 1, y: 0 }}
                                             exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                                            className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
+                                            className="absolute right-0 mt-2 w-48 bg-theme-surface rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
                                         >
                                             <button
-                                                className="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-gray-700 hover:bg-rose-50 hover:text-rose-600 transition-colors text-left"
+                                                className="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-gray-700 hover:bg-theme-lavender hover:text-[#0F766E] transition-colors text-left"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     setIsDropdownOpen(false);
@@ -341,7 +341,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                                                     else onShortlist?.();
                                                 }}
                                             >
-                                                <Star size={14} className={isShortlisted ? 'fill-rose-500 text-rose-500' : ''} />
+                                                <Star size={14} className={isShortlisted ? 'fill-theme-primary text-theme-primary' : ''} />
                                                 {isShortlisted ? 'Remove Shortlist' : 'Add to Shortlist'}
                                             </button>
                                             <button
@@ -375,13 +375,13 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
 
                     {/* Status & Badges */}
                     <div className="flex flex-wrap items-center gap-4 mb-6">
-                        <div className={`flex items-center gap-2 text-[12px] font-bold ${isOnline ? 'text-green-600' : 'text-gray-500'}`}>
-                            <span className={`w-2.5 h-2.5 rounded-full ${isOnline ? 'bg-green-500 animate-ping' : 'bg-gray-400'}`}></span>
+                        <div className={`flex items-center gap-2 text-[12px] font-bold ${isOnline ? 'text-green-600' : 'text-theme-text-secondary'}`}>
+                            <span className={`w-2.5 h-2.5 rounded-full ${isOnline ? 'bg-theme-success animate-ping' : 'bg-gray-400'}`}></span>
                             {isOnline ? 'Online' : `Active ${formatLastActive(profile.lastActive)}`}
                         </div>
-                        <div className="flex items-center gap-4 text-xs font-bold text-gray-500">
-                            <div className="flex items-center gap-1.5 hover:text-rose-500 cursor-pointer transition-colors">
-                                <Heart size={14} className="text-rose-400" />
+                        <div className="flex items-center gap-4 text-xs font-bold text-theme-text-secondary">
+                            <div className="flex items-center gap-1.5 hover:text-theme-primary cursor-pointer transition-colors">
+                                <Heart size={14} className="text-theme-primary" />
                                 You & {profile.gender?.toLowerCase() === 'male' ? 'Him' : 'Her'}
                             </div>
                             <div className="flex items-center gap-1.5 hover:text-amber-500 cursor-pointer transition-colors">
@@ -394,28 +394,28 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                     {/* Rich Details Grid */}
                     <div className="grid grid-cols-2 lg:grid-cols-2 gap-y-3 gap-x-8 mb-6">
                         <div className="text-[14px]">
-                            <span className="text-gray-500 font-medium">{age} yrs, {height}</span>
+                            <span className="text-theme-text-secondary font-medium">{age} yrs, {height}</span>
                         </div>
                         <div className="text-[14px]">
-                            <span className="text-gray-500 font-medium">{profile.maritalStatus || 'Never Married'}</span>
+                            <span className="text-theme-text-secondary font-medium">{profile.maritalStatus || 'Never Married'}</span>
                         </div>
                         <div className="text-[14px]">
-                            <span className="text-gray-500 font-medium">{religionBase}, {casteBase || 'Community'}</span>
+                            <span className="text-theme-text-secondary font-medium">{religionBase}, {casteBase || 'Community'}</span>
                         </div>
                         <div className="text-[14px]">
-                            <span className="text-gray-500 font-medium">{location}</span>
+                            <span className="text-theme-text-secondary font-medium">{location}</span>
                         </div>
                         <div className="text-[14px]">
-                            <span className="text-gray-500 font-medium">{profile.motherTongue || 'Hindi'}</span>
+                            <span className="text-theme-text-secondary font-medium">{profile.motherTongue || 'Hindi'}</span>
                         </div>
                         <div className="text-[14px]">
-                            <span className="text-gray-500 font-medium">{occupation}</span>
+                            <span className="text-theme-text-secondary font-medium">{occupation}</span>
                         </div>
                     </div>
 
                     {/* Bio Snippet */}
                     <div className="relative group/bio">
-                        <p className="text-[13px] text-gray-600 leading-relaxed line-clamp-2 italic">
+                        <p className="text-[13px] text-theme-text-secondary leading-relaxed line-clamp-2 italic">
                             {profile.aboutMe || "There are some things that would help you know me better. In terms of education, I have completed my Graduation..."}
                             <button className="ml-1.5 text-cyan-600 font-bold hover:underline">More</button>
                         </p>
@@ -436,7 +436,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
 
                 {/* Right: Connect Action Section */}
                 <div className="w-full md:w-56 bg-gray-50/50 p-6 flex flex-col items-center justify-center text-center gap-4">
-                    <p className="text-sm font-bold text-gray-500">Like this profile?</p>
+                    <p className="text-sm font-bold text-theme-text-secondary">Like this profile?</p>
 
                     <motion.button
                         whileHover={{ scale: 1.1 }}
@@ -450,8 +450,8 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                         }}
                         disabled={requestSent || isRequestSent}
                         className={`w-16 h-16 rounded-full flex items-center justify-center transition-all shadow-lg ${requestSent || isRequestSent
-                            ? 'bg-rose-100 text-rose-500 border-2 border-rose-200'
-                            : 'bg-white text-green-500 border-2 border-green-500 hover:bg-green-50'
+                            ? 'bg-theme-lavender text-theme-primary border-2 border-theme-border'
+                            : 'bg-theme-surface text-green-500 border-2 border-green-500 hover:bg-green-50'
                             }`}
                     >
                         {requestSent || isRequestSent ? (
@@ -484,7 +484,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
             viewport={{ once: true }}
             whileHover={{ y: -4 }}
             onClick={() => navigate(`/matches/${idVal}`)}
-            className="group bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col relative cursor-pointer"
+            className="group bg-theme-surface rounded-2xl shadow-sm border border-theme-border overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col relative cursor-pointer"
         >
             {/* Image Section */}
             <div
@@ -528,10 +528,10 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                                 initial={{ opacity: 0, scale: 0.95, y: -10 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                                className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
+                                className="absolute right-0 mt-2 w-48 bg-theme-surface rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
                             >
                                 <button
-                                    className="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-gray-700 hover:bg-rose-50 hover:text-rose-600 transition-colors text-left"
+                                    className="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-gray-700 hover:bg-theme-lavender hover:text-[#0F766E] transition-colors text-left"
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         setIsDropdownOpen(false);
@@ -539,7 +539,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                                         else onShortlist?.();
                                     }}
                                 >
-                                    <Star size={14} className={isShortlisted ? 'fill-rose-500 text-rose-500' : ''} />
+                                    <Star size={14} className={isShortlisted ? 'fill-theme-primary text-theme-primary' : ''} />
                                     {isShortlisted ? 'Remove Shortlist' : 'Add to Shortlist'}
                                 </button>
                                 <button
@@ -571,7 +571,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
 
                 {/* Verification Badge */}
                 <div className="absolute bottom-3 left-3">
-                    <div className="bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1.5 shadow-sm">
+                    <div className="bg-theme-surface/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1.5 shadow-sm">
                         <div className="w-4 h-4 bg-cyan-500 rounded-full flex items-center justify-center">
                             <Check size={10} className="text-white stroke-[4]" />
                         </div>
@@ -581,7 +581,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
 
                 {(requestSent || isRequestSent) && (
                     <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px] flex items-center justify-center">
-                        <span className="bg-rose-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xl flex items-center gap-2">
+                        <span className="bg-theme-primary text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xl flex items-center gap-2">
                             <Check size={14} className="stroke-[3]" />
                             Request Sent
                         </span>
@@ -593,13 +593,13 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
             <div className="p-5 flex-grow flex flex-col">
                 <div className="flex items-center justify-between mb-3">
                     <h3
-                        className="text-lg font-bold text-gray-800 truncate hover:text-rose-500 cursor-pointer transition-colors"
+                        className="text-lg font-bold text-gray-800 truncate hover:text-theme-primary cursor-pointer transition-colors"
                         onClick={() => navigate(`/matches/${profile.id}`)}
                     >
                         {displayName}
                     </h3>
-                    <span className={`flex items-center gap-1.5 text-[11px] font-bold px-2 py-0.5 rounded-full ${isOnline ? 'text-green-600 bg-green-50' : 'text-gray-500 bg-gray-100'}`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></span>
+                    <span className={`flex items-center gap-1.5 text-[11px] font-bold px-2 py-0.5 rounded-full ${isOnline ? 'text-green-600 bg-green-50' : 'text-theme-text-secondary bg-gray-100'}`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${isOnline ? 'bg-theme-success animate-pulse' : 'bg-gray-400'}`}></span>
                         {isOnline ? 'ONLINE' : formatLastActive(profile.lastActive).toUpperCase()}
                     </span>
                 </div>
@@ -614,7 +614,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                     )}
                     {matchReasons.slice(0, 2).map((reason, idx) => (
                         <div key={idx} className="bg-green-50 text-green-700 text-[10px] px-2 py-0.5 rounded-full font-bold border border-green-100 flex items-center gap-1">
-                            <div className="w-1 h-1 bg-green-500 rounded-full"></div>
+                            <div className="w-1 h-1 bg-theme-success rounded-full"></div>
                             {reason}
                         </div>
                     ))}
@@ -622,26 +622,26 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
 
                 {/* Main Details Grid */}
                 <div className="grid grid-cols-2 gap-y-2 gap-x-4 mb-4">
-                    <div className="flex items-center gap-2 text-[13px] text-gray-600">
+                    <div className="flex items-center gap-2 text-[13px] text-theme-text-secondary">
                         <User size={14} className="text-gray-400" />
                         <span>{age} yrs, {height}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-[13px] text-gray-600">
+                    <div className="flex items-center gap-2 text-[13px] text-theme-text-secondary">
                         <MapPin size={14} className="text-gray-400" />
                         <span className="truncate">{location}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-[13px] text-gray-600">
+                    <div className="flex items-center gap-2 text-[13px] text-theme-text-secondary">
                         <Globe size={14} className="text-gray-400" />
                         <span className="truncate">{community}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-[13px] text-gray-600">
+                    <div className="flex items-center gap-2 text-[13px] text-theme-text-secondary">
                         <Briefcase size={14} className="text-gray-400" />
                         <span className="truncate">{occupation}</span>
                     </div>
                 </div>
 
                 {/* About Snippet */}
-                <p className="text-[13px] text-gray-500 line-clamp-2 italic mb-6 leading-relaxed">
+                <p className="text-[13px] text-theme-text-secondary line-clamp-2 italic mb-6 leading-relaxed">
                     "{profile.aboutMe || "I am a caring and family oriented person looking for a compatibility match..."}"
                 </p>
 
@@ -659,7 +659,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                         }}
                         disabled={requestSent || isRequestSent}
                         className={`flex-1 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-lg ${requestSent || isRequestSent
-                            ? 'bg-rose-50 text-rose-500 shadow-none border border-rose-100'
+                            ? 'bg-theme-lavender text-theme-primary shadow-none border border-theme-border'
                             : 'bg-gradient-to-r from-cyan-500 to-cyan-600 text-white hover:from-cyan-600 hover:to-cyan-700 shadow-cyan-100'
                             }`}
                     >
@@ -681,7 +681,7 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                                 e.stopPropagation();
                                 onChat?.(profile.userId || profile.id);
                             }}
-                            className="w-10 h-10 bg-rose-50 rounded-xl flex items-center justify-center text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm"
+                            className="w-10 h-10 bg-theme-lavender rounded-xl flex items-center justify-center text-theme-primary hover:bg-theme-primary hover:text-white transition-all shadow-sm"
                             title="Start Chat"
                         >
                             <MessageCircle size={20} />

@@ -18,7 +18,7 @@ const ProfileUpdate = () => {
             </div>
 
             {/* Main Card - Reduced padding and shadows */}
-            <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
+            <div className="bg-theme-surface rounded-xl shadow-md border border-gray-100 overflow-hidden">
                 <div className="p-4 sm:p-6 md:p-8">
                     <div className="flex flex-col sm:flex-row items-center gap-6 md:gap-10">
                         {/* Left Side - Smaller Badge Illustration */}
@@ -32,7 +32,7 @@ const ProfileUpdate = () => {
                                 {user?.fullName ? `${user.fullName}, your` : 'Your'} profile is how matches see you.
                             </h2>
 
-                            <p className="text-gray-500 text-sm md:text-base">
+                            <p className="text-theme-text-secondary text-sm md:text-base">
                                 Thanks for keeping it updated! Check out your new matches.
                             </p>
 

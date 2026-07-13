@@ -29,7 +29,7 @@ function MyContactSettings({ profile, onUpdate }) {
     return (
         <div className="p-4 md:p-6 lg:p-8 bg-gray-50">
             {/* Contact Number Section */}
-            <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 mb-4 md:mb-6">
+            <div className="bg-theme-surface border border-theme-border rounded-lg p-4 md:p-6 mb-4 md:mb-6">
                 <div className="flex items-center justify-between mb-3 md:mb-4">
                     <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800">
                         Contact Number
@@ -45,7 +45,7 @@ function MyContactSettings({ profile, onUpdate }) {
                         <div className="flex gap-3">
                             <button
                                 onClick={() => setIsEditingPhone(false)}
-                                className="text-gray-400 font-semibold text-sm hover:text-gray-500 transition-colors"
+                                className="text-gray-400 font-semibold text-sm hover:text-theme-text-secondary transition-colors"
                             >
                                 Cancel
                             </button>
@@ -87,7 +87,7 @@ function MyContactSettings({ profile, onUpdate }) {
             </div>
 
             {/* Contact Display Status */}
-            <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6">
+            <div className="bg-theme-surface border border-theme-border rounded-lg p-4 md:p-6">
                 <div className="text-sm md:text-base lg:text-lg font-semibold text-gray-800 mb-4 md:mb-6">
                     Contact display status
                 </div>
@@ -122,7 +122,7 @@ function MyContactSettings({ profile, onUpdate }) {
                                     {option.label}
                                 </span>
                                 {option.value === "No one" && (
-                                    <span className="text-xs text-gray-500 mt-1 block">
+                                    <span className="text-xs text-theme-text-secondary mt-1 block">
                                         Matches won't be able to call you
                                     </span>
                                 )}

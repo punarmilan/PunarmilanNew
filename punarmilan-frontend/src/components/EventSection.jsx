@@ -99,7 +99,7 @@ const EventsSection = () => {
 
     if (loading && events.length === 0) {
         return (
-            <div className="bg-white rounded-3xl p-10 flex flex-col items-center justify-center min-h-[300px] shadow-sm border border-slate-100">
+            <div className="bg-theme-surface rounded-3xl p-10 flex flex-col items-center justify-center min-h-[300px] shadow-sm border border-slate-100">
                 <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-rose-500 mb-4"></div>
                 <p className="text-slate-500 font-bold">Discovering events...</p>
             </div>
@@ -126,7 +126,7 @@ const EventsSection = () => {
                         </h2>
                         <p className="text-slate-500 text-lg font-medium mt-2">Connect with potential matches beyond the screen</p>
                     </div>
-                    <div className="hidden sm:flex bg-white shadow-xl shadow-rose-500/10 p-5 rounded-[2rem] text-rose-500 border border-slate-50">
+                    <div className="hidden sm:flex bg-theme-surface shadow-xl shadow-rose-500/10 p-5 rounded-[2rem] text-rose-500 border border-slate-50">
                         <Calendar className="w-10 h-10" />
                     </div>
                 </div>
@@ -141,7 +141,7 @@ const EventsSection = () => {
                             <div
                                 key={event.id}
                                 onClick={() => openEventDetails(event)}
-                                className="group bg-white hover:bg-rose-50/30 rounded-2xl p-4 sm:p-5 border border-slate-200 hover:border-rose-200 transition-all duration-300 hover:shadow-lg cursor-pointer"
+                                className="group bg-theme-surface hover:bg-rose-50/30 rounded-2xl p-4 sm:p-5 border border-slate-200 hover:border-rose-200 transition-all duration-300 hover:shadow-lg cursor-pointer"
                             >
                                 {/* Mobile: stacked, Desktop: single row */}
                                 <div className="flex flex-col sm:flex-row sm:items-center gap-4">

@@ -173,7 +173,7 @@ const EventManagement = () => {
                     { label: 'Active Events', value: stats.active, icon: Clock, color: 'emerald' },
                     { label: 'Total Registrations', value: stats.registrations, icon: Users, color: 'rose' }
                 ].map((stat, i) => (
-                    <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div key={i} className="bg-theme-surface p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
                         <div className="flex items-center justify-between">
                             <div>
                                 <p className="text-slate-500 text-sm font-bold uppercase tracking-wider">{stat.label}</p>
@@ -188,7 +188,7 @@ const EventManagement = () => {
             </div>
 
             {/* Main Content Card */}
-            <div className="bg-white rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden">
+            <div className="bg-theme-surface rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden">
                 {/* Search and Filters */}
                 <div className="p-4 sm:p-6 border-b border-slate-50 flex flex-col lg:flex-row gap-4 lg:items-center justify-between bg-slate-50/30">
                     <div className="relative w-full lg:w-96">
@@ -198,14 +198,14 @@ const EventManagement = () => {
                             placeholder="Search events, locations, types..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all bg-white"
+                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-500/10 focus:border-rose-500 transition-all bg-theme-surface"
                         />
                     </div>
                     <div className="flex items-center gap-2 sm:gap-3 w-full lg:w-auto">
-                        <button className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-slate-200 rounded-xl text-slate-600 text-xs sm:text-sm font-bold hover:bg-slate-50 transition-colors">
+                        <button className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-theme-surface border border-slate-200 rounded-xl text-slate-600 text-xs sm:text-sm font-bold hover:bg-slate-50 transition-colors">
                             <Filter size={16} /> Filters
                         </button>
-                        <button className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-slate-200 rounded-xl text-slate-600 text-xs sm:text-sm font-bold hover:bg-slate-50 transition-colors text-rose-500 border-rose-100 bg-rose-50/30">
+                        <button className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-theme-surface border border-slate-200 rounded-xl text-slate-600 text-xs sm:text-sm font-bold hover:bg-slate-50 transition-colors text-rose-500 border-rose-100 bg-rose-50/30">
                             <Download size={16} /> Export
                         </button>
                     </div>
@@ -294,13 +294,13 @@ const EventManagement = () => {
 
             {showForm && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-md bg-slate-900/40 animate-in fade-in transition-all">
-                    <div className="bg-white rounded-[2rem] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+                    <div className="bg-theme-surface rounded-[2rem] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
                         <div className="p-6 sm:p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                             <div>
                                 <h2 className="text-xl sm:text-2xl font-black text-slate-900">{editingEvent ? 'Edit' : 'Create'} Event</h2>
                                 <p className="text-slate-500 text-[10px] sm:text-xs font-bold uppercase tracking-widest mt-1">Platform Gatherings</p>
                             </div>
-                            <button onClick={() => setShowForm(false)} className="p-2 sm:p-3 bg-white text-slate-400 hover:text-slate-900 rounded-xl transition-all shadow-sm">
+                            <button onClick={() => setShowForm(false)} className="p-2 sm:p-3 bg-theme-surface text-slate-400 hover:text-slate-900 rounded-xl transition-all shadow-sm">
                                 <X size={20} />
                             </button>
                         </div>
@@ -419,13 +419,13 @@ const EventManagement = () => {
             {/* Registrants Modal */}
             {showRegistrants && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-md bg-slate-900/60 animate-in fade-in transition-all">
-                    <div className="bg-white rounded-[2rem] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
+                    <div className="bg-theme-surface rounded-[2rem] w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
                         <div className="p-6 sm:p-8 bg-slate-900 text-white flex justify-between items-center">
                             <div className="min-w-0">
                                 <h2 className="text-xl sm:text-2xl font-black truncate">{selectedEventForRegistrants?.title}</h2>
                                 <p className="text-slate-400 text-[10px] sm:text-xs font-bold mt-1 uppercase tracking-widest">Attendance</p>
                             </div>
-                            <button onClick={() => setShowRegistrants(false)} className="p-2.5 sm:p-3 hover:bg-white/10 rounded-xl transition-all">
+                            <button onClick={() => setShowRegistrants(false)} className="p-2.5 sm:p-3 hover:bg-theme-surface/10 rounded-xl transition-all">
                                 <X size={20} />
                             </button>
                         </div>

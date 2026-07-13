@@ -40,9 +40,9 @@ function DietPage() {
 
     return (
         <div className="min-h-screen  bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50  flex items-center justify-center p-2 sm:p-4md:p-6">
-            <div className="w-full max-w-3xl bg-white rounded-2xl sm:rounded-3xl  shadow-2xl overflow-hidden animate-fadeIn">
+            <div className="w-full max-w-3xl bg-theme-surface rounded-2xl sm:rounded-3xl  shadow-2xl overflow-hidden animate-fadeIn">
                 {/* Header */}
-                <div className="bg-white border-b border-gray-200 p-4 sm:p-6 bg-gradient-to-r from-rose-500 to-rose-600">
+                <div className="bg-theme-surface border-b border-theme-border p-4 sm:p-6 bg-gradient-to-r from-rose-500 to-rose-600">
                     <button
                         onClick={handleCancel}
                         className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors mb-3 sm:mb-4"
@@ -103,7 +103,7 @@ function DietPage() {
                                     </div>
                                     <div className="flex-1">
                                         <div className="text-base sm:text-lg text-gray-900">Vegetarian</div>
-                                        <div className="text-sm text-gray-500 italic mt-0.5">Includes Jain and Vegan Profiles</div>
+                                        <div className="text-sm text-theme-text-secondary italic mt-0.5">Includes Jain and Vegan Profiles</div>
                                     </div>
                                 </label>
 
@@ -128,7 +128,7 @@ function DietPage() {
                                     </div>
                                     <div className="flex-1">
                                         <div className="text-base sm:text-lg text-gray-900">Eggetarian</div>
-                                        <div className="text-sm text-gray-500 italic mt-0.5">Includes Eggetarian and all Vegetarian Profiles</div>
+                                        <div className="text-sm text-theme-text-secondary italic mt-0.5">Includes Eggetarian and all Vegetarian Profiles</div>
                                     </div>
                                 </label>
 
@@ -162,7 +162,7 @@ function DietPage() {
                 <div className="p-4 sm:p-6 pt-2 sm:pt-4 flex gap-3 sm:gap-4">
                     <button
                         onClick={handleCancel}
-                        className="flex-1 px-6 py-3 bg-white text-gray-600 border border-gray-300 rounded-full font-medium text-base sm:text-lg hover:bg-gray-50 transition-all active:scale-95"
+                        className="flex-1 px-6 py-3 bg-theme-surface text-theme-text-secondary border border-gray-300 rounded-full font-medium text-base sm:text-lg hover:bg-gray-50 transition-all active:scale-95"
                     >
                         Cancel
                     </button>

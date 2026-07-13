@@ -482,7 +482,7 @@ const MyProfile = ({ editModePage = false }) => {
       id: 'hide-delete-profile',
       label: 'Hide / Delete Profile',
       icon: <FaEye />,
-      color: 'text-gray-600',
+      color: 'text-theme-text-secondary',
       onClick: () => navigate('/my-shadi/settings', { state: { openSection: 'delete' } })
     },
 
@@ -1093,13 +1093,13 @@ Generated on: ${new Date().toLocaleString()}
     return (
       <div className="flex flex-col sm:flex-row items-start sm:items-center p-2.5 sm:p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl hover:shadow-md transition-shadow gap-2 sm:gap-0">
         <div className="flex items-center w-full sm:w-auto">
-          <div className="mr-3 text-[#C5A059]/70 sm:text-gray-500">{icon}</div>
-          <span className="text-xs sm:text-sm font-medium text-gray-600 sm:hidden">{label}</span>
+          <div className="mr-3 text-theme-magenta/70 sm:text-theme-text-secondary">{icon}</div>
+          <span className="text-xs sm:text-sm font-medium text-theme-text-secondary sm:hidden">{label}</span>
         </div>
 
         <div className="flex-1 w-full">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center overflow-hidden">
-            <span className="hidden sm:inline text-sm font-medium text-gray-600 mr-2">{label}</span>
+            <span className="hidden sm:inline text-sm font-medium text-theme-text-secondary mr-2">{label}</span>
             <div className="flex items-center justify-between sm:justify-end gap-2 w-full sm:w-auto">
               <span className="text-gray-800 font-semibold text-sm sm:text-base truncate max-w-[200px] sm:max-w-none">
                 <span className="hidden sm:inline">: </span>{value}
@@ -1124,10 +1124,10 @@ Generated on: ${new Date().toLocaleString()}
               </h3>
               <button
                 onClick={() => handleOpenEditModal('religious')}
-                className="flex items-center justify-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium px-4 py-2 sm:py-0 bg-[#FAF6F0] sm:bg-transparent rounded-lg sm:rounded-none w-full sm:w-auto relative"
+                className="flex items-center justify-center gap-2 text-theme-magenta hover:text-rose-700 text-sm font-medium px-4 py-2 sm:py-0 bg-[#FAF6F0] sm:bg-transparent rounded-lg sm:rounded-none w-full sm:w-auto relative"
               >
                 <FaEdit /> Edit All
-                {hasPendingInSection('religious') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
+                {hasPendingInSection('religious') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-theme-warning rounded-full animate-ping"></span>}
               </button>
             </div>
 
@@ -1149,11 +1149,11 @@ Generated on: ${new Date().toLocaleString()}
               ].map((item, index) => (
                 <div key={index} className="flex flex-col sm:flex-row items-start sm:items-center p-2.5 sm:p-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl hover:shadow-md transition-shadow gap-2 sm:gap-0">
                   <div className="flex items-center w-full sm:w-auto">
-                    <div className="mr-3 text-[#C5A059]/70 sm:text-gray-500">{item.icon}</div>
-                    <span className="text-xs sm:text-sm font-medium text-gray-600 sm:hidden">{item.label}</span>
+                    <div className="mr-3 text-theme-magenta/70 sm:text-theme-text-secondary">{item.icon}</div>
+                    <span className="text-xs sm:text-sm font-medium text-theme-text-secondary sm:hidden">{item.label}</span>
                   </div>
                   <div className="flex-1 w-full flex items-center">
-                    <span className="hidden sm:inline text-sm font-medium text-gray-600 mr-2 w-1/2">{item.label}</span>
+                    <span className="hidden sm:inline text-sm font-medium text-theme-text-secondary mr-2 w-1/2">{item.label}</span>
                     <span className="text-gray-800 font-semibold text-sm sm:text-base truncate w-full sm:w-1/2">
                       <span className="hidden sm:inline">: </span>{item.value || 'Not Specified'}
                     </span>
@@ -1171,10 +1171,10 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Family Details</h3>
               <button
                 onClick={() => handleOpenEditModal('family')}
-                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-theme-magenta hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
-                {hasPendingInSection('family') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
+                {hasPendingInSection('family') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-theme-warning rounded-full animate-ping"></span>}
               </button>
             </div>
 
@@ -1202,10 +1202,10 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Education & Career</h3>
               <button
                 onClick={() => handleOpenEditModal('education')}
-                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-theme-magenta hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
-                {hasPendingInSection('education') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
+                {hasPendingInSection('education') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-theme-warning rounded-full animate-ping"></span>}
               </button>
             </div>
 
@@ -1235,10 +1235,10 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Location of Groom</h3>
               <button
                 onClick={() => handleOpenEditModal('location')}
-                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-theme-magenta hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
-                {hasPendingInSection('location') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
+                {hasPendingInSection('location') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-theme-warning rounded-full animate-ping"></span>}
               </button>
             </div>
 
@@ -1266,21 +1266,21 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Lifestyle & Personality</h3>
               <button
                 onClick={() => handleOpenEditModal('lifestyle')}
-                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-theme-magenta hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
-                {hasPendingInSection('lifestyle') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-orange-500 rounded-full animate-ping"></span>}
+                {hasPendingInSection('lifestyle') && <span className="absolute -top-1 -right-1 w-2 h-2 bg-theme-warning rounded-full animate-ping"></span>}
               </button>
             </div>
 
             {/* Personality & About Section */}
             <div className="space-y-1">
               <div className="flex justify-between items-center border-b border-white/50 pb-1 mb-1">
-                <h3 className="text-base sm:text-lg font-bold text-[#C5A059]">
+                <h3 className="text-base sm:text-lg font-bold text-theme-magenta">
                   Personality.
                 </h3>
               </div>
-              <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+              <p className="text-theme-text-secondary text-xs sm:text-sm leading-relaxed">
                 {profileData.aboutText || 'Let me introduce myself...'}
               </p>
             </div>
@@ -1307,7 +1307,7 @@ Generated on: ${new Date().toLocaleString()}
                   { label: 'Disability', value: profileData.lifestyle.disability }
                 ].map((item, index) => (
                   <div key={index} className="flex border-b border-white/50 pb-1.5">
-                    <span className="w-1/3 text-gray-500 text-xs sm:text-sm">{item.label}</span>
+                    <span className="w-1/3 text-theme-text-secondary text-xs sm:text-sm">{item.label}</span>
                     <span className="w-2/3 text-gray-800 font-medium text-xs sm:text-sm">: {item.value}</span>
                   </div>
                 ))}
@@ -1317,10 +1317,10 @@ Generated on: ${new Date().toLocaleString()}
             {/* Hobbies & Interests Section */}
             <div className="space-y-4 pt-4 border-t border-white/50">
               <div className="flex justify-between items-center">
-                <h3 className="text-base sm:text-lg font-semibold text-[#C5A059]">Hobbies and Interests</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-theme-magenta">Hobbies and Interests</h3>
                 <button
                   onClick={() => handleOpenEditModal('hobbies')}
-                  className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium"
+                  className="flex items-center gap-2 text-theme-magenta hover:text-rose-700 text-sm font-medium"
                 >
                   <FaEdit /> Edit All
                 </button>
@@ -1331,9 +1331,9 @@ Generated on: ${new Date().toLocaleString()}
                   profileData.hobbies.map((hobby, index) => (
                     <div
                       key={index}
-                      className="px-4 py-2 bg-white border border-gray-200 rounded-full shadow-sm flex items-center gap-2 text-gray-700 hover:border-rose-300 transition-colors"
+                      className="px-4 py-2 bg-theme-surface border border-theme-border rounded-full shadow-sm flex items-center gap-2 text-gray-700 hover:border-rose-300 transition-colors"
                     >
-                      <span className="text-[#C5A059]">
+                      <span className="text-theme-magenta">
                         {/* Dynamic icons could be added here based on hobby name */}
                         {hobby.toLowerCase().includes('photo') && <FaCamera />}
                         {hobby.toLowerCase().includes('music') && <FaStar />}
@@ -1348,7 +1348,7 @@ Generated on: ${new Date().toLocaleString()}
                     </div>
                   ))
                 ) : (
-                  <p className="text-gray-500 italic">No hobbies specified yet.</p>
+                  <p className="text-theme-text-secondary italic">No hobbies specified yet.</p>
                 )}
               </div>
             </div>
@@ -1362,7 +1362,7 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Privacy & Settings</h3>
               <button
                 onClick={() => handleOpenEditModal('privacy')}
-                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-theme-magenta hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
               </button>
@@ -1381,7 +1381,7 @@ Generated on: ${new Date().toLocaleString()}
                 { label: 'Profile ID (System)', value: profileData.id }
               ].map((item, idx) => (
                 <div key={idx} className="flex border-b border-white/50 pb-2">
-                  <span className="w-1/2 text-gray-500 text-sm font-medium">{item.label}</span>
+                  <span className="w-1/2 text-theme-text-secondary text-sm font-medium">{item.label}</span>
                   <span className="w-1/2 text-gray-800 text-sm font-semibold truncate">: {item.value}</span>
                 </div>
               ))}
@@ -1396,7 +1396,7 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Verification Details</h3>
               <button
                 onClick={() => handleOpenEditModal('verification')}
-                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-theme-magenta hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
               </button>
@@ -1407,14 +1407,14 @@ Generated on: ${new Date().toLocaleString()}
                   <FaCheck />
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-gray-500 uppercase tracking-wider">Current Status</div>
+                  <div className="text-xs font-bold text-theme-text-secondary uppercase tracking-wider">Current Status</div>
                   <div className={`text-lg font-bold ${profileData.verificationStatus === 'VERIFIED' ? 'text-green-600' : 'text-orange-600'}`}>
                     {profileData.verificationStatus}
                   </div>
                 </div>
               </div>
               {profileData.verificationNotes && (
-                <div className="mt-3 p-3 bg-white/50 rounded-lg text-sm text-gray-600 italic">
+                <div className="mt-3 p-3 bg-theme-surface/50 rounded-lg text-sm text-theme-text-secondary italic">
                   " {profileData.verificationNotes} "
                 </div>
               )}
@@ -1428,7 +1428,7 @@ Generated on: ${new Date().toLocaleString()}
                 { label: 'Profile Completion Score', value: profileData.profileComplete ? 'Complete' : 'Pending' }
               ].map((item, idx) => (
                 <div key={idx} className="flex border-b border-white/50 pb-2">
-                  <span className="w-1/2 text-gray-500 text-sm">{item.label}</span>
+                  <span className="w-1/2 text-theme-text-secondary text-sm">{item.label}</span>
                   <span className="w-1/2 text-gray-800 font-medium text-sm">: {item.value}</span>
                 </div>
               ))}
@@ -1451,7 +1451,7 @@ Generated on: ${new Date().toLocaleString()}
               <h3 className="text-lg font-semibold text-gray-800">Partner Preference Criteria</h3>
               <button
                 onClick={() => handleOpenEditModal('preferences')}
-                className="flex items-center gap-2 text-[#C5A059] hover:text-rose-700 text-sm font-medium relative"
+                className="flex items-center gap-2 text-theme-magenta hover:text-rose-700 text-sm font-medium relative"
               >
                 <FaEdit /> Edit All
               </button>
@@ -1459,14 +1459,14 @@ Generated on: ${new Date().toLocaleString()}
 
             <div className="dashboard-card-bg rounded-2xl shadow-lg p-5 sm:p-6 border border-white/50">
               {/* Header */}
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200">
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-theme-border">
                 <div className="flex items-center gap-3">
                   <div className="bg-gradient-to-br from-rose-100 to-rose-50 p-2.5 rounded-xl">
-                    <FaUserFriends className="text-[#C5A059] text-2xl" />
+                    <FaUserFriends className="text-theme-magenta text-2xl" />
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold text-gray-800">Partner Preferences</h2>
-                    <p className="text-gray-600 text-sm mt-1">Define your ideal partner criteria</p>
+                    <p className="text-theme-text-secondary text-sm mt-1">Define your ideal partner criteria</p>
                   </div>
                 </div>
               </div>
@@ -1489,7 +1489,7 @@ Generated on: ${new Date().toLocaleString()}
                     { label: 'Age', field: 'ageRange', defaultValue: '22 to 26', icon: '📅', color: 'bg-blue-50' },
                     { label: 'Mother Tongue', field: 'motherTongue', defaultValue: 'Marathi, Hindi, English', icon: '🗣️', color: 'bg-green-50' },
                     { label: 'Height', field: 'heightRange', defaultValue: "5' 0\"(152cm) to 5' 8\"(172cm)", icon: '📏', color: 'bg-orange-50' },
-                    { label: 'Marital Status', field: 'maritalStatus', defaultValue: 'Never Married', icon: '💍', color: 'bg-[#FCFAF7]' },
+                    { label: 'Marital Status', field: 'maritalStatus', defaultValue: 'Never Married', icon: '💍', color: 'bg-theme-bg' },
                   ].map((item) => (
                     <div key={item.field} className="group dashboard-card-bg rounded-2xl p-3 border border-white/50 hover:border-rose-200 hover:shadow-md transition-all duration-300">
                       <div className="flex items-center justify-between">
@@ -1621,7 +1621,7 @@ Generated on: ${new Date().toLocaleString()}
               <div className="mb-10">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                    <span className="bg-[#FCFAF7] p-2 rounded-lg">
+                    <span className="bg-theme-bg p-2 rounded-lg">
                       <FaHeart className="text-pink-600" />
                     </span>
                     Lifestyle & Others
@@ -1665,32 +1665,32 @@ Generated on: ${new Date().toLocaleString()}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="dashboard-card-bg p-4 rounded-xl border border-white/50 flex items-center justify-between">
-                    <span className="text-gray-600 font-medium">Verify Profiles Only</span>
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.showVerifiedOnly ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                    <span className="text-theme-text-secondary font-medium">Verify Profiles Only</span>
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.showVerifiedOnly ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-theme-text-secondary'}`}>
                       {profileData.partnerPreferences.showVerifiedOnly ? 'Yes' : 'No'}
                     </span>
                   </div>
                   <div className="dashboard-card-bg p-4 rounded-xl border border-white/50 flex items-center justify-between">
-                    <span className="text-gray-600 font-medium">Auto Match</span>
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.enableAutoMatch ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                    <span className="text-theme-text-secondary font-medium">Auto Match</span>
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.enableAutoMatch ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-theme-text-secondary'}`}>
                       {profileData.partnerPreferences.enableAutoMatch ? 'Enabled' : 'Disabled'}
                     </span>
                   </div>
                   <div className="dashboard-card-bg p-4 rounded-xl border border-white/50 flex items-center justify-between">
-                    <span className="text-gray-600 font-medium">Prefer NRI</span>
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.preferNri ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500'}`}>
+                    <span className="text-theme-text-secondary font-medium">Prefer NRI</span>
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.preferNri ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-theme-text-secondary'}`}>
                       {profileData.partnerPreferences.preferNri ? 'Yes' : 'No'}
                     </span>
                   </div>
                   <div className="dashboard-card-bg p-4 rounded-xl border border-white/50 flex items-center justify-between">
-                    <span className="text-gray-600 font-medium">Working Professionals</span>
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.preferWorkingProfessional ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-500'}`}>
+                    <span className="text-theme-text-secondary font-medium">Working Professionals</span>
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${profileData.partnerPreferences.preferWorkingProfessional ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-theme-text-secondary'}`}>
                       {profileData.partnerPreferences.preferWorkingProfessional ? 'Preferred' : 'Any'}
                     </span>
                   </div>
                   <div className="dashboard-card-bg p-4 rounded-xl border border-white/50 flex flex-col gap-2 sm:col-span-2">
                     <div className="flex justify-between">
-                      <span className="text-gray-600 font-medium">Match Score Threshold</span>
+                      <span className="text-theme-text-secondary font-medium">Match Score Threshold</span>
                       <span className="font-bold text-gray-800">{profileData.partnerPreferences.matchScoreThreshold || 0}%</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2.5">
@@ -1721,7 +1721,7 @@ Generated on: ${new Date().toLocaleString()}
           <div className="h-48 md:h-64 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${profileBanner})` }}>
             <div className="absolute inset-0 bg-black/10"></div>
             <div className="absolute top-4 right-4 z-10">
-              <button onClick={() => navigate(editModePage ? '/my-shadi/my-profile' : '/my-shadi/edit-profile')} className="bg-black/60 hover:bg-black/80 text-white backdrop-blur-md px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition-all shadow-sm">
+              <button onClick={() => navigate(editModePage ? '/my-shadi/my-profile' : '/my-shadi/edit-profile')} className="bg-gradient-to-r from-[#E86D8A] to-[#D89A74] hover:opacity-95 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition-all shadow-md">
                 <FaEdit /> {editModePage ? 'Done Editing' : 'Edit Profile'}
               </button>
             </div>
@@ -1742,35 +1742,35 @@ Generated on: ${new Date().toLocaleString()}
                   )}
 
                   {/* Online Indicator */}
-                  <div className="absolute bottom-3 right-3 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+                  <div className="absolute bottom-3 right-3 w-4 h-4 bg-[#4CAF7A] border-2 border-white rounded-full"></div>
                 </div>
               </div>
 
               {/* Basic Info */}
               <div className="flex-1 text-center md:text-left mt-2 md:mt-0">
-                <h1 className="text-2xl md:text-3xl font-bold text-[#3a2618] font-serif flex items-center justify-center md:justify-start gap-2 mb-1">
+                <h1 className="text-2xl md:text-3xl font-bold text-[#3B2F2F] font-serif flex items-center justify-center md:justify-start gap-2 mb-1">
                   {profileData.fullName || 'Priya Sharma'}
-                  <MdVerified className="text-[#8C6D39] w-5 h-5 md:w-6 md:h-6" />
+                  <MdVerified className="text-[#C99853] w-5 h-5 md:w-6 md:h-6" />
                 </h1>
-                <p className="text-gray-600 font-medium text-sm md:text-base mb-1">
+                <p className="text-theme-text-secondary font-medium text-sm md:text-base mb-1">
                   {profileData.age || '27'} Yrs, {profileData.height || "5'4\""} • {profileData.location || 'Pune, Maharashtra'}
                 </p>
-                <p className="text-gray-500 text-sm mb-4">
+                <p className="text-theme-text-secondary text-sm mb-4">
                   {profileData.religion || 'Hindu'} • {profileData.community || 'Brahmin'} • {profileData.maritalStatus || 'Never Married'}
                 </p>
 
                 {/* Tags */}
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
-                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FAF6F0] text-[#C5A059] rounded-full text-xs font-bold border border-rose-100 shadow-sm">
+                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FFF2EF] text-[#C46A88] rounded-full text-xs font-bold border border-[#F2D7D9] shadow-sm">
                     <FaMapMarkerAlt /> {profileData.city || 'Pune'}, {profileData.state || 'Maharashtra'}
                   </span>
-                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FAF6F0] text-[#C5A059] rounded-full text-xs font-bold border border-rose-100 shadow-sm">
+                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FFF2EF] text-[#C46A88] rounded-full text-xs font-bold border border-[#F2D7D9] shadow-sm">
                     <FaUserFriends /> {profileData.maritalStatus || 'Never Married'}
                   </span>
-                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FAF6F0] text-[#C5A059] rounded-full text-xs font-bold border border-rose-100 shadow-sm">
+                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FFF2EF] text-[#C46A88] rounded-full text-xs font-bold border border-[#F2D7D9] shadow-sm">
                     🕉️ {profileData.religion || 'Hindu'}
                   </span>
-                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FAF6F0] text-[#C5A059] rounded-full text-xs font-bold border border-rose-100 shadow-sm">
+                  <span className="flex items-center gap-1.5 px-3 py-1 bg-[#FFF2EF] text-[#C46A88] rounded-full text-xs font-bold border border-[#F2D7D9] shadow-sm">
                     <FaStar /> {profileData.community || 'Brahmin'}
                   </span>
                 </div>
@@ -1782,18 +1782,18 @@ Generated on: ${new Date().toLocaleString()}
         {/* STATS ROW */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           {[
-            { label: 'Profile Views', value: summary?.recentVisitorsCount || '236', icon: <FaEye className="text-rose-400" /> },
-            { label: 'Interests Received', value: summary?.pendingInvitations || '42', icon: <FaHeart className="text-rose-400" /> },
-            { label: 'Interest Sent', value: summary?.interestsSentCount || '18', icon: <FaShareAlt className="text-rose-400" /> },
-            { label: 'Shortlisted', value: '9', icon: <FaStar className="text-orange-400" /> }
+            { label: 'Profile Views', value: summary?.recentVisitorsCount || '236', icon: <FaEye className="text-[#E86D8A]" /> },
+            { label: 'Interests Received', value: summary?.pendingInvitations || '42', icon: <FaHeart className="text-[#E86D8A]" /> },
+            { label: 'Interest Sent', value: summary?.interestsSentCount || '18', icon: <FaShareAlt className="text-[#E86D8A]" /> },
+            { label: 'Shortlisted', value: '9', icon: <FaStar className="text-[#D89A74]" /> }
           ].map((stat, i) => (
             <div key={i} className="dashboard-card-bg p-5 rounded-2xl shadow-sm border border-white/50 flex items-center gap-4 hover:shadow-md transition-shadow">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#FAF6F0] flex items-center justify-center text-lg md:text-xl shrink-0">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#FFF6F2] flex items-center justify-center text-lg md:text-xl shrink-0">
                 {stat.icon}
               </div>
               <div>
                 <h3 className="text-lg md:text-xl font-black text-gray-800">{stat.value}</h3>
-                <p className="text-[10px] md:text-xs font-semibold text-gray-500 uppercase tracking-wider">{stat.label}</p>
+                <p className="text-[10px] md:text-xs font-semibold text-theme-text-secondary uppercase tracking-wider">{stat.label}</p>
               </div>
             </div>
           ))}
@@ -1811,12 +1811,12 @@ Generated on: ${new Date().toLocaleString()}
                 <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
                   <FaUserEdit className="text-[#a67c52]" /> About Me
                 </h3>
-                {isEditing && <button onClick={() => handleOpenEditModal('person')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit About Me"><FaEdit size={16}/></button>}
+                {isEditing && <button onClick={() => handleOpenEditModal('person')} className="text-theme-text-secondary hover:text-gray-900 p-1 transition-colors" title="Edit About Me"><FaEdit size={16}/></button>}
               </div>
-              <p className="text-gray-600 text-sm leading-relaxed whitespace-pre-wrap">
+              <p className="text-theme-text-secondary text-sm leading-relaxed whitespace-pre-wrap">
                 {profileData.aboutText || "I am a simple, ambitious and family-oriented person. I love traveling, reading books and exploring new places. I believe in honesty, respect and understanding in a relationship."}
               </p>
-              <button className="text-[#C5A059] text-sm font-bold mt-3 hover:underline">Read More</button>
+              <button className="text-theme-magenta text-sm font-bold mt-3 hover:underline">Read More</button>
             </div>
 
             {/* Photos (6) */}
@@ -1825,11 +1825,11 @@ Generated on: ${new Date().toLocaleString()}
                 <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
                   <FaCamera className="text-[#a67c52]" /> Photos <span className="text-gray-400 text-sm">(6 max)</span>
                 </h3>
-                <button onClick={() => navigate('/my-shadi/my-photos')} className="bg-[#FAF6F0] text-[#C5A059] px-4 py-1.5 rounded-full text-xs font-bold hover:bg-rose-100 transition-colors">View All</button>
+                <button onClick={() => navigate('/my-shadi/my-photos')} className="bg-[#FAF6F0] text-theme-magenta px-4 py-1.5 rounded-full text-xs font-bold hover:bg-rose-100 transition-colors">View All</button>
               </div>
               <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
                 {(profileData.albumPhotos || Array(6).fill(null)).map((src, idx) => (
-                  <div key={idx} className="relative w-24 h-32 shrink-0 rounded-xl overflow-hidden shadow-sm border border-gray-200 bg-gray-50 flex items-center justify-center group/photo">
+                  <div key={idx} className="relative w-24 h-32 shrink-0 rounded-xl overflow-hidden shadow-sm border border-theme-border bg-gray-50 flex items-center justify-center group/photo">
                     {src ? (
                       <>
                         <img src={src} alt={`Album ${idx + 1}`} className="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" />
@@ -1840,7 +1840,7 @@ Generated on: ${new Date().toLocaleString()}
                       </>
                     ) : (
                       <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors">
-                        <div className="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center mb-1 border border-gray-200">
+                        <div className="w-8 h-8 rounded-full bg-theme-surface shadow-sm flex items-center justify-center mb-1 border border-theme-border">
                           <span className="text-[#a67c52] font-bold text-lg leading-none">+</span>
                         </div>
                         <span className="text-[10px] font-bold text-gray-400">Add Photo</span>
@@ -1861,7 +1861,7 @@ Generated on: ${new Date().toLocaleString()}
                   <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
                     <FaUserCircle className="text-rose-400" /> Personal Details
                   </h3>
-                  {isEditing && <button onClick={() => handleOpenEditModal('person')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Personal Details"><FaEdit size={16}/></button>}
+                  {isEditing && <button onClick={() => handleOpenEditModal('person')} className="text-theme-text-secondary hover:text-gray-900 p-1 transition-colors" title="Edit Personal Details"><FaEdit size={16}/></button>}
                 </div>
                 <div className="space-y-3">
                   {[
@@ -1873,7 +1873,7 @@ Generated on: ${new Date().toLocaleString()}
                     { label: 'Manglik', value: profileData.manglikStatus === 'YES' ? 'Yes' : 'No' }
                   ].map((item, i) => (
                     <div key={i} className="flex text-sm">
-                      <span className="w-5/12 text-gray-500">{item.label}</span>
+                      <span className="w-5/12 text-theme-text-secondary">{item.label}</span>
                       <span className="w-7/12 font-semibold text-gray-800 truncate" title={item.value}>{item.value}</span>
                     </div>
                   ))}
@@ -1886,7 +1886,7 @@ Generated on: ${new Date().toLocaleString()}
                   <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
                     <FaGraduationCap className="text-rose-400" /> Education & Career
                   </h3>
-                  {isEditing && <button onClick={() => handleOpenEditModal('education')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Education & Career"><FaEdit size={16}/></button>}
+                  {isEditing && <button onClick={() => handleOpenEditModal('education')} className="text-theme-text-secondary hover:text-gray-900 p-1 transition-colors" title="Edit Education & Career"><FaEdit size={16}/></button>}
                 </div>
                 <div className="space-y-3">
                   {[
@@ -1898,7 +1898,7 @@ Generated on: ${new Date().toLocaleString()}
                     { label: 'Employment Type', value: 'Full Time' }
                   ].map((item, i) => (
                     <div key={i} className="flex text-sm">
-                      <span className="w-5/12 text-gray-500">{item.label}</span>
+                      <span className="w-5/12 text-theme-text-secondary">{item.label}</span>
                       <span className="w-7/12 font-semibold text-gray-800 truncate" title={item.value}>{item.value}</span>
                     </div>
                   ))}
@@ -1911,7 +1911,7 @@ Generated on: ${new Date().toLocaleString()}
                   <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
                     <FaHeart className="text-rose-400" /> Lifestyle
                   </h3>
-                  {isEditing && <button onClick={() => handleOpenEditModal('lifestyle')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Lifestyle"><FaEdit size={16}/></button>}
+                  {isEditing && <button onClick={() => handleOpenEditModal('lifestyle')} className="text-theme-text-secondary hover:text-gray-900 p-1 transition-colors" title="Edit Lifestyle"><FaEdit size={16}/></button>}
                 </div>
                 <div className="space-y-3">
                   {[
@@ -1922,7 +1922,7 @@ Generated on: ${new Date().toLocaleString()}
                     { label: 'Blood Group', value: profileData.bloodGroup || 'B+' }
                   ].map((item, i) => (
                     <div key={i} className="flex text-sm">
-                      <span className="w-5/12 text-gray-500">{item.label}</span>
+                      <span className="w-5/12 text-theme-text-secondary">{item.label}</span>
                       <span className="w-7/12 font-semibold text-gray-800 truncate" title={item.value}>{item.value}</span>
                     </div>
                   ))}
@@ -1935,7 +1935,7 @@ Generated on: ${new Date().toLocaleString()}
                   <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
                     <FaStar className="text-rose-400" /> Partner Preference
                   </h3>
-                  {isEditing && <button onClick={() => handleOpenEditModal('preferences')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Partner Preference"><FaEdit size={16}/></button>}
+                  {isEditing && <button onClick={() => handleOpenEditModal('preferences')} className="text-theme-text-secondary hover:text-gray-900 p-1 transition-colors" title="Edit Partner Preference"><FaEdit size={16}/></button>}
                 </div>
                 <div className="space-y-3">
                   {[
@@ -1947,7 +1947,7 @@ Generated on: ${new Date().toLocaleString()}
                     { label: 'Manglik', value: 'No Preference' }
                   ].map((item, i) => (
                     <div key={i} className="flex text-sm">
-                      <span className="w-5/12 text-gray-500">{item.label}</span>
+                      <span className="w-5/12 text-theme-text-secondary">{item.label}</span>
                       <span className="w-7/12 font-semibold text-gray-800 truncate" title={item.value}>{item.value}</span>
                     </div>
                   ))}
@@ -1963,7 +1963,7 @@ Generated on: ${new Date().toLocaleString()}
                   <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
                     <FaPhone className="text-rose-400" /> Contact Information
                   </h3>
-                  {isEditing && <button onClick={() => handleOpenEditModal('location')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Contact Information"><FaEdit size={16}/></button>}
+                  {isEditing && <button onClick={() => handleOpenEditModal('location')} className="text-theme-text-secondary hover:text-gray-900 p-1 transition-colors" title="Edit Contact Information"><FaEdit size={16}/></button>}
                 </div>
                 <div className="grid grid-cols-1 gap-3">
                   {[
@@ -1972,7 +1972,7 @@ Generated on: ${new Date().toLocaleString()}
                     { label: 'Address', value: `${profileData.city || 'Pune'}, ${profileData.state || 'Maharashtra'}, ${profileData.country || 'India'}`, verified: false }
                   ].map((item, i) => (
                     <div key={i} className="flex flex-col sm:flex-row sm:items-center text-sm py-1">
-                      <span className="w-full sm:w-5/12 text-gray-500 mb-0.5 sm:mb-0">{item.label}</span>
+                      <span className="w-full sm:w-5/12 text-theme-text-secondary mb-0.5 sm:mb-0">{item.label}</span>
                       <div className="w-full sm:w-7/12 flex items-center gap-2 overflow-hidden">
                         <span className="font-semibold text-gray-800 truncate text-[13px]" title={item.value}>
                           {item.value}
@@ -1990,7 +1990,7 @@ Generated on: ${new Date().toLocaleString()}
                   <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
                     <FaHeart className="text-rose-400" /> Interests
                   </h3>
-                  {isEditing && <button onClick={() => handleOpenEditModal('hobbies')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Interests"><FaEdit size={16}/></button>}
+                  {isEditing && <button onClick={() => handleOpenEditModal('hobbies')} className="text-theme-text-secondary hover:text-gray-900 p-1 transition-colors" title="Edit Interests"><FaEdit size={16}/></button>}
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {['🎵 Music', '✈️ Traveling', '📚 Reading', '🍳 Cooking', '📸 Photography', '🧘‍♀️ Yoga'].map((tag, i) => (
@@ -2008,7 +2008,7 @@ Generated on: ${new Date().toLocaleString()}
                 <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
                   <MdVerified className="text-rose-400 w-5 h-5" /> Verification
                 </h3>
-                {isEditing && <button onClick={() => handleOpenEditModal('verification')} className="text-gray-600 hover:text-gray-900 p-1 transition-colors" title="Edit Verification"><FaEdit size={16}/></button>}
+                {isEditing && <button onClick={() => handleOpenEditModal('verification')} className="text-theme-text-secondary hover:text-gray-900 p-1 transition-colors" title="Edit Verification"><FaEdit size={16}/></button>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="flex items-center gap-3">
@@ -2044,8 +2044,8 @@ Generated on: ${new Date().toLocaleString()}
                 </div>
               </div>
               <h4 className="font-bold text-gray-800 mb-1 text-lg">Almost There!</h4>
-              <p className="text-sm text-gray-500 mb-6 px-2">Add more details to get better matches.</p>
-              <button onClick={() => navigate('/my-shadi/edit-profile')} className="w-full bg-[#8C6D39] hover:bg-rose-700 text-white font-bold py-3.5 rounded-xl transition-colors shadow-sm">
+              <p className="text-sm text-theme-text-secondary mb-6 px-2">Add more details to get better matches.</p>
+              <button onClick={() => navigate('/my-shadi/edit-profile')} className="w-full bg-gradient-to-r from-[#DB2777] to-[#EC4899] hover:from-[#BE185D] hover:to-[#DB2777] text-white font-bold py-3.5 rounded-xl transition-colors shadow-sm">
                 Complete Now
               </button>
             </div>
@@ -2066,7 +2066,7 @@ Generated on: ${new Date().toLocaleString()}
                 ].map((item, i) => (
                   <div key={i} className="flex items-center justify-between text-sm">
                     <span className="text-gray-700 font-medium">{item.label}</span>
-                    <div className={`w-5 h-5 rounded-full flex items-center justify-center ${item.complete ? 'bg-green-500 text-white shadow-sm' : 'bg-gray-200 text-transparent'}`}>
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center ${item.complete ? 'bg-theme-success text-white shadow-sm' : 'bg-gray-200 text-transparent'}`}>
                       <FaCheck size={10} />
                     </div>
                   </div>
@@ -2092,8 +2092,8 @@ Generated on: ${new Date().toLocaleString()}
                   { label: 'View Profile', icon: <FaEye />, onClick: () => navigate('/my-shadi/my-profile') },
                   { label: 'Privacy Settings', icon: <FaShieldAlt />, onClick: () => handleOpenEditModal('privacy') },
                 ]).map((action, i) => (
-                  <button key={i} onClick={action.onClick} className="w-full flex items-center gap-3 p-3 text-sm font-bold text-gray-700 hover:bg-[#FAF6F0] hover:text-[#C5A059] rounded-xl transition-colors text-left group">
-                    <div className="w-9 h-9 rounded-xl bg-gray-50 border border-white/50 flex items-center justify-center text-gray-400 group-hover:bg-rose-100 group-hover:text-[#C5A059] group-hover:border-rose-200 transition-colors">
+                  <button key={i} onClick={action.onClick} className="w-full flex items-center gap-3 p-3 text-sm font-bold text-gray-700 hover:bg-[#FAF6F0] hover:text-theme-magenta rounded-xl transition-colors text-left group">
+                    <div className="w-9 h-9 rounded-xl bg-gray-50 border border-white/50 flex items-center justify-center text-gray-400 group-hover:bg-rose-100 group-hover:text-theme-magenta group-hover:border-rose-200 transition-colors">
                       {action.icon}
                     </div>
                     {action.label}
@@ -2104,11 +2104,11 @@ Generated on: ${new Date().toLocaleString()}
 
             {/* Promo Banner */}
             <div className="bg-gradient-to-br from-rose-50 to-[#FCFAF7] rounded-2xl shadow-sm border border-rose-100 p-8 text-center relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white rounded-full opacity-40 -mr-10 -mt-10 blur-xl group-hover:scale-150 transition-transform duration-700"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-theme-surface rounded-full opacity-40 -mr-10 -mt-10 blur-xl group-hover:scale-150 transition-transform duration-700"></div>
               <div className="text-5xl mb-4 relative z-10 drop-shadow-md">💎</div>
               <h3 className="text-xl font-black text-[#3a2618] mb-2 font-serif relative z-10">Get 10x More Matches</h3>
               <p className="text-sm text-[#6b584a] mb-6 relative z-10 leading-relaxed">Increase your visibility and connect with more people.</p>
-              <button className="w-full bg-[#8C6D39] hover:bg-rose-700 text-white font-bold py-3.5 rounded-xl transition-colors shadow-md hover:shadow-lg relative z-10">
+              <button className="w-full bg-gradient-to-r from-[#DB2777] to-[#EC4899] hover:from-[#BE185D] hover:to-[#DB2777] text-white font-bold py-3.5 rounded-xl transition-colors shadow-md hover:shadow-lg relative z-10">
                 Upgrade Now
               </button>
             </div>
@@ -2120,15 +2120,15 @@ Generated on: ${new Date().toLocaleString()}
       {/* Edit All Modal */}
       {isEditModalOpen && createPortal(
         <div className="fixed inset-0 z-[99999] flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm p-0 sm:p-4 transition-all duration-300">
-          <div className="bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in slide-in-from-bottom sm:zoom-in duration-300 border border-white/50">
-            <div className="bg-gradient-to-r from-[#C5A059] to-[#8C6D39] p-5 sm:p-6 flex justify-between items-center text-white">
+          <div className="bg-theme-surface rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in slide-in-from-bottom sm:zoom-in duration-300 border border-white/50">
+            <div className="bg-gradient-to-r from-theme-primary to-theme-pink p-5 sm:p-6 flex justify-between items-center text-white">
               <div>
                 <h3 className="text-xl font-black tracking-wide">Update Information</h3>
                 <p className="text-rose-100 text-xs mt-1 font-medium">Please provide accurate details</p>
               </div>
               <button
                 onClick={() => setIsEditModalOpen(false)}
-                className="bg-white/20 hover:bg-white/30 p-2 rounded-xl transition-colors"
+                className="bg-theme-surface/20 hover:bg-theme-surface/30 p-2 rounded-xl transition-colors"
               >
                 <FaTimes size={20} />
               </button>
@@ -2141,16 +2141,16 @@ Generated on: ${new Date().toLocaleString()}
                     <FaInfoCircle className="mt-1 shrink-0" />
                     <p>Fields in bold cannot be edited. Please contact <span className="text-cyan-600 font-medium cursor-pointer">customer care</span> for any queries.</p>
                   </div>
-                  <div className="text-right text-xs text-gray-500 mb-4">* Marked fields are mandatory</div>
+                  <div className="text-right text-xs text-theme-text-secondary mb-4">* Marked fields are mandatory</div>
 
                   {/* Profile Created By */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-gray-600 font-medium">Profile Managed by *</label>
+                    <label className="text-theme-text-secondary font-medium">Profile Managed by *</label>
                     <div className="sm:col-span-2">
                       <select
                         value={modalData.profileCreatedBy || ''}
                         onChange={(e) => handleModalDataChange('profileCreatedBy', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-[#C5A059] outline-none"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-theme-magenta outline-none"
                       >
                         <option value="">Select Options</option>
                         <option value="Self">Self</option>
@@ -2164,12 +2164,12 @@ Generated on: ${new Date().toLocaleString()}
 
                   {/* Marital Status */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-gray-600 font-medium">Marital Status *</label>
+                    <label className="text-theme-text-secondary font-medium">Marital Status *</label>
                     <div className="sm:col-span-2">
                       <select
                         value={modalData.maritalStatus || ''}
                         onChange={(e) => handleModalDataChange('maritalStatus', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-[#C5A059] outline-none"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-theme-magenta outline-none"
                       >
                         <option value="">Select Options</option>
                         {['Never Married', 'Divorced', 'Widowed', 'Awaiting Divorce', 'Annulled'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2179,12 +2179,12 @@ Generated on: ${new Date().toLocaleString()}
 
                   {/* Height */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-gray-600 font-medium">Height *</label>
+                    <label className="text-theme-text-secondary font-medium">Height *</label>
                     <div className="sm:col-span-2">
                       <select
                         value={modalData.height || ''}
                         onChange={(e) => handleModalDataChange('height', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-[#C5A059] outline-none"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-theme-magenta outline-none"
                       >
                         <option value="">Select Options</option>
                         {Array.from({ length: 41 }, (_, i) => {
@@ -2200,7 +2200,7 @@ Generated on: ${new Date().toLocaleString()}
 
                   {/* Diet */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-start">
-                    <label className="text-gray-600 font-medium mt-1">Diet *</label>
+                    <label className="text-theme-text-secondary font-medium mt-1">Diet *</label>
                     <div className="sm:col-span-2 grid grid-cols-2 gap-y-2">
                       {['Veg', 'Non-Veg', 'Occasionally Non-Veg', 'Eggetarian', 'Jain', 'Vegan'].map(opt => (
                         <label key={opt} className="flex items-center gap-2 text-sm text-gray-700">
@@ -2213,12 +2213,12 @@ Generated on: ${new Date().toLocaleString()}
 
                   {/* Health Info */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-gray-600 font-medium">Health Information</label>
+                    <label className="text-theme-text-secondary font-medium">Health Information</label>
                     <div className="sm:col-span-2">
                       <select
                         value={modalData.healthInformation || ''}
                         onChange={(e) => handleModalDataChange('healthInformation', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-[#C5A059] outline-none"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-theme-magenta outline-none"
                       >
                         <option value="">Select Options</option>
                         {['No Health Problems', 'Minor Health Issues', 'Major Health Issues'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2228,7 +2228,7 @@ Generated on: ${new Date().toLocaleString()}
 
                   {/* Disability */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-gray-600 font-medium">Any Disability? *</label>
+                    <label className="text-theme-text-secondary font-medium">Any Disability? *</label>
                     <div className="sm:col-span-2 flex gap-4">
                       {['None', 'Physical Disability'].map(opt => (
                         <label key={opt} className="flex items-center gap-2 text-sm text-gray-700">
@@ -2241,12 +2241,12 @@ Generated on: ${new Date().toLocaleString()}
 
                   {/* Blood Group */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-gray-600 font-medium">Blood Group:</label>
+                    <label className="text-theme-text-secondary font-medium">Blood Group:</label>
                     <div className="sm:col-span-2">
                       <select
                         value={modalData.bloodGroup || ''}
                         onChange={(e) => handleModalDataChange('bloodGroup', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-[#C5A059] outline-none"
+                        className="w-full px-3 py-2 border rounded-lg focus:ring-theme-magenta outline-none"
                       >
                         <option value="">Select Options</option>
                         {['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2257,10 +2257,10 @@ Generated on: ${new Date().toLocaleString()}
               ) : modalSection === 'verification' ? (
                 <div className="space-y-6">
                   <div className="bg-[#FAF6F0] text-rose-800 p-4 rounded-xl flex items-start gap-3 border border-rose-100">
-                    <FaInfoCircle className="mt-1 shrink-0 text-[#C5A059]" />
+                    <FaInfoCircle className="mt-1 shrink-0 text-theme-magenta" />
                     <div>
                       <p className="font-bold text-sm">Verify your ID</p>
-                      <p className="text-xs text-[#C5A059] mt-0.5">Please upload a clear photo of your Govt. ID (PAN card, Voter ID, or Driving License).</p>
+                      <p className="text-xs text-theme-magenta mt-0.5">Please upload a clear photo of your Govt. ID (PAN card, Voter ID, or Driving License).</p>
                     </div>
                   </div>
 
@@ -2270,7 +2270,7 @@ Generated on: ${new Date().toLocaleString()}
                       <select
                         value={modalData.idProofType || ''}
                         onChange={(e) => handleModalDataChange('idProofType', e.target.value)}
-                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all ${errors.idProofType ? 'border-red-500' : 'border-gray-200'}`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all ${errors.idProofType ? 'border-red-500' : 'border-theme-border'}`}
                       >
                         <option value="">Select ID Type</option>
                         <option value="PAN Card">PAN Card</option>
@@ -2288,7 +2288,7 @@ Generated on: ${new Date().toLocaleString()}
                         value={modalData.idProofNumber || ''}
                         onChange={(e) => handleModalDataChange('idProofNumber', e.target.value)}
                         placeholder="Enter your ID number"
-                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all ${errors.idProofNumber ? 'border-red-500' : 'border-gray-200'}`}
+                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all ${errors.idProofNumber ? 'border-red-500' : 'border-theme-border'}`}
                       />
                     </div>
 
@@ -2304,15 +2304,15 @@ Generated on: ${new Date().toLocaleString()}
                         />
                         <label
                           htmlFor="id-photo-upload"
-                          className={`flex flex-col items-center justify-center border-4 border-dashed rounded-2xl p-8 cursor-pointer transition-all duration-300 ${idProofFile ? 'border-green-400 bg-green-50' : 'border-gray-200 hover:border-rose-400 hover:bg-[#FAF6F0]'}`}
+                          className={`flex flex-col items-center justify-center border-4 border-dashed rounded-2xl p-8 cursor-pointer transition-all duration-300 ${idProofFile ? 'border-green-400 bg-green-50' : 'border-theme-border hover:border-rose-400 hover:bg-[#FAF6F0]'}`}
                         >
-                          <div className={`p-4 rounded-full mb-3 ${idProofFile ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400 group-hover:bg-rose-100 group-hover:text-[#C5A059]'}`}>
+                          <div className={`p-4 rounded-full mb-3 ${idProofFile ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-400 group-hover:bg-rose-100 group-hover:text-theme-magenta'}`}>
                             {idProofFile ? <FaCheck size={28} /> : <FaCamera size={28} />}
                           </div>
                           <p className="font-bold text-sm text-gray-700">
                             {idProofFile ? idProofFile.name : 'Click to upload ID photo'}
                           </p>
-                          <p className="text-xs text-gray-500 mt-1">
+                          <p className="text-xs text-theme-text-secondary mt-1">
                             {idProofFile ? 'Click again to change file' : 'JPEG, PNG (Max 5MB)'}
                           </p>
                         </label>
@@ -2364,14 +2364,14 @@ Generated on: ${new Date().toLocaleString()}
                     };
                     return (
                       <div key={key} className={key === 'aboutMe' ? 'col-span-1 sm:col-span-2 space-y-1' : 'space-y-1'}>
-                        <label className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1 block ml-1">
+                        <label className="text-xs font-bold text-theme-text-secondary uppercase tracking-wider mb-1 block ml-1">
                           {fieldLabels[key] || key.replace(/([A-Z])/g, ' $1').trim()}
                         </label>
                         {typeof value === 'boolean' ? (
                           <select
                             value={value}
                             onChange={(e) => handleModalDataChange(key, e.target.value === 'true')}
-                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
+                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-theme-surface focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-theme-border'} text-gray-800`}
                           >
                             <option value="true">Yes</option>
                             <option value="false">No</option>
@@ -2379,14 +2379,14 @@ Generated on: ${new Date().toLocaleString()}
                         ) : (key === 'diet' || key === 'preferredDiet') ? (
                           <div className="grid grid-cols-2 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 py-2">
                             {['Veg', 'Non-Veg', 'Occasionally Non-Veg', 'Eggetarian', 'Jain', 'Vegan'].map(option => (
-                              <label key={option} className="flex items-center gap-2 text-xs sm:text-sm cursor-pointer hover:text-[#C5A059] transition-colors">
+                              <label key={option} className="flex items-center gap-2 text-xs sm:text-sm cursor-pointer hover:text-theme-magenta transition-colors">
                                 <input
                                   type="radio"
                                   name={`diet-${key}`}
                                   value={option}
                                   checked={value === option}
                                   onChange={(e) => handleModalDataChange(key, e.target.value)}
-                                  className="w-4 h-4 text-[#C5A059] focus:ring-[#C5A059] border-gray-300"
+                                  className="w-4 h-4 text-theme-magenta focus:ring-theme-magenta border-gray-300"
                                 />
                                 {option}
                               </label>
@@ -2395,14 +2395,14 @@ Generated on: ${new Date().toLocaleString()}
                         ) : key === 'disability' ? (
                           <div className="flex gap-4 py-2">
                             {['None', 'Physical Disability'].map(option => (
-                              <label key={option} className="flex items-center gap-2 text-xs sm:text-sm cursor-pointer hover:text-[#C5A059] transition-colors">
+                              <label key={option} className="flex items-center gap-2 text-xs sm:text-sm cursor-pointer hover:text-theme-magenta transition-colors">
                                 <input
                                   type="radio"
                                   name={`disability-${key}`}
                                   value={option}
                                   checked={value === option}
                                   onChange={(e) => handleModalDataChange(key, e.target.value)}
-                                  className="w-4 h-4 text-[#C5A059] focus:ring-[#C5A059] border-gray-300"
+                                  className="w-4 h-4 text-theme-magenta focus:ring-theme-magenta border-gray-300"
                                 />
                                 {option}
                               </label>
@@ -2412,7 +2412,7 @@ Generated on: ${new Date().toLocaleString()}
                           <select
                             value={value || ''}
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
-                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
+                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-theme-surface focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-theme-border'} text-gray-800`}
                           >
                             <option value="">Select {fieldLabels[key] || key.replace(/([A-Z])/g, ' $1').trim().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</option>
                             {key === 'profileCreatedBy' && ['Self', 'Parent', 'Sibling', 'Friend', 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2469,7 +2469,7 @@ Generated on: ${new Date().toLocaleString()}
                           <select
                             value="Other"
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
-                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
+                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-theme-surface focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-theme-border'} text-gray-800`}
                           >
                             <option value="">Select Option</option>
                             {key === 'rashi' && [...rashiOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2490,7 +2490,7 @@ Generated on: ${new Date().toLocaleString()}
                             <select
                               value="Other"
                               onChange={(e) => handleModalDataChange(key, e.target.value)}
-                              className="w-full px-4 py-3 bg-gray-50/50 border border-gray-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium text-gray-800"
+                              className="w-full px-4 py-3 bg-gray-50/50 border border-theme-border rounded-xl focus:bg-theme-surface focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all text-sm font-medium text-gray-800"
                             >
                               {key === 'rashi' && [...rashiOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
                               {key === 'nakshatra' && [...nakshatraOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2505,14 +2505,14 @@ Generated on: ${new Date().toLocaleString()}
                               value={value || ''}
                               onChange={(e) => setModalData(prev => ({ ...prev, [key]: e.target.value }))}
                               placeholder={`Enter custom ${key}`}
-                              className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
+                              className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-theme-surface focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-theme-border'} text-gray-800`}
                             />
                           </div>
                         ) : (key === 'rashi' || key === 'nakshatra' || key === 'religion' || key === 'caste' || key === 'subCaste' || key === 'gotra' || key === 'motherTongue') ? (
                           <select
                             value={[...rashiOptions, ...nakshatraOptions, ...religionOptions, ...communityOptions].includes(value) ? value : 'Other'}
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
-                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
+                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-theme-surface focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-theme-border'} text-gray-800`}
                           >
                             <option value="">Select {key}</option>
                             {key === 'rashi' && [...rashiOptions, 'Other'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -2522,17 +2522,17 @@ Generated on: ${new Date().toLocaleString()}
                           </select>
                         ) : key === 'aboutMe' ? (
                           <div className="space-y-3">
-                            <p className="text-gray-500 text-sm">
+                            <p className="text-theme-text-secondary text-sm">
                               This section will help you make a strong impression on your potential partner. So, express yourself.<br />
                               (NOTE: This section will be screened everytime you update it. Allow upto 24 hours for it to go live.)
                             </p>
                             <textarea
                               value={value || ''}
                               onChange={(e) => handleModalDataChange(key, e.target.value)}
-                              className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all min-h-[160px] text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} text-gray-800`}
+                              className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-theme-surface focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all min-h-[160px] text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-theme-border'} text-gray-800`}
                               placeholder="Let me introduce myself..."
                             />
-                            <div className="flex justify-between text-gray-500 text-sm border-t border-white/50 pt-2">
+                            <div className="flex justify-between text-theme-text-secondary text-sm border-t border-white/50 pt-2">
                               <span>Characters count</span>
                               <span className="font-medium">{value?.length || 0}</span>
                               <span>min. 50, max. 8000</span>
@@ -2545,16 +2545,16 @@ Generated on: ${new Date().toLocaleString()}
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
                             readOnly={key === 'age'}
                             placeholder={key === 'dateOfBirth' ? 'YYYY-MM-DD' : key === 'timeOfBirth' ? 'HH:MM AM/PM' : ''}
-                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-white focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-gray-200'} ${key === 'age' ? 'bg-gray-100 text-gray-500' : 'text-gray-800'}`}
+                            className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-theme-surface focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-theme-border'} ${key === 'age' ? 'bg-gray-100 text-theme-text-secondary' : 'text-gray-800'}`}
                           />
                         )}
 
                         {/* Add support for new preference fields rendering */}
                         {modalSection === 'preferences' && key === 'preferredMotherTongue' && (
-                          <p className="text-xs text-gray-500">Separate multiple languages with commas</p>
+                          <p className="text-xs text-theme-text-secondary">Separate multiple languages with commas</p>
                         )}
                         {key === 'hobbies' && (
-                          <p className="text-xs text-gray-500">Tip: Separate multiple hobbies with comma</p>
+                          <p className="text-xs text-theme-text-secondary">Tip: Separate multiple hobbies with comma</p>
                         )}
                         {errors[key] && (
                           <p className="text-xs text-red-500 mt-1">{errors[key]}</p>
@@ -2569,14 +2569,14 @@ Generated on: ${new Date().toLocaleString()}
                 <button
                   type="button"
                   onClick={() => setIsEditModalOpen(false)}
-                  className="px-6 py-2.5 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-all font-bold text-sm"
+                  className="px-6 py-2.5 rounded-xl border border-theme-border text-theme-text-secondary hover:bg-gray-100 hover:text-gray-900 transition-all font-bold text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-8 py-2.5 rounded-xl bg-gradient-to-r from-[#C5A059] to-[#8C6D39] text-white shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50 hover:-translate-y-0.5 transition-all font-bold text-sm disabled:opacity-50 disabled:hover:translate-y-0"
+                  className="px-8 py-2.5 rounded-xl bg-gradient-to-r from-theme-primary to-theme-pink text-white shadow-lg shadow-rose-500/30 hover:shadow-rose-500/50 hover:-translate-y-0.5 transition-all font-bold text-sm disabled:opacity-50 disabled:hover:translate-y-0"
                 >
                   {loading ? 'Saving...' : 'Save Changes'}
                 </button>

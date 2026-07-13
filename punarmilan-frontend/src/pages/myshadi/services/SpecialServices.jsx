@@ -102,7 +102,7 @@ const SpecialServices = () => {
             let color = "from-gray-300 to-gray-400"; // default
             if (plan.name.toLowerCase().includes("gold")) color = "from-amber-300 to-amber-500";
             else if (plan.name.toLowerCase().includes("platinum")) color = "from-slate-700 to-slate-900";
-            else if (plan.name.toLowerCase().includes("diamond") || plan.name.toLowerCase().includes("elite")) color = "from-[#C5A059] to-[#8C6D39]";
+            else if (plan.name.toLowerCase().includes("diamond") || plan.name.toLowerCase().includes("elite")) color = "from-theme-primary to-theme-pink";
 
             return {
                 name: plan.name,
@@ -229,7 +229,7 @@ const SpecialServices = () => {
       {/* HERO SECTION */}
       <div className="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-gradient-to-br from-slate-900 to-[#1a1c29]">
         <div className="absolute inset-0 overflow-hidden -z-0">
-          <div className="absolute top-0 right-0 w-[] h-[500px] bg-[#C5A059] rounded-full mix-blend-screen filter blur-[120px] opacity-20"></div>
+          <div className="absolute top-0 right-0 w-[] h-[500px] bg-theme-magenta rounded-full mix-blend-screen filter blur-[120px] opacity-20"></div>
           <div className="absolute bottom-0 left-0 w-[] h-[500px] bg-rose-600 rounded-full mix-blend-screen filter blur-[120px] opacity-20"></div>
         </div>
 
@@ -238,7 +238,7 @@ const SpecialServices = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-amber-300 font-medium text-sm mb-8 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-theme-surface/10 border border-white/20 text-amber-300 font-medium text-sm mb-8 backdrop-blur-sm"
           >
             <Gem size={16} /> Elite Relationship Academy
           </motion.div>
@@ -268,7 +268,7 @@ const SpecialServices = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="max-w-4xl mx-auto mb-10 text-gray-400 leading-relaxed text-sm md:text-base bg-white/5 p-6 rounded-2xl backdrop-blur-sm border border-white/10"
+            className="max-w-4xl mx-auto mb-10 text-gray-400 leading-relaxed text-sm md:text-base bg-theme-surface/5 p-6 rounded-2xl backdrop-blur-sm border border-white/10"
           >
             <h3 className="text-white font-bold text-lg mb-2">Our Vision</h3>
             Marriage is not just a ceremony, but a lifelong partnership. Our goal is to prepare couples mentally, emotionally, behaviorally, and practically before marriage, so they can start their married life with trust, understanding, respect, and better communication.
@@ -281,7 +281,7 @@ const SpecialServices = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsModalOpen(true)}
-            className="bg-gradient-to-r from-[#C5A059] to-[#8C6D39] text-white px-8 py-4 rounded-full font-bold text-lg shadow-[0_10px_30px_rgba(197,160,89,0.3)] hover:shadow-[0_15px_40px_rgba(197,160,89,0.5)] transition-all flex items-center gap-2 mx-auto"
+            className="bg-gradient-to-r from-theme-primary to-theme-pink text-white px-8 py-4 rounded-full font-bold text-lg shadow-[0_10px_30px_rgba(197,160,89,0.3)] hover:shadow-[0_15px_40px_rgba(197,160,89,0.5)] transition-all flex items-center gap-2 mx-auto"
           >
             <CalendarCheck size={20} /> Book VIP Consultation
           </motion.button>
@@ -289,13 +289,13 @@ const SpecialServices = () => {
       </div>
 
       {/* SERVICES SECTION */}
-      <div className="py-20 bg-white">
+      <div className="py-20 bg-theme-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 font-serif mb-4">
               Our Services
             </h2>
-            <div className="w-24 h-1 bg-[#C5A059] mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-theme-magenta mx-auto rounded-full"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -306,13 +306,13 @@ const SpecialServices = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-[#C5A059]/30 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(197,160,89,0.1)] group"
+                className="bg-theme-surface rounded-2xl p-6 border border-gray-100 hover:border-[#C5A059]/30 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_10px_30px_rgba(197,160,89,0.1)] group"
               >
-                <div className="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center text-[#C5A059] mb-5 group-hover:scale-110 group-hover:bg-[#C5A059] group-hover:text-white transition-all duration-300">
+                <div className="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center text-theme-magenta mb-5 group-hover:scale-110 group-hover:bg-theme-magenta group-hover:text-white transition-all duration-300">
                   {service.icon}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-theme-text-secondary text-sm leading-relaxed">
                   {service.desc}
                 </p>
               </motion.div>
@@ -328,12 +328,12 @@ const SpecialServices = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 font-serif mb-4">
               Program Duration & Packages
             </h2>
-            <div className="w-24 h-1 bg-[#C5A059] mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-theme-magenta mx-auto rounded-full"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {loading ? (
-                <div className="col-span-1 md:col-span-2 lg:col-span-4 text-center py-10 font-bold text-gray-500 animate-pulse">
+                <div className="col-span-1 md:col-span-2 lg:col-span-4 text-center py-10 font-bold text-theme-text-secondary animate-pulse">
                     Loading our premium packages...
                 </div>
             ) : dbPackages.length > 0 ? (
@@ -344,10 +344,10 @@ const SpecialServices = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.1 }}
-                    className={`relative bg-white rounded-3xl p-8 border ${pkg.popular ? 'border-[#C5A059] shadow-xl scale-105 z-10' : 'border-gray-100 shadow-md'} flex flex-col`}
+                    className={`relative bg-theme-surface rounded-3xl p-8 border ${pkg.popular ? 'border-[#C5A059] shadow-xl scale-105 z-10' : 'border-gray-100 shadow-md'} flex flex-col`}
                 >
                     {pkg.popular && (
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#C5A059] to-[#8C6D39] text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-theme-primary to-theme-pink text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
                         Most Popular
                     </div>
                     )}
@@ -355,7 +355,7 @@ const SpecialServices = () => {
                     <Gem size={28} />
                     </div>
                     <h3 className="text-xl font-bold text-center text-gray-900 mb-2">{pkg.name}</h3>
-                    <div className="text-center text-sm text-gray-500 mb-6 font-medium bg-gray-50 py-1.5 rounded-lg">{pkg.duration} Program</div>
+                    <div className="text-center text-sm text-theme-text-secondary mb-6 font-medium bg-gray-50 py-1.5 rounded-lg">{pkg.duration} Program</div>
                     
                     <div className="text-center mb-8 flex-grow">
                     <span className="text-3xl font-extrabold text-gray-900">{pkg.price}</span>
@@ -366,14 +366,14 @@ const SpecialServices = () => {
                         setFormData({...formData, packageType: pkg.name});
                         setIsModalOpen(true);
                     }}
-                    className={`w-full py-3 rounded-xl font-bold transition-all ${pkg.popular ? 'bg-gradient-to-r from-[#C5A059] to-[#8C6D39] text-white hover:shadow-lg' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'}`}
+                    className={`w-full py-3 rounded-xl font-bold transition-all ${pkg.popular ? 'bg-gradient-to-r from-theme-primary to-theme-pink text-white hover:shadow-lg' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'}`}
                     >
                     Select Package
                     </button>
                 </motion.div>
                 ))
             ) : (
-                <div className="col-span-1 md:col-span-2 lg:col-span-4 text-center py-10 font-bold text-gray-500">
+                <div className="col-span-1 md:col-span-2 lg:col-span-4 text-center py-10 font-bold text-theme-text-secondary">
                     No special packages available at the moment. Please check back later!
                 </div>
             )}
@@ -382,19 +382,19 @@ const SpecialServices = () => {
       </div>
 
       {/* FEATURES & TEAM */}
-      <div className="py-20 bg-white">
+      <div className="py-20 bg-theme-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             
             {/* Features */}
             <div>
               <h3 className="text-2xl font-bold text-gray-900 font-serif mb-8 flex items-center gap-3">
-                <Sparkles className="text-[#C5A059]"/> Special Features
+                <Sparkles className="text-theme-magenta"/> Special Features
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {features.map((feature, i) => (
                   <div key={i} className="flex items-center gap-3 bg-amber-50/50 p-3 rounded-xl border border-amber-100/50">
-                    <CheckCircle2 className="text-[#C5A059] shrink-0" size={20} />
+                    <CheckCircle2 className="text-theme-magenta shrink-0" size={20} />
                     <span className="text-gray-700 font-medium text-sm">{feature}</span>
                   </div>
                 ))}
@@ -404,7 +404,7 @@ const SpecialServices = () => {
             {/* Team */}
             <div>
               <h3 className="text-2xl font-bold text-gray-900 font-serif mb-8 flex items-center gap-3">
-                <Award className="text-[#C5A059]"/> Our Expert Team
+                <Award className="text-theme-magenta"/> Our Expert Team
               </h3>
               <div className="flex flex-wrap gap-3">
                 {team.map((member, i) => (
@@ -443,16 +443,16 @@ const SpecialServices = () => {
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="bg-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl relative"
+              className="bg-theme-surface w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl relative"
             >
               <div className="bg-gradient-to-r from-slate-900 to-slate-800 p-6 text-white text-center relative">
                 <button 
                   onClick={() => setIsModalOpen(false)}
-                  className="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 rounded-full p-1"
+                  className="absolute top-4 right-4 text-white/70 hover:text-white bg-theme-surface/10 rounded-full p-1"
                 >
                   <X size={20} />
                 </button>
-                <Gem className="mx-auto mb-2 text-[#C5A059]" size={32} />
+                <Gem className="mx-auto mb-2 text-theme-magenta" size={32} />
                 <h2 className="text-2xl font-bold font-serif">VIP Consultation</h2>
                 <p className="text-sm text-gray-300 mt-1">Fill the form to book your exclusive session</p>
               </div>
@@ -460,23 +460,23 @@ const SpecialServices = () => {
               <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
-                  <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none bg-gray-50" placeholder="Enter your full name" />
+                  <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-theme-border focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none bg-gray-50" placeholder="Enter your full name" />
                 </div>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
-                    <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none bg-gray-50" placeholder="Email" />
+                    <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-theme-border focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none bg-gray-50" placeholder="Email" />
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
-                    <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none bg-gray-50" placeholder="Phone" />
+                    <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-theme-border focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none bg-gray-50" placeholder="Phone" />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Select Package</label>
-                  <select required name="packageType" value={formData.packageType} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none bg-gray-50 appearance-none font-medium text-gray-700">
+                  <select required name="packageType" value={formData.packageType} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-theme-border focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none bg-gray-50 appearance-none font-medium text-gray-700">
                     <option value="Silver Package">Silver Package (₹25,000)</option>
                     <option value="Gold Package">Gold Package (₹60,000)</option>
                     <option value="Platinum Package">Platinum Package (₹1,25,000)</option>
@@ -486,13 +486,13 @@ const SpecialServices = () => {
 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">Message (Optional)</label>
-                  <textarea name="message" value={formData.message} onChange={handleChange} rows="3" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#C5A059] focus:border-transparent outline-none bg-gray-50 resize-none" placeholder="Any specific requirements..."></textarea>
+                  <textarea name="message" value={formData.message} onChange={handleChange} rows="3" className="w-full px-4 py-3 rounded-xl border border-theme-border focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none bg-gray-50 resize-none" placeholder="Any specific requirements..."></textarea>
                 </div>
 
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-[#C5A059] to-[#8C6D39] text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-70"
+                  className="w-full bg-gradient-to-r from-theme-primary to-theme-pink text-white font-bold text-lg py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 mt-2 disabled:opacity-70"
                 >
                   {isSubmitting ? (
                     <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

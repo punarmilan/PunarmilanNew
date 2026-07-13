@@ -113,11 +113,11 @@ const Profile = ({ onLogout }) => {
             {/* Profile Button - Now visible on all screens */}
             <button
                 onClick={() => navigate('/my-shadi/my-profile')}
-                className="flex items-center gap-1 xs:gap-2 px-1.5 xs:px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-white/10 transition-colors group"
+                className="flex items-center gap-1 xs:gap-2 px-1.5 xs:px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-theme-surface/10 transition-colors group"
                 aria-label="Profile"
             >
                 <div className="relative">
-                    <div className="w-7 h-7 xs:w-8 xs:h-8 rounded-full overflow-hidden border-2 border-white/70 group-hover:border-white bg-white/10 flex items-center justify-center">
+                    <div className="w-7 h-7 xs:w-8 xs:h-8 rounded-full overflow-hidden border-2 border-white/70 group-hover:border-white bg-theme-surface/10 flex items-center justify-center">
                         {photoUrl ? (
                             <img
                                 src={photoUrl}
@@ -135,13 +135,13 @@ const Profile = ({ onLogout }) => {
                         </div>
                     )}
                     {/* Online Status Indicator */}
-                    <div className="absolute bottom-0 right-0 w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full border-2 border-white"></div>
+                    <div className="absolute bottom-0 right-0 w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 bg-theme-success rounded-full border-2 border-white"></div>
                 </div>
 
                 {/* Text shown on md+ screens */}
                 <div className="text-left hidden md:block">
                     <p className="text-[12px] font-bold text-gray-800 leading-tight truncate max-w-[120px]">{displayUser?.fullName || displayUser?.profileId || 'User'}</p>
-                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-tighter mt-0.5">{isPremium ? 'Premium member' : 'Free Account'}</p>
+                    <p className="text-[9px] text-theme-text-secondary font-bold uppercase tracking-tighter mt-0.5">{isPremium ? 'Premium member' : 'Free Account'}</p>
                 </div>
 
                 {/* Chevron removed since there is no dropdown */}

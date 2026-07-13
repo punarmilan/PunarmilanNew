@@ -16,7 +16,7 @@ const Sidebar = ({ sortBy, setSortBy, filterBy, setFilterBy }) => {
     return (
         <aside className="flex flex-col gap-6">
             {/* Sort Section */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-theme-surface rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="bg-gray-50/50 px-5 py-3 border-b border-gray-100">
                     <h3 className="font-bold text-gray-800 text-sm uppercase tracking-wider">Sort By</h3>
                 </div>
@@ -32,7 +32,7 @@ const Sidebar = ({ sortBy, setSortBy, filterBy, setFilterBy }) => {
                                     className="w-4 h-4 text-rose-500 border-gray-300 focus:ring-rose-500 cursor-pointer accent-rose-500"
                                 />
                             </div>
-                            <span className={`text-sm transition-colors ${sortBy === option.id ? 'text-gray-900 font-bold' : 'text-gray-600 group-hover:text-gray-900'}`}>
+                            <span className={`text-sm transition-colors ${sortBy === option.id ? 'text-gray-900 font-bold' : 'text-theme-text-secondary group-hover:text-gray-900'}`}>
                                 {option.label}
                             </span>
                         </label>
@@ -41,7 +41,7 @@ const Sidebar = ({ sortBy, setSortBy, filterBy, setFilterBy }) => {
             </div>
 
             {/* Filter Section */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-theme-surface rounded-xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="bg-gray-50/50 px-5 py-3 border-b border-gray-100">
                     <h3 className="font-bold text-gray-800 text-sm uppercase tracking-wider">Filter</h3>
                 </div>
@@ -57,7 +57,7 @@ const Sidebar = ({ sortBy, setSortBy, filterBy, setFilterBy }) => {
                                     className="w-4 h-4 text-rose-500 border-gray-300 focus:ring-rose-500 cursor-pointer accent-rose-500"
                                 />
                             </div>
-                            <span className={`text-sm transition-colors ${filterBy === option.id ? 'text-gray-900 font-bold' : 'text-gray-600 group-hover:text-gray-900'}`}>
+                            <span className={`text-sm transition-colors ${filterBy === option.id ? 'text-gray-900 font-bold' : 'text-theme-text-secondary group-hover:text-gray-900'}`}>
                                 {option.label}
                             </span>
                         </label>

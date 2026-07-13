@@ -56,7 +56,7 @@ const MoreMenuMobile = () => {
                     id: "termsConditions",
                     label: "Terms & Conditions",
                     icon: "fa-solid fa-file-contract",
-                    color: "text-gray-600",
+                    color: "text-theme-text-secondary",
                     path: "/terms-conditions"
                 },
                 {
@@ -151,7 +151,7 @@ const MoreMenuMobile = () => {
         <div className="more-menu-mobile">
             {/* Main More Menu Section */}
             {menuSections.map(section => (
-                <div key={section.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 mb-4">
+                <div key={section.id} className="bg-theme-surface rounded-xl shadow-sm border border-theme-border p-4 mb-4">
                     {/* Section Header with Toggle */}
                     <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-3">
@@ -162,7 +162,7 @@ const MoreMenuMobile = () => {
                         {/* Toggle Arrow */}
                         <button
                             onClick={() => toggleSection(section.id)}
-                            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+                            className="p-2 text-theme-text-secondary hover:text-gray-700 hover:bg-gray-100 rounded-lg"
                             aria-label={expandedSections[section.id] ? "Collapse menu" : "Expand menu"}
                         >
                             <i className={`fa-solid fa-chevron-${expandedSections[section.id] ? 'up' : 'down'} transition-transform duration-300`}></i>

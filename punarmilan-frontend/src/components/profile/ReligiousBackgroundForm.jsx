@@ -64,7 +64,7 @@ export default function ReligiousBackgroundForm({ onNext }) {
               Religious Background
             </h2>
 
-            <p className="text-gray-500 mt-1">
+            <p className="text-theme-text-secondary mt-1">
               Tell us about yourself to create your perfect profile
             </p>
           </div>
@@ -96,8 +96,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -128,8 +128,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -168,8 +168,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -205,8 +205,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -245,8 +245,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -282,8 +282,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -319,8 +319,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -356,8 +356,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -393,9 +393,9 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -421,8 +421,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -458,8 +458,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -492,8 +492,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100

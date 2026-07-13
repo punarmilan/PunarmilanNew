@@ -202,8 +202,8 @@ import {
                             </h2>
                             
                             <div className="max-w-2xl mx-auto">
-                                <div className="bg-white/40 backdrop-blur-md px-6 py-2 md:px-8 md:py-3 rounded-full border border-white/50 shadow-sm inline-block">
-                                    <p className="text-[#8C6D39] text-sm md:text-base font-black tracking-wide">
+                                <div className="bg-theme-surface/40 backdrop-blur-md px-6 py-2 md:px-8 md:py-3 rounded-full border border-white/50 shadow-sm inline-block">
+                                    <p className="text-theme-pink text-sm md:text-base font-black tracking-wide">
                                         Save upto 85% on Premium Plans!! Valid for limited period!
                                     </p>
                                 </div>
@@ -227,13 +227,13 @@ import {
                     )}
 
                     {/* Icon */}
-                    <div className="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center shadow-sm mb-4 mt-2 relative z-10">
+                    <div className="w-16 h-16 mx-auto bg-theme-surface rounded-full flex items-center justify-center shadow-sm mb-4 mt-2 relative z-10">
                       {plan.icon}
                     </div>
 
                     {/* Title & Duration */}
                     <h3 className="text-xl font-bold text-gray-800 tracking-tight">{plan.name}</h3>
-                    <p className="text-xs text-gray-500 font-medium mb-4">{plan.duration}</p>
+                    <p className="text-xs text-theme-text-secondary font-medium mb-4">{plan.duration}</p>
 
                     {/* Pricing */}
                     <div className="flex justify-center items-center gap-2 mb-1">
@@ -247,7 +247,7 @@ import {
                     <div className={`text-4xl font-black mb-1 tracking-tighter ${plan.design.textMain}`}>
                       ₹{plan.discountedPrice.toLocaleString("en-IN")}
                     </div>
-                    <p className="text-[10px] text-gray-500 mb-6 font-medium">
+                    <p className="text-[10px] text-theme-text-secondary mb-6 font-medium">
                       ₹{plan.perMonth}/month
                     </p>
 
@@ -257,7 +257,7 @@ import {
                         {plan.features.map((feature, idx) => (
                           <li
                             key={idx}
-                            className="flex items-center gap-3 text-[13px] text-gray-600 font-medium"
+                            className="flex items-center gap-3 text-[13px] text-theme-text-secondary font-medium"
                           >
                             <div className={`w-4 h-4 rounded-full flex items-center justify-center text-white flex-shrink-0 ${plan.design.checkBg}`}>
                               <Check size={10} strokeWidth={4} />
@@ -297,7 +297,7 @@ import {
             }
           `}</style>
           <div className="max-w-7xl mx-auto text-center pb-8 pt-2">
-                <p className="text-gray-600 drop-shadow-sm text-sm font-bold opacity-90 tracking-wide">
+                <p className="text-theme-text-secondary drop-shadow-sm text-sm font-bold opacity-90 tracking-wide">
                     Trusted by thousands of members. Secure payment options available.
                 </p>
             </div>
@@ -314,7 +314,7 @@ import {
                             </h3>
                             <button
                                 onClick={() => setShowModal(false)}
-                                className="text-gray-500 hover:text-rose-600 bg-white/50 hover:bg-white p-2 rounded-full shadow-sm hover:shadow transition-all"
+                                className="text-theme-text-secondary hover:text-rose-600 bg-theme-surface/50 hover:bg-theme-surface p-2 rounded-full shadow-sm hover:shadow transition-all"
                             >
                                 <X className="w-5 h-5 cursor-pointer" />
                             </button>
@@ -326,7 +326,7 @@ import {
                             <div className="flex justify-between items-center pb-5 border-b border-white/30">
                                 <div>
                                     <p className="text-lg font-bold text-gray-800">
-                                        {selectedPlan.name} <span className="text-sm font-medium text-gray-500 bg-gray-100 px-2 py-1 rounded-full ml-1">({selectedPlan.duration})</span>
+                                        {selectedPlan.name} <span className="text-sm font-medium text-theme-text-secondary bg-gray-100 px-2 py-1 rounded-full ml-1">({selectedPlan.duration})</span>
                                     </p>
                                 </div>
                                 <p className="text-xl font-black text-gray-800">
@@ -345,7 +345,7 @@ import {
                             </div>
 
                             {/* Add-ons */}
-                            <div className="space-y-3 bg-white/30 backdrop-blur-md p-4 rounded-2xl border border-white/40 shadow-sm">
+                            <div className="space-y-3 bg-theme-surface/30 backdrop-blur-md p-4 rounded-2xl border border-white/40 shadow-sm">
                                 {/* Extra Contacts */}
                                 <label className="flex items-center justify-between group cursor-pointer">
                                     <div className="flex items-center gap-3">
@@ -367,7 +367,7 @@ import {
                                             Add {selectedPlan.extraContacts} extra Contact nos.
                                         </span>
                                     </div>
-                                    <span className="text-gray-500 font-semibold">
+                                    <span className="text-theme-text-secondary font-semibold">
                                         ₹{selectedPlan.extraContactPrice}
                                     </span>
                                 </label>
@@ -391,10 +391,10 @@ import {
                                         </div>
                                         <div className="flex items-center gap-1.5">
                                             <span className="text-gray-700 font-medium group-hover:text-rose-600 transition-colors">Promote my Profile</span>
-                                            <HelpCircle className="w-4 h-4 text-gray-400 hover:text-gray-600" />
+                                            <HelpCircle className="w-4 h-4 text-gray-400 hover:text-theme-text-secondary" />
                                         </div>
                                     </div>
-                                    <span className="text-gray-500 font-semibold">
+                                    <span className="text-theme-text-secondary font-semibold">
                                         ₹{selectedPlan.promotePrice}
                                     </span>
                                 </label>
@@ -418,10 +418,10 @@ import {
                                         </div>
                                         <div className="flex items-center gap-1.5">
                                             <span className="text-gray-700 font-medium group-hover:text-rose-600 transition-colors">Contribute to PunarMilan.org</span>
-                                            <HelpCircle className="w-4 h-4 text-gray-400 hover:text-gray-600" />
+                                            <HelpCircle className="w-4 h-4 text-gray-400 hover:text-theme-text-secondary" />
                                         </div>
                                     </div>
-                                    <span className="text-gray-500 font-semibold">₹{selectedPlan.contribution}</span>
+                                    <span className="text-theme-text-secondary font-semibold">₹{selectedPlan.contribution}</span>
                                 </label>
                             </div>
 
@@ -688,10 +688,10 @@ export default Payment;
 //     <div className="min-h-screen bg-[#f8f5f2] p-4 md:p-8">
 //       <div className="max-w-7xl mx-auto">
 //         {/* Header */}
-//         <div className="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-rose-100 mb-8">
+//         <div className="bg-theme-surface rounded-[2rem] p-6 md:p-8 shadow-sm border border-rose-100 mb-8">
 //           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
 //             <div>
-//               <div className="inline-flex items-center gap-2 bg-[#FAF6F0] text-[#C5A059] px-4 py-2 rounded-full text-sm font-semibold mb-4">
+//               <div className="inline-flex items-center gap-2 bg-[#FAF6F0] text-theme-magenta px-4 py-2 rounded-full text-sm font-semibold mb-4">
 //                 <Zap size={17} />
 //                 Premium Membership
 //               </div>
@@ -700,7 +700,7 @@ export default Payment;
 //                 Upgrade Your Plan
 //               </h1>
 
-//               <p className="text-gray-500 mt-3 max-w-2xl">
+//               <p className="text-theme-text-secondary mt-3 max-w-2xl">
 //                 Get more profile views, direct contact access, premium matches,
 //                 and better visibility for your matrimonial profile.
 //               </p>
@@ -727,7 +727,7 @@ export default Payment;
 //           {plans.map((plan) => (
 //             <div
 //               key={plan.name}
-//               className={`relative bg-white rounded-[2rem] border shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-300 overflow-hidden ${
+//               className={`relative bg-theme-surface rounded-[2rem] border shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-300 overflow-hidden ${
 //                 plan.popular ? "border-rose-300 scale-[1.02]" : "border-gray-100"
 //               }`}
 //             >
@@ -738,7 +738,7 @@ export default Payment;
 //               )}
 
 //               <div className={`bg-gradient-to-r ${plan.color} p-7 text-white`}>
-//                 <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center mb-5">
+//                 <div className="w-14 h-14 rounded-2xl bg-theme-surface/20 flex items-center justify-center mb-5">
 //                   {plan.icon}
 //                 </div>
 
@@ -756,7 +756,7 @@ export default Payment;
 //                 <ul className="space-y-4">
 //                  {plan.features.map((benefit) => (
 //                     <li key={benefit} className="flex items-start gap-3">
-//                       <span className="w-6 h-6 rounded-full bg-[#FAF6F0] text-[#C5A059] flex items-center justify-center flex-shrink-0">
+//                       <span className="w-6 h-6 rounded-full bg-[#FAF6F0] text-theme-magenta flex items-center justify-center flex-shrink-0">
 //                         <Check size={16} />
 //                       </span>
 //                       <span className="text-sm text-gray-700">{benefit}</span>
@@ -768,8 +768,8 @@ export default Payment;
 //                   onClick={() => handleContinue(plan)}
 //                   className={`mt-8 w-full py-4 rounded-2xl font-bold transition ${
 //                     plan.popular
-//                       ? "bg-gradient-to-r from-[#C5A059] to-[#8C6D39] text-white shadow-lg shadow-rose-200 hover:scale-[1.02]"
-//                       : "bg-rose-100 text-[#C5A059] hover:bg-rose-200"
+//                       ? "bg-gradient-to-r from-theme-primary to-theme-pink text-white shadow-lg shadow-rose-200 hover:scale-[1.02]"
+//                       : "bg-rose-100 text-theme-magenta hover:bg-rose-200"
 //                   }`}
 //                 >
 //                   Choose {plan.name}
@@ -784,11 +784,11 @@ export default Payment;
 //                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
 //                     <div className="dashboard-card-bg rounded-3xl shadow-2xl w-full max-w-md transform transition-all duration-300 animate-slideUp">
 //                         {/* Modal Header */}
-//                         <div className="flex items-center justify-between p-6 border-b border-gray-200">
+//                         <div className="flex items-center justify-between p-6 border-b border-theme-border">
 //                             <h3 className="text-2xl font-bold text-gray-800">Order Summary</h3>
 //                             <button
 //                                 onClick={() => setShowModal(false)}
-//                                 className="text-gray-400 hover:text-gray-600 transition-colors"
+//                                 className="text-gray-400 hover:text-theme-text-secondary transition-colors"
 //                             >
 //                                 <X className="w-6 h-6 cursor-pointer" />
 //                             </button>
@@ -797,7 +797,7 @@ export default Payment;
 //                         {/* Modal Body */}
 //                         <div className="p-6 space-y-4">
 //                             {/* Plan Details */}
-//                             <div className="flex justify-between items-center pb-4 border-b border-gray-200">
+//                             <div className="flex justify-between items-center pb-4 border-b border-theme-border">
 //                                 <div>
 //                                     <p className="text-lg font-semibold text-gray-800">
 //                                         {selectedPlan.name} ({selectedPlan.duration})
@@ -809,7 +809,7 @@ export default Payment;
 //                             </div>
 
 //                             {/* Savings */}
-//                             <div className="flex justify-between items-center pb-4 border-b border-gray-200">
+//                             <div className="flex justify-between items-center pb-4 border-b border-theme-border">
 //                                 <p className="text-emerald-600 font-semibold">
 //                                     Savings ({selectedPlan.discount}% off)
 //                                 </p>
@@ -838,7 +838,7 @@ export default Payment;
 //                                             Add {selectedPlan.extraContacts} extra Contact nos.
 //                                         </span>
 //                                     </div>
-//                                     <span className="text-gray-500">
+//                                     <span className="text-theme-text-secondary">
 //                                         ₹{selectedPlan.extraContactPrice}
 //                                     </span>
 //                                 </label>
@@ -862,7 +862,7 @@ export default Payment;
 //                                             <HelpCircle className="w-4 h-4 text-gray-400" />
 //                                         </div>
 //                                     </div>
-//                                     <span className="text-gray-500">
+//                                     <span className="text-theme-text-secondary">
 //                                         ₹{selectedPlan.promotePrice}
 //                                     </span>
 //                                 </label>
@@ -886,12 +886,12 @@ export default Payment;
 //                                             <HelpCircle className="w-4 h-4 text-gray-400" />
 //                                         </div>
 //                                     </div>
-//                                     <span className="text-gray-500">₹{selectedPlan.contribution}</span>
+//                                     <span className="text-theme-text-secondary">₹{selectedPlan.contribution}</span>
 //                                 </label>
 //                             </div>
 
 //                             {/* Total Amount */}
-//                             <div className="pt-4 border-t-2 border-gray-200">
+//                             <div className="pt-4 border-t-2 border-theme-border">
 //                                 <div className="flex justify-between items-center mb-4">
 //                                     <p className="text-xl font-bold text-gray-800">Total Amount</p>
 //                                     <p className="text-3xl font-bold text-teal-600">
@@ -920,12 +920,12 @@ export default Payment;
 //             )}
 
 //         {/* Bottom Info */}
-//         <div className="mt-8 bg-white rounded-[2rem] p-6 border border-gray-100 shadow-sm">
+//         <div className="mt-8 bg-theme-surface rounded-[2rem] p-6 border border-gray-100 shadow-sm">
 //           <h3 className="text-lg font-bold text-gray-900 mb-3">
 //             Why upgrade?
 //           </h3>
 
-//           <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-600">
+//           <div className="grid md:grid-cols-3 gap-4 text-sm text-theme-text-secondary">
 //             <p>✅ Increase your profile visibility among suitable matches.</p>
 //             <p>✅ Contact interested profiles directly and faster.</p>
 //             <p>✅ Get premium support and better match recommendations.</p>

@@ -54,7 +54,7 @@ const WorkWithUsPage = () => {
 
         <div className="relative max-w-7xl mx-auto px-6 py-28 text-center">
 
-          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/10 px-5 py-2 rounded-full">
+          <div className="inline-flex items-center gap-2 bg-theme-surface/10 border border-white/10 px-5 py-2 rounded-full">
 
             <Briefcase className="w-4 h-4 text-pink-500" />
 
@@ -129,7 +129,7 @@ const WorkWithUsPage = () => {
 
       {/* Perks */}
 
-      <section className="bg-white/[0.02] border-y border-white/5">
+      <section className="bg-theme-surface/[0.02] border-y border-white/5">
 
         <div className="max-w-6xl mx-auto px-6 py-24">
 
@@ -147,7 +147,7 @@ const WorkWithUsPage = () => {
 
               <div
                 key={perk}
-                className="bg-white/[0.03] border border-white/10 rounded-3xl p-8"
+                className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8"
               >
 
                 <CheckCircle2 className="text-green-500 mb-5" />
@@ -184,7 +184,7 @@ const WorkWithUsPage = () => {
 
             <div
               key={job.title}
-              className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+              className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
             >
 
               <div>

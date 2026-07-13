@@ -19,7 +19,7 @@ export default function EmptyStateInbox() {
                     </div>
 
                     {/* Small Heart Icon - Top Right */}
-                    <div className="absolute -top-2 -right-2 sm:top-0 sm:right-0 bg-white rounded-full w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center shadow-lg">
+                    <div className="absolute -top-2 -right-2 sm:top-0 sm:right-0 bg-theme-surface rounded-full w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center shadow-lg">
                         <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-red-500 fill-red-500" />
                     </div>
                 </div>

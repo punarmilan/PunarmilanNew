@@ -17,7 +17,7 @@ export default function EmptyStateInbox() {
                     <div className="relative w-48 h-48 mx-auto mb-4">
                         {/* Main character circle */}
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-32 h-32 bg-white rounded-full border-4 border-gray-800 relative">
+                            <div className="w-32 h-32 bg-theme-surface rounded-full border-4 border-gray-800 relative">
                                 {/* Face */}
                                 <div className="absolute top-10 left-8 flex gap-3">
                                     <div className="w-2 h-2 bg-gray-800 rounded-full"></div>
@@ -54,7 +54,7 @@ export default function EmptyStateInbox() {
                                 {/* Mailbox */}
                                 <div className="relative w-12 h-10 bg-red-600 rounded-lg">
                                     <div className="absolute top-0 left-0 right-0 h-6 bg-red-500 rounded-t-lg"></div>
-                                    <div className="absolute bottom-2 left-2 w-2 h-2 bg-white rounded-full"></div>
+                                    <div className="absolute bottom-2 left-2 w-2 h-2 bg-theme-surface rounded-full"></div>
                                 </div>
                                 {/* Flag */}
                                 <div className="absolute -right-1 top-2 w-4 h-3 bg-yellow-400 rounded-sm"></div>

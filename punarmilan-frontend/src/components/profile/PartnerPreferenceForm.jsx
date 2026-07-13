@@ -50,7 +50,7 @@ export default function PartnerPreferenceForm({ onNext }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       className="
-        bg-white/90
+        bg-theme-surface/90
         backdrop-blur-xl
         rounded-[32px]
         border
@@ -88,7 +88,7 @@ export default function PartnerPreferenceForm({ onNext }) {
               Partner Preferences
             </h2>
 
-            <p className="text-gray-500 mt-1 text-sm md:text-base">
+            <p className="text-theme-text-secondary mt-1 text-sm md:text-base">
               Define your ideal life partner preferences
             </p>
           </div>
@@ -118,9 +118,9 @@ export default function PartnerPreferenceForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -157,9 +157,9 @@ export default function PartnerPreferenceForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -191,7 +191,7 @@ export default function PartnerPreferenceForm({ onNext }) {
 
               <select
                 {...register("religion")}
-                className="w-full h-14 px-5 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
+                className="w-full h-14 px-5 rounded-2xl border border-theme-border bg-gray-50 focus:bg-theme-surface focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
               >
                 <option>Open</option>
                 <option>Hindu</option>
@@ -213,7 +213,7 @@ export default function PartnerPreferenceForm({ onNext }) {
 
               <select
                 {...register("motherTongue")}
-                className="w-full h-14 px-5 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
+                className="w-full h-14 px-5 rounded-2xl border border-theme-border bg-gray-50 focus:bg-theme-surface focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
               >
                 <option>Open</option>
                 <option>Marathi</option>
@@ -235,7 +235,7 @@ export default function PartnerPreferenceForm({ onNext }) {
 
               <select
                 {...register("city")}
-                className="w-full h-14 px-5 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
+                className="w-full h-14 px-5 rounded-2xl border border-theme-border bg-gray-50 focus:bg-theme-surface focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
               >
                 <option>Open</option>
                 <option>Pune</option>
@@ -257,7 +257,7 @@ export default function PartnerPreferenceForm({ onNext }) {
 
               <select
                 {...register("education")}
-                className="w-full h-14 px-5 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
+                className="w-full h-14 px-5 rounded-2xl border border-theme-border bg-gray-50 focus:bg-theme-surface focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
               >
                 <option>Open</option>
                 <option>B.Tech</option>
@@ -279,7 +279,7 @@ export default function PartnerPreferenceForm({ onNext }) {
 
               <select
                 {...register("profession")}
-                className="w-full h-14 px-5 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
+                className="w-full h-14 px-5 rounded-2xl border border-theme-border bg-gray-50 focus:bg-theme-surface focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
               >
                 <option>Open</option>
                 <option>Software Engineer</option>
@@ -301,7 +301,7 @@ export default function PartnerPreferenceForm({ onNext }) {
 
               <select
                 {...register("income")}
-                className="w-full h-14 px-5 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
+                className="w-full h-14 px-5 rounded-2xl border border-theme-border bg-gray-50 focus:bg-theme-surface focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
               >
                 <option>Open</option>
                 <option>3+ LPA</option>
@@ -322,7 +322,7 @@ export default function PartnerPreferenceForm({ onNext }) {
 
               <select
                 {...register("diet")}
-                className="w-full h-14 px-5 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
+                className="w-full h-14 px-5 rounded-2xl border border-theme-border bg-gray-50 focus:bg-theme-surface focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
               >
                 <option>Open</option>
                 <option>Vegetarian</option>
@@ -342,7 +342,7 @@ export default function PartnerPreferenceForm({ onNext }) {
 
               <select
                 {...register("smoking")}
-                className="w-full h-14 px-5 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
+                className="w-full h-14 px-5 rounded-2xl border border-theme-border bg-gray-50 focus:bg-theme-surface focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
               >
                 <option>Open</option>
                 <option>No</option>
@@ -362,7 +362,7 @@ export default function PartnerPreferenceForm({ onNext }) {
 
               <select
                 {...register("drinking")}
-                className="w-full h-14 px-5 rounded-2xl border border-gray-200 bg-gray-50 focus:bg-white focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
+                className="w-full h-14 px-5 rounded-2xl border border-theme-border bg-gray-50 focus:bg-theme-surface focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all shadow-sm text-gray-700"
               >
                 <option>Open</option>
                 <option>No</option>
@@ -402,7 +402,7 @@ export default function PartnerPreferenceForm({ onNext }) {
                 Show Verified Profiles Only
               </p>
 
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="text-sm text-theme-text-secondary mt-1">
                 Get better trusted matches with verified accounts
               </p>
             </div>

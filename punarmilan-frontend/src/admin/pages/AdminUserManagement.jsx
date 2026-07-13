@@ -160,16 +160,16 @@ const AdminUserManagement = () => {
         <div className="space-y-6">
             {/* Tab Switcher */}
             {['ROLE_SUPER_ADMIN', 'ROLE_SUB_ADMIN'].includes(admin?.role) && (
-                <div className="flex bg-white p-1 rounded-2xl shadow-sm border border-gray-100 w-fit mb-6">
+                <div className="flex bg-theme-surface p-1 rounded-2xl shadow-sm border border-gray-100 w-fit mb-6">
                     <button
                         onClick={() => { setActiveTab('users'); setPage(0); }}
-                        className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'users' ? 'bg-pink-600 text-white shadow-lg shadow-pink-100' : 'text-gray-500 hover:bg-gray-50'}`}
+                        className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'users' ? 'bg-pink-600 text-white shadow-lg shadow-pink-100' : 'text-theme-text-secondary hover:bg-gray-50'}`}
                     >
                         <Users size={16} /> User Management
                     </button>
                     <button
                         onClick={() => { setActiveTab('staff'); setPage(0); }}
-                        className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'staff' ? 'bg-pink-600 text-white shadow-lg shadow-pink-100' : 'text-gray-500 hover:bg-gray-50'}`}
+                        className={`px-6 py-2.5 rounded-xl font-bold text-sm transition-all flex items-center gap-2 ${activeTab === 'staff' ? 'bg-pink-600 text-white shadow-lg shadow-pink-100' : 'text-theme-text-secondary hover:bg-gray-50'}`}
                     >
                         <ShieldCheck size={16} /> Staff Management
                     </button>
@@ -179,7 +179,7 @@ const AdminUserManagement = () => {
             {activeTab === 'users' ? (
                 <>
                     {/* Filters Bar */}
-                    <div className="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <div className="bg-theme-surface p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
                             <div className="relative">
                                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -188,7 +188,7 @@ const AdminUserManagement = () => {
                                     value={filters.email}
                                     onChange={handleFilterChange}
                                     placeholder="Email"
-                                    className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all text-sm"
+                                    className="w-full pl-10 pr-4 py-2 border border-theme-border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all text-sm"
                                 />
                             </div>
                             <div className="relative">
@@ -198,7 +198,7 @@ const AdminUserManagement = () => {
                                     value={filters.mobileNumber}
                                     onChange={handleFilterChange}
                                     placeholder="Mobile"
-                                    className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all text-sm"
+                                    className="w-full pl-10 pr-4 py-2 border border-theme-border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all text-sm"
                                 />
                             </div>
                             <div className="relative">
@@ -208,14 +208,14 @@ const AdminUserManagement = () => {
                                     value={filters.city}
                                     onChange={handleFilterChange}
                                     placeholder="City"
-                                    className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all text-sm"
+                                    className="w-full pl-10 pr-4 py-2 border border-theme-border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all text-sm"
                                 />
                             </div>
                             <select
                                 name="gender"
                                 value={filters.gender}
                                 onChange={handleFilterChange}
-                                className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-white cursor-pointer text-sm"
+                                className="w-full px-4 py-2 border border-theme-border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-theme-surface cursor-pointer text-sm"
                             >
                                 <option value="">Genders</option>
                                 <option value="Male">Male</option>
@@ -225,7 +225,7 @@ const AdminUserManagement = () => {
                                 name="religion"
                                 value={filters.religion}
                                 onChange={handleFilterChange}
-                                className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-white cursor-pointer text-sm"
+                                className="w-full px-4 py-2 border border-theme-border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-theme-surface cursor-pointer text-sm"
                             >
                                 <option value="">Religions</option>
                                 {['Hindu', 'Muslim', 'Sikh', 'Christian', 'Buddhist', 'Jain', 'Other'].map(r => (
@@ -236,7 +236,7 @@ const AdminUserManagement = () => {
                                 name="enabled"
                                 value={filters.enabled}
                                 onChange={handleFilterChange}
-                                className="w-full px-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-white cursor-pointer text-sm"
+                                className="w-full px-4 py-2 border border-theme-border rounded-xl focus:ring-2 focus:ring-pink-500 outline-none transition-all appearance-none bg-theme-surface cursor-pointer text-sm"
                             >
                                 <option value="">Status</option>
                                 <option value="true">Active</option>
@@ -252,7 +252,7 @@ const AdminUserManagement = () => {
                                 </button>
                                 <button
                                     onClick={() => { resetFilters(); fetchUsers(); }}
-                                    className="px-6 py-2.5 sm:py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-all font-bold text-gray-600 active:scale-95 text-sm"
+                                    className="px-6 py-2.5 sm:py-3 border border-theme-border rounded-xl hover:bg-gray-50 transition-all font-bold text-theme-text-secondary active:scale-95 text-sm"
                                 >
                                     Reset
                                 </button>
@@ -261,17 +261,17 @@ const AdminUserManagement = () => {
                     </div>
 
                     {/* Users Table */}
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div className="bg-theme-surface rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
                                 <thead className="bg-gray-50/50 border-b border-gray-100">
                                     <tr>
-                                        <th className="px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">User</th>
-                                        <th className="hidden sm:table-cell px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Profile ID</th>
-                                        <th className="hidden lg:table-cell px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Contact</th>
-                                        <th className="hidden md:table-cell px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Verification</th>
-                                        <th className="px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                                        <th className="px-4 sm:px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
+                                        <th className="px-4 sm:px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider">User</th>
+                                        <th className="hidden sm:table-cell px-4 sm:px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider">Profile ID</th>
+                                        <th className="hidden lg:table-cell px-4 sm:px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider">Contact</th>
+                                        <th className="hidden md:table-cell px-4 sm:px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider">Verification</th>
+                                        <th className="px-4 sm:px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider">Status</th>
+                                        <th className="px-4 sm:px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
@@ -301,7 +301,7 @@ const AdminUserManagement = () => {
                                                         )}
                                                         <div className="min-w-0">
                                                             <p className="text-xs sm:text-sm font-bold text-gray-800 truncate">{user.profile?.fullName || 'No Name'}</p>
-                                                            <p className="text-[9px] sm:text-[10px] text-gray-500 truncate">{user.email}</p>
+                                                            <p className="text-[9px] sm:text-[10px] text-theme-text-secondary truncate">{user.email}</p>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -361,14 +361,14 @@ const AdminUserManagement = () => {
 
                         {/* Pagination */}
                         <div className="px-6 py-5 bg-gray-50/50 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-                            <p className="text-xs font-medium text-gray-500">
+                            <p className="text-xs font-medium text-theme-text-secondary">
                                 Showing <span className="text-gray-800 font-bold">{users.length}</span> of <span className="text-gray-800 font-bold">{totalUsers}</span> registered users
                             </p>
                             <div className="flex items-center gap-2">
                                 <button
                                     disabled={page === 0}
                                     onClick={() => setPage(page - 1)}
-                                    className="px-4 py-2 bg-white border border-gray-200 rounded-xl hover:border-pink-300 hover:text-pink-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all text-xs font-bold"
+                                    className="px-4 py-2 bg-theme-surface border border-theme-border rounded-xl hover:border-pink-300 hover:text-pink-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all text-xs font-bold"
                                 >
                                     Previous
                                 </button>
@@ -378,7 +378,7 @@ const AdminUserManagement = () => {
                                 <button
                                     disabled={(page + 1) * size >= totalUsers}
                                     onClick={() => setPage(page + 1)}
-                                    className="px-4 py-2 bg-white border border-gray-200 rounded-xl hover:border-pink-300 hover:text-pink-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all text-xs font-bold"
+                                    className="px-4 py-2 bg-theme-surface border border-theme-border rounded-xl hover:border-pink-300 hover:text-pink-600 disabled:opacity-40 disabled:cursor-not-allowed transition-all text-xs font-bold"
                                 >
                                     Next
                                 </button>
@@ -399,16 +399,16 @@ const AdminUserManagement = () => {
                         </button>
                     </div>
 
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div className="bg-theme-surface rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
                                 <thead className="bg-gray-50/50 border-b border-gray-100">
                                     <tr>
-                                        <th className="px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Staff Info</th>
-                                        <th className="px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Role</th>
-                                        <th className="px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Status</th>
-                                        <th className="px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider">Last Login</th>
-                                        <th className="px-6 py-4 text-[10px] font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
+                                        <th className="px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider">Staff Info</th>
+                                        <th className="px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider">Role</th>
+                                        <th className="px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider">Status</th>
+                                        <th className="px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider">Last Login</th>
+                                        <th className="px-6 py-4 text-[10px] font-bold text-theme-text-secondary uppercase tracking-wider text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
@@ -431,7 +431,7 @@ const AdminUserManagement = () => {
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 bg-gray-100 text-gray-600 rounded-lg">
+                                                    <span className="text-[10px] font-black uppercase tracking-widest px-3 py-1 bg-gray-100 text-theme-text-secondary rounded-lg">
                                                         {s.role.replace('ROLE_', '').replace('_', ' ')}
                                                     </span>
                                                 </td>
@@ -440,7 +440,7 @@ const AdminUserManagement = () => {
                                                         {s.status ? 'Active' : 'Disabled'}
                                                     </span>
                                                 </td>
-                                                <td className="px-6 py-4 text-xs text-gray-500">
+                                                <td className="px-6 py-4 text-xs text-theme-text-secondary">
                                                     {s.lastLogin ? new Date(s.lastLogin).toLocaleString() : 'Never'}
                                                 </td>
                                                 <td className="px-6 py-4 text-right">
@@ -463,7 +463,7 @@ const AdminUserManagement = () => {
                     {/* Add Staff Modal */}
                     {isAddStaffModalOpen && (
                         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-                            <form onSubmit={handleAddStaff} className="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in duration-300">
+                            <form onSubmit={handleAddStaff} className="bg-theme-surface rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-in zoom-in duration-300">
                                 <div className="bg-gray-900 p-6 text-white flex justify-between items-center">
                                     <h3 className="text-lg font-black uppercase tracking-tight">Create Staff Member</h3>
                                     <button type="button" onClick={() => setIsAddStaffModalOpen(false)} className="text-gray-400 hover:text-white transition-colors">
@@ -506,7 +506,7 @@ const AdminUserManagement = () => {
             {/* Profile Detail Modal */}
             {isViewModalOpen && selectedUser && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-                    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden animate-in zoom-in duration-300 flex flex-col">
+                    <div className="bg-theme-surface rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden animate-in zoom-in duration-300 flex flex-col">
                         {/* Modal Header */}
                         <div className="bg-gradient-to-r from-pink-600 to-rose-600 p-6 text-white flex justify-between items-center shrink-0">
                             <div className="flex items-center gap-4">
@@ -517,7 +517,7 @@ const AdminUserManagement = () => {
                                         className="h-14 w-14 rounded-2xl object-cover border border-white/30 shadow-lg"
                                     />
                                 ) : (
-                                    <div className="h-14 w-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-2xl font-bold border border-white/30">
+                                    <div className="h-14 w-14 rounded-2xl bg-theme-surface/20 backdrop-blur-md flex items-center justify-center text-white text-2xl font-bold border border-white/30">
                                         {selectedUser.user?.profile?.fullName?.charAt(0) || 'U'}
                                     </div>
                                 )}
@@ -528,7 +528,7 @@ const AdminUserManagement = () => {
                             </div>
                             <button
                                 onClick={() => setIsViewModalOpen(false)}
-                                className="p-2 bg-white/10 hover:bg-white/20 rounded-xl transition-colors"
+                                className="p-2 bg-theme-surface/10 hover:bg-theme-surface/20 rounded-xl transition-colors"
                             >
                                 <XCircle size={24} />
                             </button>
@@ -602,7 +602,7 @@ const AdminUserManagement = () => {
                                             <FaMapMarkerAlt className="text-pink-500 flex-shrink-0" />
                                             <span className="text-xs sm:text-sm font-bold">{selectedUser.user?.profile?.city}, {selectedUser.user?.profile?.state}, {selectedUser.user?.profile?.country}</span>
                                         </div>
-                                        <p className="text-[10px] sm:text-xs text-gray-500 pl-6">{selectedUser.user?.profile?.address}</p>
+                                        <p className="text-[10px] sm:text-xs text-theme-text-secondary pl-6">{selectedUser.user?.profile?.address}</p>
                                     </div>
 
                                     <h4 className="text-xs sm:text-sm font-black text-pink-600 uppercase tracking-widest border-l-4 border-pink-500 pl-3">Verification Details</h4>
@@ -643,7 +643,7 @@ const AdminUserManagement = () => {
                                                 </div>
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-[9px] sm:text-[10px] text-pink-200 font-bold uppercase">Status</span>
-                                                    <span className="px-2 py-0.5 bg-white/20 rounded-md text-[9px] font-black uppercase tracking-widest">Active</span>
+                                                    <span className="px-2 py-0.5 bg-theme-surface/20 rounded-md text-[9px] font-black uppercase tracking-widest">Active</span>
                                                 </div>
                                             </>
                                         ) : (
@@ -660,7 +660,7 @@ const AdminUserManagement = () => {
                         <div className="p-6 bg-gray-50 border-t border-gray-100 flex justify-end gap-3 shrink-0">
                             <button
                                 onClick={() => setIsViewModalOpen(false)}
-                                className="px-6 py-2 border border-gray-200 rounded-xl hover:bg-white transition-all text-sm font-bold text-gray-600"
+                                className="px-6 py-2 border border-theme-border rounded-xl hover:bg-theme-surface transition-all text-sm font-bold text-theme-text-secondary"
                             >
                                 Close
                             </button>

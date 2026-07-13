@@ -153,7 +153,7 @@ function PunarMilanLive({ profile, onUpdate }) {
                         <span className="w-2 h-6 bg-rose-500 rounded-full"></span>
                         Live Preferences
                     </h2>
-                    <p className="text-sm text-gray-500 mt-1">Manage how we reach you for Live sessions</p>
+                    <p className="text-sm text-theme-text-secondary mt-1">Manage how we reach you for Live sessions</p>
                 </div>
                 {lastSaved && (
                     <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full uppercase tracking-wider">
@@ -174,7 +174,7 @@ function PunarMilanLive({ profile, onUpdate }) {
                             key={option.key}
                             className={`group relative flex items-center justify-between p-4 rounded-2xl border-2 transition-all duration-300 ${isEnabled
                                 ? 'bg-rose-50/50 border-rose-200 shadow-sm'
-                                : 'bg-white border-gray-100 hover:border-gray-200'
+                                : 'bg-theme-surface border-gray-100 hover:border-theme-border'
                                 }`}
                         >
                             <div className="flex items-center gap-4 flex-1 min-w-0">
@@ -190,7 +190,7 @@ function PunarMilanLive({ profile, onUpdate }) {
                                     <h3 className={`text-sm md:text-base font-bold transition-colors ${isEnabled ? 'text-rose-900' : 'text-gray-900'}`}>
                                         {option.label}
                                     </h3>
-                                    <p className="text-xs text-gray-500 line-clamp-1 group-hover:line-clamp-none transition-all">
+                                    <p className="text-xs text-theme-text-secondary line-clamp-1 group-hover:line-clamp-none transition-all">
                                         {option.description}
                                     </p>
                                 </div>
@@ -209,7 +209,7 @@ function PunarMilanLive({ profile, onUpdate }) {
                                 role="switch"
                             >
                                 <span
-                                    className={`inline-block w-4.5 h-4.5 transform rounded-full bg-white shadow-md transition-transform duration-300 ${isEnabled
+                                    className={`inline-block w-4.5 h-4.5 transform rounded-full bg-theme-surface shadow-md transition-transform duration-300 ${isEnabled
                                         ? 'translate-x-6.5'
                                         : 'translate-x-1'
                                         }`}
@@ -225,7 +225,7 @@ function PunarMilanLive({ profile, onUpdate }) {
                 <button
                     onClick={handleReset}
                     disabled={isSaving}
-                    className="flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-gray-500 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all active:scale-95 disabled:opacity-50"
+                    className="flex items-center gap-2 px-6 py-2.5 text-sm font-bold text-theme-text-secondary hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all active:scale-95 disabled:opacity-50"
                 >
                     <RotateCcw size={16} />
                     Restore Defaults

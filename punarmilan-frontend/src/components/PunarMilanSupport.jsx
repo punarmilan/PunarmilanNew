@@ -196,7 +196,7 @@ function PunarMilanSupport() {
                     aria-label="Open chat"
                 >
                     <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-                    <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-green-500 border-2 border-white rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold shadow-sm">
+                    <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-theme-success border-2 border-white rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold shadow-sm">
                         3
                     </span>
                 </button>
@@ -204,7 +204,7 @@ function PunarMilanSupport() {
 
             {/* Chat Window - MOBILE FULL SCREEN */}
             <div
-                className={`fixed inset-0 sm:inset-auto sm:bottom-4 sm:right-4 w-full sm:w-[400px] md:w-[440px] bg-white/95 backdrop-blur-xl sm:rounded-2xl transition-all duration-300 z-[10000] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-pink-100/50 overflow-hidden flex flex-col ${isOpen ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95 pointer-events-none'
+                className={`fixed inset-0 sm:inset-auto sm:bottom-4 sm:right-4 w-full sm:w-[400px] md:w-[440px] bg-theme-surface/95 backdrop-blur-xl sm:rounded-2xl transition-all duration-300 z-[10000] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-pink-100/50 overflow-hidden flex flex-col ${isOpen ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95 pointer-events-none'
                     } ${isMinimized ? 'sm:h-[70px]' : 'h-full sm:h-[600px] sm:max-h-[calc(100vh-2rem)]'}`}
             >
                 <div className="flex flex-col h-full relative">
@@ -213,7 +213,7 @@ function PunarMilanSupport() {
                         <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
                         <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                             <div className="relative flex-shrink-0">
-                                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center shadow-md overflow-hidden p-1">
+                                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-theme-surface rounded-full flex items-center justify-center shadow-md overflow-hidden p-1">
                                     <svg viewBox="0 0 100 100" className="w-full h-full">
                                         <circle cx="50" cy="50" r="48" fill="white" />
                                         <circle cx="50" cy="45" r="35" fill="#f0f0f0" />
@@ -223,7 +223,7 @@ function PunarMilanSupport() {
                                         <circle cx="50" cy="70" r="3" fill="#ff6b9d" />
                                     </svg>
                                 </div>
-                                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+                                <span className="absolute bottom-0 right-0 w-3 h-3 bg-theme-success border-2 border-white rounded-full"></span>
                             </div>
                             <div className="min-w-0 flex-1">
                                 <h3 className="font-bold text-base sm:text-lg truncate">PunarMilan Support</h3>
@@ -233,14 +233,14 @@ function PunarMilanSupport() {
                         <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0 ml-2">
                             <button
                                 onClick={minimizeChat}
-                                className="p-1.5 hover:bg-white/20 rounded-full transition-colors active:bg-white/30"
+                                className="p-1.5 hover:bg-theme-surface/20 rounded-full transition-colors active:bg-theme-surface/30"
                                 aria-label="Minimize chat"
                             >
                                 <Minimize2 className="w-4 h-4 sm:w-5 sm:h-5" />
                             </button>
                             <button
                                 onClick={toggleChat}
-                                className="p-1.5 hover:bg-white/20 rounded-full transition-colors active:bg-white/30"
+                                className="p-1.5 hover:bg-theme-surface/20 rounded-full transition-colors active:bg-theme-surface/30"
                                 aria-label="Close chat"
                             >
                                 <X className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -258,14 +258,14 @@ function PunarMilanSupport() {
                                         {/* Date Separator */}
                                         <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5 md:mb-6">
                                             <div className="flex-1 h-px bg-gray-300"></div>
-                                            <span className="text-xs text-gray-500 font-medium px-2 sm:px-3 whitespace-nowrap">
+                                            <span className="text-xs text-theme-text-secondary font-medium px-2 sm:px-3 whitespace-nowrap">
                                                 {dateGroup.date}
                                             </span>
                                             <div className="flex-1 h-px bg-gray-300"></div>
                                         </div>
 
                                         {/* Bot Label */}
-                                        <p className="text-xs text-gray-500 mb-3 sm:mb-4 px-1">
+                                        <p className="text-xs text-theme-text-secondary mb-3 sm:mb-4 px-1">
                                             Dory (Payment page bot)
                                         </p>
 
@@ -293,7 +293,7 @@ function PunarMilanSupport() {
                                                         <div
                                                             className={`rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-3.5 shadow-sm border ${chat.sender === 'user'
                                                                 ? 'bg-gradient-to-br from-pink-500 to-rose-500 text-white rounded-tr-none border-transparent shadow-pink-500/20'
-                                                                : 'bg-white text-gray-800 rounded-tl-none border-pink-100 shadow-sm'
+                                                                : 'bg-theme-surface text-gray-800 rounded-tl-none border-pink-100 shadow-sm'
                                                                 }`}
                                                         >
                                                             <p className="text-sm leading-relaxed whitespace-pre-line break-words">
@@ -327,7 +327,7 @@ function PunarMilanSupport() {
                                                     </div>
                                                     {chat.sender === 'user' && (
                                                         <div className="w-9 h-9 sm:w-10 sm:h-10 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
-                                                            <User className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600" />
+                                                            <User className="w-5 h-5 sm:w-6 sm:h-6 text-theme-text-secondary" />
                                                         </div>
                                                     )}
                                                 </div>
@@ -339,7 +339,7 @@ function PunarMilanSupport() {
                             </div>
 
                             {/* Message Input - Fixed at Bottom */}
-                            <div className="px-3 py-3 sm:px-4 sm:py-4 bg-white/80 backdrop-blur-md border-t border-pink-100 flex-shrink-0 safe-area-bottom">
+                            <div className="px-3 py-3 sm:px-4 sm:py-4 bg-theme-surface/80 backdrop-blur-md border-t border-pink-100 flex-shrink-0 safe-area-bottom">
                                 <form onSubmit={handleSendMessage} className="flex items-center gap-2 sm:gap-3 bg-slate-50 rounded-full p-1.5 border border-slate-200 shadow-inner">
                                     <input
                                         type="text"

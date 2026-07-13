@@ -18,8 +18,8 @@ const Sidebar = ({ activeFilter, setActiveFilter, sortBy, setSortBy, filterBy, s
     return (
         <aside className="space-y-6">
             {/* Type Filter */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+            <div className="bg-theme-surface rounded-lg shadow-sm border border-theme-border overflow-hidden">
+                <div className="bg-gray-50 px-4 py-3 border-b border-theme-border">
                     <h3 className="font-semibold text-gray-700">Request Type</h3>
                 </div>
                 <div className="p-4 space-y-2">
@@ -39,8 +39,8 @@ const Sidebar = ({ activeFilter, setActiveFilter, sortBy, setSortBy, filterBy, s
             </div>
 
             {/* Sort */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+            <div className="bg-theme-surface rounded-lg shadow-sm border border-theme-border overflow-hidden">
+                <div className="bg-gray-50 px-4 py-3 border-b border-theme-border">
                     <h3 className="font-semibold text-gray-700">Sort By</h3>
                 </div>
                 <div className="p-4 space-y-2">
@@ -61,8 +61,8 @@ const Sidebar = ({ activeFilter, setActiveFilter, sortBy, setSortBy, filterBy, s
             </div>
 
             {/* Granular Filters */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+            <div className="bg-theme-surface rounded-lg shadow-sm border border-theme-border overflow-hidden">
+                <div className="bg-gray-50 px-4 py-3 border-b border-theme-border">
                     <h3 className="font-semibold text-gray-700">Filter By</h3>
                 </div>
                 <div className="p-4 space-y-2">

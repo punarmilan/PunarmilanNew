@@ -117,12 +117,12 @@ const HeroSection = () => {
               transition={{ delay: 0.9, duration: 0.8 }}
               className="flex flex-row gap-4"
             >
-              <div className="flex items-center gap-2 bg-white/70 px-4 py-2 rounded-full shadow-sm border border-wedding-gold/20">
+              <div className="flex items-center gap-2 bg-theme-surface/70 px-4 py-2 rounded-full shadow-sm border border-wedding-gold/20">
                 <span className="text-wedding-gold">📅</span>
                 <span className="text-[10px] sm:text-xs font-semibold text-[#4A3728] uppercase">12 Dec 2026</span>
               </div>
               
-              <div className="flex items-center gap-2 bg-white/70 px-4 py-2 rounded-full shadow-sm border border-wedding-gold/20">
+              <div className="flex items-center gap-2 bg-theme-surface/70 px-4 py-2 rounded-full shadow-sm border border-wedding-gold/20">
                 <span className="text-wedding-gold">📍</span>
                 <span className="text-[10px] sm:text-xs font-semibold text-[#4A3728] uppercase">Jaipur, India</span>
               </div>
@@ -137,7 +137,7 @@ const HeroSection = () => {
             className="flex justify-end relative h-[550px] sm:h-[650px] w-full items-center"
           >
             {/* Main Center Arch Image */}
-            <div className="relative w-[75%] h-[80%] rounded-t-[300px] overflow-hidden border-[10px] border-white/80 shadow-[0_30px_60px_rgba(90,27,41,0.15)] z-20 backdrop-blur-sm bg-white/30">
+            <div className="relative w-[75%] h-[80%] rounded-t-[300px] overflow-hidden border-[10px] border-white/80 shadow-[0_30px_60px_rgba(90,27,41,0.15)] z-20 backdrop-blur-sm bg-theme-surface/30">
               <img
                 src={couples1}
                 alt="Couple"

@@ -12,7 +12,7 @@ export default function SortComponent({ onSortChange, defaultValue = "oldest" })
     };
 
     return (
-        <div className="w-full bg-white rounded-lg overflow-hidden shadow-sm border border-gray-200">
+        <div className="w-full bg-theme-surface rounded-lg overflow-hidden shadow-sm border border-theme-border">
             {/* Header */}
             <div className="bg-gray-200 px-5 py-3.5 border-b border-gray-300">
                 <h3 className="text-lg font-medium text-gray-700 text-center">Sort</h3>

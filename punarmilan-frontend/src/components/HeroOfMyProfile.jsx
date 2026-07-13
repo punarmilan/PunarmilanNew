@@ -98,19 +98,19 @@ export default function HeroOfMyProfile() {
                             <div className="flex-grow w-full lg:w-auto">
                                 {/* Profile ID and Status */}
                                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-4 sm:mb-5">
-                                    <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
+                                    <span className="bg-theme-surface/20 backdrop-blur-sm text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
                                         {profileData.id}
                                     </span>
                                     <span className="text-white/95 text-xs sm:text-sm font-medium">• Online Now</span>
                                 </div>
 
                                 {/* Info Grid */}
-                                <div className="bg-white/10 backdrop-blur-md rounded-xl lg:rounded-2xl p-3 sm:p-4 lg:p-5 border border-white/20">
+                                <div className="bg-theme-surface/10 backdrop-blur-md rounded-xl lg:rounded-2xl p-3 sm:p-4 lg:p-5 border border-white/20">
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
 
                                         {/* Age / Height */}
-                                        <div className="flex items-center gap-3 bg-white/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-white/15 transition-all">
-                                            <div className="flex-shrink-0 bg-white/20 rounded-lg p-2 sm:p-2.5">
+                                        <div className="flex items-center gap-3 bg-theme-surface/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-theme-surface/15 transition-all">
+                                            <div className="flex-shrink-0 bg-theme-surface/20 rounded-lg p-2 sm:p-2.5">
                                                 <FaIdCard className="text-white text-base sm:text-lg lg:text-xl" />
                                             </div>
                                             <div className="flex-grow min-w-0">
@@ -120,8 +120,8 @@ export default function HeroOfMyProfile() {
                                         </div>
 
                                         {/* Marital Status */}
-                                        <div className="flex items-center gap-3 bg-white/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-white/15 transition-all">
-                                            <div className="flex-shrink-0 bg-white/20 rounded-lg p-2 sm:p-2.5">
+                                        <div className="flex items-center gap-3 bg-theme-surface/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-theme-surface/15 transition-all">
+                                            <div className="flex-shrink-0 bg-theme-surface/20 rounded-lg p-2 sm:p-2.5">
                                                 <FaRing className="text-white text-base sm:text-lg lg:text-xl" />
                                             </div>
                                             <div className="flex-grow min-w-0">
@@ -131,8 +131,8 @@ export default function HeroOfMyProfile() {
                                         </div>
 
                                         {/* Posted by */}
-                                        <div className="flex items-center gap-3 bg-white/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-white/15 transition-all">
-                                            <div className="flex-shrink-0 bg-white/20 rounded-lg p-2 sm:p-2.5">
+                                        <div className="flex items-center gap-3 bg-theme-surface/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-theme-surface/15 transition-all">
+                                            <div className="flex-shrink-0 bg-theme-surface/20 rounded-lg p-2 sm:p-2.5">
                                                 <FaUserCircle className="text-white text-base sm:text-lg lg:text-xl" />
                                             </div>
                                             <div className="flex-grow min-w-0">
@@ -142,8 +142,8 @@ export default function HeroOfMyProfile() {
                                         </div>
 
                                         {/* Religion / Community */}
-                                        <div className="flex items-center gap-3 bg-white/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-white/15 transition-all">
-                                            <div className="flex-shrink-0 bg-white/20 rounded-lg p-2 sm:p-2.5">
+                                        <div className="flex items-center gap-3 bg-theme-surface/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-theme-surface/15 transition-all">
+                                            <div className="flex-shrink-0 bg-theme-surface/20 rounded-lg p-2 sm:p-2.5">
                                                 <FaStar className="text-white text-base sm:text-lg lg:text-xl" />
                                             </div>
                                             <div className="flex-grow min-w-0">
@@ -153,8 +153,8 @@ export default function HeroOfMyProfile() {
                                         </div>
 
                                         {/* Location */}
-                                        <div className="flex items-center gap-3 bg-white/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-white/15 transition-all">
-                                            <div className="flex-shrink-0 bg-white/20 rounded-lg p-2 sm:p-2.5">
+                                        <div className="flex items-center gap-3 bg-theme-surface/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-theme-surface/15 transition-all">
+                                            <div className="flex-shrink-0 bg-theme-surface/20 rounded-lg p-2 sm:p-2.5">
                                                 <FaMapMarkerAlt className="text-white text-base sm:text-lg lg:text-xl" />
                                             </div>
                                             <div className="flex-grow min-w-0">
@@ -164,8 +164,8 @@ export default function HeroOfMyProfile() {
                                         </div>
 
                                         {/* Mother Tongue */}
-                                        <div className="flex items-center gap-3 bg-white/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-white/15 transition-all">
-                                            <div className="flex-shrink-0 bg-white/20 rounded-lg p-2 sm:p-2.5">
+                                        <div className="flex items-center gap-3 bg-theme-surface/10 rounded-lg lg:rounded-xl p-3 sm:p-3.5 lg:p-4 border border-white/10 hover:bg-theme-surface/15 transition-all">
+                                            <div className="flex-shrink-0 bg-theme-surface/20 rounded-lg p-2 sm:p-2.5">
                                                 <FaLanguage className="text-white text-base sm:text-lg lg:text-xl" />
                                             </div>
                                             <div className="flex-grow min-w-0">
@@ -182,7 +182,7 @@ export default function HeroOfMyProfile() {
                             <div className="flex-shrink-0 w-full lg:w-auto lg:min-w-[200px] xl:min-w-[240px] flex items-center justify-center lg:justify-end mt-4 lg:mt-0">
                                 <button
                                     onClick={handleExpressInterest}
-                                    className="w-full lg:w-auto bg-white text-pink-600 hover:bg-pink-50 px-6 sm:px-8 lg:px-10 py-3 sm:py-3.5 lg:py-4 rounded-xl lg:rounded-2xl font-bold transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform flex items-center justify-center gap-2 text-sm sm:text-base lg:text-lg"
+                                    className="w-full lg:w-auto bg-theme-surface text-pink-600 hover:bg-pink-50 px-6 sm:px-8 lg:px-10 py-3 sm:py-3.5 lg:py-4 rounded-xl lg:rounded-2xl font-bold transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform flex items-center justify-center gap-2 text-sm sm:text-base lg:text-lg"
                                 >
                                     <FaHeart className="text-base sm:text-lg" /> Express Interest
                                 </button>
@@ -193,21 +193,21 @@ export default function HeroOfMyProfile() {
                 </div>
 
                 {/* Additional Demo Section */}
-                <div className="mt-4 sm:mt-6 bg-white rounded-xl lg:rounded-2xl shadow-lg p-4 sm:p-6">
+                <div className="mt-4 sm:mt-6 bg-theme-surface rounded-xl lg:rounded-2xl shadow-lg p-4 sm:p-6">
                     <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4">Dynamic Profile Data</h3>
-                    <p className="text-sm sm:text-base text-gray-600">All profile information is dynamically loaded from state and can be easily updated through API calls or user actions.</p>
+                    <p className="text-sm sm:text-base text-theme-text-secondary">All profile information is dynamically loaded from state and can be easily updated through API calls or user actions.</p>
 
                     <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                            <div className="text-xs text-gray-500 mb-1">Profile ID</div>
+                        <div className="bg-gray-50 rounded-lg p-3 border border-theme-border">
+                            <div className="text-xs text-theme-text-secondary mb-1">Profile ID</div>
                             <div className="font-semibold text-sm">{profileData.id}</div>
                         </div>
-                        <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                            <div className="text-xs text-gray-500 mb-1">Status</div>
+                        <div className="bg-gray-50 rounded-lg p-3 border border-theme-border">
+                            <div className="text-xs text-theme-text-secondary mb-1">Status</div>
                             <div className="font-semibold text-sm text-green-600">Online Now</div>
                         </div>
-                        <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                            <div className="text-xs text-gray-500 mb-1">Membership</div>
+                        <div className="bg-gray-50 rounded-lg p-3 border border-theme-border">
+                            <div className="text-xs text-theme-text-secondary mb-1">Membership</div>
                             <div className="font-semibold text-sm text-yellow-600">Premium</div>
                         </div>
                     </div>

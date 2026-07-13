@@ -8,7 +8,7 @@ import {
 } from 'recharts';
 
 const StatCard = ({ title, value, icon: Icon, color, trend }) => (
-    <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
+    <div className="bg-theme-surface p-6 rounded-3xl shadow-sm border border-gray-100 transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
         <div className="flex items-center justify-between">
             <div>
                 <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">{title}</p>
@@ -63,10 +63,10 @@ const AdminDashboard = () => {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
                     <h1 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">Dashboard Overview</h1>
-                    <p className="text-gray-500 font-medium text-sm sm:text-base">Welcome back, Admin! Here's what's happening today.</p>
+                    <p className="text-theme-text-secondary font-medium text-sm sm:text-base">Welcome back, Admin! Here's what's happening today.</p>
                 </div>
                 <div className="flex gap-2 sm:gap-3 w-full sm:w-auto">
-                    <button className="p-2 sm:p-3 bg-white rounded-2xl border border-gray-100 shadow-sm text-gray-400 hover:text-pink-500 transition-colors">
+                    <button className="p-2 sm:p-3 bg-theme-surface rounded-2xl border border-gray-100 shadow-sm text-gray-400 hover:text-pink-500 transition-colors">
                         <Bell size={20} />
                     </button>
                     <div className="flex-1 sm:flex-none justify-center bg-pink-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-2xl font-bold text-xs sm:text-sm shadow-lg shadow-pink-100 flex items-center gap-2">
@@ -126,7 +126,7 @@ const AdminDashboard = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
                 {/* Growth Chart */}
                 {['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SUB_ADMIN'].includes(admin.role) && (
-                    <div className="lg:col-span-2 bg-white p-4 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-sm border border-gray-100">
+                    <div className="lg:col-span-2 bg-theme-surface p-4 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-sm border border-gray-100">
                         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4">
                             <div>
                                 <h2 className="text-lg sm:text-xl font-black text-gray-900 tracking-tight">User Growth</h2>
@@ -162,7 +162,7 @@ const AdminDashboard = () => {
 
                 {/* Distribution Chart */}
                 {['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SUB_ADMIN'].includes(admin.role) && (
-                    <div className="bg-white p-4 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-sm border border-gray-100 flex flex-col">
+                    <div className="bg-theme-surface p-4 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-sm border border-gray-100 flex flex-col">
                         <h2 className="text-lg sm:text-xl font-black text-gray-900 tracking-tight mb-1">Gender Dist.</h2>
                         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-6 sm:mb-8">Demographic Split</p>
                         <div className="flex-1 h-56 sm:h-64">
@@ -190,7 +190,7 @@ const AdminDashboard = () => {
                                 <div key={i} className="flex justify-between items-center text-[10px] sm:text-xs font-bold">
                                     <div className="flex items-center gap-2">
                                         <div className="w-2 sm:w-3 h-2 sm:h-3 rounded-full" style={{ backgroundColor: COLORS[i % COLORS.length] }}></div>
-                                        <span className="text-gray-500 uppercase">{item.name}</span>
+                                        <span className="text-theme-text-secondary uppercase">{item.name}</span>
                                     </div>
                                     <span className="text-gray-900">{item.value}</span>
                                 </div>
@@ -204,7 +204,7 @@ const AdminDashboard = () => {
             <div className={`grid grid-cols-1 ${['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_SUB_ADMIN'].includes(admin.role) ? 'lg:grid-cols-2' : ''} gap-6 sm:gap-8`}>
                 {/* Pending Actions */}
                 {['ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_KYC_VERIFIER', 'ROLE_SUB_ADMIN'].includes(admin.role) && (
-                    <div className="bg-white p-4 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-sm border border-gray-100">
+                    <div className="bg-theme-surface p-4 sm:p-8 rounded-[24px] sm:rounded-[32px] shadow-sm border border-gray-100">
                         <div className="flex justify-between items-center mb-5 sm:mb-6">
                             <h2 className="text-lg sm:text-xl font-black text-gray-900">Priority Actions</h2>
                             <button className="text-[10px] font-black text-pink-600 uppercase">View All</button>
@@ -241,12 +241,12 @@ const AdminDashboard = () => {
                         </div>
                         <div className="grid grid-cols-2 gap-6">
                             <div className="space-y-2">
-                                <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Est. Revenue</p>
+                                <p className="text-[10px] font-black text-theme-text-secondary uppercase tracking-widest">Est. Revenue</p>
                                 <h4 className="text-3xl font-black tracking-tighter">₹{stats?.totalRevenue?.toLocaleString() || '0.00'}</h4>
                                 <p className="text-[10px] text-gray-400 font-medium italic">Based on active subscriptions</p>
                             </div>
                             <div className="space-y-2 text-right">
-                                <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Success Match Rate</p>
+                                <p className="text-[10px] font-black text-theme-text-secondary uppercase tracking-widest">Success Match Rate</p>
                                 <h4 className="text-3xl font-black tracking-tighter">18.4%</h4>
                                 <div className="flex justify-end gap-1">
                                     {[1, 2, 3, 4, 5].map(i => <div key={i} className={`h-1 w-4 rounded-full ${i <= 4 ? 'bg-pink-500' : 'bg-gray-700'}`}></div>)}

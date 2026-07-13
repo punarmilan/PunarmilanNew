@@ -86,12 +86,12 @@ const PaymentModal = ({ onClose }) => {
 
     return (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in">
-            <div className="bg-white rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-in-up">
+            <div className="bg-theme-surface rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-slide-in-up">
                 {/* Header */}
                 <div className="bg-gradient-to-br from-[#d4145a] to-[#8b0a3d] text-white px-8 py-10 text-center relative">
                     <button
                         onClick={onClose}
-                        className="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-2xl transition-all duration-300"
+                        className="absolute top-4 right-4 w-10 h-10 bg-theme-surface/20 hover:bg-theme-surface/30 rounded-full flex items-center justify-center text-2xl transition-all duration-300"
                     >
                         ×
                     </button>

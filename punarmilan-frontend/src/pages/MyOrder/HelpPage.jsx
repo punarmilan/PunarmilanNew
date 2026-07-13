@@ -138,7 +138,7 @@ const HelpPage = () => {
                     </div>
 
                     <div className="lg:col-span-3">
-                        <div className="bg-white rounded-2xl shadow-xl p-6 lg:p-8 border border-rose-100">
+                        <div className="bg-theme-surface rounded-2xl shadow-xl p-6 lg:p-8 border border-rose-100">
                             <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6 font-serif">Help & Support</h1>
 
                             <div className="mb-8 bg-gradient-to-r from-indigo-50 to-purple-50 border-l-4 border-indigo-500 p-6 rounded-r-lg flex justify-between items-center">
@@ -171,13 +171,13 @@ const HelpPage = () => {
                                             className="bg-gradient-to-br from-white to-indigo-50 rounded-xl shadow-lg border border-indigo-200 p-6 hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 relative"
                                         >
                                             {topic.badge && (
-                                                <span className="absolute top-4 right-4 bg-orange-500 text-white text-[10px] px-2 py-0.5 rounded-full animate-pulse">
+                                                <span className="absolute top-4 right-4 bg-theme-warning text-white text-[10px] px-2 py-0.5 rounded-full animate-pulse">
                                                     {topic.badge}
                                                 </span>
                                             )}
                                             <div className="text-4xl mb-4">{topic.icon}</div>
                                             <h3 className="text-xl font-bold text-gray-800 mb-2">{topic.title}</h3>
-                                            <p className="text-gray-600 text-sm leading-relaxed">{topic.description}</p>
+                                            <p className="text-theme-text-secondary text-sm leading-relaxed">{topic.description}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -229,7 +229,7 @@ const HelpPage = () => {
             {/* Ticket Creation Modal */}
             {showTicketModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-                    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
+                    <div className="bg-theme-surface rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in duration-200">
                         <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white">
                             <div className="flex justify-between items-center">
                                 <h3 className="text-xl font-bold">Raise Support Ticket</h3>

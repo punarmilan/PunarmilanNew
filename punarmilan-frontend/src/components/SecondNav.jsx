@@ -140,13 +140,13 @@ export default function SecondNav() {
             </div>
 
             {/* Mobile View (< 768px) - Bottom Navigation Bar */}
-            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-[9999] shadow-[0_-10px_20px_rgba(0,0,0,0.05)] pb-safe">
+            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-theme-surface border-t border-gray-100 z-[9999] shadow-[0_-10px_20px_rgba(0,0,0,0.05)] pb-safe">
                  <div className="flex overflow-x-auto scrollbar-hide items-center justify-start sm:justify-center h-16 px-1 xs:px-2">
                      {tabs.map(tab => (
                          <button 
                              key={tab.id}
                              onClick={() => handleTabClick(tab)}
-                             className={`flex flex-col items-center justify-center flex-shrink-0 min-w-[72px] sm:min-w-[80px] h-full relative transition-all duration-300 ${active === tab.id ? `${tab.color || 'text-[#C5A059]'} scale-105 font-bold` : `${tab.color || 'text-gray-400'} opacity-70 hover:opacity-100 font-medium`}`}
+                             className={`flex flex-col items-center justify-center flex-shrink-0 min-w-[72px] sm:min-w-[80px] h-full relative transition-all duration-300 ${active === tab.id ? `${tab.color || 'text-theme-magenta'} scale-105 font-bold` : `${tab.color || 'text-gray-400'} opacity-70 hover:opacity-100 font-medium`}`}
                          >
                              <div className="relative mb-1">
                                  <i className={`${tab.icon} text-lg xs:text-xl drop-shadow-sm`}></i>

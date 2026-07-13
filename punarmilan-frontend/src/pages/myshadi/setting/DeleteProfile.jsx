@@ -36,14 +36,14 @@ function DeleteProfile({ profile, onUpdate }) {
 
     return (
         <div className="p-4 md:p-8 max-w-2xl mx-auto space-y-6">
-            <div className="bg-white rounded-[2.5rem] border-2 border-gray-50 p-8 shadow-sm">
+            <div className="bg-theme-surface rounded-[2.5rem] border-2 border-gray-50 p-8 shadow-sm">
                 <div className="flex items-center gap-4 mb-8">
                     <div className="p-3 bg-pink-50 text-pink-500 rounded-2xl">
                         <ShieldAlert size={28} />
                     </div>
                     <div>
                         <h2 className="text-2xl font-black text-gray-900">Manage Account</h2>
-                        <p className="text-sm text-gray-500 font-medium">Temporary hide or permanent delete</p>
+                        <p className="text-sm text-theme-text-secondary font-medium">Temporary hide or permanent delete</p>
                     </div>
                 </div>
 
@@ -52,18 +52,18 @@ function DeleteProfile({ profile, onUpdate }) {
                     <div className={`p-6 rounded-3xl border-2 transition-all duration-300 ${status === "hidden" ? 'border-orange-200 bg-orange-50/30' : 'border-gray-50 bg-gray-50/30'}`}>
                         <div className="flex justify-between items-center gap-4">
                             <div className="flex items-center gap-4">
-                                <div className={`p-3 rounded-xl ${status === "hidden" ? 'bg-orange-500 text-white' : 'bg-white text-gray-400'}`}>
+                                <div className={`p-3 rounded-xl ${status === "hidden" ? 'bg-theme-warning text-white' : 'bg-theme-surface text-gray-400'}`}>
                                     <EyeOff size={20} />
                                 </div>
                                 <div>
                                     <h3 className="font-bold text-gray-900">Hide Profile</h3>
-                                    <p className="text-xs text-gray-500">Take a break from searches</p>
+                                    <p className="text-xs text-theme-text-secondary">Take a break from searches</p>
                                 </div>
                             </div>
                             <button
                                 onClick={handleToggleVisibility}
                                 disabled={isSaving}
-                                className={`px-6 py-2 rounded-xl font-bold text-sm transition-all ${status === "hidden" ? 'bg-white text-orange-600 shadow-sm' : 'bg-gray-900 text-white hover:bg-gray-800'}`}
+                                className={`px-6 py-2 rounded-xl font-bold text-sm transition-all ${status === "hidden" ? 'bg-theme-surface text-orange-600 shadow-sm' : 'bg-gray-900 text-white hover:bg-gray-800'}`}
                             >
                                 {status === "hidden" ? "Show Me" : "Hide Me"}
                             </button>
@@ -75,12 +75,12 @@ function DeleteProfile({ profile, onUpdate }) {
                         {!showDeleteConfirm ? (
                             <div className="flex justify-between items-center gap-4">
                                 <div className="flex items-center gap-4">
-                                    <div className="p-3 rounded-xl bg-white text-gray-400">
+                                    <div className="p-3 rounded-xl bg-theme-surface text-gray-400">
                                         <Trash2 size={20} />
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-gray-900">Delete Account</h3>
-                                        <p className="text-xs text-gray-500">Permanent data removal</p>
+                                        <p className="text-xs text-theme-text-secondary">Permanent data removal</p>
                                     </div>
                                 </div>
                                 <button
@@ -106,7 +106,7 @@ function DeleteProfile({ profile, onUpdate }) {
                                     </button>
                                     <button
                                         onClick={() => setShowDeleteConfirm(false)}
-                                        className="flex-1 bg-white text-gray-600 font-bold py-3 rounded-xl border border-gray-200 transition-all text-sm"
+                                        className="flex-1 bg-theme-surface text-theme-text-secondary font-bold py-3 rounded-xl border border-theme-border transition-all text-sm"
                                     >
                                         Cancel
                                     </button>

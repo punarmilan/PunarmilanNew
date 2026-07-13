@@ -205,7 +205,7 @@ function Home() {
             {showGuestAlert && (
                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4" onClick={() => setShowGuestAlert(false)}>
                     <div
-                        className="bg-white rounded-3xl shadow-2xl p-8 max-w-sm w-full relative overflow-hidden"
+                        className="bg-theme-surface rounded-3xl shadow-2xl p-8 max-w-sm w-full relative overflow-hidden"
                         onClick={e => e.stopPropagation()}
                     >
                         {/* Decorative top gradient */}
@@ -254,7 +254,7 @@ function Home() {
             {/* ================= MATCH STEPS POPUP ================= */}
             {showMatchModal && (
                 <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
-                    <div className="bg-white text-black w-full max-w-lg rounded-2xl p-6 relative">
+                    <div className="bg-theme-surface text-black w-full max-w-lg rounded-2xl p-6 relative">
 
                         {/* HEADER */}
                         <div className="flex justify-between items-center mb-4">
@@ -295,7 +295,7 @@ function Home() {
                                         onClick={() => setFormData({ ...formData, gender: "Male" })}
                                         className={`flex flex-1 items-center justify-center gap-2 py-3 rounded-xl border-2 transition-all ${formData.gender === "Male"
                                             ? "border-emerald-500 bg-emerald-50 text-emerald-600 font-bold shadow-md"
-                                            : "border-gray-200 text-gray-500 hover:border-gray-300 hover:bg-gray-50"
+                                            : "border-theme-border text-theme-text-secondary hover:border-gray-300 hover:bg-gray-50"
                                             }`}
                                     >
                                         <FaMale className="w-5 h-5" />
@@ -305,7 +305,7 @@ function Home() {
                                         onClick={() => setFormData({ ...formData, gender: "Female" })}
                                         className={`flex flex-1 items-center justify-center gap-2 py-3 rounded-xl border-2 transition-all ${formData.gender === "Female"
                                             ? "border-pink-500 bg-pink-50 text-pink-600 font-bold shadow-md"
-                                            : "border-gray-200 text-gray-500 hover:border-gray-300 hover:bg-gray-50"
+                                            : "border-theme-border text-theme-text-secondary hover:border-gray-300 hover:bg-gray-50"
                                             }`}
                                     >
                                         <FaFemale className="w-5 h-5" />
@@ -473,7 +473,7 @@ function Home() {
                             <>
                                 <button
                                     onClick={() => setShowLogin(true)}
-                                    className="px-3 py-1.5 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-bold text-slate-800 hover:text-slate-900 bg-white/40 hover:bg-white/60 backdrop-blur-md rounded-full border border-white/50 shadow-sm transition-all"
+                                    className="px-3 py-1.5 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-bold text-slate-800 hover:text-slate-900 bg-theme-surface/40 hover:bg-theme-surface/60 backdrop-blur-md rounded-full border border-white/50 shadow-sm transition-all"
                                 >
                                     Login
                                 </button>
@@ -576,11 +576,11 @@ function Home() {
                     <motion.button variants={fadeUp} onClick={() => setAuthMode('register')} className="px-8 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-bold shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 transition-all hover:-translate-y-1">
                         Register for free
                     </motion.button>
-                    <motion.div variants={fadeUp} className="flex items-center gap-3 text-sm font-semibold text-amber-700 bg-white/60 backdrop-blur-md px-4 py-2 rounded-full border border-white">
+                    <motion.div variants={fadeUp} className="flex items-center gap-3 text-sm font-semibold text-amber-700 bg-theme-surface/60 backdrop-blur-md px-4 py-2 rounded-full border border-white">
                         <HiShieldCheck className="w-5 h-5 text-amber-500" />
                         Verified Profiles
                     </motion.div>
-                    <motion.div variants={fadeUp} className="flex items-center gap-3 text-sm font-semibold text-rose-700 bg-white/60 backdrop-blur-md px-4 py-2 rounded-full border border-white">
+                    <motion.div variants={fadeUp} className="flex items-center gap-3 text-sm font-semibold text-rose-700 bg-theme-surface/60 backdrop-blur-md px-4 py-2 rounded-full border border-white">
                         <HiHeart className="w-5 h-5 text-rose-500" />
                         Family Trusted
                     </motion.div>
@@ -590,7 +590,7 @@ function Home() {
             <motion.div 
               variants={slideRight} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
               whileHover={{ y: -6, scale: 1.02 }}
-              className="bg-white/40 backdrop-blur-xl border border-white/40 shadow-xl shadow-rose-100/50 p-8 rounded-[32px] relative"
+              className="bg-theme-surface/40 backdrop-blur-xl border border-white/40 shadow-xl shadow-rose-100/50 p-8 rounded-[32px] relative"
             >
                 <h3 className="text-2xl font-bold text-[#291907] mb-6 font-serif border-b border-rose-200/50 pb-4">Find your perfect partner</h3>
 
@@ -601,7 +601,7 @@ function Home() {
                         <select
                             value={searchForm.lookingFor}
                             onChange={e => handleSearchFormChange('lookingFor', e.target.value)}
-                            className="w-full bg-white/70 backdrop-blur-md border border-white/60 rounded-xl px-4 py-3 text-[#291907] outline-none focus:ring-2 focus:ring-rose-400 transition-shadow cursor-pointer"
+                            className="w-full bg-theme-surface/70 backdrop-blur-md border border-white/60 rounded-xl px-4 py-3 text-[#291907] outline-none focus:ring-2 focus:ring-rose-400 transition-shadow cursor-pointer"
                         >
                             <option value="">Select I am looking for</option>
                             <option value="Bride">Bride</option>
@@ -615,7 +615,7 @@ function Home() {
                         <select
                             value={searchForm.ageRange}
                             onChange={e => handleSearchFormChange('ageRange', e.target.value)}
-                            className="w-full bg-white/70 backdrop-blur-md border border-white/60 rounded-xl px-4 py-3 text-[#291907] outline-none focus:ring-2 focus:ring-rose-400 transition-shadow cursor-pointer"
+                            className="w-full bg-theme-surface/70 backdrop-blur-md border border-white/60 rounded-xl px-4 py-3 text-[#291907] outline-none focus:ring-2 focus:ring-rose-400 transition-shadow cursor-pointer"
                         >
                             <option value="">Select Age</option>
                             <option value="18-22">18 – 22 years</option>
@@ -633,7 +633,7 @@ function Home() {
                         <select
                             value={searchForm.religion}
                             onChange={e => handleSearchFormChange('religion', e.target.value)}
-                            className="w-full bg-white/70 backdrop-blur-md border border-white/60 rounded-xl px-4 py-3 text-[#291907] outline-none focus:ring-2 focus:ring-rose-400 transition-shadow cursor-pointer"
+                            className="w-full bg-theme-surface/70 backdrop-blur-md border border-white/60 rounded-xl px-4 py-3 text-[#291907] outline-none focus:ring-2 focus:ring-rose-400 transition-shadow cursor-pointer"
                         >
                             <option value="">Select Religion</option>
                             <option value="Hindu">Hindu</option>
@@ -654,7 +654,7 @@ function Home() {
                         <select
                             value={searchForm.location}
                             onChange={e => handleSearchFormChange('location', e.target.value)}
-                            className="w-full bg-white/70 backdrop-blur-md border border-white/60 rounded-xl px-4 py-3 text-[#291907] outline-none focus:ring-2 focus:ring-rose-400 transition-shadow cursor-pointer"
+                            className="w-full bg-theme-surface/70 backdrop-blur-md border border-white/60 rounded-xl px-4 py-3 text-[#291907] outline-none focus:ring-2 focus:ring-rose-400 transition-shadow cursor-pointer"
                         >
                             <option value="">Select Location</option>
                             <option value="Mumbai">Mumbai, Maharashtra</option>
@@ -696,7 +696,7 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="w-full bg-white/60 backdrop-blur-xl border border-white/60 rounded-3xl p-5 md:p-6 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-slate-200/50"
+              className="w-full bg-theme-surface/60 backdrop-blur-xl border border-white/60 rounded-3xl p-5 md:p-6 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 divide-y md:divide-y-0 md:divide-x divide-slate-200/50"
           >
               {/* Feature 1 */}
               <div className="flex items-center gap-3.5 pl-0 md:pl-2 pt-0">
@@ -768,7 +768,7 @@ function Home() {
             initial="hidden" 
             whileInView="show" 
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-[0_0_15px_rgba(255,45,117,0.15)] mb-6 hover:border-pink-500/30 transition-all cursor-default"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-theme-surface/[0.03] backdrop-blur-md border border-white/10 shadow-[0_0_15px_rgba(255,45,117,0.15)] mb-6 hover:border-pink-500/30 transition-all cursor-default"
           >
             <span className="text-[#ff2d75] font-black text-xs tracking-widest uppercase">✨ OUR FEATURES</span>
           </motion.div>
@@ -823,7 +823,7 @@ function Home() {
               
               <div className="w-full relative z-10">
                 {/* 3D Gradient Icon */}
-                <div className="w-[72px] h-[72px] rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center mb-5 shadow-inner relative group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
+                <div className="w-[72px] h-[72px] rounded-xl bg-theme-surface/[0.03] border border-white/10 flex items-center justify-center mb-5 shadow-inner relative group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-[#ff2d75]/20 to-rose-500/20 blur-md group-hover:opacity-100 transition-opacity"></div>
                   <svg className="w-9 h-9 text-[#ff2d75] drop-shadow-[0_0_8px_rgba(255,45,117,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <circle cx="12" cy="14" r="7" strokeWidth="2"/>
@@ -867,7 +867,7 @@ function Home() {
 
               <div className="w-full relative z-10">
                 {/* 3D Gradient Icon */}
-                <div className="w-[72px] h-[72px] rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center mb-5 shadow-inner relative group-hover:scale-105 group-hover:-rotate-3 transition-all duration-300">
+                <div className="w-[72px] h-[72px] rounded-xl bg-theme-surface/[0.03] border border-white/10 flex items-center justify-center mb-5 shadow-inner relative group-hover:scale-105 group-hover:-rotate-3 transition-all duration-300">
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-[#8b5cf6]/20 to-purple-500/20 blur-md group-hover:opacity-100 transition-opacity"></div>
                   <svg className="w-9 h-9 text-[#8b5cf6] drop-shadow-[0_0_8px_rgba(139,92,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" strokeWidth="2" strokeLinecap="round"/>
@@ -911,7 +911,7 @@ function Home() {
 
               <div className="w-full relative z-10">
                 {/* 3D Gradient Icon */}
-                <div className="w-[72px] h-[72px] rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center mb-5 shadow-inner relative group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
+                <div className="w-[72px] h-[72px] rounded-xl bg-theme-surface/[0.03] border border-white/10 flex items-center justify-center mb-5 shadow-inner relative group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
                   <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-[#4f8cff]/20 to-blue-500/20 blur-md group-hover:opacity-100 transition-opacity"></div>
                   <svg className="w-9 h-9 text-[#4f8cff] drop-shadow-[0_0_8px_rgba(79,140,255,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -959,7 +959,7 @@ function Home() {
             <div className="absolute inset-0 bg-gradient-to-tr from-[#d94f73]/40 to-amber-400/30 rounded-[40px] transform rotate-3 scale-105 opacity-60 blur-2xl transition-transform duration-700 group-hover:rotate-6 group-hover:scale-110"></div>
 
             {/* Image frame */}
-            <div className="relative bg-white/60 backdrop-blur-xl p-3 rounded-[40px] border border-white/80 shadow-2xl shadow-rose-100/50 overflow-hidden">
+            <div className="relative bg-theme-surface/60 backdrop-blur-xl p-3 rounded-[40px] border border-white/80 shadow-2xl shadow-rose-100/50 overflow-hidden">
               <img
                 src={ceremony10}
                 alt="Happy Couple"
@@ -975,7 +975,7 @@ function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
               viewport={{ once: true }}
-              className="absolute -left-6 top-10 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3"
+              className="absolute -left-6 top-10 bg-theme-surface/80 backdrop-blur-xl border border-white/90 rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3"
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#d94f73] to-orange-400 flex items-center justify-center text-white shadow-md">
                 <HiHeart className="w-5 h-5 fill-current" />
@@ -992,7 +992,7 @@ function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
               viewport={{ once: true }}
-              className="absolute -right-6 bottom-12 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3"
+              className="absolute -right-6 bottom-12 bg-theme-surface/80 backdrop-blur-xl border border-white/90 rounded-2xl px-4 py-3 shadow-xl flex items-center gap-3"
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 flex items-center justify-center text-white shadow-md text-xl">
                 ⭐
@@ -1029,7 +1029,7 @@ function Home() {
                 <motion.div
                   variants={fadeUp}
                   whileHover={{ y: -6, scale: 1.02 }}
-                  className="relative p-5 bg-white/70 backdrop-blur-xl border border-rose-100 rounded-2xl shadow-lg hover:border-rose-300 hover:shadow-[0_8px_30px_rgba(217,79,115,0.12)] transition-all duration-300 group overflow-hidden"
+                  className="relative p-5 bg-theme-surface/70 backdrop-blur-xl border border-rose-100 rounded-2xl shadow-lg hover:border-rose-300 hover:shadow-[0_8px_30px_rgba(217,79,115,0.12)] transition-all duration-300 group overflow-hidden"
                   key={i}
                 >
                   {/* Subtle top glow on hover */}
@@ -1073,7 +1073,7 @@ function Home() {
             ["🤝", "Most Trusted", "A reliable platform for meaningful matrimonial search."],
             ["💍", "2000+ Weddings", "Thousands of successful matches and happy couples."],
           ].map((item, i) => (
-            <motion.div variants={fadeUp} whileHover={{ y: -8 }} className="relative p-8 bg-white/10 backdrop-blur-xl border border-white/10 rounded-[32px] text-center hover:shadow-[0_0_30px_rgba(196,140,70,0.2)] transition-all duration-500 group" key={i}>
+            <motion.div variants={fadeUp} whileHover={{ y: -8 }} className="relative p-8 bg-theme-surface/10 backdrop-blur-xl border border-white/10 rounded-[32px] text-center hover:shadow-[0_0_30px_rgba(196,140,70,0.2)] transition-all duration-500 group" key={i}>
               <motion.div variants={scaleIn} className="w-20 h-20 mx-auto bg-gradient-to-br from-amber-200 to-amber-500 rounded-2xl flex items-center justify-center text-4xl mb-6 shadow-[0_10px_20px_rgba(196,140,70,0.4)] border border-amber-100 group-hover:rotate-6 transition-transform">
                 {item[0]}
               </motion.div>
@@ -1103,7 +1103,7 @@ function Home() {
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
               className="absolute bottom-0 left-0 w-[68%] z-20"
             >
-              <div className="bg-white p-2.5 rounded-[28px] shadow-2xl shadow-rose-200/60 border border-rose-100/60 rotate-[-3deg] hover:rotate-0 transition-transform duration-700 group">
+              <div className="bg-theme-surface p-2.5 rounded-[28px] shadow-2xl shadow-rose-200/60 border border-rose-100/60 rotate-[-3deg] hover:rotate-0 transition-transform duration-700 group">
                 <img
                   src={sunnyFloral}
                   alt="Wedding Ceremony"
@@ -1118,7 +1118,7 @@ function Home() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
               className="absolute top-0 right-0 w-[60%] z-10"
             >
-              <div className="bg-white p-2.5 rounded-[28px] shadow-xl shadow-amber-200/50 border border-amber-100/60 rotate-[3deg] hover:rotate-0 transition-transform duration-700 group">
+              <div className="bg-theme-surface p-2.5 rounded-[28px] shadow-xl shadow-amber-200/50 border border-amber-100/60 rotate-[3deg] hover:rotate-0 transition-transform duration-700 group">
                 <img
                   src={couplesImg}
                   alt="Happy Couple"
@@ -1133,7 +1133,7 @@ function Home() {
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               className="absolute top-[36%] left-[30%] w-[42%] z-30"
             >
-              <div className="bg-white p-2 rounded-[20px] shadow-2xl shadow-rose-300/40 border border-white rotate-[1deg] hover:rotate-0 transition-transform duration-700 group">
+              <div className="bg-theme-surface p-2 rounded-[20px] shadow-2xl shadow-rose-300/40 border border-white rotate-[1deg] hover:rotate-0 transition-transform duration-700 group">
                 <img
                   src={ceremony2}
                   alt="Marriage"
@@ -1148,7 +1148,7 @@ function Home() {
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
               className="absolute top-0 left-0 w-[48%] z-[5]"
             >
-              <div className="bg-white p-2 rounded-[22px] shadow-xl shadow-rose-200/40 border border-rose-100/50 rotate-[-5deg] hover:rotate-0 transition-transform duration-700 group">
+              <div className="bg-theme-surface p-2 rounded-[22px] shadow-xl shadow-rose-200/40 border border-rose-100/50 rotate-[-5deg] hover:rotate-0 transition-transform duration-700 group">
                 <img
                   src={exp3}
                   alt="Wedding Experience"
@@ -1163,7 +1163,7 @@ function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5, duration: 0.5, type: "spring" }}
               viewport={{ once: true }}
-              className="absolute top-6 left-2 z-40 bg-white/90 backdrop-blur-xl border border-rose-100 rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3"
+              className="absolute top-6 left-2 z-40 bg-theme-surface/90 backdrop-blur-xl border border-rose-100 rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3"
             >
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#d94f73] to-orange-400 flex items-center justify-center shadow-md">
                 <HiHeart className="w-5 h-5 text-white fill-current" />
@@ -1180,7 +1180,7 @@ function Home() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.7, duration: 0.5, type: "spring" }}
               viewport={{ once: true }}
-              className="absolute bottom-6 right-2 z-40 bg-white/90 backdrop-blur-xl border border-amber-100 rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3"
+              className="absolute bottom-6 right-2 z-40 bg-theme-surface/90 backdrop-blur-xl border border-amber-100 rounded-2xl px-4 py-3 shadow-lg flex items-center gap-3"
             >
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 flex items-center justify-center shadow-md text-lg">
                 ⭐
@@ -1219,7 +1219,7 @@ function Home() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => setShowLogin(true)}
-                className="px-8 py-4 bg-white border-2 border-rose-200 text-[#d94f73] rounded-full font-bold hover:bg-rose-50 transition-all"
+                className="px-8 py-4 bg-theme-surface border-2 border-rose-200 text-[#d94f73] rounded-full font-bold hover:bg-rose-50 transition-all"
               >
                 Sign In
               </motion.button>
@@ -1240,7 +1240,7 @@ function Home() {
                   variants={scaleIn}
                   key={i}
                   whileHover={{ y: -6, boxShadow: "0 12px 30px rgba(217,79,115,0.12)" }}
-                  className="bg-white border border-rose-100/80 shadow-md p-5 rounded-3xl text-center group transition-all duration-300 cursor-default"
+                  className="bg-theme-surface border border-rose-100/80 shadow-md p-5 rounded-3xl text-center group transition-all duration-300 cursor-default"
                 >
                   <div className="text-2xl mb-1">{stat.icon}</div>
                   <h3 className="text-3xl font-black text-[#d94f73] font-serif mb-1 group-hover:scale-110 transition-transform duration-300">{stat.num}</h3>
@@ -1263,11 +1263,11 @@ function Home() {
               </h2>
               <p className="text-[#3b4c6d] text-lg font-medium">Connect with your matches anytime, anywhere</p>
 
-              <div className="bg-white rounded-[32px] p-6 shadow-sm border border-gray-100 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 max-w-lg mx-auto lg:mx-0 mt-10">
+              <div className="bg-theme-surface rounded-[32px] p-6 shadow-sm border border-gray-100 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 max-w-lg mx-auto lg:mx-0 mt-10">
                  <div className="text-center sm:text-left flex-1">
                      <p className="text-[#1a2b4c] text-sm font-medium mb-4 text-center">Point your phone camera at the QR code or use one of the download links below</p>
                      <div className="flex items-center justify-center gap-4">
-                         <div className="w-24 h-24 bg-white p-1 rounded-xl shadow-sm border border-gray-200 shrink-0">
+                         <div className="w-24 h-24 bg-theme-surface p-1 rounded-xl shadow-sm border border-theme-border shrink-0">
                             {/* Dummy QR Code */}
                             <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://punarmilan.com" alt="QR Code" className="w-full h-full object-contain" />
                          </div>
@@ -1301,10 +1301,10 @@ function Home() {
                  whileInView={{ opacity: 1, x: 80, y: 0, rotate: 6 }}
                  viewport={{ once: true }}
                  transition={{ duration: 0.8 }}
-                 className="absolute right-10 top-0 w-[230px] h-[460px] bg-white rounded-[40px] border-[8px] border-gray-200 shadow-xl overflow-hidden z-10"
+                 className="absolute right-10 top-0 w-[230px] h-[460px] bg-theme-surface rounded-[40px] border-[8px] border-theme-border shadow-xl overflow-hidden z-10"
                >
                  {/* Dummy Background for Phone 1 */}
-                 <div className="w-full h-12 bg-gray-50 flex items-center justify-between px-4 border-b border-gray-200">
+                 <div className="w-full h-12 bg-gray-50 flex items-center justify-between px-4 border-b border-theme-border">
                     <div className="w-20 h-3 bg-gray-200 rounded-full"></div>
                     <div className="flex gap-2">
                        <div className="w-4 h-4 rounded-full bg-gray-200"></div>
@@ -1343,7 +1343,7 @@ function Home() {
                  initial={{ opacity: 0, scale: 0.8 }}
                  whileInView={{ opacity: 1, scale: 1 }}
                  transition={{ delay: 0.6, duration: 0.5 }}
-                 className="absolute left-[-10px] top-[150px] bg-white rounded-full px-4 py-2 shadow-lg z-30 font-semibold text-xs text-gray-800 border border-gray-100"
+                 className="absolute left-[-10px] top-[150px] bg-theme-surface rounded-full px-4 py-2 shadow-lg z-30 font-semibold text-xs text-gray-800 border border-gray-100"
                >
                   Easy Verification
                </motion.div>
@@ -1352,7 +1352,7 @@ function Home() {
                  initial={{ opacity: 0, scale: 0.8 }}
                  whileInView={{ opacity: 1, scale: 1 }}
                  transition={{ delay: 0.8, duration: 0.5 }}
-                 className="absolute right-[-10px] top-[240px] bg-white rounded-full px-4 py-2 shadow-lg z-30 font-semibold text-xs text-gray-800 border border-gray-100"
+                 className="absolute right-[-10px] top-[240px] bg-theme-surface rounded-full px-4 py-2 shadow-lg z-30 font-semibold text-xs text-gray-800 border border-gray-100"
                >
                   Voice & Video Calls
                </motion.div>
@@ -1361,7 +1361,7 @@ function Home() {
                  initial={{ opacity: 0, scale: 0.8 }}
                  whileInView={{ opacity: 1, scale: 1 }}
                  transition={{ delay: 1.0, duration: 0.5 }}
-                 className="absolute left-[30px] bottom-[20px] bg-white rounded-full px-4 py-2 shadow-lg z-30 font-semibold text-xs text-gray-800 border border-gray-100"
+                 className="absolute left-[30px] bottom-[20px] bg-theme-surface rounded-full px-4 py-2 shadow-lg z-30 font-semibold text-xs text-gray-800 border border-gray-100"
                >
                   10M+ downloads
                </motion.div>
@@ -1385,7 +1385,7 @@ function Home() {
             initial="hidden" 
             whileInView="show" 
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-[0_0_15px_rgba(255,45,117,0.15)] mb-6 hover:border-pink-500/30 transition-all cursor-default"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-theme-surface/[0.03] backdrop-blur-md border border-white/10 shadow-[0_0_15px_rgba(255,45,117,0.15)] mb-6 hover:border-pink-500/30 transition-all cursor-default"
           >
             <span className="text-[#ff2d75] font-black text-xs tracking-widest uppercase">✦ TIMELINE ✦</span>
           </motion.div>
@@ -1427,12 +1427,12 @@ function Home() {
               variants={fadeUp}
               whileHover={{ y: -8, scale: 1.01 }}
               transition={{ duration: 0.4 }}
-              className="group relative flex flex-col items-center text-center p-8 h-[380px] w-full lg:w-[30%] rounded-[28px] bg-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#ff2d75]/40 hover:bg-white/[0.04] hover:shadow-[0_20px_50px_rgba(255,45,117,0.12)] transition-all duration-300 overflow-hidden"
+              className="group relative flex flex-col items-center text-center p-8 h-[380px] w-full lg:w-[30%] rounded-[28px] bg-theme-surface/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#ff2d75]/40 hover:bg-theme-surface/[0.04] hover:shadow-[0_20px_50px_rgba(255,45,117,0.12)] transition-all duration-300 overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-[150px] h-[150px] rounded-full bg-[#ff2d75]/5 blur-3xl pointer-events-none group-hover:bg-[#ff2d75]/10 transition-colors"></div>
 
               {/* 3D Circular Gradient Icon */}
-              <div className="w-[100px] h-[100px] rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center mb-6 shadow-inner relative group-hover:scale-105 transition-all duration-300">
+              <div className="w-[100px] h-[100px] rounded-full bg-theme-surface/[0.03] border border-white/10 flex items-center justify-center mb-6 shadow-inner relative group-hover:scale-105 transition-all duration-300">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#ff2d75]/20 to-rose-500/20 blur-md group-hover:opacity-100 transition-opacity"></div>
                 <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#ff2d75]/15 to-transparent flex items-center justify-center">
                   <svg className="w-9 h-9 text-[#ff2d75] drop-shadow-[0_0_8px_rgba(255,45,117,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -1442,7 +1442,7 @@ function Home() {
               </div>
 
               {/* Badge Step */}
-              <div className="px-4 py-1 rounded-full bg-white/[0.03] border border-white/10 text-xs font-bold text-gray-300 mb-4 tracking-wider">
+              <div className="px-4 py-1 rounded-full bg-theme-surface/[0.03] border border-white/10 text-xs font-bold text-gray-300 mb-4 tracking-wider">
                 01
               </div>
 
@@ -1461,7 +1461,7 @@ function Home() {
             {/* Connecting Arrow 1 */}
             <motion.div 
               variants={fadeUp}
-              className="hidden lg:flex items-center justify-center w-12 h-12 rounded-full border border-pink-500/20 bg-white/[0.01] backdrop-blur-md text-pink-400 relative z-20 hover:border-pink-500/40 transition-colors"
+              className="hidden lg:flex items-center justify-center w-12 h-12 rounded-full border border-pink-500/20 bg-theme-surface/[0.01] backdrop-blur-md text-pink-400 relative z-20 hover:border-pink-500/40 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -1473,12 +1473,12 @@ function Home() {
               variants={fadeUp}
               whileHover={{ y: -8, scale: 1.01 }}
               transition={{ duration: 0.4 }}
-              className="group relative flex flex-col items-center text-center p-8 h-[380px] w-full lg:w-[30%] rounded-[28px] bg-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#8b5cf6]/40 hover:bg-white/[0.04] hover:shadow-[0_20px_50px_rgba(139,92,246,0.12)] transition-all duration-300 overflow-hidden"
+              className="group relative flex flex-col items-center text-center p-8 h-[380px] w-full lg:w-[30%] rounded-[28px] bg-theme-surface/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#8b5cf6]/40 hover:bg-theme-surface/[0.04] hover:shadow-[0_20px_50px_rgba(139,92,246,0.12)] transition-all duration-300 overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-[150px] h-[150px] rounded-full bg-[#8b5cf6]/5 blur-3xl pointer-events-none group-hover:bg-[#8b5cf6]/10 transition-colors"></div>
 
               {/* 3D Circular Gradient Icon */}
-              <div className="w-[100px] h-[100px] rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center mb-6 shadow-inner relative group-hover:scale-105 transition-all duration-300">
+              <div className="w-[100px] h-[100px] rounded-full bg-theme-surface/[0.03] border border-white/10 flex items-center justify-center mb-6 shadow-inner relative group-hover:scale-105 transition-all duration-300">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#8b5cf6]/20 to-purple-500/20 blur-md group-hover:opacity-100 transition-opacity"></div>
                 <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#8b5cf6]/15 to-transparent flex items-center justify-center">
                   <svg className="w-9 h-9 text-[#8b5cf6] drop-shadow-[0_0_8px_rgba(139,92,246,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -1488,7 +1488,7 @@ function Home() {
               </div>
 
               {/* Badge Step */}
-              <div className="px-4 py-1 rounded-full bg-white/[0.03] border border-white/10 text-xs font-bold text-gray-300 mb-4 tracking-wider">
+              <div className="px-4 py-1 rounded-full bg-theme-surface/[0.03] border border-white/10 text-xs font-bold text-gray-300 mb-4 tracking-wider">
                 02
               </div>
 
@@ -1509,7 +1509,7 @@ function Home() {
             {/* Connecting Arrow 2 */}
             <motion.div 
               variants={fadeUp}
-              className="hidden lg:flex items-center justify-center w-12 h-12 rounded-full border border-blue-500/20 bg-white/[0.01] backdrop-blur-md text-blue-400 relative z-20 hover:border-blue-500/40 transition-colors"
+              className="hidden lg:flex items-center justify-center w-12 h-12 rounded-full border border-blue-500/20 bg-theme-surface/[0.01] backdrop-blur-md text-blue-400 relative z-20 hover:border-blue-500/40 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -1521,12 +1521,12 @@ function Home() {
               variants={fadeUp}
               whileHover={{ y: -8, scale: 1.01 }}
               transition={{ duration: 0.4 }}
-              className="group relative flex flex-col items-center text-center p-8 h-[380px] w-full lg:w-[30%] rounded-[28px] bg-white/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#4f8cff]/40 hover:bg-white/[0.04] hover:shadow-[0_20px_50px_rgba(79,140,255,0.12)] transition-all duration-300 overflow-hidden"
+              className="group relative flex flex-col items-center text-center p-8 h-[380px] w-full lg:w-[30%] rounded-[28px] bg-theme-surface/[0.02] backdrop-blur-xl border border-white/10 hover:border-[#4f8cff]/40 hover:bg-theme-surface/[0.04] hover:shadow-[0_20px_50px_rgba(79,140,255,0.12)] transition-all duration-300 overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-[150px] h-[150px] rounded-full bg-[#4f8cff]/5 blur-3xl pointer-events-none group-hover:bg-[#4f8cff]/10 transition-colors"></div>
 
               {/* 3D Circular Gradient Icon */}
-              <div className="w-[100px] h-[100px] rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center mb-6 shadow-inner relative group-hover:scale-105 transition-all duration-300">
+              <div className="w-[100px] h-[100px] rounded-full bg-theme-surface/[0.03] border border-white/10 flex items-center justify-center mb-6 shadow-inner relative group-hover:scale-105 transition-all duration-300">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#4f8cff]/20 to-blue-500/20 blur-md group-hover:opacity-100 transition-opacity"></div>
                 <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#4f8cff]/15 to-transparent flex items-center justify-center">
                   <svg className="w-9 h-9 text-[#4f8cff] drop-shadow-[0_0_8px_rgba(79,140,255,0.6)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
@@ -1536,7 +1536,7 @@ function Home() {
               </div>
 
               {/* Badge Step */}
-              <div className="px-4 py-1 rounded-full bg-white/[0.03] border border-white/10 text-xs font-bold text-gray-300 mb-4 tracking-wider">
+              <div className="px-4 py-1 rounded-full bg-theme-surface/[0.03] border border-white/10 text-xs font-bold text-gray-300 mb-4 tracking-wider">
                 03
               </div>
 
@@ -1559,10 +1559,10 @@ function Home() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="mt-16 px-6 py-2.5 rounded-full bg-white/[0.02] border border-white/10 backdrop-blur-md flex items-center gap-2 hover:border-[#ff2d75]/30 hover:bg-white/[0.04] transition-all"
+            className="mt-16 px-6 py-2.5 rounded-full bg-theme-surface/[0.02] border border-white/10 backdrop-blur-md flex items-center gap-2 hover:border-[#ff2d75]/30 hover:bg-theme-surface/[0.04] transition-all"
           >
             <span className="text-[#ff2d75] text-xs font-black tracking-wider uppercase">100% Verified Profiles</span>
-            <span className="text-gray-500 text-xs">•</span>
+            <span className="text-theme-text-secondary text-xs">•</span>
             <span className="text-gray-400 text-xs font-bold font-sans">
               <span className="text-green-400">Safe</span> • <span className="text-purple-400">Secure</span> • <span className="text-blue-400">Trusted</span>
             </span>
@@ -1644,7 +1644,7 @@ function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10 pointer-events-none transition-opacity group-hover:opacity-80"></div>
                 <img src={img} className="w-full h-full object-cover transform transition-all duration-1000 group-hover:scale-110 group-hover:brightness-110" />
                 <div className="absolute top-4 left-4 z-20 pointer-events-none">
-                    <span className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 text-xs rounded-full text-white tracking-widest">{i % 2 === 0 ? 'AR View' : 'VR Moment'}</span>
+                    <span className="bg-theme-surface/10 backdrop-blur-md border border-white/20 px-4 py-1.5 text-xs rounded-full text-white tracking-widest">{i % 2 === 0 ? 'AR View' : 'VR Moment'}</span>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6 z-20 flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                     <div>
@@ -1679,7 +1679,7 @@ function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent z-10 pointer-events-none transition-opacity group-hover:opacity-80"></div>
                 <img src={img} className="w-full h-full object-cover transform transition-all duration-1000 group-hover:scale-110 group-hover:brightness-110" />
                 <div className="absolute top-4 left-4 z-20 pointer-events-none">
-                    <span className="bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 text-xs rounded-full text-white tracking-widest">{i % 2 === 0 ? 'AR View' : 'VR Moment'}</span>
+                    <span className="bg-theme-surface/10 backdrop-blur-md border border-white/20 px-4 py-1.5 text-xs rounded-full text-white tracking-widest">{i % 2 === 0 ? 'AR View' : 'VR Moment'}</span>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6 z-20 flex justify-between items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                     <div>

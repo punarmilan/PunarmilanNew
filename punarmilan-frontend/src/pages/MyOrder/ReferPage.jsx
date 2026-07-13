@@ -76,7 +76,7 @@ const ReferPage = () => {
                     </div>
 
                     <div className="lg:col-span-3">
-                        <div className="bg-white rounded-2xl shadow-xl p-6 lg:p-8 border border-rose-100">
+                        <div className="bg-theme-surface rounded-2xl shadow-xl p-6 lg:p-8 border border-rose-100">
                             <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6 font-serif">Refer A Friend</h1>
 
                             {/* Main Referral Section */}
@@ -120,7 +120,7 @@ const ReferPage = () => {
                                         <div key={index} className={`bg-gradient-to-br ${benefit.color} rounded-xl p-6 border hover:shadow-lg transition-all duration-300`}>
                                             <div className="text-3xl mb-3">{benefit.icon}</div>
                                             <h3 className="font-bold text-gray-800 mb-2">{benefit.title}</h3>
-                                            <p className="text-gray-600 text-sm">{benefit.description}</p>
+                                            <p className="text-theme-text-secondary text-sm">{benefit.description}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -133,10 +133,10 @@ const ReferPage = () => {
                                     <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-xl p-6">
                                         <div className="space-y-3">
                                             {referralsSent.map((referral, index) => (
-                                                <div key={index} className="bg-white rounded-lg p-4 shadow-sm flex justify-between items-center">
+                                                <div key={index} className="bg-theme-surface rounded-lg p-4 shadow-sm flex justify-between items-center">
                                                     <div>
                                                         <p className="font-semibold text-gray-800">✉️ {referral.email}</p>
-                                                        <p className="text-sm text-gray-600">Sent on {referral.date}</p>
+                                                        <p className="text-sm text-theme-text-secondary">Sent on {referral.date}</p>
                                                     </div>
                                                     <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">
                                                         Sent
@@ -157,21 +157,21 @@ const ReferPage = () => {
                                             1
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-2">Send Invite</h3>
-                                        <p className="text-gray-600 text-sm">Share invitation with your friends via email</p>
+                                        <p className="text-theme-text-secondary text-sm">Share invitation with your friends via email</p>
                                     </div>
                                     <div className="text-center">
                                         <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-3">
                                             2
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-2">Friend Joins</h3>
-                                        <p className="text-gray-600 text-sm">Your friend registers and creates a profile</p>
+                                        <p className="text-theme-text-secondary text-sm">Your friend registers and creates a profile</p>
                                     </div>
                                     <div className="text-center">
                                         <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-3">
                                             3
                                         </div>
                                         <h3 className="font-bold text-gray-800 mb-2">Earn Rewards</h3>
-                                        <p className="text-gray-600 text-sm">Get rewards and benefits when they subscribe</p>
+                                        <p className="text-theme-text-secondary text-sm">Get rewards and benefits when they subscribe</p>
                                     </div>
                                 </div>
                             </div>

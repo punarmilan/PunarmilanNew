@@ -87,7 +87,7 @@ const SecurityPage = () => {
                     </div>
 
                     <div className="lg:col-span-3">
-                        <div className="bg-white rounded-2xl shadow-xl p-6 lg:p-8 border border-rose-100">
+                        <div className="bg-theme-surface rounded-2xl shadow-xl p-6 lg:p-8 border border-rose-100">
                             <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6 font-serif">Security Tips</h1>
 
                             {/* Main Alert */}
@@ -123,21 +123,21 @@ const SecurityPage = () => {
                             <div className="mb-8 bg-gradient-to-br from-orange-50 to-yellow-50 border border-orange-200 rounded-xl p-6">
                                 <h2 className="text-2xl font-bold text-gray-800 mb-4 font-serif">⚠️ What to Do if Something Goes Wrong</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div className="bg-white rounded-lg p-4 shadow-sm">
+                                    <div className="bg-theme-surface rounded-lg p-4 shadow-sm">
                                         <h3 className="font-bold text-gray-800 mb-2">🚫 Block the User</h3>
-                                        <p className="text-gray-600 text-sm">Use the block feature to prevent further contact from suspicious users</p>
+                                        <p className="text-theme-text-secondary text-sm">Use the block feature to prevent further contact from suspicious users</p>
                                     </div>
-                                    <div className="bg-white rounded-lg p-4 shadow-sm">
+                                    <div className="bg-theme-surface rounded-lg p-4 shadow-sm">
                                         <h3 className="font-bold text-gray-800 mb-2">📢 Report to Us</h3>
-                                        <p className="text-gray-600 text-sm">Report suspicious activity or profiles immediately to our support team</p>
+                                        <p className="text-theme-text-secondary text-sm">Report suspicious activity or profiles immediately to our support team</p>
                                     </div>
-                                    <div className="bg-white rounded-lg p-4 shadow-sm">
+                                    <div className="bg-theme-surface rounded-lg p-4 shadow-sm">
                                         <h3 className="font-bold text-gray-800 mb-2">💾 Save Evidence</h3>
-                                        <p className="text-gray-600 text-sm">Take screenshots of suspicious messages or behavior</p>
+                                        <p className="text-theme-text-secondary text-sm">Take screenshots of suspicious messages or behavior</p>
                                     </div>
-                                    <div className="bg-white rounded-lg p-4 shadow-sm">
+                                    <div className="bg-theme-surface rounded-lg p-4 shadow-sm">
                                         <h3 className="font-bold text-gray-800 mb-2">👮 Contact Authorities</h3>
-                                        <p className="text-gray-600 text-sm">For serious threats or crimes, contact local law enforcement</p>
+                                        <p className="text-theme-text-secondary text-sm">For serious threats or crimes, contact local law enforcement</p>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@ const SecurityPage = () => {
                                 <div className="flex flex-col sm:flex-row gap-4">
                                     <button
                                         onClick={() => Swal.fire({ text: 'Opening report form...', confirmButtonColor: '#8C6D39' })}
-                                        className="flex-1 bg-white text-rose-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-200"
+                                        className="flex-1 bg-theme-surface text-rose-600 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors duration-200"
                                     >
                                         🚨 Report an Issue
                                     </button>

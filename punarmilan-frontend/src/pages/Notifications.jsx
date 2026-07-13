@@ -67,7 +67,7 @@ const Notifications = () => {
       <Header />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-28">
-        <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100 p-6 md:p-8">
+        <div className="bg-theme-surface rounded-[2rem] shadow-sm border border-gray-100 p-6 md:p-8">
           
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4 border-b border-gray-100 pb-6">
@@ -77,14 +77,14 @@ const Notifications = () => {
               </div>
               <div>
                 <h1 className="text-2xl font-extrabold text-gray-900 font-serif">Notifications</h1>
-                <p className="text-sm text-gray-500 font-medium">You have {unreadCount} unread notifications</p>
+                <p className="text-sm text-theme-text-secondary font-medium">You have {unreadCount} unread notifications</p>
               </div>
             </div>
 
             {unreadCount > 0 && (
               <button 
                 onClick={markAllAsRead}
-                className="text-sm font-semibold text-[#C5A059] hover:text-[#8C6D39] px-4 py-2 bg-[#FAF6F0] hover:bg-[#F0E6D2] rounded-full transition-colors"
+                className="text-sm font-semibold text-theme-magenta hover:text-theme-pink px-4 py-2 bg-[#FAF6F0] hover:bg-[#F0E6D2] rounded-full transition-colors"
               >
                 Mark all as read
               </button>
@@ -101,7 +101,7 @@ const Notifications = () => {
                 >
                   <Bell className="mx-auto text-gray-300 mb-4" size={48} />
                   <h3 className="text-lg font-bold text-gray-900">All caught up!</h3>
-                  <p className="text-gray-500">You have no new notifications right now.</p>
+                  <p className="text-theme-text-secondary">You have no new notifications right now.</p>
                 </motion.div>
               ) : (
                 notifications.map((notification) => (
@@ -112,7 +112,7 @@ const Notifications = () => {
                     exit={{ opacity: 0, scale: 0.95 }}
                     layout
                     className={`relative p-4 md:p-5 rounded-2xl border transition-all duration-300 flex flex-col md:flex-row gap-4 group cursor-pointer ${
-                      notification.unread ? 'bg-white border-rose-100 shadow-md' : 'bg-gray-50/50 border-transparent hover:bg-gray-50 hover:shadow-sm'
+                      notification.unread ? 'bg-theme-surface border-rose-100 shadow-md' : 'bg-gray-50/50 border-transparent hover:bg-gray-50 hover:shadow-sm'
                     }`}
                     onClick={() => markAsRead(notification.id)}
                   >
@@ -129,7 +129,7 @@ const Notifications = () => {
                       <h4 className={`text-base font-bold mb-1 ${notification.unread ? 'text-gray-900' : 'text-gray-700'}`}>
                         {notification.title}
                       </h4>
-                      <p className="text-sm text-gray-600 mb-2 leading-relaxed">
+                      <p className="text-sm text-theme-text-secondary mb-2 leading-relaxed">
                         {notification.message}
                       </p>
                       <div className="flex items-center gap-1.5 text-xs font-medium text-gray-400">

@@ -51,7 +51,7 @@ const LivePage = () => {
 
         <div className="relative max-w-7xl mx-auto px-6 py-28 text-center">
 
-          <div className="inline-flex items-center gap-2 bg-white/10 px-5 py-2 rounded-full border border-white/10">
+          <div className="inline-flex items-center gap-2 bg-theme-surface/10 px-5 py-2 rounded-full border border-white/10">
 
             <Radio className="w-4 h-4 text-pink-500" />
 
@@ -102,7 +102,7 @@ const LivePage = () => {
 
             <div
               key={event.title}
-              className="bg-white/[0.03] border border-white/10 rounded-3xl p-8"
+              className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8"
             >
 
               <Video className="w-10 h-10 text-pink-500 mb-6" />
@@ -139,7 +139,7 @@ const LivePage = () => {
 
       {/* Why Join */}
 
-      <section className="bg-white/[0.02] border-y border-white/5">
+      <section className="bg-theme-surface/[0.02] border-y border-white/5">
 
         <div className="max-w-6xl mx-auto px-6 py-24">
 
@@ -157,7 +157,7 @@ const LivePage = () => {
 
               <div
                 key={item}
-                className="bg-white/[0.03] border border-white/10 rounded-3xl p-7"
+                className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-7"
               >
 
                 <CheckCircle2 className="text-green-500 mb-4" />

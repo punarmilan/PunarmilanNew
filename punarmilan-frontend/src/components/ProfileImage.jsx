@@ -38,7 +38,7 @@ const ProfileWithImage = () => {
     };
 
     return (
-        <div className="bg-white rounded-lg shadow-sm border p-6">
+        <div className="bg-theme-surface rounded-lg shadow-sm border p-6">
             {/* Profile Header */}
             <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center space-x-4">
@@ -67,8 +67,8 @@ const ProfileWithImage = () => {
                         </div>
 
                         {/* Online Status */}
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-3 border-white flex items-center justify-center">
-                            <div className="w-2 h-2 bg-white rounded-full"></div>
+                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-theme-success rounded-full border-3 border-white flex items-center justify-center">
+                            <div className="w-2 h-2 bg-theme-surface rounded-full"></div>
                         </div>
                     </div>
 
@@ -84,7 +84,7 @@ const ProfileWithImage = () => {
 
                         <button
                             onClick={() => setIsEditing(!isEditing)}
-                            className="flex items-center text-gray-600 hover:text-blue-600 text-sm"
+                            className="flex items-center text-theme-text-secondary hover:text-blue-600 text-sm"
                         >
                             <Edit2 className="w-4 h-4 mr-1" />
                             Edit
@@ -106,7 +106,7 @@ const ProfileWithImage = () => {
             <div className="mb-6">
                 <div className="flex items-center justify-between mb-3">
                     <h3 className="font-medium text-gray-700">Additional Photos</h3>
-                    <span className="text-sm text-gray-500">{additionalImages.length}/10</span>
+                    <span className="text-sm text-theme-text-secondary">{additionalImages.length}/10</span>
                 </div>
 
                 <div className="flex space-x-3 overflow-x-auto pb-2">
@@ -149,7 +149,7 @@ const ProfileWithImage = () => {
 
             {/* Account Type */}
             <div className="mb-4">
-                <div className="text-sm text-gray-500 mb-1">Account Type</div>
+                <div className="text-sm text-theme-text-secondary mb-1">Account Type</div>
                 <div className="flex items-center justify-between">
                     <div className="text-lg font-bold text-pink-600">Free Membership</div>
                     <button className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded text-sm font-medium">
@@ -162,13 +162,13 @@ const ProfileWithImage = () => {
             <div className="pt-4 border-t">
                 <div className="flex items-center justify-between">
                     <div>
-                        <div className="text-sm text-gray-600 mb-1">Standout with Verification</div>
+                        <div className="text-sm text-theme-text-secondary mb-1">Standout with Verification</div>
                         <button className="text-blue-600 text-sm font-medium hover:underline">
                             Get Blue Tick
                         </button>
                     </div>
                     <div className="flex items-center text-sm">
-                        <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                        <div className="w-2 h-2 bg-theme-success rounded-full mr-2"></div>
                         <span className="text-green-600 font-medium">Verified</span>
                     </div>
                 </div>
@@ -180,7 +180,7 @@ const ProfileWithImage = () => {
                     <h4 className="font-bold mb-3">Edit Profile</h4>
                     <div className="space-y-3">
                         <div>
-                            <label className="block text-sm text-gray-600 mb-1">Display Name</label>
+                            <label className="block text-sm text-theme-text-secondary mb-1">Display Name</label>
                             <input
                                 type="text"
                                 defaultValue="BIGITALIZER"
@@ -188,7 +188,7 @@ const ProfileWithImage = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm text-gray-600 mb-1">Bio</label>
+                            <label className="block text-sm text-theme-text-secondary mb-1">Bio</label>
                             <textarea
                                 className="w-full px-3 py-2 border rounded-lg"
                                 rows="2"

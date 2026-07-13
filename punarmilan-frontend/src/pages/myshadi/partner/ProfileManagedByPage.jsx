@@ -65,9 +65,9 @@ function ProfileManagedByPage() {
 
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-2 sm:p-4">
-            <div className="w-full max-w-xl bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div className="w-full max-w-xl bg-theme-surface rounded-2xl shadow-lg overflow-hidden">
                 {/* Header */}
-                <div className="bg-white border-b border-gray-200 p-4 sm:p-6 bg-gradient-to-r from-rose-500 to-rose-600">
+                <div className="bg-theme-surface border-b border-theme-border p-4 sm:p-6 bg-gradient-to-r from-rose-500 to-rose-600">
                     <button
                         onClick={handleCancel}
                         className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors mb-3 sm:mb-4"
@@ -91,7 +91,7 @@ function ProfileManagedByPage() {
                                 />
                                 <div className={`w-5 h-5 border-2 rounded ${selections.openToAll
                                     ? 'bg-cyan-500 border-cyan-500'
-                                    : 'bg-white border-gray-300'
+                                    : 'bg-theme-surface border-gray-300'
                                     } transition-all`}>
                                     {selections.openToAll && (
                                         <svg className="w-full h-full text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -102,7 +102,7 @@ function ProfileManagedByPage() {
                             </div>
                             <div>
                                 <span className="text-base sm:text-lg text-gray-900 font-normal">Open to All</span>
-                                <span className="text-gray-500 text-sm ml-2">(Recommended)</span>
+                                <span className="text-theme-text-secondary text-sm ml-2">(Recommended)</span>
                             </div>
                         </label>
                     </div>
@@ -123,7 +123,7 @@ function ProfileManagedByPage() {
                                     />
                                     <div className={`w-5 h-5 border-2 rounded ${selections.self
                                         ? 'bg-cyan-500 border-cyan-500'
-                                        : 'bg-white border-gray-300'
+                                        : 'bg-theme-surface border-gray-300'
                                         } transition-all`}>
                                         {selections.self && (
                                             <svg className="w-full h-full text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -146,7 +146,7 @@ function ProfileManagedByPage() {
                                     />
                                     <div className={`w-5 h-5 border-2 rounded ${selections.parent
                                         ? 'bg-cyan-500 border-cyan-500'
-                                        : 'bg-white border-gray-300'
+                                        : 'bg-theme-surface border-gray-300'
                                         } transition-all`}>
                                         {selections.parent && (
                                             <svg className="w-full h-full text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -169,7 +169,7 @@ function ProfileManagedByPage() {
                                     />
                                     <div className={`w-5 h-5 border-2 rounded ${selections.sibling
                                         ? 'bg-cyan-500 border-cyan-500'
-                                        : 'bg-white border-gray-300'
+                                        : 'bg-theme-surface border-gray-300'
                                         } transition-all`}>
                                         {selections.sibling && (
                                             <svg className="w-full h-full text-white" viewBox="0 0 20 20" fill="currentColor">
@@ -188,7 +188,7 @@ function ProfileManagedByPage() {
                 <div className="p-4 sm:p-6 pt-2 sm:pt-4 flex gap-3 sm:gap-4">
                     <button
                         onClick={handleCancel}
-                        className="flex-1 px-6 py-3 bg-white text-gray-600 border border-gray-300 rounded-full font-medium text-base sm:text-lg hover:bg-gray-50 transition-all active:scale-95"
+                        className="flex-1 px-6 py-3 bg-theme-surface text-theme-text-secondary border border-gray-300 rounded-full font-medium text-base sm:text-lg hover:bg-gray-50 transition-all active:scale-95"
                     >
                         Cancel
                     </button>

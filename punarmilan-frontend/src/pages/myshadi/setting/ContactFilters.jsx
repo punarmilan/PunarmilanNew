@@ -80,19 +80,19 @@ const ContactFilters = () => {
                     onClick={() => navigate(-1)}
                     className="mb-8 flex items-center gap-2 text-gray-400 hover:text-rose-600 font-medium transition-all group"
                 >
-                    <div className="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center group-hover:bg-rose-50 transition-colors">
+                    <div className="w-8 h-8 rounded-full bg-theme-surface shadow-sm flex items-center justify-center group-hover:bg-rose-50 transition-colors">
                         <FaArrowLeft className="text-sm" />
                     </div>
                     <span className="text-sm uppercase tracking-wider">Back to Profile</span>
                 </button>
 
-                <div className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] overflow-hidden">
+                <div className="bg-theme-surface rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] overflow-hidden">
                     {/* Header Section - Matches Image Styling */}
                     <div className="p-8 sm:p-12 pb-6">
                         <h1 className="text-4xl sm:text-5xl font-black text-[#1a1c23] mb-4 tracking-tight">
                             Who can contact me?
                         </h1>
-                        <p className="text-gray-500 text-lg sm:text-xl font-medium leading-relaxed max-w-xl">
+                        <p className="text-theme-text-secondary text-lg sm:text-xl font-medium leading-relaxed max-w-xl">
                             Only Members matching the below criteria will get to see your contact details.
                         </p>
                         <div className="mt-6">
@@ -112,7 +112,7 @@ const ContactFilters = () => {
                                     className="group flex items-center p-6 sm:p-8 hover:bg-rose-50/30 transition-all cursor-pointer rounded-2xl sm:rounded-[1.5rem]"
                                 >
                                     {/* Icon with Subtle Background */}
-                                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-xl shadow-sm border border-gray-50 flex items-center justify-center mr-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-theme-surface rounded-xl shadow-sm border border-gray-50 flex items-center justify-center mr-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
                                         <span className="text-2xl sm:text-3xl">
                                             {filter.icon}
                                         </span>
@@ -129,7 +129,7 @@ const ContactFilters = () => {
                                     </div>
 
                                     {/* Circular Button - Matches Image (Top Right Icon) */}
-                                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all ${filter.isActive ? 'bg-rose-50 text-rose-500 border border-rose-100 shadow-sm' : 'bg-white text-gray-200 border border-gray-100 group-hover:border-rose-200 group-hover:text-rose-400 shadow-sm'}`}>
+                                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all ${filter.isActive ? 'bg-rose-50 text-rose-500 border border-rose-100 shadow-sm' : 'bg-theme-surface text-gray-200 border border-gray-100 group-hover:border-rose-200 group-hover:text-rose-400 shadow-sm'}`}>
                                         <FaChevronRight className="text-xs sm:text-sm" />
                                     </div>
                                 </div>

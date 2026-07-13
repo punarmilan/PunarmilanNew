@@ -6,7 +6,7 @@ export default function MyShadiLayout({ children }) {
     return (
         <>
             <Headers />
-            <div className="pt-16 h-screen w-full bg-[#FCFAF7] relative overflow-hidden">
+            <div className="pt-16 h-screen w-full bg-theme-bg relative overflow-hidden">
                 {/* No overlay - maximum visibility */}
                 <div className="max-w-[1600px] mx-auto relative z-10 h-full">
                     <div className="flex gap-6 px-0 sm:px-4 lg:px-6 py-0 sm:py-4 h-full pb-16 md:pb-4">

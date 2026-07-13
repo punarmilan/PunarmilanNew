@@ -95,7 +95,7 @@ const BlogPage = () => {
 
           <div className="max-w-3xl mx-auto text-center">
 
-            <span className="bg-white/20 backdrop-blur-md px-5 py-2 rounded-full text-sm font-medium">
+            <span className="bg-theme-surface/20 backdrop-blur-md px-5 py-2 rounded-full text-sm font-medium">
               PunarMilan Blog
             </span>
 
@@ -113,7 +113,7 @@ const BlogPage = () => {
             </p>
 
             <div className="mt-10 max-w-xl mx-auto">
-              <div className="bg-white rounded-2xl p-2 flex items-center shadow-2xl">
+              <div className="bg-theme-surface rounded-2xl p-2 flex items-center shadow-2xl">
                 <Search className="text-gray-400 ml-4 w-5 h-5" />
                 <input
                   type="text"
@@ -140,7 +140,7 @@ const BlogPage = () => {
           {categories.map((cat) => (
             <button
               key={cat}
-              className="px-5 py-2 bg-white border border-pink-100 rounded-full hover:bg-pink-600 hover:text-white transition-all shadow-sm"
+              className="px-5 py-2 bg-theme-surface border border-pink-100 rounded-full hover:bg-pink-600 hover:text-white transition-all shadow-sm"
             >
               {cat}
             </button>
@@ -153,7 +153,7 @@ const BlogPage = () => {
       {/* Featured Blog */}
       <section className="max-w-7xl mx-auto px-6 pb-16">
 
-        <div className="bg-white rounded-[32px] overflow-hidden shadow-xl">
+        <div className="bg-theme-surface rounded-[32px] overflow-hidden shadow-xl">
 
           <div className="grid lg:grid-cols-2">
 
@@ -174,7 +174,7 @@ const BlogPage = () => {
                 {featuredPost.title}
               </h2>
 
-              <div className="flex items-center gap-6 mt-6 text-gray-500">
+              <div className="flex items-center gap-6 mt-6 text-theme-text-secondary">
 
                 <div className="flex items-center gap-2">
                   <Calendar size={16} />
@@ -188,7 +188,7 @@ const BlogPage = () => {
 
               </div>
 
-              <p className="mt-6 text-gray-600 leading-8">
+              <p className="mt-6 text-theme-text-secondary leading-8">
                 Learn the most important signs and relationship indicators
                 that can help you identify long-term compatibility and
                 emotional connection.
@@ -224,7 +224,7 @@ const BlogPage = () => {
 
             <article
               key={post.id}
-              className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition duration-500"
+              className="group bg-theme-surface rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition duration-500"
             >
 
               <div className="overflow-hidden">
@@ -245,7 +245,7 @@ const BlogPage = () => {
                   {post.title}
                 </h3>
 
-                <div className="flex items-center justify-between mt-5 text-gray-500 text-sm">
+                <div className="flex items-center justify-between mt-5 text-theme-text-secondary text-sm">
 
                   <div className="flex items-center gap-2">
                     <Calendar size={14} />

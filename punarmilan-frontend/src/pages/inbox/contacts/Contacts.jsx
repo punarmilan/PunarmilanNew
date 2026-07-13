@@ -80,7 +80,7 @@ export default function Contacts() {
                     <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#4a4a4a]">
                         Viewed Contacts ({currentProfiles.length})
                     </h1>
-                    <p className="text-gray-500 mt-1">History of profiles whose contact details you have viewed.</p>
+                    <p className="text-theme-text-secondary mt-1">History of profiles whose contact details you have viewed.</p>
                 </header>
 
                 <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] xl:grid-cols-[280px_1fr] gap-4 sm:gap-6">
@@ -93,7 +93,7 @@ export default function Contacts() {
 
                     <main className="flex flex-col gap-4 sm:gap-6">
                         {viewedContactsLoading ? (
-                            <div className="bg-white rounded-lg shadow-md p-10 text-center text-gray-500">
+                            <div className="bg-theme-surface rounded-lg shadow-md p-10 text-center text-theme-text-secondary">
                                 <div className="animate-spin inline-block w-8 h-8 border-4 border-rose-500 border-t-transparent rounded-full mb-4"></div>
                                 <p>Loading viewed contacts...</p>
                             </div>
@@ -128,7 +128,7 @@ export default function Contacts() {
                                 />
                             ))
                         ) : (
-                            <div className="bg-white rounded-lg shadow-md p-10 text-center text-gray-500">
+                            <div className="bg-theme-surface rounded-lg shadow-md p-10 text-center text-theme-text-secondary">
                                 <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                                     <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />

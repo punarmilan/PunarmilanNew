@@ -59,14 +59,14 @@ const MobileUsersManagement = () => {
 
     return (
         <div className="space-y-8 animate-in fade-in duration-700 pb-12">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-6 sm:p-8 rounded-[32px] shadow-sm border border-gray-100 gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-theme-surface p-6 sm:p-8 rounded-[32px] shadow-sm border border-gray-100 gap-4">
                 <div>
                     <h2 className="text-2xl font-black text-gray-900 tracking-tight">Mobile Users Data</h2>
                     <p className="text-sm text-gray-400 font-bold uppercase tracking-widest mt-1">Manage detailed profiles from mobile app</p>
                 </div>
             </div>
 
-            <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-theme-surface rounded-[32px] shadow-sm border border-gray-100 overflow-hidden">
                 <div className="p-6 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
                     <div className="relative w-full sm:w-96">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
@@ -97,21 +97,21 @@ const MobileUsersManagement = () => {
                                     <td className="p-4 sm:px-6">
                                         <div>
                                             <p className="font-bold text-gray-900">{user.name}</p>
-                                            <p className="text-xs text-gray-500">ID: {user.id}</p>
+                                            <p className="text-xs text-theme-text-secondary">ID: {user.id}</p>
                                         </div>
                                     </td>
                                     <td className="p-4 sm:px-6">
                                         <p className="text-sm font-medium text-gray-900">{user.mobileNumber}</p>
-                                        <p className="text-xs text-gray-500">{user.email}</p>
+                                        <p className="text-xs text-theme-text-secondary">{user.email}</p>
                                     </td>
                                     <td className="p-4 sm:px-6">
-                                        <p className="text-sm font-medium text-gray-600">
+                                        <p className="text-sm font-medium text-theme-text-secondary">
                                             {new Date(user.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                                         </p>
                                     </td>
                                     <td className="p-4 sm:px-6">
                                         <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
-                                            user.status === 'ACTIVE' ? 'bg-emerald-50 text-emerald-600' : 'bg-gray-100 text-gray-500'
+                                            user.status === 'ACTIVE' ? 'bg-emerald-50 text-emerald-600' : 'bg-gray-100 text-theme-text-secondary'
                                         }`}>
                                             {user.status}
                                         </span>

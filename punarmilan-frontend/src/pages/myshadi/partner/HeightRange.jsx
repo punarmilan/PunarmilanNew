@@ -97,7 +97,7 @@ const HeightRangePage = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
+            <div className="w-full max-w-2xl bg-theme-surface rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
                 {/* Header */}
                 <div className="bg-gradient-to-r from-rose-500 to-rose-600  p-6 sm:p-8">
                     <button
@@ -117,7 +117,7 @@ const HeightRangePage = () => {
                 <div className="p-6 sm:p-10">
                     {/* Selected Range Display */}
                     <div className="text-center mb-12">
-                        <p className="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-2">
+                        <p className="text-sm font-semibold text-theme-text-secondary uppercase tracking-wider mb-2">
                             Selected Height Range (ft/inch)
                         </p>
                         <p className="text-3xl sm:text-4xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
@@ -168,7 +168,7 @@ const HeightRangePage = () => {
                             max={MAX_HEIGHT}
                             value={heightRange[0]}
                             onChange={handleMinChange}
-                            className="absolute w-full h-2 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-blue-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg hover:[&::-webkit-slider-thumb]:scale-110 [&::-webkit-slider-thumb]:transition-transform"
+                            className="absolute w-full h-2 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-theme-surface [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-blue-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg hover:[&::-webkit-slider-thumb]:scale-110 [&::-webkit-slider-thumb]:transition-transform"
                             style={{ top: '-4px' }}
                         />
 
@@ -179,12 +179,12 @@ const HeightRangePage = () => {
                             max={MAX_HEIGHT}
                             value={heightRange[1]}
                             onChange={handleMaxChange}
-                            className="absolute w-full h-2 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-purple-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg hover:[&::-webkit-slider-thumb]:scale-110 [&::-webkit-slider-thumb]:transition-transform"
+                            className="absolute w-full h-2 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:h-6 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-theme-surface [&::-webkit-slider-thumb]:border-4 [&::-webkit-slider-thumb]:border-purple-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg hover:[&::-webkit-slider-thumb]:scale-110 [&::-webkit-slider-thumb]:transition-transform"
                             style={{ top: '-4px' }}
                         />
 
                         {/* Min/Max Labels */}
-                        <div className="flex justify-between mt-4 text-sm font-medium text-gray-600">
+                        <div className="flex justify-between mt-4 text-sm font-medium text-theme-text-secondary">
                             <span>{getHeightDisplay(MIN_HEIGHT)}</span>
                             <span>{getHeightDisplay(MAX_HEIGHT)}</span>
                         </div>
@@ -194,7 +194,7 @@ const HeightRangePage = () => {
                     <div className="flex flex-col-reverse sm:flex-row gap-4 pt-6">
                         <button
                             onClick={handleCancel}
-                            className="flex-1 px-6 py-4 bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-2xl font-bold text-lg transition-all duration-300 active:scale-95"
+                            className="flex-1 px-6 py-4 bg-theme-surface hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-2xl font-bold text-lg transition-all duration-300 active:scale-95"
                         >
                             Cancel
                         </button>

@@ -182,11 +182,11 @@ export default function Wedding() {
 
           {/* Pill Cards */}
           <div className="flex flex-col sm:flex-row gap-5 mb-24 text-sm font-bold text-[#800000] uppercase tracking-wider">
-            <motion.div whileHover={{ y: -3 }} className="flex items-center gap-3 bg-white/90 backdrop-blur-md px-8 py-4 rounded-full border border-[#d4af37]/30 shadow-[0_10px_30px_rgba(212,175,55,0.1)]">
+            <motion.div whileHover={{ y: -3 }} className="flex items-center gap-3 bg-theme-surface/90 backdrop-blur-md px-8 py-4 rounded-full border border-[#d4af37]/30 shadow-[0_10px_30px_rgba(212,175,55,0.1)]">
               <Calendar size={18} className="text-[#d4af37]" />
               12 Dec 2026
             </motion.div>
-            <motion.div whileHover={{ y: -3 }} className="flex items-center gap-3 bg-white/90 backdrop-blur-md px-8 py-4 rounded-full border border-[#d4af37]/30 shadow-[0_10px_30px_rgba(212,175,55,0.1)] cursor-pointer">
+            <motion.div whileHover={{ y: -3 }} className="flex items-center gap-3 bg-theme-surface/90 backdrop-blur-md px-8 py-4 rounded-full border border-[#d4af37]/30 shadow-[0_10px_30px_rgba(212,175,55,0.1)] cursor-pointer">
               <MapPin size={18} className="text-[#d4af37]" />
               Jaipur, India
             </motion.div>
@@ -201,7 +201,7 @@ export default function Wedding() {
              animate={{ rotate: -6, x: 30, opacity: 1 }}
              whileHover={{ rotate: -3, y: -15, scale: 1.05, zIndex: 30 }}
              transition={{ duration: 0.9, delay: 0.6 }}
-             className="absolute left-0 md:left-16 bottom-0 w-[45%] md:w-72 bg-white p-3 shadow-[0_20px_40px_rgba(128,0,0,0.1)] z-10 border border-[#d4af37]/20 rounded-t-[100px]"
+             className="absolute left-0 md:left-16 bottom-0 w-[45%] md:w-72 bg-theme-surface p-3 shadow-[0_20px_40px_rgba(128,0,0,0.1)] z-10 border border-[#d4af37]/20 rounded-t-[100px]"
            >
              <img src={heroPhotos[0]} alt="Bride" className="w-full aspect-[4/5] object-cover rounded-t-[100px] rounded-b-md" />
            </motion.div>
@@ -212,7 +212,7 @@ export default function Wedding() {
              animate={{ y: 0, opacity: 1 }}
              whileHover={{ y: -20, scale: 1.05, zIndex: 40 }}
              transition={{ duration: 0.9, delay: 0.7 }}
-             className="absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-12 w-[60%] md:w-96 bg-white p-4 shadow-[0_30px_60px_rgba(128,0,0,0.15)] z-20 border-2 border-[#d4af37] rounded-t-full rounded-b-xl"
+             className="absolute left-1/2 -translate-x-1/2 bottom-8 md:bottom-12 w-[60%] md:w-96 bg-theme-surface p-4 shadow-[0_30px_60px_rgba(128,0,0,0.15)] z-20 border-2 border-[#d4af37] rounded-t-full rounded-b-xl"
            >
              <img src={heroPhotos[1]} alt="Couple" className="w-full aspect-[3/4] object-cover rounded-t-full rounded-b-lg" />
            </motion.div>
@@ -223,7 +223,7 @@ export default function Wedding() {
              animate={{ rotate: 6, x: -30, opacity: 1 }}
              whileHover={{ rotate: 3, y: -15, scale: 1.05, zIndex: 30 }}
              transition={{ duration: 0.9, delay: 0.8 }}
-             className="absolute right-0 md:right-16 bottom-0 w-[45%] md:w-72 bg-white p-3 shadow-[0_20px_40px_rgba(128,0,0,0.1)] z-10 border border-[#d4af37]/20 rounded-t-[100px]"
+             className="absolute right-0 md:right-16 bottom-0 w-[45%] md:w-72 bg-theme-surface p-3 shadow-[0_20px_40px_rgba(128,0,0,0.1)] z-10 border border-[#d4af37]/20 rounded-t-[100px]"
            >
              <img src={heroPhotos[2]} alt="Groom" className="w-full aspect-[4/5] object-cover rounded-t-[100px] rounded-b-md" />
            </motion.div>
@@ -232,7 +232,7 @@ export default function Wedding() {
 
       {/* 2. STATS SECTION */}
       <section className="relative z-30 max-w-6xl mx-auto px-4 -mt-16">
-        <div className="bg-white/95 backdrop-blur-2xl border border-[#d4af37]/30 shadow-[0_25px_50px_rgba(128,0,0,0.08)] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0 relative overflow-hidden">
+        <div className="bg-theme-surface/95 backdrop-blur-2xl border border-[#d4af37]/30 shadow-[0_25px_50px_rgba(128,0,0,0.08)] rounded-[2.5rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0 relative overflow-hidden">
           
           <div className="flex-1 flex flex-col items-center text-center relative z-10 w-full">
             <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#f8c8dc] to-[#fffdd0] flex items-center justify-center mb-5 border border-[#d4af37]/40 shadow-sm">
@@ -325,14 +325,14 @@ export default function Wedding() {
                whileInView={{ opacity: 1, y: 0 }}
                viewport={{ once: true }}
                transition={{ delay: i * 0.2, duration: 0.8 }}
-               className="flex flex-col items-center group cursor-pointer bg-white p-6 rounded-[2.5rem] shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-[#d4af37]/20 hover:border-[#d4af37]/60 hover:-translate-y-4 hover:shadow-[0_25px_50px_rgba(128,0,0,0.1)] transition-all duration-500"
+               className="flex flex-col items-center group cursor-pointer bg-theme-surface p-6 rounded-[2.5rem] shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-[#d4af37]/20 hover:border-[#d4af37]/60 hover:-translate-y-4 hover:shadow-[0_25px_50px_rgba(128,0,0,0.1)] transition-all duration-500"
              >
                <div className="w-full max-w-[300px] aspect-[4/5] rounded-[2rem] overflow-hidden mb-8 relative border-4 border-[#fffdd0] ring-1 ring-[#d4af37]/30">
                  <img src={story.img} alt={story.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                  <div className="absolute inset-0 bg-gradient-to-t from-[#800000]/80 via-transparent to-transparent opacity-60"></div>
                  
                  {/* Date Chip over image */}
-                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md px-6 py-2 rounded-full shadow-lg border border-[#d4af37]/50 whitespace-nowrap">
+                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-theme-surface/95 backdrop-blur-md px-6 py-2 rounded-full shadow-lg border border-[#d4af37]/50 whitespace-nowrap">
                    <span className="text-xs font-bold uppercase tracking-wider text-[#800000]">{story.date}</span>
                  </div>
                </div>
@@ -369,7 +369,7 @@ export default function Wedding() {
               <div className="absolute left-[30px] md:left-1/2 top-10 md:top-1/2 w-5 h-5 rounded-full bg-[#800000] border-4 border-[#fffdd0] ring-2 ring-[#d4af37] -translate-x-1/2 md:-translate-y-1/2 z-10 shadow-lg group-hover:scale-125 transition-all duration-300"></div>
               
               <div className="w-full md:w-[45%] pl-16 md:pl-0 text-left flex flex-col justify-center">
-                 <div className={`p-8 md:p-10 rounded-[2rem] bg-white shadow-[0_15px_40px_rgba(128,0,0,0.06)] border border-[#d4af37]/20 hover:border-[#d4af37]/60 hover:-translate-y-2 transition-all duration-300 relative ${item.align === 'right' ? 'md:mr-10 md:text-left' : 'md:ml-10 md:text-right'}`}>
+                 <div className={`p-8 md:p-10 rounded-[2rem] bg-theme-surface shadow-[0_15px_40px_rgba(128,0,0,0.06)] border border-[#d4af37]/20 hover:border-[#d4af37]/60 hover:-translate-y-2 transition-all duration-300 relative ${item.align === 'right' ? 'md:mr-10 md:text-left' : 'md:ml-10 md:text-right'}`}>
                    
                    <div className={`mb-4 inline-block bg-[#f8c8dc]/30 border border-[#d94f73]/20 text-[#800000] px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase shadow-sm`}>
                       {item.time}
@@ -394,7 +394,7 @@ export default function Wedding() {
 
       {/* 6. PHOTO GALLERY SECTION */}
       <section className="py-28 relative z-10 px-4 md:px-8 bg-[#fffdd0]">
-        <div className="max-w-7xl mx-auto bg-white/60 backdrop-blur-2xl border border-[#d4af37]/30 shadow-[0_25px_60px_rgba(128,0,0,0.05)] rounded-[3rem] p-10 md:p-16">
+        <div className="max-w-7xl mx-auto bg-theme-surface/60 backdrop-blur-2xl border border-[#d4af37]/30 shadow-[0_25px_60px_rgba(128,0,0,0.05)] rounded-[3rem] p-10 md:p-16">
           
           <div className="text-center mb-16 relative z-10">
             <h3 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-4 text-[#d4af37]">Beautiful Memories</h3>

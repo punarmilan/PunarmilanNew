@@ -45,15 +45,15 @@ export default function InboxPage() {
 
                     {/* Main Content Area */}
                     <main className="flex-1 min-w-0">
-                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                        <div className="bg-theme-surface rounded-lg shadow-sm border border-theme-border overflow-hidden">
                             {/* Tabs */}
-                            <div className="border-b border-gray-200">
+                            <div className="border-b border-theme-border">
                                 <div className="flex">
                                     <button
                                         onClick={() => handleTabChange("all")}
                                         className={`flex-1 px-6 py-4 text-base font-medium transition-colors relative ${activeTab === "all"
                                             ? "text-red-500"
-                                            : "text-gray-600 hover:text-gray-800"
+                                            : "text-theme-text-secondary hover:text-gray-800"
                                             }`}
                                     >
                                         All Requests
@@ -65,7 +65,7 @@ export default function InboxPage() {
                                         onClick={() => handleTabChange("filtered")}
                                         className={`flex-1 px-6 py-4 text-base font-medium transition-colors relative ${activeTab === "filtered"
                                             ? "text-red-500"
-                                            : "text-gray-600 hover:text-gray-800"
+                                            : "text-theme-text-secondary hover:text-gray-800"
                                             }`}
                                     >
                                         Filtered Out
@@ -103,7 +103,7 @@ export default function InboxPage() {
                                             <h2 className="text-2xl font-normal text-gray-700 mb-4">
                                                 No Filtered Out Requests
                                             </h2>
-                                            <p className="text-gray-500">
+                                            <p className="text-theme-text-secondary">
                                                 Profiles you filter out will appear here
                                             </p>
                                         </div>

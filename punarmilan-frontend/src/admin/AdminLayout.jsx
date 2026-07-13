@@ -98,7 +98,7 @@ const AdminLayout = () => {
                     <span className="font-medium text-sm sm:text-base">Sign Out</span>
                 </button>
                 <div className="mt-3 sm:mt-4 px-3 sm:px-4 py-2 bg-gray-800 rounded-lg">
-                    <p className="text-xs text-gray-500">Logged in as</p>
+                    <p className="text-xs text-theme-text-secondary">Logged in as</p>
                     <p className="text-sm text-gray-300 font-medium truncate">{admin.email}</p>
                 </div>
             </div>
@@ -136,11 +136,11 @@ const AdminLayout = () => {
 
             {/* ===== Main Content ===== */}
             <main className="flex-1 flex flex-col overflow-hidden min-w-0">
-                <header className="bg-white shadow-sm h-14 sm:h-16 flex items-center justify-between px-4 sm:px-6 md:px-12 shrink-0">
+                <header className="bg-theme-surface shadow-sm h-14 sm:h-16 flex items-center justify-between px-4 sm:px-6 md:px-12 shrink-0">
                     <div className="flex items-center min-w-0">
                         <button
                             onClick={() => setMobileMenuOpen(true)}
-                            className="md:hidden mr-3 text-gray-600 hover:text-gray-900 transition-colors p-1"
+                            className="md:hidden mr-3 text-theme-text-secondary hover:text-gray-900 transition-colors p-1"
                             aria-label="Open menu"
                         >
                             <Menu className="w-6 h-6" />

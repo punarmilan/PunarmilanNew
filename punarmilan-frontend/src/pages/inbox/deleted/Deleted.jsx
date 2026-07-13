@@ -82,7 +82,7 @@ const Deleted = () => {
 
   // Empty State Component
   const EmptyState = () => (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 sm:p-16 text-center">
+    <div className="bg-theme-surface rounded-lg shadow-sm border border-theme-border p-12 sm:p-16 text-center">
       <div className="max-w-md mx-auto">
         <div className="mb-6">
           <svg className="w-32 h-32 mx-auto" viewBox="0 0 200 200" fill="none">
@@ -115,7 +115,7 @@ const Deleted = () => {
         <h3 className="text-xl font-semibold text-gray-800 mb-2">
           There are no Deleted Invitations
         </h3>
-        <p className="text-gray-500 text-sm">
+        <p className="text-theme-text-secondary text-sm">
           {activeFilter === 'cancelledByMe'
             ? "You haven't cancelled any invitations yet."
             : "No one has declined your invitations."}
@@ -135,8 +135,8 @@ const Deleted = () => {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Filters Sidebar */}
           <div className="w-full lg:w-64 flex-shrink-0">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <div className="bg-gradient-to-r from-gray-100 to-gray-50 px-4 sm:px-6 py-4 border-b border-gray-200">
+            <div className="bg-theme-surface rounded-lg shadow-sm border border-theme-border overflow-hidden">
+              <div className="bg-gradient-to-r from-gray-100 to-gray-50 px-4 sm:px-6 py-4 border-b border-theme-border">
                 <h2 className="text-lg font-semibold text-gray-800">Filters</h2>
               </div>
               <div className="p-4 sm:p-6 space-y-2">
@@ -146,7 +146,7 @@ const Deleted = () => {
                     onClick={() => handleFilterChange(filter.id)}
                     className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 ${activeFilter === filter.id
                       ? 'bg-rose-50 text-rose-700 border-2 border-rose-500'
-                      : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                      : 'bg-theme-surface text-gray-700 border-2 border-theme-border hover:border-gray-300 hover:bg-gray-50'
                       }`}
                   >
                     <div className="flex items-center gap-3">
@@ -165,7 +165,7 @@ const Deleted = () => {
                     {filter.count > 0 && (
                       <span className={`text-xs font-semibold px-2 py-1 rounded-full ${activeFilter === filter.id
                         ? 'bg-rose-100 text-rose-700'
-                        : 'bg-gray-100 text-gray-600'
+                        : 'bg-gray-100 text-theme-text-secondary'
                         }`}>
                         {filter.count}
                       </span>
@@ -184,7 +184,7 @@ const Deleted = () => {
                   {filteredInvitations.map((invitation) => (
                     <div
                       key={invitation.id}
-                      className="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200 overflow-hidden"
+                      className="bg-theme-surface rounded-lg shadow-sm border border-theme-border hover:shadow-md transition-shadow duration-200 overflow-hidden"
                     >
                       <div className="p-4 sm:p-6">
                         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
@@ -228,13 +228,13 @@ const Deleted = () => {
                                   </div>
                                 )}
                               </div>
-                              <span className="text-sm text-gray-500 whitespace-nowrap">
+                              <span className="text-sm text-theme-text-secondary whitespace-nowrap">
                                 {invitation.date}
                               </span>
                             </div>
 
                             <div className="flex items-center gap-2 mb-4">
-                              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                              <div className="w-2 h-2 bg-theme-success rounded-full animate-pulse"></div>
                               <span className="text-sm text-green-600 font-medium">
                                 {invitation.online}
                               </span>
@@ -276,7 +276,7 @@ const Deleted = () => {
                 </div>
 
                 {/* Pagination */}
-                <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white rounded-lg shadow-sm border border-gray-200 px-4 sm:px-6 py-4">
+                <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 bg-theme-surface rounded-lg shadow-sm border border-theme-border px-4 sm:px-6 py-4">
                   <button
                     onClick={handlePrevPage}
                     disabled={currentPage === 1}
@@ -289,7 +289,7 @@ const Deleted = () => {
                     <span className="hidden sm:inline">Prev</span>
                   </button>
 
-                  <div className="text-sm text-gray-600">
+                  <div className="text-sm text-theme-text-secondary">
                     Showing <span className="font-semibold text-gray-900">1-{itemsPerPage}</span> of{' '}
                     <span className="font-semibold text-gray-900">18</span>
                   </div>

@@ -151,7 +151,7 @@ const EnhancedHeroSection = () => {
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 rounded-full bg-white/60"
+            className="absolute w-1 h-1 rounded-full bg-theme-surface/60"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -370,7 +370,7 @@ const EnhancedHeroSection = () => {
                       <p className="text-sm text-white/80">Software Engineer, Mumbai</p>
                     </div>
                     <motion.div
-                      className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30"
+                      className="flex items-center gap-1 px-3 py-1 rounded-full bg-theme-surface/20 backdrop-blur-md border border-white/30"
                       animate={{ scale: [1, 1.1, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     >

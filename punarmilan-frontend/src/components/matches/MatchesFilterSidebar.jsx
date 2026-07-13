@@ -51,7 +51,7 @@ const FilterSection = ({
                 type="checkbox"
                 className="w-4 h-4 accent-pink-500"
               />
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-theme-text-secondary">
                 {option}
               </span>
             </label>
@@ -98,7 +98,7 @@ export default function MatchesFilterSidebar({
 
       {/* Sidebar */}
 
-      <div className="fixed top-0 right-0 h-screen w-full max-w-[360px] max-w-[90vw] bg-white z-[9999] shadow-2xl flex flex-col">
+      <div className="fixed top-0 right-0 h-screen w-full max-w-[360px] max-w-[90vw] bg-theme-surface z-[9999] shadow-2xl flex flex-col">
 
         {/* Header */}
 
@@ -286,7 +286,7 @@ export default function MatchesFilterSidebar({
 
         {/* Footer */}
 
-        <div className="border-t p-4 bg-white">
+        <div className="border-t p-4 bg-theme-surface">
 
           <div className="flex gap-3">
 

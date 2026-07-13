@@ -83,12 +83,12 @@ const NewMatches = () => {
             <ToastContainer />
 
             {/* Compact Container - Only shown on desktop/tablet (768px and larger) */}
-            <div className=" bg-white rounded-md shadow-sm border border-gray-200 p-3 mx-auto">
+            <div className=" bg-theme-surface rounded-md shadow-sm border border-theme-border p-3 mx-auto">
 
                 {/* Compact Header */}
-                <div className="pb-2 mb-3 border-b border-gray-200">
+                <div className="pb-2 mb-3 border-b border-theme-border">
                     <h2 className="text-base font-semibold text-gray-800">New Matches for you</h2>
-                    <p className="text-gray-600 text-xs">({matches.length} matches)</p>
+                    <p className="text-theme-text-secondary text-xs">({matches.length} matches)</p>
                 </div>
 
                 {/* Compact Matches List */}
@@ -97,7 +97,7 @@ const NewMatches = () => {
                         <div
                             key={match.id}
                             onClick={() => handleProfileClick(match.id, match.name)}
-                            className="flex items-start gap-2 p-2 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer transition-colors"
+                            className="flex items-start gap-2 p-2 border border-theme-border rounded hover:bg-gray-50 cursor-pointer transition-colors"
                         >
                             {/* Smaller Profile Image */}
                             <div className="relative flex-shrink-0">
@@ -117,7 +117,7 @@ const NewMatches = () => {
 
                                 {/* Small Status Indicators */}
                                 {match.isOnline && (
-                                    <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full border border-white"></div>
+                                    <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-theme-success rounded-full border border-white"></div>
                                 )}
 
                                 {match.isVerified && (
@@ -142,11 +142,11 @@ const NewMatches = () => {
                                 </div>
 
                                 {/* Compact Details */}
-                                <p className="text-xs text-gray-600 mb-0.5">
+                                <p className="text-xs text-theme-text-secondary mb-0.5">
                                     {match.age} yrs, {match.height}, {match.ethnicity}
                                 </p>
 
-                                <div className="text-xs text-gray-600 mb-1.5">
+                                <div className="text-xs text-theme-text-secondary mb-1.5">
                                     <span>{match.location}</span>
                                     {match.profession && (
                                         <span className="ml-1 font-medium truncate">{match.profession}</span>
@@ -187,7 +187,7 @@ const NewMatches = () => {
                 </div>
 
                 {/* Compact Footer */}
-                <div className="mt-4 pt-3 border-t border-gray-200">
+                <div className="mt-4 pt-3 border-t border-theme-border">
                     <div className="flex justify-between items-center">
                         <button className="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded text-xs font-medium">
                             Filter

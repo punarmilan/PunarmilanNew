@@ -13,7 +13,7 @@ export default function ProfileStatusCards({ user, onEditProfile }) {
             {/* Left Card - Profile Image */}
             <div className="flex-1">
                 <h3 className="text-xl font-bold text-[#6D4C41] mb-4 font-serif">Profiles status</h3>
-                <div className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 h-[380px] flex flex-col overflow-hidden relative group">
+                <div className="bg-theme-surface p-3 rounded-2xl shadow-sm border border-gray-100 h-[380px] flex flex-col overflow-hidden relative group">
                     <img 
                         src={profileImageUrl} 
                         alt="Profile" 
@@ -22,7 +22,7 @@ export default function ProfileStatusCards({ user, onEditProfile }) {
                     {/* Edit Profile Overlay */}
                     <button 
                         onClick={onEditProfile}
-                        className="absolute bottom-3 left-3 right-3 bg-black text-white py-3 rounded-xl font-bold tracking-wider hover:bg-gray-900 transition-colors z-10"
+                        className="absolute bottom-3 left-3 right-3 bg-gradient-to-r from-[#DB2777] to-[#EC4899] text-white py-3 rounded-xl font-bold tracking-wider hover:from-[#BE185D] hover:to-[#DB2777] shadow-md transition-all z-10"
                     >
                         EDIT PROFILE
                     </button>
@@ -32,7 +32,7 @@ export default function ProfileStatusCards({ user, onEditProfile }) {
             {/* Right Card - Profile Completion */}
             <div className="flex-1">
                 <h3 className="text-xl font-bold text-[#6D4C41] mb-4 font-serif">Profiles status</h3>
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-[380px] flex flex-col justify-between">
+                <div className="bg-theme-surface p-6 rounded-2xl shadow-sm border border-gray-100 h-[380px] flex flex-col justify-between">
                     
                     {/* Top Row: Title & Menu */}
                     <div className="flex justify-between items-center mb-4 relative">
@@ -46,7 +46,7 @@ export default function ProfileStatusCards({ user, onEditProfile }) {
 
                         {/* Dropdown Menu */}
                         {isMenuOpen && (
-                            <div className="absolute top-10 right-0 bg-white shadow-xl rounded-xl border border-gray-100 py-2 w-48 z-20 text-sm text-gray-700">
+                            <div className="absolute top-10 right-0 bg-theme-surface shadow-xl rounded-xl border border-gray-100 py-2 w-48 z-20 text-sm text-gray-700">
                                 <button onClick={onEditProfile} className="w-full text-left px-4 py-2 hover:bg-gray-50">Edit profile</button>
                                 <button className="w-full text-left px-4 py-2 hover:bg-gray-50">View profile</button>
                                 <button className="w-full text-left px-4 py-2 hover:bg-gray-50">Profile visibility settings</button>
@@ -77,12 +77,12 @@ export default function ProfileStatusCards({ user, onEditProfile }) {
                                 />
                                 <defs>
                                     <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stopColor="#c026d3" />
-                                        <stop offset="100%" stopColor="#2563eb" />
+                                        <stop offset="0%" stopColor="#DB2777" />
+                                        <stop offset="100%" stopColor="#EC4899" />
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <div className="absolute text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-blue-600">
+                            <div className="absolute text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#DB2777] to-[#EC4899]">
                                 {profileCompletion}%
                             </div>
                         </div>
@@ -94,25 +94,25 @@ export default function ProfileStatusCards({ user, onEditProfile }) {
                             <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-500 shadow-sm">
                                 <Heart size={18} fill="currentColor" />
                             </div>
-                            <span className="font-bold text-gray-800">12 <span className="font-normal text-gray-500">Likes</span></span>
+                            <span className="font-bold text-gray-800">12 <span className="font-normal text-theme-text-secondary">Likes</span></span>
                         </div>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center text-cyan-500 shadow-sm">
                                 <Eye size={18} />
                             </div>
-                            <span className="font-bold text-gray-800">12 <span className="font-normal text-gray-500">Views</span></span>
+                            <span className="font-bold text-gray-800">12 <span className="font-normal text-theme-text-secondary">Views</span></span>
                         </div>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-500 shadow-sm">
                                 <ThumbsUp size={18} />
                             </div>
-                            <span className="font-bold text-gray-800">12 <span className="font-normal text-gray-500">Interests</span></span>
+                            <span className="font-bold text-gray-800">12 <span className="font-normal text-theme-text-secondary">Interests</span></span>
                         </div>
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-500 shadow-sm">
                                 <MousePointer2 size={18} />
                             </div>
-                            <span className="font-bold text-gray-800">12 <span className="font-normal text-gray-500">Clicks</span></span>
+                            <span className="font-bold text-gray-800">12 <span className="font-normal text-theme-text-secondary">Clicks</span></span>
                         </div>
                     </div>
 

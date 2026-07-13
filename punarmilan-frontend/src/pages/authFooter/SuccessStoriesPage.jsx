@@ -95,7 +95,7 @@ const SuccessStoriesPage = () => {
 
           <div className="text-center max-w-4xl mx-auto">
 
-            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/10 backdrop-blur-xl px-5 py-2 rounded-full">
+            <div className="inline-flex items-center gap-2 bg-theme-surface/10 border border-white/10 backdrop-blur-xl px-5 py-2 rounded-full">
 
               <Heart className="w-4 h-4 text-pink-500 fill-pink-500" />
 
@@ -135,7 +135,7 @@ const SuccessStoriesPage = () => {
 
             <div
               key={item.label}
-              className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 text-center"
+              className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8 text-center"
             >
 
               <h3 className="text-4xl font-extrabold text-pink-500">
@@ -157,7 +157,7 @@ const SuccessStoriesPage = () => {
       {/* Featured Story */}
       <section className="max-w-7xl mx-auto px-6 py-28">
 
-        <div className="bg-white/[0.03] border border-white/10 rounded-[40px] overflow-hidden">
+        <div className="bg-theme-surface/[0.03] border border-white/10 rounded-[40px] overflow-hidden">
 
           <div className="grid lg:grid-cols-2">
 
@@ -232,7 +232,7 @@ const SuccessStoriesPage = () => {
 
             <div
               key={story.id}
-              className="group bg-white/[0.03] border border-white/10 rounded-3xl overflow-hidden hover:border-pink-500/30 transition-all duration-300"
+              className="group bg-theme-surface/[0.03] border border-white/10 rounded-3xl overflow-hidden hover:border-pink-500/30 transition-all duration-300"
             >
 
               <div className="overflow-hidden">
@@ -270,7 +270,7 @@ const SuccessStoriesPage = () => {
       </section>
 
       {/* Love Journey */}
-      <section className="border-y border-white/5 bg-white/[0.02]">
+      <section className="border-y border-white/5 bg-theme-surface/[0.02]">
 
         <div className="max-w-6xl mx-auto px-6 py-28">
 
@@ -288,7 +288,7 @@ const SuccessStoriesPage = () => {
 
               <div
                 key={item.step}
-                className="relative bg-white/[0.03] border border-white/10 rounded-3xl p-8"
+                className="relative bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8"
               >
 
                 <div className="absolute top-5 right-6 text-5xl font-extrabold text-pink-500/10">
@@ -336,7 +336,7 @@ const SuccessStoriesPage = () => {
 
             <div
               key={item}
-              className="bg-white/[0.03] border border-white/10 rounded-3xl p-8"
+              className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8"
             >
 
               <div className="flex gap-1 mb-5">
@@ -368,7 +368,7 @@ const SuccessStoriesPage = () => {
                     Happy Couple
                   </h4>
 
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-theme-text-secondary text-sm">
                     Married via PunarMilan
                   </p>
 

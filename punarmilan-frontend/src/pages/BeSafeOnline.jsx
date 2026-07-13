@@ -50,9 +50,9 @@ const BeSafeOnline = () => {
       
       {/* Hero Section */}
       <div className="pt-36 pb-24 px-4 text-center relative overflow-hidden bg-gradient-to-br from-[#FFF5F7] via-[#FFF9F0] to-[#F5F9FF]">
-        <div className="absolute inset-0 z-0 bg-white/20 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 z-0 bg-theme-surface/20 backdrop-blur-sm"></div>
         <div className="relative z-10 max-w-3xl mx-auto">
-          <div className="w-24 h-24 bg-white text-[#d94f73] rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl shadow-pink-100 border border-pink-100">
+          <div className="w-24 h-24 bg-theme-surface text-[#d94f73] rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl shadow-pink-100 border border-pink-100">
             <Shield size={48} />
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold text-slate-800 mb-6 font-serif tracking-tight">
@@ -70,7 +70,7 @@ const BeSafeOnline = () => {
           {safetyTips.map((tip, index) => (
             <div 
               key={index}
-              className="bg-white rounded-3xl p-8 border border-rose-50 shadow-[0_8px_30px_rgba(217,79,115,0.06)] hover:shadow-[0_15px_40px_rgba(217,79,115,0.12)] transition-all duration-300 hover:-translate-y-1.5 group relative overflow-hidden"
+              className="bg-theme-surface rounded-3xl p-8 border border-rose-50 shadow-[0_8px_30px_rgba(217,79,115,0.06)] hover:shadow-[0_15px_40px_rgba(217,79,115,0.12)] transition-all duration-300 hover:-translate-y-1.5 group relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-pink-50/50 to-transparent rounded-bl-full -z-10 transition-transform duration-500 group-hover:scale-150"></div>
               
@@ -89,7 +89,7 @@ const BeSafeOnline = () => {
 
         {/* Call to Action for Help */}
         <div className="mt-20 bg-gradient-to-r from-[#d94f73] to-rose-500 rounded-[2.5rem] p-10 md:p-14 text-center shadow-xl shadow-pink-200 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full opacity-10 blur-3xl -mr-20 -mt-20"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-theme-surface rounded-full opacity-10 blur-3xl -mr-20 -mt-20"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-black rounded-full opacity-5 blur-3xl -ml-20 -mb-20"></div>
           
           <div className="relative z-10">
@@ -98,7 +98,7 @@ const BeSafeOnline = () => {
               Our trust and safety team works 24/7. Don't hesitate to reach out if you feel uncomfortable or notice suspicious behavior.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link to="/contact" className="bg-white text-[#d94f73] font-bold px-8 py-4 rounded-xl hover:bg-pink-50 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-1 transform duration-300">
+              <Link to="/contact" className="bg-theme-surface text-[#d94f73] font-bold px-8 py-4 rounded-xl hover:bg-pink-50 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-1 transform duration-300">
                 Contact Support
               </Link>
               <Link to="/about-us" className="bg-rose-600/30 text-white border border-rose-300/50 font-bold px-8 py-4 rounded-xl hover:bg-rose-600/50 transition-colors backdrop-blur-md shadow-sm hover:shadow-md hover:-translate-y-1 transform duration-300">

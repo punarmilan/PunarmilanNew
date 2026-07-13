@@ -29,7 +29,7 @@ const RequestPagination = ({ currentPage, totalPages, totalItems, itemsPerPage, 
             <button
                 onClick={handlePrevPage}
                 disabled={currentPage === 1}
-                className="px-4 py-2 border border-gray-300 bg-white text-gray-600 rounded font-medium transition-colors duration-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white"
+                className="px-4 py-2 border border-gray-300 bg-theme-surface text-theme-text-secondary rounded font-medium transition-colors duration-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-theme-surface"
                 type="button"
             >
                 ← Prev
@@ -44,7 +44,7 @@ const RequestPagination = ({ currentPage, totalPages, totalItems, itemsPerPage, 
             <button
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 border border-gray-300 bg-white text-gray-600 rounded font-medium transition-colors duration-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white"
+                className="px-4 py-2 border border-gray-300 bg-theme-surface text-theme-text-secondary rounded font-medium transition-colors duration-200 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-theme-surface"
                 type="button"
             >
                 Next →

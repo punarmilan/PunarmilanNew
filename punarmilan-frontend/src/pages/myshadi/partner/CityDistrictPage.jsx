@@ -59,7 +59,7 @@ const CityDistrictPage = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 flex items-center justify-center p-2 sm:p-4 md:p-6">
-            <div className="w-full max-w-4xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
+            <div className="w-full max-w-4xl bg-theme-surface rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
                 <div className="bg-gradient-to-r from-rose-500 to-rose-600 p-4 sm:p-6 md:p-8">
                     <button onClick={handleCancel} className="flex items-center gap-2 text-white hover:text-gray-100 transition-all mb-3 sm:mb-4 group">
                         <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -71,7 +71,7 @@ const CityDistrictPage = () => {
                 <div className="p-4 sm:p-6 md:p-10">
                     <div className="mb-6 relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input type="text" placeholder="Search City / District" value={search} onChange={(e) => setSearch(e.target.value)} className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:outline-none transition-colors" />
+                        <input type="text" placeholder="Search City / District" value={search} onChange={(e) => setSearch(e.target.value)} className="w-full pl-10 pr-4 py-3 border-2 border-theme-border rounded-xl focus:border-blue-400 focus:outline-none transition-colors" />
                     </div>
                     {selected && selected !== 'Open to All' && (
                         <div className="mb-6">
@@ -86,7 +86,7 @@ const CityDistrictPage = () => {
                         </label>
                     </div>
                     <div className="max-h-80 overflow-y-auto">
-                        <h3 className="text-lg font-bold text-gray-800 mb-4 sticky top-0 bg-white py-2">Maharashtra</h3>
+                        <h3 className="text-lg font-bold text-gray-800 mb-4 sticky top-0 bg-theme-surface py-2">Maharashtra</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                             {filtered.map(c => (
                                 <label key={c} className="flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 cursor-pointer transition-colors border border-transparent hover:border-blue-200">
@@ -96,8 +96,8 @@ const CityDistrictPage = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 mt-6 border-t border-gray-200">
-                        <button onClick={() => navigate(-1)} className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg transition-all duration-300 active:scale-95">Cancel</button>
+                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 mt-6 border-t border-theme-border">
+                        <button onClick={() => navigate(-1)} className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-theme-surface hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg transition-all duration-300 active:scale-95">Cancel</button>
                         <button onClick={handleApply} className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-rose-500 to-rose-600 text-white rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2">
                             <Check className="w-4 h-4 sm:w-5 sm:h-5" />
                             <span>Apply</span>

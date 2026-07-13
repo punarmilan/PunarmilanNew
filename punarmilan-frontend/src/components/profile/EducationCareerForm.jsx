@@ -43,7 +43,7 @@ console.log("education", data);
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.4 }}
       className="
-        bg-white/90
+        bg-theme-surface/90
         backdrop-blur-xl
         rounded-[32px]
         border
@@ -81,7 +81,7 @@ console.log("education", data);
               Education & Career
             </h2>
 
-            <p className="text-gray-500 mt-1 text-sm md:text-base">
+            <p className="text-theme-text-secondary mt-1 text-sm md:text-base">
               Add your educational and professional details
             </p>
           </div>
@@ -112,9 +112,9 @@ console.log("education", data);
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -178,9 +178,9 @@ console.log("education", data);
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -207,9 +207,9 @@ console.log("education", data);
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -234,9 +234,9 @@ console.log("education", data);
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -275,9 +275,9 @@ console.log("education", data);
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -304,9 +304,9 @@ console.log("education", data);
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -331,9 +331,9 @@ console.log("education", data);
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -371,9 +371,9 @@ console.log("education", data);
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100

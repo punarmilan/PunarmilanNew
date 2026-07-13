@@ -70,7 +70,7 @@ const HelpDropdown = () => {
         if (isMobile) {
             return 'fixed inset-0 z-50 top-auto bottom-0 rounded-t-2xl rounded-b-none max-h-[85vh] overflow-y-auto';
         }
-        return 'absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden';
+        return 'absolute right-0 mt-2 w-80 bg-theme-surface rounded-lg shadow-xl border border-theme-border overflow-hidden';
     };
 
     // Get backdrop style based on screen size
@@ -193,10 +193,10 @@ const HelpDropdown = () => {
                 {isHelpOpen && (
                     <>
                         <div className={getBackdropStyle()} onClick={() => setIsHelpOpen(false)}></div>
-                        <div className={`${getDropdownPosition()} bg-white z-50`}>
+                        <div className={`${getDropdownPosition()} bg-theme-surface z-50`}>
                             {isMobile && (
                                 <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-blue-700 pt-4 pb-4 text-white flex justify-center items-center">
-                                    <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-10 h-1.5 bg-white/50 rounded-full"></div>
+                                    <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-10 h-1.5 bg-theme-surface/50 rounded-full"></div>
                                     <button onClick={() => setIsHelpOpen(false)} className="absolute left-4 top-3 text-white text-xl p-1">
                                         <i className="fa-solid fa-times"></i>
                                     </button>
@@ -211,7 +211,7 @@ const HelpDropdown = () => {
                                             <h3 className="text-lg font-bold mb-1">Upgrade Now Help</h3>
                                             <p className="text-sm opacity-90">To get instant help</p>
                                         </div>
-                                        <button onClick={() => setIsHelpOpen(false)} className="text-white hover:bg-white/20 p-1 rounded">
+                                        <button onClick={() => setIsHelpOpen(false)} className="text-white hover:bg-theme-surface/20 p-1 rounded">
                                             <i className="fa-solid fa-times text-lg"></i>
                                         </button>
                                     </div>
@@ -233,7 +233,7 @@ const HelpDropdown = () => {
                                                 <span className="font-semibold text-gray-800 text-sm">{option.title}</span>
                                                 {option.badge && <span className="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">{option.badge}</span>}
                                             </div>
-                                            <p className="text-xs text-gray-600">{option.description}</p>
+                                            <p className="text-xs text-theme-text-secondary">{option.description}</p>
                                             {option.waitTime && <div className="text-orange-600 font-medium text-xs mt-1">{option.waitTime}</div>}
                                         </div>
                                         <i className="fa-solid fa-chevron-right text-gray-400 mt-2"></i>
@@ -249,14 +249,14 @@ const HelpDropdown = () => {
             {showTicketForm && (
                 <>
                     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60]" onClick={() => setShowTicketForm(false)}></div>
-                    <div ref={ticketFormRef} className={`fixed z-[70] ${isMobile ? 'inset-x-0 bottom-0 rounded-t-2xl' : 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg rounded-2xl'} bg-white shadow-2xl max-h-[90vh] overflow-hidden`}>
+                    <div ref={ticketFormRef} className={`fixed z-[70] ${isMobile ? 'inset-x-0 bottom-0 rounded-t-2xl' : 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg rounded-2xl'} bg-theme-surface shadow-2xl max-h-[90vh] overflow-hidden`}>
                         <div className="bg-gradient-to-r from-purple-600 to-purple-700 p-4 text-white">
                             <div className="flex justify-between items-center">
                                 <div>
                                     <h3 className="text-xl font-bold">Submit a Ticket</h3>
                                     <p className="text-sm opacity-90">For detailed assistance</p>
                                 </div>
-                                <button onClick={() => setShowTicketForm(false)} className="text-white hover:bg-white/20 p-2 rounded-full">
+                                <button onClick={() => setShowTicketForm(false)} className="text-white hover:bg-theme-surface/20 p-2 rounded-full">
                                     <i className="fa-solid fa-times text-lg"></i>
                                 </button>
                             </div>
@@ -324,11 +324,11 @@ const HelpDropdown = () => {
             {showContactPage && (
                 <>
                     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[60]" onClick={() => setShowContactPage(false)}></div>
-                    <div ref={contactPageRef} className={`fixed z-[70] ${isMobile ? 'inset-x-0 bottom-0 rounded-t-2xl' : 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg rounded-2xl'} bg-white shadow-2xl max-h-[90vh] overflow-hidden`}>
+                    <div ref={contactPageRef} className={`fixed z-[70] ${isMobile ? 'inset-x-0 bottom-0 rounded-t-2xl' : 'top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg rounded-2xl'} bg-theme-surface shadow-2xl max-h-[90vh] overflow-hidden`}>
                         <div className="bg-gradient-to-r from-red-600 to-red-700 p-4 text-white">
                             <div className="flex justify-between items-center">
                                 <h3 className="text-xl font-bold">Contact Us</h3>
-                                <button onClick={() => setShowContactPage(false)} className="text-white hover:bg-white/20 p-2 rounded-full">
+                                <button onClick={() => setShowContactPage(false)} className="text-white hover:bg-theme-surface/20 p-2 rounded-full">
                                     <i className="fa-solid fa-times text-lg"></i>
                                 </button>
                             </div>

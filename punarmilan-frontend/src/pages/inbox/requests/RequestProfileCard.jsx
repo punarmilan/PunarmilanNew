@@ -7,7 +7,7 @@ const RequestProfileCard = ({ profile, index }) => {
     const navigate = useNavigate();
     return (
         <div
-            className="bg-white border-2 border-gray-200 rounded-2xl p-6 mb-5 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-red-500 animate-slideUp"
+            className="bg-theme-surface border-2 border-theme-border rounded-2xl p-6 mb-5 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:border-red-500 animate-slideUp"
             style={{ animationDelay: `${index * 0.1}s` }}
         >
             <div className="flex flex-col md:flex-row gap-5 mb-5">
@@ -42,11 +42,11 @@ const RequestProfileCard = ({ profile, index }) => {
                                         <div className="absolute top-12 right-4 w-2.5 h-2.5 bg-gradient-to-b from-[#FFD700] to-[#FFA500] rounded-full shadow-md"></div>
                                         <div className="absolute top-[68px] left-1/2 -translate-x-1/2 w-8 h-6 bg-[#FFDAB9] rounded-b-lg"></div>
                                         <div className="absolute top-[88px] left-1/2 -translate-x-1/2 w-20 h-12 bg-gradient-to-b from-[#90EE90] to-[#7CCD7C] rounded-t-2xl shadow-md">
-                                            <div className="absolute top-2 left-4 w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
-                                            <div className="absolute top-2 right-4 w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
-                                            <div className="absolute top-5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
-                                            <div className="absolute top-7 left-6 w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
-                                            <div className="absolute top-7 right-6 w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
+                                            <div className="absolute top-2 left-4 w-1.5 h-1.5 bg-theme-surface rounded-full opacity-80"></div>
+                                            <div className="absolute top-2 right-4 w-1.5 h-1.5 bg-theme-surface rounded-full opacity-80"></div>
+                                            <div className="absolute top-5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-theme-surface rounded-full opacity-80"></div>
+                                            <div className="absolute top-7 left-6 w-1.5 h-1.5 bg-theme-surface rounded-full opacity-80"></div>
+                                            <div className="absolute top-7 right-6 w-1.5 h-1.5 bg-theme-surface rounded-full opacity-80"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@ const RequestProfileCard = ({ profile, index }) => {
                     </div>
 
                     <div className="text-sm text-green-500 font-medium mb-4 flex items-center justify-center md:justify-start gap-1.5">
-                        <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span className="inline-block w-2 h-2 bg-theme-success rounded-full animate-pulse"></span>
                         {profile.onlineStatus}
                     </div>
 

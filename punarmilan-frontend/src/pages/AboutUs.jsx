@@ -21,7 +21,7 @@ const AboutUs = () => {
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white mb-8 animate-fade-in-up">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-theme-surface/10 backdrop-blur-md border border-white/20 text-white mb-8 animate-fade-in-up">
                         <Sparkles className="w-4 h-4 text-rose-400" />
                         <span className="text-sm font-bold uppercase tracking-widest text-[#e91e63]">Premium Matchmaking</span>
                     </div>
@@ -52,7 +52,7 @@ const AboutUs = () => {
                                     { icon: <ShieldCheck className="text-emerald-500" />, title: "Unwavering Privacy", desc: "Your data is sacred. We employ military-grade encryption and manual profile screening for ultimate peace of mind." }
                                 ].map((item, i) => (
                                     <div key={i} className="flex gap-6 group">
-                                        <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-slate-100">
+                                        <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-theme-surface shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-slate-100">
                                             {React.cloneElement(item.icon, { className: 'w-7 h-7' })}
                                         </div>
                                         <div>
@@ -107,7 +107,7 @@ const AboutUs = () => {
             {/* Testimonial Quote */}
             <section className="py-32 bg-slate-50">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="bg-white rounded-[4rem] p-12 md:p-24 shadow-2xl border border-slate-100 flex flex-col items-center text-center relative">
+                    <div className="bg-theme-surface rounded-[4rem] p-12 md:p-24 shadow-2xl border border-slate-100 flex flex-col items-center text-center relative">
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-[#e91e63] rounded-full flex items-center justify-center shadow-xl">
                             <span className="text-white text-5xl font-serif">"</span>
                         </div>

@@ -116,16 +116,16 @@ const ReportModal = ({ isOpen, onClose, reportedUser }) => {
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="bg-white rounded-lg shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]"
+                className="bg-theme-surface rounded-lg shadow-2xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]"
             >
                 {/* Header */}
-                <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-10">
+                <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-theme-surface sticky top-0 z-10">
                     <h3 className="text-[17px] font-semibold text-gray-700">
                         Report {reportedUser?.profileId || reportedUser?.id} to our Security Team
                     </h3>
                     <button
                         onClick={handleClose}
-                        className="text-gray-300 hover:text-gray-500 transition-colors"
+                        className="text-gray-300 hover:text-theme-text-secondary transition-colors"
                     >
                         <X size={24} strokeWidth={1.5} />
                     </button>
@@ -141,9 +141,9 @@ const ReportModal = ({ isOpen, onClose, reportedUser }) => {
                             <div key={category.id} className="border-b border-gray-100">
                                 <button
                                     onClick={() => toggleCategory(category.id)}
-                                    className={`w-full flex justify-between items-center p-5 text-left transition-colors hover:bg-gray-50/50 ${isExpanded ? 'bg-white' : ''}`}
+                                    className={`w-full flex justify-between items-center p-5 text-left transition-colors hover:bg-gray-50/50 ${isExpanded ? 'bg-theme-surface' : ''}`}
                                 >
-                                    <span className={`text-[15px] font-normal transition-colors ${isExpanded || hasSelected ? 'text-rose-500' : 'text-gray-600'}`}>
+                                    <span className={`text-[15px] font-normal transition-colors ${isExpanded || hasSelected ? 'text-rose-500' : 'text-theme-text-secondary'}`}>
                                         {category.title}
                                     </span>
                                     {isExpanded ? (
@@ -160,7 +160,7 @@ const ReportModal = ({ isOpen, onClose, reportedUser }) => {
                                             animate={{ height: 'auto', opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
                                             transition={{ duration: 0.2 }}
-                                            className="overflow-hidden bg-white"
+                                            className="overflow-hidden bg-theme-surface"
                                         >
                                             <div className="px-5 pb-5 space-y-4">
                                                 {category.reasons.map((reason) => {
@@ -175,7 +175,7 @@ const ReportModal = ({ isOpen, onClose, reportedUser }) => {
                                                                     <motion.div
                                                                         initial={{ scale: 0 }}
                                                                         animate={{ scale: 1 }}
-                                                                        className="w-2.5 h-2.5 bg-white rounded-sm"
+                                                                        className="w-2.5 h-2.5 bg-theme-surface rounded-sm"
                                                                     />
                                                                 )}
                                                             </div>
@@ -185,7 +185,7 @@ const ReportModal = ({ isOpen, onClose, reportedUser }) => {
                                                                 checked={isChecked}
                                                                 onChange={() => handleReasonChange(category.id, reason)}
                                                             />
-                                                            <span className="text-[14px] text-gray-600 font-normal">
+                                                            <span className="text-[14px] text-theme-text-secondary font-normal">
                                                                 {reason}
                                                             </span>
                                                         </label>
@@ -201,7 +201,7 @@ const ReportModal = ({ isOpen, onClose, reportedUser }) => {
                 </div>
 
                 {/* Footer */}
-                <div className="p-6 bg-white border-t border-gray-50 flex justify-center">
+                <div className="p-6 bg-theme-surface border-t border-gray-50 flex justify-center">
                     <button
                         onClick={handleSubmit}
                         disabled={loading}

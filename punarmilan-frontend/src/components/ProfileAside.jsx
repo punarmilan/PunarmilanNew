@@ -62,9 +62,9 @@ export default function ProfileAside({
         >
             <div
                 className="
-                    dashboard-card-bg rounded-3xl
-                    border border-white/50
-                    shadow-[0_8px_30px_rgba(0,0,0,0.06)]
+                    bg-white rounded-3xl
+                    border border-[#F2D7D9]
+                    shadow-[0_10px_30px_rgba(216,154,116,0.12)]
                     overflow-hidden
                 "
             >
@@ -72,8 +72,8 @@ export default function ProfileAside({
                 <div
                     className="
                         flex items-center gap-3 p-4
-                        bg-white/30
-                        border-b border-white/40
+                        bg-[#FFFDFC]
+                        border-b border-[#F2D7D9]
                     "
                 >
                     {/* Avatar */}
@@ -81,9 +81,9 @@ export default function ProfileAside({
                         <div
                             className="
                                 w-[72px] h-[72px] rounded-full overflow-hidden
-                                border-4 border-white shadow-xl
-                                ring-2 ring-rose-100
-                                bg-gray-100 flex items-center justify-center
+                                border-4 border-white shadow-md
+                                ring-2 ring-[#E86D8A]
+                                bg-gray-50 flex items-center justify-center
                             "
                         >
                             {photoPreview || user?.profilePhotoUrl ? (
@@ -93,7 +93,7 @@ export default function ProfileAside({
                                     className="w-full h-full object-cover"
                                 />
                             ) : (
-                                <UserIcon size={32} className="text-gray-400" />
+                                <UserIcon size={32} className="text-[#7A6666]" />
                             )}
                         </div>
 
@@ -103,7 +103,7 @@ export default function ProfileAside({
                             className="
                                 absolute -bottom-1 -right-1
                                 w-7 h-7 rounded-full
-                                bg-gradient-to-r from-rose-500 to-pink-600
+                                bg-gradient-to-r from-[#E86D8A] to-[#D89A74]
                                 text-white flex items-center justify-center
                                 shadow-lg hover:scale-110 transition-all
                             "
@@ -126,13 +126,13 @@ export default function ProfileAside({
                         <span
                             className="
                                 px-2 py-0.5 text-[11px] font-bold
-                                bg-rose-100 text-[#C5A059] rounded-full inline-block mb-1
+                                bg-[#F9E6E7] text-[#E86D8A] rounded-full inline-block mb-1
                             "
                         >
                             {user?.profileId || "Loading..."}
                         </span>
 
-                        <h3 className="text-[15px] font-bold text-gray-800 truncate leading-tight">
+                        <h3 className="text-[15px] font-bold text-[#3B2F2F] truncate leading-tight">
                             {user?.fullName || (
                                 <span className="animate-pulse text-gray-400">
                                     Loading...
@@ -140,7 +140,7 @@ export default function ProfileAside({
                             )}
                         </h3>
 
-                        <div className="flex items-center gap-1.5 text-gray-500 text-xs mt-0.5">
+                        <div className="flex items-center gap-1.5 text-[#7A6666] text-xs mt-0.5">
                             <Phone size={12} />
                             <span className="truncate">
                                 {user?.mobileNumber || "Fetching..."}
@@ -151,10 +151,10 @@ export default function ProfileAside({
                             onClick={handleEditProfile}
                             className="
                                 mt-2 inline-flex items-center gap-1.5
-                                px-3 py-1.5 rounded-xl
-                                bg-blue-50 text-blue-800
+                                px-4 py-1.5 rounded-full
+                                bg-gradient-to-r from-[#E86D8A] to-[#D89A74] text-white
                                 text-xs font-semibold
-                                hover:bg-blue-100 transition-all
+                                hover:shadow-[0_4px_10px_rgba(216,154,116,0.2)] transition-all
                             "
                         >
                             <Edit size={11} />
@@ -180,8 +180,8 @@ export default function ProfileAside({
                                     transition-all duration-200 border
                                     ${
                                         isActive
-                                            ? "bg-gradient-to-r from-rose-50 to-pink-50 text-[#C5A059] border-rose-100 shadow-sm"
-                                            : "text-gray-700 font-bold hover:bg-white/50 hover:text-rose-600 border-transparent"
+                                            ? "bg-gradient-to-r from-[#E86D8A] to-[#D89A74] text-white border-transparent shadow-[0_4px_15px_rgba(216,154,116,0.3)]"
+                                            : "text-[#7A6666] hover:bg-[#FFF6F2] hover:text-[#3B2F2F] border-transparent"
                                     }
                                 `}
                             >
@@ -190,15 +190,15 @@ export default function ProfileAside({
                                     className={`
                                         w-8 h-8 rounded-xl flex items-center justify-center
                                         flex-shrink-0 transition-all
-                                        ${isActive ? "bg-rose-100" : "bg-white/60 shadow-sm border border-gray-100"}
+                                        ${isActive ? "bg-transparent" : "bg-[#FFF6F2] shadow-sm border border-transparent"}
                                     `}
                                 >
                                     <Icon
                                         size={15}
                                         className={
                                             isActive
-                                                ? "text-[#C5A059]"
-                                                : "text-gray-700"
+                                                ? "text-white"
+                                                : "text-[#D89A74]"
                                         }
                                     />
                                 </div>
@@ -207,7 +207,7 @@ export default function ProfileAside({
 
                                 {/* Active indicator dot */}
                                 {isActive && (
-                                    <span className="ml-auto w-1.5 h-5 rounded-full bg-rose-400 flex-shrink-0" />
+                                    <span className="ml-auto w-1.5 h-5 rounded-full bg-[#FFFFFF] flex-shrink-0" />
                                 )}
                             </button>
                         );
@@ -215,17 +215,17 @@ export default function ProfileAside({
                 </nav>
 
                 {/* ── Upgrade Plan Banner ── */}
-                <div className="p-4 mx-4 mb-5 mt-2 rounded-2xl bg-gradient-to-br from-slate-900 to-[#8C6D39] text-white text-center shadow-lg relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="p-4 mx-4 mb-5 mt-2 rounded-2xl bg-[#FFF6F2] border border-[#F2D7D9] text-[#3B2F2F] text-center shadow-sm relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-[#E86D8A]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div className="relative z-10">
-                        <Crown className="w-8 h-8 mx-auto mb-2 text-yellow-400 drop-shadow-md animate-pulse" />
-                        <h4 className="font-bold text-sm mb-1 tracking-wide">Upgrade to Premium</h4>
-                        <p className="text-[10px] text-white/90 mb-3 font-medium leading-relaxed">Unlock advanced filters & 10x more matches</p>
+                        <Crown className="w-8 h-8 mx-auto mb-2 text-[#C99853] drop-shadow-sm animate-pulse" />
+                        <h4 className="font-bold text-sm mb-1 tracking-wide text-[#3B2F2F]">Upgrade to Premium</h4>
+                        <p className="text-[10px] text-[#7A6666] mb-3 font-medium leading-relaxed">Unlock exclusive features & stand out from the crowd.</p>
                         <button 
                             onClick={() => window.location.href = '/payment'} 
-                            className="bg-white text-[#8C6D39] text-xs font-black px-5 py-2 rounded-full hover:scale-105 hover:shadow-xl transition-all duration-300 w-full"
+                            className="bg-gradient-to-r from-[#E86D8A] to-[#D89A74] text-white text-xs font-black px-5 py-2 rounded-full hover:scale-105 hover:shadow-[0_8px_20px_rgba(216,154,116,0.3)] transition-all duration-300 w-full"
                         >
-                            Upgrade Now
+                            Upgrade Now →
                         </button>
                     </div>
                 </div>

@@ -38,13 +38,13 @@ const ActivitySummary = () => {
     return (
         <div className='w-full px-2 sm:px-4 md:px-0'>
             <div className='space-y-3 md:space-y-6'>
-                <div className="bg-white rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg p-3 sm:p-4 md:p-6">
+                <div className="bg-theme-surface rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg p-3 sm:p-4 md:p-6">
                     {/* Header */}
                     <div className="flex items-center justify-between mb-4 sm:mb-5 md:mb-6">
                         <h2 className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
                             Year Activity Summary
                         </h2>
-                        <div className="flex items-center text-xs sm:text-sm text-gray-500">
+                        <div className="flex items-center text-xs sm:text-sm text-theme-text-secondary">
                             <Crown className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-yellow-500" />
                             <span className="hidden xs:inline">Premium Features</span>
                             <span className="xs:hidden">Premium</span>
@@ -85,21 +85,21 @@ const ActivitySummary = () => {
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                             <div className="flex items-center space-x-2 sm:space-x-3">
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-theme-surface rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
                                     <Eye className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" />
                                 </div>
                                 <div className="min-w-0">
                                     <h4 className="font-semibold text-xs sm:text-sm md:text-base">Contacts viewed</h4>
-                                    <p className="text-xs sm:text-sm text-gray-600 truncate">See who viewed your profile</p>
+                                    <p className="text-xs sm:text-sm text-theme-text-secondary truncate">See who viewed your profile</p>
                                 </div>
                             </div>
                             <div className="flex items-center space-x-2 sm:space-x-3">
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-theme-surface rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
                                     <Users className="w-4 h-4 sm:w-5 sm:h-5 text-pink-500" />
                                 </div>
                                 <div className="min-w-0">
                                     <h4 className="font-semibold text-xs sm:text-sm md:text-base">Chats initiated</h4>
-                                    <p className="text-xs sm:text-sm text-gray-600 truncate">Start unlimited conversations</p>
+                                    <p className="text-xs sm:text-sm text-theme-text-secondary truncate">Start unlimited conversations</p>
                                 </div>
                             </div>
                         </div>

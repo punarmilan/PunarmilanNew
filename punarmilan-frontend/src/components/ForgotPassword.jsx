@@ -116,14 +116,14 @@ function ForgotPassword() {
     if (step === 3) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
-                <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl text-center">
+                <div className="max-w-md w-full space-y-8 bg-theme-surface p-8 rounded-2xl shadow-xl text-center">
                     <div className="flex justify-center">
                         <div className="bg-green-100 p-3 rounded-full">
                             <CheckCircle className="h-12 w-12 text-green-600" />
                         </div>
                     </div>
                     <h2 className="text-3xl font-extrabold text-gray-900">Password Reset Complete</h2>
-                    <p className="mt-2 text-sm text-gray-600">
+                    <p className="mt-2 text-sm text-theme-text-secondary">
                         Your password has been successfully reset. You can now login with your new password.
                     </p>
                     <div className="mt-6">
@@ -142,12 +142,12 @@ function ForgotPassword() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
-            <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-xl">
+            <div className="max-w-md w-full space-y-8 bg-theme-surface p-8 rounded-2xl shadow-xl">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
                         {step === 1 ? "Forgot password?" : "Reset Password"}
                     </h2>
-                    <p className="mt-2 text-center text-sm text-gray-600">
+                    <p className="mt-2 text-center text-sm text-theme-text-secondary">
                         {step === 1 ? "No worries, we'll send you an OTP to reset your password." : `Enter the OTP sent to ${email} and choose a new password.`}
                     </p>
                 </div>
@@ -198,7 +198,7 @@ function ForgotPassword() {
                                             value={digit}
                                             onChange={(e) => handleOtpChange(i, e.target.value)}
                                             onKeyDown={(e) => handleOtpKeyDown(i, e)}
-                                            className="w-12 h-14 bg-gray-50 border-2 border-gray-300 focus:border-cyan-400 focus:bg-white rounded-xl text-center text-xl font-bold text-gray-800 outline-none transition-all shadow-sm"
+                                            className="w-12 h-14 bg-gray-50 border-2 border-gray-300 focus:border-cyan-400 focus:bg-theme-surface rounded-xl text-center text-xl font-bold text-gray-800 outline-none transition-all shadow-sm"
                                         />
                                     ))}
                                 </div>
@@ -258,7 +258,7 @@ function ForgotPassword() {
                             <button
                                 type="button"
                                 onClick={() => setStep(1)}
-                                className="text-sm font-medium text-gray-600 hover:text-gray-900 flex items-center gap-1"
+                                className="text-sm font-medium text-theme-text-secondary hover:text-gray-900 flex items-center gap-1"
                             >
                                 <ArrowLeft className="w-4 h-4" /> Change Email
                             </button>

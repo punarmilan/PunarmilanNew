@@ -75,13 +75,13 @@ const Requests = () => {
           />
 
           {/* Content Area */}
-          <main className="bg-white rounded-2xl shadow-sm overflow-hidden">
+          <main className="bg-theme-surface rounded-2xl shadow-sm overflow-hidden">
             {/* Tabs */}
-            <div className="flex flex-col md:flex-row border-b-2 border-gray-200 bg-gradient-to-b from-white to-gray-50">
+            <div className="flex flex-col md:flex-row border-b-2 border-theme-border bg-gradient-to-b from-white to-gray-50">
               <button
                 onClick={() => handleTabChange('pending')}
                 className={`flex-1 px-6 py-5 text-base font-semibold transition-all duration-300 relative ${activeTab === 'pending'
-                  ? 'text-red-500 bg-white'
+                  ? 'text-red-500 bg-theme-surface'
                   : 'text-gray-400 hover:bg-red-50 hover:text-red-500'
                   }`}
               >
@@ -94,7 +94,7 @@ const Requests = () => {
               <button
                 onClick={() => handleTabChange('accepted')}
                 className={`flex-1 px-6 py-5 text-base font-semibold transition-all duration-300 relative ${activeTab === 'accepted'
-                  ? 'text-red-500 bg-white'
+                  ? 'text-red-500 bg-theme-surface'
                   : 'text-gray-400 hover:bg-red-50 hover:text-red-500'
                   }`}
               >
@@ -107,7 +107,7 @@ const Requests = () => {
               <button
                 onClick={() => handleTabChange('sent')}
                 className={`flex-1 px-6 py-5 text-base font-semibold transition-all duration-300 relative ${activeTab === 'sent'
-                  ? 'text-red-500 bg-white'
+                  ? 'text-red-500 bg-theme-surface'
                   : 'text-gray-400 hover:bg-red-50 hover:text-red-500'
                   }`}
               >

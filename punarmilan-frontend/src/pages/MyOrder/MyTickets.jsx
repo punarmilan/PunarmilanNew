@@ -35,9 +35,9 @@ const MyTickets = () => {
             case 'RESOLVED':
                 return 'bg-green-100 text-green-700 border-green-200';
             case 'CLOSED':
-                return 'bg-gray-100 text-gray-700 border-gray-200';
+                return 'bg-gray-100 text-gray-700 border-theme-border';
             default:
-                return 'bg-gray-100 text-gray-700 border-gray-200';
+                return 'bg-gray-100 text-gray-700 border-theme-border';
         }
     };
 
@@ -62,13 +62,13 @@ const MyTickets = () => {
                 <div className="flex items-center gap-4 mb-8">
                     <button
                         onClick={() => navigate(-1)}
-                        className="w-10 h-10 bg-white rounded-full shadow-sm flex items-center justify-center text-gray-600 hover:text-purple-600 transition-colors"
+                        className="w-10 h-10 bg-theme-surface rounded-full shadow-sm flex items-center justify-center text-theme-text-secondary hover:text-purple-600 transition-colors"
                     >
                         <i className="fa-solid fa-arrow-left"></i>
                     </button>
                     <div>
                         <h1 className="text-2xl font-bold text-gray-800">My Support Tickets</h1>
-                        <p className="text-sm text-gray-600">Track and manage your assistance requests</p>
+                        <p className="text-sm text-theme-text-secondary">Track and manage your assistance requests</p>
                     </div>
                 </div>
 
@@ -77,12 +77,12 @@ const MyTickets = () => {
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
                     </div>
                 ) : tickets.length === 0 ? (
-                    <div className="bg-white rounded-2xl p-12 text-center shadow-sm border border-gray-100">
+                    <div className="bg-theme-surface rounded-2xl p-12 text-center shadow-sm border border-gray-100">
                         <div className="w-20 h-20 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-6">
                             <i className="fa-solid fa-ticket text-purple-200 text-4xl"></i>
                         </div>
                         <h3 className="text-xl font-bold text-gray-800 mb-2">No tickets found</h3>
-                        <p className="text-gray-500 mb-8 max-w-sm mx-auto">If you need help with anything, feel free to submit a support ticket via the Help menu.</p>
+                        <p className="text-theme-text-secondary mb-8 max-w-sm mx-auto">If you need help with anything, feel free to submit a support ticket via the Help menu.</p>
                         <button
                             onClick={() => navigate('/')}
                             className="bg-purple-600 text-white px-8 py-3 rounded-full font-bold hover:bg-purple-700 transition-all shadow-lg shadow-purple-200"
@@ -93,7 +93,7 @@ const MyTickets = () => {
                 ) : (
                     <div className="space-y-4">
                         {tickets.map((ticket) => (
-                            <div key={ticket.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                            <div key={ticket.id} className="bg-theme-surface rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
                                 <div className="p-6">
                                     <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                                         <div>
@@ -106,7 +106,7 @@ const MyTickets = () => {
                                                 </span>
                                             </div>
                                             <h3 className="text-lg font-bold text-gray-800">{ticket.subject}</h3>
-                                            <p className="text-xs text-gray-500">
+                                            <p className="text-xs text-theme-text-secondary">
                                                 Ticket ID: <span className="font-mono">#{ticket.id}</span> • {format(new Date(ticket.createdAt), 'MMM dd, yyyy HH:mm')}
                                             </p>
                                         </div>
@@ -146,15 +146,15 @@ const MyTickets = () => {
                                 <button
                                     onClick={() => setPage(prev => Math.max(0, prev - 1))}
                                     disabled={page === 0}
-                                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-50 transition-colors"
+                                    className="px-4 py-2 bg-theme-surface border border-theme-border rounded-lg disabled:opacity-50 hover:bg-gray-50 transition-colors"
                                 >
                                     Previous
                                 </button>
-                                <span className="text-sm text-gray-600 font-medium">Page {page + 1} of {totalPages}</span>
+                                <span className="text-sm text-theme-text-secondary font-medium">Page {page + 1} of {totalPages}</span>
                                 <button
                                     onClick={() => setPage(prev => Math.min(totalPages - 1, prev + 1))}
                                     disabled={page === totalPages - 1}
-                                    className="px-4 py-2 bg-white border border-gray-200 rounded-lg disabled:opacity-50 hover:bg-gray-50 transition-colors"
+                                    className="px-4 py-2 bg-theme-surface border border-theme-border rounded-lg disabled:opacity-50 hover:bg-gray-50 transition-colors"
                                 >
                                     Next
                                 </button>

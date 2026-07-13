@@ -10,10 +10,10 @@ function AccountSettings({ email, onUpdate }) {
 
     return (
         <div className="p-4 md:p-6 lg:p-8 bg-gray-50">
-            <div className="bg-white border border-gray-200 rounded-lg p-4 md:p-6">
+            <div className="bg-theme-surface border border-theme-border rounded-lg p-4 md:p-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div className="flex-1">
-                        <label className="block text-sm md:text-base text-gray-600 mb-2">
+                        <label className="block text-sm md:text-base text-theme-text-secondary mb-2">
                             Update Email Id:
                         </label>
                         {isEditing ? (

@@ -137,7 +137,7 @@ const Country = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 flex items-center justify-center p-2 sm:p-4 md:p-6">
-            <div className="w-full max-w-4xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
+            <div className="w-full max-w-4xl bg-theme-surface rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
                 {/* Header */}
                 <div className="bg-gradient-to-r from-rose-500 to-rose-600 p-4 sm:p-6 md:p-8">
                     <button
@@ -164,7 +164,7 @@ const Country = () => {
                                 placeholder="Search Country..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-400 focus:outline-none transition-colors text-sm sm:text-base"
+                                className="w-full pl-10 pr-4 py-3 border-2 border-theme-border rounded-xl focus:border-blue-400 focus:outline-none transition-colors text-sm sm:text-base"
                             />
                         </div>
                     </div>
@@ -190,7 +190,7 @@ const Country = () => {
                                         {country}
                                         <button
                                             onClick={() => removeCountry(country)}
-                                            className="w-5 h-5 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                                            className="w-5 h-5 rounded-full bg-theme-surface/20 hover:bg-theme-surface/30 flex items-center justify-center transition-colors"
                                         >
                                             <X className="w-3 h-3" />
                                         </button>
@@ -227,7 +227,7 @@ const Country = () => {
                             // Show regions when not searching
                             <div className="space-y-2">
                                 {Object.entries(countriesByRegion).map(([region, countries]) => (
-                                    <div key={region} className="border border-gray-200 rounded-xl overflow-hidden">
+                                    <div key={region} className="border border-theme-border rounded-xl overflow-hidden">
                                         {/* Region Header */}
                                         <div
                                             onClick={() => toggleRegion(region)}
@@ -253,7 +253,7 @@ const Country = () => {
                                             </div>
                                             {region !== 'Open to All' && (
                                                 <svg
-                                                    className={`w-5 h-5 text-gray-500 transition-transform ${expandedRegion === region ? 'rotate-180' : ''
+                                                    className={`w-5 h-5 text-theme-text-secondary transition-transform ${expandedRegion === region ? 'rotate-180' : ''
                                                         }`}
                                                     fill="none"
                                                     stroke="currentColor"
@@ -266,7 +266,7 @@ const Country = () => {
 
                                         {/* Region Countries */}
                                         {region !== 'Open to All' && expandedRegion === region && (
-                                            <div className="p-4 bg-white">
+                                            <div className="p-4 bg-theme-surface">
                                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                                                     {countries.map((country) => (
                                                         <label
@@ -295,10 +295,10 @@ const Country = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 mt-6 border-t border-gray-200">
+                    <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4 pt-6 sm:pt-8 mt-6 border-t border-theme-border">
                         <button
                             onClick={handleCancel}
-                            className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg transition-all duration-300 active:scale-95"
+                            className="flex-1 px-4 sm:px-6 py-3 sm:py-4 bg-theme-surface hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-xl sm:rounded-2xl font-bold text-sm sm:text-lg transition-all duration-300 active:scale-95"
                         >
                             Cancel
                         </button>

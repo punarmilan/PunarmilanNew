@@ -84,7 +84,7 @@ function Register({ close, openLogin }) {
         if (strength <= 30) return { strength, label: 'Weak', color: 'bg-red-500' };
         if (strength <= 60) return { strength, label: 'Fair', color: 'bg-yellow-500' };
         if (strength <= 85) return { strength, label: 'Good', color: 'bg-blue-500' };
-        return { strength, label: 'Strong', color: 'bg-green-500' };
+        return { strength, label: 'Strong', color: 'bg-theme-success' };
     };
 
     const passwordStrength = getPasswordStrength(user.password);
@@ -246,13 +246,13 @@ function Register({ close, openLogin }) {
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-rose-400 rounded-3xl blur-2xl opacity-20 animate-pulse" />
 
                 {/* Main Card */}
-                <div className="relative bg-white/95 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+                <div className="relative bg-theme-surface/95 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
                     {/* Header */}
                     {!showSuccessMessage && (
                         <>
                             <button
                                 onClick={onInternalClose}
-                                className="absolute right-4 top-4 text-gray-400 hover:text-gray-700 transition-colors z-20 p-2 hover:bg-gray-100 rounded-full bg-white/50"
+                                className="absolute right-4 top-4 text-gray-400 hover:text-gray-700 transition-colors z-20 p-2 hover:bg-gray-100 rounded-full bg-theme-surface/50"
                                 aria-label="Close"
                             >
                                 <X className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -265,7 +265,7 @@ function Register({ close, openLogin }) {
                                 <h2 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 mb-2">
                                     Create Account
                                 </h2>
-                                <p className="text-sm text-gray-500 font-medium">Join thousands finding their perfect match</p>
+                                <p className="text-sm text-theme-text-secondary font-medium">Join thousands finding their perfect match</p>
                             </div>
                         </>
                     )}
@@ -274,7 +274,7 @@ function Register({ close, openLogin }) {
                         <div className="px-6 pb-12 pt-12 text-center space-y-6 animate-scaleIn">
                             <button
                                 onClick={onInternalClose}
-                                className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 transition-colors p-1 hover:bg-gray-100 rounded-full"
+                                className="absolute right-4 top-4 text-gray-400 hover:text-theme-text-secondary transition-colors p-1 hover:bg-gray-100 rounded-full"
                                 aria-label="Close"
                             >
                                 <X className="w-6 h-6" />
@@ -293,7 +293,7 @@ function Register({ close, openLogin }) {
                                 <h2 className="text-3xl font-extrabold text-gray-800 tracking-tight">
                                     Verify Your Email
                                 </h2>
-                                <p className="text-gray-600 leading-relaxed">
+                                <p className="text-theme-text-secondary leading-relaxed">
                                     We've sent a verification link to <br />
                                     <span className="font-bold text-gray-900 border-b-2 border-rose-200">{user.email}</span>
                                 </p>
@@ -316,7 +316,7 @@ function Register({ close, openLogin }) {
                             </div>
                         </div>
                     ) : (
-                        <form onSubmit={handleSubmit} className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-5 bg-white max-h-[60vh] sm:max-h-[70vh] overflow-y-auto custom-scrollbar">
+                        <form onSubmit={handleSubmit} className="p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-5 bg-theme-surface max-h-[60vh] sm:max-h-[70vh] overflow-y-auto custom-scrollbar">
                             {/* Profile Created By */}
                             <div className="space-y-2">
                                 <label className="text-xs sm:text-sm font-semibold text-gray-700 flex items-center space-x-1">
@@ -329,8 +329,8 @@ function Register({ close, openLogin }) {
                                             ? "border-red-500 focus:ring-red-400"
                                             : user.profileCreatedBy
                                                 ? "border-green-500"
-                                                : "border-gray-200"
-                                            } rounded-full cursor-pointer flex items-center bg-white transition-all`}
+                                                : "border-theme-border"
+                                            } rounded-full cursor-pointer flex items-center bg-theme-surface transition-all`}
                                         onClick={() => setIsCreatedByOpen(!isCreatedByOpen)}
                                     >
                                         <FcExport className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5" />
@@ -341,7 +341,7 @@ function Register({ close, openLogin }) {
                                     </div>
 
                                     {isCreatedByOpen && (
-                                        <div className="absolute z-30 w-full mt-1 bg-white border-2 border-gray-100 rounded-xl shadow-xl py-1 animate-slideDown overflow-hidden">
+                                        <div className="absolute z-30 w-full mt-1 bg-theme-surface border-2 border-gray-100 rounded-xl shadow-xl py-1 animate-slideDown overflow-hidden">
                                             {["Self", "Parent", "Sibling", "Friend", "Relative", "Other"].map((option) => (
                                                 <div
                                                     key={option}
@@ -386,8 +386,8 @@ function Register({ close, openLogin }) {
                                                 ? "border-red-500 focus:ring-red-400"
                                                 : user.firstName
                                                     ? "border-green-500"
-                                                    : "border-gray-200"
-                                                } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
+                                                    : "border-theme-border"
+                                                } rounded-full focus:outline-none focus:ring-4 transition-all bg-theme-surface`}
                                         />
                                     </div>
                                     {errors.firstName && touched.firstName && (
@@ -416,8 +416,8 @@ function Register({ close, openLogin }) {
                                                 ? "border-red-500 focus:ring-red-400"
                                                 : user.lastName
                                                     ? "border-green-500"
-                                                    : "border-gray-200"
-                                                } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
+                                                    : "border-theme-border"
+                                                } rounded-full focus:outline-none focus:ring-4 transition-all bg-theme-surface`}
                                         />
                                     </div>
                                     {errors.lastName && touched.lastName && (
@@ -444,10 +444,10 @@ function Register({ close, openLogin }) {
                                         }}
                                         className={`flex flex-col items-center justify-center gap-2 py-4 rounded-xl border-2 transition-all ${user.gender === "Male"
                                                 ? "border-cyan-500 bg-cyan-50 text-cyan-700 font-bold shadow-md ring-2 ring-cyan-200"
-                                                : "border-gray-200 text-gray-500 hover:border-cyan-300 hover:bg-gray-50"
+                                                : "border-theme-border text-theme-text-secondary hover:border-cyan-300 hover:bg-gray-50"
                                             }`}
                                     >
-                                        <img src={maleAvatar} alt="Male" className="w-8 h-8 rounded-full object-cover shadow-sm bg-white" />
+                                        <img src={maleAvatar} alt="Male" className="w-8 h-8 rounded-full object-cover shadow-sm bg-theme-surface" />
                                         <span>Male</span>
                                     </button>
                                     <button
@@ -458,10 +458,10 @@ function Register({ close, openLogin }) {
                                         }}
                                         className={`flex flex-col items-center justify-center gap-2 py-4 rounded-xl border-2 transition-all ${user.gender === "Female"
                                                 ? "border-rose-500 bg-rose-50 text-rose-700 font-bold shadow-md ring-2 ring-rose-200"
-                                                : "border-gray-200 text-gray-500 hover:border-rose-300 hover:bg-gray-50"
+                                                : "border-theme-border text-theme-text-secondary hover:border-rose-300 hover:bg-gray-50"
                                             }`}
                                     >
-                                        <img src={femaleAvatar} alt="Female" className="w-8 h-8 rounded-full object-cover shadow-sm bg-white" />
+                                        <img src={femaleAvatar} alt="Female" className="w-8 h-8 rounded-full object-cover shadow-sm bg-theme-surface" />
                                         <span>Female</span>
                                     </button>
                                 </div>
@@ -481,7 +481,7 @@ function Register({ close, openLogin }) {
                                 </label>
                                 <div className="relative flex items-center">
                                     <FcPhone className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 z-20" />
-                                    <div className="absolute left-9 sm:left-11 top-0 bottom-0 flex items-center justify-center px-1 bg-transparent text-gray-600 font-bold z-10">
+                                    <div className="absolute left-9 sm:left-11 top-0 bottom-0 flex items-center justify-center px-1 bg-transparent text-theme-text-secondary font-bold z-10">
                                         +91
                                     </div>
                                     <input
@@ -496,8 +496,8 @@ function Register({ close, openLogin }) {
                                             ? "border-red-500 focus:ring-red-400"
                                             : user.mobileNumber.length === 10
                                                 ? "border-green-500 focus:ring-green-400"
-                                                : "border-gray-200 focus:ring-emerald-400"
-                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
+                                                : "border-theme-border focus:ring-emerald-400"
+                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-theme-surface`}
                                     />
                                 </div>
                                 {errors.mobileNumber && touched.mobileNumber ? (
@@ -530,8 +530,8 @@ function Register({ close, openLogin }) {
                                         onBlur={() => handleBlur("email")}
                                         className={`w-full pl-10 sm:pl-12 pr-4 py-2.5 sm:py-3 text-sm sm:text-base border-2 ${errors.email && touched.email
                                             ? "border-red-500 focus:ring-red-400"
-                                            : "border-gray-200 focus:ring-emerald-400"
-                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
+                                            : "border-theme-border focus:ring-emerald-400"
+                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-theme-surface`}
                                     />
                                 </div>
                                 {errors.email && touched.email && (
@@ -559,8 +559,8 @@ function Register({ close, openLogin }) {
                                         onBlur={() => handleBlur("password")}
                                         className={`w-full pl-10 sm:pl-12 pr-10 sm:pr-12 py-2.5 sm:py-3 text-sm sm:text-base border-2 ${errors.password && touched.password
                                             ? "border-red-500 focus:ring-red-400"
-                                            : "border-gray-200 focus:ring-emerald-400"
-                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
+                                            : "border-theme-border focus:ring-emerald-400"
+                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-theme-surface`}
                                     />
                                     <button
                                         type="button"
@@ -627,8 +627,8 @@ function Register({ close, openLogin }) {
                                             ? "border-red-500 focus:ring-red-400"
                                             : confirmPassword && user.password === confirmPassword
                                                 ? "border-green-500 focus:ring-green-400"
-                                                : "border-gray-200 focus:ring-emerald-400"
-                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-white`}
+                                                : "border-theme-border focus:ring-emerald-400"
+                                            } rounded-full focus:outline-none focus:ring-4 transition-all bg-theme-surface`}
                                     />
                                     <button
                                         type="button"
@@ -701,10 +701,10 @@ function Register({ close, openLogin }) {
                             {/* Divider */}
                             <div className="relative py-2">
                                 <div className="absolute inset-0 flex items-center">
-                                    <div className="w-full border-t border-gray-200"></div>
+                                    <div className="w-full border-t border-theme-border"></div>
                                 </div>
                                 <div className="relative flex justify-center text-xs sm:text-sm">
-                                    <span className="px-3 sm:px-4 bg-white text-gray-500">Already have an account?</span>
+                                    <span className="px-3 sm:px-4 bg-theme-surface text-theme-text-secondary">Already have an account?</span>
                                 </div>
                             </div>
 
@@ -722,7 +722,7 @@ function Register({ close, openLogin }) {
                     {/* Footer Trust Badge - Only show if not success message for spacing */}
                     {!showSuccessMessage && (
                         <div className="px-4 sm:px-6 md:px-8 pb-4 sm:pb-6 bg-gradient-to-b from-white to-gray-50">
-                            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs text-gray-500">
+                            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs text-theme-text-secondary">
                                 <div className="flex items-center space-x-1">
                                     <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
                                     <span>Secure</span>

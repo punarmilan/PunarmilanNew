@@ -156,13 +156,13 @@ const ChatsPage = () => {
             <div className="flex-1 w-full dashboard-card-bg rounded-[24px] border border-white/50 shadow-sm flex overflow-hidden min-h-[600px] max-h-[750px]">
                 {/* Left Side: Conversations List */}
                 <div className={`w-full md:w-full max-w-[360px] border-r border-white/40 flex flex-col ${selectedUser ? 'hidden md:flex' : 'flex'}`}>
-                    <div className="p-4 border-b border-white/40 bg-white/30">
+                    <div className="p-4 border-b border-white/40 bg-theme-surface/30">
                         <div className="relative">
                             <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">🔍</span>
                             <input 
                                 type="text" 
                                 placeholder="Search conversations..." 
-                                className="w-full pl-9 pr-4 py-2 text-sm bg-white/50 border border-white/60 rounded-xl outline-none focus:border-pink-300 transition-all placeholder-gray-500 text-gray-800 font-medium"
+                                className="w-full pl-9 pr-4 py-2 text-sm bg-theme-surface/50 border border-white/60 rounded-xl outline-none focus:border-pink-300 transition-all placeholder-gray-500 text-gray-800 font-medium"
                             />
                         </div>
                     </div>
@@ -206,7 +206,7 @@ const ChatsPage = () => {
                                                 {new Date(c.lastActive).toLocaleDateString([], { day: '2-digit', month: 'short' })}
                                             </span>
                                         </div>
-                                        <p className="text-xs text-gray-500 truncate">{c.lastMessage || 'No messages yet'}</p>
+                                        <p className="text-xs text-theme-text-secondary truncate">{c.lastMessage || 'No messages yet'}</p>
                                     </div>
 
                                     {/* Unread Badge */}
@@ -222,17 +222,17 @@ const ChatsPage = () => {
                 </div>
 
                 {/* Right Side: Messages Pane */}
-                <div className={`flex-1 flex flex-col bg-[#FCFAF7]/20 ${!selectedUser ? 'hidden md:flex items-center justify-center p-12 text-center' : 'flex'}`}>
+                <div className={`flex-1 flex flex-col bg-theme-bg/20 ${!selectedUser ? 'hidden md:flex items-center justify-center p-12 text-center' : 'flex'}`}>
                     {selectedUser ? (
                         <>
                             {/* Selected Chat Header */}
-                            <div className="px-6 py-4 border-b border-[#EBDCCB]/60 bg-white flex items-center justify-between shrink-0">
+                            <div className="px-6 py-4 border-b border-theme-border/60 bg-theme-surface flex items-center justify-between shrink-0">
                                 <div className="flex items-center gap-3.5">
                                     <button 
                                         onClick={() => setSelectedUser(null)} 
                                         className="md:hidden p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
                                     >
-                                        <ArrowLeft className="w-5 h-5 text-gray-600" />
+                                        <ArrowLeft className="w-5 h-5 text-theme-text-secondary" />
                                     </button>
                                     <div className="relative">
                                         <div className="w-10 h-10 rounded-full overflow-hidden border border-amber-100 shadow-sm">
@@ -255,17 +255,17 @@ const ChatsPage = () => {
                             </div>
 
                             {/* Messages List Area */}
-                            <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-white/40">
+                            <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-theme-surface/40">
                                 {loading && activeChatData.messages.length === 0 ? (
                                     <div className="flex justify-center py-8">
                                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#8C6D39]" />
                                     </div>
                                 ) : activeChatData.messages.length === 0 ? (
                                     <div className="text-center py-20">
-                                        <div className="w-16 h-16 bg-amber-50/50 border border-[#EBDCCB]/40 rounded-full flex items-center justify-center mx-auto mb-4">
-                                            <MessageSquare className="w-6 h-6 text-[#8C6D39]" />
+                                        <div className="w-16 h-16 bg-amber-50/50 border border-theme-border/40 rounded-full flex items-center justify-center mx-auto mb-4">
+                                            <MessageSquare className="w-6 h-6 text-theme-pink" />
                                         </div>
-                                        <p className="text-sm font-medium text-gray-500">Say hello to {selectedUser.fullName}!</p>
+                                        <p className="text-sm font-medium text-theme-text-secondary">Say hello to {selectedUser.fullName}!</p>
                                         <p className="text-xs text-gray-400 mt-1">Start your beautiful conversation today.</p>
                                     </div>
                                 ) : (
@@ -275,8 +275,8 @@ const ChatsPage = () => {
                                             <div key={msg.id || idx} className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}>
                                                 <div className={`max-w-[70%] px-4 py-2.5 rounded-2xl text-sm shadow-sm ${
                                                     isMe
-                                                        ? 'bg-gradient-to-r from-[#C5A059] to-[#8C6D39] text-white rounded-tr-none'
-                                                        : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
+                                                        ? 'bg-gradient-to-r from-theme-primary to-theme-pink text-white rounded-tr-none'
+                                                        : 'bg-theme-surface text-gray-800 border border-gray-100 rounded-tl-none'
                                                 }`}>
                                                     <p className="leading-relaxed break-words">{msg.content}</p>
                                                     <span className={`text-[9px] block text-right mt-1 ${isMe ? 'text-white/80' : 'text-gray-400'}`}>
@@ -291,18 +291,18 @@ const ChatsPage = () => {
                             </div>
 
                             {/* Message input panel */}
-                            <form onSubmit={handleSend} className="p-4 bg-white border-t border-[#EBDCCB]/60 flex items-center gap-3 shrink-0">
+                            <form onSubmit={handleSend} className="p-4 bg-theme-surface border-t border-theme-border/60 flex items-center gap-3 shrink-0">
                                 <input
                                     type="text"
                                     value={messageText}
                                     onChange={(e) => setMessageText(e.target.value)}
                                     placeholder="Type your message here..."
-                                    className="flex-1 bg-[#FCFAF7] border border-[#EBDCCB] rounded-full px-5 py-3 text-sm focus:ring-2 focus:ring-[#8C6D39]/20 outline-none transition-all"
+                                    className="flex-1 bg-theme-bg border border-theme-border rounded-full px-5 py-3 text-sm focus:ring-2 focus:ring-[#8C6D39]/20 outline-none transition-all"
                                 />
                                 <button
                                     type="submit"
                                     disabled={!messageText.trim()}
-                                    className="w-12 h-12 bg-gradient-to-r from-[#C5A059] to-[#8C6D39] hover:from-[#B59049] hover:to-[#7C5D29] text-white rounded-full flex items-center justify-center transition-all shadow-md active:scale-95 disabled:opacity-50 disabled:scale-100"
+                                    className="w-12 h-12 bg-gradient-to-r from-theme-primary to-theme-pink hover:from-[#B59049] hover:to-[#7C5D29] text-white rounded-full flex items-center justify-center transition-all shadow-md active:scale-95 disabled:opacity-50 disabled:scale-100"
                                 >
                                     <Send className="w-5 h-5" />
                                 </button>
@@ -310,11 +310,11 @@ const ChatsPage = () => {
                         </>
                     ) : (
                         <div className="max-w-md">
-                            <div className="w-20 h-20 bg-amber-50 border border-[#EBDCCB] rounded-full flex items-center justify-center mx-auto mb-5 shadow-sm">
-                                <MessageSquare className="w-10 h-10 text-[#8C6D39]" />
+                            <div className="w-20 h-20 bg-amber-50 border border-theme-border rounded-full flex items-center justify-center mx-auto mb-5 shadow-sm">
+                                <MessageSquare className="w-10 h-10 text-theme-pink" />
                             </div>
                             <h2 className="text-xl font-bold font-serif text-[#4A3728] mb-2">Your Conversations</h2>
-                            <p className="text-sm text-gray-500 leading-relaxed">
+                            <p className="text-sm text-theme-text-secondary leading-relaxed">
                                 Select a profile from the left sidebar to start sending and receiving messages. All messages are encrypted and completely secure.
                             </p>
                         </div>

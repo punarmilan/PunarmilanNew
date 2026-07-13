@@ -48,7 +48,7 @@ const SupportTickets = () => {
             case 'IN_PROGRESS': return 'text-amber-600 bg-amber-50 border-amber-100';
             case 'RESOLVED': return 'text-emerald-600 bg-emerald-50 border-emerald-100';
             case 'CLOSED': return 'text-gray-400 bg-gray-50 border-gray-100';
-            default: return 'text-gray-500 bg-gray-50';
+            default: return 'text-theme-text-secondary bg-gray-50';
         }
     };
 
@@ -62,10 +62,10 @@ const SupportTickets = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-theme-surface p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
                 <div>
                     <h2 className="text-xl font-bold text-gray-800 leading-tight">Support Center</h2>
-                    <p className="text-sm text-gray-500 font-medium">Manage user queries and issues</p>
+                    <p className="text-sm text-theme-text-secondary font-medium">Manage user queries and issues</p>
                 </div>
                 <div className="flex gap-2 w-full sm:w-auto">
                     <div className="flex-1 sm:flex-none px-4 py-2 bg-rose-50 text-rose-700 rounded-xl text-[10px] font-black uppercase text-center">
@@ -74,7 +74,7 @@ const SupportTickets = () => {
                 </div>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-theme-surface rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead>
@@ -106,7 +106,7 @@ const SupportTickets = () => {
                                                         {ticket.status}
                                                     </span>
                                                 </div>
-                                                <p className="text-xs text-gray-500 line-clamp-1">{ticket.message}</p>
+                                                <p className="text-xs text-theme-text-secondary line-clamp-1">{ticket.message}</p>
                                                 <div className="flex items-center gap-2 text-[10px] text-gray-400 font-bold uppercase tracking-tight">
                                                     <Calendar size={10} /> {new Date(ticket.createdAt).toLocaleDateString()}
                                                 </div>
@@ -140,8 +140,8 @@ const SupportTickets = () => {
                 {/* Pagination */}
                 {totalElements > size && (
                     <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-center gap-2">
-                        <button disabled={page === 0} onClick={() => setPage(page - 1)} className="px-4 py-2 border border-gray-200 rounded-xl text-xs font-bold disabled:opacity-50">Previous</button>
-                        <button disabled={(page + 1) * size >= totalElements} onClick={() => setPage(page + 1)} className="px-4 py-2 border border-gray-200 rounded-xl text-xs font-bold disabled:opacity-50">Next</button>
+                        <button disabled={page === 0} onClick={() => setPage(page - 1)} className="px-4 py-2 border border-theme-border rounded-xl text-xs font-bold disabled:opacity-50">Previous</button>
+                        <button disabled={(page + 1) * size >= totalElements} onClick={() => setPage(page + 1)} className="px-4 py-2 border border-theme-border rounded-xl text-xs font-bold disabled:opacity-50">Next</button>
                     </div>
                 )}
             </div>
@@ -149,7 +149,7 @@ const SupportTickets = () => {
             {/* Resolve Drawer/Modal */}
             {selectedTicket && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-end bg-black/40 backdrop-blur-sm animate-in fade-in duration-300">
-                    <div className="h-full w-full sm:max-w-xl bg-white shadow-2xl animate-in slide-in-from-right duration-500 flex flex-col">
+                    <div className="h-full w-full sm:max-w-xl bg-theme-surface shadow-2xl animate-in slide-in-from-right duration-500 flex flex-col">
                         <div className="p-6 sm:p-8 border-b border-gray-100 flex justify-between items-center">
                             <div className="min-w-0">
                                 <h3 className="text-xl sm:text-2xl font-black text-gray-900 leading-none truncate">Handle Ticket</h3>
@@ -166,7 +166,7 @@ const SupportTickets = () => {
                                     {selectedTicket.status}
                                 </span>
                                 <h4 className="text-lg sm:text-xl font-black text-gray-800 leading-tight">{selectedTicket.subject}</h4>
-                                <div className="bg-gray-50 p-5 sm:p-6 rounded-[24px] sm:rounded-[32px] border border-gray-100 italic text-gray-600 text-xs sm:text-sm leading-relaxed">
+                                <div className="bg-gray-50 p-5 sm:p-6 rounded-[24px] sm:rounded-[32px] border border-gray-100 italic text-theme-text-secondary text-xs sm:text-sm leading-relaxed">
                                     "{selectedTicket.message}"
                                 </div>
                             </div>

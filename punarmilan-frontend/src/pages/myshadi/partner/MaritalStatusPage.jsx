@@ -77,7 +77,7 @@ const MaritalStatusPage = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50 to-fuchsia-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
+            <div className="w-full max-w-2xl bg-theme-surface rounded-3xl shadow-2xl overflow-hidden animate-fadeIn">
                 {/* Header */}
                 <div className="bg-gradient-to-r from-rose-500 to-rose-600  p-6 sm:p-8">
                     <button
@@ -100,7 +100,7 @@ const MaritalStatusPage = () => {
                     {/* Options Container */}
                     <div className="max-h-[400px] overflow-y-auto custom-scrollbar pr-2">
                         {/* Open to All Option */}
-                        <div className="mb-6 pb-6 border-b-2 border-gray-200">
+                        <div className="mb-6 pb-6 border-b-2 border-theme-border">
                             <label className="flex items-center gap-4 p-4 rounded-xl hover:bg-purple-50 cursor-pointer transition-all duration-300 group">
                                 <div className="relative">
                                     <input
@@ -120,7 +120,7 @@ const MaritalStatusPage = () => {
                         </div>
 
                         {/* All Preferences Header */}
-                        <h3 className="text-sm font-bold text-gray-600 uppercase tracking-wider mb-4">
+                        <h3 className="text-sm font-bold text-theme-text-secondary uppercase tracking-wider mb-4">
                             All Preferences
                         </h3>
 
@@ -172,10 +172,10 @@ const MaritalStatusPage = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-col-reverse sm:flex-row gap-4 pt-6 mt-6 border-t-2 border-gray-200">
+                    <div className="flex flex-col-reverse sm:flex-row gap-4 pt-6 mt-6 border-t-2 border-theme-border">
                         <button
                             onClick={handleCancel}
-                            className="flex-1 px-6 py-4 bg-white hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-2xl font-bold text-lg transition-all duration-300 active:scale-95"
+                            className="flex-1 px-6 py-4 bg-theme-surface hover:bg-gray-50 text-gray-700 border-2 border-gray-300 hover:border-gray-400 rounded-2xl font-bold text-lg transition-all duration-300 active:scale-95"
                         >
                             Cancel
                         </button>

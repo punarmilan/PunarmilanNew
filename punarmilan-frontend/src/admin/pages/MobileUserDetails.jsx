@@ -69,11 +69,11 @@ const MobileUserDetails = () => {
 
     const renderField = (label, value, key) => (
         <div className="space-y-1.5" key={key}>
-            <label className="text-xs font-black text-gray-500 uppercase tracking-widest ml-1">{label}</label>
+            <label className="text-xs font-black text-theme-text-secondary uppercase tracking-widest ml-1">{label}</label>
             <input 
                 type="text" 
                 defaultValue={value}
-                className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl text-sm font-bold focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all shadow-sm"
+                className="w-full px-4 py-3 bg-theme-surface border border-theme-border rounded-xl text-sm font-bold focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all shadow-sm"
             />
         </div>
     );
@@ -90,16 +90,16 @@ const MobileUserDetails = () => {
     return (
         <div className="space-y-6 animate-in fade-in duration-700 pb-12 max-w-7xl mx-auto">
             {/* Header */}
-            <div className="flex items-center gap-4 bg-white p-6 rounded-[32px] shadow-sm border border-gray-100">
+            <div className="flex items-center gap-4 bg-theme-surface p-6 rounded-[32px] shadow-sm border border-gray-100">
                 <button 
                     onClick={() => navigate('/admin/mobile-users')}
-                    className="p-3 bg-gray-50 hover:bg-gray-100 rounded-2xl transition-colors text-gray-600"
+                    className="p-3 bg-gray-50 hover:bg-gray-100 rounded-2xl transition-colors text-theme-text-secondary"
                 >
                     <ArrowLeft size={20} />
                 </button>
                 <div>
                     <h2 className="text-2xl font-black text-gray-900 tracking-tight">{user.name}'s Profile</h2>
-                    <p className="text-sm text-gray-500 font-bold tracking-wide mt-1">ID: {user.id} • {user.mobileNumber}</p>
+                    <p className="text-sm text-theme-text-secondary font-bold tracking-wide mt-1">ID: {user.id} • {user.mobileNumber}</p>
                 </div>
             </div>
 
@@ -107,7 +107,7 @@ const MobileUserDetails = () => {
             <div className="flex flex-col lg:flex-row gap-6">
                 
                 {/* Tabs Sidebar */}
-                <div className="w-full lg:w-72 bg-white rounded-[32px] shadow-sm border border-gray-100 p-4 shrink-0 h-fit lg:sticky lg:top-6">
+                <div className="w-full lg:w-72 bg-theme-surface rounded-[32px] shadow-sm border border-gray-100 p-4 shrink-0 h-fit lg:sticky lg:top-6">
                     <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto hide-scrollbar">
                         {tabs.map(tab => (
                             <button
@@ -116,7 +116,7 @@ const MobileUserDetails = () => {
                                 className={`flex items-center gap-3 px-5 py-4 rounded-2xl font-bold text-sm transition-all whitespace-nowrap ${
                                     activeTab === tab.id 
                                         ? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg shadow-pink-200' 
-                                        : 'text-gray-600 hover:bg-gray-50'
+                                        : 'text-theme-text-secondary hover:bg-gray-50'
                                 }`}
                             >
                                 <span className={activeTab === tab.id ? 'text-white' : 'text-gray-400'}>{tab.icon}</span>
@@ -127,7 +127,7 @@ const MobileUserDetails = () => {
                 </div>
 
                 {/* Tab Content Area */}
-                <div className="flex-1 bg-white rounded-[32px] shadow-sm border border-gray-100 p-6 sm:p-8">
+                <div className="flex-1 bg-theme-surface rounded-[32px] shadow-sm border border-gray-100 p-6 sm:p-8">
                     <form onSubmit={handleSaveDetails} className="flex flex-col h-full min-h-[500px]">
                         
                         <div className="flex-1">
@@ -147,10 +147,10 @@ const MobileUserDetails = () => {
                             ) : (
                                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-in slide-in-from-right-4 duration-300">
                                     {user.details.photos.map((photo, index) => (
-                                        <div key={index} className="relative group rounded-2xl overflow-hidden aspect-[3/4] shadow-md border border-gray-200">
+                                        <div key={index} className="relative group rounded-2xl overflow-hidden aspect-[3/4] shadow-md border border-theme-border">
                                             <img src={photo} alt="User" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                                                <button type="button" className="p-2 bg-white text-rose-500 rounded-lg hover:bg-rose-50 transition-colors">
+                                                <button type="button" className="p-2 bg-theme-surface text-rose-500 rounded-lg hover:bg-rose-50 transition-colors">
                                                     <Trash2 size={18} />
                                                 </button>
                                             </div>

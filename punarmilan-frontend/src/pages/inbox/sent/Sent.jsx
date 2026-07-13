@@ -104,7 +104,7 @@ const SentInvitations = () => {
         <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
           {/* Filters Sidebar */}
           <aside className="w-full lg:w-72 xl:w-80 flex-shrink-0">
-            <div className="bg-white/80 backdrop-blur-sm rounded-xl md:rounded-2xl shadow-lg border border-white/50 p-4 md:p-6 lg:sticky lg:top-4 hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-theme-surface/80 backdrop-blur-sm rounded-xl md:rounded-2xl shadow-lg border border-white/50 p-4 md:p-6 lg:sticky lg:top-4 hover:shadow-xl transition-shadow duration-300">
               <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
                 <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-pink-500 to-rose-500 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0">
                   <svg className="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -180,27 +180,27 @@ const SentInvitations = () => {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-pink-600 via-rose-600 to-purple-600 bg-clip-text text-transparent mb-1 md:mb-2">
                 Sent invitations
               </h2>
-              <p className="text-sm md:text-base text-gray-600">
+              <p className="text-sm md:text-base text-theme-text-secondary">
                 {invitations.length} {invitations.length === 1 ? 'invitation' : 'invitations'} found
               </p>
             </div>
 
             {invitations.length === 0 ? (
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl md:rounded-2xl shadow-lg border border-white/50 p-8 md:p-12 text-center">
+              <div className="bg-theme-surface/80 backdrop-blur-sm rounded-xl md:rounded-2xl shadow-lg border border-white/50 p-8 md:p-12 text-center">
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-pink-100 to-rose-100 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
                   <svg className="w-8 h-8 md:w-10 md:h-10 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                   </svg>
                 </div>
                 <p className="text-lg md:text-xl font-semibold text-gray-700 mb-1 md:mb-2">No invitations found</p>
-                <p className="text-sm md:text-base text-gray-500">Try adjusting your filters to see more results.</p>
+                <p className="text-sm md:text-base text-theme-text-secondary">Try adjusting your filters to see more results.</p>
               </div>
             ) : (
               <div className="space-y-4 md:space-y-6">
                 {invitations.map((invitation, index) => (
                   <div
                     key={invitation.id}
-                    className="bg-white/80 backdrop-blur-sm rounded-xl md:rounded-2xl shadow-lg border border-white/50 hover:shadow-2xl transition-all duration-300 overflow-hidden group animate-fade-in"
+                    className="bg-theme-surface/80 backdrop-blur-sm rounded-xl md:rounded-2xl shadow-lg border border-white/50 hover:shadow-2xl transition-all duration-300 overflow-hidden group animate-fade-in"
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     <div className="p-4 sm:p-5 md:p-6 lg:p-8">
@@ -258,8 +258,8 @@ const SentInvitations = () => {
                                 <ChevronDown className="w-4 h-4 md:w-5 md:h-5 text-gray-400 cursor-pointer hover:text-pink-500 transition-colors flex-shrink-0" />
                               </div>
                               <div className="flex items-center gap-1.5 md:gap-2 mb-1">
-                                <div className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full flex-shrink-0 ${invitation.status.includes('now') ? 'bg-green-500 animate-pulse' : 'bg-gray-400'}`}></div>
-                                <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">{invitation.status}</p>
+                                <div className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full flex-shrink-0 ${invitation.status.includes('now') ? 'bg-theme-success animate-pulse' : 'bg-gray-400'}`}></div>
+                                <p className="text-xs sm:text-sm font-medium text-theme-text-secondary truncate">{invitation.status}</p>
                               </div>
                             </div>
                             <div className="bg-gradient-to-r from-pink-100 to-rose-100 px-2.5 py-1 md:px-4 md:py-1.5 rounded-full self-start flex-shrink-0">

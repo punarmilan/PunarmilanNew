@@ -173,7 +173,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                 {/* Header */}
 
                 {/* Privacy Settings List */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div className="bg-theme-surface rounded-xl shadow-sm border border-theme-border overflow-hidden">
                     {privacyOptions.map((option, index) => (
                         <div
                             key={option.id}
@@ -187,7 +187,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                         <h3 className="font-semibold text-gray-800 text-sm md:text-base">
                                             {option.title}
                                         </h3>
-                                        <p className="text-xs md:text-sm text-gray-500 mt-1 line-clamp-1">
+                                        <p className="text-xs md:text-sm text-theme-text-secondary mt-1 line-clamp-1">
                                             {option.currentValue}
                                         </p>
                                     </div>
@@ -200,7 +200,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                             {/* Expandable Content */}
                             <div
                                 className={`overflow-hidden transition-all duration-300 ${openSection === option.id ? "max-h-[2000px]" : "max-h-0"}`}>
-                                <div className="p-6 bg-gray-50 border-t border-gray-200">
+                                <div className="p-6 bg-gray-50 border-t border-theme-border">
                                     {/* Display Name Content */}
                                     {option.id === "displayName" && (
                                         <div className="space-y-6">
@@ -242,7 +242,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                         />
                                                     </div>
                                                 </div>
-                                                <div className="flex items-start gap-2 mt-3 text-sm text-gray-600">
+                                                <div className="flex items-start gap-2 mt-3 text-sm text-theme-text-secondary">
                                                     <Info className="w-4 h-4 mt-0.5 flex-shrink-0" />
                                                     <p>
                                                         Note: Name changes will be screened before they are
@@ -251,7 +251,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                 </div>
                                             </div>
 
-                                            <div className="bg-white p-4 rounded-lg border border-gray-200">
+                                            <div className="bg-theme-surface p-4 rounded-lg border border-theme-border">
                                                 <label className="block text-sm font-medium text-gray-700 mb-3">
                                                     Display Name as
                                                 </label>
@@ -369,7 +369,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                     onClick={() => setPhotoTab("profile")}
                                                     className={`pb-3 px-1 font-medium transition-colors ${photoTab === "profile"
                                                         ? "text-gray-800 border-b-2 border-gray-800"
-                                                        : "text-gray-500 hover:text-gray-700"
+                                                        : "text-theme-text-secondary hover:text-gray-700"
                                                         }`}>
                                                     Profile Photo
                                                 </button>
@@ -377,7 +377,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                     onClick={() => setPhotoTab("album")}
                                                     className={`pb-3 px-1 font-medium transition-colors ${photoTab === "album"
                                                         ? "text-gray-800 border-b-2 border-gray-800"
-                                                        : "text-gray-500 hover:text-gray-700"
+                                                        : "text-theme-text-secondary hover:text-gray-700"
                                                         }`}>
                                                     Album
                                                 </button>
@@ -419,7 +419,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                             </div>
                                                             <div className="flex items-center gap-2">
                                                                 <span className="text-sm text-gray-700">Visible to Members I like and to all Premium Members</span>
-                                                                <div className="w-4 h-4 rounded-full border border-gray-400 flex items-center justify-center text-[10px] text-gray-500">?</div>
+                                                                <div className="w-4 h-4 rounded-full border border-gray-400 flex items-center justify-center text-[10px] text-theme-text-secondary">?</div>
                                                                 <span className="text-sm text-cyan-500">| More</span>
                                                             </div>
                                                         </label>
@@ -466,14 +466,14 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                 )}
 
                                                 {photoTab === "profile" && (
-                                                    <div className="mt-4 pt-4 border-t border-gray-200">
-                                                        <p className="text-sm font-medium text-gray-600 mb-4 italic">
+                                                    <div className="mt-4 pt-4 border-t border-theme-border">
+                                                        <p className="text-sm font-medium text-theme-text-secondary mb-4 italic">
                                                             This is how your Photos will look to other Members
                                                         </p>
                                                         <div className="grid grid-cols-2 gap-8 max-w-sm mt-6">
                                                             <div className="text-center">
                                                                 <p className="text-[11px] text-gray-400 mb-2 uppercase tracking-tight">Premium Member view</p>
-                                                                <div className="aspect-[4/5] rounded overflow-hidden shadow-sm border border-gray-200">
+                                                                <div className="aspect-[4/5] rounded overflow-hidden shadow-sm border border-theme-border">
                                                                     <img
                                                                         src={profile?.profilePhotoUrl || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop"}
                                                                         alt="Premium view"
@@ -483,7 +483,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                             </div>
                                                             <div className="text-center">
                                                                 <p className="text-[11px] text-gray-400 mb-2 uppercase tracking-tight">Free Member view</p>
-                                                                <div className="aspect-[4/5] rounded overflow-hidden shadow-sm border border-gray-200 relative">
+                                                                <div className="aspect-[4/5] rounded overflow-hidden shadow-sm border border-theme-border relative">
                                                                     <img
                                                                         src={profile?.profilePhotoUrl || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop"}
                                                                         alt="Free view"
@@ -491,7 +491,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                                     />
                                                                     {settings.profilePhotoVisibility === "MEMBERS_LIKED_PREMIUM" && (
                                                                         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/10">
-                                                                            <div className="bg-white/90 p-2 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center gap-1">
+                                                                            <div className="bg-theme-surface/90 p-2 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center gap-1">
                                                                                 <svg className="w-6 h-6 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
                                                                                     <path d="M12 2C9.243 2 7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5zm3 8H9V7c0-1.654 1.346-3 3-3s3 1.346 3 3v3z" />
                                                                                 </svg>
@@ -511,7 +511,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                             <div className="flex gap-3 pt-8">
                                                 <button
                                                     onClick={() => setOpenSection(null)}
-                                                    className="flex-1 px-6 py-2.5 bg-gray-100 text-gray-600 rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
+                                                    className="flex-1 px-6 py-2.5 bg-gray-100 text-theme-text-secondary rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
                                                     Cancel
                                                 </button>
                                                 <button
@@ -602,7 +602,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                         disabled
                                                     />
                                                     <div>
-                                                        <span className="text-sm font-medium text-gray-500">
+                                                        <span className="text-sm font-medium text-theme-text-secondary">
                                                             Only visible to all your Matches (Expires with Membership)
                                                         </span>
                                                         <div className="flex items-center gap-1 mt-1 text-[10px] text-gray-400">
@@ -622,7 +622,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                         });
                                                         setOpenSection(null);
                                                     }}
-                                                    className="flex-1 px-6 py-3 bg-gray-100 text-gray-600 rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
+                                                    className="flex-1 px-6 py-3 bg-gray-100 text-theme-text-secondary rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
                                                     Cancel
                                                 </button>
                                                 <button
@@ -722,7 +722,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                         });
                                                         setOpenSection(null);
                                                     }}
-                                                    className="flex-1 px-6 py-3 bg-gray-100 text-gray-600 rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
+                                                    className="flex-1 px-6 py-3 bg-gray-100 text-theme-text-secondary rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
                                                     Cancel
                                                 </button>
                                                 <button
@@ -786,7 +786,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                         });
                                                         setOpenSection(null);
                                                     }}
-                                                    className="flex-1 px-6 py-3 bg-gray-100 text-gray-600 rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
+                                                    className="flex-1 px-6 py-3 bg-gray-100 text-theme-text-secondary rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
                                                     Cancel
                                                 </button>
                                                 <button
@@ -850,7 +850,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                         });
                                                         setOpenSection(null);
                                                     }}
-                                                    className="flex-1 px-6 py-3 bg-gray-100 text-gray-600 rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
+                                                    className="flex-1 px-6 py-3 bg-gray-100 text-theme-text-secondary rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
                                                     Cancel
                                                 </button>
                                                 <button
@@ -914,7 +914,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                         });
                                                         setOpenSection(null);
                                                     }}
-                                                    className="flex-1 px-6 py-3 bg-gray-100 text-gray-600 rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
+                                                    className="flex-1 px-6 py-3 bg-gray-100 text-theme-text-secondary rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
                                                     Cancel
                                                 </button>
                                                 <button
@@ -944,13 +944,13 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                             }}
                                                             className="sr-only peer"
                                                         />
-                                                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:after:w-5 after:transition-all peer-checked:bg-pink-500"></div>
+                                                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-theme-surface after:border-gray-300 after:border after:rounded-full after:h-5 after:after:w-5 after:transition-all peer-checked:bg-pink-500"></div>
                                                     </div>
                                                     <div className="flex-1">
                                                         <span className={`text-sm font-bold block mb-1 ${settings.doNotDisturb ? "text-pink-900" : "text-gray-700"}`}>
                                                             PunarMilan.com can call me
                                                         </span>
-                                                        <span className="text-xs text-gray-500 leading-relaxed">
+                                                        <span className="text-xs text-theme-text-secondary leading-relaxed">
                                                             Allow PunarMilan.com to contact you for Premium membership related offers and wedding planning services.
                                                         </span>
                                                     </div>
@@ -966,7 +966,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                         });
                                                         setOpenSection(null);
                                                     }}
-                                                    className="flex-1 px-6 py-3 bg-gray-100 text-gray-600 rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
+                                                    className="flex-1 px-6 py-3 bg-gray-100 text-theme-text-secondary rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
                                                     Cancel
                                                 </button>
                                                 <button
@@ -1030,7 +1030,7 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                         });
                                                         setOpenSection(null);
                                                     }}
-                                                    className="flex-1 px-6 py-3 bg-gray-100 text-gray-600 rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
+                                                    className="flex-1 px-6 py-3 bg-gray-100 text-theme-text-secondary rounded-full font-bold hover:bg-gray-200 transition-colors uppercase text-sm tracking-wide">
                                                     Cancel
                                                 </button>
                                                 <button

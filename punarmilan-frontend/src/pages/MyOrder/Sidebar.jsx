@@ -17,7 +17,7 @@ const Sidebar = () => {
     return (
         <div className="space-y-6">
             {/* Quick Links */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-rose-100">
+            <div className="bg-theme-surface rounded-2xl shadow-xl overflow-hidden border border-rose-100">
                 <div className="bg-gradient-to-r from-rose-500 to-pink-500 p-4">
                     <h2 className="text-xl font-bold text-white font-serif">Quick Links</h2>
                 </div>
@@ -85,7 +85,7 @@ const Sidebar = () => {
             </div>
 
             {/* Profile ID Search */}
-            <div className="bg-white rounded-2xl shadow-xl p-5 border border-rose-100 ">
+            <div className="bg-theme-surface rounded-2xl shadow-xl p-5 border border-rose-100 ">
                 <h3 className="text-lg font-bold text-gray-800 mb-3 font-serif">Profile ID Search</h3>
                 <form onSubmit={handleProfileSearch} className="flex gap-2">
                     <input
@@ -105,7 +105,7 @@ const Sidebar = () => {
             </div>
 
             {/* Useful Links */}
-            <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-rose-100">
+            <div className="bg-theme-surface rounded-2xl shadow-xl overflow-hidden border border-rose-100">
                 <div className="bg-gradient-to-r from-rose-500 to-pink-500 p-4">
                     <h2 className="text-xl font-bold text-white font-serif">Useful Links</h2>
                 </div>

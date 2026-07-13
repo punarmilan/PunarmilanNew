@@ -69,7 +69,7 @@ const Contact = () => {
                         
                         {/* Contact Info Cards */}
                         <div className="lg:col-span-4 space-y-6">
-                            <div className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 group hover:-translate-y-2 transition-all duration-500">
+                            <div className="bg-theme-surface p-8 rounded-[2.5rem] shadow-xl border border-slate-100 group hover:-translate-y-2 transition-all duration-500">
                                 <div className="w-16 h-16 bg-rose-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                                     <Phone className="w-8 h-8 text-[#e91e63]" />
                                 </div>
@@ -78,7 +78,7 @@ const Contact = () => {
                                 <a href="tel:+91 9923400442" className="text-lg font-black text-[#e91e63] hover:underline">+91 9923400442</a>
                             </div>
 
-                            <div className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 group hover:-translate-y-2 transition-all duration-500">
+                            <div className="bg-theme-surface p-8 rounded-[2.5rem] shadow-xl border border-slate-100 group hover:-translate-y-2 transition-all duration-500">
                                 <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                                     <Mail className="w-8 h-8 text-blue-500" />
                                 </div>
@@ -87,7 +87,7 @@ const Contact = () => {
                                 <a href="mailto:punarmilan2@gmail.com" className="text-lg font-black text-blue-600 hover:underline">punarmilan2@gmail.com</a>
                             </div>
 
-                            <div className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 group hover:-translate-y-2 transition-all duration-500">
+                            <div className="bg-theme-surface p-8 rounded-[2.5rem] shadow-xl border border-slate-100 group hover:-translate-y-2 transition-all duration-500">
                                 <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                                     <MapPin className="w-8 h-8 text-amber-500" />
                                 </div>
@@ -98,7 +98,7 @@ const Contact = () => {
                         </div>
 
                         {/* Contact Form */}
-                        <div className="lg:col-span-8 bg-white p-10 md:p-14 rounded-[3rem] shadow-2xl border border-slate-100 relative overflow-hidden">
+                        <div className="lg:col-span-8 bg-theme-surface p-10 md:p-14 rounded-[3rem] shadow-2xl border border-slate-100 relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-rose-50 rounded-bl-[4rem] -z-10"></div>
                             
                             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-10 tracking-tight">

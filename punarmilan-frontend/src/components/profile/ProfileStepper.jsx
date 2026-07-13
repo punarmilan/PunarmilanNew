@@ -45,8 +45,8 @@ export default function ProfileStepper({
                       isCompleted
                         ? "bg-gradient-to-r from-pink-500 to-rose-500 border-pink-100 text-white"
                         : isActive
-                        ? "bg-white border-pink-500 text-pink-600 scale-110"
-                        : "bg-white border-gray-200 text-gray-400"
+                        ? "bg-theme-surface border-pink-500 text-pink-600 scale-110"
+                        : "bg-theme-surface border-theme-border text-gray-400"
                     }
                   `}
                 >

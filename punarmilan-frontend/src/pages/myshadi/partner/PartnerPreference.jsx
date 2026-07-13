@@ -78,16 +78,16 @@ const PartnerPreferencesMain = () => {
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
             Your Partner Preferences
           </h1>
-          <p className="text-gray-600 text-sm sm:text-base mb-1">
+          <p className="text-theme-text-secondary text-sm sm:text-base mb-1">
             You will see Matches based on Preferences you have set
           </p>
-          <p className="text-gray-500 text-xs sm:text-sm italic">
+          <p className="text-theme-text-secondary text-xs sm:text-sm italic">
             Tap on the field to edit
           </p>
         </div>
 
         {/* Basic Details Card */}
-        <div className="bg-white rounded-2xl shadow-md mb-6 overflow-hidden">
+        <div className="bg-theme-surface rounded-2xl shadow-md mb-6 overflow-hidden">
           <div className="p-5 sm:p-6">
             <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
               Basic Details
@@ -106,13 +106,13 @@ const PartnerPreferencesMain = () => {
                     </svg>
                   </div>
                   <div className="text-left flex-1">
-                    <p className="text-sm text-gray-500 mb-0.5">Age Range</p>
+                    <p className="text-sm text-theme-text-secondary mb-0.5">Age Range</p>
                     <p className="text-base sm:text-lg font-semibold text-gray-800">
                       {preferences.ageRange}
                     </p>
                   </div>
                 </div>
-                <ChevronRight className="text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0 w-5 h-5" />
+                <ChevronRight className="text-gray-400 group-hover:text-theme-text-secondary transition-colors flex-shrink-0 w-5 h-5" />
               </button>
 
               {/* Height Range */}
@@ -127,13 +127,13 @@ const PartnerPreferencesMain = () => {
                     </svg>
                   </div>
                   <div className="text-left flex-1">
-                    <p className="text-sm text-gray-500 mb-0.5">Height Range</p>
+                    <p className="text-sm text-theme-text-secondary mb-0.5">Height Range</p>
                     <p className="text-base sm:text-lg font-semibold text-gray-800">
                       {preferences.heightRange}
                     </p>
                   </div>
                 </div>
-                <ChevronRight className="text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0 w-5 h-5" />
+                <ChevronRight className="text-gray-400 group-hover:text-theme-text-secondary transition-colors flex-shrink-0 w-5 h-5" />
               </button>
 
               {/* Marital Status */}
@@ -148,20 +148,20 @@ const PartnerPreferencesMain = () => {
                     </svg>
                   </div>
                   <div className="text-left flex-1">
-                    <p className="text-sm text-gray-500 mb-0.5">Marital Status</p>
+                    <p className="text-sm text-theme-text-secondary mb-0.5">Marital Status</p>
                     <p className="text-base sm:text-lg font-semibold text-gray-800">
                       {preferences.maritalStatus}
                     </p>
                   </div>
                 </div>
-                <ChevronRight className="text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0 w-5 h-5" />
+                <ChevronRight className="text-gray-400 group-hover:text-theme-text-secondary transition-colors flex-shrink-0 w-5 h-5" />
               </button>
             </div>
           </div>
         </div>
 
         {/* Community Card */}
-        <div className="bg-white rounded-2xl shadow-md mb-6 overflow-hidden">
+        <div className="bg-theme-surface rounded-2xl shadow-md mb-6 overflow-hidden">
           <div className="p-5 sm:p-6">
             <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
               Community
@@ -180,13 +180,13 @@ const PartnerPreferencesMain = () => {
                     </svg>
                   </div>
                   <div className="text-left flex-1">
-                    <p className="text-sm text-gray-500 mb-0.5">Religion</p>
+                    <p className="text-sm text-theme-text-secondary mb-0.5">Religion</p>
                     <p className="text-base sm:text-lg font-semibold text-gray-800 line-clamp-1">
                       {preferences.religion}
                     </p>
                   </div>
                 </div>
-                <ChevronRight className="text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0 w-5 h-5" />
+                <ChevronRight className="text-gray-400 group-hover:text-theme-text-secondary transition-colors flex-shrink-0 w-5 h-5" />
               </button>
 
               {/* Community */}
@@ -201,13 +201,13 @@ const PartnerPreferencesMain = () => {
                     </svg>
                   </div>
                   <div className="text-left flex-1">
-                    <p className="text-sm text-gray-500 mb-0.5">Community</p>
+                    <p className="text-sm text-theme-text-secondary mb-0.5">Community</p>
                     <p className="text-base sm:text-lg font-semibold text-gray-800">
                       {preferences.community}
                     </p>
                   </div>
                 </div>
-                <ChevronRight className="text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0 w-5 h-5" />
+                <ChevronRight className="text-gray-400 group-hover:text-theme-text-secondary transition-colors flex-shrink-0 w-5 h-5" />
               </button>
 
               {/* Mother Tongue */}
@@ -222,13 +222,13 @@ const PartnerPreferencesMain = () => {
                     </svg>
                   </div>
                   <div className="text-left flex-1">
-                    <p className="text-sm text-gray-500 mb-0.5">Mother Tongue</p>
+                    <p className="text-sm text-theme-text-secondary mb-0.5">Mother Tongue</p>
                     <p className="text-base sm:text-lg font-semibold text-gray-800 line-clamp-1">
                       {preferences.motherTongue}
                     </p>
                   </div>
                 </div>
-                <ChevronRight className="text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0 w-5 h-5" />
+                <ChevronRight className="text-gray-400 group-hover:text-theme-text-secondary transition-colors flex-shrink-0 w-5 h-5" />
               </button>
             </div>
           </div>
@@ -239,7 +239,7 @@ const PartnerPreferencesMain = () => {
           <div className="mb-6 text-center">
             <button
               onClick={() => setShowMore(true)}
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 font-medium transition-colors px-6 py-2 rounded-full hover:bg-white"
+              className="inline-flex items-center gap-2 text-theme-text-secondary hover:text-gray-800 font-medium transition-colors px-6 py-2 rounded-full hover:bg-theme-surface"
             >
               <span>More</span>
               <ChevronDown className="w-5 h-5" />
@@ -251,7 +251,7 @@ const PartnerPreferencesMain = () => {
         {showMore && (
           <>
             {/* Location Section */}
-            <div className="bg-white rounded-2xl shadow-md mb-6 overflow-hidden">
+            <div className="bg-theme-surface rounded-2xl shadow-md mb-6 overflow-hidden">
               <div className="p-5 sm:p-6">
                 <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
                   Location
@@ -268,7 +268,7 @@ const PartnerPreferencesMain = () => {
                         <Globe className="w-6 h-6 text-purple-600" />
                       </div>
                       <div className="text-left flex-1">
-                        <p className="text-sm text-gray-500 mb-0.5">Country Living In</p>
+                        <p className="text-sm text-theme-text-secondary mb-0.5">Country Living In</p>
                         <p className="text-base font-semibold text-gray-800">{preferences.country}</p>
                       </div>
                     </div>
@@ -285,7 +285,7 @@ const PartnerPreferencesMain = () => {
                         <MapPin className="w-6 h-6 text-pink-600" />
                       </div>
                       <div className="text-left flex-1">
-                        <p className="text-sm text-gray-500 mb-0.5">State Living In</p>
+                        <p className="text-sm text-theme-text-secondary mb-0.5">State Living In</p>
                         <p className="text-base font-semibold text-gray-800">{preferences.state}</p>
                       </div>
                     </div>
@@ -303,7 +303,7 @@ const PartnerPreferencesMain = () => {
                           <Target className="w-6 h-6 text-orange-600" />
                         </div>
                         <div className="text-left flex-1">
-                          <p className="text-sm text-gray-500 mb-0.5">City / District</p>
+                          <p className="text-sm text-theme-text-secondary mb-0.5">City / District</p>
                           <p className="text-base font-semibold text-gray-800">{preferences.city}</p>
                         </div>
                       </div>
@@ -313,13 +313,13 @@ const PartnerPreferencesMain = () => {
 
                   {/* Suggested Cities */}
                   <div className="pt-2">
-                    <p className="text-sm text-gray-600 font-medium mb-3 px-2">Suggested for you</p>
+                    <p className="text-sm text-theme-text-secondary font-medium mb-3 px-2">Suggested for you</p>
                     <div className="flex flex-wrap gap-2">
                       {suggestedCities.map((city) => (
                         <button
                           key={city}
                           onClick={() => updatePreference('city', city)}
-                          className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-purple-200 rounded-full text-sm font-medium text-gray-700 hover:border-purple-400 hover:bg-purple-50 transition-all"
+                          className="flex items-center gap-2 px-4 py-2 bg-theme-surface border-2 border-purple-200 rounded-full text-sm font-medium text-gray-700 hover:border-purple-400 hover:bg-purple-50 transition-all"
                         >
                           {city}
                           <Plus className="w-4 h-4" />
@@ -332,7 +332,7 @@ const PartnerPreferencesMain = () => {
             </div>
 
             {/* Education & Career Section */}
-            <div className="bg-white rounded-2xl shadow-md mb-6 overflow-hidden">
+            <div className="bg-theme-surface rounded-2xl shadow-md mb-6 overflow-hidden">
               <div className="p-5 sm:p-6">
                 <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
                   Education & Career
@@ -349,7 +349,7 @@ const PartnerPreferencesMain = () => {
                         <GraduationCap className="w-6 h-6 text-blue-600" />
                       </div>
                       <div className="text-left flex-1">
-                        <p className="text-sm text-gray-500 mb-0.5">Qualification</p>
+                        <p className="text-sm text-theme-text-secondary mb-0.5">Qualification</p>
                         <p className="text-base font-semibold text-gray-800">{preferences.qualification}</p>
                       </div>
                     </div>
@@ -366,7 +366,7 @@ const PartnerPreferencesMain = () => {
                         <Building className="w-6 h-6 text-cyan-600" />
                       </div>
                       <div className="text-left flex-1">
-                        <p className="text-sm text-gray-500 mb-0.5">Working With</p>
+                        <p className="text-sm text-theme-text-secondary mb-0.5">Working With</p>
                         <p className="text-base font-semibold text-gray-800">{preferences.workingWith}</p>
                       </div>
                     </div>
@@ -383,7 +383,7 @@ const PartnerPreferencesMain = () => {
                         <Briefcase className="w-6 h-6 text-teal-600" />
                       </div>
                       <div className="text-left flex-1">
-                        <p className="text-sm text-gray-500 mb-0.5">Profession</p>
+                        <p className="text-sm text-theme-text-secondary mb-0.5">Profession</p>
                         <p className="text-base font-semibold text-gray-800">{preferences.profession}</p>
                       </div>
                     </div>
@@ -400,7 +400,7 @@ const PartnerPreferencesMain = () => {
                         <Wallet className="w-6 h-6 text-green-600" />
                       </div>
                       <div className="text-left flex-1">
-                        <p className="text-sm text-gray-500 mb-0.5">Annual Income</p>
+                        <p className="text-sm text-theme-text-secondary mb-0.5">Annual Income</p>
                         <p className="text-base font-semibold text-gray-800">{preferences.annualIncome}</p>
                       </div>
                     </div>
@@ -416,10 +416,10 @@ const PartnerPreferencesMain = () => {
                       <User className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
                     </div>
                     <div className="flex-1 text-left">
-                      <div className="text-sm text-gray-500">Profile Managed By</div>
+                      <div className="text-sm text-theme-text-secondary">Profile Managed By</div>
                       <div className="text-base text-gray-900 font-medium">{preferences.managedBy}</div>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0" />
+                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-theme-text-secondary transition-colors flex-shrink-0" />
                   </button>
 
                   {/* Diet */}
@@ -431,10 +431,10 @@ const PartnerPreferencesMain = () => {
                       <Utensils className="w-5 h-5 sm:w-6 sm:h-6 text-pink-600" />
                     </div>
                     <div className="flex-1 text-left">
-                      <div className="text-sm text-gray-500">Diet</div>
+                      <div className="text-sm text-theme-text-secondary">Diet</div>
                       <div className="text-base text-gray-900 font-medium">{preferences.diet}</div>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0" />
+                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-theme-text-secondary transition-colors flex-shrink-0" />
                   </button>
                 </div>
               </div>
@@ -444,7 +444,7 @@ const PartnerPreferencesMain = () => {
             <div className="mb-6 text-center">
               <button
                 onClick={() => setShowMore(false)}
-                className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 font-medium transition-colors px-6 py-2 rounded-full hover:bg-white"
+                className="inline-flex items-center gap-2 text-theme-text-secondary hover:text-gray-800 font-medium transition-colors px-6 py-2 rounded-full hover:bg-theme-surface"
               >
                 <span>Show Less</span>
                 <ChevronDown className="w-5 h-5 transform rotate-180" />

@@ -58,10 +58,10 @@ const VerificationQueue = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-theme-surface p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
                 <div>
                     <h2 className="text-lg sm:text-xl font-bold text-gray-800">Verification Queue</h2>
-                    <p className="text-xs sm:text-sm text-gray-500 font-medium">Manage pending profile and ID verifications</p>
+                    <p className="text-xs sm:text-sm text-theme-text-secondary font-medium">Manage pending profile and ID verifications</p>
                 </div>
                 <div className="px-3 sm:px-4 py-1.5 sm:py-2 bg-pink-50 text-pink-700 rounded-xl text-xs sm:text-sm font-black whitespace-nowrap">
                     {totalElements} Pending
@@ -72,14 +72,14 @@ const VerificationQueue = () => {
                 {loading ? (
                     <div className="p-10 text-center text-gray-400 font-medium">Loading queue...</div>
                 ) : profiles.length === 0 ? (
-                    <div className="bg-white p-12 rounded-3xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400">
+                    <div className="bg-theme-surface p-12 rounded-3xl border-2 border-dashed border-theme-border flex flex-col items-center justify-center text-gray-400">
                         <Shield size={48} className="mb-4 opacity-20" />
                         <p className="font-bold">Queue is empty!</p>
                         <p className="text-sm">All profiles are currently processed.</p>
                     </div>
                 ) : (
                     profiles.map((profile) => (
-                        <div key={profile.id} className="bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                        <div key={profile.id} className="bg-theme-surface rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
                             <div className="flex flex-col lg:flex-row">
                                 {/* User Basic Info */}
                                 <div className="p-4 sm:p-6 lg:w-1/3 border-b lg:border-b-0 lg:border-r border-gray-100 bg-gray-50/30">
@@ -94,11 +94,11 @@ const VerificationQueue = () => {
                                         </div>
                                     </div>
                                     <div className="flex flex-wrap lg:flex-col gap-3 sm:gap-4">
-                                        <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-500 font-medium whitespace-nowrap">
+                                        <div className="flex items-center gap-2 text-[10px] sm:text-xs text-theme-text-secondary font-medium whitespace-nowrap">
                                             <MapPin size={12} className="text-pink-500" />
                                             {profile.city}, {profile.state}
                                         </div>
-                                        <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-500 font-medium whitespace-nowrap">
+                                        <div className="flex items-center gap-2 text-[10px] sm:text-xs text-theme-text-secondary font-medium whitespace-nowrap">
                                             <Calendar size={12} className="text-pink-500" />
                                             {profile.gender} • {profile.age} Years
                                         </div>
@@ -126,7 +126,7 @@ const VerificationQueue = () => {
                                     <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
                                         <div
                                             onClick={() => profile.idProofUrl && window.open(profile.idProofUrl, '_blank')}
-                                            className="h-16 w-28 sm:h-20 sm:w-32 bg-gray-100 rounded-xl border border-gray-200 flex items-center justify-center overflow-hidden group relative cursor-pointer"
+                                            className="h-16 w-28 sm:h-20 sm:w-32 bg-gray-100 rounded-xl border border-theme-border flex items-center justify-center overflow-hidden group relative cursor-pointer"
                                         >
                                             {profile.idProofUrl ? (
                                                 <img src={profile.idProofUrl} alt="ID Proof" className="w-full h-full object-cover" />
@@ -137,7 +137,7 @@ const VerificationQueue = () => {
                                                 Click to View
                                             </div>
                                         </div>
-                                        <div className="text-[10px] sm:text-xs text-gray-500 font-medium">
+                                        <div className="text-[10px] sm:text-xs text-theme-text-secondary font-medium">
                                             <p>Verify that name on ID matches</p>
                                             <p className="text-gray-800 font-bold">"{profile.fullName}"</p>
                                         </div>
@@ -155,7 +155,7 @@ const VerificationQueue = () => {
                                     </button>
                                     <button
                                         onClick={() => setRejectingId(profile.id)}
-                                        className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-white border border-rose-200 text-rose-500 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm hover:bg-rose-50 transition-all active:scale-95"
+                                        className="flex-1 lg:flex-none flex items-center justify-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-theme-surface border border-rose-200 text-rose-500 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm hover:bg-rose-50 transition-all active:scale-95"
                                     >
                                         <X size={16} className="sm:size-5" />
                                         Reject
@@ -202,14 +202,14 @@ const VerificationQueue = () => {
                     <button
                         disabled={page === 0}
                         onClick={() => setPage(page - 1)}
-                        className="px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold disabled:opacity-50"
+                        className="px-4 py-2 bg-theme-surface border border-theme-border rounded-xl text-xs font-bold disabled:opacity-50"
                     >
                         Previous
                     </button>
                     <button
                         disabled={(page + 1) * size >= totalElements}
                         onClick={() => setPage(page + 1)}
-                        className="px-4 py-2 bg-white border border-gray-200 rounded-xl text-xs font-bold disabled:opacity-50"
+                        className="px-4 py-2 bg-theme-surface border border-theme-border rounded-xl text-xs font-bold disabled:opacity-50"
                     >
                         Next
                     </button>

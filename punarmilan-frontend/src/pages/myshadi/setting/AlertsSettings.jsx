@@ -170,7 +170,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
             <button
                 type="button"
                 onClick={() => handleCancel(id)}
-                className="w-full sm:w-auto px-8 py-3 text-sm md:text-base font-bold text-gray-500 bg-gray-50 rounded-xl hover:bg-gray-100 hover:text-gray-700 transition-all border border-transparent"
+                className="w-full sm:w-auto px-8 py-3 text-sm md:text-base font-bold text-theme-text-secondary bg-gray-50 rounded-xl hover:bg-gray-100 hover:text-gray-700 transition-all border border-transparent"
             >
                 Cancel
             </button>
@@ -203,7 +203,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                                     relative flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all group
                                     ${currentFreq === freq
                                         ? "border-pink-500 bg-pink-50/50 shadow-sm"
-                                        : "border-gray-200 hover:border-pink-200 hover:bg-gray-50"
+                                        : "border-theme-border hover:border-pink-200 hover:bg-gray-50"
                                     }
                                 `}>
                                 <div className="flex items-center w-full">
@@ -227,7 +227,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                 {section.hasCheckbox && currentFreq !== "unsubscribe" && (
                     <label className={`
                         flex items-start p-4 rounded-xl border-2 transition-all cursor-pointer group
-                        ${settings.sendBroaderMatches ? "border-pink-500 bg-pink-50/50" : "border-gray-200 hover:border-pink-200 hover:bg-gray-50"}
+                        ${settings.sendBroaderMatches ? "border-pink-500 bg-pink-50/50" : "border-theme-border hover:border-pink-200 hover:bg-gray-50"}
                     `}>
                         <input
                             type="checkbox"
@@ -258,7 +258,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                         <span className="block text-sm md:text-base font-bold text-gray-900">
                             Enable Email Alerts
                         </span>
-                        <p className="text-xs md:text-sm text-gray-500">Receive notifications for this category</p>
+                        <p className="text-xs md:text-sm text-theme-text-secondary">Receive notifications for this category</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
                         <input
@@ -267,7 +267,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                             onChange={(e) => updateSetting(section.id, "enabled", e.target.checked)}
                             className="sr-only peer"
                         />
-                        <div className="w-12 h-6.5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-600"></div>
+                        <div className="w-12 h-6.5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-theme-surface after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-600"></div>
                     </label>
                 </div>
 
@@ -284,7 +284,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                                         relative flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all group
                                         ${currentFreq === freq
                                             ? "border-pink-500 bg-pink-50/50 shadow-sm"
-                                            : "border-gray-200 hover:border-pink-200 hover:bg-gray-50"
+                                            : "border-theme-border hover:border-pink-200 hover:bg-gray-50"
                                         }
                                     `}>
                                     <div className="flex items-center w-full">
@@ -321,7 +321,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                         <span className="block text-sm md:text-base font-bold text-gray-900">
                             Enable SMS Alerts
                         </span>
-                        <p className="text-xs md:text-sm text-gray-500">Receive alerts directly on your phone</p>
+                        <p className="text-xs md:text-sm text-theme-text-secondary">Receive alerts directly on your phone</p>
                     </div>
                     <label className="relative inline-flex items-center cursor-pointer">
                         <input
@@ -330,7 +330,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                             onChange={(e) => updateSetting(section.id, "enabled", e.target.checked)}
                             className="sr-only peer"
                         />
-                        <div className="w-12 h-6.5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-600"></div>
+                        <div className="w-12 h-6.5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-theme-surface after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-600"></div>
                     </label>
                 </div>
 
@@ -339,7 +339,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                             <label className={`
                                 flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer
-                                ${settings.invitationReceived ? "border-pink-500 bg-pink-50/50" : "border-gray-200 hover:border-pink-200 hover:bg-gray-50"}
+                                ${settings.invitationReceived ? "border-pink-500 bg-pink-50/50" : "border-theme-border hover:border-pink-200 hover:bg-gray-50"}
                             `}>
                                 <input
                                     type="checkbox"
@@ -353,7 +353,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                             </label>
                             <label className={`
                                 flex items-center p-4 rounded-xl border-2 transition-all cursor-pointer
-                                ${settings.acceptInvitation ? "border-pink-500 bg-pink-50/50" : "border-gray-200 hover:border-pink-200 hover:bg-gray-50"}
+                                ${settings.acceptInvitation ? "border-pink-500 bg-pink-50/50" : "border-theme-border hover:border-pink-200 hover:bg-gray-50"}
                             `}>
                                 <input
                                     type="checkbox"
@@ -376,9 +376,9 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                                 value={settings.phoneNumber}
                                 onChange={(e) => updateSetting(section.id, "phoneNumber", e.target.value)}
                                 placeholder="Enter your mobile number"
-                                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all text-sm md:text-base font-medium"
+                                className="w-full px-4 py-3 border-2 border-theme-border rounded-xl focus:border-pink-500 focus:ring-4 focus:ring-pink-100 outline-none transition-all text-sm md:text-base font-medium"
                             />
-                            <p className="mt-2 text-xs md:text-sm text-gray-500">
+                            <p className="mt-2 text-xs md:text-sm text-theme-text-secondary">
                                 SMS alerts will be sent to the number associated with your profile
                             </p>
                         </div>
@@ -410,7 +410,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                                     relative flex items-center p-4 rounded-xl border-2 cursor-pointer transition-all group
                                     ${currentFreq === freq
                                         ? "border-pink-500 bg-pink-50/50 shadow-sm"
-                                        : "border-gray-200 hover:border-pink-200 hover:bg-gray-50"
+                                        : "border-theme-border hover:border-pink-200 hover:bg-gray-50"
                                     }
                                 `}>
                                 <div className="flex items-center w-full">
@@ -478,11 +478,11 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                         return (
                             <div
                                 key={section.id}
-                                className={`border rounded-2xl overflow-hidden transition-all duration-300 ${expandedSections[section.id] ? 'border-pink-200 shadow-md' : 'border-gray-200 hover:border-gray-300'}`}>
+                                className={`border rounded-2xl overflow-hidden transition-all duration-300 ${expandedSections[section.id] ? 'border-pink-200 shadow-md' : 'border-theme-border hover:border-gray-300'}`}>
                                 {/* Collapsible Header */}
                                 <button
                                     onClick={() => toggleSection(section.id)}
-                                    className={`w-full p-4 md:p-5 text-left transition-all ${expandedSections[section.id] ? 'bg-pink-50/50' : 'bg-white hover:bg-gray-50'}`}>
+                                    className={`w-full p-4 md:p-5 text-left transition-all ${expandedSections[section.id] ? 'bg-pink-50/50' : 'bg-theme-surface hover:bg-gray-50'}`}>
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-4 flex-1">
                                             <div className={`p-3 rounded-xl shadow-sm transition-colors ${expandedSections[section.id] ? 'bg-pink-500 text-white' : 'bg-gray-50 text-pink-600'}`}>
@@ -492,7 +492,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                                                 <h3 className="text-base font-bold text-gray-900">
                                                     {section.title}
                                                 </h3>
-                                                <p className="text-sm text-gray-500 line-clamp-1">
+                                                <p className="text-sm text-theme-text-secondary line-clamp-1">
                                                     {section.description}
                                                 </p>
                                             </div>
@@ -506,7 +506,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                                 {/* Collapsible Content */}
                                 <div
                                     className={`overflow-hidden transition-all duration-300 ${expandedSections[section.id] ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"}`}>
-                                    <div className="p-6 md:p-8 bg-white border-t border-gray-100">
+                                    <div className="p-6 md:p-8 bg-theme-surface border-t border-gray-100">
                                         {renderSectionContent(section)}
                                     </div>
                                 </div>
@@ -529,11 +529,11 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                         return (
                             <div
                                 key={section.id}
-                                className={`border rounded-2xl overflow-hidden transition-all duration-300 ${expandedSections[section.id] ? 'border-purple-200 shadow-md' : 'border-gray-200 hover:border-gray-300'}`}>
+                                className={`border rounded-2xl overflow-hidden transition-all duration-300 ${expandedSections[section.id] ? 'border-purple-200 shadow-md' : 'border-theme-border hover:border-gray-300'}`}>
                                 {/* Collapsible Header */}
                                 <button
                                     onClick={() => toggleSection(section.id)}
-                                    className={`w-full p-4 md:p-5 text-left transition-all ${expandedSections[section.id] ? 'bg-purple-50/50' : 'bg-white hover:bg-gray-50'}`}>
+                                    className={`w-full p-4 md:p-5 text-left transition-all ${expandedSections[section.id] ? 'bg-purple-50/50' : 'bg-theme-surface hover:bg-gray-50'}`}>
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-4 flex-1">
                                             <div className={`p-3 rounded-xl shadow-sm transition-colors ${expandedSections[section.id] ? 'bg-purple-500 text-white' : 'bg-gray-50 text-purple-600'}`}>
@@ -543,7 +543,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                                                 <h3 className="text-base font-bold text-gray-900">
                                                     {section.title}
                                                 </h3>
-                                                <p className="text-sm text-gray-500 line-clamp-1">
+                                                <p className="text-sm text-theme-text-secondary line-clamp-1">
                                                     {section.description}
                                                 </p>
                                             </div>
@@ -557,7 +557,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
                                 {/* Collapsible Content */}
                                 <div
                                     className={`overflow-hidden transition-all duration-300 ${expandedSections[section.id] ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}>
-                                    <div className="p-6 md:p-8 bg-white border-t border-gray-100">
+                                    <div className="p-6 md:p-8 bg-theme-surface border-t border-gray-100">
                                         {renderSectionContent(section)}
                                     </div>
                                 </div>
@@ -569,7 +569,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
 
             {/* Info Card */}
             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-6 flex items-start gap-4 shadow-sm">
-                <div className="bg-white p-2.5 rounded-xl text-blue-600 shadow-sm">
+                <div className="bg-theme-surface p-2.5 rounded-xl text-blue-600 shadow-sm">
                     <Mail size={24} />
                 </div>
                 <div>

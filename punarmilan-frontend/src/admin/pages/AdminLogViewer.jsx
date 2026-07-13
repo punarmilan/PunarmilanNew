@@ -35,10 +35,10 @@ const AdminLogViewer = () => {
 
     return (
         <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-theme-surface p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
                 <div>
                     <h2 className="text-xl font-bold text-gray-800">System Logs</h2>
-                    <p className="text-sm text-gray-500 font-medium">Record of all administrative actions</p>
+                    <p className="text-sm text-theme-text-secondary font-medium">Record of all administrative actions</p>
                 </div>
                 <div className="flex items-center gap-2 bg-gray-50 p-2 rounded-xl border border-gray-100 w-full sm:w-auto">
                     <Search size={18} className="text-gray-400 ml-2 shrink-0" />
@@ -50,7 +50,7 @@ const AdminLogViewer = () => {
                 </div>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-theme-surface rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead>
@@ -82,7 +82,7 @@ const AdminLogViewer = () => {
                                                 {log.action}
                                             </span>
                                         </td>
-                                        <td className="hidden lg:table-cell px-6 py-4 text-gray-500 font-medium">
+                                        <td className="hidden lg:table-cell px-6 py-4 text-theme-text-secondary font-medium">
                                             <div className="flex items-center gap-2">
                                                 <Info size={14} className="text-gray-300 shrink-0" />
                                                 <p className="text-sm">{log.details}</p>
@@ -107,14 +107,14 @@ const AdminLogViewer = () => {
                         <button
                             disabled={page === 0}
                             onClick={() => setPage(page - 1)}
-                            className="px-4 py-2 border border-gray-200 rounded-xl text-xs font-bold disabled:opacity-50"
+                            className="px-4 py-2 border border-theme-border rounded-xl text-xs font-bold disabled:opacity-50"
                         >
                             Previous
                         </button>
                         <button
                             disabled={(page + 1) * size >= totalElements}
                             onClick={() => setPage(page + 1)}
-                            className="px-4 py-2 border border-gray-200 rounded-xl text-xs font-bold disabled:opacity-50"
+                            className="px-4 py-2 border border-theme-border rounded-xl text-xs font-bold disabled:opacity-50"
                         >
                             Next
                         </button>

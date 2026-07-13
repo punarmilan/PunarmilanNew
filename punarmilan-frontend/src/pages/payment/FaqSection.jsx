@@ -45,7 +45,7 @@ function FaqSection() {
                             <h3 className="text-lg font-semibold text-gray-800 mb-4">
                                 {faq.question}
                             </h3>
-                            <p className="text-gray-600 leading-relaxed text-sm">
+                            <p className="text-theme-text-secondary leading-relaxed text-sm">
                                 {faq.answer}
                             </p>
                         </div>
@@ -54,7 +54,7 @@ function FaqSection() {
 
                 {/* Help Link */}
                 <div className="text-center mt-12">
-                    <p className="text-[#8C6D39] text-lg font-medium italic tracking-wide">
+                    <p className="text-theme-pink text-lg font-medium italic tracking-wide">
                         Didn't find what you are looking for? Find it on our{' '}
                         <a
                             href="#"
@@ -81,7 +81,7 @@ function FaqSection() {
                                 Money Back Guarantee
                                 <HelpCircle className="w-5 h-5 text-teal-500" />
                             </h3>
-                            <p className="text-gray-600">
+                            <p className="text-theme-text-secondary">
                                 Get a full refund within 30 days if you don't find a match.
                             </p>
                         </div>

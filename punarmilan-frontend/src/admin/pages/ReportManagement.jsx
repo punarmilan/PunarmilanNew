@@ -59,17 +59,17 @@ const ReportManagement = () => {
         switch (status) {
             case 'PENDING': return 'bg-amber-50 text-amber-600 border-amber-100';
             case 'RESOLVED': return 'bg-emerald-50 text-emerald-600 border-emerald-100';
-            case 'DISMISSED': return 'bg-gray-50 text-gray-500 border-gray-100';
-            default: return 'bg-gray-50 text-gray-500';
+            case 'DISMISSED': return 'bg-gray-50 text-theme-text-secondary border-gray-100';
+            default: return 'bg-gray-50 text-theme-text-secondary';
         }
     };
 
     return (
         <div className="space-y-6">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-theme-surface p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 gap-4">
                 <div>
                     <h2 className="text-lg sm:text-xl font-bold text-gray-800">Report & Moderation</h2>
-                    <p className="text-xs sm:text-sm text-gray-500 font-medium">Review reported accounts and content</p>
+                    <p className="text-xs sm:text-sm text-theme-text-secondary font-medium">Review reported accounts and content</p>
                 </div>
                 <div className="flex gap-2 w-full sm:w-auto">
                     <div className="flex-1 sm:flex-none px-4 py-2 bg-rose-50 text-rose-700 rounded-xl text-[10px] sm:text-xs font-black uppercase text-center">
@@ -78,7 +78,7 @@ const ReportManagement = () => {
                 </div>
             </div>
 
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-theme-surface rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full">
                         <thead>
@@ -111,7 +111,7 @@ const ReportManagement = () => {
                                                         {report.status}
                                                     </span>
                                                 </div>
-                                                <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">{report.description}</p>
+                                                <p className="text-xs sm:text-sm text-theme-text-secondary line-clamp-2">{report.description}</p>
                                                 <div className="sm:hidden mt-2 p-2 bg-gray-50 rounded-lg">
                                                     <p className="text-[9px] text-gray-400 font-bold uppercase">Target: {report.reportedUserName}</p>
                                                 </div>
@@ -146,7 +146,7 @@ const ReportManagement = () => {
                                                     </button>
                                                     <button
                                                         onClick={() => handleDismiss(report.id)}
-                                                        className="p-1.5 sm:p-2 bg-gray-50 text-gray-500 rounded-lg sm:rounded-xl hover:bg-gray-100 transition-colors"
+                                                        className="p-1.5 sm:p-2 bg-gray-50 text-theme-text-secondary rounded-lg sm:rounded-xl hover:bg-gray-100 transition-colors"
                                                         title="Dismiss Report"
                                                     >
                                                         <XCircle size={16} className="sm:size-[18px]" />
@@ -169,14 +169,14 @@ const ReportManagement = () => {
                         <button
                             disabled={page === 0}
                             onClick={() => setPage(page - 1)}
-                            className="px-4 py-2 border border-gray-200 rounded-xl text-xs font-bold disabled:opacity-50"
+                            className="px-4 py-2 border border-theme-border rounded-xl text-xs font-bold disabled:opacity-50"
                         >
                             Previous
                         </button>
                         <button
                             disabled={(page + 1) * size >= totalElements}
                             onClick={() => setPage(page + 1)}
-                            className="px-4 py-2 border border-gray-200 rounded-xl text-xs font-bold disabled:opacity-50"
+                            className="px-4 py-2 border border-theme-border rounded-xl text-xs font-bold disabled:opacity-50"
                         >
                             Next
                         </button>
@@ -187,7 +187,7 @@ const ReportManagement = () => {
             {/* Resolve Modal */}
             {resolvingId && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-3 sm:p-4">
-                    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in duration-300">
+                    <div className="bg-theme-surface rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in duration-300">
                         <div className="bg-rose-600 p-5 sm:p-6 text-white flex justify-between items-center">
                             <div className="flex items-center gap-3">
                                 <AlertCircle size={20} className="sm:size-6" />
@@ -204,7 +204,7 @@ const ReportManagement = () => {
                                     value={adminNote}
                                     onChange={(e) => setAdminNote(e.target.value)}
                                     placeholder="Explain action taken..."
-                                    className="w-full h-32 px-4 py-3 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:ring-2 focus:ring-rose-500 outline-none resize-none"
+                                    className="w-full h-32 px-4 py-3 border border-theme-border rounded-2xl text-xs sm:text-sm focus:ring-2 focus:ring-rose-500 outline-none resize-none"
                                 />
                             </div>
                             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
@@ -216,7 +216,7 @@ const ReportManagement = () => {
                                 </button>
                                 <button
                                     onClick={() => setResolvingId(null)}
-                                    className="order-2 sm:order-none px-6 bg-gray-100 text-gray-600 py-3 rounded-2xl font-bold text-sm hover:bg-gray-200 transition-all"
+                                    className="order-2 sm:order-none px-6 bg-gray-100 text-theme-text-secondary py-3 rounded-2xl font-bold text-sm hover:bg-gray-200 transition-all"
                                 >
                                     Cancel
                                 </button>

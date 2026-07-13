@@ -288,13 +288,13 @@ const MatchProfileDetails = () => {
     if (!profile) {
         return (
             <div className="min-h-screen bg-[#FDFBF7] flex flex-col items-center justify-center p-8 text-center font-sans">
-                <div className="dashboard-card-bg border border-[#EBDCCB] rounded-[32px] p-8 max-w-md shadow-xl">
-                    <Smile className="w-16 h-16 text-[#8C6D39] mx-auto mb-4 animate-bounce" />
+                <div className="dashboard-card-bg border border-theme-border rounded-[32px] p-8 max-w-md shadow-xl">
+                    <Smile className="w-16 h-16 text-theme-pink mx-auto mb-4 animate-bounce" />
                     <h2 className="text-2xl font-bold font-serif text-[#4A3728] mb-2">Profile Not Found</h2>
-                    <p className="text-gray-500 mb-6 text-sm">We couldn't retrieve the matrimonial profile you're looking for.</p>
+                    <p className="text-theme-text-secondary mb-6 text-sm">We couldn't retrieve the matrimonial profile you're looking for.</p>
                     <button 
                         onClick={() => navigate('/matches')}
-                        className="px-6 py-3 bg-gradient-to-r from-[#C5A059] to-[#8C6D39] hover:from-[#B59049] hover:to-[#7C5D29] text-white rounded-full font-bold shadow-md transition-all duration-200"
+                        className="px-6 py-3 bg-gradient-to-r from-theme-primary to-theme-pink hover:from-[#B59049] hover:to-[#7C5D29] text-white rounded-full font-bold shadow-md transition-all duration-200"
                     >
                         Back to Matches
                     </button>
@@ -312,19 +312,19 @@ const MatchProfileDetails = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 relative z-10">
                 {/* Back Link */}
                 <div className="mb-6 flex justify-between items-center">
-                    <Link to="/matches" className="inline-flex items-center gap-2 text-sm font-bold text-[#8C6D39] hover:text-[#7C5D29] transition-colors">
+                    <Link to="/matches" className="inline-flex items-center gap-2 text-sm font-bold text-theme-pink hover:text-[#7C5D29] transition-colors">
                         <ArrowLeft className="w-4 h-4" /> Back to Matches
                     </Link>
                     
                     {/* Share / Print Header Action */}
                     <div className="flex gap-3 text-gray-400">
-                        <button onClick={() => window.print()} className="p-2 bg-white/60 hover:bg-white rounded-full border border-[#EBDCCB]/60 shadow-sm transition-all text-[#8C6D39]">
+                        <button onClick={() => window.print()} className="p-2 bg-theme-surface/60 hover:bg-theme-surface rounded-full border border-theme-border/60 shadow-sm transition-all text-theme-pink">
                             <Printer className="w-4 h-4" />
                         </button>
                         <button onClick={() => {
                             navigator.clipboard.writeText(window.location.href);
                             Swal.fire({ text: "Profile link copied to clipboard!", confirmButtonColor: '#8C6D39' });
-                        }} className="p-2 bg-white/60 hover:bg-white rounded-full border border-[#EBDCCB]/60 shadow-sm transition-all text-[#8C6D39]">
+                        }} className="p-2 bg-theme-surface/60 hover:bg-theme-surface rounded-full border border-theme-border/60 shadow-sm transition-all text-theme-pink">
                             <Share2 className="w-4 h-4" />
                         </button>
                     </div>
@@ -337,7 +337,7 @@ const MatchProfileDetails = () => {
                         <div className="relative overflow-hidden dashboard-card-bg border border-white/40 shadow-xl rounded-[32px] p-4 flex flex-col items-center">
                             
                             {/* Main Large Image Container */}
-                            <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-md bg-gray-50 border border-[#EBDCCB]/50 group">
+                            <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden shadow-md bg-gray-50 border border-theme-border/50 group">
                                 {selectedPhoto ? (
                                     <img 
                                         src={selectedPhoto} 
@@ -356,14 +356,14 @@ const MatchProfileDetails = () => {
 
                                 {/* Selfie/Photo Verified Badge */}
                                 {profile.photoVerificationStatus === 'VERIFIED' && (
-                                    <div className="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1 shadow-md">
+                                    <div className="absolute top-4 right-4 bg-theme-success text-white text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1 shadow-md">
                                         <BadgeCheck className="w-3.5 h-3.5" /> PHOTO VERIFIED
                                     </div>
                                 )}
 
                                 {/* Premium Label */}
                                 {profile.isPremium && (
-                                    <div className="absolute top-4 left-4 bg-gradient-to-r from-[#C5A059] to-[#8C6D39] text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md">
+                                    <div className="absolute top-4 left-4 bg-gradient-to-r from-theme-primary to-theme-pink text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md">
                                         <Star className="w-3 h-3 fill-white" /> PREMIUM PLUS
                                     </div>
                                 )}
@@ -391,7 +391,7 @@ const MatchProfileDetails = () => {
                                         <Heart className="w-3 h-3 fill-pink-500" /> Invitation Sent
                                     </span>
                                 ) : (
-                                    <span className="text-xs text-gray-500 font-medium">
+                                    <span className="text-xs text-theme-text-secondary font-medium">
                                         Interested in {profile.gender === 'male' ? 'him' : 'her'}? Connect now.
                                     </span>
                                 )}
@@ -418,9 +418,9 @@ const MatchProfileDetails = () => {
                         {/* ABOUT SECTION */}
                         <div className="dashboard-card-bg rounded-[32px] p-6 border border-white/50 shadow-md">
                             <h3 className="text-lg font-serif font-bold mb-4 flex items-center gap-2 text-[#4A3728]">
-                                <Smile className="w-5 h-5 text-[#8C6D39]" /> About {profile.name}
+                                <Smile className="w-5 h-5 text-theme-pink" /> About {profile.name}
                             </h3>
-                            <p className="text-sm leading-relaxed text-gray-600">
+                            <p className="text-sm leading-relaxed text-theme-text-secondary">
                                 {profile.about || "About information not added yet."}
                             </p>
                         </div>
@@ -428,13 +428,13 @@ const MatchProfileDetails = () => {
                         {/* CONTACT INFO GLASS CARD */}
                         <div className="dashboard-card-bg rounded-[32px] p-6 border border-white/50 shadow-md relative overflow-hidden">
                             <h3 className="text-lg font-serif font-bold mb-4 flex items-center gap-2 text-[#4A3728]">
-                                <Phone className="w-5 h-5 text-[#8C6D39]" /> Contact Information
+                                <Phone className="w-5 h-5 text-theme-pink" /> Contact Information
                             </h3>
                             
-                            <div className="relative rounded-2xl overflow-hidden p-5 border border-[#EBDCCB]/40 bg-white/70">
+                            <div className="relative rounded-2xl overflow-hidden p-5 border border-theme-border/40 bg-theme-surface/70">
                                 <div className={`space-y-4 ${profile.isContactViewed ? '' : 'blur-[5px] select-none opacity-40'} transition-all duration-300`}>
                                     <div className="flex items-center gap-3">
-                                        <div className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-[#8C6D39]">
+                                        <div className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-theme-pink">
                                             <Phone className="w-4 h-4" />
                                         </div>
                                         <div>
@@ -443,7 +443,7 @@ const MatchProfileDetails = () => {
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <div className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-[#8C6D39]">
+                                        <div className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-theme-pink">
                                             <Mail className="w-4 h-4" />
                                         </div>
                                         <div>
@@ -452,7 +452,7 @@ const MatchProfileDetails = () => {
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <div className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-[#8C6D39]">
+                                        <div className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-theme-pink">
                                             <MapPin className="w-4 h-4" />
                                         </div>
                                         <div>
@@ -465,11 +465,11 @@ const MatchProfileDetails = () => {
                                 {/* Blur lock state */}
                                 {!profile.isContactViewed && (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-amber-50/20 backdrop-blur-[2px] p-4 text-center">
-                                        <Lock className="w-8 h-8 text-[#8C6D39] mb-2" />
+                                        <Lock className="w-8 h-8 text-theme-pink mb-2" />
                                         <p className="text-xs font-bold text-[#4A3728] mb-1">Contact details hidden</p>
                                         <button 
                                             onClick={() => Swal.fire({ text: 'Upgrade to Premium to view contact details', confirmButtonColor: '#8C6D39' }).then((result) => { if (result.isConfirmed) navigate('/payment'); })}
-                                            className="px-4 py-2 mt-2 bg-gradient-to-r from-[#C5A059] to-[#8C6D39] hover:from-[#B59049] hover:to-[#7C5D29] text-white rounded-full font-bold text-[10px] shadow-md transition-all duration-200"
+                                            className="px-4 py-2 mt-2 bg-gradient-to-r from-theme-primary to-theme-pink hover:from-[#B59049] hover:to-[#7C5D29] text-white rounded-full font-bold text-[10px] shadow-md transition-all duration-200"
                                         >
                                             Reveal Contact
                                         </button>
@@ -481,11 +481,11 @@ const MatchProfileDetails = () => {
                         {/* HOBBIES / INTERESTS */}
                         <div className="dashboard-card-bg rounded-[32px] p-6 border border-white/50 shadow-md">
                             <h3 className="text-lg font-serif font-bold mb-4 flex items-center gap-2 text-[#4A3728]">
-                                <Sparkles className="w-5 h-5 text-[#8C6D39]" /> Hobbies & Interests
+                                <Sparkles className="w-5 h-5 text-theme-pink" /> Hobbies & Interests
                             </h3>
                             <div className="flex flex-wrap gap-2">
                                 {['Music', 'Cooking', 'Travel', 'Reading', 'Yoga', 'Movies'].map((hobby) => (
-                                    <span key={hobby} className="px-3 py-1.5 bg-gradient-to-r from-amber-50 to-[#FFF5EB] border border-[#EBDCCB]/60 text-[#8C6D39] text-[10px] font-bold rounded-full shadow-sm">
+                                    <span key={hobby} className="px-3 py-1.5 bg-gradient-to-r from-amber-50 to-[#FFF5EB] border border-theme-border/60 text-theme-pink text-[10px] font-bold rounded-full shadow-sm">
                                         {hobby}
                                     </span>
                                 ))}
@@ -499,7 +499,7 @@ const MatchProfileDetails = () => {
                         
                         {/* HEADER GLASS CARD (Name, badges, quick info) */}
                         <div className="dashboard-card-bg rounded-[32px] p-6 md:p-8 relative border border-white/50 shadow-md">
-                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#EBDCCB]/30 pb-6 mb-6">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-theme-border/30 pb-6 mb-6">
                                 <div>
                                     <div className="flex flex-wrap items-center gap-3">
                                         <h1 className="text-3xl font-bold font-serif text-[#4A3728] leading-tight">
@@ -514,8 +514,8 @@ const MatchProfileDetails = () => {
                                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Online
                                         </span>
                                     </div>
-                                    <p className="text-xs text-gray-500 mt-2 font-medium flex items-center gap-1">
-                                        Profile ID: <span className="font-mono text-[#8C6D39] font-bold">{profile.id}</span> • Managed by {profile.managedBy}
+                                    <p className="text-xs text-theme-text-secondary mt-2 font-medium flex items-center gap-1">
+                                        Profile ID: <span className="font-mono text-theme-pink font-bold">{profile.id}</span> • Managed by {profile.managedBy}
                                     </p>
                                 </div>
 
@@ -523,7 +523,7 @@ const MatchProfileDetails = () => {
                                 <div className="relative self-start sm:self-center" ref={dropdownRef}>
                                     <button 
                                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                                        className="flex items-center gap-1.5 px-4 py-2 bg-white/60 hover:bg-white rounded-full border border-[#EBDCCB]/60 shadow-sm transition-all text-[#8C6D39] font-bold text-xs"
+                                        className="flex items-center gap-1.5 px-4 py-2 bg-theme-surface/60 hover:bg-theme-surface rounded-full border border-theme-border/60 shadow-sm transition-all text-theme-pink font-bold text-xs"
                                     >
                                         Options <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
                                     </button>
@@ -540,14 +540,14 @@ const MatchProfileDetails = () => {
                                                     onClick={toggleShortlist}
                                                     className="w-full text-left px-4 py-2.5 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-3 transition-colors"
                                                 >
-                                                    <Star className={`w-4 h-4 ${isShortlisted ? 'fill-rose-500 text-rose-500' : 'text-gray-500'}`} />
+                                                    <Star className={`w-4 h-4 ${isShortlisted ? 'fill-rose-500 text-rose-500' : 'text-theme-text-secondary'}`} />
                                                     <span>{isShortlisted ? 'Remove Shortlist' : 'Add to Shortlist'}</span>
                                                 </button>
                                                 <button
                                                     onClick={() => Swal.fire({ text: "Report functionality coming soon.", confirmButtonColor: '#8C6D39' })}
                                                     className="w-full text-left px-4 py-2.5 text-xs text-gray-700 hover:bg-gray-50 flex items-center gap-3 transition-colors"
                                                 >
-                                                    <Flag className="w-4 h-4 text-gray-500" />
+                                                    <Flag className="w-4 h-4 text-theme-text-secondary" />
                                                     <span>Report Profile</span>
                                                 </button>
                                                 <button
@@ -577,7 +577,7 @@ const MatchProfileDetails = () => {
                         {/* PHOTO GALLERY (GRID + LIGHTBOX) */}
                         <div className="dashboard-card-bg rounded-[32px] p-6 md:p-8 border border-white/50 shadow-md">
                             <h3 className="text-lg font-serif font-bold mb-4 flex items-center gap-2 text-[#4A3728]">
-                                <Eye className="w-5 h-5 text-[#8C6D39]" /> Photo Gallery
+                                <Eye className="w-5 h-5 text-theme-pink" /> Photo Gallery
                             </h3>
                             {profile.allPhotos && profile.allPhotos.length > 0 ? (
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -585,7 +585,7 @@ const MatchProfileDetails = () => {
                                         <div 
                                             key={index} 
                                             onClick={() => setLightboxPhoto(photo)}
-                                            className="relative aspect-square rounded-xl overflow-hidden border border-[#EBDCCB]/40 shadow-sm cursor-zoom-in group"
+                                            className="relative aspect-square rounded-xl overflow-hidden border border-theme-border/40 shadow-sm cursor-zoom-in group"
                                         >
                                             <img src={photo} alt="" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" />
                                             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-200">
@@ -603,8 +603,8 @@ const MatchProfileDetails = () => {
 
                         {/* PERSONAL & PROFESSIONAL INFORMATION */}
                         <div className="dashboard-card-bg rounded-[32px] p-6 md:p-8 border border-white/50 shadow-md">
-                            <h3 className="text-lg font-serif font-bold mb-6 flex items-center gap-2 text-[#4A3728] border-b border-[#EBDCCB]/30 pb-3">
-                                <User className="w-5 h-5 text-[#8C6D39]" /> Personal & Professional Details
+                            <h3 className="text-lg font-serif font-bold mb-6 flex items-center gap-2 text-[#4A3728] border-b border-theme-border/30 pb-3">
+                                <User className="w-5 h-5 text-theme-pink" /> Personal & Professional Details
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
                                 <InfoRow label="Full Name" value={profile.name} />
@@ -633,8 +633,8 @@ const MatchProfileDetails = () => {
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-8">
                     {/* FAMILY DETAILS CARD */}
                     <div className="dashboard-card-bg rounded-[32px] p-6 md:p-8 border border-white/50 shadow-md flex flex-col h-full">
-                        <h3 className="text-lg font-serif font-bold mb-6 flex items-center gap-2 text-[#4A3728] border-b border-[#EBDCCB]/30 pb-3">
-                            <Home className="w-5 h-5 text-[#8C6D39]" /> Family Information
+                        <h3 className="text-lg font-serif font-bold mb-6 flex items-center gap-2 text-[#4A3728] border-b border-theme-border/30 pb-3">
+                            <Home className="w-5 h-5 text-theme-pink" /> Family Information
                         </h3>
                         <div className="grid grid-cols-1 gap-y-4">
                             <InfoRow label="Father Status" value={profile.family?.fatherStatus || 'Not added'} />
@@ -647,21 +647,21 @@ const MatchProfileDetails = () => {
                     </div>
 
                     {/* PARTNER PREFERENCES GLASS CARD */}
-                    <div className="dashboard-card-bg rounded-[32px] p-6 md:p-8 border border-white/50 shadow-md border border-[#EBDCCB]/60 bg-gradient-to-tr from-[#FFFDFB] to-[#FAF5EF] flex flex-col h-full">
-                        <h3 className="text-lg font-serif font-bold mb-6 flex items-center gap-2 text-[#4A3728] border-b border-[#EBDCCB]/30 pb-3">
-                            <HeartHandshake className="w-5 h-5 text-[#8C6D39]" /> Partner Expectations
+                    <div className="dashboard-card-bg rounded-[32px] p-6 md:p-8 border border-white/50 shadow-md border border-theme-border/60 bg-gradient-to-tr from-[#FFFDFB] to-[#FAF5EF] flex flex-col h-full">
+                        <h3 className="text-lg font-serif font-bold mb-6 flex items-center gap-2 text-[#4A3728] border-b border-theme-border/30 pb-3">
+                            <HeartHandshake className="w-5 h-5 text-theme-pink" /> Partner Expectations
                         </h3>
                         
                         {preferenceMatch ? (
                             <div className="space-y-3 flex-1">
                                 <div className="bg-[#8C6D39]/5 border border-[#8C6D39]/10 rounded-xl p-2.5 mb-3 text-center">
-                                    <p className="text-[13px] font-semibold text-[#8C6D39]">
+                                    <p className="text-[13px] font-semibold text-theme-pink">
                                         🎉 You match {preferenceMatch.matchedCount} of {preferenceMatch.totalPreferences} expectations 🎉
                                     </p>
                                 </div>
                                 <div className="grid grid-cols-1 gap-2">
                                     {preferenceMatch.matchList.map((pref, i) => (
-                                        <div key={i} className="flex justify-between items-center px-3 py-2 bg-white/50 rounded-lg border border-[#EBDCCB]/30">
+                                        <div key={i} className="flex justify-between items-center px-3 py-2 bg-theme-surface/50 rounded-lg border border-theme-border/30">
                                             <div>
                                                 <span className="text-[10px] uppercase font-bold text-gray-400 block">{pref.fieldLabel}</span>
                                                 <span className="text-xs font-bold text-gray-700">{pref.prefValue}</span>
@@ -694,7 +694,7 @@ const MatchProfileDetails = () => {
                     className="fixed inset-0 bg-black/90 backdrop-blur-sm z-[1000] flex items-center justify-center p-4 cursor-zoom-out"
                     onClick={() => setLightboxPhoto(null)}
                 >
-                    <button className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 p-2.5 rounded-full text-white transition-all">
+                    <button className="absolute top-4 right-4 bg-theme-surface/10 hover:bg-theme-surface/20 p-2.5 rounded-full text-white transition-all">
                         <X className="w-6 h-6" />
                     </button>
                     <img src={lightboxPhoto} alt="" className="max-w-full max-h-[90vh] rounded-xl shadow-2xl object-contain animate-zoomIn" />
@@ -731,8 +731,8 @@ const MatchProfileDetails = () => {
 };
 
 const QuickInfoCard = ({ icon, label, value }) => (
-    <div className="bg-white/60 p-4 rounded-2xl border border-[#EBDCCB]/30 flex flex-col items-center text-center shadow-sm hover:bg-white hover:shadow-md transition-all duration-200">
-        <div className="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-[#8C6D39] mb-2.5">
+    <div className="bg-theme-surface/60 p-4 rounded-2xl border border-theme-border/30 flex flex-col items-center text-center shadow-sm hover:bg-theme-surface hover:shadow-md transition-all duration-200">
+        <div className="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center text-theme-pink mb-2.5">
             {icon}
         </div>
         <span className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block mb-0.5">{label}</span>
@@ -743,8 +743,8 @@ const QuickInfoCard = ({ icon, label, value }) => (
 const InfoRow = ({ label, value }) => (
     <div className="flex justify-between items-center py-2.5 border-b border-gray-100/60 last:border-b-0">
         <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]"></span>
-            <span className="text-xs font-medium text-gray-500">{label}</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-theme-magenta"></span>
+            <span className="text-xs font-medium text-theme-text-secondary">{label}</span>
         </div>
         <span className="text-xs font-bold text-gray-800 text-right max-w-[200px] truncate">{value || 'Not added'}</span>
     </div>

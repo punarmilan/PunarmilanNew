@@ -17,8 +17,8 @@ const RequestFilters = ({ filters, onFilterChange, sortBy, setSortBy, filterBy, 
     return (
         <aside className="space-y-6 lg:sticky lg:top-5 h-fit">
             {/* Request Type Filters */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm transition-all duration-300 hover:shadow-md">
-                <h2 className="text-xl font-semibold text-gray-800 mb-5 pb-3 border-b-2 border-gray-200">
+            <div className="bg-theme-surface rounded-2xl p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+                <h2 className="text-xl font-semibold text-gray-800 mb-5 pb-3 border-b-2 border-theme-border">
                     Request Type
                 </h2>
                 <div className="space-y-3">
@@ -29,7 +29,7 @@ const RequestFilters = ({ filters, onFilterChange, sortBy, setSortBy, filterBy, 
                             onChange={() => onFilterChange('allRequests')}
                             className="w-5 h-5 text-red-500 rounded focus:ring-2 focus:ring-red-500 cursor-pointer accent-red-500"
                         />
-                        <span className={`ml-3 text-base font-medium transition-colors ${filters.allRequests ? 'text-red-500 font-semibold' : 'text-gray-600'}`}>
+                        <span className={`ml-3 text-base font-medium transition-colors ${filters.allRequests ? 'text-red-500 font-semibold' : 'text-theme-text-secondary'}`}>
                             All Requests
                         </span>
                     </label>
@@ -41,7 +41,7 @@ const RequestFilters = ({ filters, onFilterChange, sortBy, setSortBy, filterBy, 
                             onChange={() => onFilterChange('photoRequests')}
                             className="w-5 h-5 text-red-500 rounded focus:ring-2 focus:ring-red-500 cursor-pointer accent-red-500"
                         />
-                        <span className={`ml-3 text-base font-medium transition-colors ${filters.photoRequests ? 'text-red-500 font-semibold' : 'text-gray-600'}`}>
+                        <span className={`ml-3 text-base font-medium transition-colors ${filters.photoRequests ? 'text-red-500 font-semibold' : 'text-theme-text-secondary'}`}>
                             Photo Requests
                         </span>
                     </label>
@@ -53,7 +53,7 @@ const RequestFilters = ({ filters, onFilterChange, sortBy, setSortBy, filterBy, 
                             onChange={() => onFilterChange('phoneRequests')}
                             className="w-5 h-5 text-red-500 rounded focus:ring-2 focus:ring-red-500 cursor-pointer accent-red-500"
                         />
-                        <span className={`ml-3 text-base font-medium transition-colors ${filters.phoneRequests ? 'text-red-500 font-semibold' : 'text-gray-600'}`}>
+                        <span className={`ml-3 text-base font-medium transition-colors ${filters.phoneRequests ? 'text-red-500 font-semibold' : 'text-theme-text-secondary'}`}>
                             Phone Requests
                         </span>
                     </label>
@@ -61,8 +61,8 @@ const RequestFilters = ({ filters, onFilterChange, sortBy, setSortBy, filterBy, 
             </div>
 
             {/* Sort By Filter */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm transition-all duration-300 hover:shadow-md">
-                <h2 className="text-xl font-semibold text-gray-800 mb-5 pb-3 border-b-2 border-gray-200">
+            <div className="bg-theme-surface rounded-2xl p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+                <h2 className="text-xl font-semibold text-gray-800 mb-5 pb-3 border-b-2 border-theme-border">
                     Sort By
                 </h2>
                 <div className="space-y-3">
@@ -76,7 +76,7 @@ const RequestFilters = ({ filters, onFilterChange, sortBy, setSortBy, filterBy, 
                                 onChange={(e) => setSortBy(e.target.value)}
                                 className="w-5 h-5 text-red-500 cursor-pointer accent-red-500"
                             />
-                            <span className={`ml-3 text-base font-medium transition-colors ${sortBy === option.value ? 'text-red-500 font-semibold' : 'text-gray-600'}`}>
+                            <span className={`ml-3 text-base font-medium transition-colors ${sortBy === option.value ? 'text-red-500 font-semibold' : 'text-theme-text-secondary'}`}>
                                 {option.label}
                             </span>
                         </label>
@@ -85,8 +85,8 @@ const RequestFilters = ({ filters, onFilterChange, sortBy, setSortBy, filterBy, 
             </div>
 
             {/* Profile Filter */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm transition-all duration-300 hover:shadow-md">
-                <h2 className="text-xl font-semibold text-gray-800 mb-5 pb-3 border-b-2 border-gray-200">
+            <div className="bg-theme-surface rounded-2xl p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+                <h2 className="text-xl font-semibold text-gray-800 mb-5 pb-3 border-b-2 border-theme-border">
                     Filter By Profile
                 </h2>
                 <div className="space-y-3">
@@ -100,7 +100,7 @@ const RequestFilters = ({ filters, onFilterChange, sortBy, setSortBy, filterBy, 
                                 onChange={(e) => setFilterBy(e.target.value)}
                                 className="w-5 h-5 text-red-500 cursor-pointer accent-red-500"
                             />
-                            <span className={`ml-3 text-base font-medium transition-colors ${filterBy === option.value ? 'text-red-500 font-semibold' : 'text-gray-600'}`}>
+                            <span className={`ml-3 text-base font-medium transition-colors ${filterBy === option.value ? 'text-red-500 font-semibold' : 'text-theme-text-secondary'}`}>
                                 {option.label}
                             </span>
                         </label>

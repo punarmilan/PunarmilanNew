@@ -91,7 +91,7 @@ export default function AllRequest() {
         const profile = request.senderProfile;
 
         return (
-            <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-5 hover:shadow-md transition-shadow">
+            <div className="bg-theme-surface border border-theme-border rounded-xl p-4 sm:p-5 hover:shadow-md transition-shadow">
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                     {/* Profile Image */}
                     <div 
@@ -131,7 +131,7 @@ export default function AllRequest() {
                                         </div>
                                     )}
                                 </h3>
-                                <p className="text-sm text-gray-500 mt-0.5">
+                                <p className="text-sm text-theme-text-secondary mt-0.5">
                                     {profile.age} yrs • {profile.height} • {profile.religion}, {profile.motherTongue}
                                 </p>
                             </div>
@@ -141,15 +141,15 @@ export default function AllRequest() {
                         </div>
 
                         <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
-                            <div className="flex items-center gap-2 text-gray-600">
+                            <div className="flex items-center gap-2 text-theme-text-secondary">
                                 <MapPin className="w-4 h-4 text-gray-400" />
                                 <span className="text-sm truncate">{profile.city}, {profile.state}</span>
                             </div>
-                            <div className="flex items-center gap-2 text-gray-600">
+                            <div className="flex items-center gap-2 text-theme-text-secondary">
                                 <Briefcase className="w-4 h-4 text-gray-400" />
                                 <span className="text-sm truncate">{profile.occupation}</span>
                             </div>
-                            <div className="flex items-center gap-2 text-gray-600">
+                            <div className="flex items-center gap-2 text-theme-text-secondary">
                                 <GraduationCap className="w-4 h-4 text-gray-400" />
                                 <span className="text-sm truncate">{profile.educationLevel}</span>
                             </div>
@@ -159,21 +159,21 @@ export default function AllRequest() {
                         <div className="mt-5 flex items-center gap-3">
                             <button
                                 onClick={() => handleAccept(request.id)}
-                                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-colors"
+                                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-theme-success hover:bg-green-600 text-white font-semibold rounded-lg transition-colors"
                             >
                                 <Check className="w-4 h-4" />
                                 <span>Accept</span>
                             </button>
                             <button
                                 onClick={() => handleDecline(request.id)}
-                                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-white hover:bg-red-50 text-red-500 border border-red-200 font-semibold rounded-lg transition-colors"
+                                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-theme-surface hover:bg-red-50 text-red-500 border border-red-200 font-semibold rounded-lg transition-colors"
                             >
                                 <X className="w-4 h-4" />
                                 <span>Decline</span>
                             </button>
                             <button
                                 onClick={() => navigate(`/matches/${profile.userId}`)}
-                                className="hidden sm:flex items-center justify-center px-4 py-2.5 text-gray-500 hover:text-cyan-600 font-medium transition-colors"
+                                className="hidden sm:flex items-center justify-center px-4 py-2.5 text-theme-text-secondary hover:text-cyan-600 font-medium transition-colors"
                             >
                                 View Profile
                             </button>
@@ -187,7 +187,7 @@ export default function AllRequest() {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Mobile Header */}
-            <div className="lg:hidden sticky top-0 z-20 bg-white border-b border-gray-200 px-4 py-3">
+            <div className="lg:hidden sticky top-0 z-20 bg-theme-surface border-b border-theme-border px-4 py-3">
                 <button
                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                     className="flex items-center gap-2 text-gray-700 font-medium"
@@ -212,7 +212,7 @@ export default function AllRequest() {
                         ${isSidebarOpen ? "fixed" : "hidden"}
                         lg:block lg:static
                         inset-y-0 left-0 z-40
-                        bg-white lg:bg-transparent
+                        bg-theme-surface lg:bg-transparent
                         overflow-y-auto w-80 p-4 lg:p-0
                     `}>
                         <div className="sticky top-4 space-y-4 sm:space-y-6">
@@ -223,20 +223,20 @@ export default function AllRequest() {
 
                     {/* Main Content Area */}
                     <main className="flex-1 min-w-0">
-                        <div className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <div className="bg-theme-surface rounded-lg sm:rounded-xl shadow-sm border border-theme-border overflow-hidden">
                             {/* Tabs */}
-                            <div className="border-b border-gray-200">
+                            <div className="border-b border-theme-border">
                                 <div className="flex">
                                     <button
                                         onClick={() => setActiveTab("all")}
-                                        className={`flex-1 px-4 sm:px-6 py-4 text-sm sm:text-base font-medium transition-all relative ${activeTab === "all" ? "text-cyan-600 bg-cyan-50/30" : "text-gray-600 hover:text-gray-800"}`}
+                                        className={`flex-1 px-4 sm:px-6 py-4 text-sm sm:text-base font-medium transition-all relative ${activeTab === "all" ? "text-cyan-600 bg-cyan-50/30" : "text-theme-text-secondary hover:text-gray-800"}`}
                                     >
                                         Pending Invitations ({processedRequests.length})
                                         {activeTab === "all" && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-600 animate-in fade-in slide-in-from-bottom-1"></div>}
                                     </button>
                                     <button
                                         onClick={() => setActiveTab("filtered")}
-                                        className={`flex-1 px-4 sm:px-6 py-4 text-sm sm:text-base font-medium transition-all relative ${activeTab === "filtered" ? "text-cyan-600 bg-cyan-50/30" : "text-gray-600 hover:text-gray-800"}`}
+                                        className={`flex-1 px-4 sm:px-6 py-4 text-sm sm:text-base font-medium transition-all relative ${activeTab === "filtered" ? "text-cyan-600 bg-cyan-50/30" : "text-theme-text-secondary hover:text-gray-800"}`}
                                     >
                                         Filtered Out
                                         {activeTab === "filtered" && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-600 animate-in fade-in slide-in-from-bottom-1"></div>}
@@ -266,7 +266,7 @@ export default function AllRequest() {
                                             <X className="w-8 h-8 text-gray-400" />
                                         </div>
                                         <h3 className="text-xl font-medium text-gray-900 mb-2">No Filtered Requests</h3>
-                                        <p className="text-gray-500">Profiles you filter out will appear here.</p>
+                                        <p className="text-theme-text-secondary">Profiles you filter out will appear here.</p>
                                     </div>
                                 )}
                             </div>

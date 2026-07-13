@@ -164,7 +164,7 @@ const Settings = () => {
   if (!profile && loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#fff7fb] via-[#fffdf8] to-[#f8f2ff]">
-        <div className="flex flex-col items-center gap-4 rounded-3xl bg-white/80 px-10 py-8 shadow-[0_20px_70px_rgba(190,24,93,0.12)] border border-white/70 backdrop-blur-xl">
+        <div className="flex flex-col items-center gap-4 rounded-3xl bg-theme-surface/80 px-10 py-8 shadow-[0_20px_70px_rgba(190,24,93,0.12)] border border-white/70 backdrop-blur-xl">
           <div className="relative">
             <div className="w-11 h-11 rounded-full border-4 border-pink-100 border-t-pink-500 animate-spin" />
             <Sparkles className="w-4 h-4 text-pink-500 absolute -right-1 -top-1 animate-pulse" />
@@ -220,7 +220,7 @@ const Settings = () => {
                   return (
                     <div
                       key={item.label}
-                      className="rounded-[20px] border border-white/80 bg-white/80 px-4 py-3.5 text-center shadow-sm backdrop-blur transition-transform hover:scale-[1.02] min-w-[120px] sm:min-w-0 flex-shrink-0"
+                      className="rounded-[20px] border border-white/80 bg-theme-surface/80 px-4 py-3.5 text-center shadow-sm backdrop-blur transition-transform hover:scale-[1.02] min-w-[120px] sm:min-w-0 flex-shrink-0"
                     >
                       <Icon className="mx-auto mb-1.5 h-5 w-5 text-pink-500 drop-shadow-sm" />
                       <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">{item.label}</p>
@@ -245,7 +245,7 @@ const Settings = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.35, delay: index * 0.04 }}
                 onClick={() => section.isLink ? section.action() : setActiveSection(section.id)}
-                className="group relative overflow-hidden rounded-[24px] border border-white/90 bg-white/60 p-4 sm:p-5 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-pink-200 hover:bg-white hover:shadow-[0_15px_40px_rgba(236,72,153,0.12)] cursor-pointer"
+                className="group relative overflow-hidden rounded-[24px] border border-white/90 bg-theme-surface/60 p-4 sm:p-5 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-pink-200 hover:bg-theme-surface hover:shadow-[0_15px_40px_rgba(236,72,153,0.12)] cursor-pointer"
               >
                 <div className="absolute top-0 right-0 p-3 sm:p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <div className="grid h-7 w-7 place-items-center rounded-full bg-pink-50 text-pink-600">
@@ -276,7 +276,7 @@ const Settings = () => {
           })}
         </div>
 
-        <div className="mt-8 rounded-3xl border border-white/80 bg-white/50 p-5 text-center text-xs font-semibold text-slate-400 shadow-sm backdrop-blur-xl">
+        <div className="mt-8 rounded-3xl border border-white/80 bg-theme-surface/50 p-5 text-center text-xs font-semibold text-slate-400 shadow-sm backdrop-blur-xl">
           Your privacy matters. Sensitive changes like email or mobile update may require login again.
         </div>
       </motion.div>
@@ -299,7 +299,7 @@ const Settings = () => {
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-xl overflow-hidden rounded-[32px] bg-white shadow-2xl ring-1 ring-black/5 flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-xl overflow-hidden rounded-[32px] bg-theme-surface shadow-2xl ring-1 ring-black/5 flex flex-col max-h-[90vh]"
             >
               {/* Modal Header */}
               <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 p-5">

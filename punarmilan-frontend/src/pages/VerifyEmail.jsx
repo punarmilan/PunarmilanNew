@@ -37,7 +37,7 @@ const VerifyEmail = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-rose-50 to-pink-50 flex items-center justify-center p-4">
-            <div className="max-w-md w-full bg-white rounded-3xl shadow-2xl p-8 text-center animate-fadeIn">
+            <div className="max-w-md w-full bg-theme-surface rounded-3xl shadow-2xl p-8 text-center animate-fadeIn">
                 {/* Logo/Icon Area */}
                 <div className="mb-8 flex justify-center">
                     <div className="w-20 h-20 bg-gradient-to-br from-rose-500 to-pink-600 rounded-2xl flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
@@ -52,7 +52,7 @@ const VerifyEmail = () => {
                             <Loader2 className="w-16 h-16 text-rose-500 animate-spin" />
                         </div>
                         <h2 className="text-2xl font-bold text-gray-800">Verifying Your Email</h2>
-                        <p className="text-gray-600">Please wait while we confirm your account...</p>
+                        <p className="text-theme-text-secondary">Please wait while we confirm your account...</p>
                     </div>
                 )}
 
@@ -64,8 +64,8 @@ const VerifyEmail = () => {
                             </div>
                         </div>
                         <h2 className="text-3xl font-bold text-gray-800">Success!</h2>
-                        <p className="text-gray-600 font-medium">{message}</p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-theme-text-secondary font-medium">{message}</p>
+                        <p className="text-sm text-theme-text-secondary">
                             Your account is now active. You may log in to start finding your perfect match.
                         </p>
                         <div className="flex flex-col gap-3 pt-4">
@@ -78,7 +78,7 @@ const VerifyEmail = () => {
                             </button>
                             <button
                                 onClick={() => navigate('/')}
-                                className="w-full bg-white border-2 border-rose-500 text-rose-500 py-3 rounded-xl font-bold hover:bg-rose-50 transition-all flex items-center justify-center gap-2"
+                                className="w-full bg-theme-surface border-2 border-rose-500 text-rose-500 py-3 rounded-xl font-bold hover:bg-rose-50 transition-all flex items-center justify-center gap-2"
                             >
                                 <Home className="w-5 h-5" />
                                 Back to Home
@@ -96,7 +96,7 @@ const VerifyEmail = () => {
                         </div>
                         <h2 className="text-3xl font-bold text-gray-800">Verification Failed</h2>
                         <p className="text-red-500 font-medium">{message}</p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-theme-text-secondary">
                             Try registering again or contact support if the problem persists.
                         </p>
                         <div className="flex flex-col gap-3 pt-4">
@@ -108,7 +108,7 @@ const VerifyEmail = () => {
                             </button>
                             <button
                                 onClick={() => navigate('/')}
-                                className="w-full bg-gray-100 text-gray-600 py-3 rounded-xl font-bold hover:bg-gray-200 transition-all"
+                                className="w-full bg-gray-100 text-theme-text-secondary py-3 rounded-xl font-bold hover:bg-gray-200 transition-all"
                             >
                                 Back to Home
                             </button>

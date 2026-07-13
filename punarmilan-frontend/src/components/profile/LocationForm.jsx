@@ -41,7 +41,7 @@ export default function LocationForm({ onNext }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       className="
-        bg-white/90
+        bg-theme-surface/90
         backdrop-blur-xl
         rounded-[32px]
         border
@@ -79,7 +79,7 @@ export default function LocationForm({ onNext }) {
               Location Details
             </h2>
 
-            <p className="text-gray-500 mt-1 text-sm md:text-base">
+            <p className="text-theme-text-secondary mt-1 text-sm md:text-base">
               Add your residential & location information
             </p>
           </div>
@@ -110,9 +110,9 @@ export default function LocationForm({ onNext }) {
                   w-full
                   p-5
                   rounded-3xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -139,9 +139,9 @@ export default function LocationForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -181,9 +181,9 @@ export default function LocationForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -222,9 +222,9 @@ export default function LocationForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -259,9 +259,9 @@ export default function LocationForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -299,9 +299,9 @@ export default function LocationForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
+                  border border-theme-border
                   bg-gray-50
-                  focus:bg-white
+                  focus:bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100

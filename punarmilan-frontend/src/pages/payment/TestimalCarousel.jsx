@@ -115,7 +115,7 @@ function TestimonialCarousel() {
                                 </h3>
 
                                 {/* Story */}
-                                <p className="text-gray-600 text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-5 md:mb-6 line-clamp-4 sm:line-clamp-5 md:line-clamp-none transition-all duration-500">
+                                <p className="text-theme-text-secondary text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-5 md:mb-6 line-clamp-4 sm:line-clamp-5 md:line-clamp-none transition-all duration-500">
                                     {testimonials[currentSlide].story}
                                 </p>
 
@@ -156,18 +156,18 @@ function TestimonialCarousel() {
                     {/* Navigation Buttons */}
                     <button
                         onClick={prevSlide}
-                        className="absolute left-2 sm:left-0 md:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 rounded-full p-2 sm:p-2.5 md:p-3 shadow-lg transition-all duration-300 hover:scale-110 z-10 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                        className="absolute left-2 sm:left-0 md:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 bg-theme-surface hover:bg-gray-50 rounded-full p-2 sm:p-2.5 md:p-3 shadow-lg transition-all duration-300 hover:scale-110 z-10 focus:outline-none focus:ring-2 focus:ring-teal-500"
                         aria-label="Previous testimonial"
                     >
-                        <ChevronLeft className="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-600" />
+                        <ChevronLeft className="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-theme-text-secondary" />
                     </button>
 
                     <button
                         onClick={handleNextSlide}
-                        className="absolute right-2 sm:right-0 md:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-50 rounded-full p-2 sm:p-2.5 md:p-3 shadow-lg transition-all duration-300 hover:scale-110 z-10 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                        className="absolute right-2 sm:right-0 md:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 bg-theme-surface hover:bg-gray-50 rounded-full p-2 sm:p-2.5 md:p-3 shadow-lg transition-all duration-300 hover:scale-110 z-10 focus:outline-none focus:ring-2 focus:ring-teal-500"
                         aria-label="Next testimonial"
                     >
-                        <ChevronRight className="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-gray-600" />
+                        <ChevronRight className="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-theme-text-secondary" />
                     </button>
                 </div>
 
@@ -191,7 +191,7 @@ function TestimonialCarousel() {
                 <div className="flex justify-center mt-4 sm:mt-6">
                     <button
                         onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                        className="text-xs sm:text-sm text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-gray-200"
+                        className="text-xs sm:text-sm text-theme-text-secondary hover:text-gray-700 transition-colors flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-gray-200"
                     >
                     </button>
                 </div>

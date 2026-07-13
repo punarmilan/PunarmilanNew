@@ -251,10 +251,10 @@ function Login({ close, openRegister }) {
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-rose-400 rounded-3xl blur-2xl opacity-20 animate-pulse" />
                 
-                <div className="relative bg-white/95 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+                <div className="relative bg-theme-surface/95 backdrop-blur-xl border border-white/40 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
                     <button
                         onClick={onInternalClose}
-                        className="absolute right-4 top-4 text-gray-400 hover:text-gray-700 transition-colors z-20 p-2 hover:bg-gray-100 rounded-full bg-white/50"
+                        className="absolute right-4 top-4 text-gray-400 hover:text-gray-700 transition-colors z-20 p-2 hover:bg-gray-100 rounded-full bg-theme-surface/50"
                         aria-label="Close"
                     >
                         <X className="w-5 h-5" />
@@ -267,15 +267,15 @@ function Login({ close, openRegister }) {
                         <h2 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-gray-600 mb-2">
                             Welcome Back
                         </h2>
-                        <p className="text-sm text-gray-500 font-medium">Please login to continue</p>
+                        <p className="text-sm text-theme-text-secondary font-medium">Please login to continue</p>
                     </div>
 
                     {/* Tabs */}
-                    <div className="flex border-b border-gray-200/60 relative z-10">
+                    <div className="flex border-b border-theme-border/60 relative z-10">
                         <button
                             type="button"
                             onClick={() => { setLoginMethod("PASSWORD"); setOtpStep(1); }}
-                            className={`flex-1 py-4 text-sm font-semibold transition-all duration-300 relative ${loginMethod === "PASSWORD" ? "text-cyan-600 bg-cyan-50/50" : "text-gray-500 hover:bg-gray-50/50 hover:text-gray-700"}`}
+                            className={`flex-1 py-4 text-sm font-semibold transition-all duration-300 relative ${loginMethod === "PASSWORD" ? "text-cyan-600 bg-cyan-50/50" : "text-theme-text-secondary hover:bg-gray-50/50 hover:text-gray-700"}`}
                         >
                             Password
                             {loginMethod === "PASSWORD" && (
@@ -285,7 +285,7 @@ function Login({ close, openRegister }) {
                         <button
                             type="button"
                             onClick={() => setLoginMethod("OTP")}
-                            className={`flex-1 py-4 text-sm font-semibold transition-all duration-300 relative ${loginMethod === "OTP" ? "text-rose-600 bg-rose-50/50" : "text-gray-500 hover:bg-gray-50/50 hover:text-gray-700"}`}
+                            className={`flex-1 py-4 text-sm font-semibold transition-all duration-300 relative ${loginMethod === "OTP" ? "text-rose-600 bg-rose-50/50" : "text-theme-text-secondary hover:bg-gray-50/50 hover:text-gray-700"}`}
                         >
                             OTP
                             {loginMethod === "OTP" && (
@@ -319,8 +319,8 @@ function Login({ close, openRegister }) {
                                     disabled={loginMethod === "OTP" && otpStep === 2}
                                     className={`w-full pl-12 pr-4 py-3.5 bg-gray-50/50 border-2 rounded-xl text-sm font-medium transition-all outline-none ${
                                         errors.email && touched.email
-                                            ? "border-red-300 focus:border-red-500 focus:bg-white"
-                                            : "border-transparent focus:border-cyan-400 focus:bg-white"
+                                            ? "border-red-300 focus:border-red-500 focus:bg-theme-surface"
+                                            : "border-transparent focus:border-cyan-400 focus:bg-theme-surface"
                                     } text-gray-800 placeholder:text-gray-400`}
                                 />
                             </div>
@@ -356,8 +356,8 @@ function Login({ close, openRegister }) {
                                         onBlur={() => handleBlur("password")}
                                         className={`w-full pl-12 pr-12 py-3.5 bg-gray-50/50 border-2 rounded-xl text-sm font-medium transition-all outline-none ${
                                             errors.password && touched.password
-                                                ? "border-red-300 focus:border-red-500 focus:bg-white"
-                                                : "border-transparent focus:border-cyan-400 focus:bg-white"
+                                                ? "border-red-300 focus:border-red-500 focus:bg-theme-surface"
+                                                : "border-transparent focus:border-cyan-400 focus:bg-theme-surface"
                                         } text-gray-800 placeholder:text-gray-400`}
                                     />
                                     <button
@@ -400,7 +400,7 @@ function Login({ close, openRegister }) {
                                             value={digit}
                                             onChange={(e) => handleOtpChange(i, e.target.value)}
                                             onKeyDown={(e) => handleOtpKeyDown(i, e)}
-                                            className="w-12 h-14 bg-gray-50/50 border-2 border-transparent focus:border-rose-400 focus:bg-white rounded-xl text-center text-xl font-bold text-gray-800 outline-none transition-all shadow-sm"
+                                            className="w-12 h-14 bg-gray-50/50 border-2 border-transparent focus:border-rose-400 focus:bg-theme-surface rounded-xl text-center text-xl font-bold text-gray-800 outline-none transition-all shadow-sm"
                                         />
                                     ))}
                                 </div>
@@ -425,7 +425,7 @@ function Login({ close, openRegister }) {
                         </button>
 
                         <div className="pt-2 text-center border-t border-gray-100">
-                            <span className="text-gray-500 text-sm">New to PunarMilan? </span>
+                            <span className="text-theme-text-secondary text-sm">New to PunarMilan? </span>
                             <button
                                 type="button"
                                 onClick={openRegister}

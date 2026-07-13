@@ -110,13 +110,13 @@ function OtpVerification() {
 
     return (
         <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
+            <div className="bg-theme-surface rounded-2xl shadow-xl w-full max-w-md p-8">
                 <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">Verification Required</h2>
                 
                 {/* Email Verification Section */}
                 <div className="mb-8 p-4 border rounded-xl bg-gray-50 relative">
                     {isEmailVerified && (
-                        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex items-center justify-center rounded-xl">
+                        <div className="absolute inset-0 bg-theme-surface/80 backdrop-blur-sm z-10 flex items-center justify-center rounded-xl">
                             <div className="text-green-600 flex items-center gap-2 font-bold text-lg">
                                 <span>Email Verified</span>
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
@@ -124,7 +124,7 @@ function OtpVerification() {
                         </div>
                     )}
                     <h3 className="font-semibold text-gray-700 mb-2">Email Verification</h3>
-                    <p className="text-sm text-gray-500 mb-4">Enter the 6-digit code sent to {email}</p>
+                    <p className="text-sm text-theme-text-secondary mb-4">Enter the 6-digit code sent to {email}</p>
                     
                     <div className="flex gap-2 justify-center mb-4">
                         {emailOtp.map((digit, i) => (
@@ -161,7 +161,7 @@ function OtpVerification() {
                 {/* Mobile Verification Section */}
                 <div className="p-4 border rounded-xl bg-gray-50 relative">
                     {isMobileVerified && (
-                        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex items-center justify-center rounded-xl">
+                        <div className="absolute inset-0 bg-theme-surface/80 backdrop-blur-sm z-10 flex items-center justify-center rounded-xl">
                             <div className="text-green-600 flex items-center gap-2 font-bold text-lg">
                                 <span>Mobile Verified</span>
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
@@ -169,7 +169,7 @@ function OtpVerification() {
                         </div>
                     )}
                     <h3 className="font-semibold text-gray-700 mb-2">Mobile Verification</h3>
-                    <p className="text-sm text-gray-500 mb-4">Enter the 6-digit code sent to {mobileNumber}</p>
+                    <p className="text-sm text-theme-text-secondary mb-4">Enter the 6-digit code sent to {mobileNumber}</p>
                     
                     <div className="flex gap-2 justify-center mb-4">
                         {mobileOtp.map((digit, i) => (

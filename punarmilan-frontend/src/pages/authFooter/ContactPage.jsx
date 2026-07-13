@@ -66,7 +66,7 @@ const ContactPage = () => {
 
           <div className="text-center max-w-4xl mx-auto">
 
-            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/10 backdrop-blur-xl px-5 py-2 rounded-full mb-8">
+            <div className="inline-flex items-center gap-2 bg-theme-surface/10 border border-white/10 backdrop-blur-xl px-5 py-2 rounded-full mb-8">
 
               <MessageCircle className="w-4 h-4 text-pink-500" />
 
@@ -102,7 +102,7 @@ const ContactPage = () => {
 
         <div className="grid md:grid-cols-3 gap-8">
 
-          <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-8">
+          <div className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8">
 
             <Phone className="w-10 h-10 text-pink-500 mb-6" />
 
@@ -120,7 +120,7 @@ const ContactPage = () => {
 
           </div>
 
-          <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-8">
+          <div className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8">
 
             <Mail className="w-10 h-10 text-blue-400 mb-6" />
 
@@ -138,7 +138,7 @@ const ContactPage = () => {
 
           </div>
 
-          <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-8">
+          <div className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8">
 
             <Clock3 className="w-10 h-10 text-yellow-400 mb-6" />
 
@@ -166,7 +166,7 @@ const ContactPage = () => {
         <div className="grid lg:grid-cols-2 gap-12">
 
           {/* Form */}
-          <div className="bg-white/[0.03] border border-white/10 rounded-[40px] p-10">
+          <div className="bg-theme-surface/[0.03] border border-white/10 rounded-[40px] p-10">
 
             <h2 className="text-4xl font-bold">
               Send Us A Message
@@ -181,22 +181,22 @@ const ContactPage = () => {
               <input
                 type="text"
                 placeholder="Full Name"
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none"
+                className="w-full bg-theme-surface/5 border border-white/10 rounded-2xl px-5 py-4 outline-none"
               />
 
               <input
                 type="email"
                 placeholder="Email Address"
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none"
+                className="w-full bg-theme-surface/5 border border-white/10 rounded-2xl px-5 py-4 outline-none"
               />
 
               <input
                 type="tel"
                 placeholder="Phone Number"
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none"
+                className="w-full bg-theme-surface/5 border border-white/10 rounded-2xl px-5 py-4 outline-none"
               />
 
-              <select className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none">
+              <select className="w-full bg-theme-surface/5 border border-white/10 rounded-2xl px-5 py-4 outline-none">
 
                 <option>General Enquiry</option>
                 <option>VIP Membership</option>
@@ -209,7 +209,7 @@ const ContactPage = () => {
               <textarea
                 rows="5"
                 placeholder="Write your message..."
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 outline-none resize-none"
+                className="w-full bg-theme-surface/5 border border-white/10 rounded-2xl px-5 py-4 outline-none resize-none"
               ></textarea>
 
               <button className="w-full bg-pink-600 hover:bg-pink-700 py-4 rounded-2xl font-semibold transition-all">
@@ -276,7 +276,7 @@ const ContactPage = () => {
                 for personalized matchmaking and premium assistance.
               </p>
 
-              <button className="mt-8 bg-white text-black px-6 py-3 rounded-xl font-semibold">
+              <button className="mt-8 bg-theme-surface text-black px-6 py-3 rounded-xl font-semibold">
                 Contact VIP Team
               </button>
 
@@ -289,7 +289,7 @@ const ContactPage = () => {
       </section>
 
       {/* Offices */}
-      <section className="border-y border-white/5 bg-white/[0.02]">
+      <section className="border-y border-white/5 bg-theme-surface/[0.02]">
 
         <div className="max-w-6xl mx-auto px-6 py-24">
 
@@ -311,7 +311,7 @@ const ContactPage = () => {
 
               <div
                 key={office.city}
-                className="bg-white/[0.03] border border-white/10 rounded-3xl p-8"
+                className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8"
               >
 
                 <MapPin className="w-10 h-10 text-pink-500 mb-5" />
@@ -353,7 +353,7 @@ const ContactPage = () => {
 
             <div
               key={faq.question}
-              className="bg-white/[0.03] border border-white/10 rounded-3xl p-8"
+              className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8"
             >
 
               <h3 className="text-xl font-semibold">

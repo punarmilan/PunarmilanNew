@@ -54,7 +54,7 @@ export default function FamilyDetailsForm({ onNext }) {
               Family Details
             </h2>
 
-            <p className="text-gray-500 mt-1">
+            <p className="text-theme-text-secondary mt-1">
               Add details about your family background
             </p>
           </div>
@@ -87,8 +87,8 @@ export default function FamilyDetailsForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -119,8 +119,8 @@ export default function FamilyDetailsForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -154,8 +154,8 @@ export default function FamilyDetailsForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -180,8 +180,8 @@ export default function FamilyDetailsForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -210,8 +210,8 @@ export default function FamilyDetailsForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -241,8 +241,8 @@ export default function FamilyDetailsForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -272,8 +272,8 @@ export default function FamilyDetailsForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -304,8 +304,8 @@ export default function FamilyDetailsForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100
@@ -336,8 +336,8 @@ export default function FamilyDetailsForm({ onNext }) {
                   h-14
                   px-5
                   rounded-2xl
-                  border border-gray-200
-                  bg-white
+                  border border-theme-border
+                  bg-theme-surface
                   focus:border-pink-500
                   focus:ring-4
                   focus:ring-pink-100

@@ -100,7 +100,7 @@ const CentresPage = () => {
 
           <div className="text-center max-w-4xl mx-auto">
 
-            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/10 backdrop-blur-xl px-5 py-2 rounded-full mb-8">
+            <div className="inline-flex items-center gap-2 bg-theme-surface/10 border border-white/10 backdrop-blur-xl px-5 py-2 rounded-full mb-8">
 
               <Building2 className="w-4 h-4 text-pink-500" />
 
@@ -148,7 +148,7 @@ const CentresPage = () => {
 
             <div
               key={item.label}
-              className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 text-center"
+              className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8 text-center"
             >
 
               <h3 className="text-4xl font-extrabold text-pink-500">
@@ -188,7 +188,7 @@ const CentresPage = () => {
 
             <div
               key={centre.city}
-              className="group bg-white/[0.03] border border-white/10 rounded-3xl overflow-hidden hover:border-pink-500/30 transition-all duration-300"
+              className="group bg-theme-surface/[0.03] border border-white/10 rounded-3xl overflow-hidden hover:border-pink-500/30 transition-all duration-300"
             >
 
               <div className="overflow-hidden">
@@ -236,7 +236,7 @@ const CentresPage = () => {
       </section>
 
       {/* Why Visit */}
-      <section className="border-y border-white/5 bg-white/[0.02]">
+      <section className="border-y border-white/5 bg-theme-surface/[0.02]">
 
         <div className="max-w-6xl mx-auto px-6 py-28">
 
@@ -254,7 +254,7 @@ const CentresPage = () => {
 
               <div
                 key={feature}
-                className="bg-white/[0.03] border border-white/10 rounded-3xl p-7"
+                className="bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-7"
               >
 
                 <CheckCircle2 className="w-7 h-7 text-green-500 mb-5" />
@@ -329,7 +329,7 @@ const CentresPage = () => {
               meaningful marriage.
             </p>
 
-            <button className="mt-8 bg-white text-black px-7 py-4 rounded-2xl font-semibold">
+            <button className="mt-8 bg-theme-surface text-black px-7 py-4 rounded-2xl font-semibold">
               Schedule Visit
             </button>
 
@@ -340,7 +340,7 @@ const CentresPage = () => {
       </section>
 
       {/* Process */}
-      <section className="bg-white/[0.02] border-y border-white/5">
+      <section className="bg-theme-surface/[0.02] border-y border-white/5">
 
         <div className="max-w-6xl mx-auto px-6 py-28">
 
@@ -358,7 +358,7 @@ const CentresPage = () => {
 
               <div
                 key={item.title}
-                className="relative bg-white/[0.03] border border-white/10 rounded-3xl p-8"
+                className="relative bg-theme-surface/[0.03] border border-white/10 rounded-3xl p-8"
               >
 
                 <div className="absolute right-6 top-4 text-5xl font-extrabold text-pink-500/10">
@@ -409,7 +409,7 @@ const CentresPage = () => {
               Book Appointment
             </button>
 
-            <button className="border border-white/10 bg-white/5 px-10 py-5 rounded-2xl font-semibold">
+            <button className="border border-white/10 bg-theme-surface/5 px-10 py-5 rounded-2xl font-semibold">
               Contact Centre
             </button>
 

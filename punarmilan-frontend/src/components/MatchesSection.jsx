@@ -34,17 +34,17 @@ const MatchesSection = () => {
 
     return (
         <div className="w-full px-2 sm:px-4 md:px-0">
-            <div className="dashboard-card-bg rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg p-3 sm:p-4 md:p-6">
+            <div className="bg-theme-surface rounded-lg sm:rounded-xl md:rounded-2xl shadow-md sm:shadow-lg p-3 sm:p-4 md:p-6">
                 {/* Header */}
                 <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between mb-4 sm:mb-5 md:mb-6 gap-2 xs:gap-0">
                     <div>
                         <h2 className="text-lg sm:text-xl md:text-2xl font-bold flex items-center">
-                            <Heart className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-pink-500 mr-1.5 sm:mr-2" />
+                            <Heart className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-theme-primary mr-1.5 sm:mr-2" />
                             My Matches
                         </h2>
-                        <p className="text-gray-500 text-xs sm:text-sm mt-0.5">Last Time: 1 AM/5 AM</p>
+                        <p className="text-theme-text-secondary text-xs sm:text-sm mt-0.5">Last Time: 1 AM/5 AM</p>
                     </div>
-                    <span className="bg-gradient-to-r from-pink-500 to-purple-500 text-white px-2.5 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap">
+                    <span className="bg-gradient-to-r from-theme-primary to-theme-pink text-white px-2.5 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap">
                         20 Matches
                     </span>
                 </div>
@@ -64,17 +64,17 @@ const MatchesSection = () => {
                             <button
                                 onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                                 disabled={currentPage === 1}
-                                className="px-3 py-2 rounded-md border bg-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                                className="px-3 py-2 rounded-md border bg-theme-surface disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
                             >
                                 &lt;
                             </button>
-                            <span className="text-xs text-gray-600 font-medium whitespace-nowrap px-2">
+                            <span className="text-xs text-theme-text-secondary font-medium whitespace-nowrap px-2">
                                 {currentPage} / {totalPages}
                             </span>
                             <button
                                 onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                                 disabled={currentPage === totalPages}
-                                className="px-3 py-2 rounded-md border bg-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                                className="px-3 py-2 rounded-md border bg-theme-surface disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
                             >
                                 &gt;
                             </button>
@@ -109,13 +109,13 @@ const CategoryCard = ({ title, count, icon, color }) => {
     const colorClasses = {
         purple: 'bg-purple-50 text-purple-600 border-purple-100',
         blue: 'bg-blue-50 text-blue-600 border-blue-100',
-        pink: 'bg-pink-50 text-pink-600 border-pink-100',
+        pink: 'bg-pink-50 text-[#0F766E] border-pink-100',
     };
 
     return (
         <div className={`${colorClasses[color]} p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl border text-center`}>
             <div className="flex justify-center mb-1 sm:mb-2">
-                <div className={`p-1 sm:p-1.5 md:p-2 rounded-full bg-white ${colorClasses[color].split(' ')[0]}`}>
+                <div className={`p-1 sm:p-1.5 md:p-2 rounded-full bg-theme-surface ${colorClasses[color].split(' ')[0]}`}>
                     {icon}
                 </div>
             </div>
