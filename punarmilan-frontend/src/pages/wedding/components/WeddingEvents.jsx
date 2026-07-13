@@ -1,26 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import ceremony2 from '../../../assets/image/marriage-ceremony2.jpg';
+import ceremony5 from '../../../assets/image/marriage-ceremony5.jpg';
+import ceremony7 from '../../../assets/image/marriage-ceremony7.webp';
+
 const events = [
   {
     id: 'haldi',
     title: 'The Haldi',
     desc: 'A splash of yellow, love, and laughter to start the celebrations.',
-    image: '/src/assets/image/marriage-ceremony2.jpg',
+    image: ceremony2,
     time: '10:00 AM'
   },
   {
     id: 'sangeet',
     title: 'The Sangeet',
     desc: 'An evening of music, dance, and unforgettable performances.',
-    image: '/src/assets/image/marriage-ceremony5.jpg',
+    image: ceremony5,
     time: '07:30 PM'
   },
   {
     id: 'wedding',
     title: 'The Wedding',
     desc: 'The sacred vows and the beginning of forever.',
-    image: '/src/assets/image/marriage-ceremony7.webp',
+    image: ceremony7,
     time: '06:00 PM'
   }
 ];

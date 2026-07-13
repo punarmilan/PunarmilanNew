@@ -117,7 +117,16 @@ function Login({ close, openRegister }) {
                     localStorage.removeItem("rememberedPassword");
                 }
                 toast.success("Login successful! 🎉");
-                navigate('/complete-profile');
+                try {
+                    const profileRes = await api.get('/profiles/me');
+                    if (profileRes.data && profileRes.data.profileComplete) {
+                        navigate('/my-shadi');
+                    } else {
+                        navigate('/complete-profile');
+                    }
+                } catch (e) {
+                    navigate('/complete-profile');
+                }
                 close && close();
                 setTimeout(() => window.location.reload(), 1000);
             } else {
@@ -172,7 +181,16 @@ function Login({ close, openRegister }) {
 
             if (loginWithOtp.fulfilled.match(resultAction)) {
                 toast.success("Login successful! 🎉");
-                navigate('/complete-profile');
+                try {
+                    const profileRes = await api.get('/profiles/me');
+                    if (profileRes.data && profileRes.data.profileComplete) {
+                        navigate('/my-shadi');
+                    } else {
+                        navigate('/complete-profile');
+                    }
+                } catch (e) {
+                    navigate('/complete-profile');
+                }
                 close && close();
                 setTimeout(() => window.location.reload(), 1000);
             } else {

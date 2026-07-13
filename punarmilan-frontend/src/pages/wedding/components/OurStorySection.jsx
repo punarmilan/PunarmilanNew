@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import heroBg2 from '../../../assets/image/hero_bg2.png';
+import flowerBouquet from '../../../assets/image/flower_bouquet.png';
 
 const OurStorySection = () => {
   return (
@@ -52,7 +54,7 @@ const OurStorySection = () => {
             {/* Image Container */}
             <div className="relative w-full aspect-[4/5] rounded-t-full rounded-b-full overflow-hidden shadow-2xl z-10 border-[6px] border-white">
               <img 
-                src="/src/assets/image/hero_bg2.png" 
+                src={heroBg2} 
                 alt="Couple" 
                 className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-1000"
               />
@@ -66,7 +68,7 @@ const OurStorySection = () => {
               className="absolute -bottom-16 -left-16 w-56 h-56 pointer-events-none z-20"
             >
               <img 
-                src="/src/assets/image/flower_bouquet.png" 
+                src={flowerBouquet} 
                 alt="Floral Decor" 
                 className="w-full h-full object-contain opacity-90 drop-shadow-xl"
               />

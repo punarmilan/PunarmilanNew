@@ -5,6 +5,13 @@ import { HiHeart, HiStar, HiShieldCheck, HiSparkles, HiCash, HiBadgeCheck, HiLig
 import { FaMale, FaFemale, FaApple, FaGooglePlay } from 'react-icons/fa'
 import Login from "../components/Login"
 import Register from "../components/Register"
+
+import ceremony10 from '../assets/image/marriage-ceremony10.jpg';
+import sunnyFloral from '../assets/image/sunny-floral-path.png';
+import couplesImg from '../assets/image/couples.jpg';
+import ceremony2 from '../assets/image/marriage-ceremony2.jpg';
+import exp3 from '../assets/image/experience-3.jpg';
+import appScreen from '../assets/image/matrimony_dashboard.png';
 import { HiX, HiArrowLeft } from "react-icons/hi"
 import heroImg from '../assets/image/hero_bg.jpg'
 import heroImg2 from '../assets/image/hero_bg2.png'
@@ -954,7 +961,7 @@ function Home() {
             {/* Image frame */}
             <div className="relative bg-white/60 backdrop-blur-xl p-3 rounded-[40px] border border-white/80 shadow-2xl shadow-rose-100/50 overflow-hidden">
               <img
-                src="/src/assets/image/marriage-ceremony10.jpg"
+                src={ceremony10}
                 alt="Happy Couple"
                 className="w-full h-[520px] rounded-[32px] object-cover object-top group-hover:scale-105 transition-transform duration-1000 ease-out"
               />
@@ -1098,7 +1105,7 @@ function Home() {
             >
               <div className="bg-white p-2.5 rounded-[28px] shadow-2xl shadow-rose-200/60 border border-rose-100/60 rotate-[-3deg] hover:rotate-0 transition-transform duration-700 group">
                 <img
-                  src="/src/assets/image/sunny-floral-path.png"
+                  src={sunnyFloral}
                   alt="Wedding Ceremony"
                   className="w-full h-[320px] object-cover object-top rounded-[20px] group-hover:scale-105 transition-transform duration-700"
                 />
@@ -1113,7 +1120,7 @@ function Home() {
             >
               <div className="bg-white p-2.5 rounded-[28px] shadow-xl shadow-amber-200/50 border border-amber-100/60 rotate-[3deg] hover:rotate-0 transition-transform duration-700 group">
                 <img
-                  src="/src/assets/image/couples.jpg"
+                  src={couplesImg}
                   alt="Happy Couple"
                   className="w-full h-[280px] object-cover object-top rounded-[20px] group-hover:scale-105 transition-transform duration-700"
                 />
@@ -1128,7 +1135,7 @@ function Home() {
             >
               <div className="bg-white p-2 rounded-[20px] shadow-2xl shadow-rose-300/40 border border-white rotate-[1deg] hover:rotate-0 transition-transform duration-700 group">
                 <img
-                  src="/src/assets/image/marriage-ceremony2.jpg"
+                  src={ceremony2}
                   alt="Marriage"
                   className="w-full h-[180px] object-cover object-center rounded-[14px] group-hover:scale-105 transition-transform duration-700"
                 />
@@ -1143,7 +1150,7 @@ function Home() {
             >
               <div className="bg-white p-2 rounded-[22px] shadow-xl shadow-rose-200/40 border border-rose-100/50 rotate-[-5deg] hover:rotate-0 transition-transform duration-700 group">
                 <img
-                  src="/src/assets/image/experience-3.jpg"
+                  src={exp3}
                   alt="Wedding Experience"
                   className="w-full h-[200px] object-cover object-top rounded-[16px] group-hover:scale-105 transition-transform duration-700"
                 />
@@ -1304,7 +1311,7 @@ function Home() {
                        <div className="w-4 h-4 rounded-full bg-gray-200"></div>
                     </div>
                  </div>
-                 <img src="/src/assets/image/matrimony_dashboard.png" alt="App Screen" className="w-full h-full object-cover rounded-b-[32px]" />
+                 <img src={appScreen} alt="App Screen" className="w-full h-full object-cover rounded-b-[32px]" />
                </motion.div>
 
                {/* Phone 2 (Front - Profile Detail) */}

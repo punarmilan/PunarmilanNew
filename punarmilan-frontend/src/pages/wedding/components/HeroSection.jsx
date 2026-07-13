@@ -1,12 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import heroNewBlur from '../../../assets/image/hero_new_blur.png';
+import flowerBouquet from '../../../assets/image/flower_bouquet.png';
+import couples1 from '../../../assets/image/couples1.jpg';
+import couples from '../../../assets/image/couples.jpg';
+import couples2 from '../../../assets/image/couples2.jpg';
+
 const HeroSection = () => {
   return (
     <section className="relative w-full min-h-[90vh] flex items-center justify-center pt-24 pb-16 overflow-hidden px-4 sm:px-6 lg:px-8 bg-wedding-cream">
       <div className="absolute inset-0 pointer-events-none z-0">
         <img 
-          src="/src/assets/image/hero_new_blur.png" 
+          src={heroNewBlur} 
           alt="Hero Background" 
           className="w-full h-full object-cover opacity-60 mix-blend-multiply animate-slow-pan" 
         />
@@ -20,12 +26,12 @@ const HeroSection = () => {
         
         {/* Floral Corners */}
         <img 
-          src="/src/assets/image/flower_bouquet.png" 
+          src={flowerBouquet} 
           alt="Floral Top Left"
           className="absolute top-0 left-0 w-48 sm:w-64 opacity-80 transform -scale-y-100 scale-x-100 origin-top-left -translate-y-1/4 -translate-x-1/4"
         />
         <img 
-          src="/src/assets/image/flower_bouquet.png" 
+          src={flowerBouquet} 
           alt="Floral Top Right"
           className="absolute top-0 right-0 w-48 sm:w-64 opacity-80 transform -scale-y-100 -scale-x-100 origin-top-right -translate-y-1/4 translate-x-1/4"
         />
@@ -133,7 +139,7 @@ const HeroSection = () => {
             {/* Main Center Arch Image */}
             <div className="relative w-[75%] h-[80%] rounded-t-[300px] overflow-hidden border-[10px] border-white/80 shadow-[0_30px_60px_rgba(90,27,41,0.15)] z-20 backdrop-blur-sm bg-white/30">
               <img
-                src="/src/assets/image/couples1.jpg"
+                src={couples1}
                 alt="Couple"
                 className="w-full h-full object-cover animate-slow-pan"
               />
@@ -147,7 +153,7 @@ const HeroSection = () => {
               className="absolute left-[-5%] top-1/4 w-[45%] h-[55%] rounded-t-[200px] rounded-b-[20px] overflow-hidden border-[6px] border-white shadow-[0_20px_40px_rgba(0,0,0,0.1)] z-10"
             >
               <img
-                src="/src/assets/image/couples.jpg"
+                src={couples}
                 alt="Left Image"
                 className="w-full h-full object-cover"
               />
@@ -160,7 +166,7 @@ const HeroSection = () => {
               className="absolute right-[-5%] bottom-12 w-[40%] h-[50%] rounded-[30px] overflow-hidden border-[6px] border-white shadow-[0_20px_40px_rgba(0,0,0,0.1)] z-30"
             >
               <img
-                src="/src/assets/image/couples2.jpg"
+                src={couples2}
                 alt="Right Image"
                 className="w-full h-full object-cover"
               />

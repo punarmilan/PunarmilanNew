@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import flowerBouquet from '../../../assets/image/flower_bouquet.png';
 
 const RSVPSection = () => {
   return (
@@ -12,8 +13,8 @@ const RSVPSection = () => {
         className="wedding-glass-card w-full max-w-4xl p-8 sm:p-12 relative overflow-hidden text-center"
       >
         {/* Background floral left & right */}
-        <div className="absolute top-0 left-0 w-32 sm:w-48 h-full opacity-30 pointer-events-none" style={{ backgroundImage: 'url(/src/assets/image/flower_bouquet.png)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'left center' }}></div>
-        <div className="absolute top-0 right-0 w-32 sm:w-48 h-full opacity-30 pointer-events-none transform scale-x-[-1]" style={{ backgroundImage: 'url(/src/assets/image/flower_bouquet.png)', backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'left center' }}></div>
+        <div className="absolute top-0 left-0 w-32 sm:w-48 h-full opacity-30 pointer-events-none" style={{ backgroundImage: `url(${flowerBouquet})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'left center' }}></div>
+        <div className="absolute top-0 right-0 w-32 sm:w-48 h-full opacity-30 pointer-events-none transform scale-x-[-1]" style={{ backgroundImage: `url(${flowerBouquet})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'left center' }}></div>
 
         <div className="relative z-10 flex flex-col items-center">
           <div className="w-12 h-12 rounded-full bg-wedding-cream flex items-center justify-center text-wedding-gold mb-6 shadow-sm">

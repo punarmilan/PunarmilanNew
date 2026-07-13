@@ -1,11 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+import ceremony4 from '../../../assets/image/marriage-ceremony4.png';
+import ceremony8 from '../../../assets/image/marriage-ceremony8.avif';
+import ceremony9 from '../../../assets/image/marriage-ceremony9.avif';
+import ceremony10 from '../../../assets/image/marriage-ceremony10.jpg';
+
 const galleryImages = [
-  { src: "/src/assets/image/marriage-ceremony4.png", style: "col-span-2 row-span-2 aspect-[4/5]", objectPos: "object-top" },
-  { src: "/src/assets/image/marriage-ceremony8.avif", style: "col-span-1 row-span-1 aspect-square", objectPos: "object-center" },
-  { src: "/src/assets/image/marriage-ceremony9.avif", style: "col-span-1 row-span-1 aspect-square mt-8", objectPos: "object-center" },
-  { src: "/src/assets/image/marriage-ceremony10.jpg", style: "col-span-2 row-span-1 aspect-[2/1]", objectPos: "object-[center_20%]" },
+  { src: ceremony4, style: "col-span-2 row-span-2 aspect-[4/5]", objectPos: "object-top" },
+  { src: ceremony8, style: "col-span-1 row-span-1 aspect-square", objectPos: "object-center" },
+  { src: ceremony9, style: "col-span-1 row-span-1 aspect-square mt-8", objectPos: "object-center" },
+  { src: ceremony10, style: "col-span-2 row-span-1 aspect-[2/1]", objectPos: "object-[center_20%]" },
 ];
 
 const GallerySection = () => {
