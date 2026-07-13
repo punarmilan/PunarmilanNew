@@ -192,11 +192,11 @@ function PunarMilanSupport() {
             {!isOpen && (
                 <button
                     onClick={toggleChat}
-                    className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-gradient-to-r from-pink-500 to-red-500 text-white p-4 sm:p-5 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 z-50 hover:scale-110 animate-bounce-slow"
+                    className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-gradient-to-br from-pink-500 to-rose-500 text-white p-3 sm:p-4 rounded-full shadow-[0_8px_30px_rgba(236,72,153,0.3)] hover:shadow-[0_8px_30px_rgba(236,72,153,0.5)] transition-all duration-300 z-[10000] hover:scale-105 animate-bounce-slow ring-2 sm:ring-4 ring-pink-100"
                     aria-label="Open chat"
                 >
-                    <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7" />
-                    <span className="absolute -top-1 -right-1 w-5 h-5 sm:w-6 sm:h-6 bg-green-500 border-2 border-white rounded-full flex items-center justify-center text-xs font-bold">
+                    <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-green-500 border-2 border-white rounded-full flex items-center justify-center text-[10px] sm:text-xs font-bold shadow-sm">
                         3
                     </span>
                 </button>
@@ -204,12 +204,13 @@ function PunarMilanSupport() {
 
             {/* Chat Window - MOBILE FULL SCREEN */}
             <div
-                className={`fixed inset-0 sm:inset-auto sm:bottom-4 sm:right-4 w-full sm:w-full max-w-[400px] md:w-full max-w-[440px] bg-white sm:rounded-2xl transition-all duration-300 z-50 shadow-2xl overflow-hidden ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full pointer-events-none'
-                    } ${isMinimized ? 'sm:h-[70px]' : 'h-full sm:h-[600px] md:h-[650px]'}`}
+                className={`fixed inset-0 sm:inset-auto sm:bottom-4 sm:right-4 w-full sm:w-[400px] md:w-[440px] bg-white/95 backdrop-blur-xl sm:rounded-2xl transition-all duration-300 z-[10000] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-pink-100/50 overflow-hidden flex flex-col ${isOpen ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95 pointer-events-none'
+                    } ${isMinimized ? 'sm:h-[70px]' : 'h-full sm:h-[600px] sm:max-h-[calc(100vh-2rem)]'}`}
             >
-                <div className="flex flex-col h-full">
+                <div className="flex flex-col h-full relative">
                     {/* Chat Header - ALWAYS VISIBLE */}
-                    <div className="bg-gradient-to-r from-pink-500 to-red-500 text-white px-3 py-3 sm:px-4 sm:py-4 flex items-center justify-between shadow-lg flex-shrink-0">
+                    <div className="bg-gradient-to-r from-pink-600 to-rose-500 text-white px-3 py-3 sm:px-4 sm:py-4 flex items-center justify-between shadow-md flex-shrink-0 relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
                         <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                             <div className="relative flex-shrink-0">
                                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center shadow-md overflow-hidden p-1">
@@ -251,7 +252,7 @@ function PunarMilanSupport() {
                     {!isMinimized && (
                         <>
                             {/* Chat Messages - Scrollable Area */}
-                            <div className="flex-1 overflow-y-auto px-3 py-4 sm:px-4 sm:py-5 bg-gray-50 custom-scrollbar">
+                            <div className="flex-1 overflow-y-auto px-3 py-4 sm:px-4 sm:py-5 bg-slate-50/50 custom-scrollbar">
                                 {messages.map((dateGroup) => (
                                     <div key={dateGroup.id} className="mb-4 sm:mb-5 md:mb-6">
                                         {/* Date Separator */}
@@ -290,9 +291,9 @@ function PunarMilanSupport() {
                                                     )}
                                                     <div className="flex-1 min-w-0">
                                                         <div
-                                                            className={`rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-3.5 shadow-sm ${chat.sender === 'user'
-                                                                ? 'bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-tr-none'
-                                                                : 'bg-pink-100 text-gray-800 rounded-tl-none'
+                                                            className={`rounded-2xl px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-3.5 shadow-sm border ${chat.sender === 'user'
+                                                                ? 'bg-gradient-to-br from-pink-500 to-rose-500 text-white rounded-tr-none border-transparent shadow-pink-500/20'
+                                                                : 'bg-white text-gray-800 rounded-tl-none border-pink-100 shadow-sm'
                                                                 }`}
                                                         >
                                                             <p className="text-sm leading-relaxed whitespace-pre-line break-words">
@@ -305,13 +306,13 @@ function PunarMilanSupport() {
                                                             <div className="flex gap-2 sm:gap-3 mt-3 sm:mt-4">
                                                                 <button
                                                                     onClick={() => handleYesNo('yes', dateGroup.id, index)}
-                                                                    className="flex-1 sm:flex-initial px-6 py-2 sm:px-7 sm:py-2.5 md:px-8 md:py-2.5 border-2 border-teal-400 text-teal-600 font-semibold rounded-full hover:bg-teal-50 hover:border-teal-500 transition-all duration-300 text-sm shadow-sm hover:shadow-md active:scale-95"
+                                                                    className="flex-1 sm:flex-initial px-6 py-2 sm:px-7 sm:py-2.5 md:px-8 md:py-2.5 border border-pink-300 bg-pink-50/50 text-pink-600 font-medium rounded-full hover:bg-pink-500 hover:text-white hover:border-pink-500 transition-all duration-300 text-sm shadow-sm active:scale-95"
                                                                 >
                                                                     Yes
                                                                 </button>
                                                                 <button
                                                                     onClick={() => handleYesNo('no', dateGroup.id, index)}
-                                                                    className="flex-1 sm:flex-initial px-6 py-2 sm:px-7 sm:py-2.5 md:px-8 md:py-2.5 border-2 border-teal-400 text-teal-600 font-semibold rounded-full hover:bg-teal-50 hover:border-teal-500 transition-all duration-300 text-sm shadow-sm hover:shadow-md active:scale-95"
+                                                                    className="flex-1 sm:flex-initial px-6 py-2 sm:px-7 sm:py-2.5 md:px-8 md:py-2.5 border border-slate-300 bg-slate-50/50 text-slate-600 font-medium rounded-full hover:bg-slate-500 hover:text-white hover:border-slate-500 transition-all duration-300 text-sm shadow-sm active:scale-95"
                                                                 >
                                                                     No
                                                                 </button>
@@ -338,22 +339,22 @@ function PunarMilanSupport() {
                             </div>
 
                             {/* Message Input - Fixed at Bottom */}
-                            <div className="px-3 py-3 sm:px-4 sm:py-4 bg-white border-t border-gray-200 flex-shrink-0 safe-area-bottom">
-                                <form onSubmit={handleSendMessage} className="flex items-center gap-2 sm:gap-3">
+                            <div className="px-3 py-3 sm:px-4 sm:py-4 bg-white/80 backdrop-blur-md border-t border-pink-100 flex-shrink-0 safe-area-bottom">
+                                <form onSubmit={handleSendMessage} className="flex items-center gap-2 sm:gap-3 bg-slate-50 rounded-full p-1.5 border border-slate-200 shadow-inner">
                                     <input
                                         type="text"
                                         value={message}
                                         onChange={(e) => setMessage(e.target.value)}
                                         placeholder="Type your message..."
-                                        className="flex-1 px-3 py-2.5 sm:px-4 sm:py-3 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-500 text-sm"
+                                        className="flex-1 px-3 py-2 sm:px-4 bg-transparent focus:outline-none text-sm text-gray-700 placeholder-gray-400"
                                     />
                                     <button
                                         type="submit"
                                         disabled={!message.trim()}
-                                        className="bg-gradient-to-r from-pink-500 to-red-500 text-white p-2.5 sm:p-3 md:p-3.5 rounded-full hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-110 active:scale-95 shadow-md flex-shrink-0"
+                                        className="bg-gradient-to-br from-pink-500 to-rose-500 text-white p-2.5 sm:p-3 rounded-full hover:shadow-[0_4px_15px_rgba(236,72,153,0.4)] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95 flex-shrink-0"
                                         aria-label="Send message"
                                     >
-                                        <Send className="w-5 h-5" />
+                                        <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                                     </button>
                                 </form>
                             </div>

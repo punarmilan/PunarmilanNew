@@ -32,25 +32,25 @@ const PremiumMatchDashboard = () => {
     const [filters, setFilters] = useState({});
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     
-    // Combine dynamic filters from Redux with static fallback lists
+    // Use static fallback lists unconditionally for filters as requested by user
     const combinedFilterOptions = useMemo(() => ({
-        religion: filterOptions?.religion?.length ? filterOptions.religion : religionOptions,
-        caste: filterOptions?.caste?.length ? filterOptions.caste : communityOptions,
-        subCaste: filterOptions?.subCaste?.length ? filterOptions.subCaste : subCommunityOptions,
-        maritalStatus: filterOptions?.maritalStatus?.length ? filterOptions.maritalStatus : maritalStatusOptions,
-        motherTongue: filterOptions?.motherTongue?.length ? filterOptions.motherTongue : motherTongueOptions,
-        country: filterOptions?.country?.length ? filterOptions.country : countryOptions,
+        religion: religionOptions,
+        caste: communityOptions,
+        subCaste: subCommunityOptions,
+        maritalStatus: maritalStatusOptions,
+        motherTongue: motherTongueOptions,
+        country: countryOptions,
         state: filterOptions?.state || [],
         city: filterOptions?.city || [],
-        educationLevel: filterOptions?.educationLevel?.length ? filterOptions.educationLevel : educationOptions,
-        occupation: filterOptions?.occupation?.length ? filterOptions.occupation : professionOptions,
-        annualIncome: filterOptions?.annualIncome?.length ? filterOptions.annualIncome : incomeOptions,
-        diet: filterOptions?.diet?.length ? filterOptions.diet : dietOptions,
-        smokingHabit: filterOptions?.smokingHabit?.length ? filterOptions.smokingHabit : smokingOptions,
-        drinkingHabit: filterOptions?.drinkingHabit?.length ? filterOptions.drinkingHabit : drinkingOptions,
-        manglikStatus: filterOptions?.manglikStatus?.length ? filterOptions.manglikStatus : manglikOptions.map(m => m.label),
-        rashi: filterOptions?.rashi?.length ? filterOptions.rashi : rashiOptions,
-        gotra: filterOptions?.gotra?.length ? filterOptions.gotra : gotraOptions,
+        educationLevel: educationOptions,
+        occupation: professionOptions,
+        annualIncome: incomeOptions,
+        diet: dietOptions,
+        smokingHabit: smokingOptions,
+        drinkingHabit: drinkingOptions,
+        manglikStatus: manglikOptions.map(m => m.label),
+        rashi: rashiOptions,
+        gotra: gotraOptions,
     }), [filterOptions]);
 
     useEffect(() => {

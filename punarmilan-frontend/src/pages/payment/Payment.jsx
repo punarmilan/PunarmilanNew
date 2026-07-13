@@ -8,10 +8,10 @@ import {
   Crown,
   Sparkles
 } from "lucide-react";
- import { X, Check, HelpCircle, ChevronDown } from 'lucide-react';
+ import { X, Check, HelpCircle, ChevronDown, ChevronRight, Navigation } from 'lucide-react';
  import FaqSection from './FaqSection';
  import TestimalCarousel from './TestimalCarousel';
- import PunarMilanSupport from './ShadiSupport';
+ 
  import HelpDropdown from '../../components/HelpDropdown';
 
  function Payment() {
@@ -62,17 +62,36 @@ import {
                     promotePrice: p.promotePrice || 339,
                     contribution: 17,
                     icon: index === 0 ? (
-                        <ShieldCheck size={28} />
+                        <Navigation size={28} className="text-[#1a56db] fill-[#1a56db]" />
                     ) : index === 1 ? (
-                        <Crown size={28} />
+                        <Sparkles size={28} className="text-[#eab308]" />
                     ) : (
-                        <Sparkles size={28} />
+                        <Crown size={28} className="text-[#0d9488] fill-[#0d9488]" />
                     ),
-                    color: index === 0
-                        ? "from-slate-700 to-slate-900"
-                        : index === 1
-                        ? "from-[#12b36a] to-emerald-600"
-                        : "from-purple-600 to-[#8C6D39]"
+                    design: index === 0 ? {
+                        bg: "bg-gradient-to-b from-[#eff6ff] to-white border-[#dbeafe]",
+                        textMain: "text-[#1a56db]",
+                        badgeBg: "bg-[#dbeafe] text-[#1a56db]",
+                        btnBg: "bg-[#1a56db] hover:bg-[#1e40af] text-white",
+                        checkBg: "bg-[#1a56db]",
+                        ribbon: null
+                    } : index === 1 ? {
+                        bg: "bg-gradient-to-b from-[#fefce8] to-white border-[#fef08a]",
+                        textMain: "text-[#eab308]",
+                        badgeBg: "bg-[#fef08a] text-[#ca8a04]",
+                        btnBg: "bg-[#eab308] hover:bg-[#ca8a04] text-white",
+                        checkBg: "bg-[#eab308]",
+                        ribbon: "TOP SELLER",
+                        ribbonBg: "bg-[#eab308]"
+                    } : {
+                        bg: "bg-gradient-to-b from-[#f0fdfa] to-white border-[#ccfbf1]",
+                        textMain: "text-[#0d9488]",
+                        badgeBg: "bg-[#ccfbf1] text-[#0d9488]",
+                        btnBg: "bg-[#0d9488] hover:bg-[#0f766e] text-white",
+                        checkBg: "bg-[#0d9488]",
+                        ribbon: "BEST VALUE",
+                        ribbonBg: "bg-[#0d9488]"
+                    }
                 }));
                 setPlans(mappedPlans);
             }
@@ -198,95 +217,64 @@ import {
               {plans.map((plan, index) => (
                 <div key={plan.id} className="h-full">
                   <div
-                    className={`relative rounded-[32px] border overflow-hidden h-full flex flex-col ${
-                      plan.badge
-                        ? "border-rose-300 shadow-xl"
-                        : "border-gray-200 shadow-md"
-                    }`}
-                    style={{ background: 'rgba(255,255,255,0.85)' }}
+                    className={`relative rounded-3xl border shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col p-6 text-center ${plan.design.bg}`}
                   >
-                    {/* Badge */}
-                    {plan.badge && (
-                      <div className="absolute top-5 right-5 z-10">
-                        <span className="bg-[#8C6D39] text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
-                          {plan.badge}
-                        </span>
+                    {/* Ribbon */}
+                    {plan.design.ribbon && (
+                      <div className={`absolute top-0 right-4 px-4 py-1.5 rounded-b-lg text-[10px] font-bold text-white tracking-wider ${plan.design.ribbonBg}`}>
+                        {plan.design.ribbon}
                       </div>
                     )}
 
-                    {/* Header */}
-                    <div
-                      className={`p-7 text-white rounded-t-[32px] ${
-                        index === 0
-                          ? "bg-gradient-to-br from-slate-700 to-slate-900"
-                          : index === 1
-                          ? "bg-gradient-to-br from-rose-500 to-[#8C6D39]"
-                          : "bg-gradient-to-br from-purple-600 to-rose-600"
-                      }`}
-                    >
-                      <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-5">
-                        <Check className="w-7 h-7" />
-                      </div>
-
-                      <h2 className="text-3xl font-extrabold tracking-tight">
-                        {plan.name}
-                      </h2>
-
-                      <p className="text-white/90 mt-1 font-medium">
-                        {plan.duration}
-                      </p>
-
-                      <div className="mt-6">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="line-through text-white/70 text-lg font-medium">
-                            ₹{plan.originalPrice.toLocaleString("en-IN")}
-                          </span>
-                          <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-bold backdrop-blur-sm shadow-inner">
-                            {plan.discount}% OFF
-                          </span>
-                        </div>
-                        <div className="text-5xl font-black tracking-tighter">
-                          ₹{plan.discountedPrice.toLocaleString("en-IN")}
-                        </div>
-                        <p className="text-sm text-white/90 mt-2 font-medium">
-                          ₹{plan.perMonth}/month
-                        </p>
-                      </div>
+                    {/* Icon */}
+                    <div className="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center shadow-sm mb-4 mt-2 relative z-10">
+                      {plan.icon}
                     </div>
 
-                    {/* Features */}
-                    <div className="p-7 flex-1 bg-white/60 backdrop-blur-md">
-                      <ul className="space-y-4 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                    {/* Title & Duration */}
+                    <h3 className="text-xl font-bold text-gray-800 tracking-tight">{plan.name}</h3>
+                    <p className="text-xs text-gray-500 font-medium mb-4">{plan.duration}</p>
+
+                    {/* Pricing */}
+                    <div className="flex justify-center items-center gap-2 mb-1">
+                      <span className="text-gray-400 line-through text-xs font-medium">
+                        ₹{plan.originalPrice.toLocaleString("en-IN")}
+                      </span>
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${plan.design.badgeBg}`}>
+                        {plan.discount}% OFF
+                      </span>
+                    </div>
+                    <div className={`text-4xl font-black mb-1 tracking-tighter ${plan.design.textMain}`}>
+                      ₹{plan.discountedPrice.toLocaleString("en-IN")}
+                    </div>
+                    <p className="text-[10px] text-gray-500 mb-6 font-medium">
+                      ₹{plan.perMonth}/month
+                    </p>
+
+                    {/* Features List */}
+                    <div className="flex-1 text-left">
+                      <ul className="space-y-3 mb-8 pl-1">
                         {plan.features.map((feature, idx) => (
                           <li
                             key={idx}
-                            className="flex items-start gap-3"
+                            className="flex items-center gap-3 text-[13px] text-gray-600 font-medium"
                           >
-                            <span className="w-6 h-6 rounded-full bg-[#FAF6F0] text-[#C5A059] flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <Check size={14} strokeWidth={3} />
-                            </span>
-                            <span className="text-sm text-gray-700 font-medium leading-relaxed">
-                              {feature}
-                            </span>
+                            <div className={`w-4 h-4 rounded-full flex items-center justify-center text-white flex-shrink-0 ${plan.design.checkBg}`}>
+                              <Check size={10} strokeWidth={4} />
+                            </div>
+                            <span>{feature}</span>
                           </li>
                         ))}
                       </ul>
-
-                      <button
-                        onClick={() => handleContinue(plan)}
-                        className={`mt-8 w-full py-4 rounded-2xl font-bold transition-all duration-300 transform ${
-                          plan.badge
-                            ? "bg-gradient-to-r from-[#C5A059] to-[#8C6D39] text-white shadow-xl hover:scale-105 hover:shadow-2xl hover:from-[#b59049] hover:to-[#7c5d29]"
-                            : "bg-rose-50 text-[#8C6D39] hover:bg-rose-100 hover:scale-105 border border-rose-100"
-                        }`}
-                      >
-                        Choose {plan.name}
-                      </button>
-
-                      <p className="text-xs text-center text-gray-400 mt-5 font-medium">
-                        Auto-renews on expiry. Cancel anytime.
-                      </p>
                     </div>
+
+                    {/* Button */}
+                    <button
+                      onClick={() => handleContinue(plan)}
+                      className={`w-full py-3 rounded-full font-bold flex items-center justify-center gap-2 transition-transform hover:scale-105 text-sm shadow-sm ${plan.design.btnBg}`}
+                    >
+                      Choose Plan <ChevronRight size={16} />
+                    </button>
                   </div>
                 </div>
               ))}
@@ -499,7 +487,7 @@ import {
             <FaqSection />
             <TestimalCarousel />
             <div className='flex justify-center items-center'>
-                <PunarMilanSupport />
+
 
             </div>
                 </div>

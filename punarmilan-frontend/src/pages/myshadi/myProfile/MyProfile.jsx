@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import editProfileBanner from '../../../assets/image/edit-profile-banner.png';
+import profileBanner from '../../../assets/image/profile_baner1.avif';
 // import img from '../../../assets/image/profile.png' // Removed static image
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEdit, FaChartBar, FaFilter, FaHeart, FaCamera, FaEye, FaPhone, FaStar, FaShareAlt, FaDownload, FaUserEdit, FaUserFriends, FaHome, FaGraduationCap, FaBriefcase, FaMapMarkerAlt, FaBirthdayCake, FaClock, FaCity, FaVenusMars, FaUsers, FaWallet, FaCheck, FaTimes, FaInfoCircle, FaUserCircle, FaLanguage, FaShieldAlt, FaTrash } from 'react-icons/fa';
@@ -1718,7 +1718,7 @@ Generated on: ${new Date().toLocaleString()}
         {/* HERO BANNER & BASIC INFO */}
         <div className="dashboard-card-bg rounded-3xl shadow-sm mb-6 overflow-hidden relative border border-white/50">
           {/* Banner Image */}
-          <div className="h-48 md:h-64 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${editProfileBanner})` }}>
+          <div className="h-48 md:h-64 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${profileBanner})` }}>
             <div className="absolute inset-0 bg-black/10"></div>
             <div className="absolute top-4 right-4 z-10">
               <button onClick={() => navigate(editModePage ? '/my-shadi/my-profile' : '/my-shadi/edit-profile')} className="bg-black/60 hover:bg-black/80 text-white backdrop-blur-md px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition-all shadow-sm">

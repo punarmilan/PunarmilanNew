@@ -14,6 +14,7 @@ import Header from "./components/Headers";
 import Footer from "./components/Footer";
 import AuthenticatedFooter from "./components/AuthenticatedFooter";
 import OnlineMembers from "./components/OnlineMembers";
+import PunarMilanSupport from "./components/PunarMilanSupport";
 import SecondNav from "./components/SecondNav";
 import { getCurrentUser } from "./Slice/UserSlice";
 import MyProfile from "./pages/myshadi/myProfile/MyProfile";
@@ -195,40 +196,9 @@ function App() {
   return (
     <div className="min-h-screen pb-safe-bottom w-full max-w-[100%] overflow-x-hidden">
       {/* Online Members Chat Button */}
-      {/* ✅ DO NOT SHOW ON HOME PAGE */}
-      {!isHomePage && !isAdminPage && !isContactPage && (
-        <>
-          {/* Online Members Chat Button */}
-          <button
-          onClick={() => setOpen(!open)}
-          className="
-            fixed
-            right-4 bottom-4
-            md:block hidden
-            z-[10000]
-            bg-gradient-to-br from-rose-500 to-pink-600
-            text-white
-            p-4
-            rounded-full
-            shadow-2xl
-            hover:scale-105
-            transition-all duration-300
-          "
-        >
-          <div className="relative">
-            <span className="text-xl">💬</span>
-
-            {(unreadCount + notificationsUnreadCount) > 0 && (
-              <span className="absolute -top-2 -right-2 min-w-[20px] h-5 bg-yellow-400 text-rose-900 text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white animate-bounce shadow-sm px-1">
-                {unreadCount + notificationsUnreadCount}
-              </span>
-            )}
-          </div>
-        </button>
-
-          <OnlineMembers open={open} setOpen={setOpen} />
-
-        </>
+      {/* Support Chat Bot */}
+      {!isAdminPage && (
+        <PunarMilanSupport />
       )}
       {/* ROUTES */}
       <Routes>
