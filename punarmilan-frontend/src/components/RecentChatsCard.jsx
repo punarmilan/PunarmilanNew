@@ -26,37 +26,7 @@ const RecentChatsCard = () => {
         });
     };
 
-    const dummyChats = [
-        {
-            otherUserId: 1,
-            otherUserName: "Julia Ann",
-            otherProfilePhotoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=60",
-            lastMessage: "Hey! I saw your profile and loved it. Let's connect!",
-            lastActive: new Date().toISOString(),
-            isOnline: true,
-            unreadCount: 2
-        },
-        {
-            otherUserId: 2,
-            otherUserName: "Aria Montgomery",
-            otherProfilePhotoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=60",
-            lastMessage: "Are you free to talk this weekend?",
-            lastActive: new Date(Date.now() - 3600000).toISOString(),
-            isOnline: true,
-            unreadCount: 0
-        },
-        {
-            otherUserId: 4,
-            otherUserName: "Elena Gilbert",
-            otherProfilePhotoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=60",
-            lastMessage: "I accept your request, looking forward to speaking with you.",
-            lastActive: new Date(Date.now() - 86400000).toISOString(),
-            isOnline: false,
-            unreadCount: 0
-        }
-    ];
-
-    const activeChats = recentConversations && recentConversations.length > 0 ? recentConversations : dummyChats;
+    const activeChats = recentConversations || [];
 
     return (
         <div className="w-full bg-theme-surface shadow-[var(--theme-shadow-soft)] rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:shadow-[var(--theme-shadow-soft)]">
@@ -85,6 +55,14 @@ const RecentChatsCard = () => {
                 <div className="flex flex-col items-center justify-center py-12 gap-2">
                     <div className="w-8 h-8 rounded-full border-4 border-theme-border border-t-[#16A085] animate-spin" />
                     <span className="text-xs text-gray-400 font-medium tracking-wider uppercase">Loading chats...</span>
+                </div>
+            ) : activeChats.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-10 text-center">
+                    <div className="w-20 h-20 mb-4 rounded-full bg-gradient-to-tr from-[#FFF6F2] to-white border border-[#FFD8C2] flex items-center justify-center shadow-inner">
+                        <MessageSquare className="w-10 h-10 text-[#D89A74]" />
+                    </div>
+                    <h4 className="text-sm font-bold text-[#D89A74] mb-1 font-serif">No Chats Yet</h4>
+                    <p className="text-xs text-[#7A6666] max-w-[260px] leading-relaxed">Accept a connection request or send a message to start chatting with your matches!</p>
                 </div>
             ) : (
                 <div className="space-y-4">

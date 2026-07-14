@@ -49,39 +49,8 @@ const ChatsPage = () => {
         }
     }, [error, dispatch]);
 
-    // Dummy chats fallback for offline/no-data mode to look populated
-    const dummyChats = [
-        {
-            otherUserId: 1,
-            otherUserName: "Julia Ann",
-            otherProfilePhotoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=60",
-            lastMessage: "Hey! I saw your profile and loved it. Let's connect!",
-            lastActive: new Date().toISOString(),
-            isOnline: true,
-            unreadCount: 2
-        },
-        {
-            otherUserId: 2,
-            otherUserName: "Aria Montgomery",
-            otherProfilePhotoUrl: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=60",
-            lastMessage: "Are you free to talk this weekend?",
-            lastActive: new Date(Date.now() - 3600000).toISOString(),
-            isOnline: true,
-            unreadCount: 0
-        },
-        {
-            otherUserId: 4,
-            otherUserName: "Elena Gilbert",
-            otherProfilePhotoUrl: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=60",
-            lastMessage: "I accept your request, looking forward to speaking with you.",
-            lastActive: new Date(Date.now() - 86400000).toISOString(),
-            isOnline: false,
-            unreadCount: 0
-        }
-    ];
-
     const activeConversations = React.useMemo(() => {
-        let baseList = recentConversations && recentConversations.length > 0 ? [...recentConversations] : [...dummyChats];
+        let baseList = recentConversations && recentConversations.length > 0 ? [...recentConversations] : [];
         
         if (selectedUser) {
             const isPresent = baseList.some(c => c.otherUserId === selectedUser.id);
@@ -169,56 +138,66 @@ const ChatsPage = () => {
                     </div>
 
                     <div className="flex-1 overflow-y-auto divide-y divide-gray-100/50">
-                        {activeConversations.map((c) => {
-                            const isSelected = selectedUser && selectedUser.id === c.otherUserId;
-                            return (
-                                <div
-                                    key={c.otherUserId}
-                                    onClick={() => setSelectedUser({
-                                        id: c.otherUserId,
-                                        fullName: c.otherUserName,
-                                        profilePhotoUrl: c.otherProfilePhotoUrl
-                                    })}
-                                    className={`flex items-center gap-3.5 px-5 py-4 cursor-pointer transition-all duration-200 ${
-                                        isSelected 
-                                            ? 'bg-amber-50/60 border-l-4 border-l-[#8C6D39]' 
-                                            : 'hover:bg-gray-50/50 border-l-4 border-l-transparent'
-                                    }`}
-                                >
-                                    {/* Avatar */}
-                                    <div className="relative flex-shrink-0">
-                                        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm ring-1 ring-amber-100">
-                                            <img 
-                                                src={c.otherProfilePhotoUrl || `https://i.pravatar.cc/100?u=${c.otherUserId}`} 
-                                                alt={c.otherUserName} 
-                                                className="w-full h-full object-cover"
-                                            />
+                        {activeConversations.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
+                                <div className="w-16 h-16 mb-4 rounded-full bg-gradient-to-tr from-[#FFF2EF] to-white border border-[#F2D7D9] flex items-center justify-center shadow-inner">
+                                    <MessageSquare className="w-8 h-8 text-[#E86D8A]" />
+                                </div>
+                                <h4 className="text-sm font-bold text-[#E86D8A] mb-1 font-serif">No Chats Found</h4>
+                                <p className="text-[11px] text-[#7A6666] max-w-[200px] leading-relaxed">Connect with your matches to start a conversation here!</p>
+                            </div>
+                        ) : (
+                            activeConversations.map((c) => {
+                                const isSelected = selectedUser && selectedUser.id === c.otherUserId;
+                                return (
+                                    <div
+                                        key={c.otherUserId}
+                                        onClick={() => setSelectedUser({
+                                            id: c.otherUserId,
+                                            fullName: c.otherUserName,
+                                            profilePhotoUrl: c.otherProfilePhotoUrl
+                                        })}
+                                        className={`flex items-center gap-3.5 px-5 py-4 cursor-pointer transition-all duration-200 ${
+                                            isSelected 
+                                                ? 'bg-amber-50/60 border-l-4 border-l-[#8C6D39]' 
+                                                : 'hover:bg-gray-50/50 border-l-4 border-l-transparent'
+                                        }`}
+                                    >
+                                        {/* Avatar */}
+                                        <div className="relative flex-shrink-0">
+                                            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm ring-1 ring-amber-100">
+                                                <img 
+                                                    src={c.otherProfilePhotoUrl || `https://i.pravatar.cc/100?u=${c.otherUserId}`} 
+                                                    alt={c.otherUserName} 
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                            {c.isOnline && (
+                                                <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white shadow-sm" />
+                                            )}
                                         </div>
-                                        {c.isOnline && (
-                                            <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white shadow-sm" />
+
+                                        {/* User Details */}
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex justify-between items-baseline mb-0.5">
+                                                <span className="font-bold text-sm text-[#4A3728] truncate">{c.otherUserName}</span>
+                                                <span className="text-[10px] text-gray-400 font-medium whitespace-nowrap">
+                                                    {c.lastActive ? new Date(c.lastActive).toLocaleDateString([], { day: '2-digit', month: 'short' }) : ''}
+                                                </span>
+                                            </div>
+                                            <p className="text-xs text-theme-text-secondary truncate">{c.lastMessage || 'No messages yet'}</p>
+                                        </div>
+
+                                        {/* Unread Badge */}
+                                        {c.unreadCount > 0 && (
+                                            <span className="h-5 min-w-[20px] px-1.5 bg-gradient-to-r from-rose-500 to-pink-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-sm animate-pulse">
+                                                {c.unreadCount}
+                                            </span>
                                         )}
                                     </div>
-
-                                    {/* User Details */}
-                                    <div className="flex-1 min-w-0">
-                                        <div className="flex justify-between items-baseline mb-0.5">
-                                            <span className="font-bold text-sm text-[#4A3728] truncate">{c.otherUserName}</span>
-                                            <span className="text-[10px] text-gray-400 font-medium whitespace-nowrap">
-                                                {new Date(c.lastActive).toLocaleDateString([], { day: '2-digit', month: 'short' })}
-                                            </span>
-                                        </div>
-                                        <p className="text-xs text-theme-text-secondary truncate">{c.lastMessage || 'No messages yet'}</p>
-                                    </div>
-
-                                    {/* Unread Badge */}
-                                    {c.unreadCount > 0 && (
-                                        <span className="h-5 min-w-[20px] px-1.5 bg-gradient-to-r from-rose-500 to-pink-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-sm animate-pulse">
-                                            {c.unreadCount}
-                                        </span>
-                                    )}
-                                </div>
-                            );
-                        })}
+                                );
+                            })
+                        )}
                     </div>
                 </div>
 
