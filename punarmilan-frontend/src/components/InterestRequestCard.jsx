@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, X, Check, MoreHorizontal } from 'lucide-react';
+import noInterestDataImg from '../assets/image/no_interest_data.svg';
 import {
   fetchReceivedRequests,
   fetchAcceptedByMe,
@@ -241,11 +242,11 @@ const InterestRequestCard = () => {
                                 animate={{ opacity: 1 }}
                                 className="flex flex-col items-center justify-center py-16 text-center"
                             >
-                                <div className="w-24 h-24 mb-6 rounded-full bg-gradient-to-tr from-[#FFF2EF] to-white border border-[#F2D7D9] flex items-center justify-center shadow-inner">
-                                    <svg className="w-12 h-12 text-[#E86D8A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 21l-1.45-1.3C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21z" />
-                                    </svg>
-                                </div>
+                                <img 
+                                    src={noInterestDataImg} 
+                                    alt="No Requests" 
+                                    className="w-48 h-48 md:w-56 md:h-56 object-contain mx-auto mb-4" 
+                                />
                                 <h4 className="text-base font-bold text-[#E86D8A] mb-1 font-serif">No Requests Found</h4>
                                 <p className="text-xs text-[#7A6666] max-w-[280px]">You don't have any {activeTab} requests at the moment. Keep exploring profiles!</p>
                             </motion.div>
