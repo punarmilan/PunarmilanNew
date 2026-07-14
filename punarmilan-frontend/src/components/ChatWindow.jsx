@@ -20,7 +20,8 @@ export default function ChatWindow({ targetUser, onClose }) {
 
     useEffect(() => {
         if (error) {
-            if (error.toLowerCase().includes("premium") || error.toLowerCase().includes("upgrade")) {
+            const errStr = typeof error === 'string' ? error : (error.message || String(error));
+            if (errStr.toLowerCase().includes("premium") || errStr.toLowerCase().includes("upgrade")) {
                 Swal.fire({
                     icon: 'warning',
                     title: '<span style="color:#8C6D39">Premium Feature</span>',
