@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import bannerBg from '../../../assets/image/banner-bg.png';
 import {
   User,
   Phone,
@@ -30,7 +31,7 @@ import MyContactSettings from './MyContactSettings';
 import AstroDetails from './AstroDetails';
 import AlertsSettings from './AlertsSettings';
 import PrivacyOptions from './PrivacyOptions';
-import PunarMilanLive from './PunarMilanLive';
+import LovenZeaLive from './LovenZeaLive';
 import DeleteHide from './DeleteHide';
 import Messages from './Messages';
 
@@ -130,12 +131,12 @@ const Settings = () => {
     },
     {
       id: 'live',
-      label: 'PunarMilan Live',
+      label: 'LovenZea Live',
       desc: 'Video meeting and live interaction settings',
       icon: Video,
       accent: 'from-red-500 to-pink-500',
       isNew: true,
-      component: <PunarMilanLive profile={profile} onUpdate={handleUpdateProfile} />,
+      component: <LovenZeaLive profile={profile} onUpdate={handleUpdateProfile} />,
     },
     {
       id: 'messages',
@@ -187,7 +188,7 @@ const Settings = () => {
         transition={{ duration: 0.45, ease: 'easeOut' }}
         className="relative z-10 mx-auto max-w-6xl px-4 pt-6 sm:px-6 lg:pt-10"
       >
-        <div className="mb-6 overflow-hidden rounded-[32px] border border-white/70 dashboard-card-bg shadow-[0_22px_70px_rgba(190,24,93,0.06)]">
+        <div className="relative mb-6 overflow-hidden rounded-[32px] border border-white/70 dashboard-card-bg shadow-[0_22px_70px_rgba(190,24,93,0.06)]" style={{ backgroundImage: `url(${bannerBg})`, backgroundSize: "cover", backgroundPosition: "center" }}>
           <div className="relative p-6 sm:p-8">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(236,72,153,0.14),transparent_35%),radial-gradient(circle_at_90%_20%,rgba(168,85,247,0.14),transparent_35%)]" />
 

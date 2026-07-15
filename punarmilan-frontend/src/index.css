@@ -27,24 +27,35 @@
 }
 
 :root {
-  --theme-primary: #E86D8A;
-  --theme-primary-dark: #C46A88;
-  --theme-violet: #D89A74;
-  --theme-magenta: #E86D8A;
-  --theme-pink: #F9E6E7;
-  --theme-coral: #C99853;
-  --theme-bg: #FFF8F7;
+  --theme-primary: #E88C8C;
+  --theme-primary-dark: #B54768;
+  --theme-violet: #B54768;
+  --theme-magenta: #B54768;
+  --theme-pink: #F7C7B8;
+  --theme-coral: #D98C72;
+  --theme-bg: #FFF8F5;
   --theme-surface: #FFFFFF;
-  --theme-lavender: #FFF6F2;
-  --theme-soft-pink: #F9E6E7;
-  --theme-text: #3B2F2F;
+  --theme-lavender: #FFF8F5;
+  --theme-soft-pink: #F7C7B8;
+  --theme-text: #6B5A5A;
   --theme-text-secondary: #7A6666;
-  --theme-border: #F2D7D9;
+  --theme-border: #F7C7B8;
   --theme-success: #4CAF7A;
   --theme-warning: #F5B942;
   --theme-error: #EF476F;
-  --theme-gradient: linear-gradient(135deg, #E86D8A 0%, #D89A74 100%);
-  --theme-purple-magenta: linear-gradient(135deg, #E86D8A 0%, #D89A74 100%);
+  --theme-gradient: linear-gradient(135deg, #E88C8C 0%, #B54768 100%);
+  --theme-purple-magenta: linear-gradient(135deg, #E88C8C 0%, #B54768 100%);
+  --theme-shadow-soft: 0 12px 35px rgba(222, 120, 120, 0.12);
+  --theme-heading-color: #5A2332;
+}
+
+body {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif {
+  color: var(--theme-heading-color) !important;
 }
 /* ===== Global Responsive Defaults ===== */
 html {
@@ -364,25 +375,14 @@ button:focus-visible, a:focus-visible {
 
 /* Global Premium Glass Card for Dashboard */
 .dashboard-card-bg {
-    background-image: url('./assets/image/sunny-floral-path.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: rgba(255, 248, 247, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     position: relative;
     border: 1px solid #F2D7D9 !important;
     border-radius: 20px !important;
     box-shadow: 0 10px 30px rgba(216, 154, 116, 0.12) !important;
     overflow: hidden;
-}
-.dashboard-card-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: rgba(255, 248, 247, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: inherit;
-    z-index: 0;
 }
 .dashboard-card-bg > * {
     position: relative;

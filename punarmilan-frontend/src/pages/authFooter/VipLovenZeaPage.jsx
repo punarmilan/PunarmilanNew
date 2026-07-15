@@ -62,7 +62,7 @@ const stats = [
   },
 ];
 
-const VipPunarMilanPage = () => {
+const VipLovenZeaPage = () => {
   return (
     <div className="bg-[#050816] min-h-screen text-white overflow-hidden">
 
@@ -88,7 +88,7 @@ const VipPunarMilanPage = () => {
             <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
 
               VIP
-              <span className="text-pink-500"> PunarMilan</span>
+              <span className="text-pink-500"> LovenZea</span>
 
             </h1>
 
@@ -153,7 +153,7 @@ const VipPunarMilanPage = () => {
         <div className="text-center mb-16">
 
           <h2 className="text-5xl font-bold">
-            Why Choose VIP PunarMilan?
+            Why Choose VIP LovenZea?
           </h2>
 
           <p className="text-gray-400 mt-5 max-w-2xl mx-auto">
@@ -346,7 +346,7 @@ const VipPunarMilanPage = () => {
               </div>
 
               <p className="text-gray-300 leading-8">
-                PunarMilan VIP helped us find a meaningful connection with
+                LovenZea VIP helped us find a meaningful connection with
                 complete privacy and personalized support.
               </p>
 
@@ -372,7 +372,7 @@ const VipPunarMilanPage = () => {
           </h2>
 
           <p className="mt-6 text-gray-400 text-lg">
-            Join VIP PunarMilan and experience personalized premium
+            Join VIP LovenZea and experience personalized premium
             matchmaking.
           </p>
 
@@ -388,4 +388,4 @@ const VipPunarMilanPage = () => {
   );
 };
 
-export default VipPunarMilanPage;
+export default VipLovenZeaPage;

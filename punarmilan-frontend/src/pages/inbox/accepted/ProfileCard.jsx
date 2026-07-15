@@ -121,7 +121,7 @@ const ProfileCard = ({ profile, onUpgrade, onChat, onWhatsApp, onCall }) => {
                         WhatsApp
                     </button>
 
-                    {/* PunarMilan Chat Button */}
+                    {/* LovenZea Chat Button */}
                     <button
                         onClick={() => { if (onChat) onChat(); }}
                         className="w-full flex items-center justify-center gap-2 bg-theme-surface border border-gray-300 text-blue-600 font-medium py-2.5 sm:py-3 px-4 rounded-md hover:bg-gray-50 transition-all text-sm sm:text-base"
@@ -129,7 +129,7 @@ const ProfileCard = ({ profile, onUpgrade, onChat, onWhatsApp, onCall }) => {
                         <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
                         </svg>
-                        PunarMilan Chat
+                        LovenZea Chat
                     </button>
                 </div>
             </div>

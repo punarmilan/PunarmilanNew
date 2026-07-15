@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
+import bannerBg from '../../../assets/image/banner-bg.png';
 import { 
     Search, Heart, ShieldCheck, Star, ExternalLink,
     ChevronDown, RotateCcw, Crown, Zap, Calendar, User, Globe, MapPin, MessageCircle, Activity,
@@ -121,7 +122,8 @@ const PremiumMatchDashboard = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="relative w-full rounded-[20px] overflow-hidden dashboard-card-bg shadow-sm mb-4 flex flex-col md:flex-row items-center px-6 py-3 border border-white/50"
+                    className="relative w-full rounded-[20px] overflow-hidden shadow-sm mb-4 flex flex-col md:flex-row items-center px-6 py-3 border border-[#f1d8d1]"
+                    style={{ backgroundImage: `url(${bannerBg})`, backgroundSize: "cover", backgroundPosition: "center" }}
                 >
 
                     <div className="relative z-10 w-full md:w-1/2 lg:w-3/5 text-gray-800 mb-2 md:mb-0">
@@ -135,10 +137,10 @@ const PremiumMatchDashboard = () => {
                             Explore compatible profiles based on your preferences & relationship goals.
                         </p>
                         <div className="flex gap-3">
-                            <button className="px-5 py-1.5 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white text-xs font-bold rounded-full shadow-md transition-colors flex items-center gap-2">
+                            <button className="px-5 py-1.5 bg-gradient-to-r from-[#ef7f8f] to-[#c93f65] hover:from-[#df5f78] hover:to-[#b83f5d] text-white text-xs font-bold rounded-full shadow-[0_4px_10px_rgba(201,63,101,0.2)] hover:shadow-[0_6px_15px_rgba(201,63,101,0.3)] hover:-translate-y-0.5 transition-all flex items-center gap-2">
                                 <User size={14} /> Explore Matches
                             </button>
-                            <button className="px-5 py-1.5 bg-theme-surface border border-pink-200 hover:bg-pink-50 text-pink-600 text-xs font-bold rounded-full transition-colors flex items-center gap-2 shadow-sm">
+                            <button className="px-5 py-1.5 bg-white border border-[#ef7f8f] hover:bg-[#fff1ed] text-[#c93f65] text-xs font-bold rounded-full transition-colors flex items-center gap-2 shadow-sm">
                                 <Heart size={14} /> View Likes
                             </button>
                         </div>

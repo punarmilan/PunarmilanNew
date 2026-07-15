@@ -80,7 +80,7 @@ const ContactPage = () => {
 
               Contact
               <span className="text-pink-500">
-                {" "}PunarMilan
+                {" "}LovenZea
               </span>
 
             </h1>
@@ -133,7 +133,7 @@ const ContactPage = () => {
             </p>
 
             <p className="text-blue-400 font-semibold mt-5 break-all">
-              punarmilan2@gmail.com
+              lovenzea2@gmail.com
             </p>
 
           </div>

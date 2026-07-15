@@ -447,7 +447,27 @@ public class ProfileServiceImpl implements ProfileService {
                 try {
                     Field field = Profile.class.getDeclaredField(key);
                     field.setAccessible(true);
-                    field.set(profile, value);
+                    
+                    if (value == null) {
+                        field.set(profile, null);
+                    } else {
+                        Class<?> fieldType = field.getType();
+                        String strValue = String.valueOf(value);
+                        
+                        if (fieldType.equals(Integer.class)) {
+                            field.set(profile, Integer.parseInt(strValue));
+                        } else if (fieldType.equals(Double.class)) {
+                            field.set(profile, Double.parseDouble(strValue));
+                        } else if (fieldType.equals(java.time.LocalDate.class)) {
+                            field.set(profile, java.time.LocalDate.parse(strValue));
+                        } else if (fieldType.equals(java.time.LocalTime.class)) {
+                            field.set(profile, java.time.LocalTime.parse(strValue));
+                        } else if (fieldType.equals(Boolean.class)) {
+                            field.set(profile, Boolean.parseBoolean(strValue));
+                        } else {
+                            field.set(profile, value);
+                        }
+                    }
                 } catch (Exception e) {
                     log.warn("Could not update field {}: {}", key, e.getMessage());
                 }

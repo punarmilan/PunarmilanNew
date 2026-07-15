@@ -2,7 +2,6 @@ import React from 'react';
 import { Shield, Lock, AlertTriangle, EyeOff, UserCheck, MessageCircle, AlertOctagon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Headers';
-import Footer from '../components/Footer';
 
 const safetyTips = [
   {
@@ -108,8 +107,6 @@ const BeSafeOnline = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

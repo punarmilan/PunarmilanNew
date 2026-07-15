@@ -1,6 +1,7 @@
  import React, { useState, useEffect } from 'react';
  import { createPortal } from 'react-dom';
  import api from '../../services/api';
+ import bannerBg from '../../assets/image/banner-bg.png';
  import Swal from 'sweetalert2';
  import { useNavigate } from "react-router-dom";
 import {
@@ -20,7 +21,7 @@ import {
     const [orderDetails, setOrderDetails] = useState({
         addContacts: false,
         promoteProfile: false,
-        contributePunarMilan: true
+        contributeLovenZea: true
     });
 
     const navigate = useNavigate()
@@ -107,7 +108,7 @@ import {
         setOrderDetails({
             addContacts: false,
             promoteProfile: false,
-            contributePunarMilan: true
+            contributeLovenZea: true
         });
         setShowModal(true);
     };
@@ -117,7 +118,7 @@ import {
         let total = selectedPlan.discountedPrice;
         if (orderDetails.addContacts) total += selectedPlan.extraContactPrice;
         if (orderDetails.promoteProfile) total += selectedPlan.promotePrice;
-        if (orderDetails.contributePunarMilan) total += selectedPlan.contribution;
+        if (orderDetails.contributeLovenZea) total += selectedPlan.contribution;
         return total;
     };
 
@@ -137,7 +138,7 @@ import {
                 key: orderResponse.key,
                 amount: finalAmount * 100,
                 currency: orderResponse.currency,
-                name: 'Punarmilan',
+                name: 'LovenZea',
                 description: `Subscription for ${selectedPlan.name}`,
                 order_id: orderResponse.orderId,
                 handler: async (response) => {
@@ -189,790 +190,271 @@ import {
 
     if (loading) return <div className="min-h-[60vh] flex items-center justify-center bg-transparent text-teal-600 font-bold">Loading Subscription Plans...</div>;
     return (
-        <div className="w-full bg-transparent font-sans">
-            <div className="max-w-7xl mx-auto flex flex-col">
-                {/* Main Content Area */}
-                <div className="flex-1 min-w-0">
-                    {/* Premium Hero Section */}
-                    <div className="dashboard-card-bg border border-white/50 pt-8 pb-24 md:pb-28 px-4 rounded-b-3xl md:rounded-3xl shadow-sm">
-                        {/* Banner Text */}
-                        <div className="max-w-5xl mx-auto text-center">
-                            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 drop-shadow-sm leading-tight mb-4 tracking-tighter">
-                                Upgrade now & Get upto 85% discount!
-                            </h2>
-                            
-                            <div className="max-w-2xl mx-auto">
-                                <div className="bg-theme-surface/40 backdrop-blur-md px-6 py-2 md:px-8 md:py-3 rounded-full border border-white/50 shadow-sm inline-block">
-                                    <p className="text-theme-pink text-sm md:text-base font-black tracking-wide">
-                                        Save upto 85% on Premium Plans!! Valid for limited period!
-                                    </p>
-                                </div>
+        <div className="w-full bg-transparent font-sans min-h-screen">
+            <div className="max-w-7xl mx-auto flex flex-col px-4 sm:px-6 lg:px-8 pb-6 pt-0">
+                
+                {/* Hero Banner with Glassmorphism */}
+                <div className="relative overflow-hidden rounded-[2.5rem] shadow-xl mb-0 group border border-white/50" 
+                     style={{ backgroundImage: `url(${bannerBg})`, backgroundSize: "cover", backgroundPosition: "center" }}>
+                    
+                    {/* Dark Glass Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#5A2332]/90 via-[#8C6D39]/80 to-transparent backdrop-blur-[2px]"></div>
+                    
+                    {/* Decorative Elements */}
+                    <div className="absolute -top-20 -right-20 w-64 h-64 bg-rose-400/20 rounded-full blur-[80px] pointer-events-none group-hover:scale-150 transition-transform duration-1000"></div>
+                    <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-amber-400/20 rounded-full blur-[80px] pointer-events-none group-hover:scale-150 transition-transform duration-1000"></div>
+                    
+                    <div className="relative z-10 pt-6 pb-20 px-6 md:pt-8 md:pb-28 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div className="text-left max-w-2xl">
+                            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-rose-100 text-[10px] font-bold uppercase tracking-widest mb-4 shadow-sm">
+                                <Crown size={12} className="text-amber-300" /> Premium Membership
+                            </div>
+                            <h1 className="text-xl md:text-2xl font-black text-white font-serif mb-3 leading-tight drop-shadow-md">
+                                Find Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-rose-200">Perfect Match</span> Faster
+                            </h1>
+                            <p className="text-rose-100 text-xs md:text-sm font-medium max-w-lg opacity-90 drop-shadow-sm leading-relaxed">
+                                Upgrade now to unlock exclusive privileges and save up to 85% on our premium plans. Limited time offer!
+                            </p>
+                        </div>
+                        
+                        <div className="hidden lg:block shrink-0 animate-pulse">
+                            <div className="w-24 h-24 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center shadow-[0_0_50px_rgba(255,255,255,0.2)]">
+                                <Sparkles size={40} className="text-amber-300" />
                             </div>
                         </div>
                     </div>
-
-                    {/* Pricing Container */}
-                    <div className="max-w-7xl mx-auto px-4 -mt-16 md:-mt-20 pb-12 relative z-10">
-            <div className="grid md:grid-cols-3 gap-8 py-10 drop-shadow-2xl">
-              {plans.map((plan, index) => (
-                <div key={plan.id} className="h-full">
-                  <div
-                    className={`relative rounded-3xl border shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col p-6 text-center ${plan.design.bg}`}
-                  >
-                    {/* Ribbon */}
-                    {plan.design.ribbon && (
-                      <div className={`absolute top-0 right-4 px-4 py-1.5 rounded-b-lg text-[10px] font-bold text-white tracking-wider ${plan.design.ribbonBg}`}>
-                        {plan.design.ribbon}
-                      </div>
-                    )}
-
-                    {/* Icon */}
-                    <div className="w-16 h-16 mx-auto bg-theme-surface rounded-full flex items-center justify-center shadow-sm mb-4 mt-2 relative z-10">
-                      {plan.icon}
-                    </div>
-
-                    {/* Title & Duration */}
-                    <h3 className="text-xl font-bold text-gray-800 tracking-tight">{plan.name}</h3>
-                    <p className="text-xs text-theme-text-secondary font-medium mb-4">{plan.duration}</p>
-
-                    {/* Pricing */}
-                    <div className="flex justify-center items-center gap-2 mb-1">
-                      <span className="text-gray-400 line-through text-xs font-medium">
-                        ₹{plan.originalPrice.toLocaleString("en-IN")}
-                      </span>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${plan.design.badgeBg}`}>
-                        {plan.discount}% OFF
-                      </span>
-                    </div>
-                    <div className={`text-4xl font-black mb-1 tracking-tighter ${plan.design.textMain}`}>
-                      ₹{plan.discountedPrice.toLocaleString("en-IN")}
-                    </div>
-                    <p className="text-[10px] text-theme-text-secondary mb-6 font-medium">
-                      ₹{plan.perMonth}/month
-                    </p>
-
-                    {/* Features List */}
-                    <div className="flex-1 text-left">
-                      <ul className="space-y-3 mb-8 pl-1">
-                        {plan.features.map((feature, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-center gap-3 text-[13px] text-theme-text-secondary font-medium"
-                          >
-                            <div className={`w-4 h-4 rounded-full flex items-center justify-center text-white flex-shrink-0 ${plan.design.checkBg}`}>
-                              <Check size={10} strokeWidth={4} />
-                            </div>
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Button */}
-                    <button
-                      onClick={() => handleContinue(plan)}
-                      className={`w-full py-3 rounded-full font-bold flex items-center justify-center gap-2 transition-transform hover:scale-105 text-sm shadow-sm ${plan.design.btnBg}`}
-                    >
-                      Choose Plan <ChevronRight size={16} />
-                    </button>
-                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-          <style>{`
-            .custom-scrollbar::-webkit-scrollbar {
-              width: 4px;
-            }
-            .custom-scrollbar::-webkit-scrollbar-track {
-              background: #f1f1f1;
-              border-radius: 4px;
-            }
-            .custom-scrollbar::-webkit-scrollbar-thumb {
-              background: #e2e8f0;
-              border-radius: 4px;
-            }
-            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-              background: #cbd5e1;
-            }
-          `}</style>
-          <div className="max-w-7xl mx-auto text-center pb-8 pt-2">
-                <p className="text-theme-text-secondary drop-shadow-sm text-sm font-bold opacity-90 tracking-wide">
-                    Trusted by thousands of members. Secure payment options available.
-                </p>
-            </div>
-  
 
-            {/* Modal */}
-            {showModal && selectedPlan && createPortal(
-                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[99999] p-4 animate-fadeIn" onClick={(e) => { if(e.target === e.currentTarget) setShowModal(false) }}>
-                    <div className="dashboard-card-bg flex flex-col rounded-[2rem] shadow-2xl w-full max-w-md max-h-[90vh] transform transition-all duration-300 animate-slideUp border border-white/50" onClick={e => e.stopPropagation()}>
-                        {/* Modal Header */}
-                        <div className="flex-shrink-0 flex items-center justify-between p-6 border-b border-white/30">
-                            <h3 className="text-2xl font-bold text-gray-800 font-serif flex items-center gap-2">
-                                Order Summary
-                            </h3>
-                            <button
-                                onClick={() => setShowModal(false)}
-                                className="text-theme-text-secondary hover:text-rose-600 bg-theme-surface/50 hover:bg-theme-surface p-2 rounded-full shadow-sm hover:shadow transition-all"
-                            >
-                                <X className="w-5 h-5 cursor-pointer" />
-                            </button>
-                        </div>
+                {/* Pricing Grid */}
+                <div className="grid lg:grid-cols-3 gap-6 relative z-10 pb-16 px-2 md:px-8 -mt-12 md:-mt-20">
+                    {plans.map((plan, index) => {
+                        const isPopular = index === 1;
+                        
+                        return (
+                            <div key={plan.id} className="relative h-full flex group">
+                                <div className={`w-full flex flex-col rounded-[2.5rem] transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_20px_40px_rgba(0,0,0,0.1)] overflow-hidden backdrop-blur-xl ${
+                                    isPopular 
+                                    ? "bg-gradient-to-b from-[#FFF2EF]/90 to-white/95 border-2 border-[#E86D8A]/50 shadow-xl" 
+                                    : "bg-white/80 border border-white/60 shadow-lg"
+                                }`}>
+                                    
+                                    {/* Popular Ribbon */}
+                                    {isPopular && (
+                                        <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#E86D8A] to-[#D89A74]"></div>
+                                    )}
+                                    {isPopular && plan.design.ribbon && (
+                                        <div className="absolute top-0 right-6 bg-gradient-to-b from-[#E86D8A] to-[#D89A74] text-white text-[9px] font-black uppercase px-3 py-1.5 rounded-b-lg tracking-widest shadow-md z-10">
+                                            {plan.design.ribbon}
+                                        </div>
+                                    )}
 
-                        {/* Modal Body */}
-                        <div className="flex-1 p-6 space-y-5 overflow-y-auto custom-scrollbar">
-                            {/* Plan Details */}
-                            <div className="flex justify-between items-center pb-5 border-b border-white/30">
-                                <div>
-                                    <p className="text-lg font-bold text-gray-800">
-                                        {selectedPlan.name} <span className="text-sm font-medium text-theme-text-secondary bg-gray-100 px-2 py-1 rounded-full ml-1">({selectedPlan.duration})</span>
-                                    </p>
+                                    <div className="p-8 md:p-10 flex-1 flex flex-col">
+                                        {/* Icon & Title */}
+                                        <div className="flex items-center gap-4 mb-6">
+                                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner ${
+                                                isPopular 
+                                                ? "bg-gradient-to-tr from-[#E86D8A] to-[#D89A74] text-white" 
+                                                : "bg-[#FAF6F0] text-[#8C6D39]"
+                                            }`}>
+                                                {plan.icon}
+                                            </div>
+                                            <div>
+                                                <h3 className="text-2xl font-bold font-serif text-[#3B2F2F]">{plan.name}</h3>
+                                                <p className="text-sm font-medium text-theme-text-secondary">{plan.duration}</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Pricing Block */}
+                                        <div className="mb-8">
+                                            <div className="flex items-center gap-3 mb-2">
+                                                <span className="text-gray-400 line-through text-sm font-semibold">
+                                                    ₹{plan.originalPrice.toLocaleString("en-IN")}
+                                                </span>
+                                                <span className={`text-xs font-bold px-3 py-1 rounded-full ${
+                                                    isPopular ? "bg-[#E86D8A]/10 text-[#E86D8A]" : "bg-emerald-50 text-emerald-600"
+                                                }`}>
+                                                    Save {plan.discount}%
+                                                </span>
+                                            </div>
+                                            <div className="flex items-baseline gap-1">
+                                                <span className="text-5xl font-black text-[#3B2F2F] tracking-tighter">
+                                                    ₹{plan.discountedPrice.toLocaleString("en-IN")}
+                                                </span>
+                                            </div>
+                                            <p className="text-sm text-theme-text-secondary font-medium mt-2">
+                                                Just ₹{plan.perMonth}/month
+                                            </p>
+                                        </div>
+
+                                        {/* Divider */}
+                                        <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-8"></div>
+
+                                        {/* Features List */}
+                                        <ul className="space-y-4 mb-10 flex-1">
+                                            {plan.features.map((feature, idx) => (
+                                                <li key={idx} className="flex items-start gap-3">
+                                                    <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
+                                                        isPopular ? "bg-[#E86D8A] text-white shadow-sm" : "bg-gray-100 text-gray-500"
+                                                    }`}>
+                                                        <Check size={12} strokeWidth={4} />
+                                                    </div>
+                                                    <span className="text-sm text-gray-700 font-medium leading-relaxed">{feature}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+
+                                        {/* Action Button */}
+                                        <button
+                                            onClick={() => handleContinue(plan)}
+                                            className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all duration-300 shadow-md ${
+                                                isPopular 
+                                                ? "bg-gradient-to-r from-[#E86D8A] to-[#D89A74] text-white hover:shadow-[0_10px_25px_rgba(232,109,138,0.3)] hover:scale-[1.02]" 
+                                                : "bg-[#FAF6F0] text-[#3B2F2F] hover:bg-white hover:shadow-lg border border-white/50"
+                                            }`}
+                                        >
+                                            Choose {plan.name} <ChevronRight size={18} />
+                                        </button>
+                                    </div>
                                 </div>
-                                <p className="text-xl font-black text-gray-800">
-                                    ₹{selectedPlan.originalPrice.toLocaleString('en-IN')}
-                                </p>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                <div className="text-center pb-12">
+                    <p className="text-[#8C6D39] text-sm font-bold tracking-wide uppercase">
+                        <ShieldCheck className="inline-block w-4 h-4 mr-1 -mt-1" /> 100% Secure & Trusted Payment Options
+                    </p>
+                </div>
+
+                {/* Modal (Redesigned) */}
+                {showModal && selectedPlan && createPortal(
+                    <div className="fixed inset-0 bg-[#3B2F2F]/40 backdrop-blur-sm flex items-center justify-center z-[99999] p-4" onClick={(e) => { if(e.target === e.currentTarget) setShowModal(false) }}>
+                        <div className="bg-white/95 backdrop-blur-2xl rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] w-full max-w-lg max-h-[90vh] flex flex-col border border-white/60 animate-slideUp overflow-hidden" onClick={e => e.stopPropagation()}>
+                            
+                            {/* Modal Header */}
+                            <div className="px-8 py-6 border-b border-gray-100 flex items-center justify-between bg-gradient-to-r from-gray-50 to-white">
+                                <h3 className="text-2xl font-black text-[#5A2332] font-serif flex items-center gap-3">
+                                    <ShieldCheck className="text-[#E86D8A]" /> Checkout
+                                </h3>
+                                <button
+                                    onClick={() => setShowModal(false)}
+                                    className="w-10 h-10 rounded-full bg-gray-100 hover:bg-[#E86D8A]/10 text-gray-500 hover:text-[#E86D8A] flex items-center justify-center transition-colors"
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
                             </div>
 
-                            {/* Savings */}
-                            <div className="flex justify-between items-center pb-5 border-b border-white/30">
-                                <p className="text-emerald-500 font-bold flex items-center gap-1">
-                                    Savings <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">{selectedPlan.discount}% off</span>
-                                </p>
-                                <p className="text-emerald-500 font-bold">
-                                    -₹{calculateSavings().toLocaleString('en-IN')}
-                                </p>
+                            {/* Modal Body */}
+                            <div className="flex-1 overflow-y-auto px-8 py-6 custom-scrollbar">
+                                {/* Plan Details Box */}
+                                <div className="bg-[#FAF6F0] rounded-2xl p-5 mb-6 border border-white">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <div>
+                                            <p className="text-lg font-bold text-[#3B2F2F]">
+                                                {selectedPlan.name} Plan
+                                            </p>
+                                            <p className="text-sm font-medium text-theme-text-secondary">{selectedPlan.duration} Validity</p>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-2xl font-black text-[#E86D8A]">
+                                                ₹{selectedPlan.discountedPrice.toLocaleString('en-IN')}
+                                            </p>
+                                            <p className="text-xs text-gray-400 line-through">₹{selectedPlan.originalPrice.toLocaleString('en-IN')}</p>
+                                        </div>
+                                    </div>
+                                    <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-lg text-xs font-bold">
+                                        <Sparkles size={12} /> You saved ₹{calculateSavings().toLocaleString('en-IN')}
+                                    </div>
+                                </div>
+
+                                {/* Add-ons */}
+                                <h4 className="text-sm font-bold text-gray-800 uppercase tracking-widest mb-4">Value Add-ons</h4>
+                                <div className="space-y-3">
+                                    {/* Extra Contacts */}
+                                    <label className="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-[#E86D8A]/30 bg-white cursor-pointer transition-colors group has-[:checked]:border-[#E86D8A] has-[:checked]:bg-[#FFF8F5]">
+                                        <input
+                                            type="checkbox"
+                                            checked={orderDetails.addContacts}
+                                            onChange={(e) => setOrderDetails({...orderDetails, addContacts: e.target.checked})}
+                                            className="w-5 h-5 rounded text-[#E86D8A] border-gray-300 focus:ring-[#E86D8A] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="text-sm font-bold text-gray-800 group-hover:text-[#E86D8A] transition-colors">Add {selectedPlan.extraContacts} Extra Contacts</p>
+                                            <p className="text-xs text-gray-500">View more profiles directly</p>
+                                        </div>
+                                        <span className="font-bold text-[#3B2F2F]">₹{selectedPlan.extraContactPrice}</span>
+                                    </label>
+
+                                    {/* Promote Profile */}
+                                    <label className="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-[#E86D8A]/30 bg-white cursor-pointer transition-colors group has-[:checked]:border-[#E86D8A] has-[:checked]:bg-[#FFF8F5]">
+                                        <input
+                                            type="checkbox"
+                                            checked={orderDetails.promoteProfile}
+                                            onChange={(e) => setOrderDetails({...orderDetails, promoteProfile: e.target.checked})}
+                                            className="w-5 h-5 rounded text-[#E86D8A] border-gray-300 focus:ring-[#E86D8A] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <div className="flex items-center gap-1.5">
+                                                <p className="text-sm font-bold text-gray-800 group-hover:text-[#E86D8A] transition-colors">Promote my Profile</p>
+                                                <HelpCircle className="w-3.5 h-3.5 text-gray-400" />
+                                            </div>
+                                            <p className="text-xs text-gray-500">Get highlighted in search results</p>
+                                        </div>
+                                        <span className="font-bold text-[#3B2F2F]">₹{selectedPlan.promotePrice}</span>
+                                    </label>
+
+                                    {/* Contribute */}
+                                    <label className="flex items-center gap-4 p-4 rounded-2xl border-2 border-gray-100 hover:border-[#E86D8A]/30 bg-white cursor-pointer transition-colors group has-[:checked]:border-[#E86D8A] has-[:checked]:bg-[#FFF8F5]">
+                                        <input
+                                            type="checkbox"
+                                            checked={orderDetails.contributeLovenZea}
+                                            onChange={(e) => setOrderDetails({...orderDetails, contributeLovenZea: e.target.checked})}
+                                            className="w-5 h-5 rounded text-[#E86D8A] border-gray-300 focus:ring-[#E86D8A] cursor-pointer"
+                                        />
+                                        <div className="flex-1">
+                                            <p className="text-sm font-bold text-gray-800 group-hover:text-[#E86D8A] transition-colors">Support LovenZea.org</p>
+                                            <p className="text-xs text-gray-500">Small contribution towards community</p>
+                                        </div>
+                                        <span className="font-bold text-[#3B2F2F]">₹{selectedPlan.contribution}</span>
+                                    </label>
+                                </div>
                             </div>
 
-                            {/* Add-ons */}
-                            <div className="space-y-3 bg-theme-surface/30 backdrop-blur-md p-4 rounded-2xl border border-white/40 shadow-sm">
-                                {/* Extra Contacts */}
-                                <label className="flex items-center justify-between group cursor-pointer">
-                                    <div className="flex items-center gap-3">
-                                        <div className="relative flex items-center justify-center">
-                                            <input
-                                                type="checkbox"
-                                                checked={orderDetails.addContacts}
-                                                onChange={(e) =>
-                                                    setOrderDetails({
-                                                        ...orderDetails,
-                                                        addContacts: e.target.checked
-                                                    })
-                                                }
-                                                className="peer w-5 h-5 appearance-none border-2 border-gray-300 rounded-md checked:bg-rose-500 checked:border-rose-500 transition-all cursor-pointer"
-                                            />
-                                            <Check className="absolute w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" strokeWidth={3} />
-                                        </div>
-                                        <span className="text-gray-700 font-medium group-hover:text-rose-600 transition-colors">
-                                            Add {selectedPlan.extraContacts} extra Contact nos.
-                                        </span>
-                                    </div>
-                                    <span className="text-theme-text-secondary font-semibold">
-                                        ₹{selectedPlan.extraContactPrice}
-                                    </span>
-                                </label>
-
-                                {/* Promote Profile */}
-                                <label className="flex items-center justify-between group cursor-pointer pt-2">
-                                    <div className="flex items-center gap-3">
-                                        <div className="relative flex items-center justify-center">
-                                            <input
-                                                type="checkbox"
-                                                checked={orderDetails.promoteProfile}
-                                                onChange={(e) =>
-                                                    setOrderDetails({
-                                                        ...orderDetails,
-                                                        promoteProfile: e.target.checked
-                                                    })
-                                                }
-                                                className="peer w-5 h-5 appearance-none border-2 border-gray-300 rounded-md checked:bg-rose-500 checked:border-rose-500 transition-all cursor-pointer"
-                                            />
-                                            <Check className="absolute w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" strokeWidth={3} />
-                                        </div>
-                                        <div className="flex items-center gap-1.5">
-                                            <span className="text-gray-700 font-medium group-hover:text-rose-600 transition-colors">Promote my Profile</span>
-                                            <HelpCircle className="w-4 h-4 text-gray-400 hover:text-theme-text-secondary" />
-                                        </div>
-                                    </div>
-                                    <span className="text-theme-text-secondary font-semibold">
-                                        ₹{selectedPlan.promotePrice}
-                                    </span>
-                                </label>
-
-                                {/* Contribute to PunarMilan.org */}
-                                <label className="flex items-center justify-between group cursor-pointer pt-2">
-                                    <div className="flex items-center gap-3">
-                                        <div className="relative flex items-center justify-center">
-                                            <input
-                                                type="checkbox"
-                                                checked={orderDetails.contributePunarMilan}
-                                                onChange={(e) =>
-                                                    setOrderDetails({
-                                                        ...orderDetails,
-                                                        contributePunarMilan: e.target.checked
-                                                    })
-                                                }
-                                                className="peer w-5 h-5 appearance-none border-2 border-gray-300 rounded-md checked:bg-rose-500 checked:border-rose-500 transition-all cursor-pointer"
-                                            />
-                                            <Check className="absolute w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" strokeWidth={3} />
-                                        </div>
-                                        <div className="flex items-center gap-1.5">
-                                            <span className="text-gray-700 font-medium group-hover:text-rose-600 transition-colors">Contribute to PunarMilan.org</span>
-                                            <HelpCircle className="w-4 h-4 text-gray-400 hover:text-theme-text-secondary" />
-                                        </div>
-                                    </div>
-                                    <span className="text-theme-text-secondary font-semibold">₹{selectedPlan.contribution}</span>
-                                </label>
-                            </div>
-
-                            {/* Total Amount */}
-                            <div className="pt-5 border-t-2 border-dashed border-white/40">
+                            {/* Modal Footer (Total & Pay) */}
+                            <div className="p-6 border-t border-gray-100 bg-white">
                                 <div className="flex justify-between items-center mb-6">
-                                    <p className="text-xl font-bold text-gray-800 uppercase tracking-wide text-sm">Total Amount</p>
-                                    <p className="text-4xl font-black text-rose-600 drop-shadow-sm">
+                                    <p className="text-gray-500 font-bold uppercase tracking-wider text-sm">Total Payable</p>
+                                    <p className="text-3xl font-black text-[#5A2332]">
                                         ₹{calculateTotal().toLocaleString('en-IN')}
                                     </p>
                                 </div>
-
-                                {/* Savings Banner */}
-                                <div className="bg-emerald-500/10 backdrop-blur-md border border-emerald-500/20 rounded-xl p-3 mb-6 shadow-sm">
-                                    <p className="text-center text-emerald-700 font-bold text-sm">
-                                        🎉 You are saving ₹{calculateSavings().toLocaleString('en-IN')} on this order!
-                                    </p>
-                                </div>
-
-                                {/* Proceed Button */}
                                 <button 
                                     onClick={handlPayment}
-                                    className="w-full bg-gradient-to-r cursor-pointer from-rose-500 to-rose-600 text-white py-4 rounded-xl font-bold text-lg hover:from-rose-600 hover:to-rose-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl shadow-rose-500/30 active:translate-y-0"
+                                    className="w-full bg-gradient-to-r from-[#E86D8A] to-[#D89A74] text-white py-4 rounded-2xl font-bold text-lg hover:shadow-[0_10px_30px_rgba(232,109,138,0.4)] hover:-translate-y-0.5 transition-all duration-300 active:scale-95"
                                 >
-                                    Proceed to Pay
+                                    Proceed to Secure Payment
                                 </button>
                             </div>
                         </div>
-                    </div>
-                </div>,
-                document.body
-            )}
+                    </div>,
+                    document.body
+                )}
 
-            <style>{`
-    @keyframes fadeIn {
-        from {
-        opacity: 0;
-        }
-        to {
-        opacity: 1;
-        }
-    }
+                <style>{`
+                    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+                    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+                    .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+                    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+                    @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+                    .animate-slideUp { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+                `}</style>
 
-    @keyframes slideUp {
-        from {
-        transform: translateY(20px);
-        opacity: 0;
-        }
-        to {
-        transform: translateY(0);
-        opacity: 1;
-        }
-    }
-
-    .animate-fadeIn {
-        animation: fadeIn 0.3s ease-out;
-    }
-
-    .animate-slideUp {
-        animation: slideUp 0.3s ease-out;
-    }
-    `}</style>
-            <FaqSection />
-            <TestimalCarousel />
-            <div className='flex justify-center items-center'>
-
-
-            </div>
-                </div>
+                <FaqSection />
+                <TestimalCarousel />
             </div>
         </div>
     );
 }
 
 export default Payment;
-
-// import React, { useState, useEffect } from "react";
-// import api from "../../services/api";
-//  import { useNavigate , Link  } from "react-router-dom";
-//  import { Check, Crown, Sparkles, ShieldCheck, Star, Zap } from "lucide-react";
-
-//  import FaqSection from './FaqSection';
-//  import TestimalCarousel from './TestimalCarousel';
-//  import PunarMilanSupport from './ShadiSupport';
-//  import HelpDropdown from '../../components/HelpDropdown';
-
-//  function Payment() {
-
-//   const navigate = useNavigate();
-
-//   const [selectedPlan, setSelectedPlan] = useState(null);
-//   const [showModal, setShowModal] = useState(false);
-
-//   const [orderDetails, setOrderDetails] = useState({
-//     addContacts: false,
-//     promoteProfile: false,
-//     contributePunarMilan: true,
-//   });
-
-//   const [plans, setPlans] = useState([]);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     fetchPlans();
-//   }, []);
-
-//     const fetchPlans = async () => {
-//         try {
-//             const response = await api.get('/subscriptions/plans');
-//             console.log("Plans API Response:", response.data);
-//             if (Array.isArray(response.data)) {
-//                 // Map backend plans to our UI structure
-//                 const mappedPlans = response.data.map(p => ({
-//                     id: p.id,
-//                     name: p.name,
-//                     duration: p.durationLabel || `${p.durationInDays / 30} Months`,
-//                     originalPrice: p.discountPercentage > 0 
-//                         ? Math.round(p.price / (1 - (p.discountPercentage / 100)))
-//                         : p.price,
-//                     discountedPrice: p.price,
-//                     perMonth: Math.round(p.price / (p.durationInDays / 30)),
-//                     discount: p.discountPercentage,
-//                     badge: p.highlightTag || null,
-//                     features: p.features ? p.features.split(',').map(f => f.trim()) : [],
-//                     extraContacts: p.extraContacts || 20,
-//                     extraContactPrice: p.extraContactPrice || 255,
-//                     promotePrice: p.promotePrice || 339,
-//                     contribution: 17
-//                 }));
-//                 setPlans(mappedPlans);
-//             }
-//             setLoading(false);
-//         } catch (error) {
-//             console.error('Error fetching plans:', error);
-//             setLoading(false);
-//         }
-//     };
-
-//     const handleContinue = (plan) => {
-//         setSelectedPlan(plan);
-//         setOrderDetails({
-//             addContacts: false,
-//             promoteProfile: false,
-//             contributePunarMilan: true
-//         });
-//         setShowModal(true);
-//     };
-
-//     const calculateTotal = () => {
-//         if (!selectedPlan) return 0;
-//         let total = selectedPlan.discountedPrice;
-//         if (orderDetails.addContacts) total += selectedPlan.extraContactPrice;
-//         if (orderDetails.promoteProfile) total += selectedPlan.promotePrice;
-//         if (orderDetails.contributePunarMilan) total += selectedPlan.contribution;
-//         return total;
-//     };
-
-//     const calculateSavings = () => {
-//         if (!selectedPlan) return 0;
-//         return selectedPlan.originalPrice - selectedPlan.discountedPrice;
-//     };
-
-
-//     const handlPayment = async () => {
-//         try {
-//             const finalAmount = calculateTotal();
-//             setShowModal(false);
-//             const { data: orderResponse } = await api.post(`/payments/create-order/${selectedPlan.id}`);
-            
-//             const options = {
-//                 key: orderResponse.key,
-//                 amount: finalAmount * 100,
-//                 currency: orderResponse.currency,
-//                 name: 'Punarmilan',
-//                 description: `Subscription for ${selectedPlan.name}`,
-//                 order_id: orderResponse.orderId,
-//                 handler: async (response) => {
-//                     try {
-//                         const verificationData = {
-//                             razorpayOrderId: response.razorpay_order_id,
-//                             razorpayPaymentId: response.razorpay_payment_id,
-//                             razorpaySignature: response.razorpay_signature,
-//                             planId: selectedPlan.id
-//                         };
-//                         const { data: subscription } = await api.post('/payments/verify', verificationData);
-//                         Swal.fire({ text: 'Subscription successful!', confirmButtonColor: '#8C6D39' });
-//                         window.location.href = '/my-shadi';
-//                     } catch (err) {
-//                         Swal.fire({ text: 'Payment verification failed', confirmButtonColor: '#8C6D39' });
-//                     }
-//                 },
-//                 prefill: {
-//                     name: 'User Name',
-//                     email: 'user@example.com',
-//                 },
-//                 theme: {
-//                     color: '#12b36a',
-//                 },
-//             };
-
-//             const rzp = new window.Razorpay(options);
-//             rzp.open();
-//         } catch (error) {
-//             console.error('Error creating order:', error);
-//             Swal.fire({ text: 'Failed to initiate payment', confirmButtonColor: '#8C6D39' });
-//         }
-//     };
-
-//     if (loading) return <div className="min-h-screen flex items-center justify-center bg-[#f1f1f1] text-teal-600 font-bold">Loading Subscription Plans...</div>;
-  
-
-//   // const plans = [
-//   //   {
-//   //     name: "Basic",
-//   //     price: "₹499",
-//   //     duration: "30 days",
-//   //     icon: <ShieldCheck />,
-//   //     popular: false,
-//   //     color: "from-gray-700 to-gray-900",
-//   //     benefits: [
-//   //       "View 25 profiles",
-//   //       "Send 10 interests",
-//   //       "Basic search filters",
-//   //       "Profile visibility boost",
-//   //       "Email support",
-//   //     ],
-//   //   },
-//   //   {
-//   //     name: "Pro",
-//   //     price: "₹999",
-//   //     duration: "60 days",
-//   //     icon: <Crown />,
-//   //     popular: true,
-//   //     color: "from-rose-500 to-[#8C6D39]",
-//   //     benefits: [
-//   //       "View 100 profiles",
-//   //       "Send unlimited interests",
-//   //       "Contact number access",
-//   //       "Advanced search filters",
-//   //       "Priority profile listing",
-//   //       "Chat support",
-//   //     ],
-//   //   },
-//   //   {
-//   //     name: "Max Pro",
-//   //     price: "₹1999",
-//   //     duration: "90 days",
-//   //     icon: <Sparkles />,
-//   //     popular: false,
-//   //     color: "from-purple-600 to-rose-600",
-//   //     benefits: [
-//   //       "Unlimited profile views",
-//   //       "Unlimited contact access",
-//   //       "Top profile highlight",
-//   //       "Dedicated relationship support",
-//   //       "Verified badge",
-//   //       "Premium matches first",
-//   //       "Priority customer support",
-//   //     ],
-//   //   },
-//   // ];
-
-//   return (
-//     <div className="min-h-screen bg-[#f8f5f2] p-4 md:p-8">
-//       <div className="max-w-7xl mx-auto">
-//         {/* Header */}
-//         <div className="bg-theme-surface rounded-[2rem] p-6 md:p-8 shadow-sm border border-rose-100 mb-8">
-//           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-//             <div>
-//               <div className="inline-flex items-center gap-2 bg-[#FAF6F0] text-theme-magenta px-4 py-2 rounded-full text-sm font-semibold mb-4">
-//                 <Zap size={17} />
-//                 Premium Membership
-//               </div>
-
-//               <h1 className="text-2xl md:text-4xl font-extrabold text-gray-900">
-//                 Upgrade Your Plan
-//               </h1>
-
-//               <p className="text-theme-text-secondary mt-3 max-w-2xl">
-//                 Get more profile views, direct contact access, premium matches,
-//                 and better visibility for your matrimonial profile.
-//               </p>
-//             </div>
-
-//             <Link to="/my-shadi" className="self-start lg:self-auto">
-//             <div className="bg-gradient-to-r from-rose-500 to-[#8C6D39] text-white rounded-3xl p-5 min-w-[230px] shadow-lg">
-//               <div className="flex items-center gap-3">
-//                 <Star fill="white" />
-//                 <div>
-//                   <p className="text-sm text-rose-100">
-//                     Current Plan
-//                     </p>
-//                   <h3 className="text-xl font-bold">Free Member</h3>
-//                 </div>
-//               </div>
-//             </div>
-//             </Link>    
-//           </div>
-//         </div>
-
-//         {/* Plans */}
-//         <div className="grid md:grid-cols-3 gap-32 ">
-//           {plans.map((plan) => (
-//             <div
-//               key={plan.name}
-//               className={`relative bg-theme-surface rounded-[2rem] border shadow-sm hover:shadow-2xl hover:-translate-y-2 transition duration-300 overflow-hidden ${
-//                 plan.popular ? "border-rose-300 scale-[1.02]" : "border-gray-100"
-//               }`}
-//             >
-//               {plan.badge && (
-//                 <div className="absolute top-5 right-5 bg-[#8C6D39] text-white text-xs font-bold px-4 py-2 rounded-full">
-//                   {plan.badge}
-//                 </div>
-//               )}
-
-//               <div className={`bg-gradient-to-r ${plan.color} p-7 text-white`}>
-//                 <div className="w-14 h-14 rounded-2xl bg-theme-surface/20 flex items-center justify-center mb-5">
-//                   {plan.icon}
-//                 </div>
-
-//                 <h2 className="text-2xl font-extrabold">{plan.name}</h2>
-
-//                 <div className="mt-4 flex items-end gap-2">
-//                   <span className="text-4xl font-black">₹{plan.discountedPrice?.toLocaleString("en-IN")}</span>
-//                   <span className="text-sm text-white/80 mb-1">
-//                     / {plan.duration}
-//                   </span>
-//                 </div>
-//               </div>
-
-//               <div className="p-7">
-//                 <ul className="space-y-4">
-//                  {plan.features.map((benefit) => (
-//                     <li key={benefit} className="flex items-start gap-3">
-//                       <span className="w-6 h-6 rounded-full bg-[#FAF6F0] text-theme-magenta flex items-center justify-center flex-shrink-0">
-//                         <Check size={16} />
-//                       </span>
-//                       <span className="text-sm text-gray-700">{benefit}</span>
-//                     </li>
-//                   ))}
-//                 </ul>
-
-//                 <button
-//                   onClick={() => handleContinue(plan)}
-//                   className={`mt-8 w-full py-4 rounded-2xl font-bold transition ${
-//                     plan.popular
-//                       ? "bg-gradient-to-r from-theme-primary to-theme-pink text-white shadow-lg shadow-rose-200 hover:scale-[1.02]"
-//                       : "bg-rose-100 text-theme-magenta hover:bg-rose-200"
-//                   }`}
-//                 >
-//                   Choose {plan.name}
-//                 </button>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-
-//         {/* Modal */}
-//             {showModal && selectedPlan && (
-//                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
-//                     <div className="dashboard-card-bg rounded-3xl shadow-2xl w-full max-w-md transform transition-all duration-300 animate-slideUp">
-//                         {/* Modal Header */}
-//                         <div className="flex items-center justify-between p-6 border-b border-theme-border">
-//                             <h3 className="text-2xl font-bold text-gray-800">Order Summary</h3>
-//                             <button
-//                                 onClick={() => setShowModal(false)}
-//                                 className="text-gray-400 hover:text-theme-text-secondary transition-colors"
-//                             >
-//                                 <X className="w-6 h-6 cursor-pointer" />
-//                             </button>
-//                         </div>
-
-//                         {/* Modal Body */}
-//                         <div className="p-6 space-y-4">
-//                             {/* Plan Details */}
-//                             <div className="flex justify-between items-center pb-4 border-b border-theme-border">
-//                                 <div>
-//                                     <p className="text-lg font-semibold text-gray-800">
-//                                         {selectedPlan.name} ({selectedPlan.duration})
-//                                     </p>
-//                                 </div>
-//                                 <p className="text-lg font-bold text-gray-800">
-//                                     ₹{selectedPlan.originalPrice.toLocaleString('en-IN')}
-//                                 </p>
-//                             </div>
-
-//                             {/* Savings */}
-//                             <div className="flex justify-between items-center pb-4 border-b border-theme-border">
-//                                 <p className="text-emerald-600 font-semibold">
-//                                     Savings ({selectedPlan.discount}% off)
-//                                 </p>
-//                                 <p className="text-emerald-600 font-bold">
-//                                     -₹{calculateSavings().toLocaleString('en-IN')}
-//                                 </p>
-//                             </div>
-
-//                             {/* Add-ons */}
-//                             <div className="space-y-3">
-//                                 {/* Extra Contacts */}
-//                                 <label className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
-//                                     <div className="flex items-center gap-3">
-//                                         <input
-//                                             type="checkbox"
-//                                             checked={orderDetails.addContacts}
-//                                             onChange={(e) =>
-//                                                 setOrderDetails({
-//                                                     ...orderDetails,
-//                                                     addContacts: e.target.checked
-//                                                 })
-//                                             }
-//                                             className="w-5 h-5 text-teal-500 rounded focus:ring-2 focus:ring-teal-500"
-//                                         />
-//                                         <span className="text-gray-700">
-//                                             Add {selectedPlan.extraContacts} extra Contact nos.
-//                                         </span>
-//                                     </div>
-//                                     <span className="text-theme-text-secondary">
-//                                         ₹{selectedPlan.extraContactPrice}
-//                                     </span>
-//                                 </label>
-
-//                                 {/* Promote Profile */}
-//                                 <label className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
-//                                     <div className="flex items-center gap-3">
-//                                         <input
-//                                             type="checkbox"
-//                                             checked={orderDetails.promoteProfile}
-//                                             onChange={(e) =>
-//                                                 setOrderDetails({
-//                                                     ...orderDetails,
-//                                                     promoteProfile: e.target.checked
-//                                                 })
-//                                             }
-//                                             className="w-5 h-5 text-teal-500 rounded focus:ring-2 focus:ring-teal-500"
-//                                         />
-//                                         <div className="flex items-center gap-2">
-//                                             <span className="text-gray-700">Promote my Profile</span>
-//                                             <HelpCircle className="w-4 h-4 text-gray-400" />
-//                                         </div>
-//                                     </div>
-//                                     <span className="text-theme-text-secondary">
-//                                         ₹{selectedPlan.promotePrice}
-//                                     </span>
-//                                 </label>
-
-//                                 {/* Contribute to PunarMilan.org */}
-//                                 <label className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
-//                                     <div className="flex items-center gap-3">
-//                                         <input
-//                                             type="checkbox"
-//                                             checked={orderDetails.contributePunarMilan}
-//                                             onChange={(e) =>
-//                                                 setOrderDetails({
-//                                                     ...orderDetails,
-//                                                     contributePunarMilan: e.target.checked
-//                                                 })
-//                                             }
-//                                             className="w-5 h-5 text-teal-500 rounded focus:ring-2 focus:ring-teal-500"
-//                                         />
-//                                         <div className="flex items-center gap-2">
-//                                             <span className="text-gray-700">Contribute to PunarMilan.org</span>
-//                                             <HelpCircle className="w-4 h-4 text-gray-400" />
-//                                         </div>
-//                                     </div>
-//                                     <span className="text-theme-text-secondary">₹{selectedPlan.contribution}</span>
-//                                 </label>
-//                             </div>
-
-//                             {/* Total Amount */}
-//                             <div className="pt-4 border-t-2 border-theme-border">
-//                                 <div className="flex justify-between items-center mb-4">
-//                                     <p className="text-xl font-bold text-gray-800">Total Amount</p>
-//                                     <p className="text-3xl font-bold text-teal-600">
-//                                         ₹{calculateTotal().toLocaleString('en-IN')}
-//                                     </p>
-//                                 </div>
-
-//                                 {/* Savings Banner */}
-//                                 <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 mb-4">
-//                                     <p className="text-center text-emerald-700 font-semibold">
-//                                         🎉 You are saving ₹{calculateSavings().toLocaleString('en-IN')} on this order 🎉
-//                                     </p>
-//                                 </div>
-
-//                                 {/* Proceed Button */}
-//                                 <button 
-//                                     onClick={handlPayment}
-//                                     className="w-full bg-gradient-to-r cursor-pointer from-cyan-500 to-teal-500 text-white py-4 rounded-xl font-bold text-lg hover:from-cyan-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
-//                                 >
-//                                     Proceed to Pay
-//                                 </button>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//             )}
-
-//         {/* Bottom Info */}
-//         <div className="mt-8 bg-theme-surface rounded-[2rem] p-6 border border-gray-100 shadow-sm">
-//           <h3 className="text-lg font-bold text-gray-900 mb-3">
-//             Why upgrade?
-//           </h3>
-
-//           <div className="grid md:grid-cols-3 gap-4 text-sm text-theme-text-secondary">
-//             <p>✅ Increase your profile visibility among suitable matches.</p>
-//             <p>✅ Contact interested profiles directly and faster.</p>
-//             <p>✅ Get premium support and better match recommendations.</p>
-//           </div>
-//         </div>
-
-//         <style>{`
-//   @keyframes fadeIn {
-//     from {
-//       opacity: 0;
-//     }
-//     to {
-//       opacity: 1;
-//     }
-//   }
-
-//   @keyframes slideUp {
-//     from {
-//       transform: translateY(20px);
-//       opacity: 0;
-//     }
-//     to {
-//       transform: translateY(0);
-//       opacity: 1;
-//     }
-//   }
-
-//   .animate-fadeIn {
-//     animation: fadeIn 0.3s ease-out;
-//   }
-
-//   .animate-slideUp {
-//     animation: slideUp 0.3s ease-out;
-//   }
-// `}</style>
-           
-//             <FaqSection />
-//             <TestimalCarousel />
-//             <div className='flex justify-center items-center'>
-//                 <PunarMilanSupport />
-            
-//       </div>     
-
-//     </div>
-//     </div>
-//   );
-// }
-// export default Payment;
-
-    

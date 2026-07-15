@@ -9,9 +9,17 @@ import java.util.Optional;
 
 @Repository
 public interface PartnerPreferenceRepository extends JpaRepository<PartnerPreference, Long> {
-    Optional<PartnerPreference> findByUser(User user);
+    Optional<PartnerPreference> findFirstByUserOrderByIdDesc(User user);
 
-    Optional<PartnerPreference> findByUserId(Long userId);
+    default Optional<PartnerPreference> findByUser(User user) {
+        return findFirstByUserOrderByIdDesc(user);
+    }
+
+    Optional<PartnerPreference> findFirstByUserIdOrderByIdDesc(Long userId);
+
+    default Optional<PartnerPreference> findByUserId(Long userId) {
+        return findFirstByUserIdOrderByIdDesc(userId);
+    }
 
     java.util.List<PartnerPreference> findAllByUserIdIn(java.util.List<Long> userIds);
 }

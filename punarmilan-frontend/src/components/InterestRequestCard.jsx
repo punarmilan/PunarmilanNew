@@ -101,15 +101,15 @@ const InterestRequestCard = () => {
     };
 
     return (
-        <div className="w-full bg-theme-surface shadow-[var(--theme-shadow-soft)] rounded-3xl p-6 sm:p-8 hover:-translate-y-1 transition-all duration-300">
+        <div className="w-full bg-white/80 backdrop-blur-md border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[32px] p-6 sm:p-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8 pb-4 border-b border-theme-border/30">
+            <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-100">
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FFF2EF] to-white flex items-center justify-center text-[#E86D8A] border border-[#F2D7D9] shadow-sm">
-                        <Heart className="w-5 h-5 fill-[#E86D8A]" />
+                    <div className="w-10 h-10 rounded-xl bg-[#FFF8F5] flex items-center justify-center border border-[#F8D6CB] shadow-sm">
+                        <Heart className="w-5 h-5 fill-[#B54768] text-[#B54768]" />
                     </div>
                     <div>
-                        <h2 className="text-xl sm:text-2xl font-bold font-serif text-theme-text">Interest Requests</h2>
+                        <h2 className="text-xl sm:text-2xl font-bold font-serif text-[#B54768] tracking-tight">Interest Requests</h2>
                         <p className="text-[11px] text-theme-text-secondary font-medium uppercase tracking-wider">Manage your connections</p>
                     </div>
                 </div>
@@ -127,7 +127,7 @@ const InterestRequestCard = () => {
             </div>
 
             {/* Modern Pill Tabs */}
-            <div className="flex flex-wrap items-center gap-2 mb-8 bg-theme-bg/50 p-1.5 rounded-full border border-theme-border/30 w-max max-w-full overflow-x-auto">
+            <div className="flex flex-wrap items-center gap-2 mb-8 bg-[#FFF8F5] p-2 rounded-[20px] border border-white shadow-inner w-max max-w-full overflow-x-auto">
                 {tabs.map((tab) => {
                     const isActive = activeTab === tab.id;
                     const count = getBadgeCount(tab.id);
@@ -137,14 +137,14 @@ const InterestRequestCard = () => {
                             onClick={() => setActiveTab(tab.id)}
                             className={`flex items-center gap-2 px-5 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
                                 isActive 
-                                    ? "bg-[#FFF2EF] text-[#E86D8A] shadow-md border border-[#F2D7D9] scale-105" 
-                                    : "text-[#7A6666] hover:text-[#E86D8A] hover:bg-[#FFF6F2]"
+                                    ? "bg-gradient-to-r from-[#B54768] to-[#E88C8C] text-white shadow-lg scale-105" 
+                                    : "text-gray-500 hover:text-[#B54768] hover:bg-white hover:shadow-sm"
                             }`}
                         >
                             {tab.icon}
                             {tab.label}
                             {count > 0 && (
-                                <span className="ml-1 bg-theme-primary text-white text-[9px] px-1.5 py-0.5 rounded-full">
+                                <span className="ml-1 bg-white text-[#B54768] font-black text-[9px] shadow-sm px-1.5 py-0.5 rounded-full">
                                     {count}
                                 </span>
                             )}
@@ -157,7 +157,7 @@ const InterestRequestCard = () => {
             <div className="space-y-4 min-h-[200px]">
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-16 gap-2">
-                        <div className="w-8 h-8 rounded-full border-4 border-theme-border border-t-[#E86D8A] animate-spin" />
+                        <div className="w-8 h-8 rounded-full border-4 border-theme-border border-t-[#B54768] animate-spin" />
                         <span className="text-xs text-gray-400 font-medium tracking-wider uppercase">Loading requests...</span>
                     </div>
                 ) : (
@@ -170,16 +170,16 @@ const InterestRequestCard = () => {
                                     exit={{ opacity: 0, scale: 0.95 }}
                                     transition={{ duration: 0.3, delay: i * 0.05 }}
                                     key={req.id}
-                                    className="group relative flex flex-col xl:flex-row items-center justify-between gap-4 p-4 bg-theme-surface/80 backdrop-blur-md rounded-2xl border border-white/60 shadow-sm hover:shadow-[var(--theme-shadow-soft)] hover:-translate-y-1 transition-all duration-300 flex-wrap overflow-hidden"
+                                    className="group relative flex flex-col xl:flex-row items-center justify-between gap-4 p-4 bg-[#FFF8F5] rounded-[24px] border border-white shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex-wrap overflow-hidden p-5"
                                 >
                                     <div className="flex flex-col sm:flex-row items-center gap-4 w-full xl:w-auto">
                                         {/* User Image with Badge */}
                                         <div className="relative flex-shrink-0 cursor-pointer" onClick={() => navigate(`/matches/${req.profileId}`)}>
-                                            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-md ring-2 ring-[#c99a52]/20 group-hover:ring-[#c99a52]/60 transition-all duration-300">
+                                            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-md ring-2 ring-[#F8D6CB]/60 group-hover:ring-[#E88C8C]/60 transition-all duration-300">
                                                 <img src={req.image} alt={req.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                             </div>
                                             {req.badge && (
-                                                <span className={`absolute -bottom-2 left-1/2 -translate-x-1/2 text-white text-[8px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md border border-white z-10 uppercase tracking-widest ${req.badge === 'VERIFIED' ? 'bg-theme-success' : 'bg-gradient-to-r from-theme-primary to-theme-pink'}`}>
+                                                <span className={`absolute -bottom-2 left-1/2 -translate-x-1/2 text-white text-[8px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-md border border-white z-10 uppercase tracking-widest ${req.badge === 'VERIFIED' ? 'bg-gradient-to-r from-emerald-400 to-teal-500 shadow-md' : 'bg-gradient-to-r from-[#B54768] to-[#E88C8C] shadow-md'}`}>
                                                     {req.badge}
                                                 </span>
                                             )}
@@ -188,7 +188,7 @@ const InterestRequestCard = () => {
                                         {/* Details */}
                                         <div className="text-center sm:text-left pt-2 sm:pt-0">
                                             <h3 
-                                                className="font-bold text-base text-theme-text cursor-pointer hover:text-theme-primary transition-colors"
+                                                className="font-bold text-base text-theme-text cursor-pointer hover:text-[#B54768] transition-colors"
                                                 onClick={() => navigate(`/matches/${req.profileId}`)}
                                             >
                                                 {req.name}
@@ -197,7 +197,7 @@ const InterestRequestCard = () => {
                                                 {req.age} yrs <span className="opacity-50 mx-1">•</span> {req.height} <span className="opacity-50 mx-1">•</span> {req.job}
                                             </p>
                                             <div className="flex items-center justify-center sm:justify-start gap-1 mt-1 text-xs text-gray-400">
-                                                <svg className="w-3 h-3 text-[#E86D8A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg className="w-3 h-3 text-[#E88C8C]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 </svg>
@@ -213,7 +213,7 @@ const InterestRequestCard = () => {
                                     <div className="flex flex-wrap items-center justify-center gap-3 w-full xl:w-auto mt-2 xl:mt-0">
                                         <button 
                                             onClick={() => navigate(`/matches/${req.profileId}`)}
-                                            className="px-4 py-2 border border-theme-border bg-theme-surface hover:bg-theme-lavender hover:border-theme-primary text-theme-primary text-xs font-bold rounded-full shadow-sm hover:shadow transition-all duration-200"
+                                            className="px-4 py-2 border border-theme-border bg-white hover:bg-[#FFF8F5] border-[#F8D6CB] hover:border-[#E88C8C] text-[#B54768] text-xs font-bold rounded-full shadow-sm hover:shadow transition-all duration-200"
                                         >
                                             View Profile
                                         </button>
@@ -221,13 +221,13 @@ const InterestRequestCard = () => {
                                             <>
                                                 <button 
                                                     onClick={() => handleAccept(req.id)}
-                                                    className="px-5 py-2 bg-theme-success hover:bg-[#059669] text-white text-xs font-bold rounded-full shadow-[0_4px_12px_rgba(16,185,129,0.3)] hover:shadow-[0_6px_16px_rgba(16,185,129,0.4)] hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-1"
+                                                    className="px-5 py-2 bg-gradient-to-r from-[#B54768] to-[#E88C8C] hover:from-[#E88C8C] hover:to-[#B54768] text-white border border-transparent text-xs font-bold rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-1"
                                                 >
                                                     <Check size={14} strokeWidth={3} /> Accept
                                                 </button>
                                                 <button 
                                                     onClick={() => handleDecline(req.id)}
-                                                    className="px-5 py-2 border border-[#F87171] bg-theme-surface text-[#EF4444] hover:bg-theme-error hover:text-white text-xs font-bold rounded-full shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1"
+                                                    className="px-5 py-2 border border-gray-200 bg-white text-gray-500 hover:border-[#E88C8C] hover:text-[#B54768] hover:bg-[#FFF8F5] text-xs font-bold rounded-full shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1"
                                                 >
                                                     <X size={14} strokeWidth={3} /> Decline
                                                 </button>

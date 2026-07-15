@@ -112,7 +112,7 @@ const CentresPage = () => {
 
             <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
 
-              PunarMilan
+              LovenZea
               <span className="text-pink-500">
                 {" "}Centres
               </span>
@@ -243,7 +243,7 @@ const CentresPage = () => {
           <div className="text-center mb-16">
 
             <h2 className="text-5xl font-bold">
-              Why Visit A PunarMilan Centre?
+              Why Visit A LovenZea Centre?
             </h2>
 
           </div>

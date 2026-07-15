@@ -1,4 +1,5 @@
 import React from 'react';
+import projectLogo from '../assets/image/project_logo_transperent.png';
 import {
     Facebook,
     Instagram,
@@ -18,12 +19,12 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
     const navItems = [
         { name: 'About Us', href: '/about-us' },
-        { name: 'VIP PunarMilan', href: '/vip-PunarMilan' },
-        { name: 'PunarMilan Blog', href: '/blog' },
+        { name: 'VIP LovenZea', href: '/vip-LovenZea' },
+        { name: 'LovenZea Blog', href: '/blog' },
         { name: 'Success Stories', href: '/success-stories' },
-        { name: 'PunarMilan Centres', href: '/centres' },
+        { name: 'LovenZea Centres', href: '/centres' },
         { name: 'Contact Us', href: '/contact-us' },
-        { name: 'PunarMilan Live', href: '/live' },
+        { name: 'LovenZea Live', href: '/live' },
         { name: 'Work With Us', href: '/work-with-us' }
     ];
 
@@ -104,13 +105,15 @@ const Footer = () => {
                     {/* Left: Logo and Tagline */}
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#ff2d7a] to-pink-600 flex items-center justify-center shadow-lg shadow-[#ff2d7a]/20">
-                                <Heart className="w-5 h-5 text-white fill-white animate-[pulse_3s_infinite]" />
+                            
+                            <div className="flex items-center gap-0">
+                                <img src={projectLogo} alt="LovenZea Logo" className="w-16 h-16 sm:w-20 sm:h-20 object-cover drop-shadow-xl hover:scale-105 transition-transform duration-300" />
+                                <span className="text-2xl sm:text-3xl font-black tracking-tighter text-slate-800 drop-shadow-sm flex items-center ml-[1px]">
+                                    LOVEN<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff2d7a] to-rose-500">ZEA</span>
+                                </span>
                             </div>
-                            <h2 className="text-3xl font-black tracking-wider">
-                                PUNAR
-                                <span className="bg-gradient-to-r from-[#ff2d7a] to-rose-500 bg-clip-text text-transparent">MILAN</span>
-                            </h2>
+
+                              
                         </div>
                         <p className="text-gray-400 text-sm font-medium tracking-wide">
                             The World's No.1 Matchmaking Service
@@ -175,7 +178,7 @@ const Footer = () => {
                     {/* Center: Copyright */}
                     <div className="text-center">
                         <p className="text-xs font-semibold text-gray-400">
-                            © 2026–2027 <span className="text-[#ff2d7a] font-black hover:underline cursor-pointer">PunarMilan.com</span>
+                            © 2026–2027 <span className="text-[#ff2d7a] font-black hover:underline cursor-pointer">LovenZea.com</span>
                         </p>
                         <p className="text-[10px] text-gray-500 font-medium mt-0.5">
                             The World's No.1 Matchmaking Service
@@ -186,7 +189,7 @@ const Footer = () => {
                     <div className="text-center lg:text-right">
                         <p className="text-[9px] font-black tracking-[2px] text-gray-500">CREATED BY</p>
                         <p className="text-xs font-bold text-[#ff2d7a] tracking-wide mt-0.5 drop-shadow-[0_0_6px_rgba(255,45,122,0.3)]">
-                            PUNARMILAN PVT LTD
+                            LOVENZEA PVT LTD
                         </p>
                     </div>
                 </div>

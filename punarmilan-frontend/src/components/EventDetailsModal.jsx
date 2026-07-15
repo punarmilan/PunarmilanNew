@@ -131,7 +131,7 @@ const EventDetailsModal = ({ isOpen, onClose, event, isRegistered, onRegister })
                                     {event.description?.split('\n').map((para, i) => (
                                         <p key={i}>{para}</p>
                                     )) || (
-                                        <p>Join us for an exclusive Punarmilan community gathering. Our events are designed to create a comfortable, safe, and engaging environment where singles can meet, interact, and build meaningful connections beyond digital profiles.</p>
+                                        <p>Join us for an exclusive LovenZea community gathering. Our events are designed to create a comfortable, safe, and engaging environment where singles can meet, interact, and build meaningful connections beyond digital profiles.</p>
                                     )}
                                 </div>
                             </div>

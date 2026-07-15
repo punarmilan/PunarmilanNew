@@ -30,8 +30,11 @@ const Navbar = () => {
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <div className="flex items-center space-x-2">
-                        <div className="text-2xl font-bold bg-gradient-to-r from-white to-[#FCFAF7] bg-clip-text text-transparent font-serif">
-                            PunarMilan
+                        <div className="flex items-center gap-0">
+                            <img src={projectLogo} alt="LovenZea Logo" className="w-14 h-14 sm:w-16 sm:h-16 object-cover drop-shadow-xl hover:scale-105 transition-transform duration-300" />
+                            <span className="text-2xl font-bold bg-gradient-to-r from-white to-[#FCFAF7] bg-clip-text text-transparent font-serif drop-shadow-sm flex items-center ml-[1px]">
+                                LovenZea
+                            </span>
                         </div>
                         {isPremiumActive && (
                             <span className="bg-white text-[#8C6D39] text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider border border-[#FCFAF7]">
@@ -42,7 +45,7 @@ const Navbar = () => {
 
                     {/* Center Navigation */}
                     <div className="hidden md:flex items-center space-x-8">
-                        <NavItem icon={<User className="w-4 h-4" />} label="My PunarMilan" />
+                        <NavItem icon={<User className="w-4 h-4" />} label="My LovenZea" />
                         <NavItem icon={<Bell className="w-4 h-4" />} label="Matches" />
                         <NavItem icon={<Search className="w-4 h-4" />} label="Search" />
                         <NavItem icon={<MessageSquare className="w-4 h-4" />} label="Inbox" />

@@ -74,8 +74,8 @@ const SecurityPage = () => {
 
     const emergencyContacts = [
         { name: 'Customer Support', number: '+91-8095031111', icon: '📞' },
-        { name: 'Email Support', email: 'support@PunarMilan.com', icon: '✉️' },
-        { name: 'Report Abuse', email: 'abuse@PunarMilan.com', icon: '🚨' },
+        { name: 'Email Support', email: 'support@LovenZea.com', icon: '✉️' },
+        { name: 'Report Abuse', email: 'abuse@LovenZea.com', icon: '🚨' },
     ];
 
     return (

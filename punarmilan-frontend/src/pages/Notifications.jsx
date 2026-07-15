@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bell, Heart, Star, MessageSquare, CheckCircle, Clock, Trash2 } from 'lucide-react';
 import Header from '../components/Headers';
-import Footer from '../components/Footer';
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([
@@ -154,7 +153,6 @@ const Notifications = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

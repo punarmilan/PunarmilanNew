@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import profileBanner from '../../../assets/image/profile_baner1.avif';
+import profileBanner from '../../../assets/image/profile_banner.jpg';
 // import img from '../../../assets/image/profile.png' // Removed static image
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEdit, FaChartBar, FaFilter, FaHeart, FaCamera, FaEye, FaPhone, FaStar, FaShareAlt, FaDownload, FaUserEdit, FaUserFriends, FaHome, FaGraduationCap, FaBriefcase, FaMapMarkerAlt, FaBirthdayCake, FaClock, FaCity, FaVenusMars, FaUsers, FaWallet, FaCheck, FaTimes, FaInfoCircle, FaUserCircle, FaLanguage, FaShieldAlt, FaTrash } from 'react-icons/fa';
@@ -646,67 +646,60 @@ const MyProfile = ({ editModePage = false }) => {
     setModalSection(section);
     if (section === 'religious') {
       fields = {
-        religion: profileData.religiousBackground.religion,
-        manglikStatus: profileData.religiousBackground.manglikChevvai,
-        caste: profileData.religiousBackground.community,
-        subCaste: profileData.religiousBackground.subCommunity,
-        gotra: profileData.religiousBackground.gothra,
-        motherTongue: profileData.religiousBackground.motherTongue,
-        timeOfBirth: profileData.religiousBackground.timeOfBirth,
-        placeOfBirth: profileData.religiousBackground.cityOfBirth,
-        nakshatra: profileData.religiousBackground.nakshatra,
-        rashi: profileData.religiousBackground.rashi,
-        astroVisibility: profileData.religiousBackground.astroVisibility
+        religion: profileData.religion,
+        manglikStatus: profileData.manglikStatus,
+        caste: profileData.community,
+        subCaste: profileData.subCommunity,
+        gotra: profileData.gotra || profileData.gothra || '',
+        motherTongue: profileData.motherTongue,
+        timeOfBirth: profileData.timeOfBirth,
+        placeOfBirth: profileData.placeOfBirth || profileData.cityOfBirth || '',
+        nakshatra: profileData.nakshatra,
+        rashi: profileData.rashi,
+        astroVisibility: profileData.astroVisibility
       };
     } else if (section === 'family') {
       fields = {
-        fatherStatus: profileData.familyDetails.father,
-        motherStatus: profileData.familyDetails.mother,
-        familyFinancialStatus: profileData.familyDetails.financialStatus,
-        sistersCount: profileData.familyDetails.sisters,
-        brothersCount: profileData.familyDetails.brothers,
-        familyLocation: profileData.familyDetails.familyLocation,
-        familyAnnualIncome: profileData.familyDetails.familyAnnualIncome,
+        fatherStatus: profileData.fatherStatus,
+        motherStatus: profileData.motherStatus,
+        familyFinancialStatus: profileData.familyFinancialStatus,
+        sistersCount: profileData.sistersCount,
+        brothersCount: profileData.brothersCount,
+        familyLocation: profileData.familyLocation,
+        familyAnnualIncome: profileData.familyAnnualIncome || '',
       };
     } else if (section === 'education') {
       fields = {
-        educationLevel: profileData.educationCareer.highestQualification,
-        educationField: profileData.educationCareer.educationField,
-        college: profileData.educationCareer.collegeAttended,
-        workingWith: profileData.educationCareer.workingWith,
-        occupation: profileData.educationCareer.workingAs,
-        company: profileData.educationCareer.employerName,
-        workingCity: profileData.educationCareer.workingCity,
-        annualIncome: profileData.educationCareer.annualIncome
+        educationLevel: profileData.education,
+        educationField: profileData.educationField,
+        college: profileData.college,
+        workingWith: profileData.workingWith,
+        occupation: profileData.profession,
+        company: profileData.company,
+        workingCity: profileData.workingCity,
+        annualIncome: profileData.income
       };
     } else if (section === 'location') {
       fields = {
-        address: profileData.locationInfo.address,
-        city: profileData.locationInfo.city,
-        state: profileData.locationInfo.state,
-        country: profileData.locationInfo.country,
-        residencyStatus: profileData.locationInfo.residencyStatus,
-        zipCode: profileData.locationInfo.zipCode
+        address: profileData.address,
+        city: profileData.city,
+        state: profileData.state,
+        country: profileData.country,
+        residencyStatus: profileData.residencyStatus,
+        zipCode: profileData.zipCode
       };
     } else if (section === 'lifestyle') {
       fields = {
-        age: profileData.age,
-        dateOfBirth: profileData.religiousBackground.dob,
-        maritalStatus: profileData.maritalStatus,
-        height: profileData.height,
-        weight: profileData.weight,
-        grewUpIn: profileData.lifestyle.grewUpIn,
-        diet: profileData.lifestyle.diet,
-        drinkingHabit: profileData.lifestyle.drinking,
-        smokingHabit: profileData.lifestyle.smoking,
-        bloodGroup: profileData.lifestyle.bloodGroup,
-        healthInformation: profileData.lifestyle.healthInfo,
-        disability: profileData.lifestyle.disability,
-        aboutMe: profileData.aboutText
+        diet: profileData.diet,
+        drinkingHabit: profileData.drinkingHabit,
+        smokingHabit: profileData.smokingHabit,
+        bloodGroup: profileData.bloodGroup,
+        healthInformation: profileData.healthInformation,
+        disability: profileData.disability
       };
     } else if (section === 'hobbies') {
       fields = {
-        hobbies: profileData.hobbies.join(', ')
+        hobbies: profileData.hobbies ? profileData.hobbies.join(', ') : ''
       };
     } else if (section === 'privacy') {
       fields = {
@@ -763,13 +756,13 @@ const MyProfile = ({ editModePage = false }) => {
       fields = {
         profileCreatedBy: profileData.postedBy,
         fullName: profileData.fullName,
+        dateOfBirth: profileData.dob,
+        timeOfBirth: profileData.timeOfBirth,
+        age: profileData.age,
         maritalStatus: profileData.maritalStatus,
         height: profileData.height,
         weight: profileData.weight,
-        diet: profileData.lifestyle.diet,
-        healthInformation: profileData.lifestyle.healthInfo,
-        disability: profileData.lifestyle.disability,
-        bloodGroup: profileData.lifestyle.bloodGroup
+        manglikStatus: profileData.manglikStatus
       };
     }
 
@@ -1013,7 +1006,7 @@ const MyProfile = ({ editModePage = false }) => {
   const handleDownloadProfile = () => {
     try {
       const content = `
-PUNARMILAN PROFILE: ${profileData.id}
+LOVENZEA PROFILE: ${profileData.id}
 ------------------------------------
 Profile Managed By: ${profileData.postedBy}
 Age: ${profileData.age} Years
@@ -1040,7 +1033,7 @@ Lifestyle:
 - Blood Group: ${profileData.lifestyle.bloodGroup || 'Not specified'}
 
 Generated on: ${new Date().toLocaleString()}
-© Punarmilan Matrimony
+© LovenZea Matrimony
       `.trim();
 
       const blob = new Blob([content], { type: 'text/plain' });
@@ -1063,8 +1056,8 @@ Generated on: ${new Date().toLocaleString()}
 
   const handleShareProfile = async () => {
     const shareData = {
-      title: `Punarmilan Profile - ${profileData.id}`,
-      text: `Check out this profile on Punarmilan: ${profileData.age} Years, ${profileData.religion}, ${profileData.profession} from ${profileData.location}`,
+      title: `LovenZea Profile - ${profileData.id}`,
+      text: `Check out this profile on LovenZea: ${profileData.age} Years, ${profileData.religion}, ${profileData.profession} from ${profileData.location}`,
       url: window.location.href,
     };
 
@@ -1709,7 +1702,7 @@ Generated on: ${new Date().toLocaleString()}
   };
 
   return (
-    <div className="bg-transparent p-3 sm:p-4 md:p-6 pb-20">
+    <div className="bg-transparent pb-20">
       <ToastContainer />
 
       {/* Main Profile Container */}
@@ -1718,7 +1711,8 @@ Generated on: ${new Date().toLocaleString()}
         {/* HERO BANNER & BASIC INFO */}
         <div className="dashboard-card-bg rounded-3xl shadow-sm mb-6 overflow-hidden relative border border-white/50">
           {/* Banner Image */}
-          <div className="h-48 md:h-64 w-full bg-cover bg-center relative" style={{ backgroundImage: `url(${profileBanner})` }}>
+          <div className="h-56 md:h-72 w-full relative">
+            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${profileBanner})` }}></div>
             <div className="absolute inset-0 bg-black/10"></div>
             <div className="absolute top-4 right-4 z-10">
               <button onClick={() => navigate(editModePage ? '/my-shadi/my-profile' : '/my-shadi/edit-profile')} className="bg-gradient-to-r from-[#E86D8A] to-[#D89A74] hover:opacity-95 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 transition-all shadow-md">
@@ -2135,126 +2129,7 @@ Generated on: ${new Date().toLocaleString()}
             </div>
 
             <form onSubmit={handleModalSubmit} className="p-4 sm:p-8 space-y-6 max-h-[80vh] overflow-y-auto custom-scrollbar">
-              {modalSection === 'person' ? (
-                <div className="space-y-4">
-                  <div className="bg-cyan-50 text-cyan-800 p-3 rounded-lg flex items-start gap-2 text-sm border border-cyan-100 mb-4">
-                    <FaInfoCircle className="mt-1 shrink-0" />
-                    <p>Fields in bold cannot be edited. Please contact <span className="text-cyan-600 font-medium cursor-pointer">customer care</span> for any queries.</p>
-                  </div>
-                  <div className="text-right text-xs text-theme-text-secondary mb-4">* Marked fields are mandatory</div>
-
-                  {/* Profile Created By */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-theme-text-secondary font-medium">Profile Managed by *</label>
-                    <div className="sm:col-span-2">
-                      <select
-                        value={modalData.profileCreatedBy || ''}
-                        onChange={(e) => handleModalDataChange('profileCreatedBy', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-theme-magenta outline-none"
-                      >
-                        <option value="">Select Options</option>
-                        <option value="Self">Self</option>
-                        <option value="Parent">Parent</option>
-                        <option value="Sibling">Sibling</option>
-                        <option value="Friend">Friend</option>
-                        <option value="Relative">Relative</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Marital Status */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-theme-text-secondary font-medium">Marital Status *</label>
-                    <div className="sm:col-span-2">
-                      <select
-                        value={modalData.maritalStatus || ''}
-                        onChange={(e) => handleModalDataChange('maritalStatus', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-theme-magenta outline-none"
-                      >
-                        <option value="">Select Options</option>
-                        {['Never Married', 'Divorced', 'Widowed', 'Awaiting Divorce', 'Annulled'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Height */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-theme-text-secondary font-medium">Height *</label>
-                    <div className="sm:col-span-2">
-                      <select
-                        value={modalData.height || ''}
-                        onChange={(e) => handleModalDataChange('height', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-theme-magenta outline-none"
-                      >
-                        <option value="">Select Options</option>
-                        {Array.from({ length: 41 }, (_, i) => {
-                          const feet = Math.floor((i + 140) / 30.48);
-                          const inches = Math.round(((i + 140) / 2.54) % 12);
-                          const cm = i + 140;
-                          const label = `${feet}ft ${inches}in - ${cm}cm`;
-                          return <option key={cm} value={label}>{label}</option>;
-                        })}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Diet */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-start">
-                    <label className="text-theme-text-secondary font-medium mt-1">Diet *</label>
-                    <div className="sm:col-span-2 grid grid-cols-2 gap-y-2">
-                      {['Veg', 'Non-Veg', 'Occasionally Non-Veg', 'Eggetarian', 'Jain', 'Vegan'].map(opt => (
-                        <label key={opt} className="flex items-center gap-2 text-sm text-gray-700">
-                          <input type="radio" name="diet" value={opt} checked={modalData.diet === opt} onChange={(e) => handleModalDataChange('diet', e.target.value)} className="w-4 h-4 text-cyan-500 focus:ring-cyan-500" />
-                          {opt}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Health Info */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-theme-text-secondary font-medium">Health Information</label>
-                    <div className="sm:col-span-2">
-                      <select
-                        value={modalData.healthInformation || ''}
-                        onChange={(e) => handleModalDataChange('healthInformation', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-theme-magenta outline-none"
-                      >
-                        <option value="">Select Options</option>
-                        {['No Health Problems', 'Minor Health Issues', 'Major Health Issues'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Disability */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-theme-text-secondary font-medium">Any Disability? *</label>
-                    <div className="sm:col-span-2 flex gap-4">
-                      {['None', 'Physical Disability'].map(opt => (
-                        <label key={opt} className="flex items-center gap-2 text-sm text-gray-700">
-                          <input type="radio" name="disability" value={opt} checked={modalData.disability === opt} onChange={(e) => handleModalDataChange('disability', e.target.value)} className="w-4 h-4 text-cyan-500 focus:ring-cyan-500" />
-                          {opt}
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Blood Group */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
-                    <label className="text-theme-text-secondary font-medium">Blood Group:</label>
-                    <div className="sm:col-span-2">
-                      <select
-                        value={modalData.bloodGroup || ''}
-                        onChange={(e) => handleModalDataChange('bloodGroup', e.target.value)}
-                        className="w-full px-3 py-2 border rounded-lg focus:ring-theme-magenta outline-none"
-                      >
-                        <option value="">Select Options</option>
-                        {['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'].map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              ) : modalSection === 'verification' ? (
+              {modalSection === 'verification' ? (
                 <div className="space-y-6">
                   <div className="bg-[#FAF6F0] text-rose-800 p-4 rounded-xl flex items-start gap-3 border border-rose-100">
                     <FaInfoCircle className="mt-1 shrink-0 text-theme-magenta" />

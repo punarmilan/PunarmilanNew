@@ -1,7 +1,5 @@
 import Headers from "../components/Headers";
 import SecondNav from "../components/SecondNav";
-import layoutBg from "../assets/image/sunny-floral-path.png";
-
 export default function MyShadiLayout({ children }) {
     return (
         <>
@@ -9,10 +7,10 @@ export default function MyShadiLayout({ children }) {
             <div className="pt-16 h-screen w-full bg-theme-bg relative overflow-hidden">
                 {/* No overlay - maximum visibility */}
                 <div className="max-w-[1600px] mx-auto relative z-10 h-full">
-                    <div className="flex gap-6 px-0 sm:px-4 lg:px-6 py-0 sm:py-4 h-full pb-16 md:pb-4">
+                    <div className="flex gap-4 lg:gap-5 px-0 sm:px-4 lg:px-6 py-0 sm:py-4 h-full pb-16 md:pb-4">
 
                         {/* Left Sidebar */}
-                        <div className="hidden md:block flex-shrink-0 z-10 w-full max-w-[280px] h-[calc(100vh-6rem)] overflow-y-auto pr-1 scrollbar-hide">
+                        <div className="hidden md:block flex-shrink-0 z-10 w-full max-w-[250px] h-[calc(100vh-6rem)] overflow-y-auto pr-1 scrollbar-hide">
                             <SecondNav />
                         </div>
 

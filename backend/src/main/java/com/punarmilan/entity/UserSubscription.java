@@ -27,7 +27,7 @@ public class UserSubscription {
     @com.fasterxml.jackson.annotation.JsonIgnore
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "plan_id", nullable = false)
     private SubscriptionPlan plan;
 

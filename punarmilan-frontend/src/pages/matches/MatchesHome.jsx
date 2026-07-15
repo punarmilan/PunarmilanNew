@@ -21,7 +21,7 @@ export default function MatchesHome() {
           </a>
         </li>
         <li>
-          <span className="font-semibold">Not a PunarMilan.com member?</span>
+          <span className="font-semibold">Not a LovenZea.com member?</span>
         </li>
       </ul>
 

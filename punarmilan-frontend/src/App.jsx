@@ -14,7 +14,7 @@ import Header from "./components/Headers";
 import Footer from "./components/Footer";
 import AuthenticatedFooter from "./components/AuthenticatedFooter";
 import OnlineMembers from "./components/OnlineMembers";
-import PunarMilanSupport from "./components/PunarMilanSupport";
+import LovenZeaSupport from "./components/LovenZeaSupport";
 import SecondNav from "./components/SecondNav";
 import { getCurrentUser } from "./Slice/UserSlice";
 import MyProfile from "./pages/myshadi/myProfile/MyProfile";
@@ -75,7 +75,7 @@ import PartnerPreferenceForm from "./components/profile/PartnerPreferenceForm";
 
 //Auth Footer Routes import
 import BlogPage from "./pages/./authFooter/BlogPage";
-import VipPunarMilanPage from "./pages/authFooter/VipPunarMilanPage";
+import VipLovenZeaPage from "./pages/authFooter/VipLovenZeaPage";
 import SuccessStoriesPage from "./pages/authFooter/SuccessStoriesPage";
 import CentresPage from "./pages/authFooter/CentresPage";
 import ContactPage from "./pages/authFooter/ContactPage";
@@ -198,7 +198,7 @@ function App() {
       {/* Online Members Chat Button */}
       {/* Support Chat Bot */}
       {!isAdminPage && (
-        <PunarMilanSupport />
+        <LovenZeaSupport />
       )}
       {/* ROUTES */}
       <Routes>
@@ -253,7 +253,7 @@ function App() {
 
         // Auth Footer Routes
         <Route path="/blog" element={<><Header /><div className="pt-16"><BlogPage /></div></>} /> 
-        <Route path="/VIP-punarmilan" element={<><Header /><div className="pt-16"><VipPunarMilanPage /></div></>} /> 
+        <Route path="/VIP-lovenzea" element={<><Header /><div className="pt-16"><VipLovenZeaPage /></div></>} /> 
         <Route path="/success-stories" element={<><Header /><div className="pt-16"><SuccessStoriesPage /></div></>} />
         <Route path="/centres" element={<><Header /><div className="pt-16"><CentresPage /></div></>} />
         <Route path="/contact-us" element={<><Header /><div className="pt-16"><ContactPage /></div></>} />

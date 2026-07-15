@@ -96,7 +96,7 @@ const BlogPage = () => {
           <div className="max-w-3xl mx-auto text-center">
 
             <span className="bg-theme-surface/20 backdrop-blur-md px-5 py-2 rounded-full text-sm font-medium">
-              PunarMilan Blog
+              LovenZea Blog
             </span>
 
             <h1 className="mt-8 text-5xl md:text-7xl font-extrabold leading-tight">

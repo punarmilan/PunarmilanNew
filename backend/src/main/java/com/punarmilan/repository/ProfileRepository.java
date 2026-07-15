@@ -14,9 +14,17 @@ import org.springframework.data.domain.Pageable;
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long>,
                 org.springframework.data.jpa.repository.JpaSpecificationExecutor<Profile> {
-        Optional<Profile> findByUser(User user);
+        Optional<Profile> findFirstByUserOrderByIdDesc(User user);
 
-        Optional<Profile> findByUserId(Long userId);
+        default Optional<Profile> findByUser(User user) {
+            return findFirstByUserOrderByIdDesc(user);
+        }
+
+        Optional<Profile> findFirstByUserIdOrderByIdDesc(Long userId);
+
+        default Optional<Profile> findByUserId(Long userId) {
+            return findFirstByUserIdOrderByIdDesc(userId);
+        }
 
         Optional<Profile> findByProfileId(String profileId);
 

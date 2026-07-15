@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import bannerBg from '../../../assets/image/banner-bg.png';
 import { HiSparkles, HiCheckCircle, HiArrowRight, HiOutlineHeart, HiChevronLeft, HiChevronRight } from 'react-icons/hi'
 import RecentChatsCard from '../../../components/RecentChatsCard'
 import MatchesSection from '../../../components/MatchesSection'
@@ -180,12 +181,12 @@ function Dashboard() {
                 <div className="flex-1 w-full pb-4 md:pb-6">
                     
                     {/* Welcome Profile Header Card */}
-                    <div className="mb-6 rounded-[24px] border border-[#F2D7D9] shadow-[0_10px_30px_rgba(216,154,116,0.12)] p-4 sm:p-5 hover:-translate-y-1 transition-all duration-300" style={{ background: 'linear-gradient(135deg, #E86D8A 0%, #D89A74 100%)' }}>
+                    <div className="mb-4 rounded-[20px] border border-[#F2D7D9] shadow-[0_10px_30px_rgba(216,154,116,0.12)] py-2 px-3 sm:py-2.5 sm:px-4 hover:-translate-y-1 transition-all duration-300" style={{ backgroundImage: `url(${bannerBg})`, backgroundSize: "cover", backgroundPosition: "center" }}>
                         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-1 md:gap-6">
                             <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-6">
                                 {/* Profile Picture */}
                                 <div className="relative">
-                                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-white shadow-md">
+                                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-[3px] border-white shadow-sm">
                                         <img 
                                             src={summary?.user?.profilePhotoUrl?.url || summary?.user?.profilePhotoUrl || "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=60"} 
                                             alt={summary?.user?.fullName || "User Profile"} 
@@ -202,55 +203,55 @@ function Dashboard() {
                                 {/* Profile info */}
                                 <div className="text-center sm:text-left">
                                     <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                                        <h1 className="text-2xl sm:text-3xl font-bold font-serif text-white">
+                                        <h1 className="text-xl sm:text-2xl font-bold font-serif text-[#5A2332]">
                                             Namaste, {summary?.user?.fullName || "Partner"}
                                         </h1>
-                                        <span className={`inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-semibold ${isPremium ? 'bg-[#C99853] text-white border border-white/20' : 'bg-theme-surface/20 text-white border border-white/30'}`}>
+                                        <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-full text-[10px] tracking-wide font-bold shadow-sm whitespace-nowrap ${isPremium ? 'bg-[#C99853] text-white border border-white/20' : 'bg-theme-surface/20 text-white border border-white/30'}`}>
                                             {isPremium ? "Premium Member" : "Free Account"}
                                         </span>
                                     </div>
-                                    <p className="text-sm text-white/90 mt-1">
-                                        Profile ID: <span className="font-mono font-bold text-[#FFF6F2]">{summary?.user?.profileId || `SH${summary?.user?.id || '29482'}`}</span>
+                                    <p className="text-[13px] text-[#4A3728] mt-0.5">
+                                        Profile ID: <span className="font-mono font-bold text-[#5A2332]">{summary?.user?.profileId || `SH${summary?.user?.id || '29482'}`}</span>
                                     </p>
-                                    <p className="text-xs text-white/70 mt-0.5">
+                                    <p className="text-xs text-[#4A3728]/80 mt-0.5">
                                         Logged in as: {summary?.user?.email || "User"}
                                     </p>
 
                                     {/* Sleek, Modern Stats Grid */}
                                     <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3 mt-3 pt-3 border-t border-white/20">
                                         {/* Stat 1 */}
-                                        <div className="bg-theme-surface/20 backdrop-blur-sm border border-white/30 rounded-xl px-3 py-2 flex items-center gap-2 hover:border-[#C99853] transition-all duration-300 shadow-sm">
-                                            <span className="text-sm text-white">👁️</span>
+                                        <div className="bg-white/40 backdrop-blur-sm border border-[#E88C8C]/30 rounded-xl px-3 py-2 flex items-center gap-2 hover:border-[#C99853] transition-all duration-300 shadow-sm">
+                                            <span className="text-sm text-[#5A2332]">👁️</span>
                                             <div className="text-left">
-                                                <p className="text-sm font-bold text-white leading-tight">{summary?.recentVisitorsCount || 0}</p>
-                                                <p className="text-[10px] text-white/80 uppercase font-semibold tracking-wider">Views</p>
+                                                <p className="text-sm font-bold text-[#5A2332] leading-tight">{summary?.recentVisitorsCount || 0}</p>
+                                                <p className="text-[10px] text-[#4A3728]/90 uppercase font-bold tracking-wider">Views</p>
                                             </div>
                                         </div>
 
                                         {/* Stat 2 */}
-                                        <div className="bg-theme-surface/20 backdrop-blur-sm border border-white/30 rounded-xl px-3 py-2 flex items-center gap-2 hover:border-[#C99853] transition-all duration-300 shadow-sm">
-                                            <span className="text-sm text-white">📩</span>
+                                        <div className="bg-white/40 backdrop-blur-sm border border-[#E88C8C]/30 rounded-xl px-3 py-2 flex items-center gap-2 hover:border-[#C99853] transition-all duration-300 shadow-sm">
+                                            <span className="text-sm text-[#5A2332]">📩</span>
                                             <div className="text-left">
-                                                <p className="text-sm font-bold text-white leading-tight">{summary?.pendingInvitations || 0}</p>
-                                                <p className="text-[10px] text-white/80 uppercase font-semibold tracking-wider">Received</p>
+                                                <p className="text-sm font-bold text-[#5A2332] leading-tight">{summary?.pendingInvitations || 0}</p>
+                                                <p className="text-[10px] text-[#4A3728]/90 uppercase font-bold tracking-wider">Received</p>
                                             </div>
                                         </div>
 
                                         {/* Stat 3 */}
-                                        <div className="bg-theme-surface/20 backdrop-blur-sm border border-white/30 rounded-xl px-3 py-2 flex items-center gap-2 hover:border-[#C99853] transition-all duration-300 shadow-sm">
-                                            <span className="text-sm text-white">🤝</span>
+                                        <div className="bg-white/40 backdrop-blur-sm border border-[#E88C8C]/30 rounded-xl px-3 py-2 flex items-center gap-2 hover:border-[#C99853] transition-all duration-300 shadow-sm">
+                                            <span className="text-sm text-[#5A2332]">🤝</span>
                                             <div className="text-left">
-                                                <p className="text-sm font-bold text-white leading-tight">{summary?.acceptedInvitations || 0}</p>
-                                                <p className="text-[10px] text-white/80 uppercase font-semibold tracking-wider">Accepted</p>
+                                                <p className="text-sm font-bold text-[#5A2332] leading-tight">{summary?.acceptedInvitations || 0}</p>
+                                                <p className="text-[10px] text-[#4A3728]/90 uppercase font-bold tracking-wider">Accepted</p>
                                             </div>
                                         </div>
 
                                         {/* Stat 4 */}
-                                        <div className="bg-theme-surface/20 backdrop-blur-sm border border-white/30 rounded-xl px-3 py-2 flex items-center gap-2 hover:border-[#C99853] transition-all duration-300 shadow-sm">
-                                            <span className="text-sm text-white">💖</span>
+                                        <div className="bg-white/40 backdrop-blur-sm border border-[#E88C8C]/30 rounded-xl px-3 py-2 flex items-center gap-2 hover:border-[#C99853] transition-all duration-300 shadow-sm">
+                                            <span className="text-sm text-[#5A2332]">💖</span>
                                             <div className="text-left">
-                                                <p className="text-sm font-bold text-white leading-tight">{summary?.shortlistCount || summary?.shortlistedCount || 0}</p>
-                                                <p className="text-[10px] text-white/80 uppercase font-semibold tracking-wider">Saved</p>
+                                                <p className="text-sm font-bold text-[#5A2332] leading-tight">{summary?.shortlistCount || summary?.shortlistedCount || 0}</p>
+                                                <p className="text-[10px] text-[#4A3728]/90 uppercase font-bold tracking-wider">Saved</p>
                                             </div>
                                         </div>
                                     </div>
@@ -258,9 +259,9 @@ function Dashboard() {
                             </div>
 
                             {/* Profile Completion Dial / Bar */}
-                            <div className="bg-theme-surface/20 backdrop-blur-md w-full md:w-64 border border-white/30 rounded-2xl p-3 flex flex-col justify-between mt-2 md:mt-0">
+                            <div className="bg-white/40 backdrop-blur-md w-full md:w-64 border border-[#E88C8C]/30 rounded-2xl p-2.5 flex flex-col justify-between mt-2 md:mt-0">
                                 <div className="flex justify-between items-center mb-2">
-                                    <span className="text-xs font-semibold text-white/90">Profile Completion</span>
+                                    <span className="text-xs font-bold text-[#4A3728]">Profile Completion</span>
                                     <span className="text-sm font-bold text-[#FCD34D]">{summary?.profileCompletionPercentage || 0}%</span>
                                 </div>
                                 <div className="w-full bg-theme-surface/30 h-2.5 rounded-full overflow-hidden">
@@ -410,7 +411,7 @@ function Dashboard() {
                         <div className="space-y-6">
                             
                             {/* Premium Upgrade Promotion Banner */}
-                            <div className="text-[#3B2F2F] rounded-[20px] border border-[#F2D7D9] p-5 shadow-[0_10px_30px_rgba(216,154,116,0.12)] relative overflow-hidden group hover:border-[#D89A74] transition-all duration-300 bg-[#FFF8F7]">
+                            <div className="text-[#3B2F2F] rounded-[20px] border border-[#F2D7D9] py-8 px-6 shadow-[0_10px_30px_rgba(216,154,116,0.12)] relative overflow-hidden group hover:border-[#D89A74] transition-all duration-300 bg-[#FFF8F7]" style={{ backgroundImage: `url(${bannerBg})`, backgroundSize: "cover", backgroundPosition: "center" }}>
                                 {/* Decorative elements */}
                                 <div className="absolute top-[-20%] right-[-10%] w-32 h-32 bg-[#E86D8A]/5 rounded-full blur-2xl pointer-events-none" />
                                 <div className="absolute bottom-[-10%] left-[-10%] w-24 h-24 bg-[#D89A74]/5 rounded-full blur-xl pointer-events-none" />
@@ -429,7 +430,7 @@ function Dashboard() {
                                     Find Your Perfect Match <br/> <span className="text-[#E86D8A]">Faster</span>
                                 </h3>
                                 
-                                <ul className="space-y-2 mb-5 relative z-10">
+                                <ul className="space-y-4 mb-6 relative z-10">
                                     {[
                                         'Message profiles directly',
                                         'See who viewed your profile',

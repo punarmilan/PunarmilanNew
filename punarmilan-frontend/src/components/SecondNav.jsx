@@ -28,6 +28,7 @@ export default function SecondNav() {
     ];
 
     const matchesTabs = [
+        { id: "Dashboard", path: "/my-shadi", icon: "fa-solid fa-border-all" },
         { id: "New Matches", path: "/matches?tab=new", icon: "fa-solid fa-bolt" },
         { id: "Near Me", path: "/matches?tab=nearme", icon: "fa-solid fa-location-dot" },
         { id: "Viewed My Profile", path: "/matches?tab=viewedme", icon: "fa-solid fa-eye" },

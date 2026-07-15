@@ -12,7 +12,7 @@ const reportCategories = [
         reasons: [
             'Incorrect Profile information',
             'Phone number is incorrect/unreachable',
-            'More than one Profile on PunarMilan.com',
+            'More than one Profile on LovenZea.com',
             'Photo belongs to someone else',
             'Not responding'
         ]

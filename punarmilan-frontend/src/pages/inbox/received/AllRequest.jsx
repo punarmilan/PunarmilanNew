@@ -91,7 +91,7 @@ export default function AllRequest() {
         const profile = request.senderProfile;
 
         return (
-            <div className="bg-theme-surface border border-theme-border rounded-xl p-4 sm:p-5 hover:shadow-md transition-shadow">
+            <div className="bg-white/40 backdrop-blur-md border border-white/50 rounded-xl p-4 sm:p-5 hover:shadow-md transition-shadow">
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                     {/* Profile Image */}
                     <div 
@@ -166,7 +166,7 @@ export default function AllRequest() {
                             </button>
                             <button
                                 onClick={() => handleDecline(request.id)}
-                                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-theme-surface hover:bg-red-50 text-red-500 border border-red-200 font-semibold rounded-lg transition-colors"
+                                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-white/40 backdrop-blur-md hover:bg-red-50 text-red-500 border border-red-200 font-semibold rounded-lg transition-colors"
                             >
                                 <X className="w-4 h-4" />
                                 <span>Decline</span>
@@ -187,7 +187,7 @@ export default function AllRequest() {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Mobile Header */}
-            <div className="lg:hidden sticky top-0 z-20 bg-theme-surface border-b border-theme-border px-4 py-3">
+            <div className="lg:hidden sticky top-0 z-20 bg-white/40 backdrop-blur-md border-b border-white/50 px-4 py-3">
                 <button
                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                     className="flex items-center gap-2 text-gray-700 font-medium"
@@ -212,7 +212,7 @@ export default function AllRequest() {
                         ${isSidebarOpen ? "fixed" : "hidden"}
                         lg:block lg:static
                         inset-y-0 left-0 z-40
-                        bg-theme-surface lg:bg-transparent
+                        bg-white/40 backdrop-blur-md lg:bg-transparent
                         overflow-y-auto w-80 p-4 lg:p-0
                     `}>
                         <div className="sticky top-4 space-y-4 sm:space-y-6">
@@ -223,9 +223,9 @@ export default function AllRequest() {
 
                     {/* Main Content Area */}
                     <main className="flex-1 min-w-0">
-                        <div className="bg-theme-surface rounded-lg sm:rounded-xl shadow-sm border border-theme-border overflow-hidden">
+                        <div className="bg-white/40 backdrop-blur-md rounded-lg sm:rounded-xl shadow-sm border border-white/50 overflow-hidden">
                             {/* Tabs */}
-                            <div className="border-b border-theme-border">
+                            <div className="border-b border-white/50">
                                 <div className="flex">
                                     <button
                                         onClick={() => setActiveTab("all")}

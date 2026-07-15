@@ -40,7 +40,7 @@ export default function InboxNav() {
             {/* Mobile/Tablet View (below 768px) */}
             <div className="md:hidden">
                 <div className="pt-12 xs:pt-14">
-                    <div className="w-full bg-theme-surface shadow-sm border-b border-theme-border">
+                    <div className="w-full bg-white/40 backdrop-blur-md shadow-sm border-b border-white/50">
                         <div className="w-full overflow-x-auto scrollbar-hide">
                             <div className="flex min-w-max px-4 sm:px-6 h-12 items-center gap-1 justify-center">
                                 {tabs.map((tab) => (
@@ -48,7 +48,7 @@ export default function InboxNav() {
                                         key={tab.id}
                                         onClick={() => handleTabClick(tab)}
                                         className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-all whitespace-nowrap ${active === tab.id
-                                            ? "text-red-500 bg-theme-surface border-b-2 border-red-500"
+                                            ? "text-red-500 bg-white/40 backdrop-blur-md border-b-2 border-red-500"
                                             : "text-theme-text-secondary hover:text-gray-900 hover:bg-gray-50"
                                             }`}
                                     >
@@ -64,7 +64,7 @@ export default function InboxNav() {
             {/* Desktop View (768px+) */}
             <div className="hidden md:block">
                 <div className="pt-14 lg:pt-16">
-                    <div className="w-full bg-theme-surface shadow-sm border-b border-theme-border">
+                    <div className="w-full bg-white/40 backdrop-blur-md shadow-sm border-b border-white/50">
                         <div className="max-w-7xl mx-auto w-full">
                             <div className="overflow-x-auto scrollbar-hide">
                                 <ul className="flex gap-0 px-4 sm:px-6 lg:px-8 h-12 items-end min-w-max justify-center">

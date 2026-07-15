@@ -35,7 +35,7 @@ const AdminLogin = () => {
         <div className="min-h-screen flex items-center justify-center bg-gray-900 p-3 sm:p-4">
             <div className="max-w-md w-full bg-gray-800 rounded-2xl shadow-2xl p-6 sm:p-8 border border-gray-700">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-white mb-2">Punarmilan Admin</h1>
+                    <h1 className="text-3xl font-bold text-white mb-2">LovenZea Admin</h1>
                     <p className="text-gray-400">Please sign in to your administrator account</p>
                 </div>
 
@@ -47,7 +47,7 @@ const AdminLogin = () => {
                             name="email"
                             required
                             className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all"
-                            placeholder="admin@punarmilan.com"
+                            placeholder="admin@lovenzea.com"
                             onChange={handleChange}
                         />
                     </div>

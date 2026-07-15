@@ -132,14 +132,9 @@ const HelpPage = () => {
     return (
         <div className="min-h-screen p-4 lg:p-8 bg-gradient-to-br from-rose-50 via-pink-50 to-orange-50">
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                    <div className="lg:col-span-1">
-                        <Sidebar />
-                    </div>
-
-                    <div className="lg:col-span-3">
-                        <div className="bg-theme-surface rounded-2xl shadow-xl p-6 lg:p-8 border border-rose-100">
-                            <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6 font-serif">Help & Support</h1>
+                <div className="max-w-5xl mx-auto">
+                    <div className="bg-theme-surface rounded-2xl shadow-xl p-6 lg:p-8 border border-rose-100">
+                        <h1 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-6 font-serif">Help & Support</h1>
 
                             <div className="mb-8 bg-gradient-to-r from-indigo-50 to-purple-50 border-l-4 border-indigo-500 p-6 rounded-r-lg flex justify-between items-center">
                                 <div>
@@ -208,7 +203,7 @@ const HelpPage = () => {
                                         📞 Call: +91-8095031111
                                     </a>
                                     <button
-                                        onClick={() => window.location.href = 'mailto:support@punarmilan.com'}
+                                        onClick={() => window.location.href = 'mailto:support@lovenzea.com'}
                                         className="flex-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all duration-200 shadow-md"
                                     >
                                         ✉️ Email Support
@@ -224,7 +219,6 @@ const HelpPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
 
             {/* Ticket Creation Modal */}
             {showTicketModal && (

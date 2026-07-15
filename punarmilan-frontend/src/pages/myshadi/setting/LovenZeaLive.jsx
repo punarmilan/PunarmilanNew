@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Bell, Mail, MessageSquare, Phone, Smartphone, CheckCircle2, RotateCcw } from 'lucide-react';
 
 /**
- * PunarMilanLive Component
- * Manages communication preferences for PunarMilan Live sessions.
+ * LovenZeaLive Component
+ * Manages communication preferences for LovenZea Live sessions.
  * Features a premium design with instant-save functionality.
  */
-function PunarMilanLive({ profile, onUpdate }) {
-    const defaultPunarMilanLive = {
+function LovenZeaLive({ profile, onUpdate }) {
+    const defaultLovenZeaLive = {
         pushNotification: true,
         email: true,
         sms: true,
@@ -15,7 +15,7 @@ function PunarMilanLive({ profile, onUpdate }) {
         call: true
     };
 
-    const [preferences, setPreferences] = useState(defaultPunarMilanLive);
+    const [preferences, setPreferences] = useState(defaultLovenZeaLive);
     const [isSaving, setIsSaving] = useState(false);
     const [lastSaved, setLastSaved] = useState(null);
 
@@ -26,11 +26,11 @@ function PunarMilanLive({ profile, onUpdate }) {
                 const parsed = typeof profile.notificationSettings === 'string'
                     ? JSON.parse(profile.notificationSettings)
                     : profile.notificationSettings;
-                if (parsed.PunarMilanLive) {
-                    setPreferences({ ...defaultPunarMilanLive, ...parsed.PunarMilanLive });
+                if (parsed.LovenZeaLive) {
+                    setPreferences({ ...defaultLovenZeaLive, ...parsed.LovenZeaLive });
                 }
             } catch (e) {
-                console.error("Error parsing settings for PunarMilanLive:", e);
+                console.error("Error parsing settings for LovenZeaLive:", e);
             }
         }
     }, [profile]);
@@ -64,7 +64,7 @@ function PunarMilanLive({ profile, onUpdate }) {
             await onUpdate({
                 notificationSettings: JSON.stringify({
                     ...currentSettings,
-                    PunarMilanLive: newPreferences
+                    LovenZeaLive: newPreferences
                 })
             });
 
@@ -83,7 +83,7 @@ function PunarMilanLive({ profile, onUpdate }) {
      */
     const handleReset = async () => {
         setIsSaving(true);
-        setPreferences(defaultPunarMilanLive);
+        setPreferences(defaultLovenZeaLive);
 
         try {
             let currentSettings = {};
@@ -100,7 +100,7 @@ function PunarMilanLive({ profile, onUpdate }) {
             await onUpdate({
                 notificationSettings: JSON.stringify({
                     ...currentSettings,
-                    PunarMilanLive: defaultPunarMilanLive
+                    LovenZeaLive: defaultLovenZeaLive
                 })
             });
             setLastSaved(new Date().toLocaleTimeString());
@@ -248,4 +248,4 @@ function PunarMilanLive({ profile, onUpdate }) {
     );
 }
 
-export default PunarMilanLive;
+export default LovenZeaLive;

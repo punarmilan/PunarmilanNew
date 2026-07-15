@@ -948,10 +948,10 @@ function PrivacyOptions({ profile, onUpdate }) {
                                                     </div>
                                                     <div className="flex-1">
                                                         <span className={`text-sm font-bold block mb-1 ${settings.doNotDisturb ? "text-pink-900" : "text-gray-700"}`}>
-                                                            PunarMilan.com can call me
+                                                            LovenZea.com can call me
                                                         </span>
                                                         <span className="text-xs text-theme-text-secondary leading-relaxed">
-                                                            Allow PunarMilan.com to contact you for Premium membership related offers and wedding planning services.
+                                                            Allow LovenZea.com to contact you for Premium membership related offers and wedding planning services.
                                                         </span>
                                                     </div>
                                                 </label>

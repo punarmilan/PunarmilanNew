@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
+import projectLogo from '../assets/image/project_logo_transperent.png';
 import { HiHeart } from "react-icons/hi";
 import HelpDropdown from "./HelpDropdown";
 import Profile from "./Profile";
@@ -28,7 +29,7 @@ import {
 const Header = () => {
     const [helpOpen, setHelpOpen] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
-    const [showMyPunarMilanMenu, setShowMyPunarMilanMenu] = useState(false);
+    const [showMyLovenZeaMenu, setShowMyLovenZeaMenu] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [activeTab, setActiveTab] = useState("Home");
@@ -318,15 +319,16 @@ const Header = () => {
                 <div className="max-w-7xl mx-auto w-full">
                     <div className="flex justify-between items-center h-12 xs:h-14 sm:h-16 px-2 xs:px-1 sm:px-4 md:px-2">
                         {/* LOGO */}
-                        <Link to="/my-shadi" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#d94f73] to-orange-400 flex items-center justify-center text-white shadow-md shadow-[#d94f73]/25">
-                                <HiHeart className="w-5 h-5 sm:w-5.5 sm:h-5.5 fill-current" />
+                        <Link to="/my-shadi" className="hover:opacity-90 transition-opacity">
+
+                            <div className="flex items-center gap-0">
+                                <img src={projectLogo} alt="LovenZea Logo" className="w-14 h-14 sm:w-16 sm:h-16 object-cover drop-shadow-xl hover:scale-105 transition-transform duration-300" />
+                                <span className="text-2xl sm:text-3xl font-black tracking-tighter text-slate-800 drop-shadow-sm flex items-center ml-[1px]">
+                                    Loven<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d94f73] to-rose-500">Zea</span>
+                                </span>
                             </div>
-                            <span className="text-xl sm:text-2xl font-black tracking-tighter flex items-center">
-                                <span className="text-slate-900 drop-shadow-sm">Punar</span>
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d94f73] to-rose-400">Milan</span>
-                            </span>
-                        </Link>
+
+                          </Link>
 
                         {/* RIGHT SIDE - All items visible on all screens */}
                         <div className="flex items-center gap-3">

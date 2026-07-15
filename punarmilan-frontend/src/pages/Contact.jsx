@@ -84,7 +84,7 @@ const Contact = () => {
                                 </div>
                                 <h3 className="text-xl font-black text-slate-900 mb-2">Email Us</h3>
                                 <p className="text-slate-500 font-medium mb-4">We reply within 24 hours</p>
-                                <a href="mailto:punarmilan2@gmail.com" className="text-lg font-black text-blue-600 hover:underline">punarmilan2@gmail.com</a>
+                                <a href="mailto:lovenzea2@gmail.com" className="text-lg font-black text-blue-600 hover:underline">lovenzea2@gmail.com</a>
                             </div>
 
                             <div className="bg-theme-surface p-8 rounded-[2.5rem] shadow-xl border border-slate-100 group hover:-translate-y-2 transition-all duration-500">

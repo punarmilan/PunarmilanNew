@@ -118,7 +118,7 @@ const ContactProfileCard = ({ profile, onChat, onWhatsApp, onCall }) => {
                         className="w-full flex items-center justify-center gap-2 bg-rose-500 text-white font-medium py-2.5 px-4 rounded-lg hover:bg-rose-600 shadow-md shadow-rose-100 transition-all text-sm"
                     >
                         <MessageCircle className="w-4 h-4" />
-                        PunarMilan Chat
+                        LovenZea Chat
                     </button>
                 </div>
             </div>

@@ -425,7 +425,7 @@ function Login({ close, openRegister }) {
                         </button>
 
                         <div className="pt-2 text-center border-t border-gray-100">
-                            <span className="text-theme-text-secondary text-sm">New to PunarMilan? </span>
+                            <span className="text-theme-text-secondary text-sm">New to LovenZea? </span>
                             <button
                                 type="button"
                                 onClick={openRegister}

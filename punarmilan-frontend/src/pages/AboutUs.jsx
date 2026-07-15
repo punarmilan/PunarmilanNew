@@ -14,7 +14,7 @@ const AboutUs = () => {
                 <div className="absolute inset-0">
                     <img
                         src={bannerImg}
-                        alt="Join PunarMilan"
+                        alt="Join LovenZea"
                         className="w-full h-full object-cover object-[center_20%] scale-105 transition-transform duration-1000"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-900/30 to-slate-50"></div>
@@ -29,7 +29,7 @@ const AboutUs = () => {
                         Uniting <span className="text-[#e91e63]">Souls</span>,<br />Creating <span className="underline decoration-[#e91e63]/50 underline-offset-8">Legacies</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-slate-100 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow-lg mb-12">
-                        PunarMilan is more than a platform; it's a sanctuary for those who believe in the enduring power of love and shared traditions.
+                        LovenZea is more than a platform; it's a sanctuary for those who believe in the enduring power of love and shared traditions.
                     </p>
 
                 </div>
@@ -112,7 +112,7 @@ const AboutUs = () => {
                             <span className="text-white text-5xl font-serif">"</span>
                         </div>
                         <p className="text-2xl md:text-4xl font-serif italic text-slate-800 leading-snug mb-12">
-                            "Finding a partner on PunarMilan felt different. It wasn't about swiping; it was about understanding. The platform's respect for our values made the journey as beautiful as the destination."
+                            "Finding a partner on LovenZea felt different. It wasn't about swiping; it was about understanding. The platform's respect for our values made the journey as beautiful as the destination."
                         </p>
                         <div className="flex items-center gap-4">
                             <div className="w-16 h-16 rounded-full bg-slate-200 overflow-hidden shadow-md">

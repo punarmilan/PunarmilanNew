@@ -58,7 +58,8 @@ const Requests = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-orange-50 to-amber-50 py-6 px-4 font-worksans">
+    <div className="min-h-screen pb-20  pt-4 xs:pt-6 sm:pt-8 overflow-x-hidden">
+            
       <div className="max-w-7xl mx-auto">
 
 

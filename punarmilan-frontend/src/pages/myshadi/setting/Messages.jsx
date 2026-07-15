@@ -12,7 +12,7 @@ import {
 
 /**
  * Messages Component
- * Redesigned for PunarMilan's premium aesthetics.
+ * Redesigned for LovenZea's premium aesthetics.
  * Handles dynamic "Message on Connect" and "Message on Accept" with instant-save feedback.
  */
 export default function Messages({ profile, onUpdate }) {

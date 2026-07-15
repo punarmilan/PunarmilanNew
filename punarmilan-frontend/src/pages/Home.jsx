@@ -18,6 +18,7 @@ import heroImg2 from '../assets/image/hero_bg2.png'
 import heroImg3 from '../assets/image/hero_bg3.png'
 import heroImg4 from '../assets/image/hero_bg_new.png'
 import heroImg5 from '../assets/image/hero_bg5.png'
+import projectLogo from '../assets/image/project_logo_transperent.png'
 import { motion, AnimatePresence } from "framer-motion";
 
 const fadeUp = {
@@ -219,7 +220,7 @@ function Home() {
                         </div>
 
                         <h2 className="text-2xl font-black text-slate-900 text-center mb-2">
-                            <span className="text-slate-900">Punar</span><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d94f73] to-rose-400">Milan</span> awaits you!
+                            <span className="text-slate-900">Loven</span><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d94f73] to-rose-500">Zea</span> awaits you!
                         </h2>
                         <p className="text-slate-500 text-sm text-center mb-6 leading-relaxed">
                             Create a free account to search verified profiles and find your perfect life partner.
@@ -443,7 +444,7 @@ function Home() {
                                     transition={{ duration: 1.5, ease: "easeInOut" }}
                                     src={imgSrc}
                                     alt={`Hero Slide ${index + 1}`}
-                                    className="absolute inset-0 w-full h-full object-cover object-center"
+                                    className="absolute inset-0 w-full h-full object-cover object-[75%_center] sm:object-center"
                                 />
                             )
                         ))}
@@ -455,14 +456,10 @@ function Home() {
 
                 {/* ── Navbar ── */}
                 <header className="relative z-30 w-full max-w-[1600px] mx-auto px-6 sm:px-8 py-5 flex items-center justify-between">
-                    {/* Left: Brand logo */}
-                    <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#d94f73] to-orange-400 flex items-center justify-center text-white shadow-md shadow-[#d94f73]/25">
-                            <HiHeart className="w-4 h-4 sm:w-5.5 sm:h-5.5 fill-current" />
-                        </div>
-                        <span className="text-xl sm:text-2xl font-black tracking-tighter flex items-center">
-                            <span className="text-slate-900 drop-shadow-sm">Punar</span>
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d94f73] to-rose-400">Milan</span>
+                    <div className="flex items-center gap-0 cursor-pointer hover:opacity-90 transition-opacity" onClick={() => navigate('/')}>
+                        <img src={projectLogo} alt="LovenZea Logo" className="w-14 h-14 sm:w-16 sm:h-16 object-cover drop-shadow-xl hover:scale-105 transition-transform duration-300" />
+                        <span className="text-2xl sm:text-3xl font-black tracking-tighter text-slate-900 drop-shadow-sm flex items-center ml-[1px]">
+                            Loven<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d94f73] to-rose-500">Zea</span>
                         </span>
                     </div>
 
@@ -542,7 +539,7 @@ function Home() {
                             className="pt-2"
                         >
                             <button
-                                onClick={openMatchModal}
+                                onClick={() => setShowRegister(true)}
                                 className="px-10 py-4 bg-gradient-to-r from-[#d94f73] to-rose-500 text-white font-bold rounded-full shadow-[0_10px_35px_rgba(217,79,115,0.35)] hover:shadow-[0_15px_45px_rgba(217,79,115,0.5)] transition-all duration-300 hover:scale-105 transform flex items-center gap-2 group text-base tracking-wide"
                             >
                                 Find Your Match
@@ -573,7 +570,7 @@ function Home() {
                     beautiful journey with confidence, trust and family values.
                 </p>
                 <motion.div variants={staggerContainer} initial="hidden" whileInView="show" viewport={{ once: true }} className="flex flex-wrap gap-4 pt-4">
-                    <motion.button variants={fadeUp} onClick={() => setAuthMode('register')} className="px-8 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-bold shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 transition-all hover:-translate-y-1">
+                    <motion.button variants={fadeUp} onClick={() => setShowRegister(true)} className="px-8 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-full font-bold shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 transition-all hover:-translate-y-1">
                         Register for free
                     </motion.button>
                     <motion.div variants={fadeUp} className="flex items-center gap-3 text-sm font-semibold text-amber-700 bg-theme-surface/60 backdrop-blur-md px-4 py-2 rounded-full border border-white">
@@ -1210,7 +1207,7 @@ function Home() {
               <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0 15px 35px rgba(217,79,115,0.4)" }}
                 whileTap={{ scale: 0.96 }}
-                onClick={() => setAuthMode('register')}
+                onClick={() => setShowRegister(true)}
                 className="px-8 py-4 bg-gradient-to-r from-[#d94f73] to-rose-500 text-white rounded-full font-bold shadow-lg shadow-rose-300/40 transition-all"
               >
                 Start your profile now
@@ -1259,7 +1256,7 @@ function Home() {
             {/* Left Content */}
             <div className="text-gray-900 space-y-4 flex-1 text-center lg:text-left z-20">
               <h2 className="text-3xl md:text-5xl font-bold leading-tight text-[#1a2b4c]">
-                Download the PunarMilan app
+                Download the LovenZea app
               </h2>
               <p className="text-[#3b4c6d] text-lg font-medium">Connect with your matches anytime, anywhere</p>
 
@@ -1269,7 +1266,7 @@ function Home() {
                      <div className="flex items-center justify-center gap-4">
                          <div className="w-24 h-24 bg-theme-surface p-1 rounded-xl shadow-sm border border-theme-border shrink-0">
                             {/* Dummy QR Code */}
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://punarmilan.com" alt="QR Code" className="w-full h-full object-contain" />
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://lovenzea.com" alt="QR Code" className="w-full h-full object-contain" />
                          </div>
                          <div className="flex flex-col gap-3">
                              <a href="#" className="flex items-center gap-2 bg-black hover:bg-gray-800 transition-colors px-4 py-2 rounded-xl text-white">
@@ -1331,8 +1328,8 @@ function Home() {
                        <p className="text-[10px] text-gray-300 mt-1">5'4" • New Delhi • Bania-Khandelwal</p>
                        <p className="text-[10px] text-gray-300 mt-0.5">Software Professional • Earns 20-25 Lacs p.a.</p>
                        <div className="flex gap-2 mt-4">
-                          <button className="flex-1 py-2 rounded-full bg-rose-500 text-white text-[10px] font-bold">Send Interest</button>
-                          <button className="flex-1 py-2 rounded-full border border-gray-400 text-white text-[10px] font-bold">Chat</button>
+                          <button onClick={() => setShowRegister(true)} className="flex-1 py-2 rounded-full bg-rose-500 text-white text-[10px] font-bold">Send Interest</button>
+                          <button onClick={() => setShowRegister(true)} className="flex-1 py-2 rounded-full border border-gray-400 text-white text-[10px] font-bold">Chat</button>
                        </div>
                     </div>
                   </div>

@@ -67,11 +67,11 @@ const MoreMenuMobile = () => {
                     path: "/contact-us"
                 },
                 {
-                    id: "PunarMilanLive",
-                    label: "PunarMilan Live",
+                    id: "LovenZeaLive",
+                    label: "LovenZea Live",
                     icon: "fa-solid fa-video",
                     color: "text-rose-600",
-                    path: "/PunarMilan-live"
+                    path: "/LovenZea-live"
                 },
                 {
                     id: "logout",
@@ -82,7 +82,7 @@ const MoreMenuMobile = () => {
                 },
                 {
                     id: "downloadApp",
-                    label: "Download the PunarMilan.com App",
+                    label: "Download the LovenZea.com App",
                     icon: "fa-solid fa-mobile-alt",
                     color: "text-teal-600",
                     path: "/download-app"
@@ -141,7 +141,7 @@ const MoreMenuMobile = () => {
         // Add your app download logic here
         console.log("Downloading app...");
         // Redirect to app store or show download modal
-        window.open("https://play.google.com/store/apps/details?id=com.PunarMilan.android", "_blank");
+        window.open("https://play.google.com/store/apps/details?id=com.LovenZea.android", "_blank");
     };
 
     // Don't render on desktop

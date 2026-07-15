@@ -24,7 +24,7 @@ const stories = [
     image:
       "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1200",
     city: "Mumbai",
-    text: "We connected through PunarMilan and instantly felt a genuine connection. Today we're happily married.",
+    text: "We connected through LovenZea and instantly felt a genuine connection. Today we're happily married.",
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ const stories = [
     image:
       "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200",
     city: "Delhi",
-    text: "From our first conversation to marriage, PunarMilan was part of our beautiful journey.",
+    text: "From our first conversation to marriage, LovenZea was part of our beautiful journey.",
   },
 ];
 
@@ -116,7 +116,7 @@ const SuccessStoriesPage = () => {
 
             <p className="mt-8 text-lg text-gray-300 leading-8 max-w-3xl mx-auto">
               Thousands of couples found their perfect life partner through
-              PunarMilan. Explore inspiring journeys that started with a
+              LovenZea. Explore inspiring journeys that started with a
               simple match and turned into lifelong relationships.
             </p>
 
@@ -192,7 +192,7 @@ const SuccessStoriesPage = () => {
               <Quote className="w-14 h-14 text-pink-500/30 mt-8" />
 
               <p className="mt-6 text-gray-300 leading-8 text-lg">
-                We joined PunarMilan hoping to find someone who truly
+                We joined LovenZea hoping to find someone who truly
                 understood us. What started as a simple conversation soon
                 became a beautiful relationship and eventually marriage.
                 Today, we are building our future together.
@@ -221,7 +221,7 @@ const SuccessStoriesPage = () => {
           </h2>
 
           <p className="text-gray-400 mt-5">
-            Real couples who found love through PunarMilan.
+            Real couples who found love through LovenZea.
           </p>
 
         </div>
@@ -369,7 +369,7 @@ const SuccessStoriesPage = () => {
                   </h4>
 
                   <p className="text-theme-text-secondary text-sm">
-                    Married via PunarMilan
+                    Married via LovenZea
                   </p>
 
                 </div>

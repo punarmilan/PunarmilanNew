@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import noChatData from '../assets/image/no_chat_data.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { MessageSquare, Clock, ArrowRight, UserCheck, MessageCircle } from 'lucide-react';
@@ -58,9 +59,7 @@ const RecentChatsCard = () => {
                 </div>
             ) : activeChats.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-10 text-center">
-                    <div className="w-20 h-20 mb-4 rounded-full bg-gradient-to-tr from-[#FFF6F2] to-white border border-[#FFD8C2] flex items-center justify-center shadow-inner">
-                        <MessageSquare className="w-10 h-10 text-[#D89A74]" />
-                    </div>
+                    <div className="w-32 h-32 mx-auto mb-2"><img src={noChatData} alt="No Chats" className="w-full h-full object-contain opacity-90 drop-shadow-sm" /></div>
                     <h4 className="text-sm font-bold text-[#D89A74] mb-1 font-serif">No Chats Yet</h4>
                     <p className="text-xs text-[#7A6666] max-w-[260px] leading-relaxed">Accept a connection request or send a message to start chatting with your matches!</p>
                 </div>

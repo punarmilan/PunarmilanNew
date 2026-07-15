@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { adminLogout } from './store/adminAuthSlice';
 import { LayoutDashboard, Users, CheckCircle, Image, Flag, LogOut, CreditCard, HelpCircle, History, CalendarDays, Menu, X, MessageCircle, Smartphone } from 'lucide-react';
+import projectLogo from '../assets/image/project_logo_transperent.png';
 
 const AdminLayout = () => {
     const { admin } = useSelector((state) => state.adminAuth);
@@ -61,8 +62,17 @@ const AdminLayout = () => {
     const SidebarContent = () => (
         <>
             <div className="p-5 sm:p-6 border-b border-gray-800">
-                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-wider">PUNARMILAN</h2>
-                <div className="flex items-center gap-2 mt-1">
+                <div className="flex items-center gap-3">
+
+                            <div className="flex items-center gap-0">
+                                <img src={projectLogo} alt="LovenZea Logo" className="w-14 h-14 sm:w-16 sm:h-16 object-cover drop-shadow-xl hover:scale-105 transition-transform duration-300" />
+                                <span className="text-2xl sm:text-3xl font-black tracking-tighter text-white drop-shadow-sm flex items-center ml-[1px]">
+                                    Loven<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d94f73] to-rose-500">Zea</span>
+                                </span>
+                            </div>
+
+                </div>
+                <div className="flex items-center gap-2 mt-2 ml-1">
                     <p className="text-pink-500 text-[10px] font-black uppercase tracking-widest">Admin Panel</p>
                     <span className="h-1 w-1 bg-gray-600 rounded-full" />
                     <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest">{admin.role.replace('ROLE_', '').replace('_', ' ')}</p>

@@ -22,8 +22,8 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
         messageReceived: false,
         smsAlert: false,
         profileBlaster: false,
-        PunarMilanSpecials: false,
-        PunarMilanInSite: false,
+        LovenZeaSpecials: false,
+        LovenZeaInSite: false,
     });
 
     const defaultSettings = {
@@ -46,11 +46,11 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
             frequency: "monthly",
             subscribed: true,
         },
-        PunarMilanSpecials: {
+        LovenZeaSpecials: {
             enabled: true,
             frequency: "occasionally",
         },
-        PunarMilanInSite: {
+        LovenZeaInSite: {
             enabled: true,
             frequency: "monthly",
         },
@@ -101,7 +101,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
         },
         {
             id: "profileBlaster",
-            title: "PunarMilan.com Profile Blaster",
+            title: "LovenZea.com Profile Blaster",
             description:
                 "Perfect matches for you through profile blaster delivered via email as often as you like. The Exact match-making tool.",
             icon: Zap,
@@ -112,17 +112,17 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
 
     const newsletterSections = [
         {
-            id: "PunarMilanSpecials",
-            title: "PunarMilan Specials",
+            id: "LovenZeaSpecials",
+            title: "LovenZea Specials",
             description:
-                "Exclusive offers, tips, and success stories from PunarMilan.com.",
+                "Exclusive offers, tips, and success stories from LovenZea.com.",
             icon: Mail,
             type: "newsletter-radio",
             frequencies: ["occasionally", "unsubscribe"],
         },
         {
-            id: "PunarMilanInSite",
-            title: "PunarMilan InSite",
+            id: "LovenZeaInSite",
+            title: "LovenZea InSite",
             description:
                 "Weekly insights and advice for a successful matchmaking journey.",
             icon: Bell,
@@ -520,7 +520,7 @@ const AlertSettingsManager = ({ profile, onUpdate }) => {
             <div>
                 <h2 className="text-xl font-black text-gray-900 mb-6 flex items-center gap-3">
                     <span className="w-2 h-6 bg-purple-500 rounded-full"></span>
-                    PunarMilan.com Newsletters
+                    LovenZea.com Newsletters
                 </h2>
 
                 <div className="space-y-4">

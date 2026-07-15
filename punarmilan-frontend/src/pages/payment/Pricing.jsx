@@ -46,7 +46,7 @@ const Pricing = () => {
         key: orderResponse.key,
         amount: finalAmount * 100, // Using final calculated amount from modal
         currency: orderResponse.currency,
-        name: 'Punarmilan',
+        name: 'LovenZea',
         description: `Subscription for ${selectedPlan.name}`,
         order_id: orderResponse.orderId,
         handler: async (response) => {

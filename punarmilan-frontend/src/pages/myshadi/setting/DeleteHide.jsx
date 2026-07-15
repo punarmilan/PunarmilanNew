@@ -70,7 +70,7 @@ export default function DeleteHide({ profile, onUpdate }) {
                         <span className="w-2 h-6 bg-pink-500 rounded-full"></span>
                         Privacy & Account
                     </h2>
-                    <p className="text-sm text-theme-text-secondary mt-1">Control your presence on PunarMilan</p>
+                    <p className="text-sm text-theme-text-secondary mt-1">Control your presence on LovenZea</p>
                 </div>
                 {lastSaved && (
                     <div className="hidden sm:flex items-center gap-1.5 text-[10px] font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full uppercase tracking-wider">

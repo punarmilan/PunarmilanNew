@@ -101,7 +101,7 @@ const WorkWithUsPage = () => {
             </h2>
 
             <p className="mt-8 text-gray-400 leading-8">
-              At PunarMilan, we're building technology and experiences that
+              At LovenZea, we're building technology and experiences that
               help people find life partners with trust, compatibility and
               confidence.
             </p>

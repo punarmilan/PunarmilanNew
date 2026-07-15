@@ -345,7 +345,7 @@ const Notifications = () => {
                             {/* Title / Sender */}
                             <div className="text-center">
                                 <h4 className="font-bold text-gray-900 text-lg">
-                                    {selectedNotification.senderName || 'PunarMilan Admin'}
+                                    {selectedNotification.senderName || 'LovenZea Admin'}
                                 </h4>
                                 <p className="text-xs font-medium text-theme-text-secondary mt-0.5">
                                     {timeAgo(selectedNotification.createdAt)}

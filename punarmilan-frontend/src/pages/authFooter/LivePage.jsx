@@ -61,7 +61,7 @@ const LivePage = () => {
 
           <h1 className="mt-8 text-6xl md:text-7xl font-extrabold">
 
-            PunarMilan
+            LovenZea
             <span className="text-pink-500"> Live</span>
 
           </h1>
@@ -146,7 +146,7 @@ const LivePage = () => {
           <div className="text-center mb-16">
 
             <h2 className="text-5xl font-bold">
-              Why Join PunarMilan Live?
+              Why Join LovenZea Live?
             </h2>
 
           </div>
