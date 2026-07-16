@@ -7,11 +7,11 @@ import {
     ChevronDown, RotateCcw, Crown, Zap, Calendar, User, Globe, MapPin, MessageCircle, Activity,
     CheckCircle2, Eye
 } from 'lucide-react';
-import { fetchNewMatches, searchPremiumProfiles, fetchFilterOptions, sendConnectionRequest, withdrawConnectionRequest, addToShortlistServer, removeFromShortlistServer, fetchSentRequests, fetchShortlist } from '../../../Slice/MatchSlice';
+import { fetchNewMatches, fetchNearMeMatches, fetchRecentVisitors, searchPremiumProfiles, fetchFilterOptions, sendConnectionRequest, withdrawConnectionRequest, addToShortlistServer, removeFromShortlistServer, fetchSentRequests, fetchShortlist } from '../../../Slice/MatchSlice';
 import FilterBar from '../../../components/FilterBar';
 import AdvancedFiltersDrawer from '../../../components/AdvancedFiltersDrawer';
 import { openChatWith } from '../../../Slice/ChatSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { formatDisplayName } from '../../../utils/mockData';
 import {
     religionOptions, communityOptions, subCommunityOptions, 
@@ -25,9 +25,11 @@ import toast from 'react-hot-toast';
 const PremiumMatchDashboard = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+    const tab = new URLSearchParams(location.search).get('tab') || 'new';
     
     // Fetch dynamic matches from Redux
-    const { newMatches, searchResults, filterOptions, sentRequests, shortlistedProfiles, loading, searchLoading } = useSelector((state) => state.match);
+    const { newMatches, nearMeMatches, recentVisitors, searchResults, filterOptions, sentRequests, shortlistedProfiles, loading, searchLoading } = useSelector((state) => state.match);
     const { user } = useSelector((state) => state.user);
 
     const [filters, setFilters] = useState({});
@@ -55,12 +57,19 @@ const PremiumMatchDashboard = () => {
     }), [filterOptions]);
 
     useEffect(() => {
-        dispatch(fetchNewMatches({ page: 0, size: 20 }));
+        if (tab === 'nearme' || tab === 'near') {
+            dispatch(fetchNearMeMatches({ page: 0, size: 20 }));
+        } else if (tab === 'viewedme') {
+            dispatch(fetchRecentVisitors({ page: 0, size: 20 }));
+        } else {
+            dispatch(fetchNewMatches({ page: 0, size: 20 }));
+            // Only load default search profiles if we are on 'new' tab
+            dispatch(searchPremiumProfiles({}));
+        }
         dispatch(fetchSentRequests());
         dispatch(fetchShortlist());
         dispatch(fetchFilterOptions());
-        dispatch(searchPremiumProfiles({}));
-    }, [dispatch]);
+    }, [dispatch, tab]);
 
     const handleFilterChange = (key, value) => {
         const updatedFilters = { ...filters, [key]: value };
@@ -89,7 +98,7 @@ const PremiumMatchDashboard = () => {
     // Format dynamic user data to match our UI needs
     const getFormattedMatches = (sourceMatches) => {
         if (!sourceMatches || sourceMatches.length === 0) return [];
-        return newMatches.map(m => {
+        return sourceMatches.map(m => {
             return {
                 id: m.userId || m.id,
                 name: formatDisplayName(m.fullName, m.displayNameVisibility, m.id) || "Unknown Profile",
@@ -112,7 +121,46 @@ const PremiumMatchDashboard = () => {
         });
     };
 
-    const displayMatches = getFormattedMatches(searchResults?.content || newMatches);
+    const applyLocalFilters = (profiles, currentFilters) => {
+        if (!profiles || !currentFilters || Object.keys(currentFilters).length === 0) return profiles;
+        
+        return profiles.filter(p => {
+            if (currentFilters.keyword && !p.fullName?.toLowerCase().includes(currentFilters.keyword.toLowerCase()) && !p.aboutMe?.toLowerCase().includes(currentFilters.keyword.toLowerCase())) return false;
+            
+            if (currentFilters.religion && p.religion !== currentFilters.religion) return false;
+            if (currentFilters.caste && p.caste !== currentFilters.caste) return false;
+            if (currentFilters.maritalStatus && p.maritalStatus !== currentFilters.maritalStatus) return false;
+            if (currentFilters.motherTongue && p.motherTongue !== currentFilters.motherTongue) return false;
+            if (currentFilters.country && p.country !== currentFilters.country) return false;
+            if (currentFilters.state && p.state !== currentFilters.state) return false;
+            if (currentFilters.city && p.city !== currentFilters.city) return false;
+            if (currentFilters.educationLevel && p.educationLevel !== currentFilters.educationLevel) return false;
+            if (currentFilters.occupation && p.occupation !== currentFilters.occupation) return false;
+            if (currentFilters.diet && p.diet !== currentFilters.diet) return false;
+            if (currentFilters.smokingHabit && p.smokingHabit !== currentFilters.smokingHabit) return false;
+            if (currentFilters.drinkingHabit && p.drinkingHabit !== currentFilters.drinkingHabit) return false;
+            if (currentFilters.manglikStatus && p.manglikStatus !== currentFilters.manglikStatus) return false;
+            
+            if (currentFilters.onlineNow && !p.isOnline) return false;
+            
+            return true;
+        });
+    };
+
+    let sourceArray = newMatches;
+    if (tab === 'nearme' || tab === 'near') {
+        sourceArray = applyLocalFilters(nearMeMatches, filters);
+    } else if (tab === 'viewedme') {
+        sourceArray = applyLocalFilters(recentVisitors, filters);
+    } else {
+        if (Object.keys(filters).length > 0 && searchResults?.content) {
+            sourceArray = searchResults.content;
+        } else {
+            sourceArray = newMatches;
+        }
+    }
+    
+    const displayMatches = getFormattedMatches(sourceArray);
     return (
         <div className="w-full bg-transparent min-h-[calc(100vh-7rem)] px-1 sm:px-4 pb-16 font-sans text-gray-800">
             <div className="max-w-7xl mx-auto pt-2">
@@ -128,13 +176,13 @@ const PremiumMatchDashboard = () => {
 
                     <div className="relative z-10 w-full md:w-1/2 lg:w-3/5 text-gray-800 mb-2 md:mb-0">
                         <div className="bg-pink-100 w-max px-2 py-0.5 rounded-full text-[9px] font-bold tracking-widest text-pink-600 mb-1 border border-pink-200">
-                            CURATED MATCHES FOR YOU
+                            {tab === 'nearme' ? 'MATCHES NEAR YOU' : tab === 'viewedme' ? 'PEOPLE WHO VIEWED YOU' : 'CURATED MATCHES FOR YOU'}
                         </div>
                         <h1 className="text-xl sm:text-2xl lg:text-[28px] font-serif font-bold leading-tight mb-1 flex items-center gap-2">
-                            Find Someone Worth Meeting <Heart className="inline fill-pink-500 text-pink-500 w-5 h-5 animate-pulse drop-shadow-sm" />
+                            {tab === 'nearme' ? 'Find Singles In Your Area' : tab === 'viewedme' ? 'Discover Who Is Interested' : 'Find Someone Worth Meeting'} <Heart className="inline fill-pink-500 text-pink-500 w-5 h-5 animate-pulse drop-shadow-sm" />
                         </h1>
                         <p className="text-[12px] text-theme-text-secondary max-w-sm mb-2 font-medium leading-relaxed">
-                            Explore compatible profiles based on your preferences & relationship goals.
+                            {tab === 'nearme' ? 'Connect with matches located close to you.' : tab === 'viewedme' ? 'These members recently viewed your profile.' : 'Explore compatible profiles based on your preferences & relationship goals.'}
                         </p>
                         <div className="flex gap-3">
                             <button className="px-5 py-1.5 bg-gradient-to-r from-[#ef7f8f] to-[#c93f65] hover:from-[#df5f78] hover:to-[#b83f5d] text-white text-xs font-bold rounded-full shadow-[0_4px_10px_rgba(201,63,101,0.2)] hover:shadow-[0_6px_15px_rgba(201,63,101,0.3)] hover:-translate-y-0.5 transition-all flex items-center gap-2">

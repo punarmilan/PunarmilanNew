@@ -82,10 +82,10 @@ const Footer = () => {
             {/* Subtle glowing particles/dots background styling */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,45,122,0.03)_1px,transparent_1px),radial-gradient(circle_at_70%_60%,rgba(59,184,255,0.03)_1px,transparent_1px)] bg-[length:32px_32px] pointer-events-none"></div>
 
-            <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-12 relative z-10">
+            <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-8 relative z-10">
                 {/* 1. Top Navigation */}
-                <div className="flex flex-col items-center mb-10">
-                    <nav className="flex flex-wrap justify-center gap-3 mb-8">
+                <div className="flex flex-col items-center mb-6">
+                    <nav className="flex flex-wrap justify-center gap-3 mb-5">
                         {navItems.map((item) => (
                             <Link
                                 key={item.name}
@@ -101,7 +101,7 @@ const Footer = () => {
                 </div>
 
                 {/* 2. Brand Section */}
-                <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-6">
                     {/* Left: Logo and Tagline */}
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <div className="flex items-center gap-3 mb-3">
@@ -136,7 +136,7 @@ const Footer = () => {
                 </div>
 
                 {/* 3. Feature Cards (5 premium glassmorphic cards in one container - horizontal layout to reduce height) */}
-                <div className="bg-white/[0.01] backdrop-blur-md border border-white/5 rounded-2xl p-4 sm:p-5 mb-10">
+                <div className="bg-white/[0.01] backdrop-blur-md border border-white/5 rounded-2xl p-4 sm:p-5 mb-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                         {featureCards.map((card, idx) => (
                             <Link
