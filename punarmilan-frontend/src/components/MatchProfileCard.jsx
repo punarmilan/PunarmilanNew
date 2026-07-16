@@ -242,11 +242,11 @@ const MatchProfileCard = ({ profile, layout = 'grid', onConnect = null, requestS
                             }}
                             disabled={requestSent || isRequestSent}
                             className={`w-full py-2 rounded font-bold text-sm transition-all shadow-sm ${requestSent || isRequestSent
-                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                ? 'bg-gradient-to-r from-amber-200 to-amber-400 text-amber-900 cursor-not-allowed flex items-center justify-center gap-1'
                                 : 'bg-gradient-to-r from-theme-primary to-theme-pink text-white hover:from-[#115E59] hover:to-[#16A085]'
                                 }`}
                         >
-                            {requestSent || isRequestSent ? 'Sent' : 'Yes'}
+                            {requestSent || isRequestSent ? <><Check className="w-4 h-4" /> Sent</> : 'Yes'}
                         </button>
                     </div>
                 </div>

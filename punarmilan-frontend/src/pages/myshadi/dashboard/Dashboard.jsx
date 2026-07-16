@@ -359,9 +359,7 @@ function Dashboard() {
                                                 </button>
                                                 
                                                 {sentInterests.has(profile.id) ? (
-                                                    <button disabled className="flex-1 h-9 bg-gradient-to-r from-gray-400 to-gray-500 text-white rounded-full text-xs font-bold shadow-md opacity-90 cursor-not-allowed">
-                                                        Interest Sent
-                                                    </button>
+                                                    <button disabled className="flex-1 h-9 bg-gradient-to-r from-amber-400 to-amber-600 text-white rounded-full text-xs font-bold shadow-md cursor-not-allowed flex items-center justify-center gap-1">✓ Interest Sent</button>
                                                 ) : (
                                                     <button 
                                                         onClick={(e) => handleSendInterest(e, profile.id)}

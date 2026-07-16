@@ -444,7 +444,7 @@ function Home() {
                                     transition={{ duration: 1.5, ease: "easeInOut" }}
                                     src={imgSrc}
                                     alt={`Hero Slide ${index + 1}`}
-                                    className="absolute inset-0 w-full h-full object-cover object-[75%_center] sm:object-center"
+                                    className={`absolute inset-0 w-full h-full object-cover ${(index === 0 || index === 2) ? 'object-[75%_center]' : 'object-[35%_center]'} sm:object-center`}
                                 />
                             )
                         ))}
