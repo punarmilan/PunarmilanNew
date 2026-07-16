@@ -82,7 +82,7 @@ const AuthenticatedFooter = () => {
             {/* Subtle glowing particles/dots background styling */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,45,122,0.03)_1px,transparent_1px),radial-gradient(circle_at_70%_60%,rgba(59,184,255,0.03)_1px,transparent_1px)] bg-[length:32px_32px] pointer-events-none"></div>
 
-            <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-16 relative z-10">
+            <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-12 relative z-10">
                 {/* 1. Top Navigation */}
                 <div className="flex flex-col items-center mb-10">
                     <nav className="flex flex-wrap justify-center gap-3 mb-8">
@@ -108,7 +108,7 @@ const AuthenticatedFooter = () => {
                             
                             <div className="flex items-center gap-0">
                                 <img src={projectLogo} alt="LovenZea Logo" className="w-16 h-16 sm:w-20 sm:h-20 object-cover drop-shadow-xl hover:scale-105 transition-transform duration-300" />
-                                <span className="text-2xl sm:text-3xl font-black tracking-tighter text-slate-800 drop-shadow-sm flex items-center ml-[1px]">
+                                <span className="text-xl sm:text-2xl font-black tracking-tighter text-white drop-shadow-sm flex items-center ml-[1px]">
                                     LOVEN<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff2d7a] to-rose-500">ZEA</span>
                                 </span>
                             </div>
