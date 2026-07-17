@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import api from "../../services/api";
 
@@ -23,7 +24,26 @@ export default function LifestyleForm({ onNext }) {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
   } = useForm();
+
+  
+  const maxDate18YearsAgo = new Date(new Date().setFullYear(new Date().getFullYear() - 18)).toISOString().split('T')[0];
+  const dob = watch("dob");
+
+  useEffect(() => {
+    if (dob) {
+      const birthDate = new Date(dob);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      setValue("age", age);
+    }
+  }, [dob, setValue]);
 
   const onSubmit = async (data) => {
 
@@ -100,17 +120,17 @@ export default function LifestyleForm({ onNext }) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
 
-            {/* AGE */}
+            {/* DOB */}
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
-                <Cake size={16} />
-                Age
+                <CalendarDays size={16} />
+                Date Of Birth
               </label>
 
               <input
-                type="number"
-                placeholder="Enter age"
-                {...register("age")}
+                type="date"
+                max={maxDate18YearsAgo}
+                {...register("dob")}
                 className="
                   w-full
                   h-14
@@ -129,16 +149,19 @@ export default function LifestyleForm({ onNext }) {
               />
             </div>
 
-            {/* DOB */}
+            {
+            /* AGE */}
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
-                <CalendarDays size={16} />
-                Date Of Birth
+                <Cake size={16} />
+                Age
               </label>
 
               <input
-                type="date"
-                {...register("dob")}
+                type="number"
+                placeholder="Auto-calculated"
+                readOnly
+                {...register("age")}
                 className="
                   w-full
                   h-14
@@ -515,7 +538,7 @@ export default function LifestyleForm({ onNext }) {
               <textarea
                 rows="6"
                 placeholder="Write something about yourself, personality, goals & interests..."
-                {...register("aboutText")}
+                {...register("aboutMe")}
                 className="
                   w-full
                   p-5

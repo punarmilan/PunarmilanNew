@@ -673,7 +673,7 @@ function App() {
              </Routes>
 
       {!isAdminPage && (isAuthenticated ? <AuthenticatedFooter /> : <Footer />)}
-      <Toaster position="top-center" />
+      <Toaster position="top-center" containerStyle={{ zIndex: 9999999 }} toastOptions={{ style: { marginTop: '80px' } }} />
 
       {/* Global Chat Window — opens from anywhere via Redux openChatWith() */}
       {activeChatUser && (

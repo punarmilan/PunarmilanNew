@@ -8,5 +8,6 @@ import com.punarmilan.entity.User;
 
 public interface PaymentService {
     PaymentOrderResponse createOrder(Long planId, User user);
+    PaymentOrderResponse createVipOrder(com.punarmilan.dto.VipOrderRequest request, User user);
     UserSubscription verifyPayment(PaymentVerificationRequest request, User user);
 }

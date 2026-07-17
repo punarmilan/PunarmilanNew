@@ -87,6 +87,47 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @Transactional
+    public PaymentOrderResponse createVipOrder(com.punarmilan.dto.VipOrderRequest request, User user) {
+        Order order;
+        try {
+            RazorpayClient razorpay = new RazorpayClient(razorpayKeyId, razorpayKeySecret);
+            JSONObject orderRequest = new JSONObject();
+            orderRequest.put("amount", request.getAmount().multiply(new BigDecimal(100)).intValue()); // amount in paise
+            orderRequest.put("currency", "INR");
+            orderRequest.put("receipt", "txn_" + System.currentTimeMillis());
+            
+            JSONObject notes = new JSONObject();
+            notes.put("userId", user.getId().toString());
+            notes.put("packageType", request.getPackageType());
+            orderRequest.put("notes", notes);
+
+            order = razorpay.orders.create(orderRequest);
+
+            PaymentTransaction transaction = PaymentTransaction.builder()
+                    .user(user)
+                    .amount(request.getAmount())
+                    .currency("INR")
+                    .providerOrderId(order.get("id"))
+                    .status(PaymentStatus.PENDING)
+                    .provider(PaymentProvider.RAZORPAY)
+                    .build();
+            transactionRepository.save(transaction);
+
+            return PaymentOrderResponse.builder()
+                    .orderId(order.get("id"))
+                    .amount(request.getAmount())
+                    .currency("INR")
+                    .key(razorpayKeyId)
+                    .build();
+
+        } catch (com.razorpay.RazorpayException e) {
+            log.error("Failed to create VIP Razorpay order", e);
+            throw new RuntimeException("Failed to initiate payment");
+        }
+    }
+
+    @Override
+    @Transactional
     public UserSubscription verifyPayment(PaymentVerificationRequest request, User user) {
 
         // Verify Signature

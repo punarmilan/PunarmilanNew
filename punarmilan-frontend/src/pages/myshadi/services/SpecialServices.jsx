@@ -123,9 +123,11 @@ const SpecialServices = () => {
             }
 
             return {
+                id: plan.id,
                 name: plan.name,
                 duration: plan.durationInDays > 0 ? `${plan.durationInDays} Days` : "Custom",
                 price: `₹${plan.price}`,
+                rawPrice: plan.price,
                 color: color,
                 badge: badge,
                 popular: plan.name.toLowerCase().includes("gold") || plan.name.toLowerCase().includes("diamond")

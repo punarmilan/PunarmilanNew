@@ -23,6 +23,11 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.createOrder(planId, authUtil.getCurrentUser()));
     }
 
+    @PostMapping("/create-vip-order")
+    public ResponseEntity<PaymentOrderResponse> createVipOrder(@RequestBody com.punarmilan.dto.VipOrderRequest request) {
+        return ResponseEntity.ok(paymentService.createVipOrder(request, authUtil.getCurrentUser()));
+    }
+
     @PostMapping("/verify")
     public ResponseEntity<UserSubscription> verifyPayment(@RequestBody PaymentVerificationRequest request) {
         return ResponseEntity.ok(paymentService.verifyPayment(request, authUtil.getCurrentUser()));

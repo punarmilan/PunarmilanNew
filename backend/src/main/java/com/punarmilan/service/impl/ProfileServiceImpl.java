@@ -44,6 +44,29 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ProfileServiceImpl implements ProfileService {
 
+
+    private static final java.util.List<String> VALID_BLOOD_GROUPS = java.util.List.of("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-");
+    private static final java.util.List<String> VALID_MARITAL_STATUS = java.util.List.of("Never Married", "Divorced", "Widowed", "Awaiting Divorce", "Annulled");
+    private static final java.util.List<String> VALID_DIET = java.util.List.of("Veg", "Non-Veg", "Occasionally Non-Veg", "Eggetarian", "Jain", "Vegan");
+    private static final java.util.List<String> VALID_SMOKING = java.util.List.of("Non-Smoker", "Light / Social Smoker", "Regular Smoker");
+    private static final java.util.List<String> VALID_DRINKING = java.util.List.of("Non-Drinker", "Light / Social Drinker", "Regular Drinker");
+    private static final java.util.List<String> VALID_HEALTH_INFO = java.util.List.of("No Health Problems", "Minor Health Issues", "Major Health Issues");
+    private static final java.util.List<String> VALID_DISABILITY = java.util.List.of("None", "Physical Disability");
+    private static final java.util.List<String> VALID_RESIDENCY_STATUS = java.util.List.of("Citizen", "Permanent Resident", "Work Permit", "Student Visa", "Temporary Visa");
+    private static final java.util.List<String> VALID_MANGLIK_STATUS = java.util.List.of("YES", "NO", "DONT_KNOW");
+    
+    // Add missing options
+    private static final java.util.List<String> VALID_PROFILE_CREATED_BY = java.util.List.of("Self", "Parent", "Sibling", "Friend", "Other");
+    private static final java.util.List<String> VALID_PROFILE_MANAGED_BY = java.util.List.of("Self", "Parent", "Sibling", "Friend", "Relative");
+    private static final java.util.List<String> VALID_PROFESSION_AREA = java.util.List.of("IT/Software", "Medical", "Finance", "Engineering", "Teaching", "Business", "Marketing", "Civil Services", "Defense", "Arts", "Other");
+    private static final java.util.List<String> VALID_WORKING_WITH = java.util.List.of("Private Company", "Government / Public Sector", "Defense / Civil Services", "Business / Self Employed", "Not Working");
+    private static final java.util.List<String> VALID_VISIBILITY = java.util.List.of("ALL_MEMBERS", "CONTACTED_AND_ACCEPTED", "PREMIUM_MEMBERS", "MATCHES", "Public", "Members", "Premium");
+    private static final java.util.List<String> VALID_INCOME = java.util.List.of("Don't want to specify", "1L - 2L", "2L - 5L", "5L - 10L", "10L - 15L", "15L - 20L", "20L - 30L", "30L - 50L", "50L - 1Cr", "1Cr+");
+    
+    // Note: Rashi, Nakshatra, Religion, Caste, Subcaste, Gotra, MotherTongue can have custom "Other" values typed in by the user.
+    // So we shouldn't strictly block them if they don't match the list.
+
+
     private final ProfileRepository profileRepository;
     private final UserRepository userRepository;
     private final MinioService minioService;

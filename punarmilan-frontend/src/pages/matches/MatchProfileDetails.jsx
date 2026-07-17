@@ -484,7 +484,7 @@ const MatchProfileDetails = () => {
                                 <Sparkles className="w-5 h-5 text-theme-pink" /> Hobbies & Interests
                             </h3>
                             <div className="flex flex-wrap gap-2">
-                                {['Music', 'Cooking', 'Travel', 'Reading', 'Yoga', 'Movies'].map((hobby) => (
+                                {(profile?.hobbies ? profile.hobbies.split(',').filter(h => h.trim() !== '') : []).map((hobby) => (
                                     <span key={hobby} className="px-3 py-1.5 bg-gradient-to-r from-amber-50 to-[#FFF5EB] border border-theme-border/60 text-theme-pink text-[10px] font-bold rounded-full shadow-sm">
                                         {hobby}
                                     </span>

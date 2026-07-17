@@ -416,7 +416,7 @@ const TodayMatchView = ({
                             {/* Hobbies & Interests */}
                             <SectionLayout icon={<Star className="w-5 h-5 text-gray-400" />} title="Hobbies & Interests">
                                 <div className="flex flex-wrap gap-2">
-                                    {(profile.hobbies || "Cooking, Music, Reading, Cycling, Trekking").split(',').map((hobby, idx) => (
+                                    {(profile.hobbies || "").split(',').filter(h => h.trim() !== "").map((hobby, idx) => (
                                         <div key={idx} className="flex items-center gap-2 border border-theme-border rounded-full px-4 py-1.5 text-[13px] text-gray-700 bg-gray-50/50">
                                             <Circle className="w-1.5 h-1.5 fill-rose-400 text-rose-400" />
                                             {hobby.trim()}

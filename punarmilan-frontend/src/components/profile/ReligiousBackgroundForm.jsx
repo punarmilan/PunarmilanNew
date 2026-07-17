@@ -82,39 +82,7 @@ export default function ReligiousBackgroundForm({ onNext }) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
 
-            {/* GENDER */}
-            <div>
-              <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
-                <Users size={16} />
-                Gender
-              </label>
-
-              <select
-                {...register("gender")}
-                className="
-                  w-full
-                  h-14
-                  px-5
-                  rounded-2xl
-                  border border-theme-border
-                  bg-theme-surface
-                  focus:border-pink-500
-                  focus:ring-4
-                  focus:ring-pink-100
-                  outline-none
-                  transition-all
-                   shadow-sm
-                "
-                required
-                
-              >
-                <option value="">Select Gender</option>
-                <option>Female</option>
-                <option>Male</option>
-              </select>
-            </div>
-
-           {/* RELIGION */}
+            {/* RELIGION */}
             <div>
               <label className="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-3">
                 <Sparkles size={16} />
@@ -259,8 +227,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                 <option value="">Select Status</option>
                 {subCommunityOptions.map((item) => (
                 <option
-                  key={item.value}
-                  value={item.value} 
+                  key={item}
+                  value={item} 
                 >
                   {item}
                 </option>
@@ -296,8 +264,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                 <option value="">Select Gothra / Gothram</option>
                  {gotraOptions.map((item) => (
                 <option
-                  key={item.value}
-                  value={item.value} 
+                  key={item}
+                  value={item} 
                 >
                   {item}
                 </option>
