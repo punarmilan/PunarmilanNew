@@ -126,8 +126,8 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Allow explicit domains
-        configuration.setAllowedOrigins(Arrays.asList("https://lovenzea.online", "https://www.lovenzea.online"));
+        // Allow configured domains
+        configuration.setAllowedOrigins(Arrays.asList(allowedOrigins));
 
         configuration.setAllowedMethods(Arrays.asList(
                 "GET",
