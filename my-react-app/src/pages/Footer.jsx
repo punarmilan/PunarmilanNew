@@ -51,7 +51,7 @@ export default function Footer() {
                 <div className="absolute top-6 left-0 w-56 bg-white text-gray-900 rounded-lg shadow-lg p-4 z-20">
                   <h4 className="font-semibold mb-2">Contact Us</h4>
                   <p className="text-sm mb-1">📞 +91 9876543210</p>
-                  <p className="text-sm">✉️ info@punarmilan.com</p>
+                  <p className="text-sm">✉️ info@lovenzea.online</p>
                 </div>
               )}
             </li>

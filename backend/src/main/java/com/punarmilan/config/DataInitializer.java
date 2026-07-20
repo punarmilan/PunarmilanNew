@@ -20,16 +20,16 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Create initial Super Admin if not exists
-        if (!adminRepository.existsByEmail("admin@punarmilan.com")) {
+        if (!adminRepository.existsByEmail("admin@lovenzea.online")) {
             Admin superAdmin = Admin.builder()
                     .name("System Admin")
-                    .email("admin@punarmilan.com")
+                    .email("admin@lovenzea.online")
                     .password(passwordEncoder.encode("admin123"))
                     .role(AdminRole.ROLE_SUPER_ADMIN)
                     .status(true)
                     .build();
             adminRepository.save(superAdmin);
-            log.info("Initial Super Admin created: admin@punarmilan.com / admin123");
+            log.info("Initial Super Admin created: admin@lovenzea.online / admin123");
         }
     }
 }

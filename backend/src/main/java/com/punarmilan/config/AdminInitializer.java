@@ -27,7 +27,7 @@ public class AdminInitializer implements CommandLineRunner {
             
             Admin defaultAdmin = Admin.builder()
                     .name("System Admin")
-                    .email("admin@punarmilan.com")
+                    .email("admin@lovenzea.online")
                     .password(passwordEncoder.encode(defaultAdminPassword))
                     .role(AdminRole.ROLE_SUPER_ADMIN)
                     .status(true)

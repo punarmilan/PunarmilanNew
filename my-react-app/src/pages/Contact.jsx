@@ -66,7 +66,7 @@ const Contact = () => {
         <div className="flex flex-col justify-center p-6 bg-indigo-50 rounded-2xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Get in Touch</h2>
           <p className="text-gray-700 mb-2">
-            <span className="font-semibold">Email:</span> info@punarmilan.com
+            <span className="font-semibold">Email:</span> info@lovenzea.online
           </p>
           <p className="text-gray-700 mb-2">
             <span className="font-semibold">Phone:</span> +91 7821868172
