@@ -46,7 +46,6 @@ export default function HeroOfMyProfile() {
 
     return (
         <div className="min-h-screen bg-gray-100 p-2 sm:p-4 lg:p-6">
-            <ToastContainer />
 
             <div className="max-w-7xl mx-auto">
                 {/* Profile Card */}

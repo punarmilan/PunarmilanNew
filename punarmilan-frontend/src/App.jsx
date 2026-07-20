@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import ChatWindow from "./components/ChatWindow";
@@ -195,6 +197,7 @@ function App() {
 
   return (
     <div className="min-h-screen pb-safe-bottom w-full max-w-[100%] overflow-x-hidden">
+      <ToastContainer style={{ zIndex: 999999 }} />
       {/* Online Members Chat Button */}
       {/* Support Chat Bot */}
       {!isAdminPage && (

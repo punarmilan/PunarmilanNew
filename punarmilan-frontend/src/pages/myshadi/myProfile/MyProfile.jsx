@@ -1703,7 +1703,6 @@ Generated on: ${new Date().toLocaleString()}
 
   return (
     <div className="bg-transparent pb-20">
-      <ToastContainer />
 
       {/* Main Profile Container */}
       <div className="max-w-7xl mx-auto font-sans">
@@ -1805,7 +1804,7 @@ Generated on: ${new Date().toLocaleString()}
                 <h3 className="text-lg font-bold text-gray-800 flex items-center gap-2 font-serif">
                   <FaUserEdit className="text-[#a67c52]" /> About Me
                 </h3>
-                {isEditing && <button onClick={() => handleOpenEditModal('person')} className="text-theme-text-secondary hover:text-gray-900 p-1 transition-colors" title="Edit About Me"><FaEdit size={16}/></button>}
+                {isEditing && <button onClick={() => handleOpenEditModal('about')} className="text-theme-text-secondary hover:text-gray-900 p-1 transition-colors" title="Edit About Me"><FaEdit size={16}/></button>}
               </div>
               <p className="text-theme-text-secondary text-sm leading-relaxed whitespace-pre-wrap">
                 {profileData.aboutText || "N/A"}
@@ -2202,10 +2201,27 @@ Generated on: ${new Date().toLocaleString()}
       {isEditModalOpen && createPortal(
         <div className="fixed inset-0 z-[99999] flex items-end sm:items-center justify-center bg-black/40 backdrop-blur-sm p-0 sm:p-4 transition-all duration-300">
           <div className="bg-theme-surface rounded-t-3xl sm:rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in slide-in-from-bottom sm:zoom-in duration-300 border border-white/50">
-            <div className="bg-gradient-to-r from-theme-primary to-theme-pink p-5 sm:p-6 flex justify-between items-center text-white">
+            <div className="bg-gradient-to-r from-[#b76e79] to-[#d4a5a5] p-5 sm:p-6 flex justify-between items-center text-white">
               <div>
-                <h3 className="text-xl font-black tracking-wide">Update Information</h3>
-                <p className="text-rose-100 text-xs mt-1 font-medium">Please provide accurate details</p>
+                <h3 className="text-xl font-black tracking-wide">
+                  Updating {
+                    {
+                      religious: 'Religious Background',
+                      family: 'Family Details',
+                      education: 'Education & Career',
+                      location: 'Location Details',
+                      lifestyle: 'Lifestyle',
+                      hobbies: 'Hobbies',
+                      privacy: 'Privacy Settings',
+                      verification: 'Verification',
+                      preferences: 'Partner Preferences',
+                      personal: 'Personal Details',
+                      about: 'About Me',
+                      person: 'Basic Details'
+                    }[modalSection] || 'Information'
+                  }
+                </h3>
+                <p className="text-rose-50 text-xs mt-1 font-medium">Please provide accurate details</p>
               </div>
               <button
                 onClick={() => setIsEditModalOpen(false)}

@@ -13,7 +13,8 @@ const ChatService = {
         if (isConnecting || (stompClient && stompClient.connected)) return;
         isConnecting = true;
 
-        const wsUrl = import.meta.env.VITE_WS_URL || '/ws';
+        // const wsUrl = import.meta.env.VITE_WS_URL || '/ws';
+        const wsUrl = '/ws';
         socket = new SockJS(wsUrl);
         stompClient = Stomp.over(socket);
 

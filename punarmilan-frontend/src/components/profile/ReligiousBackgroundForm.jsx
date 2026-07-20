@@ -403,8 +403,8 @@ export default function ReligiousBackgroundForm({ onNext }) {
                 <option value="">Select nakshatra</option>
                 {nakshatraOptions.map((item) => (
                 <option
-                  key={item.value}
-                  value={item.value}
+                  key={item}
+                  value={item}
                 >
                   {item}
                 </option>
