@@ -2522,6 +2522,7 @@ Generated on: ${new Date().toLocaleString()}
                             value={value || ''}
                             onChange={(e) => handleModalDataChange(key, e.target.value)}
                             readOnly={key === 'age'}
+                            max={key === 'dateOfBirth' ? new Date(new Date().setFullYear(new Date().getFullYear() - 18)).toISOString().split('T')[0] : undefined}
                             placeholder={key === 'dateOfBirth' ? 'YYYY-MM-DD' : key === 'timeOfBirth' ? 'HH:MM AM/PM' : ''}
                             className={`w-full px-4 py-3 bg-gray-50/50 border rounded-xl focus:bg-theme-surface focus:ring-2 focus:ring-theme-magenta focus:border-transparent outline-none transition-all text-sm font-medium ${errors[key] ? 'border-red-500' : 'border-theme-border'} ${key === 'age' ? 'bg-gray-100 text-theme-text-secondary' : 'text-gray-800'}`}
                           />
